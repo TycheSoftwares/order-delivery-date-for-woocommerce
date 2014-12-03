@@ -311,4 +311,19 @@ function my_enqueue($hook)
 }
 add_action( 'admin_enqueue_scripts', 'my_enqueue' );
 
+add_filter('woocommerce_order_details_after_order_table','add_delivery_date_to_order_page_woo');
+
+function add_delivery_date_to_order_page_woo($order) 
+{
+	$my_order_meta = get_post_custom( $order->id );
+	if(array_key_exists('Delivery Date',$my_order_meta))
+	{
+		$order_page_delivery_date = $my_order_meta['Delivery Date'];
+		if ( $order_page_delivery_date != "" )
+		{
+			echo '<p><strong>'.__(('Delivery Date'),'order-delivery-date').':</strong> ' . $order_page_delivery_date[0] . '</p>';
+		}
+	} 
+ }
+
 ?>
