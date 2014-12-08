@@ -24,9 +24,9 @@ $weekdays = array('orddd_weekday_0' => 'Sunday',
 				  );
 
 
-add_action('woocommerce_after_checkout_billing_form', 'my_custom_checkout_field'); 
+add_action('woocommerce_after_checkout_billing_form', 'orddd_lite_my_custom_checkout_field'); 
 
-function my_custom_checkout_field( $checkout ) {	
+function orddd_lite_my_custom_checkout_field( $checkout ) {	
 
     wp_enqueue_script( 'jquery' );
     wp_deregister_script( 'jqueryui');
@@ -124,9 +124,9 @@ function my_custom_checkout_field( $checkout ) {
 
 }
 
-add_action('woocommerce_checkout_update_order_meta', 'my_custom_checkout_field_update_order_meta'); 
+add_action('woocommerce_checkout_update_order_meta', 'orddd_lite_my_custom_checkout_field_update_order_meta'); 
 
-function my_custom_checkout_field_update_order_meta( $order_id ) {    
+function orddd_lite_my_custom_checkout_field_update_order_meta( $order_id ) {    
 
 	if ($_POST['e_deliverydate']) {
 
@@ -140,8 +140,8 @@ function my_custom_checkout_field_update_order_meta( $order_id ) {
  * This function are used for show custom column on order page listing. woo-orders
  * 
  */
-add_filter( 'manage_edit-shop_order_columns', 'woocommerce_order_delivery_date_column', 20, 1 );
-function woocommerce_order_delivery_date_column($columns){
+add_filter( 'manage_edit-shop_order_columns', 'orddd_lite_woocommerce_order_delivery_date_column', 20, 1 );
+function orddd_lite_woocommerce_order_delivery_date_column($columns){
 $new_columns = (is_array($columns)) ? $columns : array();
 unset( $new_columns['order_actions'] );
 
@@ -156,8 +156,8 @@ return $new_columns;
  * This fnction used to add value on the custom column created on woo- order
  * 
  */
-add_action( 'manage_shop_order_posts_custom_column', 'woocommerce_custom_column_value', 20, 1 );
-function woocommerce_custom_column_value($column){
+add_action( 'manage_shop_order_posts_custom_column', 'orddd_lite_woocommerce_custom_column_value', 20, 1 );
+function orddd_lite_woocommerce_custom_column_value($column){
 
     global $post;
     
@@ -172,15 +172,15 @@ function woocommerce_custom_column_value($column){
 // ************************ 8 ******************************
 
 //Code to create the settings page for the plugin
-add_action('admin_menu', 'order_delivery_date_menu');
-function order_delivery_date_menu()
+add_action('admin_menu', 'orddd_lite_order_delivery_date_menu');
+function orddd_lite_order_delivery_date_menu()
 {
-	add_menu_page( 'Order Delivery Date','Order Delivery Date','administrator', 'order_delivery_date','order_delivery_date_settings');
+	add_menu_page( 'Order Delivery Date','Order Delivery Date','administrator', 'order_delivery_date','orddd_lite_order_delivery_date_settings');
 }
-function order_delivery_date_settings(){
+function orddd_lite_order_delivery_date_settings(){
 	
     global $weekdays;
-    if(isset($_POST['save'])&& $_POST['save']!= "")
+    if(isset($_POST['save_orddd_lite'])&& $_POST['save_orddd_lite']!= "")
     {
             print('<div id="message" class="updated"><p>All changes have been saved.</p></div>');
     }
@@ -236,12 +236,12 @@ function order_delivery_date_settings(){
 					');
 
 
-		print ('<div class="submit_button"><span class="submit"><input type="submit" value="Save changes" name="save"/></span></div>
+		print ('<div class="submit_button"><span class="submit"><input type="submit" value="Save changes" name="save_orddd_lite"/></span></div>
 				</form>
 			</div>');
     }
 
-if(isset($_POST['save'])){
+if(isset($_POST['save_orddd_lite'])){
             foreach ($weekdays as $n => $day_name)
             {
                     if(isset($_POST[$n]))
@@ -309,11 +309,11 @@ function my_enqueue($hook)
     //<script type="text/javascript" src="jquery.themeswitcher.js"></script>
 
 }
-add_action( 'admin_enqueue_scripts', 'my_enqueue' );
+add_action( 'admin_enqueue_scripts', 'orddd_lite_my_enqueue' );
 
-add_filter('woocommerce_order_details_after_order_table','add_delivery_date_to_order_page_woo');
+add_filter('woocommerce_order_details_after_order_table','orddd_lite_add_delivery_date_to_order_page_woo');
 
-function add_delivery_date_to_order_page_woo($order) 
+function orddd_lite_add_delivery_date_to_order_page_woo($order) 
 {
 	$my_order_meta = get_post_custom( $order->id );
 	if(array_key_exists('Delivery Date',$my_order_meta))
