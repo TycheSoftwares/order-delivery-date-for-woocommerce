@@ -258,7 +258,7 @@ if(isset($_POST['save_orddd_lite'])){
             update_option('orddd_number_of_dates',$_POST['number_of_dates']);
         }
         
-function my_enqueue($hook)
+function orddd_lite_my_enqueue($hook)
 {
 	//echo $hook;
     if( 'toplevel_page_order_delivery_date' != $hook )
