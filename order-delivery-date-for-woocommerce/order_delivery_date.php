@@ -136,6 +136,16 @@ function orddd_lite_my_custom_checkout_field_update_order_meta( $order_id ) {
 	
 }
 
+ /**
+* This function is used for show delivery date in the email notification 
+**/
+add_filter('woocommerce_email_order_meta_keys', 'add_delivery_date_to_order_woo',10,1);
+
+function add_delivery_date_to_order_woo( $keys )
+{
+       $keys[] = "Delivery Date";
+       return $keys;
+}
 /**
  * This function are used for show custom column on order page listing. woo-orders
  * 
@@ -168,6 +178,8 @@ function orddd_lite_woocommerce_custom_column_value($column){
         echo (isset($data['Delivery Date'][0]) ? $data['Delivery Date'][0] : '');
     }
 }
+
+
 
 // ************************ 8 ******************************
 
