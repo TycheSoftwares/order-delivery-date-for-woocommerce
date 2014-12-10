@@ -12,9 +12,9 @@ Contributor: Tyche Softwares, http://www.tychesoftwares.com/
 
 $wpefield_version = '1.2';
 
-global $weekdays;
+global $weekdays_orddd_lite;
 
-$weekdays = array('orddd_weekday_0' => 'Sunday',
+$weekdays_orddd_lite = array('orddd_weekday_0' => 'Sunday',
 				  'orddd_weekday_1' => 'Monday',
 				  'orddd_weekday_2' => 'Tuesday',
 				  'orddd_weekday_3' => 'Wednesday',
@@ -86,35 +86,35 @@ function orddd_lite_my_custom_checkout_field( $checkout ) {
 
 				echo '</div>';
                                 
-                                global $weekdays;
+                                global $weekdays_orddd_lite;
 	
-	$alldays = array();
+	$alldays_orddd_lite = array();
 	
-	foreach ($weekdays as $n => $day_name) 
+	foreach ($weekdays_orddd_lite as $n => $day_name) 
 	{
-		$alldays[$n] = get_option($n);
+		$alldays_orddd_lite[$n] = get_option($n);
 	}
 	
-	$alldayskeys = array_keys($alldays);
+	$alldayskeys_orddd_lite = array_keys($alldays);
 	
         $checked = "No";
-	foreach($alldayskeys as $key)
+	foreach($alldayskeys_orddd_lite as $key)
 	{
-		if($alldays[$key] == 'checked')
+		if($alldays_orddd_lite[$key] == 'checked')
 		{
 			$checked = "Yes";
 		}
 	}
 	if($checked == 'Yes')
 	{
-		foreach($alldayskeys as $key)
+		foreach($alldayskeys_orddd_lite as $key)
 		{
-			print('<input type="hidden" id="'.$key.'" value="'.$alldays[$key].'">');
+			print('<input type="hidden" id="'.$key.'" value="'.$alldays_orddd_lite[$key].'">');
 		}
 	}
 	else if($checked == 'No')
 	{
-		foreach($alldayskeys as $key)
+		foreach($alldayskeys_orddd_lite as $key)
 		{
 			print('<input type="hidden" id="'.$key.'" value="checked">');
 		}
@@ -139,9 +139,9 @@ function orddd_lite_my_custom_checkout_field_update_order_meta( $order_id ) {
  /**
 * This function is used for show delivery date in the email notification 
 **/
-add_filter('woocommerce_email_order_meta_keys', 'add_delivery_date_to_order_woo',10,1);
+add_filter('woocommerce_email_order_meta_keys', 'orddd_lite_add_delivery_date_to_order_woo',10,1);
 
-function add_delivery_date_to_order_woo( $keys )
+function orddd_lite_add_delivery_date_to_order_woo( $keys )
 {
        $keys[] = "Delivery Date";
        return $keys;
@@ -191,7 +191,7 @@ function orddd_lite_order_delivery_date_menu()
 }
 function orddd_lite_order_delivery_date_settings(){
 	
-    global $weekdays;
+    global $weekdays_orddd_lite;
     if(isset($_POST['save_orddd_lite'])&& $_POST['save_orddd_lite']!= "")
     {
             print('<div id="message" class="updated"><p>All changes have been saved.</p></div>');
@@ -212,7 +212,7 @@ function orddd_lite_order_delivery_date_settings(){
 						<fieldset class="days-fieldset" style="width:190px;">
 							');
 		
-		foreach ($weekdays as $n => $day_name)
+		foreach ($weekdays_orddd_lite as $n => $day_name)
 		{
 			print('<input type="checkbox" name="'.$n.'" id="'.$n.'" class="day-checkbox" value="checked" '.get_option($n).' " />
 					<label class="ord_label" for="'.$day_name.'">'.$day_name.'</label>');
@@ -254,7 +254,7 @@ function orddd_lite_order_delivery_date_settings(){
     }
 
 if(isset($_POST['save_orddd_lite'])){
-            foreach ($weekdays as $n => $day_name)
+            foreach ($weekdays_orddd_lite as $n => $day_name)
             {
                     if(isset($_POST[$n]))
                 {
