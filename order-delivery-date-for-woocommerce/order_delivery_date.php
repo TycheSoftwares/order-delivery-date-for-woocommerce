@@ -95,7 +95,7 @@ function orddd_lite_my_custom_checkout_field( $checkout ) {
 		$alldays_orddd_lite[$n] = get_option($n);
 	}
 	
-	$alldayskeys_orddd_lite = array_keys($alldays);
+	$alldayskeys_orddd_lite = array_keys($alldays_orddd_lite);
 	
         $checked = "No";
 	foreach($alldayskeys_orddd_lite as $key)
