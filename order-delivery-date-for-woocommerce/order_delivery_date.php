@@ -5,12 +5,12 @@ Plugin Name: Order Delivery Date for Woocommerce (Lite version)
 Plugin URI: http://www.tychesoftwares.com/store/free-plugin/order-delivery-date-on-checkout/
 Description: This plugin allows customers to choose their preferred Order Delivery Date during checkout.
 Author: Ashok Rane
-Version: 1.3
+Version: 1.4
 Author URI: http://www.tychesoftwares.com/about
 Contributor: Tyche Softwares, http://www.tychesoftwares.com/
 */
 
-$wpefield_version = '1.3';
+$wpefield_version = '1.4';
 
 global $weekdays_orddd_lite;
 
@@ -55,6 +55,12 @@ function orddd_lite_my_custom_checkout_field( $checkout ) {
 	jQuery("#e_deliverydate").val("").datepicker({dateFormat: formats[1], minDate:1, beforeShow: avd, beforeShowDay: chd});
 	jQuery("#e_deliverydate").parent().append("<br><small style=font-size:10px;>We will try our best to deliver your order on the specified date</small>");
 });</script>';
+
+	if ( get_option( 'orddd_date_field_mandatory' ) == 'checked' ) {
+			$validate_wpefield = true;
+		} else {
+			$validate_wpefield = '';
+		}
 	
 	echo '<div id="my_custom_checkout_field" style="width: 202%; float: left;">'; 
         
@@ -76,7 +82,7 @@ function orddd_lite_my_custom_checkout_field( $checkout ) {
 
 				'label'         => __('Delivery Date'),		
 
-				'required'  	=> false,		
+				'required'  	=> $validate_wpefield,		
 
 				'placeholder'       => __('Delivery Date'),        
 
@@ -121,7 +127,7 @@ function orddd_lite_my_custom_checkout_field( $checkout ) {
 	}
         print('<input type="hidden" name="minimumOrderDays" id="minimumOrderDays" value="'.get_option('orddd_minimumOrderDays').'">');
 	print('<input type="hidden" name="number_of_dates" id="number_of_dates" value="'.get_option('orddd_number_of_dates').'">');
-
+	print('<input type="hidden" name="date_field_mandatory" id="date_field_mandatory" value="'.get_option('orddd_date_field_mandatory').'">');
 }
 
 add_action('woocommerce_checkout_update_order_meta', 'orddd_lite_my_custom_checkout_field_update_order_meta'); 
@@ -179,7 +185,23 @@ function orddd_lite_woocommerce_custom_column_value($column){
     }
 }
 
+/**
+ * Validate delivery date field
+ **/
 
+if ( get_option( 'orddd_date_field_mandatory' ) == 'checked' ) {
+	add_action( 'woocommerce_checkout_process', 'validate_date_wpefield' );
+}
+
+function validate_date_wpefield() {
+    global $woocommerce;
+	
+	// Check if set, if its not set add an error.
+	if ( !$_POST['e_deliverydate']  ) {
+    	$message = __( '<strong>'.get_option( 'orddd_delivery_date_field_label' ).'</strong> is a required field.', 'order-delivery-date' );
+    	wc_add_notice( $message, $notice_type = 'error' );
+	}
+}
 
 // ************************ 8 ******************************
 
@@ -245,6 +267,14 @@ function orddd_lite_order_delivery_date_settings(){
 						<?php print('</div>
 						<!--<div id="help">Based on the above 2 settings, you can decide how many dates should be made available to the customer to choose from. For example, if you enter 10, then 10 different dates will be made available to the customer to choose.</div>-->
 					</div>
+					<div id="ord_common">
+						<label class="ord_label" for="date_field_mandatory">Mandatory field?:</label>
+							<input type="checkbox" name="date_field_mandatory" id="date_field_mandatory" 
+							class="day-checkbox" value="checked" '.get_option( 'orddd_date_field_mandatory' ).' />
+								<div id="help">' );
+						?>
+									<img class="help_tip" width="16" height="16" data-tip="<?php echo "Check this option if you want to make the Delivery Date field <br>mandatory on the checkout page. Users will not be able to <br>place their orders unless the date is selected.";?>" src="<?php echo plugins_url() ;?>/woocommerce/assets/images/help.png" />
+						<?php print( '</div></div>
 					');
 
 
@@ -268,6 +298,11 @@ if(isset($_POST['save_orddd_lite'])){
             }
             update_option('orddd_minimumOrderDays',$_POST['minimumOrderDays']);
             update_option('orddd_number_of_dates',$_POST['number_of_dates']);
+			if ( isset( $_POST['date_field_mandatory'] ) ) {
+				update_option('orddd_date_field_mandatory', $_POST['date_field_mandatory']);
+			} else {
+				update_option('orddd_date_field_mandatory', '');
+			}
         }
         
 function orddd_lite_my_enqueue($hook)
