@@ -198,7 +198,7 @@ function validate_date_wpefield() {
 	
 	// Check if set, if its not set add an error.
 	if ( !$_POST['e_deliverydate']  ) {
-    	$message = __( '<strong>'.get_option( 'orddd_delivery_date_field_label' ).'</strong> is a required field.', 'order-delivery-date' );
+    	$message = __( '<strong>'.__(('Delivery Date'),'order-delivery-date').'</strong> is a required field.', 'order-delivery-date' );
     	wc_add_notice( $message, $notice_type = 'error' );
 	}
 }
