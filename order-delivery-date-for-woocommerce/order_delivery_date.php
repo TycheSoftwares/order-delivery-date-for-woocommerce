@@ -237,7 +237,7 @@ function orddd_lite_order_delivery_date_settings(){
 		foreach ($weekdays_orddd_lite as $n => $day_name)
 		{
 			print('<input type="checkbox" name="'.$n.'" id="'.$n.'" class="day-checkbox" value="checked" '.get_option($n).' " />
-					<label class="ord_label" for="'.$day_name.'">'.$day_name.'</label>');
+					<label class="ord_label" for="'.$day_name.'">'__($day_name, 'order-delivery-date')'</label>');
 			print('<br>');
 		}
 		
