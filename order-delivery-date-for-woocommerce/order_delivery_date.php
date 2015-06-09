@@ -24,7 +24,20 @@ $weekdays_orddd_lite = array('orddd_weekday_0' => 'Sunday',
 				  );
 
 
+
 add_action('woocommerce_after_checkout_billing_form', 'orddd_lite_my_custom_checkout_field'); 
+
+// For language translation
+add_action( 'init', 'update_po_file' );
+function  update_po_file(){
+    $domain = 'order-delivery-date';
+    $locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+    if ( $loaded = load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '-' . $locale . '.mo' ) ) {
+        return $loaded;
+    } else {
+        load_plugin_textdomain( $domain, FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+    }
+}
 
 function orddd_lite_my_custom_checkout_field( $checkout ) {	
 
@@ -220,7 +233,7 @@ function orddd_lite_order_delivery_date_settings(){
     }
         print('<br />
 		<div id="order-delivery-date-settings">
-			<div class="ino_titlee"><h3 class="ord_h3">Order Delivery Date Settings</h3></div>
+			<div class="ino_titlee"><h3 class="ord_h3">'.__( 'Order Delivery Date Settings', 'order-delivery-date').'</h3></div>
                         
 				<form id="order-delivery-date-settings-form" name="order-delivery-date-settings" method="post">
 					<input type="hidden" name="action" value="">
@@ -230,7 +243,7 @@ function orddd_lite_order_delivery_date_settings(){
 					
 					
 				print('<div id="ord_common">
-						<label class="ord_label" class="ord_label" for="delivery-days-tf">Delivery Days: </label>
+						<label class="ord_label" class="ord_label" for="delivery-days-tf">'.__('Delivery Days:', 'order-delivery-date').'</label>
 						<fieldset class="days-fieldset" style="width:190px;">
 							');
 		
@@ -244,41 +257,41 @@ function orddd_lite_order_delivery_date_settings(){
 		print('</fieldset>
 				<div id="help">');
 						?>
-						<img class="help_tip" width="16" height="16" data-tip="<?php echo 'Select the weekdays when the delivery of items takes place. <br>For example, if you deliver only on Tuesday, Wednesday, <br>Thursday & Friday, then select only those days here. The <br>remaining days will not be available for selection to the <br>customer.';?>" src="<?php echo plugins_url() ;?>/woocommerce/assets/images/help.png" />
+						<img class="help_tip" width="16" height="16" data-tip="<?php _e( 'Select the weekdays when the delivery of items takes place. <br>For example, if you deliver only on Tuesday, Wednesday, <br>Thursday & Friday, then select only those days here. The <br>remaining days will not be available for selection to the <br>customer.', 'order-delivery-date' );?>" src="<?php echo plugins_url() ;?>/woocommerce/assets/images/help.png" />
 						<?php print('</div>
 						<!--<div id="help">Select the weekdays when the delivery of items takes place. For example, if you deliver only on Tuesday, Wednesday, Thursday & Friday, then select only those days here. The remaining days will not be available for selection to the customer.</div>-->
 					</div>
 
 					<div id="ord_common">
-						<label class="ord_label" for="order-delay-days-tf">Minimum Delivery time (in days): </label>
+						<label class="ord_label" for="order-delay-days-tf">'.__('Minimum Delivery time (in days):', 'order-delivery-date').'</label>
 						<input type="text" name="minimumOrderDays" id="minimumOrderDays" value="'.get_option('orddd_minimumOrderDays').'"/>
 						<div id="help">');
 						?>
-						<img class="help_tip" width="16" height="16" data-tip="<?php echo 'Enter the minimum number of days it takes for you to deliver <br>an order. For example, if it takes 2 days atleast to ship an <br>order, enter 2 here. The customer can select a date that is <br>available only after the minimum days that are entered here.';?>" src="<?php echo plugins_url() ;?>/woocommerce/assets/images/help.png" />
+						<img class="help_tip" width="16" height="16" data-tip="<?php _e( 'Enter the minimum number of days it takes for you to deliver <br>an order. For example, if it takes 2 days atleast to ship an <br>order, enter 2 here. The customer can select a date that is <br>available only after the minimum days that are entered here.', 'order-delivery-date' );?>" src="<?php echo plugins_url() ;?>/woocommerce/assets/images/help.png" />
 						<?php print('
 						</div>
 					</div>
 					<div id="ord_common">
-						<label class="ord_label" for="number_of_dates">Number of dates to choose: </label>
+						<label class="ord_label" for="number_of_dates">'.__('Number of dates to choose:', 'order-delivery-date').'</label>
 						<input type="text" name="number_of_dates" id="number_of_dates" value="'.get_option('orddd_number_of_dates').'"/>
 						<div id="help">');
 						?>
-						<img class="help_tip" width="16" height="16" data-tip="<?php echo 'Based on the above 2 settings, you can decide how many dates should be made available to the customer to choose from. For example, if you enter 10, then 10 different dates will be made available to the customer to choose.';?>" src="<?php echo plugins_url() ;?>/woocommerce/assets/images/help.png" />
+						<img class="help_tip" width="16" height="16" data-tip="<?php _e( 'Based on the above 2 settings, you can decide how many dates should be made available to the customer to choose from. For example, if you enter 10, then 10 different dates will be made available to the customer to choose.', 'order-delivery-date' );?>" src="<?php echo plugins_url() ;?>/woocommerce/assets/images/help.png" />
 						<?php print('</div>
 						<!--<div id="help">Based on the above 2 settings, you can decide how many dates should be made available to the customer to choose from. For example, if you enter 10, then 10 different dates will be made available to the customer to choose.</div>-->
 					</div>
 					<div id="ord_common">
-						<label class="ord_label" for="date_field_mandatory">Mandatory field?:</label>
+						<label class="ord_label" for="date_field_mandatory">'.__('Mandatory field?:', 'order-delivery-date').'</label>
 							<input type="checkbox" name="date_field_mandatory" id="date_field_mandatory" 
 							class="day-checkbox" value="checked" '.get_option( 'orddd_date_field_mandatory' ).' />
 								<div id="help">' );
 						?>
-									<img class="help_tip" width="16" height="16" data-tip="<?php echo "Check this option if you want to make the Delivery Date field <br>mandatory on the checkout page. Users will not be able to <br>place their orders unless the date is selected.";?>" src="<?php echo plugins_url() ;?>/woocommerce/assets/images/help.png" />
+									<img class="help_tip" width="16" height="16" data-tip="<?php  _e( "Check this option if you want to make the Delivery Date field <br>mandatory on the checkout page. Users will not be able to <br>place their orders unless the date is selected.", "order-delivery-date" );?>" src="<?php echo plugins_url() ;?>/woocommerce/assets/images/help.png" />
 						<?php print( '</div></div>
 					');
 
 
-		print ('<div class="submit_button"><span class="submit"><input type="submit" value="Save changes" name="save_orddd_lite"/></span></div>
+		print ('<div class="submit_button"><span class="submit"><input type="submit" value="'.__("Save changes","order-delivery-date").'" name="save_orddd_lite"/></span></div>
 				</form>
 			</div>');
     }
