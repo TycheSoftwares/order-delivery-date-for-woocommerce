@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-09 15:10+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: order_delivery_date.php:29
+msgid "Sunday"
+msgstr ""
+
+#: order_delivery_date.php:30
+msgid "Monday"
+msgstr ""
+
+#: order_delivery_date.php:31
+msgid "Tuesday"
+msgstr ""
+
+#: order_delivery_date.php:32
+msgid "Wednesday"
+msgstr ""
+
+#: order_delivery_date.php:33
+msgid "Thursday"
+msgstr ""
+
+#: order_delivery_date.php:34
+msgid "Friday"
+msgstr ""
+
+#: order_delivery_date.php:35
+msgid "Saturday"
+msgstr ""
+
+#: order_delivery_date.php:94 order_delivery_date.php:98
+msgid "Delivery Date"
+msgstr ""
+
+#: order_delivery_date.php:212
+msgid "<strong>"
+msgstr ""
+
+#: order_delivery_date.php:234
+msgid "Order Delivery Date Settings"
+msgstr ""
+
+#: order_delivery_date.php:244
+msgid "Delivery Days:"
+msgstr ""
+
+#: order_delivery_date.php:258
+msgid ""
+"Select the weekdays when the delivery of items takes place. <br>For example, "
+"if you deliver only on Tuesday, Wednesday, <br>Thursday & Friday, then "
+"select only those days here. The <br>remaining days will not be available "
+"for selection to the <br>customer."
+msgstr ""
+
+#: order_delivery_date.php:264
+msgid "Minimum Delivery time (in days):"
+msgstr ""
+
+#: order_delivery_date.php:268
+msgid ""
+"Enter the minimum number of days it takes for you to deliver <br>an order. "
+"For example, if it takes 2 days atleast to ship an <br>order, enter 2 here. "
+"The customer can select a date that is <br>available only after the minimum "
+"days that are entered here."
+msgstr ""
+
+#: order_delivery_date.php:273
+msgid "Number of dates to choose:"
+msgstr ""
+
+#: order_delivery_date.php:277
+msgid ""
+"Based on the above 2 settings, you can decide how many dates should be made "
+"available to the customer to choose from. For example, if you enter 10, then "
+"10 different dates will be made available to the customer to choose."
+msgstr ""
+
+#: order_delivery_date.php:282
+msgid "Mandatory field?:"
+msgstr ""
+
+#: order_delivery_date.php:287
+msgid ""
+"Check this option if you want to make the Delivery Date field <br>mandatory "
+"on the checkout page. Users will not be able to <br>place their orders "
+"unless the date is selected."
+msgstr ""
+
+#: order_delivery_date.php:292
+msgid "Save changes"
+msgstr ""
