@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: order-delivery-date\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 15:10+0530\n"
-"PO-Revision-Date: 2015-06-09 15:12+0530\n"
+"POT-Creation-Date: 2015-06-23 14:39+0530\n"
+"PO-Revision-Date: 2015-06-23 14:41+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,92 +18,93 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
 
-#: order_delivery_date.php:29
+#: order_delivery_date.php:17
 msgid "Sunday"
 msgstr ""
 
-#: order_delivery_date.php:30
+#: order_delivery_date.php:18
 msgid "Monday"
 msgstr ""
 
-#: order_delivery_date.php:31
+#: order_delivery_date.php:19
 msgid "Tuesday"
 msgstr ""
 
-#: order_delivery_date.php:32
+#: order_delivery_date.php:20
 msgid "Wednesday"
 msgstr ""
 
-#: order_delivery_date.php:33
+#: order_delivery_date.php:21
 msgid "Thursday"
 msgstr ""
 
-#: order_delivery_date.php:34
+#: order_delivery_date.php:22
 msgid "Friday"
 msgstr ""
 
-#: order_delivery_date.php:35
+#: order_delivery_date.php:23
 msgid "Saturday"
 msgstr ""
 
-#: order_delivery_date.php:94 order_delivery_date.php:98
+#: order_delivery_date.php:94 order_delivery_date.php:96
 msgid "Delivery Date"
 msgstr ""
 
-#: order_delivery_date.php:212
+#: order_delivery_date.php:189
 msgid "<strong>"
 msgstr ""
 
-#: order_delivery_date.php:234
+#: order_delivery_date.php:201
 msgid "Order Delivery Date Settings"
 msgstr ""
 
-#: order_delivery_date.php:244
+#: order_delivery_date.php:208
 msgid "Delivery Days:"
 msgstr ""
 
-#: order_delivery_date.php:258
-msgid ""
-"Select the weekdays when the delivery of items takes place. <br>For example, "
-"if you deliver only on Tuesday, Wednesday, <br>Thursday & Friday, then "
-"select only those days here. The <br>remaining days will not be available "
-"for selection to the <br>customer."
+#: order_delivery_date.php:212
+msgid "Select weekdays for delivery."
 msgstr ""
 
-#: order_delivery_date.php:264
+#: order_delivery_date.php:217
 msgid "Minimum Delivery time (in days):"
 msgstr ""
 
-#: order_delivery_date.php:268
-msgid ""
-"Enter the minimum number of days it takes for you to deliver <br>an order. "
-"For example, if it takes 2 days atleast to ship an <br>order, enter 2 here. "
-"The customer can select a date that is <br>available only after the minimum "
-"days that are entered here."
+#: order_delivery_date.php:221
+msgid "Minimum number of days required to prepare for delivery."
 msgstr ""
 
-#: order_delivery_date.php:273
+#: order_delivery_date.php:226
 msgid "Number of dates to choose:"
 msgstr ""
 
-#: order_delivery_date.php:277
-msgid ""
-"Based on the above 2 settings, you can decide how many dates should be made "
-"available to the customer to choose from. For example, if you enter 10, then "
-"10 different dates will be made available to the customer to choose."
+#: order_delivery_date.php:230
+msgid "Number of dates available for delivery."
 msgstr ""
 
-#: order_delivery_date.php:282
+#: order_delivery_date.php:235
 msgid "Mandatory field?:"
 msgstr ""
 
-#: order_delivery_date.php:287
-msgid ""
-"Check this option if you want to make the Delivery Date field <br>mandatory "
-"on the checkout page. Users will not be able to <br>place their orders "
-"unless the date is selected."
+#: order_delivery_date.php:239
+msgid "Selection of delivery date on the checkout page will become mandatory."
 msgstr ""
 
-#: order_delivery_date.php:292
-msgid "Save changes"
+#: order_delivery_date.php:286
+msgid "Save Settings"
+msgstr ""
+
+#: order_delivery_date.php:295
+msgid "Weekdays:"
+msgstr ""
+
+#: order_delivery_date.php:402
+#, php-format
+msgid ""
+"You can upgrade to the <a href=\"https://www.tychesoftwares.com/store/"
+"premium-plugins/order-delivery-date-for-woocommerce-pro-21/\">PRO version of "
+"Order Delivery Date for WooCommerce plugin</a> at a <b>20% discount</b>. Use "
+"the coupon code: <b>ORDPRO20</b>.<a href=\"https://www.tychesoftwares.com/"
+"store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/\"> "
+"Purchase now </a> & save $20!"
 msgstr ""

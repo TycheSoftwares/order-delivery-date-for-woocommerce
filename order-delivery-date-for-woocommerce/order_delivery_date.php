@@ -14,13 +14,13 @@ $wpefield_version = '1.4';
 
 global $weekdays_orddd_lite;
 
-$weekdays_orddd_lite = array('orddd_weekday_0' => 'Sunday',
-				  'orddd_weekday_1' => 'Monday',
-				  'orddd_weekday_2' => 'Tuesday',
-				  'orddd_weekday_3' => 'Wednesday',
-				  'orddd_weekday_4' => 'Thursday',
-				  'orddd_weekday_5' => 'Friday',
-				  'orddd_weekday_6' => 'Saturday'
+$weekdays_orddd_lite = array('orddd_weekday_0' => __( 'Sunday', 'order-delivery-date' ),
+				  'orddd_weekday_1' => __( 'Monday', 'order-delivery-date' ),
+				  'orddd_weekday_2' => __( 'Tuesday', 'order-delivery-date' ),
+				  'orddd_weekday_3' => __( 'Wednesday', 'order-delivery-date' ),
+				  'orddd_weekday_4' => __( 'Thursday', 'order-delivery-date' ),
+				  'orddd_weekday_5' => __( 'Friday', 'order-delivery-date' ),
+				  'orddd_weekday_6' => __( 'Saturday', 'order-delivery-date' )
 				  );
 
 
@@ -198,7 +198,7 @@ function order_lite_delivery_date_admin_settings() {
     // First, we register a section. This is necessary since all future options must belong to one.
     add_settings_section(
         'orddd_lite_date_settings_section',		// ID used to identify this section and with which to register options
-        'Order Delivery Date Settings',		// Title to be displayed on the administration page
+        __( 'Order Delivery Date Settings', 'order-delivery-date' ),		// Title to be displayed on the administration page
         'orddd_lite_delivery_date_setting',		// Callback used to render the description of the section
         'orddd_lite_date_settings_page'				// Page on which to add this section of options
     );
@@ -209,7 +209,7 @@ function order_lite_delivery_date_admin_settings() {
         'orddd_lite_delivery_days_callback',
         'orddd_lite_date_settings_page',
         'orddd_lite_date_settings_section',
-        array ( __('&nbsp;Select weekdays for delivery.','order-delivery-date' ))
+        array ( '&nbsp;'.__( 'Select weekdays for delivery.', 'order-delivery-date' ) )
      );
      
      add_settings_field(
@@ -283,7 +283,7 @@ function orddd_lite_order_delivery_date_settings(){
         <form method="post" action="options.php">');
             settings_fields( "orddd_lite_date_settings" );
             do_settings_sections( "orddd_lite_date_settings_page" );
-            submit_button( 'Save Settings', 'primary', 'save_orddd_lite', true );
+            submit_button ( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save_orddd_lite', true );
         print('</form>
     </div>');
 }
@@ -292,7 +292,7 @@ function orddd_lite_delivery_days_callback( $args ) {
     global $weekdays_orddd_lite;
     printf(
         '<fieldset class="days-fieldset" style="width:150px;">
-        <legend><b>Weekdays:</b></legend>'
+        <legend><b>'.__( 'Weekdays:', 'order-delivery-date' ).'</b></legend>'
     );
         $html = '';
         printf('<table>');
