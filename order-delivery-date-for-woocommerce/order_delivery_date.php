@@ -336,10 +336,12 @@ function orddd_lite_date_field_mandatory_callback( $args ) {
     echo $html;
 }
 
+add_action( 'admin_enqueue_scripts', 'orddd_lite_my_enqueue' );
+
 function orddd_lite_my_enqueue( $hook ) {
+    
     if( 'toplevel_page_order_delivery_date' != $hook )
         return;
-
 	wp_enqueue_script(
 		'jquery-ui',
 		'http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js',
@@ -375,13 +377,35 @@ function orddd_lite_my_enqueue( $hook ) {
 	wp_register_script( 'woocommerce_admin', plugins_url() . '/woocommerce/assets/js/admin/woocommerce_admin.js', array('jquery', 'jquery-ui-widget', 'jquery-ui-core'));
 	wp_enqueue_script( 'woocommerce_admin' );
 	
+	
 	//<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
     //<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
     //<script type="text/javascript" src="jquery.themeswitcher.js"></script>
 
 }
 
-add_action( 'admin_enqueue_scripts', 'orddd_lite_my_enqueue' );
+add_action( 'admin_footer', 'admin_notices_scripts' );
+
+function admin_notices_scripts() {    
+    wp_enqueue_script(
+    'dismiss-notice.js',
+    plugins_url('/js/dismiss-notice.js', __FILE__),
+    '',
+    '',
+    false
+    );
+    
+    wp_enqueue_style( 'dismiss-notice', plugins_url('/css/dismiss-notice.css', __FILE__ ) , '', '', false);
+    
+    wp_enqueue_script(
+    'jquery-ui-min',
+    'http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js',
+    '',
+    '',
+    false
+    );
+}
+
 add_filter('woocommerce_order_details_after_order_table','orddd_lite_add_delivery_date_to_order_page_woo');
 
 function orddd_lite_add_delivery_date_to_order_page_woo( $order ) {
@@ -396,11 +420,24 @@ function orddd_lite_add_delivery_date_to_order_page_woo( $order ) {
 
 add_action( 'admin_notices', 'order_lite_coupon_notice');
 
-function order_lite_coupon_notice() {
-    ?>
-    <div class="updated" data-dismiss="true">
-        <p><?php _e( 'You can upgrade to the <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/">PRO version of Order Delivery Date for WooCommerce plugin</a> at a <b>20% discount</b>. Use the coupon code: <b>ORDPRO20</b>.<a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/"> Purchase now </a> & save $20!', 'order-delivery-date' ); ?></p>
-    </div>   
-   	<?php
+function order_lite_coupon_notice() { 
+    $admin_url = get_admin_url();
+    echo '<input type="hidden" id="admin_url" value="'.$admin_url.'"/>';
+    $admin_notice = get_option('orddd_admin_notices');
+    if($admin_notice != 'yes') {
+        ?>
+        <div class="updated notice is-dismissible" >
+            <p><?php _e( 'You can upgrade to the <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/">PRO version of Order Delivery Date for WooCommerce plugin</a> at a <b>20% discount</b>. Use the coupon code: <b>ORDPRO20</b>.<a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/"> Purchase now </a> & save $20!', 'order-delivery-date' ); ?></p>
+        </div>   
+   	    <?php
+    }
+}
+
+add_action('wp_ajax_admin_notices','admin_notices');
+
+function admin_notices() {
+    echo "here";
+   update_option('orddd_admin_notices','yes');   
+   die();
 }
 ?>
