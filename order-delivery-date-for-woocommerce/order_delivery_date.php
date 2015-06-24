@@ -1,16 +1,16 @@
 <?php 
 
 /*
-Plugin Name: Order Delivery Date for Woocommerce (Lite version)
+Plugin Name: Order Delivery Date for WooCommerce (Lite version)
 Plugin URI: http://www.tychesoftwares.com/store/free-plugin/order-delivery-date-on-checkout/
 Description: This plugin allows customers to choose their preferred Order Delivery Date during checkout.
-Author: Ashok Rane
-Version: 1.4
+Author: Tyche Softwares
+Version: 1.5
 Author URI: http://www.tychesoftwares.com/about
 Contributor: Tyche Softwares, http://www.tychesoftwares.com/
 */
 
-$wpefield_version = '1.4';
+$wpefield_version = '1.5';
 
 global $weekdays_orddd_lite;
 
