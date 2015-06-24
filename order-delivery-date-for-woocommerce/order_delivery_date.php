@@ -78,7 +78,7 @@ function orddd_lite_my_custom_checkout_field( $checkout ) {
 	jQuery("#e_deliverydate").width("150px");
 	var formats = ["MM d, yy","MM d, yy"];
 	jQuery("#e_deliverydate").val("").datepicker({dateFormat: formats[1], minDate:1, beforeShow: avd, beforeShowDay: chd});
-	jQuery("#e_deliverydate").parent().append("<br><small style=font-size:10px;>We will try our best to deliver your order on the specified date</small>");
+	jQuery("#e_deliverydate").parent().append("<br><small style=font-size:10px;>'.__('We will try our best to deliver your order on the specified date','order-delivery-date').'</small>");
     });</script>';
 
 	if ( get_option( 'orddd_date_field_mandatory' ) == 'checked' ) {
@@ -103,11 +103,11 @@ function orddd_lite_my_custom_checkout_field( $checkout ) {
 
 	woocommerce_form_field( 'e_deliverydate', array(        
 				'type'          => 'text',        
-				'label'         => __('Delivery Date'),		
+				'label'         => __('Delivery Date','order-delivery-date'),		
 				'required'  	=> $validate_wpefield,		
-				'placeholder'       => __('Delivery Date'),        
+				'placeholder'       => __('Delivery Date','order-delivery-date'),        
 				), 
-	$checkout->get_value( 'e_deliverydate' ));     
+	$checkout->get_value( 'e_deliverydate' ));       
 	echo '</div>';
 	
 	$alldays_orddd_lite = array();
