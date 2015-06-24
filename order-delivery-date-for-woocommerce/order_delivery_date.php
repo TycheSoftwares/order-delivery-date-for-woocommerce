@@ -150,7 +150,8 @@ function orddd_lite_my_custom_checkout_field_update_order_meta( $order_id ) {
 add_filter('woocommerce_email_order_meta_keys', 'orddd_lite_add_delivery_date_to_order_woo',10,1);
 
 function orddd_lite_add_delivery_date_to_order_woo( $keys ) {
-    $keys[] = "Delivery Date";
+    $label_name = __("Delivery Date","order-delivery-date");
+    $keys[$label_name] = "Delivery Date";
     return $keys;
 }
 /**
@@ -165,7 +166,7 @@ function orddd_lite_woocommerce_order_delivery_date_column( $columns ) {
 
     //edit this for you column(s)
     //all of your columns will be added before the actions column
-    $new_columns['order_delivery_date'] = 'Delivery Date'; //Title for column heading
+    $new_columns['order_delivery_date'] = __('Delivery Date','order-delivery-date'); //Title for column heading
     $new_columns['order_actions'] = $columns['order_actions'];
     return $new_columns;
 }
