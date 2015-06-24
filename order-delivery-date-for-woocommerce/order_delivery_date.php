@@ -24,6 +24,18 @@ $weekdays_orddd_lite = array('orddd_weekday_0' => __( 'Sunday', 'order-delivery-
 				  );
 
 
+register_uninstall_hook( __FILE__, 'orddd_lite_deactivate' );
+function orddd_lite_deactivate() {
+    global $weekdays_orddd_lite;
+    foreach ( $weekdays_orddd_lite as $n => $day_name ) {
+        delete_option( $n );
+    }
+    delete_option( 'orddd_minimumOrderDays' );
+    delete_option( 'orddd_number_of_dates' );
+    delete_option( 'orddd_date_field_mandatory' );
+
+    delete_option('orddd_admin_notices');
+}
 
 add_action('woocommerce_after_checkout_billing_form', 'orddd_lite_my_custom_checkout_field'); 
 
