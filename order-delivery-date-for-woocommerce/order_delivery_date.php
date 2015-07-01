@@ -374,7 +374,7 @@ function orddd_lite_my_enqueue( $hook ) {
 	);
     wp_enqueue_script(
 	   'jquery-ui-min',
-	   'http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js',
+	   'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js',
 	   '',
 	   '',
 	   false
@@ -412,7 +412,7 @@ function admin_notices_scripts() {
     
     wp_enqueue_script(
     'jquery-ui-min',
-    'http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js',
+    'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js',
     '',
     '',
     false
