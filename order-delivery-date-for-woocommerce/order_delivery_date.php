@@ -449,7 +449,6 @@ function order_lite_coupon_notice() {
 add_action('wp_ajax_admin_notices','admin_notices');
 
 function admin_notices() {
-    echo "here";
    update_option('orddd_admin_notices','yes');   
    die();
 }
