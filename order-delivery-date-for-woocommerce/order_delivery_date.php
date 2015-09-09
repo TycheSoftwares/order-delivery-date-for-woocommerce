@@ -76,6 +76,7 @@ function orddd_lite_my_custom_checkout_field( $checkout ) {
 
 	echo '<script language="javascript">jQuery(document).ready(function(){
 	jQuery("#e_deliverydate").width("150px");
+	jQuery( "#e_deliverydate" ).attr( "readonly", true );
 	var formats = ["MM d, yy","MM d, yy"];
 	jQuery("#e_deliverydate").val("").datepicker({dateFormat: formats[1], minDate:1, beforeShow: avd, beforeShowDay: chd});
 	jQuery("#e_deliverydate").parent().append("<br><small style=font-size:10px;>'.__('We will try our best to deliver your order on the specified date','order-delivery-date').'</small>");
