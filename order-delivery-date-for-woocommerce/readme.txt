@@ -1,8 +1,8 @@
 === Order Delivery Date for Woocommerce ===
-Contributors: ashokrane, MoxaJogani, bhavik.kiri
+Contributors: ashokrane, MoxaJogani, bhavik.kiri, mansishah, komal-maru, dharakothari
 Tags: delivery date, checkout, order delivery, calendar, checkout calendar, woocommerce delivery date
 Requires at least: 1.4
-Tested up to: 4.1.1
+Tested up to: 4.2.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ This plugin allows you to improve your customer service by delivering the order 
 
 **Pro Version:**
 
-**[Order Delivery Date Pro 2.6.6](http://www.tychesoftwares.com/store/premium-plugins/woocommerce-delivery-date-delivery-time "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. Following features are available in PRO version:
+**[Order Delivery Date Pro 2.8.5](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. Following features are available in PRO version:
 
 <ol>
 <li>Ability to allow the customer to select <strong>Delivery Time along with Delivery Date</strong></li>
@@ -39,7 +39,7 @@ This plugin allows you to improve your customer service by delivering the order 
 <li>Capture only delivery date or only delivery time or both</li>
  </ol>
 
-**[View Demo](http://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "View Demo")**
+**[View Demo](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "View Demo")**
 
 == Installation ==
 
@@ -53,11 +53,11 @@ This plugin allows you to improve your customer service by delivering the order 
 
 = Can the customer enter the preferred order delivery time? =
 
-Currently there is no provision for entering the delivery time in the free version. This is possible in the Version 2.1. [View Demo](http://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "View Demo")
+Currently there is no provision for entering the delivery time in the free version. This is possible in the Pro version. [View Demo](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "View Demo")
 
 = Is the order delivery date field mandatory on checkout page? =
 
-No. The delivery date field is optional in the free version. The field can be configured as Mandatory or optional in the Version 2.1. [View Demo](http://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "View Demo")
+The field can be configured as Mandatory or optional using the 'Mandatory field?' setting.
 
 == Screenshots ==
 
@@ -68,6 +68,26 @@ No. The delivery date field is optional in the free version. The field can be co
 3. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date".
 
 == Changelog ==
+
+= 1.7 =
+
+* A new setting is being added named as 'Lockout date after X orders' which allows to block the dates for further deliveries after X number of orders.
+* The plugin is now compatible with 3rd party plugins like:
+	- WooCommerce Zapier Integration.
+	- WooCommerce Print Invoice & Delivery Note
+	- WooCommerce PDF Invoices & Packing Slips
+	- WooCommerce Customer/Order CSV Export
+	- WooCommerce Subscriptions
+	- WooCommerce Print Orders
+	- WooCommerce Print Invoice/Packing list
+* Delivery Date field on the checkout page has been made readonly preventing manual editing.
+
+= 1.6 =
+* The jQuery UI version has been updated to 1.10.4. The old version was throwing a Javascript error in some pages in the WordPress Admin.
+
+= 1.5 =
+* The plugin fields in admin have been restructured. We are now using the WordPress Settings API for all the plugin fields in admin.
+* We have included .po, .pot and .mo files in the plugin. The plugin strings can now be translated to any language using these files.
 
 = 1.4 =
 * We have added a new setting 'Mandatory field?' in the admin dashboard, which will allow the Delivery Date field to be set as mandatory on the checkout page.
