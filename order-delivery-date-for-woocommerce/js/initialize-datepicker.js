@@ -6,7 +6,7 @@ function dwd( date ) {
 			return [ false, "", "Booked" ];
 		}
 	}
-	var day = 'orddd_weekday_' + date.getDay();
+	var day = 'orddd_lite_weekday_' + date.getDay();
 	if ( jQuery( "#" + day ).val() != 'checked' ) {
 		return [false];
 	}
@@ -61,7 +61,7 @@ function avd( date ) {
 		var new_date = new Date( ad( l_start, i ) );
 
 		var day = "";
-		day = 'orddd_weekday_' + new_date.getDay();
+		day = 'orddd_lite_weekday_' + new_date.getDay();
 		day_check = jQuery( "#" + day ).val();
 
 		if( day_check != "checked" ) {
