@@ -37,6 +37,7 @@ function orddd_lite_deactivate() {
     delete_option( 'orddd_lite_admin_notices' );
     delete_option( 'orddd_lite_lockout_date_after_orders' );
     delete_option( 'orddd_lite_lockout_days' );
+    delete_option( 'orddd_lite_update_value' );
 }
 
 if ( !class_exists( 'order_delivery_date_lite' ) ) {
@@ -45,8 +46,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         public function __construct() {
             add_action( 'init', array( &$this, 'orddd_lite_update_po_file' ) );
             
-            // ADMIN
+            //Initialize settings
+            register_activation_hook( __FILE__, array( &$this, 'orddd_lite_activate' ) );
             add_action( 'admin_init', array( &$this, 'orddd_lite_update_db_check' ) );
+            
+            // ADMIN
             add_action( 'admin_footer', array( &$this, 'admin_notices_scripts' ) );
             add_action( 'wp_ajax_admin_notices', array( &$this, 'orddd_lite_admin_notices' ) );
             add_action( 'admin_notices', array( &$this, 'order_lite_coupon_notice' ) );
@@ -66,6 +70,20 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             if ( get_option( 'orddd_lite_date_field_mandatory' ) == 'checked' ) {
                 add_action( 'woocommerce_checkout_process', array( &$this, 'orddd_lite_validate_date_wpefield' ) );
             }
+        }
+        
+        public static function orddd_lite_activate() {
+            global $weekdays_orddd_lite;
+        
+            foreach ( $weekdays_orddd_lite as $n => $day_name ) {
+                add_option( $n, 'checked' );
+            }
+            add_option( 'orddd_lite_minimumOrderDays', '0' );
+            add_option( 'orddd_lite_number_of_dates', '30' );
+            add_option( 'orddd_lite_date_field_mandatory', '' );
+            add_option( 'orddd_lite_lockout_date_after_orders', '' );
+            add_option( 'orddd_lite_lockout_days', '' );
+            add_option( 'orddd_lite_update_value', 'yes' );
         }
 
         /***********************************************************
@@ -100,35 +118,38 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             $orddd_lite_plugin_version = get_option( 'orddd_lite_db_version' );
             if ( $orddd_lite_plugin_version != order_delivery_date_lite::get_orddd_lite_version() ) {
                 update_option('orddd_lite_db_version','1.7');
+                if ( get_option( 'orddd_lite_update_value' ) != 'yes' ) {
+                    $i = 0;
+                    foreach ( $weekdays_orddd_lite as $n => $day_name ) {
         
-                $i = 0;
-                foreach ( $weekdays_orddd_lite as $n => $day_name ) {
+                        $orddd_lite_weekday = get_option( 'orddd_weekday_'.$i );
+                        update_option( $n , $orddd_lite_weekday );
+                        delete_option( 'orddd_weekday_'.$i );
+                        $i++;
+                    }
         
-                    $orddd_lite_weekday = get_option( 'orddd_weekday_'.$i );
-                    update_option( $n , $orddd_lite_weekday );
-                    delete_option( 'orddd_weekday_'.$i );
-                    $i++;
+                    $orddd_lite_minimumOrderDays = get_option( 'orddd_minimumOrderDays' );
+                    update_option( 'orddd_lite_minimumOrderDays', $orddd_lite_minimumOrderDays );
+                    delete_option( 'orddd_minimumOrderDays' );
+            
+                    $orddd_lite_number_of_dates = get_option( 'orddd_number_of_dates' );
+                    update_option( 'orddd_lite_number_of_dates', $orddd_lite_number_of_dates );
+                    delete_option( 'orddd_number_of_dates' );
+        
+                    $orddd_lite_date_field_mandatory = get_option( 'orddd_date_field_mandatory' );
+                    update_option( 'orddd_lite_date_field_mandatory', $orddd_lite_date_field_mandatory );
+                    delete_option( 'orddd_date_field_mandatory' );
+        
+                    $orddd_lite_lockout_date_after_orders = get_option( 'orddd_lockout_date_after_orders' );
+                    update_option( 'orddd_lite_lockout_date_after_orders', $orddd_lite_lockout_date_after_orders );
+                    delete_option( 'orddd_lockout_date_after_orders' );
+        
+                    $orddd_lite_lockout_days = get_option( 'orddd_lockout_days' );
+                    update_option( 'orddd_lite_lockout_days', $orddd_lite_lockout_days );
+                    delete_option( 'orddd_lockout_days' );
+                    
+                    update_option( 'orddd_lite_update_value', 'yes' );
                 }
-        
-                $orddd_lite_minimumOrderDays = get_option( 'orddd_minimumOrderDays' );
-                update_option( 'orddd_lite_minimumOrderDays', $orddd_lite_minimumOrderDays );
-                delete_option( 'orddd_minimumOrderDays' );
-        
-                $orddd_lite_number_of_dates = get_option( 'orddd_number_of_dates' );
-                update_option( 'orddd_lite_number_of_dates', $orddd_lite_number_of_dates );
-                delete_option( 'orddd_number_of_dates' );
-        
-                $orddd_lite_date_field_mandatory = get_option( 'orddd_date_field_mandatory' );
-                update_option( 'orddd_lite_date_field_mandatory', $orddd_lite_date_field_mandatory );
-                delete_option( 'orddd_date_field_mandatory' );
-        
-                $orddd_lite_lockout_date_after_orders = get_option( 'orddd_lockout_date_after_orders' );
-                update_option( 'orddd_lite_lockout_date_after_orders', $orddd_lite_lockout_date_after_orders );
-                delete_option( 'orddd_lockout_date_after_orders' );
-        
-                $orddd_lite_lockout_days = get_option( 'orddd_lockout_days' );
-                update_option( 'orddd_lite_lockout_days', $orddd_lite_lockout_days );
-                delete_option( 'orddd_lockout_days' );
             }
         }
         
