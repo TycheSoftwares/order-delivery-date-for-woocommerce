@@ -19,29 +19,38 @@ function chd( date ) {
 }
 
 function avd( date ) {
-	var delay_days = parseInt( jQuery( "#orddd_lite_minimumOrderDays" ).val() );
+	var delay_date = jQuery( "#orddd_lite_minimumOrderDays" ).val();
+	var split_date = delay_date.split('-');
+	var delay_days = new Date ( split_date[1] + '/' + split_date[0] + '/' + split_date[2] );
+	delay_days.setDate( delay_days.getDate() );
 	var noOfDaysToFind = parseInt( jQuery( "#orddd_lite_number_of_dates" ).val() );
 	
 	if( isNaN( delay_days ) ) {
-		delay_days = 0;
+		//delay_days = 0;
+		delay_days = new Date();
+		delay_days.setDate( delay_days.getDate()+1 );
 	}
 	if( isNaN( noOfDaysToFind ) ) {
 		noOfDaysToFind = 1000;
 	}
 	
-	var minDate = delay_days + 1;
+	var minDate = delay_days;
 	var date = new Date();
 	var t_year = date.getFullYear();
 	var t_month = date.getMonth()+1;
 	var t_day = date.getDate();
 	var t_month_days = new Date( t_year, t_month, 0 ).getDate();
 	
-	var s_day = new Date( ad( date , delay_days ) );
+	/*var s_day = new Date( ad( date , delay_days ) );
 	start = ( s_day.getMonth()+1 ) + "/" + s_day.getDate() + "/" + s_day.getFullYear();
 	var start_month = s_day.getMonth()+1;
-	var start_year = s_day.getFullYear();
+	var start_year = s_day.getFullYear();*/
 	
-	var end_date = new Date( ad( s_day , noOfDaysToFind ) );
+	start = ( delay_days.getMonth()+1 ) + "/" + delay_days.getDate() + "/" + delay_days.getFullYear();
+	var start_month = delay_days.getMonth()+1;
+	var start_year = delay_days.getFullYear();
+	
+	var end_date = new Date( ad( delay_days , noOfDaysToFind ) );
 	end = ( end_date.getMonth()+1 ) + "/" + end_date.getDate() + "/" + end_date.getFullYear();
 	
 	var specific_max_date = start;
@@ -52,7 +61,7 @@ function avd( date ) {
 	var today = dt.getMonth() + '-' + dt.getDate() + '-' + dt.getFullYear();
 	
 	var loopCounter = gd(start , end , 'days');
-	var prev = s_day;
+	var prev = delay_days;
 	var new_l_end, is_holiday;
 	for( var i = 1; i <= loopCounter; i++ ) {
 		var l_start = new Date( start );
@@ -65,7 +74,7 @@ function avd( date ) {
 		day_check = jQuery( "#" + day ).val();
 
 		if( day_check != "checked" ) {
-			new_l_end = l_end = new Date(ad(l_end,1));
+			new_l_end = l_end = new Date( ad( l_end, 1 ) );
 			end = ( l_end.getMonth()+1 ) + "/" + l_end.getDate() + "/" + l_end.getFullYear();
 			diff = gd(l_end , specific_max_date , 'days');
 			if ( diff >= 0 ) {
@@ -79,7 +88,7 @@ function avd( date ) {
 
 	
 	return {
-		minDate: minDate,
+		minDate: new Date(start),
         maxDate: l_end
     };
 }

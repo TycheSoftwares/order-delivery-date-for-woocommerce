@@ -38,6 +38,7 @@ function orddd_lite_deactivate() {
     delete_option( 'orddd_lite_lockout_date_after_orders' );
     delete_option( 'orddd_lite_lockout_days' );
     delete_option( 'orddd_lite_update_value' );
+    delete_option( 'orddd_lite_abp_hrs' );
 }
 
 if ( !class_exists( 'order_delivery_date_lite' ) ) {
@@ -72,7 +73,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             }
         }
         
-        public static function orddd_lite_activate() {
+        function orddd_lite_activate() {
             global $weekdays_orddd_lite;
         
             foreach ( $weekdays_orddd_lite as $n => $day_name ) {
@@ -84,13 +85,14 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_option( 'orddd_lite_lockout_date_after_orders', '' );
             add_option( 'orddd_lite_lockout_days', '' );
             add_option( 'orddd_lite_update_value', 'yes' );
+            add_option( 'orddd_lite_abp_hrs', 'HOURS' );
         }
 
         /***********************************************************
          * This function returns the order delivery date plugin version number
          **********************************************************/
         
-        public static function get_orddd_lite_version() {
+        function get_orddd_lite_version() {
             $plugin_data = get_plugin_data( __FILE__ );
             $plugin_version = $plugin_data[ 'Version' ];
             return $plugin_version;
@@ -103,7 +105,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
          *  make any changes if necessary.
          ***************************************************************/
         
-        public static function orddd_lite_update_db_check() {
+        function orddd_lite_update_db_check() {
             global $orddd_lite_plugin_version, $wpefield_version;
             $orddd_lite_plugin_version = $wpefield_version;
             if ( $orddd_lite_plugin_version == "1.7" ) {
@@ -111,7 +113,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             }
         }
         
-        public static function orddd_lite_update_install() {
+        function orddd_lite_update_install() {
             global $wpdb, $weekdays_orddd_lite;
         
             //code to set the option to on as default
@@ -147,6 +149,17 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                     $orddd_lite_lockout_days = get_option( 'orddd_lockout_days' );
                     update_option( 'orddd_lite_lockout_days', $orddd_lite_lockout_days );
                     delete_option( 'orddd_lockout_days' );
+                    
+                    // Code to convert the Minimum delivery time(in days) to Minimum delivery time(in hours)
+                    $orddd_abp_hrs = get_option( 'orddd_lite_abp_hrs' );
+                    if ( $orddd_abp_hrs != 'HOURS' ) {
+                        // Convert the Minimum Delivery time in days to hours
+                        if ( get_option( 'orddd_lite_minimumOrderDays' ) > 0 ) {
+                            $advance_period_hrs = ( get_option( 'orddd_lite_minimumOrderDays' ) + 1 ) * 24;
+                            update_option( 'orddd_lite_minimumOrderDays', $advance_period_hrs );
+                        }
+                        update_option( 'orddd_lite_abp_hrs', 'HOURS' );
+                    }
                     
                     update_option( 'orddd_lite_update_value', 'yes' );
                 }
@@ -273,11 +286,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
              
             add_settings_field(
                 'orddd_lite_minimumOrderDays',
-                __( 'Minimum Delivery time (in days):', 'order-delivery-date' ),
+                __( 'Minimum Delivery time (in hours):', 'order-delivery-date' ),
                 array( &$this, 'orddd_lite_minimum_delivery_time_callback' ),
                 'orddd_lite_date_settings_page',
                 'orddd_lite_date_settings_section',
-                array ( __( 'Minimum number of days required to prepare for delivery.', 'order-delivery-date' ) )
+                array ( __( 'Minimum number of hours required to prepare for delivery.', 'order-delivery-date' ) )
             );
              
             add_settings_field(
@@ -477,7 +490,15 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 }
             }
             
-            print( '<input type="hidden" name="orddd_lite_minimumOrderDays" id="orddd_lite_minimumOrderDays" value="' . get_option( 'orddd_lite_minimumOrderDays' ) . '">' );
+            $min_date = '';
+            $current_time = current_time( 'timestamp' );
+            
+            $delivery_time_seconds = get_option( 'orddd_lite_minimumOrderDays' ) *60 *60;
+            $cut_off_timestamp = $current_time + $delivery_time_seconds;
+            $cut_off_date = date( "d-m-Y", $cut_off_timestamp );
+            $min_date = date( "j-n-Y", strtotime( $cut_off_date ) );
+            
+            print( '<input type="hidden" name="orddd_lite_minimumOrderDays" id="orddd_lite_minimumOrderDays" value="' . $min_date . '">' );
             print( '<input type="hidden" name="orddd_lite_number_of_dates" id="orddd_lite_number_of_dates" value="' . get_option( 'orddd_lite_number_of_dates' ) . '">' );
         	print( '<input type="hidden" name="orddd_lite_date_field_mandatory" id="orddd_lite_date_field_mandatory" value="' . get_option( 'orddd_lite_date_field_mandatory' ) . '">' );
         	
