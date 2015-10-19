@@ -607,12 +607,6 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         function orddd_lite_validate_date_wpefield() {
             global $woocommerce;
         
-            // Check if set, if its not set add an error.
-            /*if ( !isset( $_POST[ 'e_deliverydate' ] ) ) {
-                $message = __( '<strong>' . __( 'Delivery Date', 'order-delivery-date' ) . '</strong> is a required field.', 'order-delivery-date' );
-                wc_add_notice( $message, $notice_type = 'error' );
-            }*/
-            
             if( isset( $_POST[ 'e_deliverydate' ] ) ) {
                 $delivery_date = $_POST[ 'e_deliverydate' ];
             } else {
