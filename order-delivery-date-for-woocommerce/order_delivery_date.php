@@ -13,13 +13,13 @@ $wpefield_version = '1.7';
 
 global $weekdays_orddd_lite;
 
-$weekdays_orddd_lite = array('orddd_lite_weekday_0' => __( 'Sunday', 'order-delivery-date' ),
-				  'orddd_lite_weekday_1' => __( 'Monday', 'order-delivery-date' ),
-				  'orddd_lite_weekday_2' => __( 'Tuesday', 'order-delivery-date' ),
-				  'orddd_lite_weekday_3' => __( 'Wednesday', 'order-delivery-date' ),
-				  'orddd_lite_weekday_4' => __( 'Thursday', 'order-delivery-date' ),
-				  'orddd_lite_weekday_5' => __( 'Friday', 'order-delivery-date' ),
-				  'orddd_lite_weekday_6' => __( 'Saturday', 'order-delivery-date' )
+$weekdays_orddd_lite = array('orddd_lite_weekday_0' => __( 'Sunday', 'order-delivery-date-lite' ),
+				  'orddd_lite_weekday_1' => __( 'Monday', 'order-delivery-date-lite' ),
+				  'orddd_lite_weekday_2' => __( 'Tuesday', 'order-delivery-date-lite' ),
+				  'orddd_lite_weekday_3' => __( 'Wednesday', 'order-delivery-date-lite' ),
+				  'orddd_lite_weekday_4' => __( 'Thursday', 'order-delivery-date-lite' ),
+				  'orddd_lite_weekday_5' => __( 'Friday', 'order-delivery-date-lite' ),
+				  'orddd_lite_weekday_6' => __( 'Saturday', 'order-delivery-date-lite' )
 				  );
 include_once( 'integration.php' );
 
@@ -168,7 +168,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         
         // For language translation
         function  orddd_lite_update_po_file() {
-            $domain = 'order-delivery-date';
+            $domain = 'order-delivery-date-lite';
             $locale = apply_filters( 'plugin_locale', get_locale(), $domain );
             if ( $loaded = load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '-' . $locale . '.mo' ) ) {
                 return $loaded;
@@ -205,7 +205,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             if( $admin_notice != 'yes' ) {
                 ?>  
                 <div class="updated notice is-dismissible" >
-                    <p><?php _e( 'You can upgrade to the <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/">PRO version of Order Delivery Date for WooCommerce plugin</a> at a <b>20% discount</b>. Use the coupon code: <b>ORDPRO20</b>.<a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/"> Purchase now </a> & save $20!', 'order-delivery-date' ); ?></p>
+                    <p><?php _e( 'You can upgrade to the <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/">PRO version of Order Delivery Date for WooCommerce plugin</a> at a <b>20% discount</b>. Use the coupon code: <b>ORDPRO20</b>.<a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/"> Purchase now </a> & save $20!', 'order-delivery-date-lite' ); ?></p>
                 </div>   
                 <?php
             }
@@ -262,7 +262,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
         
         function orddd_lite_order_delivery_date_menu() {
-            add_menu_page( 'Order Delivery Date', 'Order Delivery Date', 'administrator', 'order_delivery_date', array( &$this, 'orddd_lite_order_delivery_date_settings' ) );
+            add_menu_page( 'Order Delivery Date', 'Order Delivery Date', 'administrator', 'order_delivery_date_lite', array( &$this, 'orddd_lite_order_delivery_date_settings' ) );
         }
         
         function order_lite_delivery_date_admin_settings() {
@@ -270,54 +270,54 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             // First, we register a section. This is necessary since all future options must belong to one.
             add_settings_section(
                 'orddd_lite_date_settings_section',		// ID used to identify this section and with which to register options
-                __( 'Order Delivery Date Settings', 'order-delivery-date' ),		// Title to be displayed on the administration page
+                __( 'Order Delivery Date Settings', 'order-delivery-date-lite' ),		// Title to be displayed on the administration page
                 array( &$this, 'orddd_lite_delivery_date_setting' ),		// Callback used to render the description of the section
                 'orddd_lite_date_settings_page'				// Page on which to add this section of options
             );
         
             add_settings_field(
                 'orddd_lite_delivery_days',
-                __( 'Delivery Days:', 'order-delivery-date' ),
+                __( 'Delivery Days:', 'order-delivery-date-lite' ),
                 array( &$this, 'orddd_lite_delivery_days_callback' ),
                 'orddd_lite_date_settings_page',
                 'orddd_lite_date_settings_section',
-                array ( '&nbsp;' . __( 'Select weekdays for delivery.', 'order-delivery-date' ) )
+                array ( '&nbsp;' . __( 'Select weekdays for delivery.', 'order-delivery-date-lite' ) )
             );
              
             add_settings_field(
                 'orddd_lite_minimumOrderDays',
-                __( 'Minimum Delivery time (in hours):', 'order-delivery-date' ),
+                __( 'Minimum Delivery time (in hours):', 'order-delivery-date-lite' ),
                 array( &$this, 'orddd_lite_minimum_delivery_time_callback' ),
                 'orddd_lite_date_settings_page',
                 'orddd_lite_date_settings_section',
-                array ( __( 'Minimum number of hours required to prepare for delivery.', 'order-delivery-date' ) )
+                array ( __( 'Minimum number of hours required to prepare for delivery.', 'order-delivery-date-lite' ) )
             );
              
             add_settings_field(
                 'orddd_lite_number_of_dates',
-                __( 'Number of dates to choose:', 'order-delivery-date' ),
+                __( 'Number of dates to choose:', 'order-delivery-date-lite' ),
                 array( &$this, 'orddd_lite_number_of_dates_callback' ),
                 'orddd_lite_date_settings_page',
                 'orddd_lite_date_settings_section',
-                array ( __( 'Number of dates available for delivery.', 'order-delivery-date' ) )
+                array ( __( 'Number of dates available for delivery.', 'order-delivery-date-lite' ) )
             );
              
             add_settings_field(
                 'orddd_lite_date_field_mandatory',
-                __( 'Mandatory field?:', 'order-delivery-date' ),
+                __( 'Mandatory field?:', 'order-delivery-date-lite' ),
                 array( &$this, 'orddd_lite_date_field_mandatory_callback' ),
                 'orddd_lite_date_settings_page',
                 'orddd_lite_date_settings_section',
-                array ( __( 'Selection of delivery date on the checkout page will become mandatory.', 'order-delivery-date' ) )
+                array ( __( 'Selection of delivery date on the checkout page will become mandatory.', 'order-delivery-date-lite' ) )
             );
             
             add_settings_field(
                 'orddd_lite_lockout_date_after_orders',
-                __( 'Lockout date after X orders:', 'order-delivery-date' ),
+                __( 'Lockout date after X orders:', 'order-delivery-date-lite' ),
                 array( &$this, 'orddd_lite_lockout_date_after_orders_callback' ),
                 'orddd_lite_date_settings_page',
                 'orddd_lite_date_settings_section',
-                array ( __( 'Maximum deliveries/orders per day.', 'order-delivery-date' ) )
+                array ( __( 'Maximum deliveries/orders per day.', 'order-delivery-date-lite' ) )
             );
             
             foreach ( $weekdays_orddd_lite as $n => $day_name ) {
@@ -361,22 +361,22 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 <form method="post" action="options.php">');
                     settings_fields( "orddd_lite_date_settings" );
                     do_settings_sections( "orddd_lite_date_settings_page" );
-                    submit_button ( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save_orddd_lite', true );
+                    submit_button ( __( 'Save Settings', 'order-delivery-date-lite' ), 'primary', 'save_orddd_lite', true );
                 print('</form>
             </div>');
         }
         
         function orddd_lite_delivery_days_callback( $args ) {
             global $weekdays_orddd_lite;
-            printf( '<fieldset class="days-fieldset" style="width:150px;">
-                <legend><b>' . __( 'Weekdays:', 'order-delivery-date' ) . '</b></legend>'
+            printf( '<fieldset class="orddd-days-fieldset" style="width:150px;">
+                <legend><b>' . __( 'Weekdays:', 'order-delivery-date-lite' ) . '</b></legend>'
             );
             $html = '';
             printf( '<table>' );
             foreach ( $weekdays_orddd_lite as $n => $day_name ) {
                 printf('<tr>
         	       <td style="padding: 0.5px 0.5px;"><input type="checkbox" name="' . $n . '" id="' . $n .'" value="checked" ' . get_option( $n ) . '/></td>
-        	       <td style="padding: 0.5px 0.5px;"><label class="ord_label" for="' . $day_name . '">' . __( $day_name, 'order-delivery-date' ) . '</label></td>'
+        	       <td style="padding: 0.5px 0.5px;"><label class="ord_label" for="' . $day_name . '">' . __( $day_name, 'order-delivery-date-lite' ) . '</label></td>'
                 );
             }
             printf( '</table>
@@ -443,7 +443,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                             }
                         }            
                     });
-	               jQuery("#e_deliverydate").parent().append("<br><small style=font-size:10px;>' . __( 'We will try our best to deliver your order on the specified date', 'order-delivery-date' ) . '</small>" );
+	               jQuery("#e_deliverydate").parent().append("<br><small style=font-size:10px;>' . __( 'We will try our best to deliver your order on the specified date', 'order-delivery-date-lite' ) . '</small>" );
                 });
             </script>';
         
@@ -455,9 +455,9 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             
             woocommerce_form_field( 'e_deliverydate', array(
                 'type'          => 'text',
-        	    'label'         => __( 'Delivery Date', 'order-delivery-date' ),
+        	    'label'         => __( 'Delivery Date', 'order-delivery-date-lite' ),
         	    'required'  	=> $validate_wpefield,
-        	    'placeholder'   => __( 'Delivery Date', 'order-delivery-date' ),
+        	    'placeholder'   => __( 'Delivery Date', 'order-delivery-date-lite' ),
             ),
             $checkout->get_value( 'e_deliverydate' ) );
 
@@ -565,7 +565,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
          * This function is used for show delivery date in the email notification
          **/
         function orddd_lite_add_delivery_date_to_order_woo( $keys ) {
-            $label_name = __( "Delivery Date", "order-delivery-date" );
+            $label_name = __( "Delivery Date", "order-delivery-date-lite" );
             $keys[ $label_name ] = "Delivery Date";
             return $keys;
         }
@@ -580,7 +580,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             unset( $new_columns['order_actions'] );
             //edit this for you column(s)
             //all of your columns will be added before the actions column
-            $new_columns[ 'order_delivery_date' ] = __( 'Delivery Date', 'order-delivery-date' ); //Title for column heading
+            $new_columns[ 'order_delivery_date' ] = __( 'Delivery Date', 'order-delivery-date-lite' ); //Title for column heading
             $new_columns[ 'order_actions' ] = $columns[ 'order_actions' ];
             return $new_columns;
         }
@@ -615,7 +615,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
              
             //Check if set, if its not set add an error.
             if ( $delivery_date == '' ) {
-                $message = __( '<strong>' . __( 'Delivery Date', 'order-delivery-date' ) . '</strong> is a required field.', 'order-delivery-date' );
+                $message = __( '<strong>' . __( 'Delivery Date', 'order-delivery-date-lite' ) . '</strong> is a required field.', 'order-delivery-date-lite' );
                 wc_add_notice( $message, $notice_type = 'error' );
             }
         }
@@ -625,7 +625,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             if( array_key_exists( 'Delivery Date', $my_order_meta ) ) {
                 $order_page_delivery_date = $my_order_meta[ 'Delivery Date' ];
                 if ( $order_page_delivery_date != "" ) {
-                    echo '<p><strong>' . __( 'Delivery Date', 'order-delivery-date' ) . ':</strong> ' . $order_page_delivery_date[ 0 ] . '</p>';
+                    echo '<p><strong>' . __( 'Delivery Date', 'order-delivery-date-lite' ) . ':</strong> ' . $order_page_delivery_date[ 0 ] . '</p>';
                 }
             }
         }
