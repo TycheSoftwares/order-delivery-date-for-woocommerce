@@ -368,7 +368,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         
         function orddd_lite_delivery_days_callback( $args ) {
             global $weekdays_orddd_lite;
-            printf( '<fieldset class="orddd-days-fieldset" style="width:150px;">
+            printf( '<fieldset class="orddd-days-fieldset" style="width:150px;border: 1px solid #DCDBDA;float: left;margin-bottom: 10px;margin-left: 0px;margin-top: 0;">
                 <legend><b>' . __( 'Weekdays:', 'order-delivery-date-lite' ) . '</b></legend>'
             );
             $html = '';
