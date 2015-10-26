@@ -212,7 +212,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             if( isset( $_GET['page'] ) && ( $_GET['page'] == 'order_delivery_date_lite' ) ) {
                 ?>
                 <div class="error">
-                    <p><?php _e( 'Minimum Delivery time(in days) will now be calculated in hours which is from current WordPress time. To keep the functionality of our plugin intact at your site, we have added +24 hours to the \'Minimum Delivery time(in hours)\' setting.', 'order-delivery-date' ); ?></p>
+                    <p><?php _e( 'Minimum Delivery time (in days) will now be calculated in hours which is from current WordPress time. To keep the functionality of our plugin intact at your site, we have added +24 hours to the \'Minimum Delivery time (in hours)\' setting.', 'order-delivery-date' ); ?></p>
             	</div>            
                 <?php                 
             }

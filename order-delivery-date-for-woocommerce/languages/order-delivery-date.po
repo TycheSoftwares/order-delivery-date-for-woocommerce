@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: order-delivery-date-for-woocommerce\n"
+"Project-Id-Version: order_delivery_date\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-23 14:03+0530\n"
-"PO-Revision-Date: 2015-10-23 14:08+0530\n"
+"POT-Creation-Date: 2015-10-26 15:54+0530\n"
+"PO-Revision-Date: 2015-10-26 15:58+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -56,78 +56,78 @@ msgid ""
 "Purchase now </a> & save $20!"
 msgstr ""
 
-#: order_delivery_date.php:216
+#: order_delivery_date.php:215
 msgid ""
-"Minimum Delivery time(in days) will now be calculated in hours which is from "
-"current WordPress time. To keep the functionality of our plugin intact at "
-"your site, we have added +24 hours to the 'Minimum Delivery time(in hours)' "
-"setting."
+"Minimum Delivery time (in days) will now be calculated in hours which is "
+"from current WordPress time. To keep the functionality of our plugin intact "
+"at your site, we have added +24 hours to the 'Minimum Delivery time (in "
+"hours)' setting."
 msgstr ""
 
-#: order_delivery_date.php:282
+#: order_delivery_date.php:280
 msgid "Order Delivery Date Settings"
 msgstr ""
 
-#: order_delivery_date.php:289
+#: order_delivery_date.php:287
 msgid "Delivery Days:"
 msgstr ""
 
-#: order_delivery_date.php:293
+#: order_delivery_date.php:291
 msgid "Select weekdays for delivery."
 msgstr ""
 
-#: order_delivery_date.php:298
+#: order_delivery_date.php:296
 msgid "Minimum Delivery time (in hours):"
 msgstr ""
 
-#: order_delivery_date.php:302
+#: order_delivery_date.php:300
 msgid "Minimum number of hours required to prepare for delivery."
 msgstr ""
 
-#: order_delivery_date.php:307
+#: order_delivery_date.php:305
 msgid "Number of dates to choose:"
 msgstr ""
 
-#: order_delivery_date.php:311
+#: order_delivery_date.php:309
 msgid "Number of dates available for delivery."
 msgstr ""
 
-#: order_delivery_date.php:316
+#: order_delivery_date.php:314
 msgid "Mandatory field?:"
 msgstr ""
 
-#: order_delivery_date.php:320
+#: order_delivery_date.php:318
 msgid "Selection of delivery date on the checkout page will become mandatory."
 msgstr ""
 
-#: order_delivery_date.php:325
+#: order_delivery_date.php:323
 msgid "Lockout date after X orders:"
 msgstr ""
 
-#: order_delivery_date.php:329
+#: order_delivery_date.php:327
 msgid "Maximum deliveries/orders per day."
 msgstr ""
 
-#: order_delivery_date.php:373
+#: order_delivery_date.php:371
 msgid "Save Settings"
 msgstr ""
 
-#: order_delivery_date.php:381
+#: order_delivery_date.php:379
 msgid "Weekdays:"
 msgstr ""
 
-#: order_delivery_date.php:455
+#: order_delivery_date.php:453
 msgid "We will try our best to deliver your order on the specified date"
 msgstr ""
 
-#: order_delivery_date.php:467 order_delivery_date.php:469
-#: order_delivery_date.php:577 order_delivery_date.php:592
-#: order_delivery_date.php:627 order_delivery_date.php:637 integration.php:77
+#: order_delivery_date.php:465 order_delivery_date.php:467
+#: order_delivery_date.php:575 order_delivery_date.php:590
+#: order_delivery_date.php:625 order_delivery_date.php:635 integration.php:77
 #: integration.php:84 integration.php:118 integration.php:130
 #: integration.php:174
 msgid "Delivery Date"
 msgstr ""
 
-#: order_delivery_date.php:627
+#: order_delivery_date.php:625
 msgid "<strong>"
 msgstr ""
