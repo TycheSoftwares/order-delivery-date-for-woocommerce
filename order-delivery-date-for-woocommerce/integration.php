@@ -1,5 +1,6 @@
 <?php 
 
+include_once( dirname( __FILE__ ) . '/orddd-lite-common.php' );
 // Code to integrate the WooCommerce Order Delivery Date plugin with various 3rd party plugins
 class orddd_lite_integration {
 
@@ -58,30 +59,31 @@ class orddd_lite_integration {
 	    if ( $trigger->is_sample() ) {
 	        // We're sending sample data.
 	        // Send the label of the custom checkout field as the field's value.
-	        $order_data[ 'Delivery Date' ] = 'Delivery Date';
+	        $field_name = get_option( 'orddd_lite_delivery_date_field_label' );
+	        $order_data[ $field_name ] = $field_name;
 	    } else {
 	        // We're sending real data.
 	        // Send the saved value of this checkout field.
 	        // If the order doesn't contain this custom field, an empty string will be used as the value.
-	        $order_data[ 'Delivery Date' ] = get_post_meta( $order_data[ 'id' ], 'Delivery Date', true );
+	        $order_data[ $field_name ] = get_post_meta( $order_data[ 'id' ], $field_name, true );
 	    }
 	    return $order_data;
 	}
 	
 	function orddd_lite_plugins_packing_slip() {
-		global $wpo_wcpdf, $orddd_date_formats;
-		$my_order_meta = get_post_custom( $wpo_wcpdf->export->order->id );
-		if( array_key_exists( 'Delivery Date', $my_order_meta ) ) {
-		    $delivery_date = $my_order_meta[ 'Delivery Date' ][ 0 ];
-		    if ( $delivery_date != "" ) {
-                echo '<p><strong>' . __( 'Delivery Date', 'order-delivery-date' ) . ': </strong>' . $delivery_date;
-		    }
+		global $wpo_wcpdf, $orddd_lite_date_formats;
+		$order_export = $wpo_wcpdf->export;
+		$order_obj = $order_export->order;
+		$order_id = $order_obj->id;
+		$delivery_date_formatted = orddd_lite_common::orddd_lite_get_order_delivery_date( $order_id );
+		if( $delivery_date_formatted != '' ) {
+		    echo '<p><strong>' . __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ) . ': </strong>' . $delivery_date_formatted;
 		}
 	}
 
 	function orddd_lite_csv_export_modify_column_headers( $column_headers ) { 
 		$new_headers = array(
-			'column_1' => __( 'Delivery Date', 'order-delivery-date' )
+			'column_1' => __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' )
 		);
 		return array_merge( $column_headers, $new_headers );
 	}
@@ -89,14 +91,12 @@ class orddd_lite_integration {
 	public static function orddd_lite_csv_export_modify_row_data( $order_data, $order, $csv_generator ) {
 	    $new_order_data = $custom_data = array();
 		$order_id = $order->id;
-		$my_order_meta = get_post_custom( $order_id );
-		if( array_key_exists( 'Delivery Date', $my_order_meta ) ) {
-		    $delivery_date = $my_order_meta[ 'Delivery Date' ][ 0 ];
-            $custom_data = array(
-                'column_1' => $delivery_date
-            );
-		}
+		$delivery_date_formatted = orddd_lite_common::orddd_lite_get_order_delivery_date( $order_id );
 		
+		$custom_data = array(
+		    'column_1' => $delivery_date_formatted,
+		);
+			
 		if ( isset( $csv_generator->order_format ) && ( 'default_one_row_per_item' == $csv_generator->order_format || 'legacy_one_row_per_item' == $csv_generator->order_format ) ) {
 			foreach ( $order_data as $data ) {
 				$new_order_data[] = array_merge( (array) $data, $custom_data );
@@ -111,24 +111,22 @@ class orddd_lite_integration {
 	function orddd_lite_print_invoice_delivery_note( $fields, $order ) {
 		$new_fields = array();
         $order_id = $order->id;
-        $my_order_meta = get_post_custom( $order_id );
-        if( array_key_exists( 'Delivery Date', $my_order_meta ) ) {
-            $delivery_date = $my_order_meta[ 'Delivery Date' ][ 0 ];
-            $new_fields[ 'Delivery Date' ] = array(
-                'label' => __( 'Delivery Date', 'order-delivery-date' ),
-                'value' => $delivery_date
+        $delivery_date_formatted = orddd_lite_common::orddd_lite_get_order_delivery_date( $order_id );
+        if( $delivery_date_formatted != '' ) {
+            $new_fields[ get_option( 'orddd_lite_delivery_date_field_label' ) ] = array(
+                'label' => __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ),
+                'value' => $delivery_date_formatted
             );
-        }	
-		return array_merge( $fields, $new_fields );
+        }
+        return array_merge( $fields, $new_fields );
 	}
 	
 	function orddd_lite_cloud_print_fields( $order ) { 
+	    $field_date_label = get_option( 'orddd_lite_delivery_date_field_label' );
 	    $order_id = $order->id;
-		$my_order_meta = get_post_custom( $order_id );
-		if( array_key_exists( 'Delivery Date', $my_order_meta ) ) {
-		    $delivery_date = $my_order_meta[ 'Delivery Date' ][ 0 ];
-            echo '<p><strong>'.__( 'Delivery Date', 'order-delivery-date' ) . ': </strong>' . $delivery_date;
-		}
+	    
+	    $delivery_date_formatted = orddd_lite_common::orddd_lite_get_order_delivery_date( $order_id );
+	    echo '<p><strong>'.__( $field_date_label, 'order-delivery-date' ) . ': </strong>' . $delivery_date_formatted;
 	}
 	
 	function orddd_lite_filter_woocommerce_create_order ( $order_id, $checkout_object ) {
@@ -147,7 +145,7 @@ class orddd_lite_integration {
 	            );
 	            $renewal_order_id = WC_Subscriptions_Renewal_Order::generate_renewal_order( $original_order_id, $product_id, $renewal_order_args );
 	            if ( isset( $_POST[ 'e_deliverydate' ] ) && $_POST[ 'e_deliverydate' ] != '' ) {
-	                update_post_meta( $renewal_order_id, 'Delivery Date', esc_attr( $_POST[ 'e_deliverydate' ] ) );
+	                update_post_meta( $renewal_order_id, get_option( 'orddd_lite_delivery_date_field_label' ), esc_attr( $_POST[ 'e_deliverydate' ] ) );
 	
 	                $date_format = 'dd-mm-y';
 	                if( isset( $_POST[ 'h_deliverydate' ] ) && $_POST[ 'h_deliverydate' ] != '' ) {
@@ -156,22 +154,26 @@ class orddd_lite_integration {
 	                    $delivery_date = '';
 	                }
 	                
-	                if ( get_option( 'orddd_lockout_date_after_orders' ) > 0 ) {
+	                $timestamp = orddd_lite_common::orddd_lite_get_timestamp( $delivery_date, $date_format );
+	                update_post_meta( $renewal_order_id, '_orddd_lite_timestamp', $timestamp );
+	                if ( get_option( 'orddd_lite_lockout_date_after_orders' ) > 0 ) {
 	                    order_delivery_date_lite::orddd_lite_update_lockout_days( $delivery_date );
 	                }
 	            } else {
-	                update_post_meta( $renewal_order_id, 'Delivery Date', '' );
+	                update_post_meta( $renewal_order_id, get_option( 'orddd_lite_delivery_date_field_label' ), '' );
 	            }
 	        }
 	    }
 	}
 	
 	function orddd_lite_woocommerce_pip( $order ) {
+	    global $orddd_date_formats;
+	    $delivery_date = get_option( 'orddd_lite_delivery_date_field_label' );
+	    
         $order_id = $order->id;
-        $my_order_meta = get_post_custom( $order_id );
-        if( array_key_exists( 'Delivery Date', $my_order_meta ) ) {
-            $delivery_date = $my_order_meta[ 'Delivery Date' ][ 0 ];
-            echo '<p><strong>' . __( 'Delivery Date', 'order-delivery-date' ) . ': </strong>' . $delivery_date;
+        $delivery_date_formatted = orddd_lite_common::orddd_lite_get_order_delivery_date( $order_id );
+        if( $delivery_date_formatted != '' ) {
+            echo '<p><strong>' . __( $delivery_date, 'order-delivery-date' ) . ': </strong>' . $delivery_date_formatted;
         }
 	}
 }

@@ -86,11 +86,22 @@ function avd( date ) {
 		}
 	}
 
-	
-	return {
-		minDate: new Date(start),
-        maxDate: l_end
-    };
+	var maxMonth = new_l_end.getMonth()+1;
+	var maxYear = new_l_end.getFullYear();
+	var number_of_months = parseInt( jQuery( "#orddd_lite_number_of_months" ).val() );
+	if ( maxMonth > start_month || maxYear > start_year ) {
+		return {
+			minDate: new Date(start),
+	        maxDate: l_end,
+			numberOfMonths: number_of_months 
+	    };
+	}
+	else {
+		return {
+			minDate: new Date(start),
+			maxDate: l_end
+		};
+	}
 }
 
 function ad( dateObj, numDays ) {

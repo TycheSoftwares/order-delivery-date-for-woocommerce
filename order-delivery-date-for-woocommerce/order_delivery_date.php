@@ -4,31 +4,24 @@ Plugin Name: Order Delivery Date for WooCommerce (Lite version)
 Plugin URI: http://www.tychesoftwares.com/store/free-plugin/order-delivery-date-on-checkout/
 Description: This plugin allows customers to choose their preferred Order Delivery Date during checkout.
 Author: Tyche Softwares
-Version: 1.8
+Version: 1.9
 Author URI: http://www.tychesoftwares.com/about
 Contributor: Tyche Softwares, http://www.tychesoftwares.com/
 */
 
-$wpefield_version = '1.8';
+$wpefield_version = '1.9';
 
-global $weekdays_orddd_lite;
-
-$weekdays_orddd_lite = array('orddd_lite_weekday_0' => __( 'Sunday', 'order-delivery-date' ),
-				  'orddd_lite_weekday_1' => __( 'Monday', 'order-delivery-date' ),
-				  'orddd_lite_weekday_2' => __( 'Tuesday', 'order-delivery-date' ),
-				  'orddd_lite_weekday_3' => __( 'Wednesday', 'order-delivery-date' ),
-				  'orddd_lite_weekday_4' => __( 'Thursday', 'order-delivery-date' ),
-				  'orddd_lite_weekday_5' => __( 'Friday', 'order-delivery-date' ),
-				  'orddd_lite_weekday_6' => __( 'Saturday', 'order-delivery-date' )
-				  );
 include_once( 'integration.php' );
+include_once( 'orddd-lite-config.php' );
+include_once( 'orddd-lite-common.php' );
+include_once( 'filter.php' );
 
 register_uninstall_hook( __FILE__, 'orddd_lite_deactivate' );
 
 function orddd_lite_deactivate() {
-    global $weekdays_orddd_lite;
+    global $orddd_lite_weekdays;
     delete_option( 'orddd_lite_db_version' );
-    foreach ( $weekdays_orddd_lite as $n => $day_name ) {
+    foreach ( $orddd_lite_weekdays as $n => $day_name ) {
         delete_option( $n );
     }
     delete_option( 'orddd_lite_minimumOrderDays' );
@@ -39,6 +32,20 @@ function orddd_lite_deactivate() {
     delete_option( 'orddd_lite_lockout_days' );
     delete_option( 'orddd_lite_update_value' );
     delete_option( 'orddd_lite_abp_hrs' );
+    
+    // appearance options
+    delete_option( 'orddd_lite_delivery_date_field_label' );
+    delete_option( 'orddd_lite_delivery_date_field_placeholder' );
+    delete_option( 'orddd_lite_delivery_date_field_note' );
+    delete_option( 'orddd_lite_delivery_date_format' );
+    delete_option( 'orddd_lite_number_of_months' );
+    delete_option( 'orddd_lite_calendar_theme' );
+    delete_option( 'orddd_lite_calendar_theme_name' );
+    delete_option( 'orddd_lite_language_selected' );
+    delete_option( 'orddd_lite_date_in_shipping' );
+    delete_option( 'orddd_lite_default_appearance_settings' );
+    
+    delete_option( 'orddd_timestamp_update_script' );
 }
 
 if ( !class_exists( 'order_delivery_date_lite' ) ) {
@@ -56,15 +63,22 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_action( 'wp_ajax_admin_notices', array( &$this, 'orddd_lite_admin_notices' ) );
             add_action( 'admin_notices', array( &$this, 'order_lite_coupon_notice' ) );
             
+            //To create timestamp for old orders
+            add_action( 'admin_init', array( &$this, 'orddd_create_timestamp_for_old_order' ) );
+            
             add_action( 'admin_enqueue_scripts', array( &$this,  'orddd_lite_my_enqueue' ) );
             add_action( 'admin_menu', array( &$this, 'orddd_lite_order_delivery_date_menu' ) );
             add_action( 'admin_init', array( &$this, 'order_lite_delivery_date_admin_settings' ) );
+            add_action( 'admin_init', array( &$this, 'order_lite_appearance_admin_settings' ) );
             
-            add_filter( 'manage_edit-shop_order_columns', array( &$this, 'orddd_lite_woocommerce_order_delivery_date_column'), 20, 1 );
-            add_action( 'manage_shop_order_posts_custom_column', array( &$this, 'orddd_lite_woocommerce_custom_column_value') , 20, 1 );
             add_filter( 'woocommerce_order_details_after_order_table', array( &$this, 'orddd_lite_add_delivery_date_to_order_page_woo' ) );
             
-            add_action( 'woocommerce_after_checkout_billing_form', array( &$this, 'orddd_lite_my_custom_checkout_field' ) );
+            add_filter( 'manage_edit-shop_order_columns', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_order_delivery_date_column'), 20, 1 );
+            add_action( 'manage_shop_order_posts_custom_column', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_custom_column_value') , 20, 1 );
+            add_filter( 'manage_edit-shop_order_sortable_columns', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_custom_column_value_sort' ) );
+            add_filter( 'request', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_delivery_date_orderby' ) );
+            
+            add_action( ORDDD_SHOPPING_CART_HOOK, array( &$this, 'orddd_lite_my_custom_checkout_field' ) );
             add_action( 'woocommerce_checkout_update_order_meta', array( &$this, 'orddd_lite_my_custom_checkout_field_update_order_meta' ) );
             add_filter( 'woocommerce_email_order_meta_keys', array( &$this, 'orddd_lite_add_delivery_date_to_order_woo' ), 10, 1 );
     
@@ -74,9 +88,9 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
         
         function orddd_lite_activate() {
-            global $weekdays_orddd_lite;
+            global $orddd_lite_weekdays;
         
-            foreach ( $weekdays_orddd_lite as $n => $day_name ) {
+            foreach ( $orddd_lite_weekdays as $n => $day_name ) {
                 add_option( $n, 'checked' );
             }
             add_option( 'orddd_lite_minimumOrderDays', '0' );
@@ -86,6 +100,18 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_option( 'orddd_lite_lockout_days', '' );
             add_option( 'orddd_lite_update_value', 'yes' );
             add_option( 'orddd_lite_abp_hrs', 'HOURS' );
+            add_option( 'orddd_lite_default_appearance_settings', 'yes' );
+            
+            // appearance options
+            add_option( 'orddd_lite_delivery_date_format', ORDDD_LITE_DELIVERY_DATE_FORMAT );
+            add_option( 'orddd_lite_delivery_date_field_label', ORDDD_LITE_DELIVERY_DATE_FIELD_LABEL );
+            add_option( 'orddd_lite_delivery_date_field_placeholder', ORDDD_LITE_DELIVERY_DATE_FIELD_PLACEHOLDER );
+            add_option( 'orddd_lite_delivery_date_field_note', ORDDD_LITE_DELIVERY_DATE_FIELD_NOTE );
+            add_option( 'orddd_lite_number_of_months', '1' );
+            add_option( 'orddd_lite_calendar_theme', ORDDD_LITE_CALENDAR_THEME );
+            add_option( 'orddd_lite_calendar_theme_name', ORDDD_LITE_CALENDAR_THEME_NAME );
+            add_option( 'orddd_lite_language_selected', 'en-GB' );
+            add_option( 'orddd_lite_date_in_shipping', '' );
         }
 
         /***********************************************************
@@ -108,21 +134,21 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         function orddd_lite_update_db_check() {
             global $orddd_lite_plugin_version, $wpefield_version;
             $orddd_lite_plugin_version = $wpefield_version;
-            if ( $orddd_lite_plugin_version == "1.8" ) {
+            if ( $orddd_lite_plugin_version == "1.9" ) {
                 order_delivery_date_lite::orddd_lite_update_install();
             }
         }
         
         function orddd_lite_update_install() {
-            global $wpdb, $weekdays_orddd_lite;
+            global $wpdb, $orddd_lite_weekdays;
         
             //code to set the option to on as default
             $orddd_lite_plugin_version = get_option( 'orddd_lite_db_version' );
             if ( $orddd_lite_plugin_version != order_delivery_date_lite::get_orddd_lite_version() ) {
-                update_option('orddd_lite_db_version','1.8');
+                update_option('orddd_lite_db_version','1.9');
                 if ( get_option( 'orddd_lite_update_value' ) != 'yes' ) {
                     $i = 0;
-                    foreach ( $weekdays_orddd_lite as $n => $day_name ) {
+                    foreach ( $orddd_lite_weekdays as $n => $day_name ) {
         
                         $orddd_lite_weekday = get_option( 'orddd_weekday_'.$i );
                         update_option( $n , $orddd_lite_weekday );
@@ -162,6 +188,19 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                     }
                     
                     update_option( 'orddd_lite_update_value', 'yes' );
+                }
+                if( get_option( "orddd_lite_default_appearance_settings" ) != 'yes' ) {
+                    // appearance options
+                    update_option( 'orddd_lite_delivery_date_format', ORDDD_LITE_DELIVERY_DATE_FORMAT );
+                    update_option( 'orddd_lite_delivery_date_field_label', ORDDD_LITE_DELIVERY_DATE_FIELD_LABEL );
+                    update_option( 'orddd_lite_delivery_date_field_placeholder', ORDDD_LITE_DELIVERY_DATE_FIELD_PLACEHOLDER );
+                    update_option( 'orddd_lite_delivery_date_field_note', ORDDD_LITE_DELIVERY_DATE_FIELD_NOTE );
+                    update_option( 'orddd_lite_number_of_months', '1' );
+                    update_option( 'orddd_lite_calendar_theme', ORDDD_LITE_CALENDAR_THEME );
+                    update_option( 'orddd_lite_calendar_theme_name', ORDDD_LITE_CALENDAR_THEME_NAME );
+                    update_option( 'orddd_lite_language_selected', 'en-GB' );
+                    update_option( 'orddd_lite_date_in_shipping', '' );
+                    update_option( 'orddd_lite_default_appearance_settings', 'yes' );
                 }
             }
         }
@@ -224,7 +263,8 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
 
         function orddd_lite_my_enqueue( $hook ) {
-            if( 'toplevel_page_order_delivery_date' != $hook )
+            global $orddd_lite_languages;
+            if( 'toplevel_page_order_delivery_date_lite' != $hook )
                 return;
             wp_enqueue_script( 'jquery-ui-datepicker' );
             wp_enqueue_script(
@@ -251,13 +291,30 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 false
             );
             
+            wp_dequeue_script( 'themeswitcher' );
             wp_enqueue_script(
-                'jquery-tip',
-                plugins_url('/js/jquery.tipTip.minified.js', __FILE__),
+                'themeswitcher-orddd',
+                plugins_url( '/js/jquery.themeswitcher.min.js', __FILE__ ),
                 '',
                 '',
-                false
-            );
+                false );
+            
+            foreach ( $orddd_lite_languages as $key => $value ) {
+                wp_enqueue_script(
+                $value,
+                plugins_url( "/js/i18n/jquery.ui.datepicker-$key.js", __FILE__ ),
+                '',
+                '',
+                false );
+            }
+            
+            wp_dequeue_script( 'jquery-tip' );
+            wp_enqueue_script(
+                'jquery-tip-orddd',
+                plugins_url( '/js/jquery.tipTip.minified.js', __FILE__ ),
+                '',
+                '',
+                false );
             
             wp_register_script( 'woocommerce_admin', plugins_url() . '/woocommerce/assets/js/admin/woocommerce_admin.js', array('jquery', 'jquery-ui-widget', 'jquery-ui-core'));
             wp_enqueue_script( 'woocommerce_admin' );
@@ -273,7 +330,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
         
         function order_lite_delivery_date_admin_settings() {
-            global $weekdays_orddd_lite;
+            global $orddd_lite_weekdays;
             // First, we register a section. This is necessary since all future options must belong to one.
             add_settings_section(
                 'orddd_lite_date_settings_section',		// ID used to identify this section and with which to register options
@@ -327,7 +384,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 array ( __( 'Maximum deliveries/orders per day.', 'order-delivery-date' ) )
             );
             
-            foreach ( $weekdays_orddd_lite as $n => $day_name ) {
+            foreach ( $orddd_lite_weekdays as $n => $day_name ) {
                 register_setting(
                     'orddd_lite_date_settings',
                     $n
@@ -355,32 +412,202 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             );
         }
         
+        function order_lite_appearance_admin_settings() {
+            add_settings_section(
+                'orddd_lite_appearance_section',
+                __( 'Calendar Apprearance', 'order-delivery-date' ),
+                array( &$this, 'orddd_lite_appearance_admin_setting_callback' ),
+                'orddd_lite_appearance_page'
+            );
+        
+            add_settings_field(
+                'orddd_lite_language_selected',
+                __( 'Calendar Language:', 'order-delivery-date' ),
+                array( &$this, 'orddd_lite_appearance_calendar_language_callback' ),
+                'orddd_lite_appearance_page',
+                'orddd_lite_appearance_section',
+                array ( __( 'Choose a Language.', 'order-delivery-date' ) )
+            );
+        
+            add_settings_field(
+                'orddd_lite_delivery_date_format',
+                __( 'Date Format:', 'order-delivery-date' ),
+                array( &$this, 'orddd_lite_appearance_date_formats_callback' ),
+                'orddd_lite_appearance_page',
+                'orddd_lite_appearance_section',
+                array( '<br>' . __( 'The format in which the Delivery Date appears to the customers on the checkout page once the date is selected.', 'order-delivery-date' ) )
+            );
+        
+            add_settings_field(
+                'orddd_lite_start_of_week',
+                __( 'First Day of Week:', 'order-delivery-date' ),
+                array( &$this, 'orddd_lite_appearance_first_day_of_week_callback' ),
+                'orddd_lite_appearance_page',
+                'orddd_lite_appearance_section',
+                array( __( 'Choose the first day of week displayed on the Delivery Date calendar.', 'order-delivery-date' ) )
+            );
+             
+            add_settings_field(
+                'orddd_lite_delivery_date_field_label',
+                __( 'Field Label:', 'order-delivery-date' ),
+                array( &$this, 'orddd_lite_delivery_date_field_label_callback' ),
+                'orddd_lite_appearance_page',
+                'orddd_lite_appearance_section',
+                array( __( 'Choose the label that is to be displayed for the field on checkout page.', 'order-delivery-date' ) )
+            );
+             
+            add_settings_field(
+                'orddd_lite_delivery_date_field_placeholder',
+                __( 'Field Placeholder Text:', 'order-delivery-date' ),
+                array( &$this, 'orddd_lite_delivery_date_field_placeholder_callback' ),
+                'orddd_lite_appearance_page',
+                'orddd_lite_appearance_section',
+                array( __( 'Choose the placeholder text that is to be displayed for the field on checkout page.', 'order-delivery-date' ) )
+            );
+             
+            add_settings_field(
+                'orddd_lite_delivery_date_field_note',
+                __( 'Field Note Text:', 'order-delivery-date' ),
+                array( &$this, 'orddd_lite_delivery_date_field_note_text_callback' ),
+                'orddd_lite_appearance_page',
+                'orddd_lite_appearance_section',
+                array( '<br>' . __( 'Choose the note to be displayed below the delivery date field on checkout page.', 'order-delivery-date' ) )
+            );
+             
+            add_settings_field(
+                'orddd_lite_number_of_months',
+                __( 'Number of Months:', 'order-delivery-date' ),
+                array( &$this, 'orddd_lite_appearance_number_of_months_callback' ),
+                'orddd_lite_appearance_page',
+                'orddd_lite_appearance_section',
+                array ( __( 'The number of months to be shown on the calendar.', 'order-delivery-date' ) )
+            );
+             
+            add_settings_field(
+                'orddd_lite_date_in_shipping',
+                __( 'Delivery date in the Shipping Section:', 'order-delivery-date' ),
+                array( &$this, 'orddd_lite_delivery_date_in_shipping_section_callback' ),
+                'orddd_lite_appearance_page',
+                'orddd_lite_appearance_section',
+                array( __( 'If the checkbox is checked then Delivery Date will be displayed in the shipping section otherwise in the billing section.</br><i>Note: WooCommerce automatically hides the Shipping section fields for Virtual products.</i>', 'order-delivery-date' ) )
+            );
+        
+            add_settings_field(
+                'orddd_lite_calendar_theme_name',
+                __( 'Theme:', 'order-delivery-date' ),
+                array( &$this, 'orddd_lite_appearance_calendar_theme_callback' ),
+                'orddd_lite_appearance_page',
+                'orddd_lite_appearance_section',
+                array( __( 'Select the theme for the calendar which blends with the design of your website.', 'order-delivery-date' ) )
+            );
+             
+            register_setting(
+                'orddd_lite_appearance_settings',
+                'orddd_lite_language_selected'
+            );
+             
+            register_setting(
+                'orddd_lite_appearance_settings',
+                'orddd_lite_delivery_date_format'
+            );
+             
+            register_setting(
+                'orddd_lite_appearance_settings',
+                'orddd_lite_start_of_week'
+            );
+             
+            register_setting(
+                'orddd_lite_appearance_settings',
+                'orddd_lite_delivery_date_field_label'
+            );
+             
+            register_setting(
+                'orddd_lite_appearance_settings',
+                'orddd_lite_delivery_date_field_placeholder'
+            );
+             
+            register_setting(
+                'orddd_lite_appearance_settings',
+                'orddd_lite_delivery_date_field_note'
+            );
+             
+            register_setting(
+                'orddd_lite_appearance_settings',
+                'orddd_lite_number_of_months'
+            );
+             
+            register_setting(
+                'orddd_lite_appearance_settings',
+                'orddd_lite_date_in_shipping'
+            );
+             
+            register_setting(
+                'orddd_lite_appearance_settings',
+                'orddd_lite_calendar_theme_name'
+            );
+             
+            register_setting(
+                'orddd_lite_appearance_settings',
+                'orddd_lite_calendar_theme'
+            );
+        }
+        
         function orddd_lite_delivery_date_setting() { }
         
         function orddd_lite_order_delivery_date_settings() {
-            global $weekdays_orddd_lite;
-            settings_errors();
-            if( isset( $_POST[ 'save_orddd_lite' ] ) && $_POST[ 'save_orddd_lite' ] != "" ) {
-                print( '<div id="message" class="updated"><p>All changes have been saved.</p></div>' );
+            global $orddd_lite_weekdays;
+            $action = $active_date_settings = $active_appearance = '';
+            if ( isset( $_GET[ 'action' ] ) ) {
+                $action = $_GET[ 'action' ];
+            } else {
+                $action = "date";
             }
-        
-            print( '<div id="content">
-                <form method="post" action="options.php">');
-                    settings_fields( "orddd_lite_date_settings" );
-                    do_settings_sections( "orddd_lite_date_settings_page" );
-                    submit_button ( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save_orddd_lite', true );
-                print('</form>
-            </div>');
+            
+            if ( $action == 'date' || $action == '' ) {
+                $active_date_settings = "nav-tab-active";
+            }
+            
+            if ( $action == 'appearance' ) {
+                $active_appearance = "nav-tab-active";
+            }
+            
+            ?>
+            <h2>Order Delivery Date Settings</h2>
+            <?php 
+            settings_errors();
+            ?>	
+            <h2 class="nav-tab-wrapper woo-nav-tab-wrapper">
+                <a href="admin.php?page=order_delivery_date_lite&action=date" class="nav-tab <?php echo $active_date_settings; ?>"><?php _e( 'Date Settings', 'order-delivery-date' );?> </a>
+                <a href="admin.php?page=order_delivery_date_lite&action=appearance" class="nav-tab <?php echo $active_appearance; ?>"> <?php _e( 'Appearance', 'order-delivery-date' );?> </a>
+            </h2>
+            <?php
+            if ( $action == 'date' || $action == '' ) {
+                print( '<div id="content">
+                    <form method="post" action="options.php">');
+                        settings_fields( "orddd_lite_date_settings" );
+                        do_settings_sections( "orddd_lite_date_settings_page" );
+                        submit_button ( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save_orddd_lite', true );
+                    print('</form>
+                </div>');
+            } elseif ( $action == 'appearance' ) {
+                print( '<div id="content">
+                    <form method="post" action="options.php">');
+                    settings_fields( "orddd_lite_appearance_settings" );
+                    do_settings_sections( "orddd_lite_appearance_page" );
+                    submit_button ( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save', true );
+                    print('</form>
+                </div>' );
+            }
         }
         
         function orddd_lite_delivery_days_callback( $args ) {
-            global $weekdays_orddd_lite;
+            global $orddd_lite_weekdays;
             printf( '<fieldset class="orddd-days-fieldset" style="width:150px;border: 1px solid #DCDBDA;float: left;margin-bottom: 10px;margin-left: 0px;margin-top: 0;">
                 <legend><b>' . __( 'Weekdays:', 'order-delivery-date' ) . '</b></legend>'
             );
             $html = '';
             printf( '<table>' );
-            foreach ( $weekdays_orddd_lite as $n => $day_name ) {
+            foreach ( $orddd_lite_weekdays as $n => $day_name ) {
                 printf('<tr>
         	       <td style="padding: 0.5px 0.5px;"><input type="checkbox" name="' . $n . '" id="' . $n .'" value="checked" ' . get_option( $n ) . '/></td>
         	       <td style="padding: 0.5px 0.5px;"><label class="ord_label" for="' . $day_name . '">' . __( $day_name, 'order-delivery-date' ) . '</label></td>'
@@ -417,14 +644,254 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             echo $html;
         }
         
+        /**
+         * Callback for adding Appearance tab settings
+         */
+        
+        function orddd_lite_appearance_admin_setting_callback() { }
+        
+        /**
+         * Callback for adding Calendar Language setting
+         *
+         * @param array $args
+         */
+        public static function orddd_lite_appearance_calendar_language_callback( $args ) {
+            global $orddd_lite_languages;
+            $language_selected = get_option( 'orddd_lite_language_selected' );
+            if ( $language_selected == "" ) {
+                $language_selected = "en-GB";
+            }
+        
+            echo '<select id="orddd_lite_language_selected" name="orddd_lite_language_selected">';
+        
+            foreach ( $orddd_lite_languages as $key => $value ) {
+                $sel = "";
+                if ( $key == $language_selected ) {
+                    $sel = "selected";
+                }
+                echo "<option value='$key' $sel>$value</option>";
+            }
+        
+            echo '</select>';
+        
+            $html = '<label for="orddd_lite_language_selected"> ' . $args[ 0 ] . '</label>';
+            echo $html;
+        }
+        
+        /**
+        * Callback for adding Date formats setting
+        *
+        * @param array $args
+        */
+        public static function orddd_lite_appearance_date_formats_callback( $args ) {
+            global $orddd_lite_date_formats;
+        
+            echo '<select name="orddd_lite_delivery_date_format" id="orddd_lite_delivery_date_format" size="1">';
+        
+            foreach ( $orddd_lite_date_formats as $k => $format ) {
+                printf( "<option %s value='%s'>%s</option>\n",
+                    selected( $k, get_option( 'orddd_lite_delivery_date_format' ), false ),
+                    esc_attr( $k ),
+        		    date( $format )
+                );
+            }
+            echo '</select>';
+        
+            $html = '<label for="orddd_lite_delivery_date_format">' . $args[ 0 ] . '</label>';
+                    echo $html;
+        }
+        
+        /**
+        * Callback for adding First day of week setting
+        *
+        * @param array $args
+        */
+        
+        public static function orddd_lite_appearance_first_day_of_week_callback( $args ) {
+            global $orddd_lite_days;
+            $day_selected = get_option( 'orddd_lite_start_of_week' );
+            if( $day_selected == "" ) {
+                $day_selected = 0;
+            }
+        
+            echo '<select id="orddd_lite_start_of_week" name="orddd_lite_start_of_week">';
+        
+            foreach ( $orddd_lite_days as $key => $value ) {
+                $sel = "";
+                if ( $key == $day_selected ) {
+                    $sel = " selected ";
+                }
+                echo "<option value='$key' $sel>$value</option>";
+            }
+            echo '</select>';
+        
+        	$html = '<label for="orddd_lite_start_of_week"> ' . $args[ 0 ] . '</label>';
+            echo $html;
+        }
+        
+        /**
+                	* Callback for adding Delivery Date field label setting
+                	    *
+                	    * @param array $args
+                	    */
+        
+                	    public static function orddd_lite_delivery_date_field_label_callback( $args ) {
+                	    echo '<input type="text" name="orddd_lite_delivery_date_field_label" id="orddd_lite_delivery_date_field_label" value="' . get_option( 'orddd_lite_delivery_date_field_label' ) . '" maxlength="40"/>';
+        
+                	    $html = '<label for="orddd_lite_delivery_date_field_label"> ' . $args[ 0 ] . '</label>';
+                	    echo $html;
+        }
+        
+        /**
+        * Callback for adding Delivery Date field placeholder setting
+        *
+        * @param array $args
+        */
+        
+        public static function orddd_lite_delivery_date_field_placeholder_callback( $args ) {
+            echo '<input type="text" name="orddd_lite_delivery_date_field_placeholder" id="orddd_lite_delivery_date_field_placeholder" value="' . get_option( 'orddd_lite_delivery_date_field_placeholder' ) . '" maxlength="40"/>';
+        
+            $html = '<label for="orddd_lite_delivery_date_field_placeholder"> ' . $args[ 0 ] . '</label>';
+            echo $html;
+        }
+        
+        /**
+        * Callback for adding Delivery Date field note text setting
+        *
+        * @param array $args
+        */
+        
+        public static function orddd_lite_delivery_date_field_note_text_callback( $args ) {
+            echo '<textarea rows="2" cols="90" name="orddd_lite_delivery_date_field_note" id="orddd_lite_delivery_date_field_note" style="width: 290px;">' . stripslashes( get_option( 'orddd_lite_delivery_date_field_note' ) ) . '</textarea>';
+        
+            $html = '<label for="orddd_lite_delivery_date_field_note"> ' . $args[ 0 ] . '</label>';
+            echo $html;
+        }
+        
+        /**
+        * Callback for adding Number of months setting
+        *
+        * @param array $args
+        */
+        
+        public static function orddd_lite_appearance_number_of_months_callback( $args ) {
+            global $orddd_lite_number_of_months;
+        	echo '<select name="orddd_lite_number_of_months" id="orddd_lite_number_of_months" size="1">';
+        
+            foreach ( $orddd_lite_number_of_months as $k => $v ) {
+                printf( "<option %s value='%s'>%s</option>\n",
+                    selected( $k, get_option( 'orddd_lite_number_of_months' ), false ),
+                    esc_attr( $k ),
+                    $v
+                );
+            }
+            echo '</select>';
+                         
+            $html = '<label for="orddd_lite_number_of_months">' . $args[ 0 ] . '</label>';
+            echo $html;
+        }
+        
+        /**
+        * Callback for adding Delivery Date fields in Shipping section setting
+        *
+        * @param array $args
+        */
+        
+        public static function orddd_lite_delivery_date_in_shipping_section_callback( $args ) {
+            if ( get_option( 'orddd_lite_date_in_shipping' ) == 'on' ) {
+        	   $date_in_shipping = "checked";
+            } else {
+                $date_in_shipping = "";
+            }
+        
+        	echo '<input type="checkbox" name="orddd_lite_date_in_shipping" id="orddd_lite_date_in_shipping" class="day-checkbox"' . $date_in_shipping . ' value="on"/>';
+        
+            $html = '<label for="orddd_lite_date_in_shipping"> ' . $args[ 0 ] . '</label>';
+        	echo $html;
+        }
+        
+        /**
+        * Callback for hiding Delivery Date fields on the checkout page for Virtual product setting
+        *
+        * @param array $args
+        */
+        
+        public static function orddd_lite_appearance_virtual_product_callback( $args ) {
+            if ( get_option( 'orddd_lite_no_fields_for_virtual_product' ) == 'on' ) {
+                $orddd_no_fields_for_virtual_product = "checked";
+            } else {
+                $orddd_no_fields_for_virtual_product = "";
+            }
+        
+            echo '<input type="checkbox" name="orddd_lite_no_fields_for_virtual_product" id="orddd_lite_no_fields_for_virtual_product" class="day-checkbox"' . $orddd_no_fields_for_virtual_product . '/>';
+        
+            $html = '<label for="orddd_lite_no_fields_for_virtual_product"> ' . $args[ 0 ] . '</label>';
+            echo $html;
+        }
+        
+        /**
+        * Callback for adding Calendar theme setting
+        *
+        * @param array $args
+        */
+        
+        public static function orddd_lite_appearance_calendar_theme_callback( $args ) {
+            global $orddd_lite_calendar_themes;
+        	$language_selected = get_option( 'orddd_lite_language_selected' );
+            if ( $language_selected == "" ) {
+                $language_selected = "en-GB";
+            }
+        	
+        	echo '<input type="hidden" name="orddd_lite_calendar_theme" id="orddd_lite_calendar_theme" value="' . get_option( 'orddd_lite_calendar_theme' ) . '">
+        	   <input type="hidden" name="orddd_lite_calendar_theme_name" id="orddd_lite_calendar_theme_name" value="' . get_option( 'orddd_lite_calendar_theme_name' ) . '">';
+            echo '<script>
+                jQuery( document ).ready( function( ) {
+                    var calendar_themes = ' . json_encode( $orddd_lite_calendar_themes ) .'
+                    jQuery( "#switcher" ).themeswitcher( {
+                        onclose: function( ) {
+                            var cookie_name = this.cookiename;
+                            jQuery( "input#orddd_lite_calendar_theme" ).val( jQuery.cookie( cookie_name ) );
+                            jQuery.each( calendar_themes, function( key, value ) {
+                                if( jQuery.cookie( cookie_name ) == key ) {
+                                    jQuery( "input#orddd_lite_calendar_theme_name" ).val( value );
+                                }
+                            });
+                        },
+                        imgpath: "'.plugins_url().'/order-delivery-date-for-woocommerce/images/",
+                        loadTheme: "' . get_option( 'orddd_lite_calendar_theme_name' ) . '",
+                        
+                    });
+                });
+                jQuery( function() {
+                    jQuery.datepicker.setDefaults( jQuery.datepicker.regional[ "" ] );
+                    jQuery( "#datepicker" ).datepicker( jQuery.datepicker.regional[ "' . $language_selected . '" ] );
+                    jQuery( "#localisation_select" ).change(function() {
+                        jQuery( "#datepicker" ).datepicker( "option",
+                            jQuery.datepicker.regional[ jQuery( this ).val() ] );
+                        });
+                    });
+            </script>
+            <div id="switcher"></div>
+            <br><strong>' . __( 'Preview theme:', 'order-delivery-date' ) . '</strong><br>
+            <div id="datepicker"></div>';
+        
+        	$html = '<label for="orddd_lite_calendar_theme_name"> ' . $args[0] . '</label>';
+        	echo $html;
+        }
+        
         function orddd_lite_my_custom_checkout_field( $checkout ) {
-            global $weekdays_orddd_lite;
+            global $orddd_lite_weekdays;
             
             wp_enqueue_script( 'jquery' );
             wp_deregister_script( 'jqueryui');
             wp_enqueue_script( 'jquery-ui-datepicker' );
         
-            wp_enqueue_style( 'jquery-ui', "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" , '', '', false);
+            $calendar_theme = get_option( 'orddd_lite_calendar_theme' );
+            if ( $calendar_theme == '' ) {
+                $calendar_theme = 'base';
+            }
+            wp_dequeue_style( 'jquery-ui' );
+            wp_enqueue_style( 'jquery-ui-orddd', "//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/$calendar_theme/jquery-ui.css" , '', '', false );
             wp_enqueue_style( 'datepicker', plugins_url('/css/datepicker.css', __FILE__) , '', '', false);
         
             wp_enqueue_script(
@@ -435,11 +902,39 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 false
             );
         
+            if ( isset( $_GET[ 'lang' ] ) && $_GET[ 'lang' ] != '' && $_GET[ 'lang' ] != null ) {
+                $language_selected = $_GET['lang'];
+            } else {
+                $language_selected = get_option( 'orddd_lite_language_selected' );
+                if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+                    if( constant( 'ICL_LANGUAGE_CODE' ) != '' ) {
+                        $wpml_current_language = constant( 'ICL_LANGUAGE_CODE' );
+                        if ( !empty( $wpml_current_language ) ) {
+                            $language_selected = $wpml_current_language;
+                        } else {
+                            $language_selected = get_option( 'orddd_lite_language_selected' );
+                        }
+                    }
+                }
+                if ( $language_selected == "" ) $language_selected = "en-GB";
+            }
+             
+            wp_enqueue_script(
+                $language_selected,
+                plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ),
+                '',
+                '',
+                false );
+            $first_day_of_week = '1';
+            if( get_option( 'orddd_lite_start_of_week' ) != '' ) {
+                $first_day_of_week = get_option( 'orddd_lite_start_of_week' );
+            }
+            
             echo '<script language="javascript">
                 jQuery( document ).ready( function(){
                     jQuery( "#e_deliverydate" ).attr( "readonly", true );
                     var formats = ["MM d, yy","MM d, yy"];
-                    jQuery("#e_deliverydate").val("").datepicker({dateFormat: formats[1], minDate:1, beforeShow: avd, beforeShowDay: chd,
+                    jQuery("#e_deliverydate").val("").datepicker({dateFormat: "' . get_option( 'orddd_lite_delivery_date_format' ) . '", firstDay: parseInt( ' . $first_day_of_week . ' ), minDate:1, beforeShow: avd, beforeShowDay: chd,
                         onClose:function( dateStr, inst ) {
                             if ( dateStr != "" ) {
                                 var monthValue = inst.selectedMonth+1;
@@ -449,9 +944,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                                 jQuery( "#h_deliverydate" ).val( all );
                             }
                         }            
-                    });
-	               jQuery("#e_deliverydate").parent().append("<br><small style=font-size:10px;>' . __( 'We will try our best to deliver your order on the specified date', 'order-delivery-date' ) . '</small>" );
-                });
+                    });';
+            if ( get_option( 'orddd_lite_delivery_date_field_note' ) != '' ) {
+                echo 'jQuery("#e_deliverydate").parent().append("<br><small style=font-size:10px;>' . addslashes( __( get_option( 'orddd_lite_delivery_date_field_note' ), 'order-delivery-date' ) ) . '</small>" );';
+            }
+            echo '} );
             </script>';
         
             if ( get_option( 'orddd_lite_date_field_mandatory' ) == 'checked' ) {
@@ -462,9 +959,9 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             
             woocommerce_form_field( 'e_deliverydate', array(
                 'type'          => 'text',
-        	    'label'         => __( 'Delivery Date', 'order-delivery-date' ),
+        	    'label'         => __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ),
         	    'required'  	=> $validate_wpefield,
-        	    'placeholder'   => __( 'Delivery Date', 'order-delivery-date' ),
+        	    'placeholder'   => __( get_option( 'orddd_lite_delivery_date_field_placeholder' ), 'order-delivery-date' ),
             ),
             $checkout->get_value( 'e_deliverydate' ) );
 
@@ -476,7 +973,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             $checkout->get_value( 'h_deliverydate' ) );
             
             $alldays_orddd_lite = array();
-        	foreach ( $weekdays_orddd_lite as $n => $day_name ) {
+        	foreach ( $orddd_lite_weekdays as $n => $day_name ) {
                 $alldays_orddd_lite[ $n ] = get_option( $n );
             }
             $alldayskeys_orddd_lite = array_keys( $alldays_orddd_lite );
@@ -508,7 +1005,8 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             print( '<input type="hidden" name="orddd_lite_minimumOrderDays" id="orddd_lite_minimumOrderDays" value="' . $min_date . '">' );
             print( '<input type="hidden" name="orddd_lite_number_of_dates" id="orddd_lite_number_of_dates" value="' . get_option( 'orddd_lite_number_of_dates' ) . '">' );
         	print( '<input type="hidden" name="orddd_lite_date_field_mandatory" id="orddd_lite_date_field_mandatory" value="' . get_option( 'orddd_lite_date_field_mandatory' ) . '">' );
-        	
+        	print( '<input type="hidden" name="orddd_lite_number_of_months" id="orddd_lite_number_of_months" value="' . get_option( 'orddd_lite_number_of_months' ) . '">' );
+        	 
         	$lockout_days_str = '';
         	if ( get_option( 'orddd_lite_lockout_date_after_orders' ) > 0 ) {
         	    $lockout_days_arr = array();
@@ -526,17 +1024,21 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         	print( '<input type="hidden" name="orddd_lite_lockout_days" id="orddd_lite_lockout_days" value=\'' . $lockout_days_str . '\'>' );
         }
         
-         function orddd_lite_my_custom_checkout_field_update_order_meta( $order_id ) {
+        function orddd_lite_my_custom_checkout_field_update_order_meta( $order_id ) {
             if ( isset( $_POST['e_deliverydate'] ) && $_POST['e_deliverydate'] != '' ) {
-                update_post_meta( $order_id, 'Delivery Date', esc_attr( $_POST[ 'e_deliverydate' ] ) );
+                if( isset( $_POST[ 'h_deliverydate' ] ) ) {	    
+                    $delivery_date = $_POST['h_deliverydate'];
+                } else {
+                    $delivery_date = '';
+                }
+                $date_format = 'dd-mm-y';
+                
+                update_post_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), esc_attr( $_POST['e_deliverydate'] ) );
+		    
+                $timestamp = orddd_lite_common::orddd_lite_get_timestamp( $delivery_date, $date_format );
+                update_post_meta( $order_id, '_orddd_lite_timestamp', $timestamp );
+			    order_delivery_date_lite::orddd_lite_update_lockout_days( $delivery_date );
             }
-            
-            if( isset( $_POST[ 'h_deliverydate' ] ) && $_POST[ 'h_deliverydate' ] != '' ) {
-                $delivery_date = $_POST[ 'h_deliverydate' ];
-            } else {
-                $delivery_date = '';
-            }
-            order_delivery_date_lite::orddd_lite_update_lockout_days( $delivery_date );
         }
         
         public static function orddd_lite_update_lockout_days( $delivery_date ) {
@@ -572,39 +1074,9 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
          * This function is used for show delivery date in the email notification
          **/
         function orddd_lite_add_delivery_date_to_order_woo( $keys ) {
-            $label_name = __( "Delivery Date", "order-delivery-date" );
-            $keys[ $label_name ] = "Delivery Date";
+            $label_name = __( get_option( 'orddd_lite_delivery_date_field_label' ), "order-delivery-date" );
+            $keys[] = get_option( 'orddd_lite_delivery_date_field_label' );
             return $keys;
-        }
-        
-        /**
-         * This function are used for show custom column on order page listing. woo-orders
-         *
-         */
-        
-        function orddd_lite_woocommerce_order_delivery_date_column( $columns ) {
-            $new_columns = ( is_array( $columns  )) ? $columns : array();
-            unset( $new_columns['order_actions'] );
-            //edit this for you column(s)
-            //all of your columns will be added before the actions column
-            $new_columns[ 'order_delivery_date' ] = __( 'Delivery Date', 'order-delivery-date' ); //Title for column heading
-            $new_columns[ 'order_actions' ] = $columns[ 'order_actions' ];
-            return $new_columns;
-        }
-        
-        
-        /**
-         * This fnction used to add value on the custom column created on woo- order
-         *
-         */
-        function orddd_lite_woocommerce_custom_column_value( $column ) {
-            global $post;
-            $data = get_post_meta( $post->ID );
-            //start editing, I was saving my fields for the orders as custom post meta
-            //if you did the same, follow this code
-            if ( $column == 'order_delivery_date' ) {
-                echo ( isset ( $data[ 'Delivery Date' ][ 0 ]) ? $data[ 'Delivery Date' ][ 0 ] : '');
-            }
         }
         
         /**
@@ -622,19 +1094,139 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
              
             //Check if set, if its not set add an error.
             if ( $delivery_date == '' ) {
-                $message = __( '<strong>' . __( 'Delivery Date', 'order-delivery-date' ) . '</strong> is a required field.', 'order-delivery-date' );
+                $message = __( '<strong>' . __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ) . '</strong> is a required field.', 'order-delivery-date' );
                 wc_add_notice( $message, $notice_type = 'error' );
             }
         }
         
+        /**
+         * Display Delivery Date on Order Recieved Page
+         *
+         * @param resource $order
+         */
         function orddd_lite_add_delivery_date_to_order_page_woo( $order ) {
-            $my_order_meta = get_post_custom( $order->id );
-            if( array_key_exists( 'Delivery Date', $my_order_meta ) ) {
-                $order_page_delivery_date = $my_order_meta[ 'Delivery Date' ];
-                if ( $order_page_delivery_date != "" ) {
-                    echo '<p><strong>' . __( 'Delivery Date', 'order-delivery-date' ) . ':</strong> ' . $order_page_delivery_date[ 0 ] . '</p>';
+            global $orddd_lite_date_formats;
+            $delivery_date_formatted = orddd_lite_common::orddd_lite_get_order_delivery_date( $order->id );
+            if( $delivery_date_formatted != '' ) {
+                echo '<p><strong>'.__( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ) . ':</strong> ' . $delivery_date_formatted . '</p>';
+            }
+        }
+        
+        /**
+         * This function needs to be called when updating to 1.9 version
+         * So that the timestamps for all previous orders of the Order delivery date field are inserted
+         * This is necessary for the sorting to give expected results
+         *
+         */
+        function orddd_create_timestamp_for_old_order() {
+            global $wpdb;
+            $db_updated = get_option( 'orddd_timestamp_update_script' );
+        
+            if ( $db_updated != 'yes' ) {
+                add_action( 'admin_notices', array( &$this, 'orddd_db_update_notice' ) );
+            }
+        
+            if ( isset( $_GET['mode'] ) && $_GET['mode'] == 'update_db' ) {
+                global $orddd_lite_date_formats;
+                $order_ids_updated = get_option( 'orddd_lite_orders_script_updated' );
+                if( $order_ids_updated == 'null' || $order_ids_updated == '' || $order_ids_updated == '{}' || $order_ids_updated == '[]') {
+                    $order_ids_updated = array();
+                }
+                $step_variable = get_option( 'orddd_lite_steps_for_script' );
+                if( $step_variable == 'null' || $step_variable == '' || $step_variable == '{}' || $step_variable == '[]') {
+                    $step_variable = 1;
+                } else {
+                    $step_variable = $step_variable + 1;
+                }
+                $results = $wpdb->get_results( "SELECT * FROM `".$wpdb->prefix."posts` WHERE post_type='shop_order' AND post_status IN ('" . implode("','", array_keys( wc_get_order_statuses() )) . "') AND ID NOT IN ('" . implode("','", $order_ids_updated ) . "') LIMIT 300" );
+                if( count( $results ) > 0 ) {
+                    echo "Step: " . $step_variable;
+                }
+                foreach( $results as $key => $value ) {
+                    $date_str = '';
+			        $order_id = $value->ID;
+				    $order_ids_updated[] = $order_id;
+				    $data = get_post_meta( $order_id );
+				    $delivery_date_timestamp = $delivery_date_formatted = '';
+				    $delivery_date_prev_timestamp = '';
+				    $m = $d = $y = "";
+				    $old_order = "NO";
+				    if ( isset( $data[ '_orddd_lite_timestamp' ] ) ) {
+                        $delivery_date_prev_timestamp = $data['_orddd_lite_timestamp'][0];
+                        if( $delivery_date_prev_timestamp == '' ) {
+                            $old_order = "YES";
+                        }
+                    } else {
+				        $old_order = "YES";
+                    }
+        
+                    if ( isset( $data[ '_orddd_lite_timestamp' ] ) || isset( $data[ 'Delivery Date' ] ) ) {
+                        if ( isset( $data[ '_orddd_lite_timestamp' ] ) ) {
+                            $delivery_date_timestamp = $data[ '_orddd_lite_timestamp' ][ 0 ];
+                        } 
+                        if ( $delivery_date_timestamp == '' ) {
+                            $delivery_date_timestamp_1 = strtotime( $data[ 'Delivery Date' ][ 0 ] );
+                            if ( $delivery_date_timestamp_1 != '' ) {
+                                // add timestamp for sorting
+                                $date_format = 'MM d, yy';
+                                $delivery_date = $data[ 'Delivery Date' ][ 0 ];
+                                $hour = 0;
+                                $min = 1;
+                                switch ( $date_format ) {
+                                    case 'MM d, yy':
+                                        $date_str = str_replace( ',', '', $delivery_date );
+                                    break;
+                                }
+                                if ( isset( $date_str ) ) {
+                                    $timestamp = strtotime( $date_str );
+                                }   
+                                add_post_meta( $order_id, '_orddd_lite_timestamp', $timestamp );
+                            }
+                        }
+                    } 
+                }
+                if( count( $results ) > 0 ) {
+                    update_option( 'orddd_lite_steps_for_script', $step_variable );
+                    update_option( 'orddd_lite_orders_script_updated', $order_ids_updated );
+                    echo '<script>
+                    location.reload();
+                    </script>';
+                } else {
+                    update_option( 'orddd_timestamp_update_script', 'yes' );
+                    add_action( 'admin_notices', array( &$this, 'orddd_db_updated_notice' ) );
+                    echo'<script>
+                    window.location="'.get_admin_url().'edit.php?post_type=shop_order";
+                    </script>';
                 }
             }
+        }   
+            
+        /**
+        * Show database update notice for plugin version 1.9
+        *
+        */
+        function orddd_db_update_notice() {
+            $db_updated = get_option( 'orddd_timestamp_update_script' );
+            if ( $db_updated != 'yes' ) {
+                
+            ?>
+            	<div class="error">
+            	   <p><?php _e( 'Order Delivery Date for WooCommerce Plugin needs to update your database. Please <a href="?page=order_delivery_date_lite&action=date&mode=update_db">click here</a> to update.', 'order-delivery-date' ); ?></p>
+            	</div>
+            <?php 
+            }
+        }
+            
+        /**
+        * Show database updated success notice for plugin version 1.9
+        *
+        */
+        function orddd_db_updated_notice() {
+        ?>
+            <div class="updated">
+                <p><?php _e( 'The database has been updated. You can now take advantage of all features of the Order Delivery Date plugin. Thank you.', 'order-delivery-date' ); ?></p>
+            </div>
+        <?php 
         }
     }
 } 
