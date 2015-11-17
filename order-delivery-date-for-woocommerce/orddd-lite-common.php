@@ -19,8 +19,8 @@ class orddd_lite_common {
 		$date_language = get_option( 'orddd_lite_language_selected' );
 		if( $delivery_date_timestamp != '' ) {
             if( $date_language != 'en-GB' ) {
-                $locale_format = $orddd_lite_languages[ $date_language ];print_r( $orddd_lite_languages_locale[ $locale_format ] );
-                $time = setlocale( LC_ALL, $orddd_lite_languages_locale[ $locale_format ] );echo $time;
+                $locale_format = $orddd_lite_languages[ $date_language ];
+                $time = setlocale( LC_ALL, $orddd_lite_languages_locale[ $locale_format ] );
                 $date_format = get_option( 'orddd_lite_delivery_date_format' );
                 switch ( $date_format ) {
                     case 'd M, y':
