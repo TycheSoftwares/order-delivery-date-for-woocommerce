@@ -49,10 +49,33 @@ class orddd_lite_filter {
      **/
     public static function orddd_lite_woocommerce_delivery_date_orderby( $vars ) {
         global $typenow;
-        $delivery_field_label = '_orddd_lite_timestamp';
-        if ( isset( $vars[ 'orderby' ] ) ) {
-            if ( $delivery_field_label == $vars[ 'orderby' ] ) {
-                $sorting_vars = array( 'orderby'  => 'meta_value_num' );
+        if( get_option( 'orddd_lite_enable_default_sorting_of_column' ) == 'checked' ) {
+            $delivery_field_label = '_orddd_lite_timestamp';
+            if ( isset( $vars[ 'orderby' ] ) ) {
+                if ( $delivery_field_label == $vars[ 'orderby' ] ) {
+                    $sorting_vars = array( 'orderby'  => 'meta_value_num' );
+                    if ( !isset( $_GET[ 'order_delivery_date_filter' ] ) || $_GET['order_delivery_date_filter'] == '' ) {
+                        $sorting_vars[ 'meta_query' ] = array(  'relation' => 'OR',
+                            array (
+                                'key'	  => $delivery_field_label,
+                                'value'	  => '',
+                                'compare' => 'NOT EXISTS'
+                            ),
+                            array (
+                                'key'	  => $delivery_field_label,
+                                'compare' => 'EXISTS'
+                            )
+                        );
+                    }
+                    $vars = array_merge( $vars, $sorting_vars );
+                }
+            } else {
+                if ( 'shop_order' != $typenow ) {
+                    return $vars;
+                }
+                $sorting_vars = array(
+                    'orderby'  => 'meta_value_num',
+                    'order'	   => 'DESC');
                 if ( !isset( $_GET[ 'order_delivery_date_filter' ] ) || $_GET['order_delivery_date_filter'] == '' ) {
                     $sorting_vars[ 'meta_query' ] = array(  'relation' => 'OR',
                         array (
@@ -67,29 +90,8 @@ class orddd_lite_filter {
                     );
                 }
                 $vars = array_merge( $vars, $sorting_vars );
-            }
-        } else {
-            if ( 'shop_order' != $typenow ) {
-                return $vars;
-            }
-            $sorting_vars = array(
-                'orderby'  => 'meta_value_num',
-                'order'	   => 'DESC');
-            if ( !isset( $_GET[ 'order_delivery_date_filter' ] ) || $_GET['order_delivery_date_filter'] == '' ) {
-                $sorting_vars[ 'meta_query' ] = array(  'relation' => 'OR',
-                    array (
-                        'key'	  => $delivery_field_label,
-                        'value'	  => '',
-                        'compare' => 'NOT EXISTS'
-                    ),
-                    array (
-                        'key'	  => $delivery_field_label,
-                        'compare' => 'EXISTS'
-                    )
-                );
-            }
-            $vars = array_merge( $vars, $sorting_vars );
-        }
+            } 
+        }  
         return $vars;
     }
 }

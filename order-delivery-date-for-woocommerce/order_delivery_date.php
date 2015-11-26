@@ -32,6 +32,7 @@ function orddd_lite_deactivate() {
     delete_option( 'orddd_lite_lockout_days' );
     delete_option( 'orddd_lite_update_value' );
     delete_option( 'orddd_lite_abp_hrs' );
+    delete_option( 'orddd_lite_enable_default_sorting_of_column' );
     
     // appearance options
     delete_option( 'orddd_lite_delivery_date_field_label' );
@@ -101,6 +102,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_option( 'orddd_lite_update_value', 'yes' );
             add_option( 'orddd_lite_abp_hrs', 'HOURS' );
             add_option( 'orddd_lite_default_appearance_settings', 'yes' );
+            add_option( 'orddd_lite_enable_default_sorting_of_column', '' );
             
             // appearance options
             add_option( 'orddd_lite_delivery_date_format', ORDDD_LITE_DELIVERY_DATE_FORMAT );
@@ -384,6 +386,15 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 array ( __( 'Maximum deliveries/orders per day.', 'order-delivery-date' ) )
             );
             
+            add_settings_field(
+            'orddd_lite_enable_default_sorting_of_column',
+            __( 'Sort on Orders Listing Page:', 'order-delivery-date' ),
+            array( &$this, 'orddd_lite_enable_default_sorting_of_column_callback' ),
+            'orddd_lite_date_settings_page',
+            'orddd_lite_date_settings_section',
+            array ( __( 'Enable default sorting of orders (in descending order) by Delivery Date on WooCommerce -> Orders page', 'order-delivery-date' ) )
+            );
+            
             foreach ( $orddd_lite_weekdays as $n => $day_name ) {
                 register_setting(
                     'orddd_lite_date_settings',
@@ -409,6 +420,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             register_setting(
                 'orddd_lite_date_settings',
                 'orddd_lite_lockout_date_after_orders'
+            );
+            
+            register_setting(
+                'orddd_lite_date_settings',
+                'orddd_lite_enable_default_sorting_of_column'
             );
         }
         
@@ -641,6 +657,12 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         function orddd_lite_lockout_date_after_orders_callback( $args ) {
             printf( '<input type="text" name="orddd_lite_lockout_date_after_orders" id="orddd_lite_lockout_date_after_orders" style="width: 75px;" value="' . get_option( 'orddd_lite_lockout_date_after_orders' ) . '"/>' );
             $html = '<label for="orddd_lite_lockout_date_after_orders"> ' . $args[ 0 ] . '</label>';
+            echo $html;
+        }
+        
+        function orddd_lite_enable_default_sorting_of_column_callback( $args ) {
+            printf( '<input type="checkbox" name="orddd_lite_enable_default_sorting_of_column" id="orddd_lite_enable_default_sorting_of_column" value="checked"' . get_option( 'orddd_lite_enable_default_sorting_of_column' ) . '/>' );
+            $html = '<label for="orddd_lite_enable_default_sorting_of_column"> ' . $args[ 0 ] . '</label>';
             echo $html;
         }
         
