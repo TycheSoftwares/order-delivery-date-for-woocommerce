@@ -431,7 +431,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         function order_lite_appearance_admin_settings() {
             add_settings_section(
                 'orddd_lite_appearance_section',
-                __( 'Calendar Apprearance', 'order-delivery-date' ),
+                __( 'Calendar Appearance', 'order-delivery-date' ),
                 array( &$this, 'orddd_lite_appearance_admin_setting_callback' ),
                 'orddd_lite_appearance_page'
             );

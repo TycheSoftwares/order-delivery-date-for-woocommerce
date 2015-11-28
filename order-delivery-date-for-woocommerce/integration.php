@@ -6,7 +6,7 @@ class orddd_lite_integration {
 
 	public function __construct() {		
 	    // Zapier integration
-	    add_action( 'plugins_loaded', array( &$this, 'orddd_lite_plugins_loaded' ) );
+	    //add_action( 'plugins_loaded', array( &$this, 'orddd_lite_plugins_loaded' ) );
 	    
 		// WooCommerce PDF Invoices & Packing Slips
 		add_action( 'wpo_wcpdf_after_order_details', array( &$this, 'orddd_lite_plugins_packing_slip' ) );
@@ -21,7 +21,7 @@ class orddd_lite_integration {
 		add_action( 'woocommerce_cloudprint_internaloutput_footer', array( &$this, 'orddd_lite_cloud_print_fields' ) );
 		
 		//WooCommerce Subscriptions
-		add_filter( 'woocommerce_create_order', array( &$this, 'orddd_lite_filter_woocommerce_create_order' ), 1, 2 );
+		//add_filter( 'woocommerce_create_order', array( &$this, 'orddd_lite_filter_woocommerce_create_order' ), 1, 2 );
 		
 		//WooCommerce Print Invoice/Packing list plugin
 		add_action( 'wc_print_invoice_packing_template_body_after_billing_address', array( &$this, 'orddd_lite_woocommerce_pip' ) );
