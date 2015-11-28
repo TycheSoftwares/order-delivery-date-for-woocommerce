@@ -388,7 +388,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             
             add_settings_field(
             'orddd_lite_enable_default_sorting_of_column',
-            __( 'Sort on Orders Listing Page:', 'order-delivery-date' ),
+            __( 'Sort on WooCommerce Orders Page:', 'order-delivery-date' ),
             array( &$this, 'orddd_lite_enable_default_sorting_of_column_callback' ),
             'orddd_lite_date_settings_page',
             'orddd_lite_date_settings_section',
@@ -830,25 +830,6 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         
             $html = '<label for="orddd_lite_date_in_shipping"> ' . $args[ 0 ] . '</label>';
         	echo $html;
-        }
-        
-        /**
-        * Callback for hiding Delivery Date fields on the checkout page for Virtual product setting
-        *
-        * @param array $args
-        */
-        
-        public static function orddd_lite_appearance_virtual_product_callback( $args ) {
-            if ( get_option( 'orddd_lite_no_fields_for_virtual_product' ) == 'on' ) {
-                $orddd_no_fields_for_virtual_product = "checked";
-            } else {
-                $orddd_no_fields_for_virtual_product = "";
-            }
-        
-            echo '<input type="checkbox" name="orddd_lite_no_fields_for_virtual_product" id="orddd_lite_no_fields_for_virtual_product" class="day-checkbox"' . $orddd_no_fields_for_virtual_product . '/>';
-        
-            $html = '<label for="orddd_lite_no_fields_for_virtual_product"> ' . $args[ 0 ] . '</label>';
-            echo $html;
         }
         
         /**
