@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: order-delivery-date-for-woocommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 15:32+0530\n"
-"PO-Revision-Date: 2015-11-17 15:35+0530\n"
+"POT-Creation-Date: 2015-11-28 16:18+0530\n"
+"PO-Revision-Date: 2015-11-28 16:21+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.7\n"
 
-#: order_delivery_date.php:247
+#: order_delivery_date.php:249
 #, php-format
 msgid ""
 "You can upgrade to the <a href=\"https://www.tychesoftwares.com/store/"
@@ -27,7 +27,7 @@ msgid ""
 "Purchase now </a> & save $20!"
 msgstr ""
 
-#: order_delivery_date.php:254
+#: order_delivery_date.php:256
 msgid ""
 "Minimum Delivery time (in days) will now be calculated in hours which is "
 "from current WordPress time. To keep the functionality of our plugin intact "
@@ -35,170 +35,180 @@ msgid ""
 "hours)' setting."
 msgstr ""
 
-#: order_delivery_date.php:337
+#: order_delivery_date.php:339
 msgid "Order Delivery Date Settings"
 msgstr ""
 
-#: order_delivery_date.php:344
+#: order_delivery_date.php:346
 msgid "Delivery Days:"
 msgstr ""
 
-#: order_delivery_date.php:348
+#: order_delivery_date.php:350
 msgid "Select weekdays for delivery."
 msgstr ""
 
-#: order_delivery_date.php:353
+#: order_delivery_date.php:355
 msgid "Minimum Delivery time (in hours):"
 msgstr ""
 
-#: order_delivery_date.php:357
+#: order_delivery_date.php:359
 msgid "Minimum number of hours required to prepare for delivery."
 msgstr ""
 
-#: order_delivery_date.php:362
+#: order_delivery_date.php:364
 msgid "Number of dates to choose:"
 msgstr ""
 
-#: order_delivery_date.php:366
+#: order_delivery_date.php:368
 msgid "Number of dates available for delivery."
 msgstr ""
 
-#: order_delivery_date.php:371
+#: order_delivery_date.php:373
 msgid "Mandatory field?:"
 msgstr ""
 
-#: order_delivery_date.php:375
+#: order_delivery_date.php:377
 msgid "Selection of delivery date on the checkout page will become mandatory."
 msgstr ""
 
-#: order_delivery_date.php:380
+#: order_delivery_date.php:382
 msgid "Lockout date after X orders:"
 msgstr ""
 
-#: order_delivery_date.php:384
+#: order_delivery_date.php:386
 msgid "Maximum deliveries/orders per day."
 msgstr ""
 
-#: order_delivery_date.php:418
-msgid "Calendar Apprearance"
+#: order_delivery_date.php:391
+msgid "Sort on WooCommerce Orders Page:"
 msgstr ""
 
-#: order_delivery_date.php:425
-msgid "Calendar Language:"
-msgstr ""
-
-#: order_delivery_date.php:429
-msgid "Choose a Language."
+#: order_delivery_date.php:395
+msgid ""
+"Enable default sorting of orders (in descending order) by Delivery Date on "
+"WooCommerce -> Orders page"
 msgstr ""
 
 #: order_delivery_date.php:434
+msgid "Calendar Appearance"
+msgstr ""
+
+#: order_delivery_date.php:441
+msgid "Calendar Language:"
+msgstr ""
+
+#: order_delivery_date.php:445
+msgid "Choose a Language."
+msgstr ""
+
+#: order_delivery_date.php:450
 msgid "Date Format:"
 msgstr ""
 
-#: order_delivery_date.php:438
+#: order_delivery_date.php:454
 msgid ""
 "The format in which the Delivery Date appears to the customers on the "
 "checkout page once the date is selected."
 msgstr ""
 
-#: order_delivery_date.php:443
+#: order_delivery_date.php:459
 msgid "First Day of Week:"
 msgstr ""
 
-#: order_delivery_date.php:447
+#: order_delivery_date.php:463
 msgid "Choose the first day of week displayed on the Delivery Date calendar."
 msgstr ""
 
-#: order_delivery_date.php:452
+#: order_delivery_date.php:468
 msgid "Field Label:"
 msgstr ""
 
-#: order_delivery_date.php:456
+#: order_delivery_date.php:472
 msgid ""
 "Choose the label that is to be displayed for the field on checkout page."
 msgstr ""
 
-#: order_delivery_date.php:461
+#: order_delivery_date.php:477
 msgid "Field Placeholder Text:"
 msgstr ""
 
-#: order_delivery_date.php:465
+#: order_delivery_date.php:481
 msgid ""
 "Choose the placeholder text that is to be displayed for the field on "
 "checkout page."
 msgstr ""
 
-#: order_delivery_date.php:470
+#: order_delivery_date.php:486
 msgid "Field Note Text:"
 msgstr ""
 
-#: order_delivery_date.php:474
+#: order_delivery_date.php:490
 msgid ""
 "Choose the note to be displayed below the delivery date field on checkout "
 "page."
 msgstr ""
 
-#: order_delivery_date.php:479
+#: order_delivery_date.php:495
 msgid "Number of Months:"
 msgstr ""
 
-#: order_delivery_date.php:483
+#: order_delivery_date.php:499
 msgid "The number of months to be shown on the calendar."
 msgstr ""
 
-#: order_delivery_date.php:488
+#: order_delivery_date.php:504
 msgid "Delivery date in the Shipping Section:"
 msgstr ""
 
-#: order_delivery_date.php:492
+#: order_delivery_date.php:508
 msgid ""
 "If the checkbox is checked then Delivery Date will be displayed in the "
 "shipping section otherwise in the billing section.</br><i>Note: WooCommerce "
 "automatically hides the Shipping section fields for Virtual products.</i>"
 msgstr ""
 
-#: order_delivery_date.php:497
+#: order_delivery_date.php:513
 msgid "Theme:"
 msgstr ""
 
-#: order_delivery_date.php:501
+#: order_delivery_date.php:517
 msgid ""
 "Select the theme for the calendar which blends with the design of your "
 "website."
 msgstr ""
 
-#: order_delivery_date.php:580
+#: order_delivery_date.php:596
 msgid "Date Settings"
 msgstr ""
 
-#: order_delivery_date.php:581
+#: order_delivery_date.php:597
 msgid "Appearance"
 msgstr ""
 
-#: order_delivery_date.php:589 order_delivery_date.php:597
+#: order_delivery_date.php:605 order_delivery_date.php:613
 msgid "Save Settings"
 msgstr ""
 
-#: order_delivery_date.php:606
+#: order_delivery_date.php:622
 msgid "Weekdays:"
 msgstr ""
 
-#: order_delivery_date.php:875
+#: order_delivery_date.php:878
 msgid "Preview theme:"
 msgstr ""
 
-#: order_delivery_date.php:1097
+#: order_delivery_date.php:1100
 msgid "<strong>"
 msgstr ""
 
-#: order_delivery_date.php:1214
+#: order_delivery_date.php:1217
 msgid ""
 "Order Delivery Date for WooCommerce Plugin needs to update your database. "
 "Please <a href=\"?page=order_delivery_date_lite&action=date&mode=update_db"
 "\">click here</a> to update."
 msgstr ""
 
-#: order_delivery_date.php:1227
+#: order_delivery_date.php:1230
 msgid ""
 "The database has been updated. You can now take advantage of all features of "
 "the Order Delivery Date plugin. Thank you."
