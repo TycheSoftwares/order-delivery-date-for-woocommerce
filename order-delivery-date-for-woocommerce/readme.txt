@@ -1,20 +1,20 @@
-=== Order Delivery Date for Woocommerce ===
+=== Order Delivery Date for WooCommerce ===
 Contributors: ashokrane, MoxaJogani, bhavik.kiri, mansishah, komal-maru, dharakothari
 Tags: delivery date, checkout, order delivery, calendar, checkout calendar, woocommerce delivery date
 Requires at least: 1.4
-Tested up to: 4.2.2
+Tested up to: 4.3.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: http://www.tychesoftwares.com/
 
-Allow the customers to choose an order delivery date on the checkout page for Woocommerce store owners.
+Allow the customers to choose an order delivery date on the checkout page for WooCommerce store owners.
 
 == Description ==
 
 This plugin will allow the customer to choose an order delivery date on the checkout page. The customer can choose any delivery date that is after the current date. The plugin uses the inbuilt datepicker that comes with WordPress.
 
-The plugin allows the site administrator to select delivery weekdays, specify minimum delivery time and display number of dates on calendar. The delivery date also shows in a column on Woocommerce > Orders page.
+The plugin allows the site administrator to select delivery weekdays, specify minimum delivery time and display number of dates on calendar. The delivery date also shows in a column on WooCommerce -> Orders page.
 
 The 'Mandatory field?' setting will allow the Delivery Date field to be set as mandatory on the checkout page.
 
@@ -24,7 +24,7 @@ This plugin allows you to improve your customer service by delivering the order 
 
 **Pro Version:**
 
-**[Order Delivery Date Pro 2.8.5](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. Following features are available in PRO version:
+**[Order Delivery Date Pro 3.6](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. Following features are available in PRO version:
 
 <ol>
 <li>Ability to allow the customer to select <strong>Delivery Time along with Delivery Date</strong></li>
@@ -41,9 +41,11 @@ This plugin allows you to improve your customer service by delivering the order 
 
 **[View Demo](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "View Demo")**
 
+**[Github Repository](https://github.com/TycheSoftwares/woocommerce-delivery-date "Github Repository")**
+
 == Installation ==
 
-1. Ensure you have latest version of Woocommerce plugin installed
+1. Ensure you have latest version of WooCommerce plugin installed
 2. Unzip and upload contents of the plugin to your /wp-content/plugins/ directory
 3. Activate the plugin through the 'Plugins' menu in WordPress
 4. Order Delivery Date calendar will appear on the checkout page of your store.
@@ -68,6 +70,32 @@ The field can be configured as Mandatory or optional using the 'Mandatory field?
 3. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date".
 
 == Changelog ==
+
+= 2.0 =
+* A checkbox is added on the Date settings tab to prevent the default sorting of the orders (in descending order) on the WooCommerce ->Orders page when the Delivery Date field is visible. 
+
+= 1.9 =
+* A new 'Appearance' tab is added on the settings page where admin will be able to
+	- Change the label, placeholder text for the Delivery Date field on the checkout page.
+	- To choose different language in the delivery calendar from 62 available languages. 
+	- Date format for the Delivery Date can be changed.
+	- To set the 1st day of the week on the delivery date calendar.
+	- Field note text can be changed.
+	- Number of months to be shown on the calendar can be selected to maximum 2.
+	- The delivery date field can be set to shown in the Shipping section instead of always showing in the Billing section on the checkout page.
+	- Choose different theme for the delivery calendar to match with the theme of the website.
+* From this update, sorting of orders will be done based on Delivery Date on the WooCommerce-> Order page.
+You will need to update the database for sorting the previous orders from the notice displayed after updating the plugin.
+
+Note: Please take a back up before updating this version.
+
+= 1.8 =
+* The Minimum Delivery time (in days) feature will now be replaced with Minimum Delivery time (in hours) Feature. When the plugin will be updated, the existing value will be multiplied with 24 hours and more 24 hours will be added to it, which will keep your setting intact.
+* Plugin will have some default settings when it is installed for the first time.
+* Order Delivery Date for WooCommerce (Lite version) is now compatible with Order Delivery Date Pro for WooCommerce plugin. 
+
+= 1.7.1 =
+* The order was placed without selecting delivery date on the checkout page even if the Delivery Date field is mandatory. This is fixed now.
 
 = 1.7 =
 
