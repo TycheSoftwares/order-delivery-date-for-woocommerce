@@ -228,14 +228,6 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             );
         
             wp_enqueue_style( 'dismiss-notice', plugins_url('/css/dismiss-notice.css', __FILE__ ) , '', '', false);
-        
-            wp_enqueue_script(
-                'jquery-ui-min',
-                'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js',
-                '',
-                '',
-                false
-            );
         }
         
         function order_lite_coupon_notice() {
