@@ -316,7 +316,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             wp_enqueue_style( 'order-delivery-date', plugins_url('/css/order-delivery-date.css', __FILE__ ) , '', '', false);
             wp_enqueue_style( 'jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' , '', '', false);
             wp_enqueue_style( 'woocommerce_admin_styles', plugins_url() . '/woocommerce/assets/css/admin.css' );
-            
+            wp_enqueue_style( 'datepicker', plugins_url('/css/datepicker.css', __FILE__) , '', '', false);            
         }
         
         function orddd_lite_order_delivery_date_menu() {
@@ -851,6 +851,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                                     jQuery( "input#orddd_lite_calendar_theme_name" ).val( value );
                                 }
                             });
+                            jQuery( "<link/>", {
+                                rel: "stylesheet",
+                                type: "text/css",
+                                href: "' . plugins_url( "/css/datepicker.css", __FILE__ ) . '"
+                            }).appendTo("head");
                         },
                         imgpath: "'.plugins_url().'/order-delivery-date-for-woocommerce/images/",
                         loadTheme: "' . get_option( 'orddd_lite_calendar_theme_name' ) . '",
@@ -861,14 +866,13 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                     jQuery.datepicker.setDefaults( jQuery.datepicker.regional[ "" ] );
                     jQuery( "#datepicker" ).datepicker( jQuery.datepicker.regional[ "' . $language_selected . '" ] );
                     jQuery( "#localisation_select" ).change(function() {
-                        jQuery( "#datepicker" ).datepicker( "option",
-                            jQuery.datepicker.regional[ jQuery( this ).val() ] );
+                        jQuery( "#datepicker" ).datepicker( "option", jQuery.datepicker.regional[ jQuery( this ).val() ] );
                         });
                     });
             </script>
             <div id="switcher"></div>
             <br><strong>' . __( 'Preview theme:', 'order-delivery-date' ) . '</strong><br>
-            <div id="datepicker"></div>';
+            <div id="datepicker" style="width:300px"></div>';
         
         	$html = '<label for="orddd_lite_calendar_theme_name"> ' . $args[0] . '</label>';
         	echo $html;
