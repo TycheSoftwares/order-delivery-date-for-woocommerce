@@ -1,0 +1,9 @@
+<wpml-config>
+
+<admin-texts>
+	<key name="orddd_lite_delivery_date_field_label"/>
+	<key name="orddd_lite_delivery_date_field_placeholder"/>
+	<key name="orddd_lite_delivery_date_field_note"/>
+</admin-texts>
+
+</wpml-config>
