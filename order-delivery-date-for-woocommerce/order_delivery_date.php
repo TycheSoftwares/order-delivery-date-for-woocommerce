@@ -58,6 +58,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             //Initialize settings
             register_activation_hook( __FILE__, array( &$this, 'orddd_lite_activate' ) );
             add_action( 'admin_init', array( &$this, 'orddd_lite_update_db_check' ) );
+            add_action( 'admin_init', array( &$this, 'orddd_lite_capabilities' ) );
             
             // ADMIN
             add_action( 'admin_footer', array( &$this, 'admin_notices_scripts' ) );
@@ -218,6 +219,16 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             }
         }
         
+        /** 
+		 * Capability to allow shop manager to edit settings
+		 */
+		function orddd_lite_capabilities() {
+		    $role = get_role( 'shop_manager' );
+		    if( $role != '' ) {
+		        $role->add_cap( 'manage_options' );
+		    }
+		}
+        
         function admin_notices_scripts() {
             wp_enqueue_script(
                 'dismiss-notice.js',
@@ -320,7 +331,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
         
         function orddd_lite_order_delivery_date_menu() {
-            add_menu_page( 'Order Delivery Date', 'Order Delivery Date', 'administrator', 'order_delivery_date_lite', array( &$this, 'orddd_lite_order_delivery_date_settings' ) );
+            add_menu_page( 'Order Delivery Date', 'Order Delivery Date', 'manage_woocommerce', 'order_delivery_date_lite', array( &$this, 'orddd_lite_order_delivery_date_settings' ) );
         }
         
         function order_lite_delivery_date_admin_settings() {
