@@ -933,7 +933,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 jQuery( document ).ready( function(){
                     jQuery( "#e_deliverydate" ).attr( "readonly", true );
                     var formats = ["MM d, yy","MM d, yy"];
-                    jQuery("#e_deliverydate").val("").datepicker({dateFormat: "' . get_option( 'orddd_lite_delivery_date_format' ) . '", firstDay: parseInt( ' . $first_day_of_week . ' ), minDate:1, beforeShow: avd, beforeShowDay: chd,
+                    jQuery.extend( jQuery.datepicker, { afterShow: function( event ) {
+						jQuery.datepicker._getInst( event.target ).dpDiv.css( "z-index", 9999 );
+					}
+                    });
+                    jQuery( "#e_deliverydate" ).val("").datepicker( { dateFormat: "' . get_option( 'orddd_lite_delivery_date_format' ) . '", firstDay: parseInt( ' . $first_day_of_week . ' ), minDate:1, beforeShow: avd, beforeShowDay: chd,
                         onClose:function( dateStr, inst ) {
                             if ( dateStr != "" ) {
                                 var monthValue = inst.selectedMonth+1;
@@ -943,9 +947,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                                 jQuery( "#h_deliverydate" ).val( all );
                             }
                         }            
+                    }).focus( function ( event ) {
+                        jQuery.datepicker.afterShow( event );
                     });';
             if ( get_option( 'orddd_lite_delivery_date_field_note' ) != '' ) {
-                echo 'jQuery("#e_deliverydate").parent().append("<br><small style=font-size:10px;>' . addslashes( __( get_option( 'orddd_lite_delivery_date_field_note' ), 'order-delivery-date' ) ) . '</small>" );';
+                echo 'jQuery( "#e_deliverydate" ).parent().append( "<br><small style=font-size:10px;>' . addslashes( __( get_option( 'orddd_lite_delivery_date_field_note' ), 'order-delivery-date' ) ) . '</small>" );';
             }
             echo '} );
             </script>';
