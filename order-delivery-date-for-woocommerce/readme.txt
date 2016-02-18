@@ -24,7 +24,7 @@ This plugin allows you to improve your customer service by delivering the order 
 
 **Pro Version:**
 
-**[Order Delivery Date Pro 3.8](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. Following features are available in PRO version:
+**[Order Delivery Date Pro 4.2](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. Following features are available in PRO version:
 
 <ol>
 <li>Ability to allow the customer to select <strong>Delivery Time along with Delivery Date</strong></li>
@@ -70,6 +70,11 @@ The field can be configured as Mandatory or optional using the 'Mandatory field?
 3. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date".
 
 == Changelog ==
+
+= 2.2 =
+* The Delivery Date field label, field placeholder text and the field note text in Order Delivery Date -> Appearance can now be translated with WPML plugin.
+* Until now, only admin user was able to access the Order Delivery Date settings page. From this update, users with the role 'Shop manager' will be able to access and edit the Order Delivery Date settings.
+* The calendar was not appearing on the checkout page when clicked on the Delivery Date field on the checkout page. This issue is specific to the 'Stockholm' theme. This is fixed now.
 
 = 2.1 =
 * The jQuery Calendar on the checkout page will now appear with a Flat Design. The CSS file for the Flat Design is used from the WP Datepicker Styling plugin on Github: https://github.com/stuttter/wp-datepicker-styling
