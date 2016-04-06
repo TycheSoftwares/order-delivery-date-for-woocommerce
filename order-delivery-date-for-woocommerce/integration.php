@@ -18,7 +18,7 @@ class orddd_lite_integration {
 		add_action( 'woocommerce_cloudprint_internaloutput_footer', array( &$this, 'orddd_lite_cloud_print_fields' ) );
 		
 		//WooCommerce Print Invoice/Packing list plugin
-		add_action( 'wc_print_invoice_packing_template_body_after_billing_address', array( &$this, 'orddd_lite_woocommerce_pip' ) );
+		add_action( 'wc_pip_after_body', array( &$this, 'orddd_lite_woocommerce_pip' ), 10, 4 );
 	}
     
 	function orddd_lite_plugins_packing_slip() {
@@ -80,7 +80,7 @@ class orddd_lite_integration {
 	    echo '<p><strong>'.__( $field_date_label, 'order-delivery-date' ) . ': </strong>' . $delivery_date_formatted;
 	}
 	
-	function orddd_lite_woocommerce_pip( $order ) {
+	function orddd_lite_woocommerce_pip( $type, $action, $document, $order ) {
 	    global $orddd_date_formats;
 	    $delivery_date = get_option( 'orddd_lite_delivery_date_field_label' );
 	    
