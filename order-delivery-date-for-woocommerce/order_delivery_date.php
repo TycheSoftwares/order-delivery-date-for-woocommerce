@@ -951,6 +951,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                     var formats = ["MM d, yy","MM d, yy"];
                     jQuery.extend( jQuery.datepicker, { afterShow: function( event ) {
 						jQuery.datepicker._getInst( event.target ).dpDiv.css( "z-index", 9999 );
+                        if ( jQuery( "#orddd_lite_number_of_months" ).val() == "1" ) {
+                            jQuery.datepicker._getInst( event.target ).dpDiv.css( "width", "300px" );
+                        } else {
+                            jQuery.datepicker._getInst( event.target ).dpDiv.css( "width", "40em" );
+                        }
 					}
                     });
                     jQuery( "#e_deliverydate" ).val("").datepicker( { dateFormat: "' . get_option( 'orddd_lite_delivery_date_format' ) . '", firstDay: parseInt( ' . $first_day_of_week . ' ), minDate:1, beforeShow: avd, beforeShowDay: chd,
