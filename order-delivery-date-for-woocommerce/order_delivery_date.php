@@ -82,8 +82,13 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             
             add_action( ORDDD_SHOPPING_CART_HOOK, array( &$this, 'orddd_lite_my_custom_checkout_field' ) );
             add_action( 'woocommerce_checkout_update_order_meta', array( &$this, 'orddd_lite_my_custom_checkout_field_update_order_meta' ) );
-            add_filter( 'woocommerce_email_order_meta_keys', array( &$this, 'orddd_lite_add_delivery_date_to_order_woo' ), 10, 1 );
-    
+           
+            if ( defined( 'WOOCOMMERCE_VERSION' ) && version_compare( WOOCOMMERCE_VERSION, "2.3", '>=' ) < 0 ) {
+                add_filter( 'woocommerce_email_order_meta_fields', array( &$this, 'orddd_lite_add_delivery_date_to_order_woo_new' ), 11, 3 );
+            } else {
+                add_filter( 'woocommerce_email_order_meta_keys', array( &$this, 'orddd_lite_add_delivery_date_to_order_woo_deprecated' ), 11, 1 );
+            }
+            
             if ( get_option( 'orddd_lite_date_field_mandatory' ) == 'checked' ) {
                 add_action( 'woocommerce_checkout_process', array( &$this, 'orddd_lite_validate_date_wpefield' ) );
             }
@@ -1087,12 +1092,28 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
         
         /**
-         * This function is used for show delivery date in the email notification
+         * This function is used for show delivery date in the email notification for the WooCommerce version below 2.3
          **/
-        function orddd_lite_add_delivery_date_to_order_woo( $keys ) {
+        function orddd_lite_add_delivery_date_to_order_woo_deprecated( $keys ) {
             $label_name = __( get_option( 'orddd_lite_delivery_date_field_label' ), "order-delivery-date" );
             $keys[] = get_option( 'orddd_lite_delivery_date_field_label' );
             return $keys;
+        }
+        
+        /**
+         * Display Delivery Date in Customer notification email
+         *
+         * @param array $fields
+         * @param bool $sent_to_admin
+         * @param resource $order
+         */
+        
+        public static function orddd_lite_add_delivery_date_to_order_woo_new( $fields, $sent_to_admin, $order ) {
+           $fields[ get_option( 'orddd_lite_delivery_date_field_label' ) ] = array(
+               'label' => __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ),
+               'value' => get_post_meta( $order->id, get_option( 'orddd_lite_delivery_date_field_label' ), true ),
+           );
+           return $fields;
         }
         
         /**
