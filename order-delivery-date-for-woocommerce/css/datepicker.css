@@ -89,23 +89,37 @@
     float: right;
 }
 
-.ui-datepicker .ui-datepicker-prev:before,
-.ui-datepicker .ui-datepicker-next:before {
-    font: normal 20px/34px 'dashicons';
-    padding-left: 7px;
-    speak: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    width: 34px;
-    height: 34px;
-}
-
 .ui-datepicker .ui-datepicker-prev:before {
-    content: '\f341';
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    border-left: 0.1em solid;
+    border-bottom: 0.1em solid;
+	-ms-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin-left: 0.6em;
+	font: normal 20px/34px 'dashicons';
 }
 
 .ui-datepicker .ui-datepicker-next:before {
-    content: '\f345';
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    border-right: 0.1em solid;
+    border-top: 0.1em solid;
+	-ms-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-webkit-transform:rotate(45deg);
+    transform: rotate(45deg);
+    margin-left: 0.6em;
+	font: normal 20px/34px 'dashicons';
 }
 
 .ui-datepicker .ui-datepicker-prev-hover:before,
