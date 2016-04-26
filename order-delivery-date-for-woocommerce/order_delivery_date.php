@@ -274,64 +274,22 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
 
         function orddd_lite_my_enqueue( $hook ) {
             global $orddd_lite_languages;
-            if( 'toplevel_page_order_delivery_date_lite' != $hook )
+            if( 'toplevel_page_order_delivery_date_lite' != $hook ) {
                 return;
-            wp_enqueue_script( 'jquery-ui-datepicker' );
-            wp_enqueue_script(
-                'jquery-ui',
-                'http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js',
-                '',
-                '',
-                false
-            );
-            
-            wp_enqueue_script(
-                'jquery-min',
-                'http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js',
-                '',
-                '',
-                false
-            );
-            
-            wp_enqueue_script(
-                'jquery-ui-min',
-                'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js',
-                '',
-                '',
-                false
-            );
-            
-            wp_dequeue_script( 'themeswitcher' );
-            wp_enqueue_script(
-                'themeswitcher-orddd',
-                plugins_url( '/js/jquery.themeswitcher.min.js', __FILE__ ),
-                '',
-                '',
-                false );
-            
-            foreach ( $orddd_lite_languages as $key => $value ) {
-                wp_enqueue_script(
-                $value,
-                plugins_url( "/js/i18n/jquery.ui.datepicker-$key.js", __FILE__ ),
-                '',
-                '',
-                false );
             }
             
-            wp_dequeue_script( 'jquery-tip' );
-            wp_enqueue_script(
-                'jquery-tip-orddd',
-                plugins_url( '/js/jquery.tipTip.minified.js', __FILE__ ),
-                '',
-                '',
-                false );
+            wp_dequeue_script( 'themeswitcher' );
+            wp_enqueue_script( 'themeswitcher-orddd', plugins_url( '/js/jquery.themeswitcher.min.js', __FILE__ ), array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-datepicker' ), '', false );
+                
+            foreach ( $orddd_lite_languages as $key => $value ) {
+                wp_enqueue_script( $value, plugins_url( "/js/i18n/jquery.ui.datepicker-$key.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), '', false );
+            }
             
-            wp_register_script( 'woocommerce_admin', plugins_url() . '/woocommerce/assets/js/admin/woocommerce_admin.js', array('jquery', 'jquery-ui-widget', 'jquery-ui-core'));
-            wp_enqueue_script( 'woocommerce_admin' );
-            
+            wp_register_style( 'woocommerce_admin_styles', plugins_url() . '/woocommerce/assets/css/admin.css', array(), WC_VERSION );
+            wp_enqueue_style( 'woocommerce_admin_styles' );
             wp_enqueue_style( 'order-delivery-date', plugins_url('/css/order-delivery-date.css', __FILE__ ) , '', '', false);
-            wp_enqueue_style( 'jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' , '', '', false);
-            wp_enqueue_style( 'woocommerce_admin_styles', plugins_url() . '/woocommerce/assets/css/admin.css' );
+            wp_register_style( 'jquery-ui-style', '//code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css', '', '', false );
+            wp_enqueue_style( 'jquery-ui-style' );
             wp_enqueue_style( 'datepicker', plugins_url('/css/datepicker.css', __FILE__) , '', '', false);            
         }
         
@@ -897,25 +855,17 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         function orddd_lite_my_custom_checkout_field( $checkout ) {
             global $orddd_lite_weekdays;
             
-            wp_enqueue_script( 'jquery' );
-            wp_deregister_script( 'jqueryui');
-            wp_enqueue_script( 'jquery-ui-datepicker' );
-        
             $calendar_theme = get_option( 'orddd_lite_calendar_theme' );
             if ( $calendar_theme == '' ) {
                 $calendar_theme = 'base';
             }
-            wp_dequeue_style( 'jquery-ui' );
-            wp_enqueue_style( 'jquery-ui-orddd', "//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/$calendar_theme/jquery-ui.css" , '', '', false );
+            wp_dequeue_style( 'jquery-ui-style' );
+            wp_register_style( 'jquery-ui-style-orddd-lite', "//code.jquery.com/ui/1.9.2/themes/$calendar_theme/jquery-ui.css", '', '', false );
+            wp_enqueue_style( 'jquery-ui-style-orddd-lite' );
             wp_enqueue_style( 'datepicker', plugins_url('/css/datepicker.css', __FILE__) , '', '', false);
         
-            wp_enqueue_script(
-                'initialize-datepicker.js',
-                plugins_url('/js/initialize-datepicker.js', __FILE__),
-                '',
-                '',
-                false
-            );
+            wp_dequeue_script( 'initialize-datepicker' );
+            wp_enqueue_script( 'initialize-datepicker-orddd', plugins_url('/js/initialize-datepicker.js', __FILE__ ), '', '', false );
         
             if ( isset( $_GET[ 'lang' ] ) && $_GET[ 'lang' ] != '' && $_GET[ 'lang' ] != null ) {
                 $language_selected = $_GET['lang'];
@@ -931,15 +881,12 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                         }
                     }
                 }
-                if ( $language_selected == "" ) $language_selected = "en-GB";
+                if ( $language_selected == "" ) {
+                    $language_selected = "en-GB";
+                }
             }
              
-            wp_enqueue_script(
-                $language_selected,
-                plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ),
-                '',
-                '',
-                false );
+            wp_enqueue_script( $language_selected, plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), '', false );
             $first_day_of_week = '1';
             if( get_option( 'orddd_lite_start_of_week' ) != '' ) {
                 $first_day_of_week = get_option( 'orddd_lite_start_of_week' );
