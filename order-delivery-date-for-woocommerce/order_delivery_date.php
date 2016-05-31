@@ -44,9 +44,7 @@ function orddd_lite_deactivate() {
     delete_option( 'orddd_lite_calendar_theme_name' );
     delete_option( 'orddd_lite_language_selected' );
     delete_option( 'orddd_lite_delivery_date_fields_on_checkout_page' );
-    delete_option( 'orddd_lite_default_appearance_settings' );
-    
-    delete_option( 'orddd_timestamp_update_script' );
+    delete_option( 'orddd_lite_default_appearance_settings' );    
 }
 
 if ( !class_exists( 'order_delivery_date_lite' ) ) {
