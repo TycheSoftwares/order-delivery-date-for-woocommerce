@@ -43,7 +43,7 @@ function orddd_lite_deactivate() {
     delete_option( 'orddd_lite_calendar_theme' );
     delete_option( 'orddd_lite_calendar_theme_name' );
     delete_option( 'orddd_lite_language_selected' );
-    delete_option( 'orddd_lite_date_in_shipping' );
+    delete_option( 'orddd_lite_delivery_date_fields_on_checkout_page' );
     delete_option( 'orddd_lite_default_appearance_settings' );
     
     delete_option( 'orddd_timestamp_update_script' );
@@ -80,7 +80,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_filter( 'manage_edit-shop_order_sortable_columns', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_custom_column_value_sort' ) );
             add_filter( 'request', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_delivery_date_orderby' ) );
             
-            add_action( ORDDD_SHOPPING_CART_HOOK, array( &$this, 'orddd_lite_my_custom_checkout_field' ) );
+            add_action( ORDDD_LITE_SHOPPING_CART_HOOK, array( &$this, 'orddd_lite_my_custom_checkout_field' ) );
             add_action( 'woocommerce_checkout_update_order_meta', array( &$this, 'orddd_lite_my_custom_checkout_field_update_order_meta' ) );
            
             if ( defined( 'WOOCOMMERCE_VERSION' ) && version_compare( WOOCOMMERCE_VERSION, "2.3", '>=' ) < 0 ) {
@@ -119,7 +119,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_option( 'orddd_lite_calendar_theme', ORDDD_LITE_CALENDAR_THEME );
             add_option( 'orddd_lite_calendar_theme_name', ORDDD_LITE_CALENDAR_THEME_NAME );
             add_option( 'orddd_lite_language_selected', 'en-GB' );
-            add_option( 'orddd_lite_date_in_shipping', '' );
+            add_option( 'orddd_lite_delivery_date_fields_on_checkout_page', 'billing_section' );
         }
 
         /***********************************************************
@@ -209,6 +209,16 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                     update_option( 'orddd_lite_language_selected', 'en-GB' );
                     update_option( 'orddd_lite_date_in_shipping', '' );
                     update_option( 'orddd_lite_default_appearance_settings', 'yes' );
+                }
+                if ( get_option( "orddd_lite_delivery_date_on_checkout_page_enabled" ) != 'yes' ) {
+                    if ( get_option( "orddd_lite_date_in_shipping" ) == 'on' ) {
+                        update_option( "orddd_lite_delivery_date_fields_on_checkout_page", "shipping_section" );
+                        delete_option( "orddd_lite_date_in_shipping" );                       
+                    } else {
+                        update_option( "orddd_lite_delivery_date_fields_on_checkout_page", "billing_section" );
+                        delete_option( "orddd_lite_date_in_shipping" );
+                    }
+                    update_option( "orddd_lite_delivery_date_on_checkout_page_enabled", 'yes' );
                 }
             }
         }
@@ -466,12 +476,12 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             );
              
             add_settings_field(
-                'orddd_lite_date_in_shipping',
-                __( 'Delivery date in the Shipping Section:', 'order-delivery-date' ),
+                'orddd_lite_delivery_date_fields_on_checkout_page',
+                __( 'Fields placement on the Checkout page:', 'order-delivery-date' ),
                 array( &$this, 'orddd_lite_delivery_date_in_shipping_section_callback' ),
                 'orddd_lite_appearance_page',
                 'orddd_lite_appearance_section',
-                array( __( 'If the checkbox is checked then Delivery Date will be displayed in the shipping section otherwise in the billing section.</br><i>Note: WooCommerce automatically hides the Shipping section fields for Virtual products.</i>', 'order-delivery-date' ) )
+                array( __( '</br>The Delivery Date fields will be displayed in the selected section.</br><i>Note: WooCommerce automatically hides the Shipping section fields for Virtual products.</i>', 'order-delivery-date' ) )
             );
         
             add_settings_field(
@@ -520,7 +530,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
              
             register_setting(
                 'orddd_lite_appearance_settings',
-                'orddd_lite_date_in_shipping'
+                'orddd_lite_delivery_date_fields_on_checkout_page'
             );
              
             register_setting(
@@ -786,15 +796,36 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         */
         
         public static function orddd_lite_delivery_date_in_shipping_section_callback( $args ) {
-            if ( get_option( 'orddd_lite_date_in_shipping' ) == 'on' ) {
-        	   $date_in_shipping = "checked";
-            } else {
-                $date_in_shipping = "";
+            $orddd_lite_date_in_billing = 'checked';
+            $orddd_lite_date_in_shipping = $orddd_lite_date_before_order_notes = $orddd_lite_date_after_order_notes = '';
+            if ( get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) == "billing_section" ) {
+                $orddd_lite_date_in_billing = 'checked';
+                $orddd_lite_date_in_shipping = '';
+                $orddd_lite_date_before_order_notes = '';
+                $orddd_lite_date_after_order_notes = '';
+            } else if ( get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) == "shipping_section" ) {
+                $orddd_lite_date_in_shipping = 'checked';
+                $orddd_lite_date_in_billing = '';
+                $orddd_lite_date_before_order_notes = '';
+                $orddd_lite_date_after_order_notes = '';
+            } else if ( get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) == "before_order_notes" ) {
+                $orddd_lite_date_before_order_notes = 'checked';
+                $orddd_lite_date_in_billing = '';
+                $orddd_lite_date_in_shipping = '';
+                $orddd_lite_date_after_order_notes = '';
+            } else if ( get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) == "after_order_notes" ) {
+                $orddd_lite_date_after_order_notes = 'checked';
+                $orddd_lite_date_in_billing = '';
+                $orddd_lite_date_in_shipping = '';
+                $orddd_lite_date_before_order_notes = '';
             }
-        
-        	echo '<input type="checkbox" name="orddd_lite_date_in_shipping" id="orddd_lite_date_in_shipping" class="day-checkbox"' . $date_in_shipping . ' value="on"/>';
-        
-            $html = '<label for="orddd_lite_date_in_shipping"> ' . $args[ 0 ] . '</label>';
+            
+            echo '<input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="billing_section" ' . $orddd_lite_date_in_billing . '>' . __( 'In Billing Section', 'order-delivery-date' ) . '&nbsp;&nbsp;
+                <input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="billing_section" ' . $orddd_lite_date_in_shipping . '>' . __( 'In Shipping Section', 'order-delivery-date' ) . '&nbsp;&nbsp;
+                <input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="billing_section" ' . $orddd_lite_date_before_order_notes . '>' . __( 'Before Order Notes', 'order-delivery-date' ) . '&nbsp;&nbsp;
+		        <input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="billing_section" ' . $orddd_lite_date_after_order_notes . '>' . __( 'After Order Notes', 'order-delivery-date' );
+        	
+            $html = '<label for="orddd_lite_delivery_date_fields_on_checkout_page"> ' . $args[ 0 ] . '</label>';
         	echo $html;
         }
         
