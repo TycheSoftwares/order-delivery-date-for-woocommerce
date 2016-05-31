@@ -257,7 +257,6 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         function order_lite_coupon_notice() {
             $admin_url = get_admin_url();
             echo '<input type="hidden" id="admin_url" value="' . $admin_url . '"/>';
-            
             $admin_notice = get_option( 'orddd_admin_notices' );
             if( $admin_notice != 'yes' ) {
                 ?>  
@@ -265,18 +264,29 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                     <p><?php _e( 'You can upgrade to the <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/">PRO version of Order Delivery Date for WooCommerce plugin</a> at a <b>20% discount</b>. Use the coupon code: <b>ORDPRO20</b>.<a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/"> Purchase now </a> & save $20!', 'order-delivery-date' ); ?></p>
                 </div>   
                 <?php
+                update_option( 'orddd_update_admin_notice', 'yes' );
             }
-            if( isset( $_GET['page'] ) && ( $_GET['page'] == 'order_delivery_date_lite' ) ) {
-                ?>
-                <div class="error">
-                    <p><?php _e( 'Minimum Delivery time (in days) will now be calculated in hours which is from current WordPress time. To keep the functionality of our plugin intact at your site, we have added +24 hours to the \'Minimum Delivery time (in hours)\' setting.', 'order-delivery-date' ); ?></p>
-            	</div>            
-                <?php                 
+            
+            $minimum_delivery_notice = get_option( 'orddd_lite_minimum_delivery_notices' );
+            if( $minimum_delivery_notice != 'yes' ) {
+                if( isset( $_GET['page'] ) && ( $_GET['page'] == 'order_delivery_date_lite' ) ) {
+                    ?>
+                    <div class="error notice is-dismissible" id="minimum_delivery_time" >
+                        <p><?php _e( 'Minimum Delivery time (in days) will now be calculated in hours which is from current WordPress time. To keep the functionality of our plugin intact at your site, we have added +24 hours to the \'Minimum Delivery time (in hours)\' setting.', 'order-delivery-date' ); ?></p>
+                    </div>            
+                    <?php 
+                    update_option( 'orddd_update_minimum_delivery_notice', 'yes' );
+                }                
             }
         }
                 
         function orddd_lite_admin_notices() {
-            update_option( 'orddd_admin_notices', 'yes' );   
+            if ( get_option( 'orddd_update_admin_notice' ) == 'yes' ) {
+                update_option( 'orddd_admin_notices', 'yes' );
+            } 
+            if ( get_option( 'orddd_update_minimum_delivery_notice' ) == 'yes' ) {
+                update_option( 'orddd_lite_minimum_delivery_notices', 'yes' );
+            }  
             die();
         }
 
