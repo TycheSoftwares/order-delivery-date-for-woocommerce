@@ -2,7 +2,7 @@
 Contributors: ashokrane, MoxaJogani, bhavik.kiri, mansishah, komal-maru, dharakothari
 Tags: delivery date, checkout, order delivery, calendar, checkout calendar, woocommerce delivery date
 Requires at least: 1.4
-Tested up to: 4.5
+Tested up to: 4.5.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ This plugin allows you to improve your customer service by delivering the order 
 
 **Pro Version:**
 
-**[Order Delivery Date Pro 4.6](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. Following features are available in PRO version:
+**[Order Delivery Date Pro 4.8](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. Following features are available in PRO version:
 
 <ol>
 <li>Ability to allow the customer to select <strong>Delivery Time along with Delivery Date</strong></li>
