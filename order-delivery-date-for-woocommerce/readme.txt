@@ -71,6 +71,14 @@ The field can be configured as Mandatory or optional using the 'Mandatory field?
 
 == Changelog ==
 
+= 2.4 =
+* A new language "Hebrew" is added for the calendar. Now you can set your Delivery Calendar in the Hebrew language on the Checkout Page.
+* 'Delivery date in the Shipping Section' setting in the Appearance tab is now renamed to 'Field placement on the Checkout page'. It will allow the Delivery Date field to be displayed in Billing Section, Shipping Section, before Order notes or after Order notes on the checkout page.
+* The plugin is now using the jquery libraries available in WordPress core instead of the googleapis.com.
+* The notice "Minimum Delivery time (in days) will now be calculated in hours which is from current WordPress time. To keep the functionality of our plugin intact at your site, we have added +24 hours to the 'Minimum Delivery time (in hours)' setting." is made dismissible now.
+* A warning was displayed in the admin and on the front-end pages when the both Order Delivery Date Pro and Order Delivery Date Lite is activated together.
+* The update notice 'Order Delivery Date for WooCommerce Plugin needs to update your database' appears even when the plugin is re-installed. The notice should not come once the database is already updated. This is fixed now.
+
 = 2.3 =
 * Calendar next and previous arrows were not displayed correctly with the Galleria theme on the checkout page. This is fixed now.
 * Delivery Date was not displayed on the invoice and packing list due to a hook being deprecated from WooCommerce Print Invoices/Packing Lists plugin. This issue is fixed now.
