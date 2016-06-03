@@ -829,9 +829,9 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             }
             
             echo '<input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="billing_section" ' . $orddd_lite_date_in_billing . '>' . __( 'In Billing Section', 'order-delivery-date' ) . '&nbsp;&nbsp;
-                <input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="billing_section" ' . $orddd_lite_date_in_shipping . '>' . __( 'In Shipping Section', 'order-delivery-date' ) . '&nbsp;&nbsp;
-                <input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="billing_section" ' . $orddd_lite_date_before_order_notes . '>' . __( 'Before Order Notes', 'order-delivery-date' ) . '&nbsp;&nbsp;
-		        <input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="billing_section" ' . $orddd_lite_date_after_order_notes . '>' . __( 'After Order Notes', 'order-delivery-date' );
+                <input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="shipping_section" ' . $orddd_lite_date_in_shipping . '>' . __( 'In Shipping Section', 'order-delivery-date' ) . '&nbsp;&nbsp;
+                <input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="before_order_notes" ' . $orddd_lite_date_before_order_notes . '>' . __( 'Before Order Notes', 'order-delivery-date' ) . '&nbsp;&nbsp;
+		        <input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="after_order_notes" ' . $orddd_lite_date_after_order_notes . '>' . __( 'After Order Notes', 'order-delivery-date' );
         	
             $html = '<label for="orddd_lite_delivery_date_fields_on_checkout_page"> ' . $args[ 0 ] . '</label>';
         	echo $html;
