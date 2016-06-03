@@ -485,11 +485,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
              
             add_settings_field(
                 'orddd_lite_delivery_date_fields_on_checkout_page',
-                __( 'Fields placement on the Checkout page:', 'order-delivery-date' ),
+                __( 'Field placement on the Checkout page:', 'order-delivery-date' ),
                 array( &$this, 'orddd_lite_delivery_date_in_shipping_section_callback' ),
                 'orddd_lite_appearance_page',
                 'orddd_lite_appearance_section',
-                array( __( '</br>The Delivery Date fields will be displayed in the selected section.</br><i>Note: WooCommerce automatically hides the Shipping section fields for Virtual products.</i>', 'order-delivery-date' ) )
+                array( __( '</br>The Delivery Date field will be displayed in the selected section.</br><i>Note: WooCommerce automatically hides the Shipping section fields for Virtual products.</i>', 'order-delivery-date' ) )
             );
         
             add_settings_field(
