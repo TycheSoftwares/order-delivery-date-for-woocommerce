@@ -90,6 +90,12 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             if ( get_option( 'orddd_lite_date_field_mandatory' ) == 'checked' ) {
                 add_action( 'woocommerce_checkout_process', array( &$this, 'orddd_lite_validate_date_wpefield' ) );
             }
+            
+            //To recover the delivery date when order is cancelled, refunded, failed or trashed.
+            add_action( 'woocommerce_order_status_cancelled' , array( 'orddd_lite_common', 'orddd_lite_cancel_delivery' ), 10, 1 );
+            add_action( 'woocommerce_order_status_refunded' , array( 'orddd_lite_common', 'orddd_lite_cancel_delivery' ), 10, 1 );
+            add_action( 'woocommerce_order_status_failed' , array( 'orddd_lite_common', 'orddd_lite_cancel_delivery' ), 10, 1 );
+            add_action( 'wp_trash_post', array( 'orddd_lite_common', 'orddd_lite_cancel_delivery_for_trashed' ), 10, 1 );
         }
         
         function orddd_lite_activate() {

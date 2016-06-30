@@ -218,5 +218,56 @@ class orddd_lite_common {
 	    }
 	    return $timestamp;
 	}
+	
+	public static function orddd_lite_cancel_delivery_for_trashed( $order_id ) {
+	    global $typenow;
+	    $post_obj = get_post( $order_id );
+	     
+	    if ( 'shop_order' != $typenow ) {
+	        return;
+	    } else {
+	        if ( 'wc-cancelled' != $post_obj->post_status || 'wc-refunded' != $post_obj->post_status || 'wc-failed' != $post_obj->post_status ) {
+	            return;
+	        } else {
+	            orddd_lite_common::orddd_lite_cancel_delivery( $order_id );
+	        }
+	    }
+	}
+	
+	public static function orddd_lite_cancel_delivery( $order_id ) {
+	    global $wpdb, $typenow;
+	    $post_meta = get_post_meta( $order_id, '_orddd_lite_timestamp' );
+	    if( isset( $post_meta[0] ) && $post_meta[0] != '' && $post_meta[0] != null ) {
+	        $delivery_date_timestamp = $post_meta[0];
+	    } else {
+	        $delivery_date_timestamp = '';
+	    }
+	     
+	    if( $delivery_date_timestamp != '' ) {
+	        $delivery_date = date( ORDDD_LITE_LOCKOUT_DATE_FORMAT, $delivery_date_timestamp );
+	    } else {
+	        $delivery_date = '';
+	    }
+	    $lockout_days = get_option( 'orddd_lite_lockout_days' );
+	    if ( $lockout_days == '' || $lockout_days == '{}' || $lockout_days == '[]' || $lockout_days == "null" ) {
+	        $lockout_days_arr = array();
+	    } else {
+	        $lockout_days_arr = (array) json_decode( $lockout_days );
+	    }
+	    foreach ( $lockout_days_arr as $k => $v ) {
+	        $orders = $v->o;
+	        if ( $delivery_date == $v->d ) {
+	            if( $v->o == '1' ) {
+	                unset( $lockout_days_arr[ $k ] );
+	            } else {
+	                $orders = $v->o - 1;
+	                $lockout_days_arr[ $k ] = array( 'o' => $orders, 'd' => $v->d );
+	            }
+	        }
+	    }
+	     
+	    $lockout_days_jarr = json_encode( $lockout_days_arr );
+	    update_option( 'orddd_lite_lockout_days', $lockout_days_jarr );
+	}
 }
 ?>
