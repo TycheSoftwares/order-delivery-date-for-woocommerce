@@ -2,6 +2,10 @@
 	float:left;
 }
 
+.orddd_lite_field_note {
+	font-size: 10px;
+}
+
 /* Date Picker Default Styles */
 .ui-datepicker {
     padding: 0;

@@ -608,15 +608,15 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         
         function orddd_lite_delivery_days_callback( $args ) {
             global $orddd_lite_weekdays;
-            printf( '<fieldset class="orddd-days-fieldset" style="width:150px;border: 1px solid #DCDBDA;float: left;margin-bottom: 10px;margin-left: 0px;margin-top: 0;">
+            printf( '<fieldset class="orddd-lite-days-fieldset">
                 <legend><b>' . __( 'Weekdays:', 'order-delivery-date' ) . '</b></legend>'
             );
             $html = '';
             printf( '<table>' );
             foreach ( $orddd_lite_weekdays as $n => $day_name ) {
                 printf('<tr>
-        	       <td style="padding: 0.5px 0.5px;"><input type="checkbox" name="' . $n . '" id="' . $n .'" value="checked" ' . get_option( $n ) . '/></td>
-        	       <td style="padding: 0.5px 0.5px;"><label class="ord_label" for="' . $day_name . '">' . __( $day_name, 'order-delivery-date' ) . '</label></td>'
+        	       <td class="orddd_lite_fieldset_padding"><input type="checkbox" name="' . $n . '" id="' . $n .'" value="checked" ' . get_option( $n ) . '/></td>
+        	       <td class="orddd_lite_fieldset_padding"><label class="ord_label" for="' . $day_name . '">' . __( $day_name, 'order-delivery-date' ) . '</label></td>'
                 );
             }
             printf( '</table>
@@ -627,13 +627,13 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
         
         function orddd_lite_minimum_delivery_time_callback( $args ) {
-            printf( '<input type="text" name="orddd_lite_minimumOrderDays" id="orddd_lite_minimumOrderDays" style="width: 75px;" value="' . get_option( 'orddd_lite_minimumOrderDays' ) . '"/>' );
+            printf( '<input type="text" name="orddd_lite_minimumOrderDays" id="orddd_lite_minimumOrderDays" value="' . get_option( 'orddd_lite_minimumOrderDays' ) . '"/>' );
             $html = '<label for="orddd_lite_minimumOrderDays"> '  . $args[0] . '</label>';
             echo $html;
         }
         
         function orddd_lite_number_of_dates_callback( $args ) {
-            printf( '<input type="text" name="orddd_lite_number_of_dates" id="orddd_lite_number_of_dates" style="width: 75px;" value="' . get_option( 'orddd_lite_number_of_dates' ) . '"/>' );
+            printf( '<input type="text" name="orddd_lite_number_of_dates" id="orddd_lite_number_of_dates" value="' . get_option( 'orddd_lite_number_of_dates' ) . '"/>' );
             $html = '<label for="orddd_lite_number_of_dates"> '  . $args[0] . '</label>';
             echo $html;
         }
@@ -645,7 +645,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
         
         function orddd_lite_lockout_date_after_orders_callback( $args ) {
-            printf( '<input type="text" name="orddd_lite_lockout_date_after_orders" id="orddd_lite_lockout_date_after_orders" style="width: 75px;" value="' . get_option( 'orddd_lite_lockout_date_after_orders' ) . '"/>' );
+            printf( '<input type="text" name="orddd_lite_lockout_date_after_orders" id="orddd_lite_lockout_date_after_orders" value="' . get_option( 'orddd_lite_lockout_date_after_orders' ) . '"/>' );
             $html = '<label for="orddd_lite_lockout_date_after_orders"> ' . $args[ 0 ] . '</label>';
             echo $html;
         }
@@ -774,7 +774,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         */
         
         public static function orddd_lite_delivery_date_field_note_text_callback( $args ) {
-            echo '<textarea rows="2" cols="90" name="orddd_lite_delivery_date_field_note" id="orddd_lite_delivery_date_field_note" style="width: 290px;">' . stripslashes( get_option( 'orddd_lite_delivery_date_field_note' ) ) . '</textarea>';
+            echo '<textarea rows="2" cols="90" name="orddd_lite_delivery_date_field_note" id="orddd_lite_delivery_date_field_note">' . stripslashes( get_option( 'orddd_lite_delivery_date_field_note' ) ) . '</textarea>';
         
             $html = '<label for="orddd_lite_delivery_date_field_note"> ' . $args[ 0 ] . '</label>';
             echo $html;
@@ -964,7 +964,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                         jQuery.datepicker.afterShow( event );
                     });';
             if ( get_option( 'orddd_lite_delivery_date_field_note' ) != '' ) {
-                echo 'jQuery( "#e_deliverydate" ).parent().append( "<br><small style=font-size:10px;>' . addslashes( __( get_option( 'orddd_lite_delivery_date_field_note' ), 'order-delivery-date' ) ) . '</small>" );';
+                echo 'jQuery( "#e_deliverydate" ).parent().append( "<br><small class=\'orddd_lite_field_note\'>' . addslashes( __( get_option( 'orddd_lite_delivery_date_field_note' ), 'order-delivery-date' ) ) . '</small>" );';
             }
             echo '} );
             </script>';
