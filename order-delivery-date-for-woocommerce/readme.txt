@@ -125,11 +125,9 @@ Note: Please take a back up before updating this version.
 
 * A new setting is being added named as 'Lockout date after X orders' which allows to block the dates for further deliveries after X number of orders.
 * The plugin is now compatible with 3rd party plugins like:
-	- WooCommerce Zapier Integration.
 	- WooCommerce Print Invoice & Delivery Note
 	- WooCommerce PDF Invoices & Packing Slips
 	- WooCommerce Customer/Order CSV Export
-	- WooCommerce Subscriptions
 	- WooCommerce Print Orders
 	- WooCommerce Print Invoice/Packing list
 * Delivery Date field on the checkout page has been made readonly preventing manual editing.
