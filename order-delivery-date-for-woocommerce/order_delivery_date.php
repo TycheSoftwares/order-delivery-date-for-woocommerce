@@ -939,7 +939,6 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             
             echo '<script language="javascript">
                 jQuery( document ).ready( function(){
-                    jQuery( "#e_deliverydate" ).attr( "readonly", true );
                     var formats = ["MM d, yy","MM d, yy"];
                     jQuery.extend( jQuery.datepicker, { afterShow: function( event ) {
 						jQuery.datepicker._getInst( event.target ).dpDiv.css( "z-index", 9999 );
@@ -959,8 +958,10 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                                 var all = dayValue + "-" + monthValue + "-" + yearValue;
                                 jQuery( "#h_deliverydate" ).val( all );
                             }
+                            jQuery( "#e_deliverydate" ).blur();
                         }            
                     }).focus( function ( event ) {
+                        jQuery(this).trigger( "blur" );
                         jQuery.datepicker.afterShow( event );
                     });';
             if ( get_option( 'orddd_lite_delivery_date_field_note' ) != '' ) {
