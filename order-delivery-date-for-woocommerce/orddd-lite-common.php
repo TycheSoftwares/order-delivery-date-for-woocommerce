@@ -222,12 +222,10 @@ class orddd_lite_common {
 	public static function orddd_lite_cancel_delivery_for_trashed( $order_id ) {
 	    global $typenow;
 	    $post_obj = get_post( $order_id );
-	     
 	    if ( 'shop_order' != $typenow ) {
 	        return;
 	    } else {
-	        if ( 'wc-cancelled' != $post_obj->post_status || 'wc-refunded' != $post_obj->post_status || 'wc-failed' != $post_obj->post_status ) {
-	            return;
+	        if ( 'wc-cancelled' == $post_obj->post_status || 'wc-refunded' == $post_obj->post_status || 'wc-failed' == $post_obj->post_status ) {
 	        } else {
 	            orddd_lite_common::orddd_lite_cancel_delivery( $order_id );
 	        }
