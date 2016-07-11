@@ -242,8 +242,8 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
 		 * Capability to allow shop manager to edit settings
 		 */
 		function orddd_lite_capabilities() {
-		    $role = get_role( 'shop_manager' );
-		    if( $role != '' ) {
+            $role = get_role( 'shop_manager' );
+		    if( '' != $role ) {
 		        $role->add_cap( 'manage_options' );
 		    }
 		}
