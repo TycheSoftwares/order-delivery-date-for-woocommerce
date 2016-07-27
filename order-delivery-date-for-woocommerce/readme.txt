@@ -24,7 +24,7 @@ This plugin allows you to improve your customer service by delivering the order 
 
 **Pro Version:**
 
-**[Order Delivery Date Pro 4.8](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. Following features are available in PRO version:
+**[Order Delivery Date Pro 5.1.1](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. Following features are available in PRO version:
 
 <ol>
 <li>Ability to allow the customer to select <strong>Delivery Time along with Delivery Date</strong></li>
@@ -70,6 +70,11 @@ The field can be configured as Mandatory or optional using the 'Mandatory field?
 3. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date".
 
 == Changelog ==
+
+= 2.5 =
+
+* The Delivery dates will now be freed up when an order is cancelled, refunded, failed or trashed.
+* Calendar was not showing up on iPhone 6+ when the Delivery Date field was selected. Instead, it would only show when the delivery date field label was clicked. This is fixed now.
 
 = 2.4 =
 * A new language "Hebrew" is added for the calendar. Now you can set your Delivery Calendar in the Hebrew language on the Checkout Page.
