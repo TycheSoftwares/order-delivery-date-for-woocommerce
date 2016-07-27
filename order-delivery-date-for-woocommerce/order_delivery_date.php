@@ -79,6 +79,8 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_filter( 'request', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_delivery_date_orderby' ) );
             
             add_action( ORDDD_LITE_SHOPPING_CART_HOOK, array( &$this, 'orddd_lite_my_custom_checkout_field' ) );
+            add_action( ORDDD_LITE_SHOPPING_CART_HOOK, array( &$this, 'orddd_lite_front_scripts_js' ) );
+            
             add_action( 'woocommerce_checkout_update_order_meta', array( &$this, 'orddd_lite_my_custom_checkout_field_update_order_meta' ) );
            
             if ( defined( 'WOOCOMMERCE_VERSION' ) && version_compare( WOOCOMMERCE_VERSION, "2.3", '>=' ) < 0 ) {
@@ -897,9 +899,8 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         	echo $html;
         }
         
-        function orddd_lite_my_custom_checkout_field( $checkout ) {
-            global $orddd_lite_weekdays, $wpefield_version;
-            
+        function orddd_lite_front_scripts_js() {
+            global $wpefield_version;
             $calendar_theme = get_option( 'orddd_lite_calendar_theme' );
             if ( $calendar_theme == '' ) {
                 $calendar_theme = 'base';
@@ -908,10 +909,10 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             wp_register_style( 'jquery-ui-style-orddd-lite', "//code.jquery.com/ui/1.9.2/themes/$calendar_theme/jquery-ui.css", '', $wpefield_version, false );
             wp_enqueue_style( 'jquery-ui-style-orddd-lite' );
             wp_enqueue_style( 'datepicker', plugins_url('/css/datepicker.css', __FILE__) , '', $wpefield_version, false);
-        
+            
             wp_dequeue_script( 'initialize-datepicker' );
             wp_enqueue_script( 'initialize-datepicker-orddd', plugins_url('/js/initialize-datepicker.js', __FILE__ ), '', $wpefield_version, false );
-        
+            
             if ( isset( $_GET[ 'lang' ] ) && $_GET[ 'lang' ] != '' && $_GET[ 'lang' ] != null ) {
                 $language_selected = $_GET['lang'];
             } else {
@@ -932,6 +933,10 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             }
              
             wp_enqueue_script( $language_selected, plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
+        }
+        
+        function orddd_lite_my_custom_checkout_field( $checkout ) {
+            global $orddd_lite_weekdays, $wpefield_version;
             $first_day_of_week = '1';
             if( get_option( 'orddd_lite_start_of_week' ) != '' ) {
                 $first_day_of_week = get_option( 'orddd_lite_start_of_week' );
