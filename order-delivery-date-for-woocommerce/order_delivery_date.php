@@ -982,10 +982,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             }
             
             woocommerce_form_field( 'e_deliverydate', array(
-                'type'          => 'text',
-        	    'label'         => __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ),
-        	    'required'  	=> $validate_wpefield,
-        	    'placeholder'   => __( get_option( 'orddd_lite_delivery_date_field_placeholder' ), 'order-delivery-date' ),
+                'type'              => 'text',
+                'label'             => __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ),
+                'required'          => $validate_wpefield,
+                'placeholder'       => __( get_option( 'orddd_lite_delivery_date_field_placeholder' ), 'order-delivery-date' ),
+                'custom_attributes' => array( 'style'=>'cursor:text !important;')
             ),
             $checkout->get_value( 'e_deliverydate' ) );
 
