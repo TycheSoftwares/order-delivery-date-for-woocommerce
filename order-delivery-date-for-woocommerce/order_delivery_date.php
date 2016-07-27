@@ -990,13 +990,6 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             ),
             $checkout->get_value( 'e_deliverydate' ) );
 
-
-            woocommerce_form_field( 'h_deliverydate', array(
-                'type' => 'text',
-                'custom_attributes' => array( 'style'=>'display: none !important;' ) 
-            ),
-            $checkout->get_value( 'h_deliverydate' ) );
-            
             $alldays_orddd_lite = array();
         	foreach ( $orddd_lite_weekdays as $n => $day_name ) {
                 $alldays_orddd_lite[ $n ] = get_option( $n );
@@ -1031,6 +1024,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             print( '<input type="hidden" name="orddd_lite_number_of_dates" id="orddd_lite_number_of_dates" value="' . get_option( 'orddd_lite_number_of_dates' ) . '">' );
         	print( '<input type="hidden" name="orddd_lite_date_field_mandatory" id="orddd_lite_date_field_mandatory" value="' . get_option( 'orddd_lite_date_field_mandatory' ) . '">' );
         	print( '<input type="hidden" name="orddd_lite_number_of_months" id="orddd_lite_number_of_months" value="' . get_option( 'orddd_lite_number_of_months' ) . '">' );
+        	print( '<input type="hidden" name="h_deliverydate" id="h_deliverydate" value="">' );
         	 
         	$lockout_days_str = '';
         	if ( get_option( 'orddd_lite_lockout_date_after_orders' ) > 0 ) {
