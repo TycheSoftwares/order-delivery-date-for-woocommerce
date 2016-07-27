@@ -57,6 +57,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             register_activation_hook( __FILE__, array( &$this, 'orddd_lite_activate' ) );
             add_action( 'admin_init', array( &$this, 'orddd_lite_update_db_check' ) );
             add_action( 'admin_init', array( &$this, 'orddd_lite_capabilities' ) );
+            add_action( 'admin_init', array( &$this, 'orddd_lite_check_if_woocommerce_active' ) );
             
             // ADMIN
             add_action( 'admin_footer', array( &$this, 'admin_notices_scripts' ) );
@@ -98,6 +99,45 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_action( 'woocommerce_order_status_refunded' , array( 'orddd_lite_common', 'orddd_lite_cancel_delivery' ), 10, 1 );
             add_action( 'woocommerce_order_status_failed' , array( 'orddd_lite_common', 'orddd_lite_cancel_delivery' ), 10, 1 );
             add_action( 'wp_trash_post', array( 'orddd_lite_common', 'orddd_lite_cancel_delivery_for_trashed' ), 10, 1 );
+        }
+        
+        /**
+         * Check if WooCommerce is active.
+         */
+        public static function orddd_lite_check_woo_installed() {
+            if ( class_exists( 'WooCommerce' ) ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        /**
+         * Function checks if the WooCommerce plugin is active or not. If it is not active then it will display a notice.
+         *
+         */
+        
+        function orddd_lite_check_if_woocommerce_active() {
+            if ( ! self::orddd_lite_check_woo_installed() ) {
+                if ( is_plugin_active( plugin_basename( __FILE__ ) ) ) {
+                    deactivate_plugins( plugin_basename( __FILE__ ) );
+                    add_action( 'admin_notices', array( 'order_delivery_date_lite', 'orddd_lite_disabled_notice' ) );
+                    if ( isset( $_GET[ 'activate' ] ) ) {
+                        unset( $_GET[ 'activate' ] );
+                    }
+                }
+            }
+        }
+        
+        /**
+         * Display a notice in the admin Plugins page if the booking plugin is
+         * activated while WooCommerce is deactivated.
+         */
+        public static function orddd_lite_disabled_notice() {
+            $class = 'notice notice-error';
+            $message = __( 'Order Delivery Date for WooCommerce (Lite version) plugin requires WooCommerce installed and activate.', 'order-delivery-date' );
+        
+            printf( '<div class="%1$s"><p>%2$s</p></div>', $class, $message );
         }
         
         function orddd_lite_activate() {
