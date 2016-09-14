@@ -267,5 +267,50 @@ class orddd_lite_common {
 	    $lockout_days_jarr = json_encode( $lockout_days_arr );
 	    update_option( 'orddd_lite_lockout_days', $lockout_days_jarr );
 	}
+	
+
+	/**
+	 * Checks if there is a Virtual product in cart
+	 *
+	 * @return string
+	 */
+	public static function orddd_lite_is_delivery_enabled() {
+	    global $woocommerce;
+	    $delivery_enabled = 'yes';
+	    if ( get_option( 'orddd_lite_no_fields_for_virtual_product' ) == 'on' && get_option( 'orddd_lite_no_fields_for_featured_product' ) == 'on' ) {
+	        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
+	            $_product = $values[ 'data' ];
+	            if( $_product->is_virtual() == false && $_product->is_featured() == false ) {
+	                $delivery_enabled = 'yes';
+	                break;
+	            } else {
+	                $delivery_enabled = 'no';
+	            }
+	        }
+	    } else if( get_option( 'orddd_lite_no_fields_for_virtual_product' ) == 'on' && get_option( 'orddd_lite_no_fields_for_featured_product' ) != 'on' ) {
+	        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
+	            $_product = $values[ 'data' ];
+	            if( $_product->is_virtual() == false ) {
+	                $delivery_enabled = 'yes';
+	                break;
+	            } else {
+	                $delivery_enabled = 'no';
+	            }
+	        }
+	    } else if( get_option( 'orddd_lite_no_fields_for_virtual_product' ) != 'on' && get_option( 'orddd_lite_no_fields_for_featured_product' ) == 'on' ) {
+	        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
+	            $_product = $values[ 'data' ];
+	            if( $_product->is_featured() == false ) {
+	                $delivery_enabled = 'yes';
+	                break;
+	            } else {
+	                $delivery_enabled = 'no';
+	            }
+	        }
+	    } else {
+	        $delivery_enabled = 'yes';
+	    }
+	    return $delivery_enabled;
+	}
 }
 ?>

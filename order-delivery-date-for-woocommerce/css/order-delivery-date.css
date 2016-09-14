@@ -126,3 +126,7 @@ input[type="checkbox"] {
 #orddd_lite_delivery_date_field_note {
 	 width: 290px;
 }
+
+.orddd_lite_no_fields_for_product_type{
+	float:left;
+}

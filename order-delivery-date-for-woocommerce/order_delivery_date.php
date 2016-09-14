@@ -47,6 +47,8 @@ function orddd_lite_deactivate() {
     delete_option( 'orddd_lite_language_selected' );
     delete_option( 'orddd_lite_delivery_date_fields_on_checkout_page' );
     delete_option( 'orddd_lite_default_appearance_settings' );    
+    delete_option( 'orddd_lite_no_fields_for_virtual_product' );
+    delete_option( 'orddd_lite_no_fields_for_featured_product' );
 }
 
 if ( !class_exists( 'order_delivery_date_lite' ) ) {
@@ -169,6 +171,8 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_option( 'orddd_lite_calendar_theme_name', ORDDD_LITE_CALENDAR_THEME_NAME );
             add_option( 'orddd_lite_language_selected', 'en-GB' );
             add_option( 'orddd_lite_delivery_date_fields_on_checkout_page', 'billing_section' );
+            add_option( 'orddd_lite_no_fields_for_virtual_product', '' );
+            add_option( 'orddd_lite_no_fields_for_featured_product', '' );
         }
 
         /***********************************************************
@@ -442,7 +446,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 'orddd_lite_date_settings_page',
                 'orddd_lite_date_settings_section',
                 array ( __( 'Enable default sorting of orders (in descending order) by Delivery Date on WooCommerce -> Orders page', 'order-delivery-date' ) )
-            );
+                );
             
             foreach ( $orddd_lite_weekdays as $n => $day_name ) {
                 register_setting(
@@ -570,6 +574,15 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 'orddd_lite_appearance_section',
                 array( __( 'Select the theme for the calendar which blends with the design of your website.', 'order-delivery-date' ) )
             );
+            
+            add_settings_field(
+                'orddd_lite_no_fields_for_product_type',
+                __( 'Disable the Delivery Date Field for:', 'order-delivery-date' ),
+                array( &$this, 'orddd_lite_appearance_virtual_product_callback' ),
+                'orddd_lite_appearance_page',
+                'orddd_lite_appearance_section',
+                array( __( '<br>Disable the Delivery Date on the Checkout page for Virtual products and Featured products.', 'order-delivery-date' ) )
+            );
              
             register_setting(
                 'orddd_lite_appearance_settings',
@@ -620,6 +633,16 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 'orddd_lite_appearance_settings',
                 'orddd_lite_calendar_theme'
             );
+            
+            register_setting(
+                'orddd_lite_appearance_settings',
+                'orddd_lite_no_fields_for_virtual_product'
+            );
+    
+            register_setting(
+                'orddd_lite_appearance_settings',
+                'orddd_lite_no_fields_for_featured_product'
+            );            
         }
         
         function orddd_lite_delivery_date_setting() { }
@@ -973,6 +996,27 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         	echo $html;
         }
         
+        public static function orddd_lite_appearance_virtual_product_callback( $args ) {
+            if ( get_option( 'orddd_lite_no_fields_for_virtual_product' ) == 'on' ) {
+                $orddd_lite_no_fields_for_virtual_product = "checked";
+            } else {
+                $orddd_lite_no_fields_for_virtual_product = "";
+            }
+            
+            echo '<input type="checkbox" name="orddd_lite_no_fields_for_virtual_product" id="orddd_lite_no_fields_for_virtual_product" class="day-checkbox"' . $orddd_lite_no_fields_for_virtual_product . '/><label class="orddd_lite_no_fields_for_product_type">' . __( 'Virtual Products', 'order-delivery-date' ) . '</label>';
+            
+            if ( get_option( 'orddd_lite_no_fields_for_featured_product' ) == 'on' ) {
+                $orddd_lite_no_fields_for_featured_product = "checked";
+            } else {
+                $orddd_lite_no_fields_for_featured_product = "";
+            }
+            
+            echo '<input type="checkbox" name="orddd_lite_no_fields_for_featured_product" id="orddd_lite_no_fields_for_featured_product" class="day-checkbox"' . $orddd_lite_no_fields_for_featured_product . '/><label class="orddd_lite_no_fields_for_product_type">' . __( 'Featured products', 'order-delivery-date' ) . '</label>';
+            
+            $html = '<label for="orddd_lite_no_fields_for_product_type"> ' . $args[ 0 ] . '</label>';
+            echo $html;
+        }
+        
         function orddd_lite_front_scripts_js() {
             global $wpefield_version;
             if ( get_option( 'orddd_lite_enable_delivery_date' ) == 'on' ) {
@@ -1142,6 +1186,17 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 $timestamp = orddd_lite_common::orddd_lite_get_timestamp( $delivery_date, $date_format );
                 update_post_meta( $order_id, '_orddd_lite_timestamp', $timestamp );
 			    order_delivery_date_lite::orddd_lite_update_lockout_days( $delivery_date );
+            } else {
+    		    global $woocommerce;
+    		    $delivery_enabled = orddd_lite_common::orddd_lite_is_delivery_enabled();
+    		    $is_delivery_enabled = 'yes';
+    		    if ( $delivery_enabled == 'no' ) {
+    		        $is_delivery_enabled = 'no';
+    		    }
+                
+                if( $is_delivery_enabled == 'yes' ) {
+                    update_post_meta( $order_id, get_option( 'orddd_delivery_date_field_label' ), '' );
+                }
             }
         }
         
@@ -1205,17 +1260,24 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
 
         function orddd_lite_validate_date_wpefield() {
             global $woocommerce;
-        
+            $delivery_enabled = orddd_lite_common::orddd_lite_is_delivery_enabled();
+            $is_delivery_enabled = 'yes';
+            if ( $delivery_enabled == 'no' ) {
+                $is_delivery_enabled = 'no';
+            }
+            
             if( isset( $_POST[ 'e_deliverydate' ] ) ) {
                 $delivery_date = $_POST[ 'e_deliverydate' ];
             } else {
                 $delivery_date = '';
             }
              
-            //Check if set, if its not set add an error.
-            if ( $delivery_date == '' ) {
-                $message = __( '<strong>' . __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ) . '</strong> is a required field.', 'order-delivery-date' );
-                wc_add_notice( $message, $notice_type = 'error' );
+            if( $is_delivery_enabled == 'yes' ) {
+                //Check if set, if its not set add an error.
+                if ( $delivery_date == '' ) {
+                    $message = __( '<strong>' . __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ) . '</strong> is a required field.', 'order-delivery-date' );
+                    wc_add_notice( $message, $notice_type = 'error' );
+                }
             }
         }
         
@@ -1347,7 +1409,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 <p><?php _e( 'The database has been updated. You can now take advantage of all features of the Order Delivery Date plugin. Thank you.', 'order-delivery-date' ); ?></p>
             </div>
         <?php 
-        }
+        }                
     }
 } 
 $order_delivery_date_lite = new order_delivery_date_lite();
