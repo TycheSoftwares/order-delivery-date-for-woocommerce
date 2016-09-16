@@ -4,12 +4,12 @@ Plugin Name: Order Delivery Date for WooCommerce (Lite version)
 Plugin URI: http://www.tychesoftwares.com/store/free-plugin/order-delivery-date-on-checkout/
 Description: This plugin allows customers to choose their preferred Order Delivery Date during checkout.
 Author: Tyche Softwares
-Version: 2.5
+Version: 2.6
 Author URI: http://www.tychesoftwares.com/about
 Contributor: Tyche Softwares, http://www.tychesoftwares.com/
 */
 
-$wpefield_version = '2.5';
+$wpefield_version = '2.6';
 
 include_once( 'integration.php' );
 include_once( 'orddd-lite-config.php' );
@@ -196,7 +196,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         function orddd_lite_update_db_check() {
             global $orddd_lite_plugin_version, $wpefield_version;
             $orddd_lite_plugin_version = $wpefield_version;
-            if ( $orddd_lite_plugin_version == "2.5" ) {
+            if ( $orddd_lite_plugin_version == "2.6" ) {
                 order_delivery_date_lite::orddd_lite_update_install();
             }
         }
@@ -207,7 +207,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             //code to set the option to on as default
             $orddd_lite_plugin_version = get_option( 'orddd_lite_db_version' );
             if ( $orddd_lite_plugin_version != order_delivery_date_lite::get_orddd_lite_version() ) {
-                update_option( 'orddd_lite_db_version','2.5' );
+                update_option( 'orddd_lite_db_version','2.6' );
                 if ( get_option( 'orddd_lite_update_value' ) != 'yes' ) {
                     $i = 0;
                     foreach ( $orddd_lite_weekdays as $n => $day_name ) {
@@ -1012,7 +1012,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 $orddd_lite_no_fields_for_featured_product = "";
             }
             
-            echo '<input type="checkbox" name="orddd_lite_no_fields_for_featured_product" id="orddd_lite_no_fields_for_featured_product" class="day-checkbox"' . $orddd_lite_no_fields_for_featured_product . '/><label class="orddd_lite_no_fields_for_product_type">' . __( 'Featured products', 'order-delivery-date' ) . '</label>';
+            echo '<input type="checkbox" name="orddd_lite_no_fields_for_featured_product" id="orddd_lite_no_fields_for_featured_product" class="day-checkbox"' . $orddd_lite_no_fields_for_featured_product . '/><label class="orddd_lite_no_fields_for_product_type">' . __( 'Featured Products', 'order-delivery-date' ) . '</label>';
             
             $html = '<label for="orddd_lite_no_fields_for_product_type"> ' . $args[ 0 ] . '</label>';
             echo $html;
