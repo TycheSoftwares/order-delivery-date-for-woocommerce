@@ -41,11 +41,6 @@ function avd( date ) {
 	var t_day = date.getDate();
 	var t_month_days = new Date( t_year, t_month, 0 ).getDate();
 	
-	/*var s_day = new Date( ad( date , delay_days ) );
-	start = ( s_day.getMonth()+1 ) + "/" + s_day.getDate() + "/" + s_day.getFullYear();
-	var start_month = s_day.getMonth()+1;
-	var start_year = s_day.getFullYear();*/
-	
 	start = ( delay_days.getMonth()+1 ) + "/" + delay_days.getDate() + "/" + delay_days.getFullYear();
 	var start_month = delay_days.getMonth()+1;
 	var start_year = delay_days.getFullYear();
@@ -76,12 +71,6 @@ function avd( date ) {
 		if( day_check != "checked" ) {
 			new_l_end = l_end = new Date( ad( l_end, 1 ) );
 			end = ( l_end.getMonth()+1 ) + "/" + l_end.getDate() + "/" + l_end.getFullYear();
-			diff = gd(l_end , specific_max_date , 'days');
-			if ( diff >= 0 ) {
-				loopCounter = gd( start , end , 'days' );
-			}
-		}
-		else {
 			loopCounter = gd(start , end , 'days');
 		}
 	}
