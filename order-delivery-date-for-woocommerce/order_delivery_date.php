@@ -1051,6 +1051,8 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                     $first_day_of_week = get_option( 'orddd_lite_start_of_week' );
                 }
                 
+                $clear_button_text = "showButtonPanel: true, closeText: '" . __( "Clear", "order-delivery-date" ) . "',";
+                
                 echo '<script language="javascript">
                     jQuery( document ).ready( function(){
                         var formats = ["MM d, yy","MM d, yy"];
@@ -1063,7 +1065,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                             }
     					}
                         });
-                        jQuery( "#e_deliverydate" ).val("").datepicker( { dateFormat: "' . get_option( 'orddd_lite_delivery_date_format' ) . '", firstDay: parseInt( ' . $first_day_of_week . ' ), minDate:1, beforeShow: avd, beforeShowDay: chd,
+                        jQuery( "#e_deliverydate" ).val("").datepicker( { dateFormat: "' . get_option( 'orddd_lite_delivery_date_format' ) . '", firstDay: parseInt( ' . $first_day_of_week . ' ), minDate:1, beforeShow: avd, beforeShowDay: chd, ' . $clear_button_text . '
                             onClose:function( dateStr, inst ) {
                                 if ( dateStr != "" ) {
                                     var monthValue = inst.selectedMonth+1;
@@ -1071,6 +1073,14 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                                     var yearValue = inst.selectedYear;
                                     var all = dayValue + "-" + monthValue + "-" + yearValue;
                                     jQuery( "#h_deliverydate" ).val( all );
+                                    // If "Clear" gets clicked, then really clear it
+                                    var event = arguments.callee.caller.caller.arguments[0];
+                                    if( typeof( event ) !== "undefined" ) {
+                                        if ( jQuery( event.delegateTarget ).hasClass( "ui-datepicker-close" ) ) {
+                                            jQuery( this ).val( "" ); 
+                                            jQuery( "#h_deliverydate" ).val( "" );
+                                        }
+                                    }
                                 }
                                 jQuery( "#e_deliverydate" ).blur();
                             }            

@@ -165,3 +165,6 @@
 .ui-datepicker td.ui-state-disabled .ui-state-default {
     opacity: 0.5;
 }
+
+/* To hide the Today button in the calendar */
+.ui-datepicker-current { display: none; }
