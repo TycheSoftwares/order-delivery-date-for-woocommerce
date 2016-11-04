@@ -1079,7 +1079,9 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                             jQuery.datepicker.afterShow( event );
                         });';
                 if ( get_option( 'orddd_lite_delivery_date_field_note' ) != '' ) {
-                    echo 'jQuery( "#e_deliverydate" ).parent().append( "<small class=\'orddd_lite_field_note\'>' . addslashes( __( get_option( 'orddd_lite_delivery_date_field_note' ), 'order-delivery-date' ) ) . '</small>" );';
+                    $field_note_text = addslashes( __( get_option( 'orddd_lite_delivery_date_field_note' ), 'order-delivery-date' ) );
+                    $field_note_text = str_replace( array( "\r\n", "\r", "\n" ), "<br/>", $field_note_text );
+                    echo 'jQuery( "#e_deliverydate" ).parent().append( "<small class=\'orddd_lite_field_note\'>' . $field_note_text . '</small>" );';                    
                 }
                 echo '} );
                 </script>';
