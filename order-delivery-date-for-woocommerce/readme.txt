@@ -2,7 +2,7 @@
 Contributors: ashokrane, MoxaJogani, bhavik.kiri, mansishah, komal-maru, dharakothari
 Tags: delivery date, checkout, order delivery, calendar, checkout calendar, woocommerce delivery date
 Requires at least: 1.4
-Tested up to: 4.5.2
+Tested up to: 4.6.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ This plugin allows you to improve your customer service by delivering the order 
 
 **Pro Version:**
 
-**[Order Delivery Date Pro 5.5](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. Following features are available in PRO version:
+**[Order Delivery Date Pro 5.8](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21 "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. Following features are available in PRO version:
 
 <ol>
 <li>Ability to allow the customer to select <strong>Delivery Time along with Delivery Date</strong></li>
@@ -71,9 +71,15 @@ The field can be configured as Mandatory or optional using the 'Mandatory field?
 
 == Changelog ==
 
+= 2.7 =
+
+* The delivery date selected on the checkout page can now be cleared without refreshing the checkout page.
+* The calendar was not working on the checkout page when Field note text has line breaks. There was an error in the console as "Unexpected token". This is fixed now.
+* If the first available delivery date is disabled for delivery then number of days to choose is not working properly in the calendar. This is fixed now.
+
 = 2.6 =
 
-* From now on the Delivery Date can be enabled or disabled for capturin the delivery date. A checkbox named as 'Enable Delivery Date' is added in the Date Settings tab.
+* From now on the Delivery Date can be enabled or disabled for capturing the delivery date. A checkbox named as 'Enable Delivery Date' is added in the Date Settings tab.
 
 The default value of this setting is disabled, which when enabled will allow clients to capture the Delivery Date for an order on the checkout page.
 * The Delivery Date field can also be disabled for Virtual and Featured products on the checkout page.
