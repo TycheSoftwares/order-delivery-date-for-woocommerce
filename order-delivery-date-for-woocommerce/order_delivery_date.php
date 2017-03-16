@@ -75,7 +75,9 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_action( 'admin_menu', array( &$this, 'orddd_lite_order_delivery_date_menu' ) );
             add_action( 'admin_init', array( &$this, 'order_lite_delivery_date_admin_settings' ) );
             add_action( 'admin_init', array( &$this, 'order_lite_appearance_admin_settings' ) );
-            
+            add_action( 'admin_init', array( &$this, 'order_lite_holidays_admin_settings' ) );
+            add_action( 'admin_init', array( &$this, 'orddd_lite_delete_settings' ) );
+
             add_filter( 'woocommerce_order_details_after_order_table', array( &$this, 'orddd_lite_add_delivery_date_to_order_page_woo' ) );
             
             add_filter( 'manage_edit-shop_order_columns', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_order_delivery_date_column'), 20, 1 );
@@ -633,11 +635,45 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             );            
         }
         
+        function order_lite_holidays_admin_settings() {
+            // First, we register a section. This is necessary since all future options must belong to one.
+            add_settings_section (
+                'orddd_lite_holidays_section',
+                'Add Holiday',
+                array( &$this, 'orddd_lite_holidays_admin_settings_callback' ),
+                'orddd_lite_holidays_page'
+            );
+        
+            add_settings_field (
+                'orddd_lite_holiday_name',
+                'Name:',
+                array( &$this, 'orddd_lite_holidays_name_callback' ),
+                'orddd_lite_holidays_page',
+                'orddd_lite_holidays_section',
+                array ( 'Enter the name of the holiday here.' )
+            );
+        
+            add_settings_field(
+                'orddd_lite_holiday_date',
+                'Date:',
+                array( &$this, 'orddd_lite_holidays_date_callback' ),
+                'orddd_lite_holidays_page',
+                'orddd_lite_holidays_section',
+                array ( 'Select the holiday date here.' )
+            );
+       
+            register_setting(
+                'orddd_lite_holidays_settings',
+                'orddd_lite_holidays',
+                array( &$this, 'orddd_lite_holidays_callback' )
+            );
+        }
+
         function orddd_lite_delivery_date_setting() { }
         
         function orddd_lite_order_delivery_date_settings() {
             global $orddd_lite_weekdays;
-            $action = $active_date_settings = $active_appearance = '';
+            $action = $active_date_settings = $active_appearance = $active_holidays = '';
             if ( isset( $_GET[ 'action' ] ) ) {
                 $action = $_GET[ 'action' ];
             } else {
@@ -652,6 +688,9 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 $active_appearance = "nav-tab-active";
             }
             
+            if( $action == 'holidays' ) {
+                $active_holidays = 'nav-tab-active'; 
+            }
             ?>
             <h2>Order Delivery Date Settings</h2>
             <?php 
@@ -660,6 +699,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             <h2 class="nav-tab-wrapper woo-nav-tab-wrapper">
                 <a href="admin.php?page=order_delivery_date_lite&action=date" class="nav-tab <?php echo $active_date_settings; ?>"><?php _e( 'Date Settings', 'order-delivery-date' );?> </a>
                 <a href="admin.php?page=order_delivery_date_lite&action=appearance" class="nav-tab <?php echo $active_appearance; ?>"> <?php _e( 'Appearance', 'order-delivery-date' );?> </a>
+                <a href="admin.php?page=order_delivery_date_lite&action=holidays" class="nav-tab <?php echo $active_holidays; ?>"> <?php _e( 'Holidays', 'order-delivery-date' );?> </a>
             </h2>
             <?php
             if ( $action == 'date' || $action == '' ) {
@@ -678,6 +718,29 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                     submit_button ( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save', true );
                     print('</form>
                 </div>' );
+            } elseif ( $action == 'holidays' ) {
+                print( '<div id="content">
+                    <form method="post" action="options.php">');
+                    settings_fields( "orddd_lite_holidays_settings" );
+                    do_settings_sections( "orddd_lite_holidays_page" );
+                    submit_button ( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save', true );
+                    print('</form>
+                </div>' );
+
+                echo "<h3 id='holidays_table_head'>" . __( 'Holidays', 'order-delivery-date' ) . "</h3>";
+                include_once( 'class-view-holidays.php' );
+                $orddd_table = new ORDDD_LITE_View_Holidays_Table();
+                $orddd_table->orddd_prepare_items();
+                ?>
+                <div id = "orddd_lite_holidays_list">
+                    <form id="holidays" method="get" >
+                        <input type="hidden" name="page" value="order_delivery_date_lite" />
+                        <input type="hidden" name="tab" value="holidays" />
+                        <input type="hidden" name="action" value="delete" />
+                        <?php $orddd_table->display(); ?>
+                    </form>
+                </div>
+                <?php    
             }
         }
         
@@ -829,16 +892,16 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
         
         /**
-                	* Callback for adding Delivery Date field label setting
-                	    *
-                	    * @param array $args
-                	    */
-        
-                	    public static function orddd_lite_delivery_date_field_label_callback( $args ) {
-                	    echo '<input type="text" name="orddd_lite_delivery_date_field_label" id="orddd_lite_delivery_date_field_label" value="' . get_option( 'orddd_lite_delivery_date_field_label' ) . '" maxlength="40"/>';
-        
-                	    $html = '<label for="orddd_lite_delivery_date_field_label"> ' . $args[ 0 ] . '</label>';
-                	    echo $html;
+    	* Callback for adding Delivery Date field label setting
+	    *
+	    * @param array $args
+	    */
+
+	    public static function orddd_lite_delivery_date_field_label_callback( $args ) {
+    	    echo '<input type="text" name="orddd_lite_delivery_date_field_label" id="orddd_lite_delivery_date_field_label" value="' . get_option( 'orddd_lite_delivery_date_field_label' ) . '" maxlength="40"/>';
+
+    	    $html = '<label for="orddd_lite_delivery_date_field_label"> ' . $args[ 0 ] . '</label>';
+    	    echo $html;
         }
         
         /**
@@ -1005,6 +1068,98 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             echo $html;
         }
         
+        public static function orddd_lite_holidays_admin_settings_callback() {}
+    
+        public static function orddd_lite_holidays_name_callback( $args ) {
+            echo '<input type="text" name="orddd_lite_holiday_name" id="orddd_lite_holiday_name" class="orddd_lite_holiday_name"/>';
+       
+            $html = '<label for="orddd_lite_holiday_name"> ' . $args[0] . '</label>';
+            echo $html;
+        }
+        
+        public static function orddd_lite_holidays_date_callback( $args ) {
+            $current_language = get_option( 'orddd_lite_language_selected' );
+            print( '<script type="text/javascript">
+                 jQuery( document ).ready( function() {
+                    jQuery.datepicker.setDefaults( jQuery.datepicker.regional[ "en-GB" ] );
+                    var formats = [ "mm-dd-yy", "d.m.y", "d M, yy","MM d, yy" ];
+                    jQuery( "#orddd_lite_holiday_date" ).val( "" ).datepicker( {
+                        constrainInput: true,
+                        dateFormat: formats[0],
+                    } );
+                } );
+            </script>' );
+
+            echo '<input type="text" name="orddd_lite_holiday_date" id="orddd_lite_holiday_date" class="orddd_lite_holiday_date" />';
+
+            $html = '<label for="orddd_lite_holiday_date"> ' . $args[0] . '</label>';
+            echo $html;
+        }  
+
+        public static function orddd_lite_holidays_callback( $input ) {
+            $output = array();
+            if( isset( $_POST[ 'orddd_lite_holiday_date' ]  ) ) {
+                $date_arr = explode( "-", $_POST[ 'orddd_lite_holiday_date' ] );
+                $holiday_date = date( ORDDD_LITE_HOLIDAY_DATE_FORMAT, gmmktime( 0, 0, 0, $date_arr[ 0 ], $date_arr[ 1 ], $date_arr[ 2 ] ) );
+
+                
+                $holidays = get_option( 'orddd_lite_holidays' );
+                if ( $holidays == '' || $holidays == '{}' || $holidays == '[]' ) {
+                    $holidays_arr = array();
+                } else {
+                    $holidays_arr = json_decode( $holidays );
+                }
+                
+                foreach ( $holidays_arr as $k => $v ) {
+                    $holidays_new_arr[] = array( 'n' => $v->n, 'd' => $v->d );
+                }
+                
+                $holiday_name = str_replace( "\'", "", $_POST[ 'orddd_lite_holiday_name' ] );
+                $holiday_name = str_replace( '\"', '', $holiday_name );
+                $holidays_new_arr[] = array( 'n' => $holiday_name,
+                    'd' => $holiday_date );
+                $holidays_jarr = json_encode( $holidays_new_arr );
+                $output = $holidays_jarr;    
+            } else {
+                $output = $input;
+            }
+            
+            return $output;
+        }
+
+        function orddd_lite_delete_settings() {
+            if ( ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] == 'order_delivery_date_lite' ) && ( isset( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] == 'holidays' ) ) {
+                $holiday = array();
+                    
+                if( isset( $_GET[ 'holiday' ] ) ) {
+                    $holiday = $_GET[ 'holiday' ];
+                }
+                //print_r( $holiday );
+                foreach( $holiday as $h_key => $h_value ) {
+                    $holidays = get_option( 'orddd_lite_holidays' );
+                    $holidays_arr = json_decode( $holidays );
+                    $holidays_new_arr = array();
+                    if ( count( $holidays_arr ) > 0 ) {
+                        foreach ( $holidays_arr as $k => $v ){
+                            $holidays_new_arr[] = array( 'n' => $v->n, 'd' => $v->d );
+                        }
+                    }
+                    
+                    foreach( $holidays_new_arr as $subKey => $subValue ) {
+                        if( $subValue[ 'd' ] == $h_value ) {
+                            unset( $holidays_new_arr[ $subKey ] );
+                        }
+                    }
+                    $holidays_jarr = json_encode( $holidays_new_arr );
+                    //print_r( $holidays_jarr );
+
+                    update_option( 'orddd_lite_holidays', $holidays_jarr );                
+                } 
+                //exit;
+                wp_safe_redirect( admin_url( '/admin.php?page=order_delivery_date_lite&action=holidays' ) );
+            }
+        }
+
         function orddd_lite_front_scripts_js() {
             global $wpefield_version;
             if ( get_option( 'orddd_lite_enable_delivery_date' ) == 'on' ) {
@@ -1169,6 +1324,23 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             	    $lockout_days_str = substr( $lockout_days_str, 0, strlen( $lockout_days_str ) -1 );
             	}
             	print( '<input type="hidden" name="orddd_lite_lockout_days" id="orddd_lite_lockout_days" value=\'' . $lockout_days_str . '\'>' );
+
+                //fetch holidays
+                $holidays_arr = array();
+                $holidays = get_option( 'orddd_lite_holidays' );
+                if ( $holidays != '' && $holidays != '{}' && $holidays != '[]' && $holidays != 'null' ) {
+                    $holidays_arr = json_decode( get_option( 'orddd_lite_holidays' ) );
+                }
+                $holidays_str = "";
+                foreach ( $holidays_arr as $k => $v ) {
+                    $name = str_replace( "'", "&apos;", $v->n );
+                    $name = str_replace( "'", "&quot;", $name );
+                    $holidays_str .= '"' . $name . ":" . $v->d . '",';
+                    
+                }
+                
+                $holidays_str = substr( $holidays_str, 0, strlen( $holidays_str )-1 );
+                echo '<input type="hidden" name="orddd_lite_holidays" id="orddd_lite_holidays" value=\'' . $holidays_str . '\'>';
             }
         }
         
