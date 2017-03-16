@@ -71,13 +71,94 @@ function orddd_lite_autofil_date_time() {
     	delay_days.setDate( delay_days.getDate()+1 );
 	}
 	
-    if( delay_days != '' ) {
-		var min_date_to_set = delay_days.getDate() + "-" + ( delay_days.getMonth()+1 ) + "-" + delay_days.getFullYear();
-    }
-	
+	if( delay_date != "" ) {
+		delay_days = minimum_date_to_set( delay_days );
+        if( delay_days != '' ) {
+			var min_date_to_set = delay_days.getDate() + "-" + ( delay_days.getMonth()+1 ) + "-" + delay_days.getFullYear();
+        }
+	}
+
 	var date_to_set = delay_days;
 	jQuery( '#e_deliverydate' ).datepicker( "setDate", date_to_set );
 	jQuery( "#h_deliverydate" ).val( min_date_to_set );
+}
+
+function minimum_date_to_set( delay_days ) {
+	var disabledDays = eval( "[" + jQuery( "#orddd_lite_holidays" ).val() + "]" );
+	var holidays = [];
+	for ( i = 0; i < disabledDays.length; i++ ) {
+		var holidays_array = disabledDays[ i ].split( ":" );
+		holidays[i] = holidays_array[ 1 ];
+	}
+
+	var bookedDays = eval( "[" + jQuery( "#orddd_lite_lockout_days" ).val() + "]" );
+
+	var current_date = jQuery( "#orddd_lite_current_day" ).val();
+	var split_current_date = current_date.split( "-" );
+	var current_day = new Date ( split_current_date[ 1 ] + "/" + split_current_date[ 0 ] + "/" + split_current_date[ 2 ] );
+
+	var delay_time = delay_days.getTime();
+    var current_time = current_day.getTime();
+    var current_weekday = current_day.getDay();
+    
+	var j;
+	for ( j = current_weekday ; current_time <= delay_time ; j++ ) {
+		if( j >= 0 ) {
+			if ( jQuery( "#orddd_lite_calculate_min_time_disabled_days" ).val() != 'on' ) {
+				day = 'orddd_lite_weekday_' + current_weekday;
+				day_check = jQuery( "#" + day ).val();
+				if ( day_check == '' ) {
+					delay_days.setDate( delay_days.getDate()+1 );
+					delay_time = delay_days.getTime();
+					current_day.setDate( current_day.getDate()+1 );
+					current_time = current_day.getTime();
+					current_weekday = current_day.getDay();
+				} else {
+					if( current_day <= delay_days ) {
+						var m = current_day.getMonth(), d = current_day.getDate(), y = current_day.getFullYear();
+						if( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 ) {	
+							delay_days.setDate( delay_days.getDate()+1 );
+							delay_time = delay_days.getTime();
+						}
+						current_day.setDate( current_day.getDate()+1 );
+						current_time = current_day.getTime();
+						current_weekday = current_day.getDay();
+					}
+				}
+			} else {
+				if( current_day <= delay_days ) {
+					var m = current_day.getMonth(), d = current_day.getDate(), y = current_day.getFullYear();
+					if( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 ) {	
+						delay_days.setDate( delay_days.getDate()+1 );
+						delay_time = delay_days.getTime();
+					}
+					current_day.setDate( current_day.getDate()+1 );
+					current_time = current_day.getTime();
+					current_weekday = current_day.getDay();
+				}
+			}
+		} else {
+			break;
+		}
+	}
+	
+    if( delay_days != '' ) {
+    	for ( i = 0; i < holidays.length; i++ ) {
+	        var dm = delay_days.getMonth(), dd = delay_days.getDate(), dy = delay_days.getFullYear();
+	        if( jQuery.inArray( ( dm+1 ) + "-" + dd + "-" + dy, holidays ) != -1 ) {
+	            delay_days.setDate( delay_days.getDate()+1 );
+	            delay_time = delay_days.getTime();
+	        }
+	    }
+
+        var dm = delay_days.getMonth(), dd = delay_days.getDate(), dy = delay_days.getFullYear();
+        if( jQuery.inArray( ( dm+1 ) + "-" + dd + "-" + dy, bookedDays ) != -1 ) {
+            delay_days.setDate( delay_days.getDate()+1 );
+            delay_time = delay_days.getTime();
+        } 
+    }
+    
+	return delay_days;
 }
 
 function nd( date ) {
@@ -146,6 +227,52 @@ function avd( date ) {
 	}
 	if( isNaN( noOfDaysToFind ) ) {
 		noOfDaysToFind = 1000;
+	}
+	
+	if( delay_date != "" ) {
+		var delay_time = delay_days.getTime();
+		var current_time = current_day.getTime();
+		var current_weekday = current_day.getDay();
+		var j;
+		for ( j = current_weekday ; current_time <= delay_time ; j++ ) {
+			if( j >= 0 ) {
+				if ( jQuery( "#orddd_lite_calculate_min_time_disabled_days" ).val() != 'on' ) {
+					day = 'orddd_lite_weekday_' + current_weekday;
+					day_check = jQuery( "#" + day ).val();
+					if ( day_check == '' ) {
+						delay_days.setDate( delay_days.getDate()+1 );
+						delay_time = delay_days.getTime();
+						current_day.setDate( current_day.getDate()+1 );
+						current_time = current_day.getTime();
+						current_weekday = current_day.getDay();
+					} else {
+						if( current_day <= delay_days ) {
+							var m = current_day.getMonth(), d = current_day.getDate(), y = current_day.getFullYear();
+							if( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 ) {	
+								delay_days.setDate( delay_days.getDate()+1 );
+								delay_time = delay_days.getTime();
+							}
+							current_day.setDate( current_day.getDate()+1 );
+							current_time = current_day.getTime();
+							current_weekday = current_day.getDay();
+						}
+					}
+				} else {
+					if( current_day <= delay_days ) {
+						var m = current_day.getMonth(), d = current_day.getDate(), y = current_day.getFullYear();
+						if( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 ) {	
+							delay_days.setDate( delay_days.getDate()+1 );
+							delay_time = delay_days.getTime();
+						}
+						current_day.setDate( current_day.getDate()+1 );
+						current_time = current_day.getTime();
+						current_weekday = current_day.getDay();
+					}
+				}
+			} else {
+				break;
+			}
+		}
 	}
 
 	var minDate = delay_days;

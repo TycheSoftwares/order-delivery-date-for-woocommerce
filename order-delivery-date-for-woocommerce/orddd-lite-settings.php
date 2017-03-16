@@ -87,6 +87,15 @@ class orddd_lite_settings {
             array( __( 'Auto-populate first available Delivery date when the checkout page loads.', 'order-delivery-date' ) )
         );
 
+        add_settings_field(
+            'orddd_lite_calculate_min_time_disabled_days',
+            __( 'Apply Minimum Delivery Time for non working weekdays:', 'order-delivery-date' ),
+            array( 'orddd_lite_settings', 'orddd_lite_calculate_min_time_disabled_days_callback' ),
+            'orddd_lite_date_settings_page',
+            'orddd_lite_date_settings_section',
+            array( __( 'If selected, then the Minimum Delivery Time (in hours) will be applied on the non working weekdays which are unchecked in Delivery Weekdays. If unchecked, then it will not be applied. For example, if Minimum Delivery Time (in hours) is set to 48 hours and Saturday is disabled for delivery. Now if a customer visits the website on Firday, then the first available date will be Monday and not Sunday.', 'order-delivery-date' ) )
+        );
+
         foreach ( $orddd_lite_weekdays as $n => $day_name ) {
             register_setting(
                 'orddd_lite_date_settings',
@@ -127,6 +136,11 @@ class orddd_lite_settings {
         register_setting(
             'orddd_lite_date_settings',
             'orddd_lite_auto_populate_first_available_date'
+        );
+
+        register_setting(
+            'orddd_lite_date_settings',
+            'orddd_lite_calculate_min_time_disabled_days'
         );
     }
 
@@ -472,6 +486,17 @@ class orddd_lite_settings {
         echo $html;
     }
 
+    public static function orddd_lite_calculate_min_time_disabled_days_callback( $args ) {
+        $orddd_lite_calculate_min_time_disabled_days = '';
+        if ( get_option( 'orddd_lite_calculate_min_time_disabled_days' ) == 'on' ) {
+            $orddd_lite_calculate_min_time_disabled_days = "checked";
+        }
+        
+        echo '<input type="checkbox" name="orddd_lite_calculate_min_time_disabled_days" id="orddd_lite_calculate_min_time_disabled_days" class="day-checkbox" ' . $orddd_lite_calculate_min_time_disabled_days . '/>';
+        
+        $html = '<label for="orddd_lite_calculate_min_time_disabled_days"> '. $args[ 0 ] . '</label>';
+        echo $html;   
+    }
     /**
      * Callback for adding Appearance tab settings
      */

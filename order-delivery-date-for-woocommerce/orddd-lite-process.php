@@ -92,6 +92,8 @@ class orddd_lite_process{
 
             $var .= '<input type="hidden" name="orddd_lite_auto_populate_first_available_date" id="orddd_lite_auto_populate_first_available_date" value="' . get_option( 'orddd_lite_auto_populate_first_available_date' ) . '">';
 
+            $var .= '<input type="hidden" name="orddd_lite_calculate_min_time_disabled_days" id="orddd_lite_calculate_min_time_disabled_days" value="' . get_option( 'orddd_lite_calculate_min_time_disabled_days' ) . '">';
+
             $current_time = current_time( 'timestamp' );
 	    	$current_date = date( "j-n-Y", $current_time );
             $var .= '<input type="hidden" name="orddd_lite_current_day" id="orddd_lite_current_day" value="' . $current_date . '">';
