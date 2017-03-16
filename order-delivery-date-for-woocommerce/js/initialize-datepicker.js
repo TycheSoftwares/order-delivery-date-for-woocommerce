@@ -1,3 +1,23 @@
+function nd( date ) {
+	var disabledDays = eval( '[' + jQuery( '#orddd_lite_holidays' ).val() + ']' );
+	var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+	var currentdt = m + '-' + d + '-' + y;
+	
+	var dt = new Date();
+	var today = dt.getMonth() + '-' + dt.getDate() + '-' + dt.getFullYear();
+	for ( i = 0; i < disabledDays.length; i++ ) {
+		var holidays_array = disabledDays[ i ].split( ":" );
+		if( holidays_array[ 1 ] == ( ( m+1 ) + '-' + d + '-' + y ) ) {
+			if( '' == holidays_array[ 0 ] ) {
+				return [ false, "", "Holiday" ];
+			} else {
+				return [ false, "", holidays_array[ 0 ]  ];
+			}
+		}
+	}
+	return [ true ];
+}
+
 function dwd( date ) {
 	var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
 	var lockoutDays = eval( '[' + jQuery( '#orddd_lite_lockout_days' ).val() + ']' );
@@ -15,7 +35,7 @@ function dwd( date ) {
 
 function chd( date ) {
 	var nW = dwd( date );
-	return nW;
+	return nW[ 0 ] ? nd( date ) : nW;
 }
 
 function avd( date ) {
