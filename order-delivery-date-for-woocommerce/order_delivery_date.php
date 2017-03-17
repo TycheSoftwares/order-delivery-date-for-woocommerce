@@ -78,7 +78,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_action( 'wp_trash_post', array( 'orddd_lite_common', 'orddd_lite_cancel_delivery_for_trashed' ), 10, 1 );
         }
         
-         function orddd_lite_activate() {
+        function orddd_lite_activate() {
             global $orddd_lite_weekdays;
         
             add_option( 'orddd_lite_enable_delivery_date', '' );
