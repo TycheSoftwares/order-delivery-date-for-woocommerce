@@ -137,7 +137,7 @@ class orddd_lite_process{
 	    
             $timestamp = orddd_lite_common::orddd_lite_get_timestamp( $delivery_date, $date_format );
             update_post_meta( $order_id, '_orddd_lite_timestamp', $timestamp );
-		    order_delivery_date_lite::orddd_lite_update_lockout_days( $delivery_date );
+		    orddd_lite_process::orddd_lite_update_lockout_days( $delivery_date );
         } else {
 		    global $woocommerce;
 		    $delivery_enabled = orddd_lite_common::orddd_lite_is_delivery_enabled();
