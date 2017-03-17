@@ -308,9 +308,9 @@ function avd( date ) {
 		var day = "";
 		day = 'orddd_lite_weekday_' + new_date.getDay();
 		day_check = jQuery( "#" + day ).val();
-
-		if( day_check != "checked" ) {
-			new_l_end = l_end = new Date( ad( l_end, 1 ) );
+		is_holiday = nd( new_date );
+		if( day_check != "checked" || is_holiday != 'true' ) {
+			new_l_end = l_end = new Date( ad( l_end, 2 ) );
 			end = ( l_end.getMonth()+1 ) + "/" + l_end.getDate() + "/" + l_end.getFullYear();
 			loopCounter = gd(start , end , 'days');
 		}
@@ -335,7 +335,7 @@ function avd( date ) {
 }
 
 function ad( dateObj, numDays ) {
-	return dateObj.setDate( dateObj.getDate() + numDays );
+	return dateObj.setDate( dateObj.getDate() + ( numDays - 1 ) );
 }
 
 function gd( date1, date2, interval ) {
