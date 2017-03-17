@@ -108,6 +108,9 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_option( 'orddd_lite_delivery_date_fields_on_checkout_page', 'billing_section' );
             add_option( 'orddd_lite_no_fields_for_virtual_product', '' );
             add_option( 'orddd_lite_no_fields_for_featured_product', '' );
+
+            //flags
+            add_option( 'orddd_lite_update_calculate_min_time_disabled_days', 'yes' );
         }
 
         public static function orddd_lite_deactivate() {
