@@ -6,7 +6,7 @@ Tested up to: 4.7.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Donate link: http://www.tychesoftwares.com/
+Donate link: https://www.paypal.me/TycheSoftwares
 
 Allow the customers to choose an order delivery date on the checkout page for WooCommerce store owners.
 
@@ -95,6 +95,10 @@ The field can be configured as Mandatory or optional using the 'Mandatory field?
 3. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date".
 
 == Changelog ==
+
+= 2.9 =
+
+* Fix - Warnings were displayed on the Order Received page with WooCommerce version 3.0.0. This is fixed now.
 
 = 2.8 =
 
