@@ -4,12 +4,12 @@ Plugin Name: Order Delivery Date for WooCommerce (Lite version)
 Plugin URI: http://www.tychesoftwares.com/store/free-plugin/order-delivery-date-on-checkout/
 Description: This plugin allows customers to choose their preferred Order Delivery Date during checkout.
 Author: Tyche Softwares
-Version: 2.8
+Version: 2.9
 Author URI: http://www.tychesoftwares.com/about
 Contributor: Tyche Softwares, http://www.tychesoftwares.com/
 */
 
-$wpefield_version = '2.8';
+$wpefield_version = '2.9';
 
 include_once( 'integration.php' );
 include_once( 'orddd-lite-config.php' );
@@ -221,7 +221,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         function orddd_lite_update_db_check() {
             global $orddd_lite_plugin_version, $wpefield_version;
             $orddd_lite_plugin_version = $wpefield_version;
-            if ( $orddd_lite_plugin_version == "2.8" ) {
+            if ( $orddd_lite_plugin_version == "2.9" ) {
                 order_delivery_date_lite::orddd_lite_update_install();
             }
         }
@@ -232,7 +232,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             //code to set the option to on as default
             $orddd_lite_plugin_version = get_option( 'orddd_lite_db_version' );
             if ( $orddd_lite_plugin_version != order_delivery_date_lite::get_orddd_lite_version() ) {
-                update_option( 'orddd_lite_db_version', '2.8' );
+                update_option( 'orddd_lite_db_version', '2.9' );
                 if ( get_option( 'orddd_lite_update_value' ) != 'yes' ) {
                     $i = 0;
                     foreach ( $orddd_lite_weekdays as $n => $day_name ) {
