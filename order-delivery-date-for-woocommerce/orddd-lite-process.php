@@ -199,9 +199,14 @@ class orddd_lite_process{
      */
     
     public static function orddd_lite_add_delivery_date_to_order_woo_new( $fields, $sent_to_admin, $order ) {
-       $fields[ get_option( 'orddd_lite_delivery_date_field_label' ) ] = array(
+        if( version_compare( get_option( 'woocommerce_version' ), '3.0.0', ">=" ) ) {            
+            $order_id = $order->get_id();
+        } else {
+            $order_id = $order->id;
+        }
+        $fields[ get_option( 'orddd_lite_delivery_date_field_label' ) ] = array(
            'label' => __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ),
-           'value' => get_post_meta( $order->id, get_option( 'orddd_lite_delivery_date_field_label' ), true ),
+           'value' => get_post_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), true ),
        );
        return $fields;
     }
@@ -240,7 +245,12 @@ class orddd_lite_process{
      */
     public static function orddd_lite_add_delivery_date_to_order_page_woo( $order ) {
         global $orddd_lite_date_formats;
-        $delivery_date_formatted = orddd_lite_common::orddd_lite_get_order_delivery_date( $order->id );
+        if( version_compare( get_option( 'woocommerce_version' ), '3.0.0', ">=" ) ) {            
+            $order_id = $order->get_id();
+        } else {
+            $order_id = $order->id;
+        }
+        $delivery_date_formatted = orddd_lite_common::orddd_lite_get_order_delivery_date( $order_id );
         if( $delivery_date_formatted != '' ) {
             echo '<p><strong>'.__( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ) . ':</strong> ' . $delivery_date_formatted . '</p>';
         }
