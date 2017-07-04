@@ -17,6 +17,7 @@ include_once( 'orddd-lite-common.php' );
 include_once( 'orddd-lite-settings.php' );
 include_once( 'orddd-lite-process.php' );
 include_once( 'filter.php' );
+include_once( 'orddd-lite-pro-notices.php' );
 
 if ( !class_exists( 'order_delivery_date_lite' ) ) {
     class order_delivery_date_lite {
@@ -31,12 +32,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_action( 'admin_init',            array( &$this, 'orddd_lite_capabilities' ) );
             add_action( 'admin_init',            array( &$this, 'orddd_lite_check_if_woocommerce_active' ) );
             add_action( 'admin_footer',          array( &$this, 'admin_notices_scripts' ) );
-            add_action( 'wp_ajax_admin_notices', array( &$this, 'orddd_lite_admin_notices' ) );
-            add_action( 'admin_notices',         array( &$this, 'order_lite_coupon_notice' ) );
-            
-            //To create timestamp for old orders
-            add_action( 'admin_init',            array( &$this, 'orddd_create_timestamp_for_old_order' ) );
 
+            //Add pro notices
+            add_action( 'admin_notices', array( 'orddd_lite_pro_notices', 'orddd_lite_notices_of_pro' ) );
+            add_action( 'admin_init', array( 'orddd_lite_pro_notices', 'orddd_lite_ignore_pro_notices' ) );
+                       
             //Settings
             add_action( 'admin_menu', array( 'orddd_lite_settings', 'orddd_lite_order_delivery_date_menu' ) );
             add_action( 'admin_init', array( 'orddd_lite_settings', 'order_lite_delivery_date_admin_settings' ) );
@@ -111,6 +111,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
 
             //flags
             add_option( 'orddd_lite_update_calculate_min_time_disabled_days', 'yes' );
+
+            //Pro admin Notices
+            if( !get_option( 'orddd_lite_activate_time' ) ) {
+                add_option( 'orddd_lite_activate_time', current_time( 'timestamp' ) );
+            }
         }
 
         public static function orddd_lite_deactivate() {
@@ -123,8 +128,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             delete_option( 'orddd_lite_enable_delivery_date' );
             delete_option( 'orddd_lite_minimumOrderDays' );
             delete_option( 'orddd_lite_number_of_dates' );
-            delete_option( 'orddd_lite_date_field_mandatory' );
-            delete_option( 'orddd_lite_admin_notices' );
+            delete_option( 'orddd_lite_date_field_mandatory' );            
             delete_option( 'orddd_lite_lockout_date_after_orders' );
             delete_option( 'orddd_lite_lockout_days' );
             delete_option( 'orddd_lite_update_value' );
@@ -337,147 +341,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         
             wp_enqueue_style( 'dismiss-notice', plugins_url('/css/dismiss-notice.css', __FILE__ ) , '', '', false);
         }
-        
-        function order_lite_coupon_notice() {
-            $admin_url = get_admin_url();
-            echo '<input type="hidden" id="admin_url" value="' . $admin_url . '"/>';
-            $minimum_delivery_notice = get_option( 'orddd_lite_minimum_delivery_notices' );
-            if( $minimum_delivery_notice != 'yes' ) {
-                if( isset( $_GET['page'] ) && ( $_GET['page'] == 'order_delivery_date_lite' ) ) {
-                    ?>
-                    <div class="error notice is-dismissible" id="minimum_delivery_time" >
-                        <p><?php _e( 'Minimum Delivery time (in days) will now be calculated in hours which is from current WordPress time. To keep the functionality of our plugin intact at your site, we have added +24 hours to the \'Minimum Delivery time (in hours)\' setting.', 'order-delivery-date' ); ?></p>
-                    </div>            
-                    <?php 
-                    update_option( 'orddd_update_minimum_delivery_notice', 'yes' );
-                }                
-            }
-        }
-                
-        function orddd_lite_admin_notices() {
-            if ( get_option( 'orddd_update_minimum_delivery_notice' ) == 'yes' ) {
-                update_option( 'orddd_lite_minimum_delivery_notices', 'yes' );
-            }  
-            die();
-        }
-
-        /**
-         * This function needs to be called when updating to 1.9 version
-         * So that the timestamps for all previous orders of the Order delivery date field are inserted
-         * This is necessary for the sorting to give expected results
-         *
-         */
-        function orddd_create_timestamp_for_old_order() {
-            global $wpdb;
-            $db_updated = get_option( 'orddd_timestamp_update_script' );
-        
-            if ( $db_updated != 'yes' ) {
-                add_action( 'admin_notices', array( &$this, 'orddd_db_update_notice' ) );
-            }
-        
-            if ( isset( $_GET['mode'] ) && $_GET['mode'] == 'update_db' ) {
-                global $orddd_lite_date_formats;
-                $order_ids_updated = get_option( 'orddd_lite_orders_script_updated' );
-                if( $order_ids_updated == 'null' || $order_ids_updated == '' || $order_ids_updated == '{}' || $order_ids_updated == '[]') {
-                    $order_ids_updated = array();
-                }
-                $step_variable = get_option( 'orddd_lite_steps_for_script' );
-                if( $step_variable == 'null' || $step_variable == '' || $step_variable == '{}' || $step_variable == '[]') {
-                    $step_variable = 1;
-                } else {
-                    $step_variable = $step_variable + 1;
-                }
-                $results = $wpdb->get_results( "SELECT * FROM `".$wpdb->prefix."posts` WHERE post_type='shop_order' AND post_status IN ('" . implode("','", array_keys( wc_get_order_statuses() )) . "') AND ID NOT IN ('" . implode("','", $order_ids_updated ) . "') LIMIT 300" );
-                if( count( $results ) > 0 ) {
-                    echo "Step: " . $step_variable;
-                }
-                foreach( $results as $key => $value ) {
-                    $date_str = '';
-                    $order_id = $value->ID;
-                    $order_ids_updated[] = $order_id;
-                    $data = get_post_meta( $order_id );
-                    $delivery_date_timestamp = $delivery_date_formatted = '';
-                    $delivery_date_prev_timestamp = '';
-                    $m = $d = $y = "";
-                    $old_order = "NO";
-                    if ( isset( $data[ '_orddd_lite_timestamp' ] ) ) {
-                        $delivery_date_prev_timestamp = $data['_orddd_lite_timestamp'][0];
-                        if( $delivery_date_prev_timestamp == '' ) {
-                            $old_order = "YES";
-                        }
-                    } else {
-                        $old_order = "YES";
-                    }
-        
-                    if ( isset( $data[ '_orddd_lite_timestamp' ] ) || isset( $data[ 'Delivery Date' ] ) ) {
-                        if ( isset( $data[ '_orddd_lite_timestamp' ] ) ) {
-                            $delivery_date_timestamp = $data[ '_orddd_lite_timestamp' ][ 0 ];
-                        } 
-                        if ( $delivery_date_timestamp == '' ) {
-                            $delivery_date_timestamp_1 = strtotime( $data[ 'Delivery Date' ][ 0 ] );
-                            if ( $delivery_date_timestamp_1 != '' ) {
-                                // add timestamp for sorting
-                                $date_format = 'MM d, yy';
-                                $delivery_date = $data[ 'Delivery Date' ][ 0 ];
-                                $hour = 0;
-                                $min = 1;
-                                switch ( $date_format ) {
-                                    case 'MM d, yy':
-                                        $date_str = str_replace( ',', '', $delivery_date );
-                                    break;
-                                }
-                                if ( isset( $date_str ) ) {
-                                    $timestamp = strtotime( $date_str );
-                                }   
-                                add_post_meta( $order_id, '_orddd_lite_timestamp', $timestamp );
-                            }
-                        }
-                    } 
-                }
-                if( count( $results ) > 0 ) {
-                    update_option( 'orddd_lite_steps_for_script', $step_variable );
-                    update_option( 'orddd_lite_orders_script_updated', $order_ids_updated );
-                    echo '<script>
-                    location.reload();
-                    </script>';
-                } else {
-                    update_option( 'orddd_timestamp_update_script', 'yes' );
-                    add_action( 'admin_notices', array( &$this, 'orddd_db_updated_notice' ) );
-                    echo'<script>
-                    window.location="'.get_admin_url().'edit.php?post_type=shop_order";
-                    </script>';
-                }
-            }
-        }   
             
-        /**
-        * Show database update notice for plugin version 1.9
-        *
-        */
-        function orddd_db_update_notice() {
-            $db_updated = get_option( 'orddd_timestamp_update_script' );
-            if ( $db_updated != 'yes' ) {
-                
-            ?>
-                <div class="error">
-                   <p><?php _e( 'Order Delivery Date for WooCommerce Plugin needs to update your database. Please <a href="?page=order_delivery_date_lite&action=date&mode=update_db">click here</a> to update.', 'order-delivery-date' ); ?></p>
-                </div>
-            <?php 
-            }
-        }
-            
-        /**
-        * Show database updated success notice for plugin version 1.9
-        *
-        */
-        function orddd_db_updated_notice() {
-        ?>
-            <div class="updated">
-                <p><?php _e( 'The database has been updated. You can now take advantage of all features of the Order Delivery Date plugin. Thank you.', 'order-delivery-date' ); ?></p>
-            </div>
-        <?php 
-        }
-
         function orddd_lite_my_enqueue( $hook ) {
             global $orddd_lite_languages, $wpefield_version;
             if( 'toplevel_page_order_delivery_date_lite' != $hook ) {
