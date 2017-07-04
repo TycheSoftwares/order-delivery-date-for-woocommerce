@@ -225,7 +225,7 @@ function avd( date ) {
 		delay_days.setDate( delay_days.getDate()+1 );
 	
 	}
-	if( isNaN( noOfDaysToFind ) ) {
+	if( isNaN( noOfDaysToFind ) || 0 === noOfDaysToFind ) {
 		noOfDaysToFind = 1000;
 	}
 	
