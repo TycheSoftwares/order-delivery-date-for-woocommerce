@@ -197,6 +197,10 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 
 == Changelog ==
 
+= 3.0 (06.07.2017) =
+
+* Fix - Delivery Calendar was not working on the checkout page when 'Number of dates to choose' setting is set to '0'. This is fixed now. 
+
 = 2.9 (31.03.2017) =
 
 * Fix - Warnings were displayed on the Order Received page with WooCommerce version 3.0.0. This is fixed now.
@@ -324,6 +328,10 @@ Note: Please take a back up before updating this version.
 * Initial release.
 
 == Upgrade Notice ==
+
+= 3.0 (06.07.2017) =
+
+* Fix - Delivery Calendar was not working on the checkout page when 'Number of dates to choose' setting is set to '0'. This is fixed now.
 
 = 2.9 (31.03.2017) =
 
