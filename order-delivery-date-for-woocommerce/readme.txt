@@ -196,6 +196,10 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+= 3.1 (19.07.2017) =
+
+* You can add the Delivery Date field on the WooCommerce Cart page along with the Checkout page. A checkbox is added for this under Appearance tab.
+* The selected Delivery Date will be retained until the order is placed.
 
 = 3.0 (06.07.2017) =
 
