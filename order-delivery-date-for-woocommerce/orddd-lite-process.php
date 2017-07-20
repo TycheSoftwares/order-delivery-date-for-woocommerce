@@ -1,6 +1,6 @@
 <?php
 class orddd_lite_process{
-	public static function orddd_lite_my_custom_checkout_field( $checkout ) {
+	public static function orddd_lite_my_custom_checkout_field( $checkout = '' ) {
         global $orddd_lite_weekdays, $wpefield_version;
         if ( get_option( 'orddd_lite_enable_delivery_date' ) == 'on' ) {
         	$var = '';
@@ -98,6 +98,27 @@ class orddd_lite_process{
 	    	$current_date = date( "j-n-Y", $current_time );
             $var .= '<input type="hidden" name="orddd_lite_current_day" id="orddd_lite_current_day" value="' . $current_date . '">';
 
+            $admin_url = get_admin_url();
+            $admin_url_arr = explode( "://", $admin_url );
+            $home_url = get_home_url();
+            $home_url_arr = explode( "://", $home_url );
+            if( $admin_url_arr[ 0 ] != $home_url_arr[ 0 ] ) {
+                $admin_url_arr[ 0 ] = $home_url_arr[ 0 ];
+                $ajax_url = implode( "://", $admin_url_arr );
+            } else {
+                $ajax_url = $admin_url;
+            }
+
+            $var .= '<input type="hidden" name="orddd_admin_url" id="orddd_admin_url" value="' . $ajax_url . '">';
+
+            //Session fields
+            if( isset( $_SESSION[ 'e_deliverydate_lite' ] ) ) {
+                $e_deliverydate_session = $_SESSION[ 'e_deliverydate_lite' ];
+                $h_deliverydate_session =$_SESSION[ 'h_deliverydate_lite' ];
+                $var .= '<input type="hidden" name="h_deliverydate_lite_session" id="h_deliverydate_lite_session" value="' . $h_deliverydate_session . '">';
+                $var .= '<input type="hidden" name="e_deliverydate_lite_session" id="e_deliverydate_lite_session" value="' . $e_deliverydate_session . '">';
+            }
+
 			echo $var;
 
             $delivery_enabled = orddd_lite_common::orddd_lite_is_delivery_enabled();
@@ -111,19 +132,37 @@ class orddd_lite_process{
                 if ( get_option( 'orddd_lite_date_field_mandatory' ) == 'checked' ) {
                     $validate_wpefield = true;
                 }
-            
-                woocommerce_form_field( 'e_deliverydate', array(
-                    'type'              => 'text',
-                    'label'             => __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ),
-                    'required'          => $validate_wpefield,
-                    'placeholder'       => __( get_option( 'orddd_lite_delivery_date_field_placeholder' ), 'order-delivery-date' ),
-                    'custom_attributes' => array( 'style'=>'cursor:text !important;')
-                ),
-                $checkout->get_value( 'e_deliverydate' ) );
+                if( '' == $checkout ) {
+                    woocommerce_form_field( 'e_deliverydate', array(
+                        'type'              => 'text',
+                        'label'             => __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ),
+                        'required'          => $validate_wpefield,
+                        'placeholder'       => __( get_option( 'orddd_lite_delivery_date_field_placeholder' ), 'order-delivery-date' ),
+                        'custom_attributes' => array( 'style'=>'cursor:text !important;')
+                    ) );
+                } else {
+                    woocommerce_form_field( 'e_deliverydate', array(
+                        'type'              => 'text',
+                        'label'             => __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ),
+                        'required'          => $validate_wpefield,
+                        'placeholder'       => __( get_option( 'orddd_lite_delivery_date_field_placeholder' ), 'order-delivery-date' ),
+                        'custom_attributes' => array( 'style'=>'cursor:text !important;')
+                    ),
+                    $checkout->get_value( 'e_deliverydate' ) );
+                }
             }
         }
     }
+    
+    public static function orddd_lite_update_delivery_session() {
         
+        $_SESSION[ 'e_deliverydate_lite' ] = $_POST[ 'e_deliverydate' ];
+        $_SESSION[ 'h_deliverydate_lite' ] = $_POST[ 'h_deliverydate' ];
+        
+        $_POST[ 'h_deliverydate' ] = "";
+        $_POST[ 'e_deliverydate' ] = "";
+    }
+
     public static function orddd_lite_my_custom_checkout_field_update_order_meta( $order_id ) {
         if ( isset( $_POST['e_deliverydate'] ) && $_POST['e_deliverydate'] != '' ) {
             if( isset( $_POST[ 'h_deliverydate' ] ) ) {	    
@@ -149,6 +188,14 @@ class orddd_lite_process{
             if( $is_delivery_enabled == 'yes' ) {
                 update_post_meta( $order_id, get_option( 'orddd_delivery_date_field_label' ), '' );
             }
+        }
+
+        if( isset( $_SESSION[ 'e_deliverydate_lite' ] ) ) {
+            unset( $_SESSION[ 'e_deliverydate_lite' ] );
+        }
+
+        if( isset( $_SESSION[ 'h_deliverydate_lite' ] ) ) {
+            unset( $_SESSION[ 'h_deliverydate_lite' ] );
         }
     }
         

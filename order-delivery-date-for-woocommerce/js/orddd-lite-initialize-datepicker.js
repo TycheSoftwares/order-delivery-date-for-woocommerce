@@ -17,6 +17,7 @@ jQuery(document).ready( function() {
     	beforeShowDay: chd, 
     	showButtonPanel: true,
     	closeText: jsL10n.clearText,
+    	onSelect: orddd_on_select_date,
         onClose:function( dateStr, inst ) {
             if ( dateStr != "" ) {
                 var monthValue = inst.selectedMonth+1;
@@ -47,9 +48,35 @@ jQuery(document).ready( function() {
     window.onload = load_lite_functions;
 });
 
+function orddd_on_select_date( date, inst ) {
+	var monthValue = inst.selectedMonth+1;
+    var dayValue = inst.selectedDay;
+    var yearValue = inst.selectedYear;
+    var all = dayValue + "-" + monthValue + "-" + yearValue;
+
+	var data = {
+        e_deliverydate: jQuery( "#e_deliverydate" ).val(),
+        h_deliverydate: all,
+        action: "orddd_lite_update_delivery_session"
+    };
+    
+    jQuery.post( jQuery( '#orddd_admin_url' ).val() + "admin-ajax.php", data, function( response ) {
+    });
+}
+
 function load_lite_functions() {
 	if( jQuery( "#orddd_lite_auto_populate_first_available_date" ).val() == "on" ) {
 		orddd_lite_autofil_date_time();
+    }
+
+    if( typeof( jQuery( '#e_deliverydate_lite_session' ).val() ) != 'undefined' && jQuery( '#e_deliverydate_lite_session' ).val() != '' ) {
+        var e_deliverydate_session = jQuery( '#e_deliverydate_lite_session' ).val();
+        var h_deliverydate_session = jQuery( '#h_deliverydate_lite_session' ).val();
+        var default_date_arr = h_deliverydate_session.split( '-' );
+        var default_date = new Date( default_date_arr[ 1 ] + '/' + default_date_arr[ 0 ] + '/' + default_date_arr[ 2 ] );
+        jQuery( '#e_deliverydate' ).datepicker( "setDate", default_date );
+        jQuery( "#h_deliverydate" ).val( h_deliverydate_session );
+        
     }
 }
 
