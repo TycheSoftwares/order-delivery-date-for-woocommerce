@@ -51,6 +51,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_action( ORDDD_LITE_SHOPPING_CART_HOOK, array( 'orddd_lite_process', 'orddd_lite_my_custom_checkout_field' ) );
             add_action( ORDDD_LITE_SHOPPING_CART_HOOK, array( &$this, 'orddd_lite_front_scripts_js' ) );
 
+            if( 'on' == get_option( 'orddd_lite_delivery_date_on_cart_page' ) ) {
+                add_action( 'woocommerce_cart_collaterals', array( 'orddd_lite_process', 'orddd_lite_my_custom_checkout_field' ) );
+                add_action( 'woocommerce_cart_collaterals', array( &$this, 'orddd_lite_front_scripts_js' ) );
+            }
+
             add_action( 'woocommerce_checkout_update_order_meta', array( 'orddd_lite_process', 'orddd_lite_my_custom_checkout_field_update_order_meta' ) );
            
             if ( defined( 'WOOCOMMERCE_VERSION' ) && version_compare( WOOCOMMERCE_VERSION, "2.3", '>=' ) < 0 ) {
@@ -76,8 +81,20 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_action( 'woocommerce_order_status_refunded' , array( 'orddd_lite_common', 'orddd_lite_cancel_delivery' ), 10, 1 );
             add_action( 'woocommerce_order_status_failed' , array( 'orddd_lite_common', 'orddd_lite_cancel_delivery' ), 10, 1 );
             add_action( 'wp_trash_post', array( 'orddd_lite_common', 'orddd_lite_cancel_delivery_for_trashed' ), 10, 1 );
+
+            //Ajax calls
+            add_action( 'init', array( &$this, 'orddd_lite_load_ajax' ) );
         }
         
+        function orddd_lite_load_ajax() {
+            session_start();
+            if ( !is_user_logged_in() ) {
+                add_action( 'wp_ajax_nopriv_orddd_lite_update_delivery_session', array( 'orddd_lite_process', 'orddd_lite_update_delivery_session' ) );
+            } else {
+                add_action( 'wp_ajax_orddd_lite_update_delivery_session', array( 'orddd_lite_process', 'orddd_lite_update_delivery_session' ) );
+            }
+        }
+
         function orddd_lite_activate() {
             global $orddd_lite_weekdays;
         

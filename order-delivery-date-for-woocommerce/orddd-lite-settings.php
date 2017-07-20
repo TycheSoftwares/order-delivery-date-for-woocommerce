@@ -223,7 +223,16 @@ class orddd_lite_settings {
             'orddd_lite_appearance_section',
             array( __( '</br>The Delivery Date field will be displayed in the selected section.</br><i>Note: WooCommerce automatically hides the Shipping section fields for Virtual products.</i>', 'order-delivery-date' ) )
         );
-    
+        
+        add_settings_field(
+            'orddd_lite_delivery_date_on_cart_page',
+            __( 'Delivery Date field on Cart page:', 'order-delivery-date' ),
+            array( 'orddd_lite_settings', 'orddd_lite_delivery_date_on_cart_page_callback' ),
+            'orddd_lite_appearance_page',
+            'orddd_lite_appearance_section',
+            array( __( 'Add the Delivery Date field on the cart page along with the Checkout page.' ) )
+        );
+
         add_settings_field(
             'orddd_lite_calendar_theme_name',
             __( 'Theme:', 'order-delivery-date' ),
@@ -282,6 +291,11 @@ class orddd_lite_settings {
             'orddd_lite_delivery_date_fields_on_checkout_page'
         );
          
+        register_setting(
+            'orddd_lite_appearance_settings',
+            'orddd_lite_delivery_date_on_cart_page'
+        );
+
         register_setting(
             'orddd_lite_appearance_settings',
             'orddd_lite_calendar_theme_name'
@@ -683,6 +697,24 @@ class orddd_lite_settings {
     	echo $html;
     }
     
+    /**
+    * Callback for adding Delivery Date field on Cart page setting
+    *
+    * @param array $args
+    */
+
+    public static function orddd_lite_delivery_date_on_cart_page_callback( $args ) {
+        $delivery_date_on_cart_page = "";
+        if ( get_option( ' orddd_lite_delivery_date_on_cart_page' ) == 'on' ) {
+            $delivery_date_on_cart_page = "checked";
+        }
+        
+        echo '<input type="checkbox" name="orddd_lite_delivery_date_on_cart_page" id="orddd_lite_delivery_date_on_cart_page" class="day-checkbox" ' . $delivery_date_on_cart_page . '/>';
+
+        $html = '<label for="orddd_lite_delivery_date_on_cart_page"> ' . $args[0] . '</label>';
+        echo $html; 
+    }
+
     /**
     * Callback for adding Calendar theme setting
     *
