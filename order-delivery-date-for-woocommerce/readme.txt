@@ -5,7 +5,7 @@ Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, order delivery date, woocommerce delivery date, delivery, order delivery
 Requires at least: 4.8
 Tested up to: 4.8
-Stable tag: 2.9
+Stable tag: 3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -196,7 +196,7 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
-= 3.1 (19.07.2017) =
+= 3.1 (20.07.2017) =
 
 * You can add the Delivery Date field on the WooCommerce Cart page along with the Checkout page. A checkbox is added for this under Appearance tab.
 * The selected Delivery Date will be retained until the order is placed.
