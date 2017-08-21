@@ -314,13 +314,13 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         function admin_notices_scripts() {
             wp_enqueue_script(
                 'dismiss-notice.js',
-                plugins_url('/js/dismiss-notice.js', __FILE__),
+                esc_url( plugins_url('/js/dismiss-notice.js', __FILE__) ),
                 '',
                 '',
                 false
             );
         
-            wp_enqueue_style( 'dismiss-notice', plugins_url('/css/dismiss-notice.css', __FILE__ ) , '', '', false);
+            wp_enqueue_style( 'dismiss-notice', esc_url( plugins_url('/css/dismiss-notice.css', __FILE__ ) ), '', '', false );
         }
             
         function orddd_lite_my_enqueue( $hook ) {
@@ -330,18 +330,18 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             }
             
             wp_dequeue_script( 'themeswitcher' );
-            wp_enqueue_script( 'themeswitcher-orddd', plugins_url( '/js/jquery.themeswitcher.min.js', __FILE__ ), array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-datepicker' ), $wpefield_version, false );
+            wp_enqueue_script( 'themeswitcher-orddd', esc_url( plugins_url( '/js/jquery.themeswitcher.min.js', __FILE__ ) ), array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-datepicker' ), $wpefield_version, false );
                 
             foreach ( $orddd_lite_languages as $key => $value ) {
-                wp_enqueue_script( $value, plugins_url( "/js/i18n/jquery.ui.datepicker-$key.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
+                wp_enqueue_script( $value, esc_url( plugins_url( "/js/i18n/jquery.ui.datepicker-$key.js", __FILE__ ) ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
             }
             
-            wp_register_style( 'woocommerce_admin_styles', plugins_url() . '/woocommerce/assets/css/admin.css', array(), WC_VERSION );
+            wp_register_style( 'woocommerce_admin_styles', esc_url( plugins_url() . '/woocommerce/assets/css/admin.css' ), array(), WC_VERSION );
             wp_enqueue_style( 'woocommerce_admin_styles' );
-            wp_enqueue_style( 'order-delivery-date', plugins_url('/css/order-delivery-date.css', __FILE__ ) , '', $wpefield_version, false);
-            wp_register_style( 'jquery-ui-style', '//code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css', '', $wpefield_version, false );
+            wp_enqueue_style( 'order-delivery-date', esc_url( plugins_url('/css/order-delivery-date.css', __FILE__ ) ) , '', $wpefield_version, false);
+            wp_register_style( 'jquery-ui-style', esc_url( '//code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css' ), '', $wpefield_version, false );
             wp_enqueue_style( 'jquery-ui-style' );
-            wp_enqueue_style( 'datepicker', plugins_url('/css/datepicker.css', __FILE__) , '', $wpefield_version, false);            
+            wp_enqueue_style( 'datepicker', esc_url( plugins_url('/css/datepicker.css', __FILE__) ), '', $wpefield_version, false);            
         }
         
         function orddd_lite_front_scripts_js() {
@@ -352,12 +352,12 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                     $calendar_theme = 'base';
                 }
                 wp_dequeue_style( 'jquery-ui-style' );
-                wp_register_style( 'jquery-ui-style-orddd-lite', "//code.jquery.com/ui/1.9.2/themes/$calendar_theme/jquery-ui.css", '', $wpefield_version, false );
+                wp_register_style( 'jquery-ui-style-orddd-lite', esc_url( "//code.jquery.com/ui/1.9.2/themes/$calendar_theme/jquery-ui.css" ), '', $wpefield_version, false );
                 wp_enqueue_style( 'jquery-ui-style-orddd-lite' );
-                wp_enqueue_style( 'datepicker', plugins_url('/css/datepicker.css', __FILE__) , '', $wpefield_version, false);
+                wp_enqueue_style( 'datepicker', esc_url( plugins_url('/css/datepicker.css', __FILE__) ), '', $wpefield_version, false);
                 
                 wp_dequeue_script( 'initialize-datepicker' );
-                wp_enqueue_script( 'initialize-datepicker-orddd', plugins_url('/js/orddd-lite-initialize-datepicker.js', __FILE__ ), '', $wpefield_version, false );
+                wp_enqueue_script( 'initialize-datepicker-orddd', esc_url( plugins_url( '/js/orddd-lite-initialize-datepicker.js', __FILE__ ) ), '', $wpefield_version, false );
                 
                 $jsArgs = array(
                         'clearText'    => __( 'Clear', 'order-delivery-date' )
@@ -383,7 +383,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                     }
                 }
                  
-                wp_enqueue_script( $language_selected, plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
+                wp_enqueue_script( $language_selected, esc_url( plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ) ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
             }
         }               
     }

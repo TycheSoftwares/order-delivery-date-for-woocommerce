@@ -745,10 +745,10 @@ class orddd_lite_settings {
                         jQuery( "<link/>", {
                             rel: "stylesheet",
                             type: "text/css",
-                            href: "' . plugins_url( "/css/datepicker.css", __FILE__ ) . '"
+                            href: "' . esc_url( plugins_url( "/css/datepicker.css", __FILE__ ) ). '"
                         }).appendTo("head");
                     },
-                    imgpath: "'.plugins_url().'/order-delivery-date-for-woocommerce/images/",
+                    imgpath: "'. esc_url( plugins_url().'/order-delivery-date-for-woocommerce/images/' ) .'",
                     loadTheme: "' . get_option( 'orddd_lite_calendar_theme_name' ) . '",
                     
                 });
@@ -821,7 +821,7 @@ class orddd_lite_settings {
     public static function orddd_lite_holidays_callback( $input ) {
         $output = array();
         if( isset( $_POST[ 'orddd_lite_holiday_date' ]  ) ) {
-            $date_arr = explode( "-", $_POST[ 'orddd_lite_holiday_date' ] );
+            $date_arr = explode( "-", sanitize_text_field( $_POST[ 'orddd_lite_holiday_date' ] ) );
             $holiday_date = date( ORDDD_LITE_HOLIDAY_DATE_FORMAT, gmmktime( 0, 0, 0, $date_arr[ 0 ], $date_arr[ 1 ], $date_arr[ 2 ] ) );
 
             $holidays = get_option( 'orddd_lite_holidays' );
@@ -835,7 +835,7 @@ class orddd_lite_settings {
                 $holidays_new_arr[] = array( 'n' => $v->n, 'd' => $v->d );
             }
             
-            $holiday_name = str_replace( "\'", "", $_POST[ 'orddd_lite_holiday_name' ] );
+            $holiday_name = str_replace( "\'", "", sanitize_text_field( $_POST[ 'orddd_lite_holiday_name' ] ) );
             $holiday_name = str_replace( '\"', '', $holiday_name );
             $holidays_new_arr[] = array( 'n' => $holiday_name,
                 'd' => $holiday_date );
@@ -876,7 +876,7 @@ class orddd_lite_settings {
                     update_option( 'orddd_lite_holidays', $holidays_jarr );                
                 }
             } 
-            wp_safe_redirect( admin_url( '/admin.php?page=order_delivery_date_lite&action=holidays' ) );
+            wp_safe_redirect( esc_url( admin_url( '/admin.php?page=order_delivery_date_lite&action=holidays' ) ) );
         }
     }
 }
