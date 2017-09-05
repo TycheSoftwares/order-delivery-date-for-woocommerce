@@ -279,7 +279,7 @@ class orddd_lite_process{
         if( $is_delivery_enabled == 'yes' ) {
             //Check if set, if its not set add an error.
             if ( $delivery_date == '' ) {
-                $message = __( '<strong>' . __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ) . '</strong> is a required field.', 'order-delivery-date' );
+                $message = '<strong>' . __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ) . '</strong>' . ' ' . __( 'is a required field.', 'order-delivery-date' );
                 wc_add_notice( $message, $notice_type = 'error' );
             }
         }
