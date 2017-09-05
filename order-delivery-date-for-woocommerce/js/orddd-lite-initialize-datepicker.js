@@ -199,7 +199,7 @@ function nd( date ) {
 		var holidays_array = disabledDays[ i ].split( ":" );
 		if( holidays_array[ 1 ] == ( ( m+1 ) + '-' + d + '-' + y ) ) {
 			if( '' == holidays_array[ 0 ] ) {
-				return [ false, "", "Holiday" ];
+				return [ false, "", jsL10n.holidayText ];
 			} else {
 				return [ false, "", holidays_array[ 0 ]  ];
 			}
@@ -213,7 +213,7 @@ function dwd( date ) {
 	var lockoutDays = eval( '[' + jQuery( '#orddd_lite_lockout_days' ).val() + ']' );
 	for ( i = 0; i < lockoutDays.length; i++ ) {
 		if( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, lockoutDays ) != -1 ) {
-			return [ false, "", "Booked" ];
+			return [ false, "", jsL10n.bookedText ];
 		}
 	}
 	var day = 'orddd_lite_weekday_' + date.getDay();
@@ -394,4 +394,3 @@ function gd( date1, date2, interval ) {
 			return undefined;
 	}
 }
-
