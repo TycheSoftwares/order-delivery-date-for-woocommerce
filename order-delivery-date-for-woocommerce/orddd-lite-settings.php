@@ -321,14 +321,14 @@ class orddd_lite_settings {
         // First, we register a section. This is necessary since all future options must belong to one.
         add_settings_section (
             'orddd_lite_holidays_section',
-            'Add Holiday',
+            __( 'Add Holiday', 'order-delivery-date' ),
             array( 'orddd_lite_settings', 'orddd_lite_holidays_admin_settings_callback' ),
             'orddd_lite_holidays_page'
         );
     
         add_settings_field (
             'orddd_lite_holiday_name',
-            'Name:',
+            __( 'Name:', 'order-delivery-date' ),
             array( 'orddd_lite_settings', 'orddd_lite_holidays_name_callback' ),
             'orddd_lite_holidays_page',
             'orddd_lite_holidays_section',
@@ -337,7 +337,7 @@ class orddd_lite_settings {
     
         add_settings_field(
             'orddd_lite_holiday_date',
-            'Date:',
+            __( 'Date:', 'order-delivery-date' ),
             array( 'orddd_lite_settings', 'orddd_lite_holidays_date_callback' ),
             'orddd_lite_holidays_page',
             'orddd_lite_holidays_section',
@@ -374,7 +374,7 @@ class orddd_lite_settings {
             $active_holidays = 'nav-tab-active'; 
         }
         ?>
-        <h2>Order Delivery Date Settings</h2>
+        <h2><?php _e( 'Order Delivery Date Settings', 'order-delivery-date' ); ?></h2>
         <?php 
         settings_errors();
         ?>	

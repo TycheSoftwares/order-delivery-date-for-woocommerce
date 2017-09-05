@@ -360,7 +360,9 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 wp_enqueue_script( 'initialize-datepicker-orddd', esc_url( plugins_url( '/js/orddd-lite-initialize-datepicker.js', __FILE__ ) ), '', $wpefield_version, false );
                 
                 $jsArgs = array(
-                        'clearText'    => __( 'Clear', 'order-delivery-date' )
+                        'clearText'    => __( 'Clear', 'order-delivery-date' ),
+                        'holidayText'  => __( 'Holiday', 'order-delivery-date' ),
+                        'bookedText'   => __( 'Booked', 'order-delivery-date' )
                     );
                 wp_localize_script( 'initialize-datepicker-orddd', 'jsL10n', $jsArgs );
 
