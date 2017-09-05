@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-28 16:18+0530\n"
+"POT-Creation-Date: 2017-09-05 10:49+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,228 +17,363 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: order_delivery_date.php:249
-#, php-format
+#: order_delivery_date.php:182
 msgid ""
-"You can upgrade to the <a href=\"https://www.tychesoftwares.com/store/"
-"premium-plugins/order-delivery-date-for-woocommerce-pro-21/\">PRO version of "
-"Order Delivery Date for WooCommerce plugin</a> at a <b>20% discount</b>. Use "
-"the coupon code: <b>ORDPRO20</b>.<a href=\"https://www.tychesoftwares.com/"
-"store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/\"> "
-"Purchase now </a> & save $20!"
+"Order Delivery Date for WooCommerce (Lite version) plugin requires "
+"WooCommerce installed and activate."
 msgstr ""
 
-#: order_delivery_date.php:256
-msgid ""
-"Minimum Delivery time (in days) will now be calculated in hours which is "
-"from current WordPress time. To keep the functionality of our plugin intact "
-"at your site, we have added +24 hours to the 'Minimum Delivery time (in "
-"hours)' setting."
-msgstr ""
-
-#: order_delivery_date.php:339
-msgid "Order Delivery Date Settings"
-msgstr ""
-
-#: order_delivery_date.php:346
-msgid "Delivery Days:"
-msgstr ""
-
-#: order_delivery_date.php:350
-msgid "Select weekdays for delivery."
-msgstr ""
-
-#: order_delivery_date.php:355
-msgid "Minimum Delivery time (in hours):"
-msgstr ""
-
-#: order_delivery_date.php:359
-msgid "Minimum number of hours required to prepare for delivery."
+#: order_delivery_date.php:363
+msgid "Clear"
 msgstr ""
 
 #: order_delivery_date.php:364
+msgid "Holiday"
+msgstr ""
+
+#: order_delivery_date.php:365
+msgid "Booked"
+msgstr ""
+
+#: class-view-holidays.php:32
+msgid "holiday"
+msgstr ""
+
+#: class-view-holidays.php:33
+msgid "holidays"
+msgstr ""
+
+#: class-view-holidays.php:42
+msgid "Delete"
+msgstr ""
+
+#: class-view-holidays.php:82
+msgid "Name"
+msgstr ""
+
+#: class-view-holidays.php:83
+msgid "Date"
+msgstr ""
+
+#: orddd-lite-config.php:120
+msgid "Sunday"
+msgstr ""
+
+#: orddd-lite-config.php:121
+msgid "Monday"
+msgstr ""
+
+#: orddd-lite-config.php:122
+msgid "Tuesday"
+msgstr ""
+
+#: orddd-lite-config.php:123
+msgid "Wednesday"
+msgstr ""
+
+#: orddd-lite-config.php:124
+msgid "Thursday"
+msgstr ""
+
+#: orddd-lite-config.php:125
+msgid "Friday"
+msgstr ""
+
+#: orddd-lite-config.php:126
+msgid "Saturday"
+msgstr ""
+
+#: orddd-lite-pro-notices.php:22
+msgid ""
+"Thank you for using Order Delivery Date for WooCommerce! Never login to your "
+"admin to check your deliveries by syncing the delivery dates to the Google "
+"Calendar from Order Delivery Date Pro for WooCommerce. <strong><a target="
+"\"_blank\" href= \""
+msgstr ""
+
+#: orddd-lite-pro-notices.php:42
+msgid ""
+"Send Product review emails to the customers on the next day of delivery "
+"using Post Delivery Product Reviews Addon for Order Delivery Date plugin. "
+"<strong><a target=\"_blank\" href= \""
+msgstr ""
+
+#: orddd-lite-pro-notices.php:65 orddd-lite-pro-notices.php:112
+msgid ""
+"Boost your sales by recovering the abandoned carts with our FREE Abandoned "
+"Cart for WooCommerce plugin. <strong><a target=\"_blank\" href= \""
+msgstr ""
+
+#: orddd-lite-pro-notices.php:88 orddd-lite-pro-notices.php:134
+#: orddd-lite-pro-notices.php:157
+#, php-format
+msgid ""
+"Create Delivery Settings by Shipping Zones & Shipping Classes using Order "
+"Delivery Date Pro for WooCommerce plugin. <br>Use discount code \"ORDPRO20\" "
+"and grab 20% discount on the purchase of the plugin. The discount code is "
+"valid only for the first 20 customers. <strong><a target=\"_blank\" href= \""
+msgstr ""
+
+#: orddd-lite-pro-notices.php:182
+msgid ""
+"Receive feedbacks for your products from verified owners by sending them "
+"post delivery emails using Post Delivery Product Reviews addon of Order "
+"Delivery Date plugin. <strong><a target=\"_blank\" href= \""
+msgstr ""
+
+#: orddd-lite-process.php:282
+msgid "is a required field."
+msgstr ""
+
+#: orddd-lite-settings.php:13 orddd-lite-settings.php:377
+msgid "Order Delivery Date Settings"
+msgstr ""
+
+#: orddd-lite-settings.php:20
+msgid "Enable Delivery Date:"
+msgstr ""
+
+#: orddd-lite-settings.php:24
+msgid "Enable Delivery Date capture on the checkout page."
+msgstr ""
+
+#: orddd-lite-settings.php:29
+msgid "Delivery Days:"
+msgstr ""
+
+#: orddd-lite-settings.php:33
+msgid "Select weekdays for delivery."
+msgstr ""
+
+#: orddd-lite-settings.php:38
+msgid "Minimum Delivery time (in hours):"
+msgstr ""
+
+#: orddd-lite-settings.php:42
+msgid "Minimum number of hours required to prepare for delivery."
+msgstr ""
+
+#: orddd-lite-settings.php:47
 msgid "Number of dates to choose:"
 msgstr ""
 
-#: order_delivery_date.php:368
+#: orddd-lite-settings.php:51
 msgid "Number of dates available for delivery."
 msgstr ""
 
-#: order_delivery_date.php:373
+#: orddd-lite-settings.php:56
 msgid "Mandatory field?:"
 msgstr ""
 
-#: order_delivery_date.php:377
+#: orddd-lite-settings.php:60
 msgid "Selection of delivery date on the checkout page will become mandatory."
 msgstr ""
 
-#: order_delivery_date.php:382
+#: orddd-lite-settings.php:65
 msgid "Lockout date after X orders:"
 msgstr ""
 
-#: order_delivery_date.php:386
+#: orddd-lite-settings.php:69
 msgid "Maximum deliveries/orders per day."
 msgstr ""
 
-#: order_delivery_date.php:391
+#: orddd-lite-settings.php:74
 msgid "Sort on WooCommerce Orders Page:"
 msgstr ""
 
-#: order_delivery_date.php:395
+#: orddd-lite-settings.php:78
 msgid ""
 "Enable default sorting of orders (in descending order) by Delivery Date on "
 "WooCommerce -> Orders page"
 msgstr ""
 
-#: order_delivery_date.php:434
+#: orddd-lite-settings.php:83
+msgid "Auto-populate first available Delivery date:"
+msgstr ""
+
+#: orddd-lite-settings.php:87
+msgid ""
+"Auto-populate first available Delivery date when the checkout page loads."
+msgstr ""
+
+#: orddd-lite-settings.php:92
+msgid "Apply Minimum Delivery Time for non working weekdays:"
+msgstr ""
+
+#: orddd-lite-settings.php:96
+msgid ""
+"If selected, then the Minimum Delivery Time (in hours) will be applied on "
+"the non working weekdays which are unchecked in Delivery Weekdays. If "
+"unchecked, then it will not be applied. For example, if Minimum Delivery "
+"Time (in hours) is set to 48 hours and Saturday is disabled for delivery. "
+"Now if a customer visits the website on Firday, then the first available "
+"date will be Monday and not Sunday."
+msgstr ""
+
+#: orddd-lite-settings.php:150
 msgid "Calendar Appearance"
 msgstr ""
 
-#: order_delivery_date.php:441
+#: orddd-lite-settings.php:157
 msgid "Calendar Language:"
 msgstr ""
 
-#: order_delivery_date.php:445
+#: orddd-lite-settings.php:161
 msgid "Choose a Language."
 msgstr ""
 
-#: order_delivery_date.php:450
+#: orddd-lite-settings.php:166
 msgid "Date Format:"
 msgstr ""
 
-#: order_delivery_date.php:454
+#: orddd-lite-settings.php:170
 msgid ""
 "The format in which the Delivery Date appears to the customers on the "
 "checkout page once the date is selected."
 msgstr ""
 
-#: order_delivery_date.php:459
+#: orddd-lite-settings.php:175
 msgid "First Day of Week:"
 msgstr ""
 
-#: order_delivery_date.php:463
+#: orddd-lite-settings.php:179
 msgid "Choose the first day of week displayed on the Delivery Date calendar."
 msgstr ""
 
-#: order_delivery_date.php:468
+#: orddd-lite-settings.php:184
 msgid "Field Label:"
 msgstr ""
 
-#: order_delivery_date.php:472
+#: orddd-lite-settings.php:188
 msgid ""
 "Choose the label that is to be displayed for the field on checkout page."
 msgstr ""
 
-#: order_delivery_date.php:477
+#: orddd-lite-settings.php:193
 msgid "Field Placeholder Text:"
 msgstr ""
 
-#: order_delivery_date.php:481
+#: orddd-lite-settings.php:197
 msgid ""
 "Choose the placeholder text that is to be displayed for the field on "
 "checkout page."
 msgstr ""
 
-#: order_delivery_date.php:486
+#: orddd-lite-settings.php:202
 msgid "Field Note Text:"
 msgstr ""
 
-#: order_delivery_date.php:490
+#: orddd-lite-settings.php:206
 msgid ""
 "Choose the note to be displayed below the delivery date field on checkout "
 "page."
 msgstr ""
 
-#: order_delivery_date.php:495
+#: orddd-lite-settings.php:211
 msgid "Number of Months:"
 msgstr ""
 
-#: order_delivery_date.php:499
+#: orddd-lite-settings.php:215
 msgid "The number of months to be shown on the calendar."
 msgstr ""
 
-#: order_delivery_date.php:504
-msgid "Delivery date in the Shipping Section:"
+#: orddd-lite-settings.php:220
+msgid "Field placement on the Checkout page:"
 msgstr ""
 
-#: order_delivery_date.php:508
+#: orddd-lite-settings.php:224
 msgid ""
-"If the checkbox is checked then Delivery Date will be displayed in the "
-"shipping section otherwise in the billing section.</br><i>Note: WooCommerce "
-"automatically hides the Shipping section fields for Virtual products.</i>"
+"</br>The Delivery Date field will be displayed in the selected section.</"
+"br><i>Note: WooCommerce automatically hides the Shipping section fields for "
+"Virtual products.</i>"
 msgstr ""
 
-#: order_delivery_date.php:513
+#: orddd-lite-settings.php:229
+msgid "Delivery Date field on Cart page:"
+msgstr ""
+
+#: orddd-lite-settings.php:233
+msgid ""
+"Add the Delivery Date field on the cart page along with the Checkout page."
+msgstr ""
+
+#: orddd-lite-settings.php:238
 msgid "Theme:"
 msgstr ""
 
-#: order_delivery_date.php:517
+#: orddd-lite-settings.php:242
 msgid ""
 "Select the theme for the calendar which blends with the design of your "
 "website."
 msgstr ""
 
-#: order_delivery_date.php:596
+#: orddd-lite-settings.php:247
+msgid "Disable the Delivery Date Field for:"
+msgstr ""
+
+#: orddd-lite-settings.php:251
+msgid ""
+"<br>Disable the Delivery Date on the Checkout page for Virtual products and "
+"Featured products."
+msgstr ""
+
+#: orddd-lite-settings.php:324
+msgid "Add Holiday"
+msgstr ""
+
+#: orddd-lite-settings.php:331
+msgid "Name:"
+msgstr ""
+
+#: orddd-lite-settings.php:340
+msgid "Date:"
+msgstr ""
+
+#: orddd-lite-settings.php:382
 msgid "Date Settings"
 msgstr ""
 
-#: order_delivery_date.php:597
+#: orddd-lite-settings.php:383
 msgid "Appearance"
 msgstr ""
 
-#: order_delivery_date.php:605 order_delivery_date.php:613
+#: orddd-lite-settings.php:384 orddd-lite-settings.php:412
+msgid "Holidays"
+msgstr ""
+
+#: orddd-lite-settings.php:392 orddd-lite-settings.php:400
+#: orddd-lite-settings.php:408
 msgid "Save Settings"
 msgstr ""
 
-#: order_delivery_date.php:622
+#: orddd-lite-settings.php:443
 msgid "Weekdays:"
 msgstr ""
 
-#: order_delivery_date.php:878
+#: orddd-lite-settings.php:691
+msgid "In Billing Section"
+msgstr ""
+
+#: orddd-lite-settings.php:692
+msgid "In Shipping Section"
+msgstr ""
+
+#: orddd-lite-settings.php:693
+msgid "Before Order Notes"
+msgstr ""
+
+#: orddd-lite-settings.php:694
+msgid "After Order Notes"
+msgstr ""
+
+#: orddd-lite-settings.php:765
 msgid "Preview theme:"
 msgstr ""
 
-#: order_delivery_date.php:1100
-msgid "<strong>"
+#: orddd-lite-settings.php:779
+msgid "Virtual Products"
 msgstr ""
 
-#: order_delivery_date.php:1217
-msgid ""
-"Order Delivery Date for WooCommerce Plugin needs to update your database. "
-"Please <a href=\"?page=order_delivery_date_lite&action=date&mode=update_db"
-"\">click here</a> to update."
-msgstr ""
-
-#: order_delivery_date.php:1230
-msgid ""
-"The database has been updated. You can now take advantage of all features of "
-"the Order Delivery Date plugin. Thank you."
-msgstr ""
-
-#: orddd-lite-config.php:118
-msgid "Sunday"
-msgstr ""
-
-#: orddd-lite-config.php:119
-msgid "Monday"
-msgstr ""
-
-#: orddd-lite-config.php:120
-msgid "Tuesday"
-msgstr ""
-
-#: orddd-lite-config.php:121
-msgid "Wednesday"
-msgstr ""
-
-#: orddd-lite-config.php:122
-msgid "Thursday"
-msgstr ""
-
-#: orddd-lite-config.php:123
-msgid "Friday"
-msgstr ""
-
-#: orddd-lite-config.php:124
-msgid "Saturday"
+#: orddd-lite-settings.php:787
+msgid "Featured Products"
 msgstr ""
