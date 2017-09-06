@@ -104,7 +104,25 @@ If you like Order Delivery Date, please leave a [5 star](https://wordpress.org/s
 
 2. **[Product Delivery Date for WooCommerce - Lite](https://wordpress.org/plugins/product-delivery-date-for-woocommerce-lite/ "Product Delivery Date for WooCommerce")**
 
-3. **[Prevent Customers To Cancel WooCommerce Orders](https://wordpress.org/plugins/woo-prevent-cancel-order/ "Prevent Customers To Cancel WooCommerce Orders")**
+3. **[WooCommerce Print Invoice & Delivery Note](https://wordpress.org/plugins/woocommerce-delivery-notes/ "WooCommerce Print Invoice & Delivery Note")**
+
+4. **[Order Delivery Date for WP e-Commerce](https://wordpress.org/plugins/order-delivery-date/ "Order Delivery Date for WP e-Commerce")**
+
+5. **[Prevent Customers To Cancel WooCommerce Orders](https://wordpress.org/plugins/woo-prevent-cancel-order/ "Prevent Customers To Cancel WooCommerce Orders")**
+
+6. **[WooCommerce Coupons by Categories and Tags](https://wordpress.org/plugins/woo-coupons-by-categories-and-tags/ "WooCommerce Coupons by Categories and Tags")**
+
+7. **[Arconix FAQ](https://wordpress.org/plugins/arconix-faq/ "Arconix FAQ")**
+
+8. **[Arconix Shortcodes](https://wordpress.org/plugins/arconix-shortcodes/ "Arconix Shortcodes")**
+
+9. **[Arconix Flexslider](https://wordpress.org/plugins/arconix-flexslider/ "Arconix Flexslider")**
+
+10. **[Arconix Portfolio](https://wordpress.org/plugins/arconix-portfolio/ "Arconix Portfolio")**
+
+11. **[Arconix Testimonials](https://wordpress.org/plugins/arconix-testimonials/ "Arconix Testimonials")**
+
+12. **[Export WordPress Menus](https://wordpress.org/plugins/wp-export-menus/ "Export WordPress Menus")**
 
 > Great plugin that does exactly what it says.
 > I had a minor conflict with another plugin & within 4 hours they provided a new version of the plugin to solve the issue. Now, that’s good support.
