@@ -5,7 +5,7 @@ Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, order delivery date, woocommerce delivery date, delivery, order delivery
 Requires at least: 4.8
 Tested up to: 4.8
-Stable tag: 3.1
+Stable tag: 3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -214,6 +214,11 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+= 3.2 (06.09.2017) =
+
+* A new language "Persian" is added for the calendar. Now you can set your Delivery Calendar in the Persian language on the Checkout Page.
+* Some strings were not translated using the .po files. This is fixed now.
+
 = 3.1 (20.07.2017) =
 
 * You can add the Delivery Date field on the WooCommerce Cart page along with the Checkout page. A checkbox is added for this under Appearance tab.
@@ -350,6 +355,15 @@ Note: Please take a back up before updating this version.
 * Initial release.
 
 == Upgrade Notice ==
+= 3.2 (06.09.2017) =
+
+* A new language "Persian" is added for the calendar. Now you can set your Delivery Calendar in the Persian language on the Checkout Page.
+* Some strings were not translated using the .po files. This is fixed now.
+
+= 3.1 (20.07.2017) =
+
+* You can add the Delivery Date field on the WooCommerce Cart page along with the Checkout page. A checkbox is added for this under Appearance tab.
+* The selected Delivery Date will be retained until the order is placed.
 
 = 3.0 (06.07.2017) =
 
