@@ -19,6 +19,14 @@ include_once( 'orddd-lite-process.php' );
 include_once( 'filter.php' );
 include_once( 'orddd-lite-pro-notices.php' );
 
+if ( is_admin() ) {
+    require_once( 'welcome.php' );
+
+    define( 'ORDDD_VERSION', orddd_lite_common::orddd_get_version() );
+
+    define( 'ORDDD_PLUGIN_URL', orddd_lite_common::orddd_get_plugin_url() );
+}
+
 if ( !class_exists( 'order_delivery_date_lite' ) ) {
     class order_delivery_date_lite {
         

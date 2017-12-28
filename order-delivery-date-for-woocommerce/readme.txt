@@ -98,6 +98,8 @@ If you like Order Delivery Date, please leave a [5 star](https://wordpress.org/s
 
 4. **[Product Delivery Date Pro for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Product Delivery Date Pro for WooCommerce")**
 
+5. **[Deposits For WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/deposits-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Deposits For WooCommerce")**
+
 ### Some of our other free plugins
 
 1. **[Abandoned Cart Lite for WooCommerce](https://wordpress.org/plugins/woocommerce-abandoned-cart/ "Abandoned Cart Lite for WooCommerce")**
@@ -216,7 +218,7 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 == Changelog ==
 = 3.2 (06.09.2017) =
 
-* A new language "Persian" is added for the calendar. Now you can set your Delivery Calendar in the Persian language on the Checkout Page.
+* A new language 'Persian' is added for the calendar. Now you can set your Delivery Calendar in the Persian language on the Checkout Page.
 * Some strings were not translated using the .po files. This is fixed now.
 
 = 3.1 (20.07.2017) =
@@ -357,7 +359,7 @@ Note: Please take a back up before updating this version.
 == Upgrade Notice ==
 = 3.2 (06.09.2017) =
 
-* A new language "Persian" is added for the calendar. Now you can set your Delivery Calendar in the Persian language on the Checkout Page.
+* A new language 'Persian' is added for the calendar. Now you can set your Delivery Calendar in the Persian language on the Checkout Page.
 * Some strings were not translated using the .po files. This is fixed now.
 
 = 3.1 (20.07.2017) =

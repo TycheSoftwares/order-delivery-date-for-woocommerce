@@ -312,5 +312,27 @@ class orddd_lite_common {
 	    }
 	    return $delivery_enabled;
 	}
+
+	/**
+     * This function returns the Order Delivery Date Lite plugin version number.
+     */
+    public static function orddd_get_version() {
+        $plugin_version = '';
+        $orddd_plugin_dir =  dirname ( dirname (__FILE__) );
+        $orddd_plugin_dir .= '/order-delivery-date-for-woocommerce/order_delivery_date.php';
+
+        $plugin_data = get_file_data( $orddd_plugin_dir, array( 'Version' => 'Version' ) );
+        if ( ! empty( $plugin_data['Version'] ) ) {
+            $plugin_version = $plugin_data[ 'Version' ];
+        }
+        return $plugin_version;
+    }
+
+    /**
+     * This function returns the plugin url 
+     */
+    public static function orddd_get_plugin_url() {
+        return plugins_url() . '/order-delivery-date-for-woocommerce/';
+    }
 }
 ?>
