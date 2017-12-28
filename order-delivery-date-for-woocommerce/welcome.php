@@ -1,9 +1,3 @@
-<style>
-	.feature-section .feature-section-item {
-		float:left;
-		width:48%;
-	}
-</style>
 <?php 
 
 /**
@@ -91,6 +85,12 @@ class ORDDD_Welcome {
 		// Badge for welcome page
 		$badge_url = ORDDD_PLUGIN_URL . 'images/icon-256x256.png';		
 		?>
+		<style>
+			.feature-section .feature-section-item {
+				float:left;
+				width:48%;
+			}
+		</style>
         <div class="wrap about-wrap">
 
 			<?php $this->get_welcome_header() ?>
