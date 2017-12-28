@@ -216,6 +216,12 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+= 3.3 (28.12.2017) =
+
+* The delivery date field label was not coming properly on the checkout page. This is fixed now.
+* Delivery weekdays were not getting deleted when the plugin is deleted. This is fixed now. 
+* Some errors in the debug.log file are fixed. 
+
 = 3.2 (06.09.2017) =
 
 * A new language 'Persian' is added for the calendar. Now you can set your Delivery Calendar in the Persian language on the Checkout Page.
@@ -357,6 +363,12 @@ Note: Please take a back up before updating this version.
 * Initial release.
 
 == Upgrade Notice ==
+= 3.3 (28.12.2017) =
+
+* The delivery date field label was not coming properly on the checkout page. This is fixed now.
+* Delivery weekdays were not getting deleted when the plugin is deleted. This is fixed now. 
+* Some errors in the debug.log file are fixed. 
+
 = 3.2 (06.09.2017) =
 
 * A new language 'Persian' is added for the calendar. Now you can set your Delivery Calendar in the Persian language on the Checkout Page.
