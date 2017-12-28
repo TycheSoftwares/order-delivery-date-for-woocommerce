@@ -216,6 +216,10 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+= 3.3.1 (28.12.2017) =
+
+*A warning is fixed which was displayed when the plugin is activated.
+
 = 3.3 (28.12.2017) =
 
 * The delivery date field label was not coming properly on the checkout page. This is fixed now.
@@ -363,6 +367,10 @@ Note: Please take a back up before updating this version.
 * Initial release.
 
 == Upgrade Notice ==
+= 3.3.1 (28.12.2017) =
+
+*A warning is fixed which was displayed when the plugin is activated.
+
 = 3.3 (28.12.2017) =
 
 * The delivery date field label was not coming properly on the checkout page. This is fixed now.
