@@ -111,6 +111,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_option( 'orddd_lite_default_appearance_settings', 'yes' );
             add_option( 'orddd_lite_enable_default_sorting_of_column', '' );
             add_option( 'orddd_lite_enable_delivery_date_enabled', 'yes' );
+            add_option( 'orddd_lite_auto_populate_first_available_date', 'on' );
             
             // appearance options
             add_option( 'orddd_lite_delivery_date_format', ORDDD_LITE_DELIVERY_DATE_FORMAT );
