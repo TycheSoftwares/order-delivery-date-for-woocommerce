@@ -153,15 +153,25 @@ function minimum_date_to_set( delay_days ) {
 					}
 				}
 			} else {
-				if( current_day <= delay_days ) {
-					var m = current_day.getMonth(), d = current_day.getDate(), y = current_day.getFullYear();
-					if( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 ) {	
-						delay_days.setDate( delay_days.getDate()+1 );
-						delay_time = delay_days.getTime();
-					}
+				day = 'orddd_lite_weekday_' + current_weekday;
+				day_check = jQuery( "#" + day ).val();
+				if ( day_check == '' ) {
+					delay_days.setDate( delay_days.getDate()+1 );
+					delay_time = delay_days.getTime();
 					current_day.setDate( current_day.getDate()+1 );
 					current_time = current_day.getTime();
 					current_weekday = current_day.getDay();
+				} else {
+					if( current_day <= delay_days ) {
+						var m = current_day.getMonth(), d = current_day.getDate(), y = current_day.getFullYear();
+						if( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 ) {	
+							delay_days.setDate( delay_days.getDate()+1 );
+							delay_time = delay_days.getTime();
+						}
+						current_day.setDate( current_day.getDate()+1 );
+						current_time = current_day.getTime();
+						current_weekday = current_day.getDay();
+					}
 				}
 			}
 		} else {
