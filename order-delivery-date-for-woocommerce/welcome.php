@@ -206,7 +206,7 @@ class ORDDD_Welcome {
 	            </div>
 
                 <a href="https://www.tychesoftwares.com/differences-pro-lite-versions-order-delivery-date-woocommerce-plugin/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank" class="button-secondary">
-					<?php esc_html_e( 'View full list of differences between Lite & Pro plugin', 'woocommerce-ac' ); ?>
+					<?php esc_html_e( 'View full list of differences between Lite & Pro plugin', 'order-delivery-date' ); ?>
                     <span class="dashicons dashicons-external"></span>
                 </a>
             </div>
@@ -215,20 +215,20 @@ class ORDDD_Welcome {
 
                 <div class="content feature-section-item">
 
-                    <h3><?php esc_html_e( 'Getting to Know Tyche Softwares', 'woocommerce-ac' ); ?></h3>
+                    <h3><?php esc_html_e( 'Getting to Know Tyche Softwares', 'order-delivery-date' ); ?></h3>
 
                     <ul class="ul-disc">
-                        <li><a href="https://tychesoftwares.com/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=AbandonedCartLitePlugin" target="_blank"><?php esc_html_e( 'Visit the Tyche Softwares Website', 'woocommerce-ac' ); ?></a></li>
-                        <li><a href="https://tychesoftwares.com/premium-plugins/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=AbandonedCartLitePlugin" target="_blank"><?php esc_html_e( 'View all Premium Plugins', 'woocommerce-ac' ); ?></a>
+                        <li><a href="https://www.tychesoftwares.com/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank"><?php esc_html_e( 'Visit the Tyche Softwares Website', 'order-delivery-date' ); ?></a></li>
+                        <li><a href="https://www.tychesoftwares.com/premium-plugins/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank"><?php esc_html_e( 'View all Premium Plugins', 'order-delivery-date' ); ?></a>
                         <ul class="ul-disc">
-                        	<li><a href="https://www.tychesoftwares.com/store/premium-plugins/woocommerce-abandoned-cart-pro/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=AbandonedCartLitePlugin" target="_blank">Abandoned Cart Pro Plugin for WooCommerce</a></li>
-                        	<li><a href="https://www.tychesoftwares.com/store/premium-plugins/woocommerce-booking-plugin/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=AbandonedCartLitePlugin" target="_blank">Booking & Appointment Plugin for WooCommerce</a></li>
-                        	<li><a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=AbandonedCartLitePlugin" target="_blank">Order Delivery Date for WooCommerce</a></li>
-                        	<li><a href="https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=AbandonedCartLitePlugin" target="_blank">Product Delivery Date for WooCommerce</a></li>
-                        	<li><a href="https://www.tychesoftwares.com/store/premium-plugins/deposits-for-woocommerce/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=AbandonedCartLitePlugin" target="_blank">Deposits for WooCommerce</a></li>
+                        	<li><a href="https://www.tychesoftwares.com/store/premium-plugins/woocommerce-abandoned-cart-pro/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank">Abandoned Cart Pro Plugin for WooCommerce</a></li>
+                        	<li><a href="https://www.tychesoftwares.com/store/premium-plugins/woocommerce-booking-plugin/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank">Booking & Appointment Plugin for WooCommerce</a></li>
+                        	<li><a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank">Order Delivery Date for WooCommerce</a></li>
+                        	<li><a href="https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank">Product Delivery Date for WooCommerce</a></li>
+                        	<li><a href="https://www.tychesoftwares.com/store/premium-plugins/deposits-for-woocommerce/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank">Deposits for WooCommerce</a></li>
                         </ul>
                         </li>
-                        <li><a href="https://tychesoftwares.com/about/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=AbandonedCartLitePlugin" target="_blank"><?php esc_html_e( 'Meet the team', 'woocommerce-ac' ); ?></a></li>
+                        <li><a href="https://tychesoftwares.com/about/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank"><?php esc_html_e( 'Meet the team', 'order-delivery-date' ); ?></a></li>
                     </ul>
 
                 </div>
@@ -236,9 +236,9 @@ class ORDDD_Welcome {
 
                 <div class="content feature-section-item">
 
-                    <h3><?php esc_html_e( 'Current Offers', 'woocommerce-ac' ); ?></h3>
+                    <h3><?php esc_html_e( 'Current Offers', 'order-delivery-date' ); ?></h3>
 
-                    <p>Buy all our <a href="https://tychesoftwares.com/premium-plugins/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=AbandonedCartLitePlugin" target="_blank">premium plugins</a> at 30% off till 31st December 2017</p>
+                    <p>Buy all our <a href="https://tychesoftwares.com/premium-plugins/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank">premium plugins</a> at 30% off till 31st December 2017</p>
 
                 </div>
 
@@ -306,8 +306,8 @@ class ORDDD_Welcome {
 
 
 	/**
-	 * Sends user to the Welcome page on first activation of Abandoned Cart Lite as well as each
-	 * time Abandoned Cart Lite is upgraded to a new version
+	 * Sends user to the Welcome page on first activation of Order Delivery Date Lite as well as each
+	 * time Order Delivery Date Lite is upgraded to a new version
 	 *
 	 * @access public
 	 * @since  3.3
