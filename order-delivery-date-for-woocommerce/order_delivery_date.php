@@ -1,15 +1,19 @@
 <?php 
 /*
 Plugin Name: Order Delivery Date for WooCommerce (Lite version)
-Plugin URI: http://www.tychesoftwares.com/store/free-plugin/order-delivery-date-on-checkout/
+Plugin URI: https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/
 Description: This plugin allows customers to choose their preferred Order Delivery Date during checkout.
 Author: Tyche Softwares
-Version: 3.3.1
-Author URI: http://www.tychesoftwares.com/about
+Version: 3.4
+Author URI: https://www.tychesoftwares.com/
 Contributor: Tyche Softwares, http://www.tychesoftwares.com/
+Text Domain: order-delivery-date
+Requires PHP: 5.6
+WC requires at least: 3.0.0
+WC tested up to: 3.2.0
 */
 
-$wpefield_version = '3.3.1';
+$wpefield_version = '3.4';
 
 include_once( 'integration.php' );
 include_once( 'orddd-lite-config.php' );
@@ -217,7 +221,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         function orddd_lite_update_db_check() {
             global $orddd_lite_plugin_version, $wpefield_version;
             $orddd_lite_plugin_version = $wpefield_version;
-            if ( $orddd_lite_plugin_version == "3.3.1" ) {
+            if ( $orddd_lite_plugin_version == "3.4" ) {
                 order_delivery_date_lite::orddd_lite_update_install();
             }
         }
@@ -228,7 +232,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             //code to set the option to on as default
             $orddd_lite_plugin_version = get_option( 'orddd_lite_db_version' );
             if ( $orddd_lite_plugin_version != order_delivery_date_lite::get_orddd_lite_version() ) {
-                update_option( 'orddd_lite_db_version', '3.3.1' );
+                update_option( 'orddd_lite_db_version', '3.4' );
                 if ( get_option( 'orddd_lite_update_value' ) != 'yes' ) {
                     $i = 0;
                     foreach ( $orddd_lite_weekdays as $n => $day_name ) {
@@ -402,4 +406,43 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
     }
 } 
 $order_delivery_date_lite = new order_delivery_date_lite();
+
+// ADDING A NEW COLUMN TEST
+add_filter( 'manage_edit-shop_order_columns', 'my_columns_fn' );
+function my_columns_fn( $columns ) {
+    $new_columns = ( is_array( $columns ) ) ? $columns : array();
+    unset( $new_columns[ 'order_actions' ] );
+
+    //edit this for your column(s)
+    //all of your columns will be added before the actions column
+    $new_columns['fecha_horneada'] = 'Fecha Horneada';
+    $new_columns['encargado'] = 'Encargado';
+
+    //stop editing
+    $new_columns[ 'order_actions' ] = $columns[ 'order_actions' ];
+    return $new_columns;
+}
+
+add_filter( "manage_edit-shop_order_sortable_columns", 'my_columns_sort_fn' );
+function my_columns_sort_fn( $columns )
+{
+    $custom = array(
+        'fecha_horneada' => 'fecha_horneada_data',
+        'encargado' => 'encargado_data'
+    );
+    return wp_parse_args( $custom, $columns );
+}
+
+add_action( 'manage_shop_order_posts_custom_column', 'my_columns_values_fn', 2 );
+function my_columns_values_fn( $column ) {
+    global $post;
+    $data = get_post_meta( $post->ID );
+    if ( $column == 'fecha_horneada' ) {
+        echo ( isset( $data[ 'fecha_horneada_data' ] ) ? $data[ 'fecha_horneada_data' ] : '' );
+    }
+    if ( $column == 'encargado' ) {
+        echo ( isset( $data[ 'encargado_data' ] ) ? $data[ 'encargado_data' ] : '' );
+    }
+}
+
 ?>
