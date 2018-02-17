@@ -3,9 +3,9 @@ Contributors: ashokrane, MoxaJogani, bhavik.kiri, komal-maru, tychesoftwares
 Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, order delivery date, woocommerce delivery date, delivery, order delivery
-Requires at least: 4.8
-Tested up to: 4.8
-Stable tag: 3.2
+Requires at least: 1.3
+Tested up to: 4.9.2
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -216,6 +216,17 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+= 3.4.1 (17.02.2018) =
+
+* The language slug of Abandon Cart Lite was being used at many places. Fixed that.
+* The UTM link of AbandonedCartLitePlugin was being used on some links, changed that.
+* Updated compatibility with latest WooCommerce 3.3.x
+
+= 3.4 (24.01.2018) =
+
+* Auto-populate will be enabled by default for all new plugin installations. This will help in selecting the first available delivery date automatically on the checkout page.
+* Delivery Date was coming incorrect when the option "Apply Minimum Delivery Time for non working weekdays" was enabled. This has been fixed.
+
 = 3.3.1 (28.12.2017) =
 
 *A warning is fixed which was displayed when the plugin is activated.
