@@ -1,18 +1,29 @@
 <?php 
 
+/* Order Delivery Date for WooCommerce Lite
+*
+* Common functions used in multiple files are added
+*
+* @author      Tyche Softwares
+* @package     ORDDD_LITE/CLASSES
+* @since       3.5
+* @category    Classes
+*/
+
 /**
- * orddd_common Class
- *
- * @class orddd_common
+ * Class for the common functions used in the plugin
  */
 class orddd_lite_common {
     
     /**
      * Return the date with the selected langauge in Appearance tab
      * 
-     * @param string $delivery_date_formatted
-     * @param string $delivery_date_timestamp
-     * @return string
+     * @param string $delivery_date_formatted Default Delivery Date
+     * @param string $delivery_date_timestamp Delivery Date Timestamp
+     * @return string Translated Delivery Date
+     * @global array $orddd_lite_languages Languages array
+     * @global array $orddd_lite_languages_locale Locale of all languages array
+     * @since 1.9
      */
 	public static function delivery_date_lite_language( $delivery_date_formatted, $delivery_date_timestamp ) {
 		global $orddd_lite_languages, $orddd_lite_languages_locale;
@@ -84,12 +95,15 @@ class orddd_lite_common {
 		return $delivery_date_formatted;
 	}
 	
-	/** 
-	 * Returns Delivery date for an order
-	 * 
-	 * @param int $order_id
-	 * @return string
-	 */
+	/**
+     * Return the delivery date selected for the order
+     *
+     * @param int $order_id Order ID
+     * @return string Delivery Date for the order
+     * @global array $orddd_lite_date_formats Date Format array
+     * @since 1.9
+     */
+
 	public static function orddd_lite_get_order_delivery_date( $order_id ) {
 	    global $orddd_lite_date_formats;
 	    $data = get_post_meta( $order_id );
@@ -125,10 +139,10 @@ class orddd_lite_common {
 	/**
 	 * Returns timestamp for the selected Delivery date
 	 * 
-	 * @param string $delivery_date
-	 * @param string $date_format
-	 * @param array $time_setting
-	 * @return string
+	 * @param string $delivery_date Selected Delivery Date 
+	 * @param string $date_format Date Format 
+	 * @return string Timestamp for the selected delivery date
+	 * @since 1.7
 	 */
 	
 	public static function orddd_lite_get_timestamp( $delivery_date, $date_format ) {
@@ -216,9 +230,20 @@ class orddd_lite_common {
 	    } else {
 	        $timestamp = '';
 	    }
+
 	    return $timestamp;
 	}
 	
+	/**
+	 * Free up the delivery date and time if an order is moved to trashed
+	 * 
+	 * @hook wp_trash_post
+	 *
+	 * @param int $order_id Order ID
+	 * @global string typenow
+	 * @since 2.5
+	 */
+
 	public static function orddd_lite_cancel_delivery_for_trashed( $order_id ) {
 	    global $typenow;
 	    $post_obj = get_post( $order_id );
@@ -231,7 +256,20 @@ class orddd_lite_common {
 	        }
 	    }
 	}
-	
+		
+
+	/**
+	 * Free up the delivery date and time if an order is cancelled, refunded or failed
+	 * 
+	 * @hook woocommerce_order_status_cancelled
+	 * @hook woocommerce_order_status_refunded
+	 * @hook woocommerce_order_status_failed
+	 *
+	 * @param int $order_id Order ID
+	 * @global string typenow
+	 * @since 2.5
+	 */
+
 	public static function orddd_lite_cancel_delivery( $order_id ) {
 	    global $wpdb, $typenow;
 	    $post_meta = get_post_meta( $order_id, '_orddd_lite_timestamp' );
@@ -272,7 +310,9 @@ class orddd_lite_common {
 	/**
 	 * Checks if there is a Virtual product in cart
 	 *
-	 * @return string
+	 * @global $woocommerce WooCommerce Object
+	 * @return string yes if virtual product is there in the cart else no
+	 * @since 1.7
 	 */
 	public static function orddd_lite_is_delivery_enabled() {
 	    global $woocommerce;
@@ -315,6 +355,9 @@ class orddd_lite_common {
 
 	/**
      * This function returns the Order Delivery Date Lite plugin version number.
+     *     
+	 * @return string Version of the plugin
+	 * @since 3.3
      */
     public static function orddd_get_version() {
         $plugin_version = '';
@@ -330,6 +373,8 @@ class orddd_lite_common {
 
     /**
      * This function returns the plugin url 
+     * @return string Base URL of the plugin
+	 * @since 3.3
      */
     public static function orddd_get_plugin_url() {
         return plugins_url() . '/order-delivery-date-for-woocommerce/';
