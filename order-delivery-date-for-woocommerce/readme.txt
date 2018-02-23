@@ -216,6 +216,10 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+= 3.4.2 (22.02.2018) =
+
+* Additional columns "Fecha Horneada" and "Encargado" were added on the WooCommerce Edit order page when the plugin is updated to version 3.4.1. 
+
 = 3.4.1 (17.02.2018) =
 
 * The language slug of Abandon Cart Lite was being used at many places. Fixed that.
@@ -378,6 +382,21 @@ Note: Please take a back up before updating this version.
 * Initial release.
 
 == Upgrade Notice ==
+= 3.4.2 (22.02.2018) =
+
+* Additional columns "Fecha Horneada" and "Encargado" were added on the WooCommerce Edit order page when the plugin is updated to version 3.4.1. 
+
+= 3.4.1 (17.02.2018) =
+
+* The language slug of Abandon Cart Lite was being used at many places. Fixed that.
+* The UTM link of AbandonedCartLitePlugin was being used on some links, changed that.
+* Updated compatibility with latest WooCommerce 3.3.x
+
+= 3.4 (24.01.2018) =
+
+* Auto-populate will be enabled by default for all new plugin installations. This will help in selecting the first available delivery date automatically on the checkout page.
+* Delivery Date was coming incorrect when the option "Apply Minimum Delivery Time for non working weekdays" was enabled. This has been fixed.
+
 = 3.3.1 (28.12.2017) =
 
 *A warning is fixed which was displayed when the plugin is activated.
