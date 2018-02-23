@@ -16,7 +16,7 @@ class ORDDD_LITE_View_Holidays_Table extends WP_List_Table {
 	 * URL of this page
 	 *
 	 * @var string
-	 * @since 1.4.1
+	 * @since 2.8
 	 */
 	public $base_url;
 	
@@ -37,14 +37,21 @@ class ORDDD_LITE_View_Holidays_Table extends WP_List_Table {
 		$this->base_url = admin_url( 'admin.php?page=order_delivery_date_lite&action=holidays' );
 	}
 	
+	/**
+	 * Add the Delete Bulk Action
+	 * @since 2.8
+	 */
 	public function get_bulk_actions() {
 	    return array(
 	        'orddd_lite_delete' => __( 'Delete', 'order-delivery-date' )
 	    );
 	}
 	
-	/**
+    /**
 	 * It is used to add the check box for the items
+	 * 
+	 * @param object $item
+	 * @since 2.8
 	 **/
 	function column_cb( $item ){
 	    $row_id = '';
@@ -60,6 +67,8 @@ class ORDDD_LITE_View_Holidays_Table extends WP_List_Table {
 	
 	/**
 	 * Prepare items to display in the table
+	 * 
+	 * @since 2.8
 	 */
 	public function orddd_prepare_items() {
 		$columns  = $this->get_columns();
@@ -72,9 +81,10 @@ class ORDDD_LITE_View_Holidays_Table extends WP_List_Table {
 	}
 	
 	/**
-	 * Return columns to add in the table
+	 * Return columns to be displayed in the table
 	 * 
-	 * @return array
+	 * @return array $columns - An array of column Names
+	 * @since 2.8
 	 */
 	public function get_columns() {
 		$columns = array(
@@ -88,9 +98,9 @@ class ORDDD_LITE_View_Holidays_Table extends WP_List_Table {
 	/**
 	 * Displays the data in the table
 	 * 
-	 * @return array
+	 * @return array $return_holidays - contains the holidays to be displayed
+	 * @since 2.8
 	 */
-	
 	public function orddd_lite_holidays_data() { 
 		$holidays_arr = $return_holidays = array();
 		$holidays = get_option( 'orddd_lite_holidays' );
@@ -112,9 +122,10 @@ class ORDDD_LITE_View_Holidays_Table extends WP_List_Table {
 	/**
 	 * Add Edit and Delete link in each row of the table data
 	 * 
-	 * @param resource $shipping_settings
-	 * @param string $column_name
-	 * @return $arrayName = array('' => , );
+	 * @param resource $holiday_settings - Holiday details
+     * @param string $column_name - Column Name
+     * @return $arrayName = array('' => , );
+     * @since 2.8
 	 */
 	public function column_default( $holiday_settings, $column_name ) {
 	    $value = isset( $holiday_settings->$column_name ) ? $holiday_settings->$column_name : '';

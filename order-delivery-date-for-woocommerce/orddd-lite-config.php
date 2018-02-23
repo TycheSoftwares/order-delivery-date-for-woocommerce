@@ -1,7 +1,13 @@
 <?php
-
+/**
+ * Define the global arrays
+ */
 global $orddd_lite_calendar_themes, $orddd_lite_weekdays, $orddd_lite_calendar_languages, $orddd_lite_date_formats, $orddd_lite_number_of_months, $orddd_lite_days, $orddd_lite_languages, $orddd_lite_languages_locale;
 
+/**
+ * Define the Language locales
+ * @since 1.9
+ */
 $orddd_lite_languages_locale = array(
     'Afrikaans'           => array( 'af_ZA.utf8', 'afr' ),
     'Arabic'              => array( 'ar_SA.utf8', 'ara', 'ar-SA' ),
@@ -68,6 +74,10 @@ $orddd_lite_languages_locale = array(
     'Chinese Simplified'  => array( 'zh_CN.utf8', 'zho' ),
     'Chinese Traditional' => array( 'zh_TW.utf8', 'zho' ) );
 
+/**
+ * Define the Date Formats available for the Delivery Date
+ * @since 1.9
+ */
 $orddd_lite_date_formats = array( 
     'mm/dd/y'	   => 'm/d/y',
 	'dd/mm/y'	   => 'd/m/y',
@@ -86,10 +96,18 @@ $orddd_lite_date_formats = array(
     'DD, MM d, yy' => 'l, F j, Y',
 	'D, MM d, yy'  => 'D, F j, Y' );
 
+/**
+ * Define the Number of months to be displayed in The Delivery Calendar
+ * @since 1.9
+ */
 $orddd_lite_number_of_months = array( 
     1 => 1, 
     2 => 2 );
 
+/**
+ * Define the Calendar themes
+ * @since 1.9
+ */
 $orddd_lite_calendar_themes = array( 
     'smoothness'	 => 'Smoothness',
 	'ui-lightness'   => 'UI lightness',
@@ -116,6 +134,10 @@ $orddd_lite_calendar_themes = array(
 	'trontastic'	 => 'Trontastic',
 	'swanky-purse'   => 'Swanky Purse' );
 
+/**
+ * Define the Weekdays available for delivery
+ * @since 1.9
+ */
 $orddd_lite_weekdays = array(
     'orddd_lite_weekday_0' => __( 'Sunday', 'order-delivery-date' ),
 	'orddd_lite_weekday_1' => __( 'Monday', 'order-delivery-date' ),
@@ -125,8 +147,10 @@ $orddd_lite_weekdays = array(
 	'orddd_lite_weekday_5' => __( 'Friday', 'order-delivery-date' ),
 	'orddd_lite_weekday_6' => __( 'Saturday', 'order-delivery-date' ) );
 
-//This array prepared for Selecting the first day of week
-
+/**
+ * Define the weekdays available to select the first day of the week.
+ * @since 1.9 
+ */
 $orddd_lite_days = array( 
     '0' => 'Sunday',
     '1' => 'Monday',
@@ -136,6 +160,10 @@ $orddd_lite_days = array(
     '5' => 'Friday',
     '6' => 'Saturday' );
 
+/**
+ * Define the Languages
+ * @since 1.9
+ */
 $orddd_lite_languages = array(
 		'af'	=> 'Afrikaans',
 		'ar'	=> 'Arabic',
@@ -202,6 +230,10 @@ $orddd_lite_languages = array(
 		'zh-CN' => 'Chinese Simplified',
 		'zh-TW' => 'Chinese Traditional' );
 
+/**
+ * Define the constants
+ * @since 1.9
+ */
 define( 'ORDDD_LITE_DELIVERY_DATE_FIELD_LABEL', 'Delivery Date' );
 define( 'ORDDD_LITE_DELIVERY_DATE_FIELD_PLACEHOLDER', 'Choose a Date' );
 define( 'ORDDD_LITE_DELIVERY_DATE_FIELD_NOTE', 'We will try our best to deliver your order on the specified date.' );
@@ -211,6 +243,10 @@ define( 'ORDDD_LITE_HOLIDAY_DATE_FORMAT', 'n-j-Y' );
 define( 'ORDDD_LITE_CALENDAR_THEME', 'smoothness' );
 define( 'ORDDD_LITE_CALENDAR_THEME_NAME', 'Smoothness' );
 
+/**
+ * Add some constants for hooks
+ * @since 1.9
+ */
 if ( get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) == 'billing_section' ) {
     define( 'ORDDD_LITE_SHOPPING_CART_HOOK', 'woocommerce_after_checkout_billing_form' );
 } else if ( get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) == 'shipping_section' ) {
