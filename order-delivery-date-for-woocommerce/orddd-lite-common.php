@@ -21,8 +21,8 @@ class orddd_lite_common {
      * @param string $delivery_date_formatted Default Delivery Date
      * @param string $delivery_date_timestamp Delivery Date Timestamp
      * @return string Translated Delivery Date
-     * @global array $orddd_lite_languages Languages array
-     * @global array $orddd_lite_languages_locale Locale of all languages array
+     * @globals array $orddd_lite_languages Languages array
+     * @globals array $orddd_lite_languages_locale Locale of all languages array
      * @since 1.9
      */
 	public static function delivery_date_lite_language( $delivery_date_formatted, $delivery_date_timestamp ) {
@@ -100,7 +100,7 @@ class orddd_lite_common {
      *
      * @param int $order_id Order ID
      * @return string Delivery Date for the order
-     * @global array $orddd_lite_date_formats Date Format array
+     * @globals array $orddd_lite_date_formats Date Format array
      * @since 1.9
      */
 
@@ -240,7 +240,7 @@ class orddd_lite_common {
 	 * @hook wp_trash_post
 	 *
 	 * @param int $order_id Order ID
-	 * @global string typenow
+	 * @globals string typenow
 	 * @since 2.5
 	 */
 
@@ -266,7 +266,7 @@ class orddd_lite_common {
 	 * @hook woocommerce_order_status_failed
 	 *
 	 * @param int $order_id Order ID
-	 * @global string typenow
+	 * @globals string typenow
 	 * @since 2.5
 	 */
 
@@ -310,7 +310,7 @@ class orddd_lite_common {
 	/**
 	 * Checks if there is a Virtual product in cart
 	 *
-	 * @global $woocommerce WooCommerce Object
+	 * @globals resource $woocommerce WooCommerce Object
 	 * @return string yes if virtual product is there in the cart else no
 	 * @since 1.7
 	 */
