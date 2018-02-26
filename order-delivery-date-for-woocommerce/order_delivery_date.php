@@ -11,10 +11,19 @@ Text Domain: order-delivery-date
 Requires PHP: 5.6
 WC requires at least: 3.0.0
 WC tested up to: 3.3.0
+* @package     ORDDD_LITE/CLASSES
 */
 
+/**
+ * Latest version of the plugin
+ * @since 1.0
+ */
 $wpefield_version = '3.4.2';
 
+/**
+ * Include the require files
+ * @since 1.0
+ */
 include_once( 'integration.php' );
 include_once( 'orddd-lite-config.php' );
 include_once( 'orddd-lite-common.php' );
@@ -22,6 +31,12 @@ include_once( 'orddd-lite-settings.php' );
 include_once( 'orddd-lite-process.php' );
 include_once( 'filter.php' );
 include_once( 'orddd-lite-pro-notices.php' );
+
+/**
+* Defines the plugin version and url when on the admin page
+* 
+* @since 3.4
+*/
 
 if ( is_admin() ) {
     require_once( 'welcome.php' );
@@ -32,8 +47,17 @@ if ( is_admin() ) {
 }
 
 if ( !class_exists( 'order_delivery_date_lite' ) ) {
+    /**
+     * Main Order Delivery Date class
+     */
+
     class order_delivery_date_lite {
         
+        /**
+         * Default Constructor
+         * 
+         * @since 1.0
+         */        
         public function __construct() {
             //Initialize settings
             register_activation_hook( __FILE__,  array( &$this, 'orddd_lite_activate' ) );
@@ -97,6 +121,13 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_action( 'init', array( &$this, 'orddd_lite_load_ajax' ) );
         }
         
+        /**
+         * Loads ajax callback
+         * 
+         * @hook init
+         * @since 1.5
+         */  
+
         function orddd_lite_load_ajax() {
             if( '' == session_id() ) {
                 session_start();    
@@ -107,6 +138,14 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 add_action( 'wp_ajax_orddd_lite_update_delivery_session', array( 'orddd_lite_process', 'orddd_lite_update_delivery_session' ) );
             }
         }
+
+        /**
+         * Add default settings when plugin is activated for the first time
+         * 
+         * @hook register_activation_hook
+         * @globals array $orddd_lite_weekdays Weekdays array
+         * @since 1.5
+         */ 
 
         function orddd_lite_activate() {
             global $orddd_lite_weekdays;
@@ -149,7 +188,13 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             }
         }
 
-        // For language translation
+        /**
+         * Load text domain for language translation
+         * 
+         * @hook init
+         * @since 1.5
+         */ 
+
         function  orddd_lite_update_po_file() {
             $domain = 'order-delivery-date';
             $locale = apply_filters( 'plugin_locale', get_locale(), $domain );
@@ -161,7 +206,10 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
 
         /**
-         * Check if WooCommerce is active.
+         * Check if WooCommerce is active
+         * 
+         * @return bool
+         * @since 2.6
          */
         public static function orddd_lite_check_woo_installed() {
             if ( class_exists( 'WooCommerce' ) ) {
@@ -172,8 +220,10 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
         
         /**
-         * Function checks if the WooCommerce plugin is active or not. If it is not active then it will display a notice.
-         *
+         * Check if WooCommerce plugin is active or not. If it is not active then it will display a notice.
+         * 
+         * @hook admin_init
+         * @since 2.6
          */
         
         function orddd_lite_check_if_woocommerce_active() {
@@ -189,8 +239,10 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
         
         /**
-         * Display a notice in the admin Plugins page if the booking plugin is
-         * activated while WooCommerce is deactivated.
+         * Display a notice in the admin Plugins page if the plugin is activated while WooCommerce is deactivated.
+         * 
+         * @hook admin_notices
+         * @since 2.6
          */
         public static function orddd_lite_disabled_notice() {
             $class = 'notice notice-error';
@@ -199,11 +251,12 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             printf( '<div class="%1$s"><p>%2$s</p></div>', $class, $message );
         }
         
-       
-
-        /***********************************************************
-         * This function returns the order delivery date plugin version number
-         **********************************************************/
+        /**
+         * Returns the order delivery date plugin version number
+         * 
+         * @return int $plugin_version Plugin Version 
+         * @since 1.0
+         */
         
         function get_orddd_lite_version() {
             $plugin_data = get_plugin_data( __FILE__ );
@@ -211,21 +264,29 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             return $plugin_version;
         }
         
-        /***************************************************************
-         *  This function is executed when the plugin is updated using
-         *  the Automatic Updater. It calls the wpefield_update_install function
-         *  which will check the options for the plugin and
-         *  make any changes if necessary.
-         ***************************************************************/
+        /**
+         * This function is executed when the plugin is updated using the Automatic Updater.
+         * 
+         * @globals int $wpefield_version Plugin Version
+         * 
+         * @hook admin_init
+         * @since 1.0
+         */
         
         function orddd_lite_update_db_check() {
-            global $orddd_lite_plugin_version, $wpefield_version;
-            $orddd_lite_plugin_version = $wpefield_version;
-            if ( $orddd_lite_plugin_version == "3.4.2" ) {
+            global $wpefield_version;
+            if ( $wpefield_version == "3.4.2" ) {
                 order_delivery_date_lite::orddd_lite_update_install();
             }
         }
         
+        /**
+         * Updates the require options when the plugin is updated using the Automatic Updater.
+         * 
+         * @globals resource $wpdb
+         * @globals array $orddd_lite_weekdays Weekdays array
+         * @since 1.0
+         */
         function orddd_lite_update_install() {
             global $wpdb, $orddd_lite_weekdays;
         
@@ -315,9 +376,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         }
         
         
-        
         /** 
 		 * Capability to allow shop manager to edit settings
+         * 
+         * @hook admin_init
+         * @since 2.2
 		 */
 		function orddd_lite_capabilities() {
             $role = get_role( 'shop_manager' );
@@ -326,6 +389,12 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
 		    }
 		}
         
+        /** 
+         * Enqueue scripts in the admin footer
+         * 
+         * @hook admin_footer
+         * @since 2.6
+         */
         function admin_notices_scripts() {
             wp_enqueue_script(
                 'dismiss-notice.js',
@@ -337,7 +406,15 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         
             wp_enqueue_style( 'dismiss-notice', esc_url( plugins_url('/css/dismiss-notice.css', __FILE__ ) ), '', '', false );
         }
-            
+        
+        /** 
+         * Enqueue scripts on the admin Order Delivery Date menu page
+         * 
+         * @hook admin_enqueue_scripts
+         * 
+         * @param string @hook 
+         * @since 1.0
+         */    
         function orddd_lite_my_enqueue( $hook ) {
             global $orddd_lite_languages, $wpefield_version;
             if( 'toplevel_page_order_delivery_date_lite' != $hook ) {
@@ -359,6 +436,13 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             wp_enqueue_style( 'datepicker', esc_url( plugins_url('/css/datepicker.css', __FILE__) ), '', $wpefield_version, false);            
         }
         
+        /** 
+         * Enqueue scripts on the frontend checkout page
+         * 
+         * @hook admin_enqueue_scripts
+         * @since 1.0
+         */   
+
         function orddd_lite_front_scripts_js() {
             global $wpefield_version;
             if ( get_option( 'orddd_lite_enable_delivery_date' ) == 'on' ) {
