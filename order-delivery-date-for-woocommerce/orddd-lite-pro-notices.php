@@ -1,6 +1,26 @@
 <?php
+/* Order Delivery Date for WooCommerce Lite
+*
+* Add notices of Pro plugin in some interval of days 
+*
+* @author      Tyche Softwares
+* @package     ORDDD_LITE/CLASSES
+* @since       3.0
+* @category    Classes
+*/
+
+/**
+ * Class for adding notices of Pro plugin in some interval of days 
+ */
 
 class orddd_lite_pro_notices {
+
+	/**
+	 * Add notices of Pro features in the admin in the interval of 15, 30 and 45 days
+	 * 
+	 * @hook admin_notices
+	 * @since 3.0
+	 */	
 	public static function orddd_lite_notices_of_pro() {
 		$orddd_lite_activate_time = get_option ( 'orddd_lite_activate_time' );
         $orddd_lite_sixty_days    = strtotime( '+60 Days', $orddd_lite_activate_time );
@@ -190,11 +210,13 @@ class orddd_lite_pro_notices {
 	}
 
 	/**
-	 * Ignore pro notice
+	 * If a user clicks to ignore the notice, add that to their user meta
+	 * 
+	 * @hook admin_init
+	 * @since 3.0
 	 */
-	public static function orddd_lite_ignore_pro_notices() {
 
-		// If user clicks to ignore the notice, add that to their user meta
+	public static function orddd_lite_ignore_pro_notices() {
 		if ( isset( $_GET['orddd_pro_first_notice_ignore'] ) && '0' === $_GET['orddd_pro_first_notice_ignore'] ) {
 			add_user_meta( get_current_user_id(), 'orddd_pro_first_notice_ignore', 'true', true );
 			add_user_meta( get_current_user_id(), 'orddd_pro_first_notice_ignore_time', current_time( 'timestamp' ), true );
