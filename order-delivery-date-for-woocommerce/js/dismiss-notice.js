@@ -1,3 +1,9 @@
+/**
+ * This function allows to dismiss the notices which are shown from the plugin.
+ *
+ * @namespace orddd_lite
+ * @since 2.6 
+*/
 // Make notices dismissible
 jQuery(document).ready( function() {
 	jQuery( '.notice.is-dismissible' ).each( function() {
@@ -9,7 +15,11 @@ jQuery(document).ready( function() {
 		$button.find( '.screen-reader-text' ).text( btnText );
 
 		$this.append( $button );
-
+		/**
+		 * Event when close icon is clicked.
+		 * @fires event:notice-dismiss
+		 * @since 2.6
+		*/
 		$button.on( 'click.notice-dismiss', function( event ) {
 			event.preventDefault();
 			$this.fadeTo( 100 , 0, function() {

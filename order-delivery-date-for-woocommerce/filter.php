@@ -1,12 +1,28 @@
 <?php 
-
+/* Order Delivery Date for WooCommerce Lite
+ *
+ * Functions to add columns on WooCommerced->Orders page.
+ *
+ * @author      Tyche Softwares
+ * @package     ORDDD_LITE/CLASSES
+ * @since       1.9
+ * @category    Classes
+ */
 include_once( dirname( __FILE__ ) . '/orddd-lite-common.php' );
 
+/**
+ * Order Delivery Date Filter Class
+ *
+ * @class orddd_lite_filter
+ */
 class orddd_lite_filter {
     
     /**
-     * This function are used for show custom column on order page listing. woo-orders
-     *
+     * This function adds the Delivery Date column to WooCommerce->Orders page
+     * 
+     * @param array $columns - List of columns already present
+     * @return array $new_columns - List of columns with the new ones added
+     * @since 1.9
      */
     public static function orddd_lite_woocommerce_order_delivery_date_column( $columns ) {
         $new_columns = ( is_array( $columns  )) ? $columns : array();
@@ -19,8 +35,10 @@ class orddd_lite_filter {
     }
     
     /**
-     * This fnction used to add value on the custom column created on woo- order
-     *
+     * This function adds the Delivery Date for each order on WooCommerce->Orders page
+     * 
+     * @param str $column - Name of the column
+     * @since 1.9
      */
     public static function orddd_lite_woocommerce_custom_column_value( $column ) {
         global $post, $orddd_lite_date_formats;
@@ -31,21 +49,25 @@ class orddd_lite_filter {
     }
     
     /**
-     * Meta key for sorting the column
-     * @param array $columns
-     * @return array
-    */
+     * Adds the Delivery Date column to the list of sortable columns
+     * in WooCommerce->Orders page.
+     * 
+     * @param array $columns - list of sortable columns
+     * @return array $columns - list of sortable columns with our column added
+     * @since 1.9
+     */
     public static function orddd_lite_woocommerce_custom_column_value_sort( $columns ) {
         $columns[ 'order_delivery_date' ] = '_orddd_lite_timestamp';
         return $columns;
     }
     
     /**
-     * Delivery date column orderby. This help woocommerce to understand which column need to sort on which value.
+     * Delivery date column orderby. This help WooCommerce to understand the field on which the sorting should be based on.
      * The delivery date is stored as a timestamp in the _orddd_lite_timestamp variable in wp_postmeta
      *
      * @param array $vars
      * @return array
+     * @since 1.9
      **/
     public static function orddd_lite_woocommerce_delivery_date_orderby( $vars ) {
         global $typenow;

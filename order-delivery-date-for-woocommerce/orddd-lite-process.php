@@ -1,7 +1,36 @@
 <?php
-class orddd_lite_process{
+/* Order Delivery Date for WooCommerce Lite
+ *
+ * Processes performed on the frontend checkout page
+ *
+ * @author      Tyche Softwares
+ * @package     ORDDD_LITE/CLASSES
+ * @since       1.5
+ * @category    Classes
+ */
+
+/**
+ * Class for adding processes to be performed on the checkout page
+ */
+
+class orddd_lite_process {
+
+    /**
+     * Adds hidden fields and delivery date field on the frontend checkout page
+     * 
+     * @hook woocommerce_after_checkout_billing_form
+     * @hook woocommerce_after_checkout_shipping_form
+     * @hook woocommerce_before_order_notes
+     * @hook woocommerce_after_order_notes
+     *
+     * @globals array $orddd_lite_weekdays Weekdays array
+     *
+     * @param resource $checkout WooCommerce checkout object
+     * @since 1.5
+     */
+
 	public static function orddd_lite_my_custom_checkout_field( $checkout = '' ) {
-        global $orddd_lite_weekdays, $wpefield_version;
+        global $orddd_lite_weekdays;
         if ( get_option( 'orddd_lite_enable_delivery_date' ) == 'on' ) {
         	$var = '';
 
@@ -156,8 +185,12 @@ class orddd_lite_process{
         }
     }
     
+    /**
+     * Adds the selected delivery date into the php session variable
+     * 
+     * @since 1.5
+     */
     public static function orddd_lite_update_delivery_session() {
-        
         $_SESSION[ 'e_deliverydate_lite' ] = $_POST[ 'e_deliverydate' ];
         $_SESSION[ 'h_deliverydate_lite' ] = $_POST[ 'h_deliverydate' ];
         
@@ -165,6 +198,14 @@ class orddd_lite_process{
         $_POST[ 'e_deliverydate' ] = "";
     }
 
+    /**
+     * Saves the selected delivery date into the post meta table 
+     *
+     * @hook woocommerce_checkout_update_order_meta
+     *
+     * @param int $order_id Order ID
+     * @since 1.5
+     */
     public static function orddd_lite_my_custom_checkout_field_update_order_meta( $order_id ) {
         if ( isset( $_POST['e_deliverydate'] ) && $_POST['e_deliverydate'] != '' ) {
             if( isset( $_POST[ 'h_deliverydate' ] ) ) {	    
@@ -200,7 +241,15 @@ class orddd_lite_process{
             unset( $_SESSION[ 'h_deliverydate_lite' ] );
         }
     }
-        
+    
+
+    /**
+     * Updates the lockout for the delivery date in the options table
+     *
+     * @param string $delivery_date Selected Delivery Date
+     * @since 1.5
+     */
+
     public static function orddd_lite_update_lockout_days( $delivery_date ) {
         global $wpdb;
         
@@ -231,8 +280,14 @@ class orddd_lite_process{
     }
         
     /**
-     * This function is used for show delivery date in the email notification for the WooCommerce version below 2.3
-     **/
+     * Show delivery date in the email notification for the WooCommerce version below 2.3
+     * 
+     * @hook woocommerce_email_order_meta_keys
+     * 
+     * @param array $keys
+     * @return array $keys
+     * @since 1.3
+     */
     public static function orddd_lite_add_delivery_date_to_order_woo_deprecated( $keys ) {
         $label_name = __( get_option( 'orddd_lite_delivery_date_field_label' ), "order-delivery-date" );
         $keys[] = get_option( 'orddd_lite_delivery_date_field_label' );
@@ -240,11 +295,14 @@ class orddd_lite_process{
     }
         
     /**
-     * Display Delivery Date in Customer notification email
+     * Display Delivery Date in Customer notification email for WooCOmmerce version 2.3 and above
      *
+     * @hook woocommerce_email_order_meta_fields
      * @param array $fields
      * @param bool $sent_to_admin
      * @param resource $order
+     * @return array fields
+     * @since 1.3
      */
     
     public static function orddd_lite_add_delivery_date_to_order_woo_new( $fields, $sent_to_admin, $order ) {
@@ -262,6 +320,10 @@ class orddd_lite_process{
         
     /**
      * Validate delivery date field
+     *
+     * @hook woocommerce_checkout_process
+     * @globals resource $woocommerce WooCommerce Object
+     * @since 1.4
      **/
 
     public static function orddd_lite_validate_date_wpefield() {
@@ -290,7 +352,12 @@ class orddd_lite_process{
     /**
      * Display Delivery Date on Order Recieved Page
      *
+     * @hook woocommerce_order_details_after_order_table
+     *
+     * @globals array orddd_lite_date_formats Date Format array
+     * 
      * @param resource $order
+     * @since 1.0
      */
     public static function orddd_lite_add_delivery_date_to_order_page_woo( $order ) {
         global $orddd_lite_date_formats;

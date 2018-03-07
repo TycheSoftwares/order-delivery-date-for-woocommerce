@@ -1,10 +1,38 @@
 <?php
+/* Order Delivery Date for WooCommerce Lite
+ *
+ * Settings added for the plugin in the admin
+ *
+ * @author      Tyche Softwares
+ * @package     ORDDD_LITE/CLASSES
+ * @since       1.5
+ * @category    Classes
+ */
+
+/**
+ * Class for adding the settings of the plugin in admin.
+ */
+
 class orddd_lite_settings {
+
+    /**
+     * Adds Order Delivery Date menu in admin dashboard
+     * 
+     * @hook admin_menu
+     * @since 1.5
+     */
 
 	public static function orddd_lite_order_delivery_date_menu() {
         add_menu_page( 'Order Delivery Date', 'Order Delivery Date', 'manage_woocommerce', 'order_delivery_date_lite', array( 'orddd_lite_settings', 'orddd_lite_order_delivery_date_settings' ) );
     }
-        
+    
+    /**
+     * Add settings field on Date Settings tab. 
+     *
+     * @globals array $orddd_lite_weekdays Weekdays array 
+     * @hook admin_init
+     * @since 1.5
+     */    
     public static function order_lite_delivery_date_admin_settings() {
         global $orddd_lite_weekdays;
         // First, we register a section. This is necessary since all future options must belong to one.
@@ -143,6 +171,13 @@ class orddd_lite_settings {
             'orddd_lite_calculate_min_time_disabled_days'
         );
     }
+
+    /**
+     * Add settings field on Appearance tab. 
+     *
+     * @hook admin_init
+     * @since 1.5
+     */    
 
     public static function order_lite_appearance_admin_settings() {
         add_settings_section(
@@ -316,7 +351,14 @@ class orddd_lite_settings {
             'orddd_lite_no_fields_for_featured_product'
         );            
     }
-        
+    
+    /**
+     * Add settings field on Holidays tab. 
+     *
+     * @hook admin_init
+     * @since 1.5
+     */    
+
     public static function order_lite_holidays_admin_settings() {
         // First, we register a section. This is necessary since all future options must belong to one.
         add_settings_section (
@@ -351,8 +393,21 @@ class orddd_lite_settings {
         );
     }
 
+    /**
+     * Callback for Order Delivery Date Settings section
+     *
+     * @since 1.5
+     */    
+
 	public static function orddd_lite_delivery_date_setting() { }
-        
+    
+    /**
+     * Callback for adding settings tab in the Order Delivery Date menu
+     *
+     * @globals array $orddd_lite_weekdays Weekdays array
+     * @since 1.5
+     */    
+ 
     public static function orddd_lite_order_delivery_date_settings() {
         global $orddd_lite_weekdays;
         $action = $active_date_settings = $active_appearance = $active_holidays = '';
@@ -424,7 +479,15 @@ class orddd_lite_settings {
             <?php    
         }
     }
-        
+    
+
+    /**
+     * Callback for adding Enable Delivery Date checkbox
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */    
+
     public static function orddd_lite_enable_delivery_date_callback( $args ) {
         $enable_delivery_date = "";
         if ( get_option( 'orddd_lite_enable_delivery_date' ) == 'on' ) {
@@ -436,7 +499,14 @@ class orddd_lite_settings {
         $html = '<label for="orddd_lite_enable_delivery_date"> ' . $args[0] . '</label>';
         echo $html;
     }
-        
+    
+    /**
+     * Callback for adding Delivery Weekdays dropdown
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */    
+
     public static function orddd_lite_delivery_days_callback( $args ) {
         global $orddd_lite_weekdays;
         printf( '<fieldset class="orddd-lite-days-fieldset">
@@ -457,36 +527,78 @@ class orddd_lite_settings {
         echo $html;
     }
     
+    /**
+     * Callback for adding Minimum Delivery Time (in hours) text field
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */    
+
     public static function orddd_lite_minimum_delivery_time_callback( $args ) {
         printf( '<input type="text" name="orddd_lite_minimumOrderDays" id="orddd_lite_minimumOrderDays" value="' . get_option( 'orddd_lite_minimumOrderDays' ) . '"/>' );
         $html = '<label for="orddd_lite_minimumOrderDays"> '  . $args[0] . '</label>';
         echo $html;
     }
-        
+    
+    /**
+     * Callback for adding Number of Dates to choose text field
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */    
+
     public static function orddd_lite_number_of_dates_callback( $args ) {
         printf( '<input type="text" name="orddd_lite_number_of_dates" id="orddd_lite_number_of_dates" value="' . get_option( 'orddd_lite_number_of_dates' ) . '"/>' );
         $html = '<label for="orddd_lite_number_of_dates"> '  . $args[0] . '</label>';
         echo $html;
     }
     
+    /**
+     * Callback for adding Mandatory checkbox
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */   
+
     public static function orddd_lite_date_field_mandatory_callback( $args ) {
         printf( '<input type="checkbox" name="orddd_lite_date_field_mandatory" id="orddd_lite_date_field_mandatory" class="day-checkbox" value="checked" ' . get_option( 'orddd_lite_date_field_mandatory' ) . ' />' );
         $html = '<label for="orddd_lite_date_field_mandatory"> '. $args[0] . '</label>';
         echo $html;
     }
     
+    /**
+     * Callback for adding Maximum orders per day text field
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */   
+
     public static function orddd_lite_lockout_date_after_orders_callback( $args ) {
         printf( '<input type="text" name="orddd_lite_lockout_date_after_orders" id="orddd_lite_lockout_date_after_orders" value="' . get_option( 'orddd_lite_lockout_date_after_orders' ) . '"/>' );
         $html = '<label for="orddd_lite_lockout_date_after_orders"> ' . $args[ 0 ] . '</label>';
         echo $html;
     }
     
+    /**
+     * Callback for adding Default sorting checkbox of Delivery date column on edit order
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */   
+
     public static function orddd_lite_enable_default_sorting_of_column_callback( $args ) {
         printf( '<input type="checkbox" name="orddd_lite_enable_default_sorting_of_column" id="orddd_lite_enable_default_sorting_of_column" value="checked"' . get_option( 'orddd_lite_enable_default_sorting_of_column' ) . '/>' );
         $html = '<label for="orddd_lite_enable_default_sorting_of_column"> ' . $args[ 0 ] . '</label>';
         echo $html;
     }
     
+    /**
+     * Callback for adding Auto Populate First available delivery date checkbox
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */  
+
     public static function orddd_lite_auto_populate_first_available_date_callback( $args ) {
         $orddd_lite_auto_populate_first_available_date = '';
         if ( get_option( 'orddd_lite_auto_populate_first_available_date' ) == 'on' ) {
@@ -499,6 +611,13 @@ class orddd_lite_settings {
         echo $html;
     }
 
+    /**
+     * Callback for adding a checkbox of Calculating minimum delivery time on disable days
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */  
+
     public static function orddd_lite_calculate_min_time_disabled_days_callback( $args ) {
         $orddd_lite_calculate_min_time_disabled_days = '';
         if ( get_option( 'orddd_lite_calculate_min_time_disabled_days' ) == 'on' ) {
@@ -510,8 +629,11 @@ class orddd_lite_settings {
         $html = '<label for="orddd_lite_calculate_min_time_disabled_days"> '. $args[ 0 ] . '</label>';
         echo $html;   
     }
+
     /**
      * Callback for adding Appearance tab settings
+     *
+     * @since 1.5
      */
     
     public static function orddd_lite_appearance_admin_setting_callback() { }
@@ -519,7 +641,8 @@ class orddd_lite_settings {
     /**
      * Callback for adding Calendar Language setting
      *
-     * @param array $args
+     * @param array $args Callback arguments
+     * @since 1.5
      */
     public static function orddd_lite_appearance_calendar_language_callback( $args ) {
         global $orddd_lite_languages;
@@ -547,7 +670,8 @@ class orddd_lite_settings {
     /**
     * Callback for adding Date formats setting
     *
-    * @param array $args
+    * @param array $args Callback arguments
+    * @since 1.5
     */
     public static function orddd_lite_appearance_date_formats_callback( $args ) {
         global $orddd_lite_date_formats;
@@ -570,7 +694,8 @@ class orddd_lite_settings {
     /**
     * Callback for adding First day of week setting
     *
-    * @param array $args
+    * @param array $args Callback arguments
+    * @since 1.5
     */
     
     public static function orddd_lite_appearance_first_day_of_week_callback( $args ) {
@@ -598,7 +723,8 @@ class orddd_lite_settings {
     /**
 	* Callback for adding Delivery Date field label setting
     *
-    * @param array $args
+    * @param array $args Callback arguments
+    * @since 1.5
     */
 
     public static function orddd_lite_delivery_date_field_label_callback( $args ) {
@@ -611,7 +737,8 @@ class orddd_lite_settings {
     /**
     * Callback for adding Delivery Date field placeholder setting
     *
-    * @param array $args
+    * @param array $args Callback arguments
+    * @since 1.5
     */
     
     public static function orddd_lite_delivery_date_field_placeholder_callback( $args ) {
@@ -624,7 +751,8 @@ class orddd_lite_settings {
     /**
     * Callback for adding Delivery Date field note text setting
     *
-    * @param array $args
+    * @param array $args Callback arguments
+    * @since 1.5
     */
     
     public static function orddd_lite_delivery_date_field_note_text_callback( $args ) {
@@ -637,7 +765,8 @@ class orddd_lite_settings {
     /**
     * Callback for adding Number of months setting
     *
-    * @param array $args
+    * @param array $args Callback arguments
+    * @since 1.5
     */
     
     public static function orddd_lite_appearance_number_of_months_callback( $args ) {
@@ -660,7 +789,8 @@ class orddd_lite_settings {
     /**
     * Callback for adding Delivery Date fields in Shipping section setting
     *
-    * @param array $args
+    * @param array $args Callback arguments
+    * @since 1.5
     */
     
     public static function orddd_lite_delivery_date_in_shipping_section_callback( $args ) {
@@ -700,7 +830,8 @@ class orddd_lite_settings {
     /**
     * Callback for adding Delivery Date field on Cart page setting
     *
-    * @param array $args
+    * @param array $args Callback arguments
+    * @since 1.5
     */
 
     public static function orddd_lite_delivery_date_on_cart_page_callback( $args ) {
@@ -718,7 +849,8 @@ class orddd_lite_settings {
     /**
     * Callback for adding Calendar theme setting
     *
-    * @param array $args
+    * @param array $args Callback arguments
+    * @since 1.5
     */
         
     public static function orddd_lite_appearance_calendar_theme_callback( $args ) {
@@ -768,7 +900,14 @@ class orddd_lite_settings {
     	$html = '<label for="orddd_lite_calendar_theme_name"> ' . $args[0] . '</label>';
     	echo $html;
     }
-        
+     
+    /**
+     * Callback for adding checkbox to hide delivery date field for virtual products
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */  
+
     public static function orddd_lite_appearance_virtual_product_callback( $args ) {
         if ( get_option( 'orddd_lite_no_fields_for_virtual_product' ) == 'on' ) {
             $orddd_lite_no_fields_for_virtual_product = "checked";
@@ -789,8 +928,22 @@ class orddd_lite_settings {
         $html = '<label for="orddd_lite_no_fields_for_product_type"> ' . $args[ 0 ] . '</label>';
         echo $html;
     }
-        
+    
+    /**
+     * Callback for adding Holidays tab
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */  
+
     public static function orddd_lite_holidays_admin_settings_callback() {}
+
+    /**
+     * Callback for adding Holiday name text field
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */  
 
     public static function orddd_lite_holidays_name_callback( $args ) {
         echo '<input type="text" name="orddd_lite_holiday_name" id="orddd_lite_holiday_name" class="orddd_lite_holiday_name"/>';
@@ -799,6 +952,13 @@ class orddd_lite_settings {
         echo $html;
     }
     
+    /**
+     * Callback for adding holiday dates
+     *
+     * $params array $args Callback arguments
+     * @since 1.5
+     */  
+
     public static function orddd_lite_holidays_date_callback( $args ) {
         $current_language = get_option( 'orddd_lite_language_selected' );
         print( '<script type="text/javascript">
@@ -817,6 +977,14 @@ class orddd_lite_settings {
         $html = '<label for="orddd_lite_holiday_date"> ' . $args[0] . '</label>';
         echo $html;
     }  
+
+    /**
+     * Callback for saving holidays in json object
+     *
+     * $params array $input Content of the selected settings
+     * @return array $output Json object of the holidays added 
+     * @since 1.5
+     */  
 
     public static function orddd_lite_holidays_callback( $input ) {
         $output = array();
@@ -847,6 +1015,12 @@ class orddd_lite_settings {
         
         return $output;
     }
+
+    /**
+     * Callback for deleting the selected holidays
+     *
+     * @since 1.5
+     */  
 
     public static function orddd_lite_delete_settings() {
         if ( ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] == 'order_delivery_date_lite' ) && ( isset( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] == 'holidays' ) ) {

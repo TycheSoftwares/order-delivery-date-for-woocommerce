@@ -1,3 +1,9 @@
+/**
+ * Allows to initiliaze/load the settings in the calendar.
+ *
+ * @namespace orddd_lite_initialize
+ * @since 1.0
+ */
 jQuery(document).ready( function() {
 	var formats = ["MM d, yy","MM d, yy"];
     
@@ -48,6 +54,15 @@ jQuery(document).ready( function() {
     window.onload = load_lite_functions;
 });
 
+/**
+ * This function is called when the date is selected from the calendar.
+ *
+ * @function orddd_on_select_date
+ * @memberof orddd_lite_initialize
+ * @param {object} inst  
+ * @param {string} date
+ * @since 3.1
+ */
 function orddd_on_select_date( date, inst ) {
 	var monthValue = inst.selectedMonth+1;
     var dayValue = inst.selectedDay;
@@ -64,6 +79,13 @@ function orddd_on_select_date( date, inst ) {
     });
 }
 
+/**
+ * This function is called on the page load to assign/populate the delivery date to the Delivery Date field.
+
+ * @function load_lite_functions
+ * @memberof orddd_lite_initialize
+ * @since 2.8
+ */
 function load_lite_functions() {
 	if( jQuery( "#orddd_lite_auto_populate_first_available_date" ).val() == "on" ) {
 		orddd_lite_autofil_date_time();
@@ -80,6 +102,13 @@ function load_lite_functions() {
     }
 }
 
+/**
+ * Auto-populates the first available delivery date in the Delivery Date field.
+ *
+ * @function orddd_lite_autofil_date_time
+ * @memberof orddd_lite_initialize
+ * @since 2.8
+ */
 function orddd_lite_autofil_date_time() {
 	var current_date = jQuery( "#orddd_lite_current_day" ).val();
 	var split_current_date = current_date.split( "-" );
@@ -110,6 +139,15 @@ function orddd_lite_autofil_date_time() {
 	jQuery( "#h_deliverydate" ).val( min_date_to_set );
 }
 
+/**
+ * Calculates the first available date to be enabled in the calendar
+ *
+ * @function minimum_date_to_set
+ * @memberof orddd_lite_initialize
+ * @param {object} delay_days
+ * @returns {object} first available delivery date
+ * @since 2.8
+ */
 function minimum_date_to_set( delay_days ) {
 	var disabledDays = eval( "[" + jQuery( "#orddd_lite_holidays" ).val() + "]" );
 	var holidays = [];
@@ -198,6 +236,15 @@ function minimum_date_to_set( delay_days ) {
 	return delay_days;
 }
 
+/**
+ * This function disables the date in the calendar for holidays.
+ *
+ * @function nd
+ * @memberof orddd_lite_initialize
+ * @param {object} date - date to be checked
+ * @returns {bool} Returns true or false based on date available or not
+ * @since 2.8
+ */
 function nd( date ) {
 	var disabledDays = eval( '[' + jQuery( '#orddd_lite_holidays' ).val() + ']' );
 	var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
@@ -218,6 +265,15 @@ function nd( date ) {
 	return [ true ];
 }
 
+/**
+ * This function disables the date in the calendar for disabled weekdays and for which lockout is reached.
+ *
+ * @function dwd
+ * @memberof orddd_lite_initialize
+ * @param {object} date - date to be checked
+ * @returns {bool} Returns true or false based on date available or not
+ * @since 1.0
+ */
 function dwd( date ) {
 	var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
 	var lockoutDays = eval( '[' + jQuery( '#orddd_lite_lockout_days' ).val() + ']' );
@@ -233,11 +289,29 @@ function dwd( date ) {
 	return [true];
 }
 
+/**
+ * The function is called for each day in the datepicker before it is displayed.
+ *
+ * @function chd
+ * @memberof orddd_lite_initialize
+ * @param {object} date - date to be checked
+ * @returns {array} Returns an array
+ * @since 1.0
+ */
 function chd( date ) {
 	var nW = dwd( date );
 	return nW[ 0 ] ? nd( date ) : nW;
 }
 
+/**
+ * This function is called just before the datepicker is displayed.
+ *
+ * @function avd
+ * @memberof orddd_lite_initialize
+ * @param {object} date - date to be checked
+ * @returns {object} options object to update the datepicker
+ * @since 1.0
+ */
 function avd( date ) {
 	var disabledDays = eval( "[" + jQuery( "#orddd_lite_holidays" ).val() + "]" );
 	var holidays = [];
@@ -371,10 +445,31 @@ function avd( date ) {
 	}
 }
 
+/**
+ * This function is called to find the end date to be set in the calendar.
+ *
+ * @function ad
+ * @memberof orddd_lite_initialize
+ * @param {object} dateObj
+ * @param {number} numDays - number of dates to choose
+ * @returns {number} returns the end date to be set in the calendar
+ * @since 1.0
+ */
 function ad( dateObj, numDays ) {
 	return dateObj.setDate( dateObj.getDate() + ( numDays - 1 ) );
 }
 
+/**
+ * This function is called to find the difference between the two dates.
+ *
+ * @function gd
+ * @memberof orddd_lite_initialize
+ * @param {string} date1 - start date
+ * @param {string} date2 - end date
+ * @param {string} interval - days
+ * @returns {number} returns the number between two dates.
+ * @since 1.0
+ */
 function gd( date1, date2, interval ) {
 	var second = 1000,
 	minute = second * 60,

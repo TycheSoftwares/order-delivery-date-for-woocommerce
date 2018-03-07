@@ -1,10 +1,13 @@
 <?php 
-
-/**
- * Order Delivery Date Lite Welcome Page Class
- *
- * Displays on plugin activation
- */
+/* Order Delivery Date for WooCommerce Lite
+*
+* Show welcome page when the plugin is installed
+*
+* @author      Tyche Softwares
+* @package     ORDDD_LITE/CLASSES
+* @since       3.3
+* @category    Classes
+*/
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,12 +15,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * ORDDD_Welcome Class
+ * Adds Welcome page when the plugin is installed and activated
  *
- * A general class for About page.
- *
- * @since 3.3
  */
+
 class ORDDD_Welcome {
 
 	/**
@@ -26,7 +27,7 @@ class ORDDD_Welcome {
 	public $minimum_capability = 'manage_options';
 
 	/**
-	 * Get things started
+	 * Default constructor
 	 *
 	 * @since 3.3
 	 */
@@ -44,6 +45,7 @@ class ORDDD_Welcome {
 	 * Register the Dashboard Page which is later hidden but this pages
 	 * is used to render the Welcome page.
 	 *
+	 * @hook admin_menu
 	 * @access public
 	 * @since  3.3
 	 * @return void
@@ -59,12 +61,12 @@ class ORDDD_Welcome {
 			'orddd-about',
 			array( $this, 'about_screen' )
 		);
-
 	}
 
 	/**
 	 * Hide Individual Dashboard Pages
 	 *
+	 * @hook admin_head
 	 * @access public
 	 * @since  3.3
 	 * @return void
@@ -263,18 +265,19 @@ class ORDDD_Welcome {
 		$badge_url = ORDDD_PLUGIN_URL . 'images/icon-256x256.png';
 		?>
         <h1 class="welcome-h1"><?php echo get_admin_page_title(); ?></h1>
-		<?php $this->social_media_elements(); ?>
-
-	<?php }
+		<?php $this->social_media_elements(); 
+	}
 
 
 	/**
 	 * Social Media Like Buttons
 	 *
 	 * Various social media elements to Tyche Softwares
+	 *
+	 * @since 3.3
 	 */
-	public function social_media_elements() { ?>
-
+	public function social_media_elements() { 
+		?>
         <div class="social-items-wrap">
 
             <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Ftychesoftwares&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=220596284639969"
@@ -300,7 +303,6 @@ class ORDDD_Welcome {
 
         </div>
         <!--/.social-items-wrap -->
-
 		<?php
 	}
 
@@ -315,7 +317,6 @@ class ORDDD_Welcome {
 	 * @return void
 	 */
 	public function orddd_welcome() {
-
 		// Bail if activating from network, or bulk
 		if ( is_network_admin() || isset( $_GET['activate-multi'] ) ) {
 			return;
@@ -326,7 +327,6 @@ class ORDDD_Welcome {
 			exit;
 		}
 	}
-
 }
 
 new ORDDD_Welcome();
