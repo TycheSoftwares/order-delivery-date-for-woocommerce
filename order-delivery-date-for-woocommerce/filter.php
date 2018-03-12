@@ -1,13 +1,14 @@
 <?php 
-/* Order Delivery Date for WooCommerce Lite
+/**
+ * Order Delivery Date for WooCommerce Lite
  *
  * Functions to add columns on WooCommerced->Orders page.
  *
  * @author      Tyche Softwares
- * @package     ORDDD_LITE/CLASSES
+ * @package     Order-Delivery-Date-Lite-for-WooCommerce/Admin/Delivery-Date-on-Edit-Order-Page
  * @since       1.9
- * @category    Classes
  */
+
 include_once( dirname( __FILE__ ) . '/orddd-lite-common.php' );
 
 /**

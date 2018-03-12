@@ -1,12 +1,12 @@
 <?php
-/* Order Delivery Date for WooCommerce Lite
+/** 
+ * Order Delivery Date for WooCommerce Lite
  *
  * Settings added for the plugin in the admin
  *
  * @author      Tyche Softwares
- * @package     ORDDD_LITE/CLASSES
+ * @package     Order-Delivery-Date-Lite-for-WooCommerce/Admin/Settings
  * @since       1.5
- * @category    Classes
  */
 
 /**

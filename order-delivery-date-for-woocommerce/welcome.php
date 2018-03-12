@@ -1,12 +1,12 @@
 <?php 
-/* Order Delivery Date for WooCommerce Lite
+/**
+* Order Delivery Date for WooCommerce Lite
 *
 * Show welcome page when the plugin is installed
 *
 * @author      Tyche Softwares
-* @package     ORDDD_LITE/CLASSES
+* @package     Order-Delivery-Date-Lite-for-WooCommerce/Admin/Welcome-Page
 * @since       3.3
-* @category    Classes
 */
 
 // Exit if accessed directly.

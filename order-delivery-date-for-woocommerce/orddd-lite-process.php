@@ -1,12 +1,12 @@
 <?php
-/* Order Delivery Date for WooCommerce Lite
+/**
+ * Order Delivery Date for WooCommerce Lite
  *
  * Processes performed on the frontend checkout page
  *
  * @author      Tyche Softwares
- * @package     ORDDD_LITE/CLASSES
+ * @package     Order-Delivery-Date-Lite-for-WooCommerce/Frontend/Checkout-Page-Processes
  * @since       1.5
- * @category    Classes
  */
 
 /**

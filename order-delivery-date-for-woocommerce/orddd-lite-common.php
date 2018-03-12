@@ -1,13 +1,13 @@
 <?php 
 
-/* Order Delivery Date for WooCommerce Lite
+/**
+* Order Delivery Date for WooCommerce Lite
 *
 * Common functions used in multiple files are added
 *
 * @author      Tyche Softwares
-* @package     ORDDD_LITE/CLASSES
+* @package     Order-Delivery-Date-Lite-for-WooCommerce/Common-Functions
 * @since       3.5
-* @category    Classes
 */
 
 /**

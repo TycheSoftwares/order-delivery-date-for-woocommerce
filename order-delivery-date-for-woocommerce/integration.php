@@ -1,4 +1,13 @@
 <?php 
+/**
+* Order Delivery Date for WooCommerce Lite
+*
+* Integration of the WooCommerce Order Delivery Date plugin with various 3rd party plugins 
+*
+* @author      Tyche Softwares
+* @package     Order-Delivery-Date-Lite-for-WooCommerce/Integrate-Delivery-Date
+* @since       3.5
+*/
 
 include_once( dirname( __FILE__ ) . '/orddd-lite-common.php' );
 /** 

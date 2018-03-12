@@ -1,12 +1,12 @@
 <?php
-/* Order Delivery Date for WooCommerce Lite
+/**
+* Order Delivery Date for WooCommerce Lite
 *
 * Add notices of Pro plugin in some interval of days 
 *
 * @author      Tyche Softwares
-* @package     ORDDD_LITE/CLASSES
+* @package     Order-Delivery-Date-Lite-for-WooCommerce/Admin/Pro-Notices
 * @since       3.0
-* @category    Classes
 */
 
 /**
