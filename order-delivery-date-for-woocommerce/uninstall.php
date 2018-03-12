@@ -5,8 +5,7 @@
  * Uninstalling Order Delivery Date Lite delets all settings for the plugin
  *
  * @author      Tyche Softwares
- * @category    Core
- * @package     Tyche Softwares/Uninstaller
+ * @package     Order-Delivery-Date-Lite-for-WooCommerce/Admin/Uninstaller
  * @version     3.2
  */
 

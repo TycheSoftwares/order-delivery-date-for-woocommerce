@@ -1,4 +1,14 @@
 <?php 
+/**
+ * Order Delivery Date for WooCommerce Lite
+ *
+ * Functions to display the added holidays in WP List Table.
+ *
+ * @author      Tyche Softwares
+ * @package     Order-Delivery-Date-Lite-for-WooCommerce/Admin/Display-Holidays
+ * @since       1.9
+ */
+
 // Load WP_List_Table if not loaded
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';

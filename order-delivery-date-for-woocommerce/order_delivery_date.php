@@ -11,7 +11,7 @@ Text Domain: order-delivery-date
 Requires PHP: 5.6
 WC requires at least: 3.0.0
 WC tested up to: 3.3.0
-* @package     ORDDD_LITE/CLASSES
+* @package  Order-Delivery-Date-Lite-for-WooCommerce
 */
 
 /**
