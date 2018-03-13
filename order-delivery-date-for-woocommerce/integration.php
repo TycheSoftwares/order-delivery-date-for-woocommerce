@@ -16,7 +16,11 @@ include_once( dirname( __FILE__ ) . '/orddd-lite-common.php' );
  * @class orddd_lite_integration
  */
 class orddd_lite_integration {
-
+	 /**
+     * Default Constructor
+     * 
+     * @since 3.5
+     */    
 	public function __construct() {		
 	    // WooCommerce PDF Invoices & Packing Slips
 		add_action( 'wpo_wcpdf_after_order_details', array( &$this, 'orddd_lite_plugins_packing_slip' ) );
