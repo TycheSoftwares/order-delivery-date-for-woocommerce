@@ -439,7 +439,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         /** 
          * Enqueue scripts on the frontend checkout page
          * 
-         * @hook admin_enqueue_scripts
+         * @hook woocommerce_after_checkout_billing_form
+         * @hook woocommerce_after_checkout_shipping_form
+         * @hook woocommerce_before_order_notes
+         * @hook woocommerce_after_order_notes
+         *
          * @since 1.0
          */   
 
