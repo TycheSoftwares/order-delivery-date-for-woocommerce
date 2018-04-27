@@ -437,8 +437,11 @@ class orddd_lite_settings {
             <a href="admin.php?page=order_delivery_date_lite&action=date" class="nav-tab <?php echo $active_date_settings; ?>"><?php _e( 'Date Settings', 'order-delivery-date' );?> </a>
             <a href="admin.php?page=order_delivery_date_lite&action=appearance" class="nav-tab <?php echo $active_appearance; ?>"> <?php _e( 'Appearance', 'order-delivery-date' );?> </a>
             <a href="admin.php?page=order_delivery_date_lite&action=holidays" class="nav-tab <?php echo $active_holidays; ?>"> <?php _e( 'Holidays', 'order-delivery-date' );?> </a>
+
+            <?php do_action ( "orddd_lite_add_settings_tab" ); ?>
         </h2>
         <?php
+        do_action ( "orddd_lite_add_tab_content" );
         if ( $action == 'date' || $action == '' ) {
             print( '<div id="content">
                 <form method="post" action="options.php">');
