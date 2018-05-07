@@ -14,6 +14,134 @@
  * Class for the common functions used in the plugin
  */
 class orddd_lite_common {
+
+	/**
+     * Tracking data to send when No, thanks. button is clicked.
+     *
+     * @hook ts_tracker_opt_out_data
+     *
+     * @param array $params Parameters to pass for tracking data.
+     *
+     * @return array Data to track when opted out.
+     * 
+     */
+	public static function orddd_lite_get_data_for_opt_out ( $params ) {
+	    $plugin_data[ 'ts_meta_data_table_name']   = 'ts_tracking_orddd_lite_meta_data';
+	    $plugin_data[ 'ts_plugin_name' ]		   = 'Order Delivery Date for WooCommerce (Lite version)';
+	    
+	    // Store count info
+	    $plugin_data[ 'deliveries_count' ]         = self::orddd_lite_ts_get_order_counts();
+	    $params[ 'plugin_data' ]  				   = $plugin_data;
+	    
+	    return $params;
+	}
+
+	/**
+     * Plugin's data to be tracked when Allow option is choosed.
+     *
+     * @hook ts_tracker_data
+     *
+     * @param array $data Contains the data to be tracked.
+     *
+     * @return array Plugin's data to track.
+     * 
+     */
+
+    public static function orddd_lite_ts_add_plugin_tracking_data ( $data ) {
+    	if ( isset( $_GET[ 'orddd_lite_tracker_optin' ] ) && isset( $_GET[ 'orddd_lite_tracker_nonce' ] ) && wp_verify_nonce( $_GET[ 'orddd_lite_tracker_nonce' ], 'orddd_lite_tracker_optin' ) ) {
+
+	        $plugin_data  = array();
+	        $plugin_data[ 'ts_meta_data_table_name' ]   = 'ts_tracking_orddd_lite_meta_data';
+	        $plugin_data[ 'ts_plugin_name' ]		    = 'Order Delivery Date for WooCommerce (Lite version)';
+	        
+	        // Store count info
+	        $plugin_data[ 'deliveries_count' ]          = self::orddd_lite_ts_get_order_counts();
+	        
+	        // Get all plugin options info
+	        $plugin_data[ 'deliveries_settings' ]       = self::orddd_lite_ts_get_all_plugin_options_values();
+	        $plugin_data[ 'orddd_lite_plugin_version' ] = self::orddd_get_version();
+	        $plugin_data[ 'orddd_lite_allow_tracking' ] = get_option ( 'orddd_lite_allow_tracking' );
+	        $data[ 'plugin_data' ]                      = $plugin_data;
+	    }
+        return $data;
+    }
+
+	/**
+	 * Get order counts based on order status.
+	 * 
+	 * @globals resource WordPress object
+	 *
+	 * @return int $order_count Number of Deliveries
+	 * 
+	 */	
+	public static function orddd_lite_ts_get_order_counts () {
+		global $wpdb;
+        $order_count = 0;
+        $orddd_query = "SELECT count(ID) AS delivery_orders_count FROM `" . $wpdb->prefix . "posts` WHERE post_type = 'shop_order' AND post_status NOT IN ('wc-cancelled', 'wc-refunded', 'trash', 'wc-failed' ) AND ID IN ( SELECT post_id FROM `" . $wpdb->prefix . "postmeta` WHERE meta_key IN ( %s, %s ) )";
+
+        $results = $wpdb->get_results( $wpdb->prepare( $orddd_query, '_orddd_lite_timestamp', get_option( 'orddd_lite_delivery_date_field_label' ) ) );
+        if( isset( $results[0] ) ) {
+            $order_count = $results[0]->delivery_orders_count;    
+        }
+        
+        return $order_count;
+	}
+
+	/**
+	 * Get all plugin options starting with orddd_ prefix.
+	 *
+	 * @globals resource WordPress object
+	 *
+	 * @return array Plugin Settings
+	 * 
+	 */
+	public static function orddd_lite_ts_get_all_plugin_options_values () {
+		return array(
+            'enable_delivery'                          => get_option( 'orddd_lite_enable_delivery_date' ),
+            'date_mandatory'                           => get_option( 'orddd_lite_date_field_mandatory' ),
+            'populate_first_delivery_date'             => get_option( 'orddd_lite_auto_populate_first_available_date' ),
+            'allow_minimum_hours_for_non_working_days' => get_option( 'orddd_lite_calculate_min_time_disabled_days' ),
+            'no_fields_for'                            => array( 'virtual_product'  => get_option( 'orddd_lite_no_fields_for_virtual_product' ),         'featured_product' 						   => get_option( 'orddd_lite_no_fields_for_featured_product' ) ),
+            'cart_page_delivery'               		   => get_option( 'orddd_lite_delivery_date_on_cart_page' )
+		);
+	}
+
+
+	/**
+	 * It will add the question for the deactivate popup modal
+	 * @return array $orddd_lite_add_questions All questions.
+	 */
+	public static function orddd_lite_deactivate_add_questions () {
+
+		$orddd_lite_add_questions = array(
+			0 => array(
+				'id'                => 4,
+				'text'              => __( "Minimum Delivery Time (in hours) is not working as expected.", "order-delivery-date" ),
+				'input_type'        => '',
+				'input_placeholder' => ''
+				), 
+			1 =>  array(
+				'id'                => 5,
+				'text'              => __( "I need delivery time along with the delivery date.", "order-delivery-date" ),
+				'input_type'        => '',
+				'input_placeholder' => ''
+			),
+			2 => array(
+				'id'                => 6,
+				'text'              => __( "The plugin is not compatible with another plugin.", "order-delivery-date" ),
+				'input_type'        => 'textfield',
+				'input_placeholder' => 'Which Plugin?'
+			),
+			3 => array(
+				'id'                => 7,
+				'text'              => __( "I have purchased the Pro version of the Plugin.", "order-delivery-date" ),
+				'input_type'        => '',
+				'input_placeholder' => ''
+			)
+
+		);
+		return $orddd_lite_add_questions;
+	}
     
     /**
      * Return the date with the selected langauge in Appearance tab

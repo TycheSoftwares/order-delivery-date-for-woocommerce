@@ -30,7 +30,7 @@ include_once( 'orddd-lite-common.php' );
 include_once( 'orddd-lite-settings.php' );
 include_once( 'orddd-lite-process.php' );
 include_once( 'filter.php' );
-include_once( 'orddd-lite-pro-notices.php' );
+//include_once( 'orddd-lite-pro-notices.php' );
 
 /**
 * Defines the plugin version and url when on the admin page
@@ -39,11 +39,13 @@ include_once( 'orddd-lite-pro-notices.php' );
 */
 
 if ( is_admin() ) {
-    require_once( 'welcome.php' );
+    require_once( 'includes/orddd-lite-component.php' );
 
-    define( 'ORDDD_VERSION', orddd_lite_common::orddd_get_version() );
+    //require_once( 'welcome.php' );
 
-    define( 'ORDDD_PLUGIN_URL', orddd_lite_common::orddd_get_plugin_url() );
+    //define( 'ORDDD_VERSION', orddd_lite_common::orddd_get_version() );
+
+    //define( 'ORDDD_PLUGIN_URL', orddd_lite_common::orddd_get_plugin_url() );
 }
 
 if ( !class_exists( 'order_delivery_date_lite' ) ) {
@@ -66,11 +68,11 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_action( 'admin_init',            array( &$this, 'orddd_lite_update_db_check' ) );
             add_action( 'admin_init',            array( &$this, 'orddd_lite_capabilities' ) );
             add_action( 'admin_init',            array( &$this, 'orddd_lite_check_if_woocommerce_active' ) );
-            add_action( 'admin_footer',          array( &$this, 'admin_notices_scripts' ) );
+            //add_action( 'admin_footer',          array( &$this, 'admin_notices_scripts' ) );
 
             //Add pro notices
-            add_action( 'admin_notices', array( 'orddd_lite_pro_notices', 'orddd_lite_notices_of_pro' ) );
-            add_action( 'admin_init', array( 'orddd_lite_pro_notices', 'orddd_lite_ignore_pro_notices' ) );
+            //add_action( 'admin_notices', array( 'orddd_lite_pro_notices', 'orddd_lite_notices_of_pro' ) );
+            //add_action( 'admin_init', array( 'orddd_lite_pro_notices', 'orddd_lite_ignore_pro_notices' ) );
                        
             //Settings
             add_action( 'admin_menu', array( 'orddd_lite_settings', 'orddd_lite_order_delivery_date_menu' ) );
@@ -119,6 +121,15 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
 
             //Ajax calls
             add_action( 'init', array( &$this, 'orddd_lite_load_ajax' ) );
+
+            /**
+             * It will add the actions for the components.
+             */
+            if ( true === is_admin() ) {
+                add_filter( 'ts_tracker_data',                         array( 'orddd_lite_common', 'orddd_lite_ts_add_plugin_tracking_data' ), 10, 1 );
+				add_filter( 'ts_tracker_opt_out_data',                 array( 'orddd_lite_common', 'orddd_lite_get_data_for_opt_out' ), 10, 1 );
+                add_filter ( 'ts_deativate_plugin_questions',          array( 'orddd_lite_common', 'orddd_lite_deactivate_add_questions' ), 10, 1 );
+            }
         }
         
         /**
@@ -186,6 +197,8 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             if( !get_option( 'orddd_lite_activate_time' ) ) {
                 add_option( 'orddd_lite_activate_time', current_time( 'timestamp' ) );
             }
+
+            add_option( 'orddd_lite_installed', 'yes' );
         }
 
         /**
