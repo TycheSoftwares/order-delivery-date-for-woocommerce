@@ -197,6 +197,8 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             if( !get_option( 'orddd_lite_activate_time' ) ) {
                 add_option( 'orddd_lite_activate_time', current_time( 'timestamp' ) );
             }
+
+            add_option( 'orddd_lite_installed', 'yes' );
         }
 
         /**

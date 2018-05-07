@@ -115,6 +115,8 @@ class TS_Welcome {
 		self::$previous_plugin_version = $ts_previous_version;
 		self::$plugin_url     		   = $this->ts_get_plugin_url();
 		self::$template_base  		   = $this->ts_get_template_path();
+		
+		self::$ts_welcome_header_text  = sprintf( esc_html__( 'Welcome to %s %s', self::$plugin_context ), self::$plugin_name, self::$plugin_version );
 	}
 
 	/**
