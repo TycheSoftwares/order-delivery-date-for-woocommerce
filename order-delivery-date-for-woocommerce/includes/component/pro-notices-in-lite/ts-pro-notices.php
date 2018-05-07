@@ -97,20 +97,16 @@ class ts_pro_notices {
 		$add_query_arguments = '';
 		$message             = '';
 
-		// var_dump($activate_time);
-		// exit;
         if( !is_plugin_active( self::$ts_pro_file_name ) && 
             ( false === $activate_time || ( $activate_time > 0 && $current_time >= $sixty_days ) ) ) {
         	global $current_user ;
 			$user_id = $current_user->ID;
 			
 			if( ! get_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_first_notice_ignore' ) ) {
-				
 				$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_first_notice_ignore', '0' );
-				
 				$class = 'updated notice-info point-notice one';
 				$style = 'position:relative';
-				$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
+				$cancel_button = '<a href="' . $add_query_arguments . '" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
 				printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[1], $cancel_button );
 			}
 
@@ -119,35 +115,25 @@ class ts_pro_notices {
 				 ) {
 
 				$first_ignore_time = get_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_first_notice_ignore_time' );
-				// $fifteen_days = strtotime( '+15 Days', $first_ignore_time[0] );
-
-				$fifteen_days = strtotime( '+2 Minutes', $first_ignore_time[0] );
-
+				$fifteen_days = strtotime( '+15 Days', $first_ignore_time[0] );
 				if ( $current_time > $fifteen_days ) {
-					
 					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_second_notice_ignore', '0' );
-					
 					$class = 'updated notice-info point-notice two';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
+					$cancel_button = '<a href="' . $add_query_arguments . '" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
 					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[2], $cancel_button );
 				}
 			}
 			
-			if ( get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_first_notice_ignore' ) && 
-				get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_second_notice_ignore' ) &&
-				! get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_third_notice_ignore' )
+			if ( get_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_first_notice_ignore' ) && 
+				get_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_second_notice_ignore' ) &&
+				! get_user_meta( get_current_user_id(), self::$pro_plugin_prefix . '_third_notice_ignore' )
 			   ) {
 
 				$second_ignore_time = get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_second_notice_ignore_time' );
-				//$ts_fifteen_days = strtotime( '+15 Days', $second_ignore_time[0] );
-
-				$ts_fifteen_days = strtotime( '+2 Minutes', $second_ignore_time[0] );
-
+				$ts_fifteen_days = strtotime( '+15 Days', $second_ignore_time[0] );
 				if ( $current_time > $ts_fifteen_days ) {
-					
 					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_third_notice_ignore', '0' );
-					
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
 					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
@@ -162,19 +148,12 @@ class ts_pro_notices {
 			   ) {
 
 				$third_ignore_time = get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_third_notice_ignore_time' );
-				//$ts_fifteen_days = strtotime( '+15 Days', $third_ignore_time[0] );
-
-				$ts_fifteen_days = strtotime( '+2 Minutes', $third_ignore_time[0] );
-
-				
-
-				if ( $current_time > $ts_fifteen_days ) {
-					
+				$ts_fifteen_days = strtotime( '+15 Days', $third_ignore_time[0] );
+				if ( $current_time > $ts_fifteen_days ) {					
 					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_fourth_notice_ignore', '0' );
-					
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
+					$cancel_button = '<a href="' . $add_query_arguments . '" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
 					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[4], $cancel_button );
 				}
 			}
@@ -187,20 +166,12 @@ class ts_pro_notices {
 			   ) {
 
 				$fourth_ignore_time = get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_fourth_notice_ignore_time' );
-				//$ts_fifteen_days = strtotime( '+15 Days', $fourth_ignore_time[0] );
-
-				$ts_fifteen_days = strtotime( '+2 Minutes', $fourth_ignore_time[0] );
-
-				
-
-
+				$ts_fifteen_days = strtotime( '+15 Days', $fourth_ignore_time[0] );
 				if ( $current_time > $ts_fifteen_days ) {
-					
 					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_fifth_notice_ignore', '0' );
-					
 					$class = 'updated notice-info point-notice';
 					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
+					$cancel_button = '<a href="' . $add_query_arguments . '" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
 					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[5], $cancel_button );
 				}
 			}
@@ -216,7 +187,6 @@ class ts_pro_notices {
 			     get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_fifth_notice_ignore' )
 			) {
 				$fifth_ignore_time = get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_fifth_notice_ignore_time' );
-
 				self::ts_display_other_pro_plugin_notices( $current_time, $activate_time, $fifth_ignore_time [ 0 ] );
 		  	}
 		}
@@ -232,7 +202,6 @@ class ts_pro_notices {
 		$seven_days    = strtotime ( '+7 Days', $activate_time );
 		if( is_plugin_active( self::$ts_pro_file_name ) && 
 		( false === $activate_time || ( $activate_time > 0 && $current_time >= $seven_days ) ) ) {
-
 			self::ts_display_other_pro_plugin_notices( $current_time, $activate_time );
 		}
 
@@ -247,92 +216,68 @@ class ts_pro_notices {
 		if ( ! get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_sixth_notice_ignore' )
 			) {
 
-				if ( '' != $ts_consider_time ) {
-					/**
-					 * This is fifth ignore notice time plus 7 days
-					 */
-					//$ts_consider_time = strtotime( '+7 Days', $ts_consider_time );
-
-					$ts_consider_time = strtotime( '+2 Minutes', $ts_consider_time );
-				}
-				if ( $current_time > $ts_consider_time ) { 
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_sixth_notice_ignore', '0' );
-					
-					$class = 'updated notice-info point-notice';
-					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[6], $cancel_button );
-				}
-				
+			if ( '' != $ts_consider_time ) {
+				/**
+				 * This is fifth ignore notice time plus 7 days
+				 */
+				$ts_consider_time = strtotime( '+7 Days', $ts_consider_time );
 			}
 
-			if ( get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_sixth_notice_ignore' )  &&
-				! get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_seventh_notice_ignore' ) 
-			) {
-
-				$sixth_ignore_time = get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_sixth_notice_ignore_time' );
-				//$ts_seven_days = strtotime( '+7 Days', $sixth_ignore_time[0] );
-
-				$ts_seven_days = strtotime( '+2 Minutes', $sixth_ignore_time[0] );
-
-				
-
-				if ( $current_time > $ts_seven_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_seventh_notice_ignore', '0' );
-					
-					$class = 'updated notice-info point-notice';
-					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[7], $cancel_button );
-				}
+			if ( $current_time > $ts_consider_time ) { 
+				$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_sixth_notice_ignore', '0' );
+				$class = 'updated notice-info point-notice';
+				$style = 'position:relative';
+				$cancel_button = '<a href="' . $add_query_arguments . '" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
+				printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[6], $cancel_button );
 			}
+		}
 
-			if ( get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_sixth_notice_ignore' )   &&
-				 get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_seventh_notice_ignore' ) &&
-				! get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_eigth_notice_ignore' ) 
-			) {
+		if ( get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_sixth_notice_ignore' )  &&
+			! get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_seventh_notice_ignore' ) 
+		) {
 
-				$seventh_ignore_time = get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_seventh_notice_ignore_time' );
-				//$ts_seven_days = strtotime( '+7 Days', $seventh_ignore_time[0] );
-
-				$ts_seven_days = strtotime( '+2 Minutes', $seventh_ignore_time[0] );
-
-				
-
-				if ( $current_time > $ts_seven_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_eigth_notice_ignore', '0' );
-					
-					$class = 'updated notice-info point-notice';
-					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[8], $cancel_button );
-				}
+			$sixth_ignore_time = get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_sixth_notice_ignore_time' );
+			$ts_seven_days = strtotime( '+7 Days', $sixth_ignore_time[0] );
+			if ( $current_time > $ts_seven_days ) {
+				$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_seventh_notice_ignore', '0' );
+				$class = 'updated notice-info point-notice';
+				$style = 'position:relative';
+				$cancel_button = '<a href="' . $add_query_arguments . '" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
+				printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[7], $cancel_button );
 			}
+		}
 
-			if ( get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_sixth_notice_ignore' )   &&
-				 get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_seventh_notice_ignore' ) &&
-				 get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_eigth_notice_ignore' )   &&
-				! get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_ninth_notice_ignore' ) 
-			) {
-
-				$eigth_ignore_time = get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_eigth_notice_ignore_time' );
-				//$ts_seven_days   = strtotime( '+7 Days', $eigth_ignore_time[0] );
-
-				$ts_seven_days   = strtotime( '+2 Minutes', $eigth_ignore_time[0] );
-				
-				if ( $current_time > $ts_seven_days ) {
-					
-					$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_ninth_notice_ignore', '0' );
-					
-					$class = 'updated notice-info point-notice';
-					$style = 'position:relative';
-					$cancel_button = '<a href="'.$add_query_arguments.'" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
-					printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[9], $cancel_button );
-				}
-
+		if ( get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_sixth_notice_ignore' )   &&
+			 get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_seventh_notice_ignore' ) &&
+			! get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_eigth_notice_ignore' ) 
+		) {
+			$seventh_ignore_time = get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_seventh_notice_ignore_time' );
+			$ts_seven_days = strtotime( '+7 Days', $seventh_ignore_time[0] );
+			if ( $current_time > $ts_seven_days ) {
+				$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_eigth_notice_ignore', '0' );
+				$class = 'updated notice-info point-notice';
+				$style = 'position:relative';
+				$cancel_button = '<a href="' . $add_query_arguments . '" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
+				printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[8], $cancel_button );
 			}
+		}
+
+		if ( get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_sixth_notice_ignore' )   &&
+			 get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_seventh_notice_ignore' ) &&
+			 get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_eigth_notice_ignore' )   &&
+			! get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_ninth_notice_ignore' ) 
+		) {
+
+			$eigth_ignore_time = get_user_meta( get_current_user_id(),  self::$pro_plugin_prefix . '_eigth_notice_ignore_time' );
+			$ts_seven_days   = strtotime( '+7 Days', $eigth_ignore_time[0] );
+			if ( $current_time > $ts_seven_days ) {
+				$add_query_arguments = add_query_arg( self::$pro_plugin_prefix . '_ninth_notice_ignore', '0' );
+				$class = 'updated notice-info point-notice';
+				$style = 'position:relative';
+				$cancel_button = '<a href="' . $add_query_arguments . '" class="dashicons dashicons-dismiss dashicons-dismiss-icon" style="position: absolute; top: 8px; right: 8px; color: #222; opacity: 0.4; text-decoration: none !important;"></a>';
+				printf( '<div class="%1$s" style="%2$s"><p>%3$s %4$s</p></div>', $class, $style, self::$ts_pro_notices[9], $cancel_button );
+			}
+		}
 	}
 
 	/**
