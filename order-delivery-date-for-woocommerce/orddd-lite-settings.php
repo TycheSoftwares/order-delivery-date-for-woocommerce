@@ -170,6 +170,7 @@ class orddd_lite_settings {
             'orddd_lite_date_settings',
             'orddd_lite_calculate_min_time_disabled_days'
         );
+        do_action ( "orddd_lite_add_new_settings" );
     }
 
     /**

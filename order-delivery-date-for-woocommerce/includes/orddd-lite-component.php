@@ -51,9 +51,14 @@ if ( ! class_exists( 'Orddd_Lite_All_Component' ) ) {
                 $orddd_lite_plugin_slug          = 'order_delivery_date_lite';
                 $orddd_lite_pro_file_name        = 'order-delivery-date/order_delivery_date.php';
 
+                $ordd_lite_settings_page        = 'admin.php?page=order_delivery_date_lite';
+                $ordd_lite_setting_add_on       = 'orddd_lite_date_settings_page';
+                $ordd_lite_setting_section      = 'orddd_lite_date_settings_section';
+                $ordd_lite_register_setting     = 'orddd_lite_date_settings';
+
                 new TS_Woo_Active ( $orddd_lite_plugin_name, $orddd_lite_file_name, $orddd_lite_locale );
 
-                new TS_tracking ( $orddd_lite_plugin_prefix, $orddd_lite_plugin_name, $orddd_lite_blog_post_link, $orddd_lite_locale, $orddd_lite_plugin_url );
+                new TS_tracking ( $orddd_lite_plugin_prefix, $orddd_lite_plugin_name, $orddd_lite_blog_post_link, $orddd_lite_locale, $orddd_lite_plugin_url, $ordd_lite_settings_page, $ordd_lite_setting_add_on, $ordd_lite_setting_section, $ordd_lite_register_setting );
 
                 new TS_Tracker ( $orddd_lite_plugin_prefix, $orddd_lite_plugin_name );
 
