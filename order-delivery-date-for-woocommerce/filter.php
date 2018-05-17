@@ -27,11 +27,11 @@ class orddd_lite_filter {
      */
     public static function orddd_lite_woocommerce_order_delivery_date_column( $columns ) {
         $new_columns = ( is_array( $columns  )) ? $columns : array();
-        unset( $new_columns[ 'order_actions' ] );
+        unset( $new_columns[ 'wc_actions' ] );
         //edit this for you column(s)
         //all of your columns will be added before the actions column
         $new_columns[ 'order_delivery_date' ] = __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ); //Title for column heading
-        $new_columns[ 'order_actions' ] = $columns[ 'order_actions' ];
+        $new_columns[ 'wc_actions' ] = $columns[ 'wc_actions' ];
         return $new_columns;
     }
     
