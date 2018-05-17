@@ -75,7 +75,13 @@ class orddd_lite_process {
             $min_date = '';
             $current_time = current_time( 'timestamp' );
             
-            $delivery_time_seconds = get_option( 'orddd_lite_minimumOrderDays' ) *60 *60;
+            if( '' ==  get_option( 'orddd_lite_minimumOrderDays' ) ) {
+                $minimum_delivery_time_orddd_lite = 0;
+            } else {
+                $minimum_delivery_time_orddd_lite = get_option( 'orddd_lite_minimumOrderDays' );
+            }
+
+            $delivery_time_seconds = $minimum_delivery_time_orddd_lite *60 *60;
             $cut_off_timestamp = $current_time + $delivery_time_seconds;
             $cut_off_date = date( "d-m-Y", $cut_off_timestamp );
             $min_date = date( "j-n-Y", strtotime( $cut_off_date ) );
