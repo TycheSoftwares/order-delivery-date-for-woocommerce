@@ -30,6 +30,7 @@ include_once( 'orddd-lite-common.php' );
 include_once( 'orddd-lite-settings.php' );
 include_once( 'orddd-lite-process.php' );
 include_once( 'filter.php' );
+include_once( 'orddd-lite-privacy.php' );
 //include_once( 'orddd-lite-pro-notices.php' );
 
 /**
