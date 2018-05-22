@@ -29,8 +29,6 @@ class orddd_lite_common {
 	    $plugin_data[ 'ts_meta_data_table_name']   = 'ts_tracking_orddd_lite_meta_data';
 	    $plugin_data[ 'ts_plugin_name' ]		   = 'Order Delivery Date for WooCommerce (Lite version)';
 	    
-	    // Store count info
-	    $plugin_data[ 'deliveries_count' ]         = self::orddd_lite_ts_get_order_counts();
 	    $params[ 'plugin_data' ]  				   = $plugin_data;
 	    
 	    return $params;
@@ -50,7 +48,6 @@ class orddd_lite_common {
     public static function orddd_lite_ts_add_plugin_tracking_data ( $data ) {
     	if ( isset( $_GET[ 'orddd_lite_tracker_optin' ] ) && isset( $_GET[ 'orddd_lite_tracker_nonce' ] ) && wp_verify_nonce( $_GET[ 'orddd_lite_tracker_nonce' ], 'orddd_lite_tracker_optin' ) ) {
 
-	        $plugin_data  = array();
 	        $plugin_data[ 'ts_meta_data_table_name' ]   = 'ts_tracking_orddd_lite_meta_data';
 	        $plugin_data[ 'ts_plugin_name' ]		    = 'Order Delivery Date for WooCommerce (Lite version)';
 	        
