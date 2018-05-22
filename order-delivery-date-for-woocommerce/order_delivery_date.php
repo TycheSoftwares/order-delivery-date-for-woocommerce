@@ -40,7 +40,7 @@ include_once( 'orddd-lite-privacy.php' );
 */
 
 if ( is_admin() ) {
-    require_once( 'includes/orddd-lite-component.php' );
+    //require_once( 'includes/orddd-lite-component.php' );
 
     //require_once( 'welcome.php' );
 
