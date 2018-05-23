@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, order delivery date, woocommerce delivery date, delivery, order delivery
 Requires at least: 1.3
-Tested up to: 4.9.2
+Tested up to: 4.9.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -216,6 +216,13 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+= 3.5 (23.05.2018) =
+
+* The plugin is now GDPR compliant.
+* Delivery Date & Time for the orders will now be exported to the User's Personal Data from the Tools -> Export Personal Data menu.
+* A warning was displayed on the checkout page when Minimum delivery time is set to blank. This is fixed now.
+* Some notices are fixed in debug.log file.
+
 = 3.4.2 (22.02.2018) =
 
 * Additional columns "Fecha Horneada" and "Encargado" were added on the WooCommerce Edit order page when the plugin is updated to version 3.4.1. 
@@ -382,6 +389,13 @@ Note: Please take a back up before updating this version.
 * Initial release.
 
 == Upgrade Notice ==
+= 3.5 (23.05.2018) =
+
+* The plugin is now GDPR compliant.
+* Delivery Date & Time for the orders will now be exported to the User's Personal Data from the Tools -> Export Personal Data menu.
+* A warning was displayed on the checkout page when Minimum delivery time is set to blank. This is fixed now.
+* Some notices are fixed in debug.log file.
+
 = 3.4.2 (22.02.2018) =
 
 * Additional columns "Fecha Horneada" and "Encargado" were added on the WooCommerce Edit order page when the plugin is updated to version 3.4.1. 
