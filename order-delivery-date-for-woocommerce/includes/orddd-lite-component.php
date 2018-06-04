@@ -56,24 +56,24 @@ if ( ! class_exists( 'Orddd_Lite_All_Component' ) ) {
                 $ordd_lite_setting_section      = 'orddd_lite_date_settings_section';
                 $ordd_lite_register_setting     = 'orddd_lite_date_settings';
 
-                new TS_Woo_Active ( $orddd_lite_plugin_name, $orddd_lite_file_name, $orddd_lite_locale );
+                new Orddd_Lite_TS_Woo_Active ( $orddd_lite_plugin_name, $orddd_lite_file_name, $orddd_lite_locale );
 
-                new TS_tracking ( $orddd_lite_plugin_prefix, $orddd_lite_plugin_name, $orddd_lite_blog_post_link, $orddd_lite_locale, $orddd_lite_plugin_url, $ordd_lite_settings_page, $ordd_lite_setting_add_on, $ordd_lite_setting_section, $ordd_lite_register_setting );
+                new Orddd_Lite_TS_tracking ( $orddd_lite_plugin_prefix, $orddd_lite_plugin_name, $orddd_lite_blog_post_link, $orddd_lite_locale, $orddd_lite_plugin_url, $ordd_lite_settings_page, $ordd_lite_setting_add_on, $ordd_lite_setting_section, $ordd_lite_register_setting );
 
-                new TS_Tracker ( $orddd_lite_plugin_prefix, $orddd_lite_plugin_name );
+                new Orddd_Lite_TS_Tracker ( $orddd_lite_plugin_prefix, $orddd_lite_plugin_name );
 
-                $orddd_lite_deativate = new TS_deactivate;
+                $orddd_lite_deativate = new Orddd_Lite_TS_deactivate;
                 $orddd_lite_deativate->init ( $orddd_lite_file_name, $orddd_lite_plugin_name );
 
                 $ordd_lite_welcome_page_header_text = '';
 
-                new TS_Welcome ( $orddd_lite_plugin_name, $orddd_lite_plugin_prefix, $orddd_lite_locale, $orddd_lite_plugin_folder_name, $orddd_lite_plugin_dir_name, $orddd_lite_get_previous_version, $ordd_lite_welcome_page_header_text );
+                new Orddd_Lite_TS_Welcome ( $orddd_lite_plugin_name, $orddd_lite_plugin_prefix, $orddd_lite_locale, $orddd_lite_plugin_folder_name, $orddd_lite_plugin_dir_name, $orddd_lite_get_previous_version, $ordd_lite_welcome_page_header_text );
                 
                 $ts_pro_faq = self::orddd_lite_get_faq ();
-                new TS_Faq_Support( $orddd_lite_plugin_name, $orddd_lite_plugin_prefix, $orddd_lite_plugins_page, $orddd_lite_locale, $orddd_lite_plugin_folder_name, $orddd_lite_plugin_slug, $ts_pro_faq );
+                new Orddd_Lite_TS_Faq_Support( $orddd_lite_plugin_name, $orddd_lite_plugin_prefix, $orddd_lite_plugins_page, $orddd_lite_locale, $orddd_lite_plugin_folder_name, $orddd_lite_plugin_slug, $ts_pro_faq );
                 
                 $ts_pro_notices = self::orddd_lite_get_notice_text ();
-				new ts_pro_notices( $orddd_lite_plugin_name, $orddd_lite_lite_plugin_prefix, $orddd_lite_plugin_prefix, $ts_pro_notices, $orddd_lite_file_name, $orddd_lite_pro_file_name );
+				new Orddd_Lite_ts_pro_notices( $orddd_lite_plugin_name, $orddd_lite_lite_plugin_prefix, $orddd_lite_plugin_prefix, $ts_pro_notices, $orddd_lite_file_name, $orddd_lite_pro_file_name );
 
             }
         }
