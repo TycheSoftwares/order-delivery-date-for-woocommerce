@@ -1,6 +1,6 @@
 <?php
 
-class ts_pro_notices {
+class Orddd_Lite_ts_pro_notices {
 
 	/**
 	* Plugin's Name
@@ -65,16 +65,16 @@ class ts_pro_notices {
 		register_activation_hook( __FILE__,  array( &$this, 'ts_notices_activate' ) );
 
 		//Add pro notices
-        add_action( 'admin_notices', array( 'ts_pro_notices', 'ts_notices_of_pro' ) );
-		add_action( 'admin_init', array( 'ts_pro_notices', 'ts_ignore_pro_notices' ) );
+        add_action( 'admin_notices', array( 'Orddd_Lite_ts_pro_notices', 'ts_notices_of_pro' ) );
+		add_action( 'admin_init', array( 'Orddd_Lite_ts_pro_notices', 'ts_ignore_pro_notices' ) );
 		
-		add_action( self::$plugin_prefix . '_activate', array( 'ts_pro_notices', 'ts_activate_time' ) );
+		add_action( self::$plugin_prefix . '_activate', array( 'Orddd_Lite_ts_pro_notices', 'ts_activate_time' ) );
 	}
 
 	public static function ts_activate_time () {
 
-		if( !get_option( 'wcal_activate_time' ) ) {
-			add_option( 'wcal_activate_time', current_time( 'timestamp' ) );
+		if( !get_option( self::$plugin_prefix . '_activate_time' ) ) {
+			add_option( self::$plugin_prefix . '_activate_time', current_time( 'timestamp' ) );
 		}
 	}
 
