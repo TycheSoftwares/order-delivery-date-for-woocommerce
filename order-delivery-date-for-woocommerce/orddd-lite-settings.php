@@ -1054,7 +1054,7 @@ class orddd_lite_settings {
                     update_option( 'orddd_lite_holidays', $holidays_jarr );                
                 }
             } 
-            wp_safe_redirect( esc_url( admin_url( '/admin.php?page=order_delivery_date_lite&action=holidays' ) ) );
+            wp_safe_redirect( admin_url( '/admin.php?page=order_delivery_date_lite&action=holidays' ) );
         }
     }
 }
