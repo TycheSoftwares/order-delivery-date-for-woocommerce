@@ -23,7 +23,11 @@ class orddd_lite_integration {
      */    
 	public function __construct() {		
 	    // WooCommerce PDF Invoices & Packing Slips
-		add_action( 'wpo_wcpdf_after_order_details', array( &$this, 'orddd_lite_plugins_packing_slip' ) );
+		if ( version_compare( get_option( 'wpo_wcpdf_version' ), '2.0.0', ">=" ) ) {
+			add_action( 'wpo_wcpdf_after_order_details', array( &$this, 'orddd_lite_plugins_packing_slip' ), 10, 2 );
+		} else {
+			add_action( 'wpo_wcpdf_after_order_details', array( &$this, 'orddd_lite_plugins_packing_slip' ) );
+		}
 		
 		// add custom columns headers to csv when Order/Customer CSV Export Plugin is activate
 		add_filter( 'wc_customer_order_csv_export_order_headers', array( &$this, 'orddd_lite_csv_export_modify_column_headers' ) );
@@ -45,11 +49,17 @@ class orddd_lite_integration {
 	 * @hook wpo_wcpdf_after_order_details
 	 * @since 1.7
 	 */
-	function orddd_lite_plugins_packing_slip() {
-		global $wpo_wcpdf, $orddd_lite_date_formats;
-		$order_export = $wpo_wcpdf->export;
-		$order_obj = $order_export->order;
-		$order_id = $order_obj->id;
+	function orddd_lite_plugins_packing_slip( $template_type = "", $order = array() ) {
+		global $orddd_lite_date_formats;
+		if ( version_compare( get_option( 'wpo_wcpdf_version' ), '2.0.0', ">=" ) ) {
+			$order_id = ( version_compare( get_option( 'woocommerce_version' ), '3.0.0', ">="  ) ) ? $order->get_id() : $order->id;
+		} else { 
+			global $wpo_wcpdf;
+			$order_export = $wpo_wcpdf->export;
+			$order_obj = $order_export->order;
+			$order_id = $order_obj->id;
+		}
+
 		$delivery_date_formatted = orddd_lite_common::orddd_lite_get_order_delivery_date( $order_id );
 		if( $delivery_date_formatted != '' ) {
 		    echo '<p><strong>' . __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ) . ': </strong>' . $delivery_date_formatted;
