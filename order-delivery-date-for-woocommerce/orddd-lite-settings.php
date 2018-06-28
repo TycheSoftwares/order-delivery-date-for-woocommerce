@@ -266,7 +266,7 @@ class orddd_lite_settings {
             array( 'orddd_lite_settings', 'orddd_lite_delivery_date_on_cart_page_callback' ),
             'orddd_lite_appearance_page',
             'orddd_lite_appearance_section',
-            array( __( 'Add the Delivery Date field on the cart page along with the Checkout page.' ) )
+            array( __( 'Add the Delivery Date field on the cart page along with the Checkout page.', 'order-delivery-date' ) )
         );
 
         add_settings_field(
@@ -375,7 +375,7 @@ class orddd_lite_settings {
             array( 'orddd_lite_settings', 'orddd_lite_holidays_name_callback' ),
             'orddd_lite_holidays_page',
             'orddd_lite_holidays_section',
-            array ( 'Enter the name of the holiday here.' )
+            array ( __( 'Enter the name of the holiday here.', 'order-delivery-date' ) )
         );
     
         add_settings_field(
@@ -384,7 +384,7 @@ class orddd_lite_settings {
             array( 'orddd_lite_settings', 'orddd_lite_holidays_date_callback' ),
             'orddd_lite_holidays_page',
             'orddd_lite_holidays_section',
-            array ( 'Select the holiday date here.' )
+            array ( __( 'Select the holiday date here.', 'order-delivery-date' ) )
         );
    
         register_setting(
