@@ -444,7 +444,8 @@ class orddd_lite_common {
 	    $delivery_enabled = 'yes';
 	    if ( get_option( 'orddd_lite_no_fields_for_virtual_product' ) == 'on' && get_option( 'orddd_lite_no_fields_for_featured_product' ) == 'on' ) {
 	        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
-	            $_product = $values[ 'data' ];
+	            $product_id = $values[ 'product_id' ];
+                $_product = wc_get_product( $product_id );
 	            if( $_product->is_virtual() == false && $_product->is_featured() == false ) {
 	                $delivery_enabled = 'yes';
 	                break;
@@ -464,7 +465,8 @@ class orddd_lite_common {
 	        }
 	    } else if( get_option( 'orddd_lite_no_fields_for_virtual_product' ) != 'on' && get_option( 'orddd_lite_no_fields_for_featured_product' ) == 'on' ) {
 	        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
-	            $_product = $values[ 'data' ];
+	            $product_id = $values[ 'product_id' ];
+                $_product = wc_get_product( $product_id );
 	            if( $_product->is_featured() == false ) {
 	                $delivery_enabled = 'yes';
 	                break;
