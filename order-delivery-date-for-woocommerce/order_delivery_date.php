@@ -10,7 +10,7 @@ Contributor: Tyche Softwares, http://www.tychesoftwares.com/
 Text Domain: order-delivery-date
 Requires PHP: 5.6
 WC requires at least: 3.0.0
-WC tested up to: 3.3.0
+WC tested up to: 3.4.3
 * @package  Order-Delivery-Date-Lite-for-WooCommerce
 */
 
@@ -40,7 +40,7 @@ include_once( 'orddd-lite-privacy.php' );
 */
 
 if ( is_admin() ) {
-    //require_once( 'includes/orddd-lite-component.php' );
+    require_once( 'includes/orddd-lite-component.php' );
 
     //require_once( 'welcome.php' );
 
