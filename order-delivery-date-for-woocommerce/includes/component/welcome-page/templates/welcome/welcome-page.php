@@ -93,7 +93,7 @@
             <h3><?php esc_html_e( 'Create Custom Delivery Schedules', 'order-delivery-date-lite' ); ?></h3>
             <p  style="font-size: 17px;" ><?php esc_html_e( 'The ability to set different delivery schedule for different WooCommerce shipping zones, shipping classes and product categories is very useful for the businesses like food packet deliveries, cake shops etc which deals with delivery in different shipping zones.', 'order-delivery-date-lite' ); ?></p>
 
-            <a href="https://www.tychesoftwares.com/custom-delivery-settings/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank" class="button-secondary">
+            <a href="https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/custom-delivery-settings/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank" class="button-secondary">
                 <?php esc_html_e( 'Learn More', 'order-delivery-date-lite' ); ?>
                 <span class="dashicons dashicons-external"></span>
             </a>
@@ -104,7 +104,7 @@
         <div class="content feature-section-item"  style="float:left;width:50%;">
             <h3><?php esc_html_e( 'Delivery Time along with Delivery Date', 'order-delivery-date-lite' ); ?></h3>
             <p style="font-size: 17px;"><?php esc_html_e( "The provision for allowing Delivery Time along with the Delivery Date on the checkout page makes the delivery more accurate. Delivering products on customer's preferred date and time improves your customers service.", 'order-delivery-date-lite' ); ?></p>
-            <a href="https://www.tychesoftwares.com/setup-delivery-date-time/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank" class="button-secondary">
+            <a href="https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/setup-delivery-date-with-time/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank" class="button-secondary">
                     <?php esc_html_e( 'Learn More', 'order-delivery-date-lite' ); ?>
                     <span class="dashicons dashicons-external"></span>
                 </a>
@@ -126,7 +126,7 @@
 
             <p style="font-size: 17px;"><?php esc_html_e( 'The ability to synchronise deliveries to the google calendar helps administrator or store manager to manage all the things in a single calendar.', 'order-delivery-date-lite' ); ?></p>
 
-            <a href="https://www.tychesoftwares.com/how-to-synchornize-delivery-dates-with-your-google-calendar/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank" class="button-secondary">
+            <a href="https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/synchronise-delivery-date-time-with-google-calendar/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank" class="button-secondary">
                 <?php esc_html_e( 'Learn More', 'order-delivery-date-lite' ); ?>
                 <span class="dashicons dashicons-external"></span>
             </a>
@@ -139,7 +139,7 @@
 
             <p  style="font-size: 17px;" ><?php esc_html_e( 'The Pro version of the plugin allows you to add different delivery settings like Same day cut-off time, Next Day cut-off time or Minimum Delivery Time for each weekday. It also allows you to add different delivery charges for different weekdays.', 'order-delivery-date-lite' ); ?></p>
 
-            <a href="https://www.tychesoftwares.com/weekday-settings/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank" class="button-secondary">
+            <a href="https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/weekday-settings/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateLitePlugin" target="_blank" class="button-secondary">
                 <?php esc_html_e( 'Learn More', 'order-delivery-date-lite' ); ?>
                 <span class="dashicons dashicons-external"></span>
             </a>
@@ -161,7 +161,7 @@
             <h3><?php esc_html_e( 'Getting to Know Tyche Softwares', 'woocommerce-ac' ); ?></h3>
             <ul class="ul-disc">
                 <li><a href="https://tychesoftwares.com/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateProPlugin" target="_blank"><?php esc_html_e( 'Visit the Tyche Softwares Website', 'woocommerce-ac' ); ?></a></li>
-                <li><a href="https://tychesoftwares.com/premium-plugins/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateProPlugin" target="_blank"><?php esc_html_e( 'View all Premium Plugins', 'woocommerce-ac' ); ?></a>
+                <li><a href="https://www.tychesoftwares.com/premium-woocommerce-plugins/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateProPlugin" target="_blank"><?php esc_html_e( 'View all Premium Plugins', 'woocommerce-ac' ); ?></a>
                 <ul class="ul-disc">
                     <li><a href="https://www.tychesoftwares.com/store/premium-plugins/woocommerce-abandoned-cart-pro/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateProPlugin" target="_blank">Abandoned Cart Pro Plugin for WooCommerce</a></li>
                     <li><a href="https://www.tychesoftwares.com/store/premium-plugins/woocommerce-booking-plugin/?utm_source=wpaboutpage&utm_medium=link&utm_campaign=OrderDeliveryDateProPlugin" target="_blank">Booking & Appointment Plugin for WooCommerce</a></li>
