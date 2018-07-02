@@ -1039,7 +1039,7 @@ class orddd_lite_settings {
                     $holidays = get_option( 'orddd_lite_holidays' );
                     $holidays_arr = json_decode( $holidays );
                     $holidays_new_arr = array();
-                    if ( count( $holidays_arr ) > 0 ) {
+                    if ( is_array( $holidays_arr ) && count( $holidays_arr ) > 0 ) {
                         foreach ( $holidays_arr as $k => $v ){
                             $holidays_new_arr[] = array( 'n' => $v->n, 'd' => $v->d );
                         }
