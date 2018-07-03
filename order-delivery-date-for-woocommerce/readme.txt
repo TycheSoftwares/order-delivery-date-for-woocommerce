@@ -132,6 +132,7 @@ If you like Order Delivery Date, please leave a [5 star](https://wordpress.org/s
 > - [Jurgen Hollebecq](https://wordpress.org/support/topic/works-like-a-charm-great-support-1/)
 
 **[View Demo](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=demolink&utm_campaign=OrderDeliveryDateLite "View Demo")**
+**[Developer Documentation](https://www.tychesoftwares.com/docs/orddl-apidocs/index.html "Developer Documentation")**
 **[Github Repository](https://github.com/TycheSoftwares/woocommerce-delivery-date "Github Repository")**
 
 == Installation ==
@@ -216,6 +217,24 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+= 3.6 (03.07.2018) =
+
+There are some enhancements and some bug fixes in this update which are mentioned below:
+* Enhancements:
+* A new dismissible notice is added in the WordPress admin, which provides an option to allow usage tracking of the non-sensitive data of our plugin from the website.
+* A new FAQ & Support menu is added to Order Delivery Date menu in admin dashboard which lists the top 10 frequently asked questions. This helps you to resolve your queries in a more faster way if they are already been answered or you can simply contact our Support team with the contact details provided. 
+* A Welcome page is added which will be shown on installation or updating of the plugin. It explains some exciting features or some new features in brief. 
+* A survey is added on deactivation of the plugin which helps us to know why is plugin is being or not used. This helps in improvising the plugin functionalities. 
+* Bug Fixes:
+* Delivery Date information was not displayed in the Packing slips and the Invoices of the freshly installed WooCommerce PDF Invoices & Packing Slips plugin. This is fixed now.
+* Some strings were not translated using the .po files. This is fixed now.
+* Delivery Date field was shown on the checkout page even when the featured variable product is added to the cart. This is fixed now.
+* Wrong delivery date was auto-populated on the checkout page when the first available delivery date is set to a holiday. This is fixed now.
+* Wrong delivery date was auto-populated on the checkout page where the Minimum Delivery time calculation was not done for non-working days when 'Apply Minimum Delivery Time for non working weekdays' setting is enabled. This is fixed now.
+* When holidays are deleted, the page was redirected to the Date Settings tab whereas it should stay on Holidays page itself. This is fixed now.
+* Some warnings are fixed in the debug.log file.
+* Some links shown on the welcome page are modified.
+
 = 3.5 (23.05.2018) =
 
 * The plugin is now GDPR compliant.
@@ -389,6 +408,24 @@ Note: Please take a back up before updating this version.
 * Initial release.
 
 == Upgrade Notice ==
+= 3.6 (03.07.2018) =
+
+There are some enhancements and some bug fixes in this update which are mentioned below:
+* Enhancements:
+* A new dismissible notice is added in the WordPress admin, which provides an option to allow usage tracking of the non-sensitive data of our plugin from the website.
+* A new FAQ & Support menu is added to Order Delivery Date menu in admin dashboard which lists the top 10 frequently asked questions. This helps you to resolve your queries in a more faster way if they are already been answered or you can simply contact our Support team with the contact details provided. 
+* A Welcome page is added which will be shown on installation or updating of the plugin. It explains some exciting features or some new features in brief. 
+* A survey is added on deactivation of the plugin which helps us to know why is plugin is being or not used. This helps in improvising the plugin functionalities. 
+* Bug Fixes:
+* Delivery Date information was not displayed in the Packing slips and the Invoices of the freshly installed WooCommerce PDF Invoices & Packing Slips plugin. This is fixed now.
+* Some strings were not translated using the .po files. This is fixed now.
+* Delivery Date field was shown on the checkout page even when the featured variable product is added to the cart. This is fixed now.
+* Wrong delivery date was auto-populated on the checkout page when the first available delivery date is set to a holiday. This is fixed now.
+* Wrong delivery date was auto-populated on the checkout page where the Minimum Delivery time calculation was not done for non-working days when 'Apply Minimum Delivery Time for non working weekdays' setting is enabled. This is fixed now.
+* When holidays are deleted, the page was redirected to the Date Settings tab whereas it should stay on Holidays page itself. This is fixed now.
+* Some warnings are fixed in the debug.log file.
+* Some links shown on the welcome page are modified.
+
 = 3.5 (23.05.2018) =
 
 * The plugin is now GDPR compliant.
