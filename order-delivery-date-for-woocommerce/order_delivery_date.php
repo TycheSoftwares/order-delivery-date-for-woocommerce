@@ -39,16 +39,6 @@ include_once( 'orddd-lite-privacy.php' );
 * @since 3.4
 */
 
-if ( is_admin() ) {
-    require_once( 'includes/orddd-lite-component.php' );
-
-    //require_once( 'welcome.php' );
-
-    //define( 'ORDDD_VERSION', orddd_lite_common::orddd_get_version() );
-
-    //define( 'ORDDD_PLUGIN_URL', orddd_lite_common::orddd_get_plugin_url() );
-}
-
 if ( !class_exists( 'order_delivery_date_lite' ) ) {
     /**
      * Main Order Delivery Date class
@@ -122,6 +112,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
 
             //Ajax calls
             add_action( 'init', array( &$this, 'orddd_lite_load_ajax' ) );
+            add_action( 'init', array( &$this, 'orddd_lite_add_component_file' ) );
 
             /**
              * It will add the actions for the components.
@@ -450,6 +441,18 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             wp_enqueue_style( 'datepicker', esc_url( plugins_url('/css/datepicker.css', __FILE__) ), '', $wpefield_version, false);            
         }
         
+        /**
+         * It will load the boilerplate components file. In this file we have included all boilerplate files.
+         * We need to inlcude this file after the init hook.
+         * @hook init
+         */
+
+        public static function orddd_lite_add_component_file () {
+            if ( is_admin() ) {
+                require_once( 'includes/orddd-lite-component.php' );
+            }
+        }
+
         /** 
          * Enqueue scripts on the frontend checkout page
          * 

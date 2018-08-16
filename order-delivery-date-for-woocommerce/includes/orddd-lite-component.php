@@ -67,8 +67,11 @@ if ( ! class_exists( 'Orddd_Lite_All_Component' ) ) {
 
                 $ordd_lite_welcome_page_header_text = '';
 
-                new Orddd_Lite_TS_Welcome ( $orddd_lite_plugin_name, $orddd_lite_plugin_prefix, $orddd_lite_locale, $orddd_lite_plugin_folder_name, $orddd_lite_plugin_dir_name, $orddd_lite_get_previous_version, $ordd_lite_welcome_page_header_text );
+                $user = wp_get_current_user();
                 
+                if ( in_array( 'administrator', (array) $user->roles ) ) {
+                    new Orddd_Lite_TS_Welcome ( $orddd_lite_plugin_name, $orddd_lite_plugin_prefix, $orddd_lite_locale, $orddd_lite_plugin_folder_name, $orddd_lite_plugin_dir_name, $orddd_lite_get_previous_version, $ordd_lite_welcome_page_header_text );
+                }
                 $ts_pro_faq = self::orddd_lite_get_faq ();
                 new Orddd_Lite_TS_Faq_Support( $orddd_lite_plugin_name, $orddd_lite_plugin_prefix, $orddd_lite_plugins_page, $orddd_lite_locale, $orddd_lite_plugin_folder_name, $orddd_lite_plugin_slug, $ts_pro_faq );
                 
