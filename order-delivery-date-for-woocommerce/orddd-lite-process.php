@@ -154,6 +154,13 @@ class orddd_lite_process {
                 $var .= '<input type="hidden" name="e_deliverydate_lite_session" id="e_deliverydate_lite_session" value="' . $e_deliverydate_session . '">';
             }
 
+            $orddd_lite_disable_for_holidays = 'no';
+            if( has_filter( 'orddd_to_calculate_minimum_hours_for_holidays' ) ) {
+                $orddd_lite_disable_for_holidays = apply_filters( 'orddd_to_calculate_minimum_hours_for_holidays', $orddd_lite_disable_for_holidays );
+            }
+            
+            $var .= '<input type="hidden" name="orddd_lite_disable_for_holidays" id="orddd_lite_disable_for_holidays" value="' . $orddd_lite_disable_for_holidays . '">';
+            
 			echo $var;
 
             $delivery_enabled = orddd_lite_common::orddd_lite_is_delivery_enabled();
