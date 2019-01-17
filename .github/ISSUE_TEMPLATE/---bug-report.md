@@ -35,9 +35,9 @@ If applicable, add screenshots or Video to help explain your problem.
  - Version [e.g. 22]
 
 **Isolating the problem (mark completed items with an [x]):**
- [ ] This bug happens with only Order Delivery Date for WooCommerce plugin active
- [ ] This bug happens with a default WordPress theme active, or [Storefront]
- [ ] I can reproduce this bug consistently using the steps above
+- [ ] This bug happens with only Order Delivery Date for WooCommerce plugin active
+- [ ] This bug happens with a default WordPress theme active, or [Storefront]
+- [ ] I can reproduce this bug consistently using the steps above
 
 **WordPress Environment**
 <details>
