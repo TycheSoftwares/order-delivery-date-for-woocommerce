@@ -1027,33 +1027,25 @@ class orddd_lite_settings {
      */  
 
     public static function orddd_lite_delete_settings() {
-        if ( ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] == 'order_delivery_date_lite' ) && ( isset( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] == 'holidays' ) ) {
-            if( ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] == 'orddd_lite_delete' ) || ( isset( $_GET[ 'action2' ] ) && $_GET[ 'action2' ] == 'orddd_lite_delete' ) ) {
-                $holiday = array();
-                    
-                if( isset( $_GET[ 'holiday' ] ) ) {
-                    $holiday = $_GET[ 'holiday' ];
-                }
+        if ( ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] == 'order_delivery_date_lite' ) && ( isset( $_GET[ 'tab' ] ) && $_GET[ 'tab' ] == 'holidays' ) && ( ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] == 'orddd_lite_delete' ) || ( isset( $_GET[ 'action2' ] ) && $_GET[ 'action2' ] == 'orddd_lite_delete' ) ) ) {
+
+            $holiday = array();
+            if( isset( $_GET[ 'holiday' ] ) ) {
+                $holiday = $_GET[ 'holiday' ];
+            }
                 
-                foreach( $holiday as $h_key => $h_value ) {
-                    $holidays = get_option( 'orddd_lite_holidays' );
-                    $holidays_arr = json_decode( $holidays );
-                    $holidays_new_arr = array();
-                    if ( is_array( $holidays_arr ) && count( $holidays_arr ) > 0 ) {
-                        foreach ( $holidays_arr as $k => $v ){
-                            $holidays_new_arr[] = array( 'n' => $v->n, 'd' => $v->d );
-                        }
+            $holidays = get_option( 'orddd_lite_holidays' );
+            $holidays_arr = json_decode( $holidays );
+            foreach( $holiday as $h_key => $h_value ) {
+                foreach( $holidays_arr as $subKey => $subValue ) {
+                    if( $subValue->d == $h_value ) {
+                        unset( $holidays_arr[ $subKey ] );
                     }
-                    
-                    foreach( $holidays_new_arr as $subKey => $subValue ) {
-                        if( $subValue[ 'd' ] == $h_value ) {
-                            unset( $holidays_new_arr[ $subKey ] );
-                        }
-                    }
-                    $holidays_jarr = json_encode( $holidays_new_arr );
-                    update_option( 'orddd_lite_holidays', $holidays_jarr );                
                 }
-            } 
+            }
+
+            $holidays_jarr = json_encode( $holidays_arr );
+            update_option( 'orddd_lite_holidays', $holidays_jarr );                
             wp_safe_redirect( admin_url( '/admin.php?page=order_delivery_date_lite&action=holidays' ) );
         }
     }
