@@ -147,9 +147,9 @@ class orddd_lite_process {
             $var .= '<input type="hidden" name="orddd_admin_url" id="orddd_admin_url" value="' . $ajax_url . '">';
 
             //Session fields
-            if( isset( $_SESSION[ 'e_deliverydate_lite' ] ) ) {
-                $e_deliverydate_session = $_SESSION[ 'e_deliverydate_lite' ];
-                $h_deliverydate_session =$_SESSION[ 'h_deliverydate_lite' ];
+            if( WC()->session->get('e_deliverydate_lite') ) {
+                $e_deliverydate_session = WC()->session->get('e_deliverydate_lite');
+                $h_deliverydate_session = WC()->session->get('h_deliverydate_lite');
                 $var .= '<input type="hidden" name="h_deliverydate_lite_session" id="h_deliverydate_lite_session" value="' . $h_deliverydate_session . '">';
                 $var .= '<input type="hidden" name="e_deliverydate_lite_session" id="e_deliverydate_lite_session" value="' . $e_deliverydate_session . '">';
             }
@@ -204,9 +204,11 @@ class orddd_lite_process {
      * @since 1.5
      */
     public static function orddd_lite_update_delivery_session() {
-        $_SESSION[ 'e_deliverydate_lite' ] = $_POST[ 'e_deliverydate' ];
-        $_SESSION[ 'h_deliverydate_lite' ] = $_POST[ 'h_deliverydate' ];
-        
+        $e_deliverydate = $_POST[ 'e_deliverydate' ];
+        $h_deliverydate = $_POST[ 'h_deliverydate' ];
+
+        WC()->session->set( 'e_deliverydate_lite', $e_deliverydate );
+        WC()->session->set( 'h_deliverydate_lite', $h_deliverydate );
         $_POST[ 'h_deliverydate' ] = "";
         $_POST[ 'e_deliverydate' ] = "";
     }
