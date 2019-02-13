@@ -132,9 +132,6 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
          */  
 
         function orddd_lite_load_ajax() {
-            if( '' == session_id() ) {
-                session_start();    
-            }
             if ( !is_user_logged_in() ) {
                 add_action( 'wp_ajax_nopriv_orddd_lite_update_delivery_session', array( 'orddd_lite_process', 'orddd_lite_update_delivery_session' ) );
             } else {
