@@ -1037,14 +1037,22 @@ class orddd_lite_settings {
             $holidays = get_option( 'orddd_lite_holidays' );
             $holidays_arr = json_decode( $holidays );
             foreach( $holiday as $h_key => $h_value ) {
-                foreach( $holidays_arr as $subKey => $subValue ) {
-                    if( $subValue->d == $h_value ) {
-                        unset( $holidays_arr[ $subKey ] );
+                $holidays_new_arr = array();
+
+                foreach( $holidays_arr as $k => $v ) {
+                    $holidays_new_arr[] = array( 'n' => $v->n, 'd' => $v->d );
+                }
+
+                
+                foreach( $holidays_new_arr as $subKey => $subValue ) {
+                    if( $subValue['d'] == $h_value ) {
+                        unset( $holidays_new_arr[ $subKey ] );
                     }
                 }
             }
 
-            $holidays_jarr = json_encode( $holidays_arr );
+            $holidays_jarr = json_encode( $holidays_new_arr );
+
             update_option( 'orddd_lite_holidays', $holidays_jarr );                
             wp_safe_redirect( admin_url( '/admin.php?page=order_delivery_date_lite&action=holidays' ) );
         }
