@@ -1039,16 +1039,13 @@ class orddd_lite_settings {
             foreach( $holiday as $h_key => $h_value ) {
                 foreach( $holidays_arr as $subKey => $subValue ) {
                     if( $subValue->d == $h_value ) {
-                        if( is_array( $holidays_arr) ) {
-                            unset( $holidays_arr[$subKey] );
-                        }else {
-                            unset( $holidays_arr->$subKey );
-                        }
+                        unset( $holidays_arr[$subKey] );
                     }
                 }
             }
-            
-            $holidays_jarr = json_encode( $holidays_arr );
+           
+            $holidays_jarr = json_encode( array_values($holidays_arr) );
+           
             update_option( 'orddd_lite_holidays', $holidays_jarr );                
             wp_safe_redirect( admin_url( '/admin.php?page=order_delivery_date_lite&action=holidays' ) );
         }
