@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, order delivery date, woocommerce delivery date, delivery, order delivery
 Requires at least: 1.3
-Tested up to: 4.9.6
+Tested up to: 5.0.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -217,6 +217,14 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+
+= 3.6.1 (14.02.2019) =
+
+There are 3 bug fixes in this update:
+* All holidays were getting deleted through bulk options even when only certain hoildays were marked.
+* Changes made under Appearance -> Editor submenu were not getting updated when Order Delivery Date lite plugin was active.
+* "Apply Minimum Delivery Time for non working weekdays" option was not working for holidays.
+
 = 3.6 (03.07.2018) =
 
 There are some enhancements and some bug fixes in this update which are mentioned below:
