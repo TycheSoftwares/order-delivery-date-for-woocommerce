@@ -187,6 +187,11 @@ function minimum_date_to_set( delay_days ) {
 								delay_time = delay_days.getTime();
 							}
 						}
+
+						if( jQuery.inArray( ( m+1 ) + "-" + d + "-" + y, bookedDays ) != -1 ) {
+				            delay_days.setDate( delay_days.getDate()+1 );
+				            delay_time = delay_days.getTime();
+				        } 
 						current_day.setDate( current_day.getDate()+1 );
 						current_time = current_day.getTime();
 						current_weekday = current_day.getDay();
@@ -208,6 +213,12 @@ function minimum_date_to_set( delay_days ) {
 							delay_time = delay_days.getTime();
 						}
 					}
+
+					if( jQuery.inArray( ( m+1 ) + "-" + d + "-" + y, bookedDays ) != -1 ) {
+			            delay_days.setDate( delay_days.getDate()+1 );
+			            delay_time = delay_days.getTime();
+			        } 
+
 					current_day.setDate( current_day.getDate()+1 );
 					current_time = current_day.getTime();
 					current_weekday = current_day.getDay();
