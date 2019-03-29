@@ -31,7 +31,6 @@ include_once( 'orddd-lite-settings.php' );
 include_once( 'orddd-lite-process.php' );
 include_once( 'filter.php' );
 include_once( 'orddd-lite-privacy.php' );
-//include_once( 'orddd-lite-pro-notices.php' );
 
 /**
 * Defines the plugin version and url when on the admin page
@@ -59,11 +58,6 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_action( 'admin_init',            array( &$this, 'orddd_lite_update_db_check' ) );
             add_action( 'admin_init',            array( &$this, 'orddd_lite_capabilities' ) );
             add_action( 'admin_init',            array( &$this, 'orddd_lite_check_if_woocommerce_active' ) );
-            //add_action( 'admin_footer',          array( &$this, 'admin_notices_scripts' ) );
-
-            //Add pro notices
-            //add_action( 'admin_notices', array( 'orddd_lite_pro_notices', 'orddd_lite_notices_of_pro' ) );
-            //add_action( 'admin_init', array( 'orddd_lite_pro_notices', 'orddd_lite_ignore_pro_notices' ) );
                        
             //Settings
             add_action( 'admin_menu', array( 'orddd_lite_settings', 'orddd_lite_order_delivery_date_menu' ) );
@@ -374,24 +368,6 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
 		        $role->add_cap( 'manage_options' );
 		    }
 		}
-        
-        /** 
-         * Enqueue scripts in the admin footer
-         * 
-         * @hook admin_footer
-         * @since 2.6
-         */
-        function admin_notices_scripts() {
-            wp_enqueue_script(
-                'dismiss-notice.js',
-                esc_url( plugins_url('/js/dismiss-notice.js', __FILE__) ),
-                '',
-                '',
-                false
-            );
-        
-            wp_enqueue_style( 'dismiss-notice', esc_url( plugins_url('/css/dismiss-notice.css', __FILE__ ) ), '', '', false );
-        }
         
         /** 
          * Enqueue scripts on the admin Order Delivery Date menu page

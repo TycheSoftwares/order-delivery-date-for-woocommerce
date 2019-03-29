@@ -29,9 +29,7 @@ if ( ! class_exists( 'Orddd_Lite_All_Component' ) ) {
                 require_once( "component/tracking-data/ts-tracking.php" );
                 require_once( "component/deactivate-survey-popup/class-ts-deactivation.php" );
 
-                require_once( "component/welcome-page/ts-welcome.php" );
                 require_once( "component/faq-support/ts-faq-support.php" );
-                require_once( "component/pro-notices-in-lite/ts-pro-notices.php" );
                 
                 $orddd_lite_plugin_name          = self::ts_get_plugin_name();;
                 $orddd_lite_locale               = self::ts_get_plugin_locale();
@@ -65,19 +63,8 @@ if ( ! class_exists( 'Orddd_Lite_All_Component' ) ) {
                 $orddd_lite_deativate = new Orddd_Lite_TS_deactivate;
                 $orddd_lite_deativate->init ( $orddd_lite_file_name, $orddd_lite_plugin_name );
 
-                $ordd_lite_welcome_page_header_text = '';
-
-                $user = wp_get_current_user();
-                
-                if ( in_array( 'administrator', (array) $user->roles ) ) {
-                    new Orddd_Lite_TS_Welcome ( $orddd_lite_plugin_name, $orddd_lite_plugin_prefix, $orddd_lite_locale, $orddd_lite_plugin_folder_name, $orddd_lite_plugin_dir_name, $orddd_lite_get_previous_version, $ordd_lite_welcome_page_header_text );
-                }
                 $ts_pro_faq = self::orddd_lite_get_faq ();
                 new Orddd_Lite_TS_Faq_Support( $orddd_lite_plugin_name, $orddd_lite_plugin_prefix, $orddd_lite_plugins_page, $orddd_lite_locale, $orddd_lite_plugin_folder_name, $orddd_lite_plugin_slug, $ts_pro_faq );
-                
-                $ts_pro_notices = self::orddd_lite_get_notice_text ();
-				new Orddd_Lite_ts_pro_notices( $orddd_lite_plugin_name, $orddd_lite_lite_plugin_prefix, $orddd_lite_plugin_prefix, $ts_pro_notices, $orddd_lite_file_name, $orddd_lite_pro_file_name );
-
             }
         }
 
@@ -113,56 +100,6 @@ if ( ! class_exists( 'Orddd_Lite_All_Component' ) ) {
             return $ts_plugin_domain;
         }
         
-        /**
-         * It will Display the notices in the admin dashboard for the pro vesion of the plugin.
-         * @return array $ts_pro_notices All text of the notices
-         */
-        public static function orddd_lite_get_notice_text () {
-            $ts_pro_notices = array();
-
-            $orddd_lite_locale               = self::ts_get_plugin_locale();
-
-            $message_first = wp_kses_post ( __( 'Thank you for using Order Delivery Date for WooCommerce! Never login to your admin to check your deliveries by syncing the delivery dates to the Google Calendar from Order Delivery Date Pro for WooCommerce. <strong><a target="_blank" href= "https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/checkout?edd_action=add_to_cart&download_id=16&utm_source=wpnotice&utm_medium=first&utm_campaign=OrderDeliveryDateLitePlugin">Get it now!</a></strong>', $orddd_lite_locale ) );  
-
-            $message_two = wp_kses_post ( __( 'Send Product review emails to the customers on the next day of delivery using Post Delivery Product Reviews Addon for Order Delivery Date plugin. <strong><a target="_blank" href= "https://www.tychesoftwares.com/store/premium-plugins/post-delivery-product-reviews-addon-order-delivery-date-woocommerce/checkout?edd_action=add_to_cart&download_id=278278&utm_source=wpnotice&utm_medium=second&utm_campaign=OrderDeliveryDateLitePlugin">Have it now!</a></strong>', $orddd_lite_locale ) );
-
-            $message_three = wp_kses_post ( __( 'Create Delivery Settings by Shipping Zones & Shipping Classes using Order Delivery Date Pro for WooCommerce plugin. <br>Use discount code "ORDPRO20" and grab 20% discount on the purchase of the plugin. The discount code is valid only for the first 20 customers. <strong><a target="_blank" href= "\'https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/checkout?edd_action=add_to_cart&download_id=16&utm_source=wpnotice&utm_medium=third&utm_campaign=OrderDeliveryDateLitePlugin">Purchase now</a></strong>.', $orddd_lite_locale ) );
-
-            $message_four = wp_kses_post ( __( 'Allow recurring deliveries for the subscriptions from the WooCommerce Subscriptions plugin by using WooCommerce Subscriptions Compatibility Addons. <strong><a target="_blank" href= "https://www.tychesoftwares.com/store/premium-plugins/woocommerce-subscriptions-compatibility-addon-for-order-delivery-date-pro-for-woocommerce-plugin/checkout?edd_action=add_to_cart&download_id=278278&utm_source=wpnotice&utm_medium=fourth&utm_campaign=OrderDeliveryDateLitePlugin">Have it now!</a></strong>.', $orddd_lite_locale ) );
-
-            $message_five = wp_kses_post ( __( 'Receive feedbacks for your products from verified owners by sending them post delivery emails using Post Delivery Product Reviews addon of Order Delivery Date plugin. <strong><a target="_blank" href= "https://www.tychesoftwares.com/store/premium-plugins/post-delivery-product-reviews-addon-order-delivery-date-woocommerce/checkout?edd_action=add_to_cart&download_id=278278&utm_source=wpnotice&utm_medium=fifth&utm_campaign=OrderDeliveryDateLitePlugin">Have it now!</a></strong>.', $orddd_lite_locale ) );
-
-            $orddd_wcal_lite_link = 'https://www.tychesoftwares.com/store/premium-plugins/woocommerce-abandoned-cart-pro/checkout?edd_action=add_to_cart&download_id=20&utm_source=wpnotice&utm_medium=sixth&utm_campaign=OrderDeliveryDateLitePlugin';
-
-            $message_six = wp_kses_post ( __( 'Boost your sales by recovering up to 60% of the abandoned carts with our Abandoned Cart Pro for WooCommerce plugin. It allows you to capture guest customer\'s email address on the shop page using Add to cart pop modal.<strong><a target="_blank" href= "'.$orddd_wcal_lite_link.'"> Install it now.</a></strong>', $orddd_lite_locale ) );
-            
-
-            $_link = 'https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/checkout?edd_action=add_to_cart&download_id=238877&utm_source=wpnotice&utm_medium=seventh&utm_campaign=OrderDeliveryDateLitePlugin';
-            $message_seven = wp_kses_post ( __( 'Allow your customers to select the Delivery Date on Single Product Page using our Product Delivery Date pro for WooCommerce Plugin. <br> 
-            <strong><a target="_blank" href= "'.$_link.'">Shop now</a></strong> & be one of the 20 customers to get 20% discount on the plugin price. Use the code "PRDPRO20". Hurry!!', $orddd_lite_locale ) );
-            
-            $_link = 'https://www.tychesoftwares.com/store/premium-plugins/woocommerce-booking-plugin/checkout?edd_action=add_to_cart&download_id=22&utm_source=wpnotice&utm_medium=eight&utm_campaign=OrderDeliveryDateLitePlugin';
-            $message_eight = wp_kses_post ( __( ' Allow your customers to book an appointment or rent an apartment with our Booking and Appointment for WooCommerce plugin. You can also sell your product as a resource or integrate with a few Vendor plugins. <br>Shop now & Save 20% on the plugin with the code "BKAP20". Only for first 20 customers. <strong><a target="_blank" href= "'.$_link.'">Have it now!</a></strong>', $orddd_lite_locale ) );
-            
-            $_link = 'https://www.tychesoftwares.com/store/premium-plugins/deposits-for-woocommerce/checkout?edd_action=add_to_cart&download_id=286371&utm_source=wpnotice&utm_medium=eight&utm_campaign=OrderDeliveryDateLitePlugin';
-            $message_nine = wp_kses_post ( __( ' Allow your customers to pay deposits on products using our Deposits for WooCommerce plguin. <br>
-            <strong><a target="_blank" href= "'.$_link.'">Purchase now</a></strong> & Grab 20% discount with the code "DFWP20". The discount code is valid only for the first 20 customers.', $orddd_lite_locale ) );
-			
-            $ts_pro_notices = array (
-                1 => $message_first,
-                2 => $message_two,
-                3 => $message_three,
-                4 => $message_four,
-                5 => $message_five,
-                6 => $message_six,
-                7 => $message_seven,
-                8 => $message_eight,
-                9 => $message_nine,
-            ) ;
-
-            return $ts_pro_notices;
-        }
-		
 		/**
          * It will contain all the FAQ which need to be display on the FAQ page.
          * @return array $ts_faq All questions and answers.
