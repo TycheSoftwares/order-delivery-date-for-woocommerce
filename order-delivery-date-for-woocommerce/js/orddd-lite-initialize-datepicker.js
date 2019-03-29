@@ -5,6 +5,37 @@
  * @since 1.0
  */
 jQuery(document).ready( function() {
+
+	//Clear local storage for the selected delivery date in next 2 hours. 
+    var orddd_last_check_date = localStorage.getItem( "orddd_lite_storage_next_time" );
+    var current_date = jQuery( "#orddd_lite_current_day" ).val();
+    
+    if( current_date != '' && typeof( current_date ) != 'undefined' ) {
+        var split_current_date = current_date.split( '-' );
+        var ordd_next_date = new Date( split_current_date[ 2 ], ( split_current_date[ 1 ] - 1 ), split_current_date[ 0 ], jQuery( "#orddd_lite_current_hour" ).val(), jQuery( "#orddd_lite_current_minute" ).val() );
+    } else {
+        var ordd_next_date = new Date();
+    }
+
+    if ( null != orddd_last_check_date ) {
+        if ( ordd_next_date.getTime() > orddd_last_check_date ) {
+            localStorage.removeItem( "orddd_lite_storage_next_time" );
+            localStorage.removeItem( "e_deliverydate_lite_session" );
+            localStorage.removeItem( "h_deliverydate_lite_session" );
+        }
+    }
+
+    jQuery(document).on( "ajaxComplete", function( event, xhr, options ) {
+        if( options.url.indexOf( "wc-ajax=checkout" ) !== -1 ) {
+            if( xhr.statusText != "abort" ) {
+                localStorage.removeItem( "orddd_lite_storage_next_time" );
+            	localStorage.removeItem( "e_deliverydate_lite_session" );
+            	localStorage.removeItem( "h_deliverydate_lite_session" );
+            }
+        }
+    });
+
+
 	var formats = ["MM d, yy","MM d, yy"];
     
     jQuery.extend( jQuery.datepicker, { afterShow: function( event ) {
@@ -69,14 +100,21 @@ function orddd_on_select_date( date, inst ) {
     var yearValue = inst.selectedYear;
     var all = dayValue + "-" + monthValue + "-" + yearValue;
 
-	var data = {
-        e_deliverydate: jQuery( "#e_deliverydate" ).val(),
-        h_deliverydate: all,
-        action: "orddd_lite_update_delivery_session"
-    };
-    
-    jQuery.post( jQuery( '#orddd_admin_url' ).val() + "admin-ajax.php", data, function( response ) {
-    });
+    if( 'on' == jQuery( '#orddd_lite_delivery_date_on_cart_page' ).val() ) {
+        localStorage.setItem( "e_deliverydate_lite_session", jQuery( "#e_deliverydate" ).val() );
+        localStorage.setItem( "h_deliverydate_lite_session", all );
+        
+        var current_date = jQuery( "#orddd_lite_current_day" ).val();
+        if( typeof( current_date ) != 'undefined' && current_date != '' ) {
+            var split_current_date = current_date.split( '-' );
+            var ordd_next_date = new Date( split_current_date[ 2 ], ( split_current_date[ 1 ] - 1 ), split_current_date[ 0 ], jQuery( "#orddd_lite_current_hour" ).val(), jQuery( "#orddd_lite_current_minute" ).val() );
+        } else {
+            var ordd_next_date = new Date();
+        }            
+
+        ordd_next_date.setHours( ordd_next_date.getHours() + 2 );
+        localStorage.setItem( "orddd_lite_storage_next_time", ordd_next_date.getTime() );
+    }
 }
 
 /**
@@ -91,15 +129,18 @@ function load_lite_functions() {
 		orddd_lite_autofil_date_time();
     }
 
-    if( typeof( jQuery( '#e_deliverydate_lite_session' ).val() ) != 'undefined' && jQuery( '#e_deliverydate_lite_session' ).val() != '' ) {
-        var e_deliverydate_session = jQuery( '#e_deliverydate_lite_session' ).val();
-        var h_deliverydate_session = jQuery( '#h_deliverydate_lite_session' ).val();
-        var default_date_arr = h_deliverydate_session.split( '-' );
-        var default_date = new Date( default_date_arr[ 1 ] + '/' + default_date_arr[ 0 ] + '/' + default_date_arr[ 2 ] );
-        jQuery( '#e_deliverydate' ).datepicker( "setDate", default_date );
-        jQuery( "#h_deliverydate" ).val( h_deliverydate_session );
-        
-    }
+    if( 'on' == jQuery( '#orddd_lite_delivery_date_on_cart_page' ).val() ) {
+		var e_deliverydate_session = localStorage.getItem( 'e_deliverydate_lite_session' );
+    	if( typeof( e_deliverydate_session ) != 'undefined' && e_deliverydate_session != '' ) {
+    		var h_deliverydate_session = localStorage.getItem( 'h_deliverydate_lite_session' );
+    		if( typeof( h_deliverydate_session ) != 'undefined' && h_deliverydate_session != '' && h_deliverydate_session != null ) {
+		        var default_date_arr = h_deliverydate_session.split( '-' );
+		        var default_date = new Date( default_date_arr[ 1 ] + '/' + default_date_arr[ 0 ] + '/' + default_date_arr[ 2 ] );
+		        jQuery( '#e_deliverydate' ).datepicker( "setDate", default_date );
+		        jQuery( "#h_deliverydate" ).val( h_deliverydate_session );
+		    }
+	    }
+	}
 }
 
 /**
@@ -129,6 +170,7 @@ function orddd_lite_autofil_date_time() {
 	
 	if( delay_date != "" ) {
 		delay_days = minimum_date_to_set( delay_days );
+
         if( delay_days != '' ) {
 			var min_date_to_set = delay_days.getDate() + "-" + ( delay_days.getMonth()+1 ) + "-" + delay_days.getFullYear();
         }

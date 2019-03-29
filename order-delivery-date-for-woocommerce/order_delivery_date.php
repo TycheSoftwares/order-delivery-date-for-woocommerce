@@ -111,7 +111,6 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_action( 'wp_trash_post', array( 'orddd_lite_common', 'orddd_lite_cancel_delivery_for_trashed' ), 10, 1 );
 
             //Ajax calls
-            add_action( 'init', array( &$this, 'orddd_lite_load_ajax' ) );
             add_action( 'init', array( &$this, 'orddd_lite_add_component_file' ) );
 
             /**
@@ -121,21 +120,6 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 add_filter( 'ts_tracker_data',                         array( 'orddd_lite_common', 'orddd_lite_ts_add_plugin_tracking_data' ), 10, 1 );
 				add_filter( 'ts_tracker_opt_out_data',                 array( 'orddd_lite_common', 'orddd_lite_get_data_for_opt_out' ), 10, 1 );
                 add_filter ( 'ts_deativate_plugin_questions',          array( 'orddd_lite_common', 'orddd_lite_deactivate_add_questions' ), 10, 1 );
-            }
-        }
-        
-        /**
-         * Loads ajax callback
-         * 
-         * @hook init
-         * @since 1.5
-         */  
-
-        function orddd_lite_load_ajax() {
-            if ( !is_user_logged_in() ) {
-                add_action( 'wp_ajax_nopriv_orddd_lite_update_delivery_session', array( 'orddd_lite_process', 'orddd_lite_update_delivery_session' ) );
-            } else {
-                add_action( 'wp_ajax_orddd_lite_update_delivery_session', array( 'orddd_lite_process', 'orddd_lite_update_delivery_session' ) );
             }
         }
 

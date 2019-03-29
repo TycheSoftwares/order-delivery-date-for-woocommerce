@@ -146,21 +146,24 @@ class orddd_lite_process {
 
             $var .= '<input type="hidden" name="orddd_admin_url" id="orddd_admin_url" value="' . $ajax_url . '">';
 
-            //Session fields
-            if( WC()->session->get('e_deliverydate_lite') ) {
-                $e_deliverydate_session = WC()->session->get('e_deliverydate_lite');
-                $h_deliverydate_session = WC()->session->get('h_deliverydate_lite');
-                $var .= '<input type="hidden" name="h_deliverydate_lite_session" id="h_deliverydate_lite_session" value="' . $h_deliverydate_session . '">';
-                $var .= '<input type="hidden" name="e_deliverydate_lite_session" id="e_deliverydate_lite_session" value="' . $e_deliverydate_session . '">';
-            }
-
             $orddd_lite_disable_for_holidays = 'no';
             if( has_filter( 'orddd_to_calculate_minimum_hours_for_holidays' ) ) {
                 $orddd_lite_disable_for_holidays = apply_filters( 'orddd_to_calculate_minimum_hours_for_holidays', $orddd_lite_disable_for_holidays );
             }
             
             $var .= '<input type="hidden" name="orddd_lite_disable_for_holidays" id="orddd_lite_disable_for_holidays" value="' . $orddd_lite_disable_for_holidays . '">';
-            
+
+            $var .= '<input type="hidden" name="orddd_lite_delivery_date_on_cart_page" id="orddd_lite_delivery_date_on_cart_page" value ="' . get_option( 'orddd_lite_delivery_date_on_cart_page' ) . '">';
+
+            $current_time = current_time( 'timestamp' );
+            $current_date = date( "j-n-Y", $current_time );
+            $current_hour = date( "H", $current_time );
+            $current_minute  = date( "i", $current_time );
+
+            $var .= '<input type="hidden" name="orddd_lite_current_day" id="orddd_lite_current_day" value="' . $current_date . '">';
+            $var .= '<input type="hidden" name="orddd_lite_current_hour" id="orddd_lite_current_hour" value="' . $current_hour . '">';
+            $var .= '<input type="hidden" name="orddd_lite_current_minute" id="orddd_lite_current_minute" value="' . $current_minute . '">';
+
 			echo $var;
 
             $delivery_enabled = orddd_lite_common::orddd_lite_is_delivery_enabled();
@@ -197,21 +200,6 @@ class orddd_lite_process {
             }
         }
     }
-    
-    /**
-     * Adds the selected delivery date into the php session variable
-     * 
-     * @since 1.5
-     */
-    public static function orddd_lite_update_delivery_session() {
-        $e_deliverydate = $_POST[ 'e_deliverydate' ];
-        $h_deliverydate = $_POST[ 'h_deliverydate' ];
-
-        WC()->session->set( 'e_deliverydate_lite', $e_deliverydate );
-        WC()->session->set( 'h_deliverydate_lite', $h_deliverydate );
-        $_POST[ 'h_deliverydate' ] = "";
-        $_POST[ 'e_deliverydate' ] = "";
-    }
 
     /**
      * Saves the selected delivery date into the post meta table 
@@ -246,14 +234,6 @@ class orddd_lite_process {
             if( $is_delivery_enabled == 'yes' ) {
                 update_post_meta( $order_id, get_option( 'orddd_delivery_date_field_label' ), '' );
             }
-        }
-
-        if( isset( $_SESSION[ 'e_deliverydate_lite' ] ) ) {
-            unset( $_SESSION[ 'e_deliverydate_lite' ] );
-        }
-
-        if( isset( $_SESSION[ 'h_deliverydate_lite' ] ) ) {
-            unset( $_SESSION[ 'h_deliverydate_lite' ] );
         }
     }
     
