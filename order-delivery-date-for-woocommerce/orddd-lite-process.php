@@ -177,6 +177,7 @@ class orddd_lite_process {
                 if ( get_option( 'orddd_lite_date_field_mandatory' ) == 'checked' ) {
                     $validate_wpefield = true;
                 }
+
                 if( '' == $checkout ) {
                     woocommerce_form_field( 'e_deliverydate', array(
                         'type'              => 'text',
@@ -184,7 +185,7 @@ class orddd_lite_process {
                         'required'          => $validate_wpefield,
                         'placeholder'       => __( get_option( 'orddd_lite_delivery_date_field_placeholder' ), 'order-delivery-date' ),
                         'custom_attributes' => array( 'style'=>'cursor:text !important;'),
-                        'class' => array( 'form-row-wide' )
+                        'class' => array( 'form-row-cart' )
                     ) );
                 } else {
                     woocommerce_form_field( 'e_deliverydate', array(
