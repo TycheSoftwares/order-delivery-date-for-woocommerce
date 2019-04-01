@@ -886,10 +886,10 @@ class orddd_lite_settings {
                         jQuery( "<link/>", {
                             rel: "stylesheet",
                             type: "text/css",
-                            href: "' . esc_url( plugins_url( "/css/datepicker.css", __FILE__ ) ). '"
+                            href: "' . esc_url( plugins_url() .  "/order-delivery-date-for-woocommerce/css/datepicker.css" ). '"
                         }).appendTo("head");
                     },
-                    imgpath: "'. esc_url( plugins_url().'/order-delivery-date-for-woocommerce/images/' ) .'",
+                    imgpath: "'. esc_url( plugins_url() . '/order-delivery-date-for-woocommerce/images/' ) .'",
                     loadTheme: "' . get_option( 'orddd_lite_calendar_theme_name' ) . '",
                     
                 });

@@ -24,13 +24,13 @@ $wpefield_version = '3.6.1';
  * Include the require files
  * @since 1.0
  */
-include_once( 'integration.php' );
-include_once( 'orddd-lite-config.php' );
-include_once( 'orddd-lite-common.php' );
-include_once( 'orddd-lite-settings.php' );
-include_once( 'orddd-lite-process.php' );
-include_once( 'filter.php' );
-include_once( 'orddd-lite-privacy.php' );
+include_once( 'includes/integration.php' );
+include_once( 'includes/orddd-lite-config.php' );
+include_once( 'includes/orddd-lite-common.php' );
+include_once( 'includes/settings/orddd-lite-settings.php' );
+include_once( 'includes/orddd-lite-process.php' );
+include_once( 'includes/settings/filter.php' );
+include_once( 'includes/orddd-lite-privacy.php' );
 
 /**
 * Defines the plugin version and url when on the admin page
