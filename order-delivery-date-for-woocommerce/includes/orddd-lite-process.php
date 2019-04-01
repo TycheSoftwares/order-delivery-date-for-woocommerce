@@ -211,15 +211,16 @@ class orddd_lite_process {
      * @since 1.5
      */
     public static function orddd_lite_my_custom_checkout_field_update_order_meta( $order_id ) {
-        if ( isset( $_POST['e_deliverydate'] ) && $_POST['e_deliverydate'] != '' ) {
-            if( isset( $_POST[ 'h_deliverydate' ] ) ) {	    
-                $delivery_date = $_POST['h_deliverydate'];
-            } else {
-                $delivery_date = '';
-            }
+        if ( isset( $_POST[ 'e_deliverydate' ] ) && $_POST[ 'e_deliverydate' ] != '' ) {
+            $delivery_date = '';
             $date_format = 'dd-mm-y';
-            
-            update_post_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), esc_attr( $_POST['e_deliverydate'] ) );
+
+            if( isset( $_POST[ 'h_deliverydate' ] ) ) {	    
+                $delivery_date = sanitize_text_field( $_POST[ 'h_deliverydate' ] );
+            }
+            echo $delivery_date;exit;
+
+            update_post_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), sanitize_text_field( $_POST[ 'e_deliverydate' ] ) );
 	    
             $timestamp = orddd_lite_common::orddd_lite_get_timestamp( $delivery_date, $date_format );
             update_post_meta( $order_id, '_orddd_lite_timestamp', $timestamp );
@@ -330,12 +331,11 @@ class orddd_lite_process {
             $is_delivery_enabled = 'no';
         }
         
+        $delivery_date = '';
         if( isset( $_POST[ 'e_deliverydate' ] ) ) {
             $delivery_date = $_POST[ 'e_deliverydate' ];
-        } else {
-            $delivery_date = '';
-        }
-         
+        } 
+
         if( $is_delivery_enabled == 'yes' ) {
             //Check if set, if its not set add an error.
             if ( $delivery_date == '' ) {
