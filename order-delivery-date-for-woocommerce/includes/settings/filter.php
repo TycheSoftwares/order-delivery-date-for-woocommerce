@@ -73,7 +73,7 @@ class orddd_lite_filter {
     public static function orddd_lite_woocommerce_delivery_date_orderby( $vars ) {
         global $typenow;
         $delivery_field_label = '_orddd_lite_timestamp';
-        if ( isset( $vars[ 'orderby' ] ) ) {
+        if ( isset( $vars[ 'orderby' ] ) && $vars[ 'orderby' ] != '' ) {
             if ( $delivery_field_label == $vars[ 'orderby' ] ) {
                 $sorting_vars = array( 'orderby'  => array( 'meta_value_num' => $vars[ 'order' ], 'date' => 'ASC' ) );
                 if ( !isset( $_GET[ 'order_delivery_date_filter' ] ) || $_GET['order_delivery_date_filter'] == '' ) {
