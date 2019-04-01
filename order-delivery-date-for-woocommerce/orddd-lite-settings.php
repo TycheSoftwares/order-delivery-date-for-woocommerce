@@ -864,6 +864,11 @@ class orddd_lite_settings {
             $language_selected = "en-GB";
         }
     	
+        $first_day_of_week = '1';
+        if( get_option( 'orddd_lite_start_of_week' ) != '' ) {
+            $first_day_of_week = get_option( 'orddd_lite_start_of_week' );
+        }
+
     	echo '<input type="hidden" name="orddd_lite_calendar_theme" id="orddd_lite_calendar_theme" value="' . get_option( 'orddd_lite_calendar_theme' ) . '">
     	   <input type="hidden" name="orddd_lite_calendar_theme_name" id="orddd_lite_calendar_theme_name" value="' . get_option( 'orddd_lite_calendar_theme_name' ) . '">';
         echo '<script>
@@ -889,8 +894,10 @@ class orddd_lite_settings {
                     
                 });
             });
+
             jQuery( function() {
                 jQuery.datepicker.setDefaults( jQuery.datepicker.regional[ "" ] );
+                jQuery( "#datepicker" ).datepicker({firstDay:' . $first_day_of_week . '});
                 jQuery( "#datepicker" ).datepicker( jQuery.datepicker.regional[ "' . $language_selected . '" ] );
                 jQuery( "#localisation_select" ).change(function() {
                     jQuery( "#datepicker" ).datepicker( "option", jQuery.datepicker.regional[ jQuery( this ).val() ] );
@@ -965,6 +972,10 @@ class orddd_lite_settings {
 
     public static function orddd_lite_holidays_date_callback( $args ) {
         $current_language = get_option( 'orddd_lite_language_selected' );
+        $first_day_of_week = '1';
+        if( get_option( 'orddd_lite_start_of_week' ) != '' ) {
+            $first_day_of_week = get_option( 'orddd_lite_start_of_week' );
+        }
         print( '<script type="text/javascript">
              jQuery( document ).ready( function() {
                 jQuery.datepicker.setDefaults( jQuery.datepicker.regional[ "en-GB" ] );
@@ -972,6 +983,7 @@ class orddd_lite_settings {
                 jQuery( "#orddd_lite_holiday_date" ).val( "" ).datepicker( {
                     constrainInput: true,
                     dateFormat: formats[0],
+                    firstDay: ' . $first_day_of_week . '
                 } );
             } );
         </script>' );
