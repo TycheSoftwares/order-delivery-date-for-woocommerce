@@ -9,7 +9,7 @@
  * @since       1.9
  */
 
-include_once( dirname( __FILE__ ) . '/orddd-lite-common.php' );
+include_once( WP_PLUGIN_DIR . '/order-delivery-date-for-woocommerce/includes/orddd-lite-common.php' );
 
 /**
  * Order Delivery Date Filter Class
@@ -75,7 +75,7 @@ class orddd_lite_filter {
         $delivery_field_label = '_orddd_lite_timestamp';
         if ( isset( $vars[ 'orderby' ] ) ) {
             if ( $delivery_field_label == $vars[ 'orderby' ] ) {
-                $sorting_vars = array( 'orderby'  => 'meta_value_num' );
+                $sorting_vars = array( 'orderby'  => array( 'meta_value_num' => $vars[ 'order' ], 'date' => 'ASC' ) );
                 if ( !isset( $_GET[ 'order_delivery_date_filter' ] ) || $_GET['order_delivery_date_filter'] == '' ) {
                     $sorting_vars[ 'meta_query' ] = array(  'relation' => 'OR',
                         array (
@@ -96,9 +96,9 @@ class orddd_lite_filter {
                 return $vars;
             }
             $sorting_vars = array(
-                'orderby'  => 'meta_value_num',
+                'orderby'  => array( 'meta_value_num' => 'DESC', 'date' => 'ASC' ),
                 'order'	   => 'DESC');
-            if ( !isset( $_GET[ 'order_delivery_date_filter' ] ) || $_GET['order_delivery_date_filter'] == '' ) {
+            if ( !isset( $_GET[ 'order_delivery_date_filter' ] ) || $_GET[ 'order_delivery_date_filter' ] == '' ) {
                 $sorting_vars[ 'meta_query' ] = array(  'relation' => 'OR',
                     array (
                         'key'	  => $delivery_field_label,

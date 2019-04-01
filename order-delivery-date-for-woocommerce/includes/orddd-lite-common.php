@@ -26,7 +26,7 @@ class orddd_lite_common {
      * 
      */
 	public static function orddd_lite_get_data_for_opt_out ( $params ) {
-	    $plugin_data[ 'ts_meta_data_table_name']   = 'ts_tracking_orddd_lite_meta_data';
+	    $plugin_data[ 'ts_meta_data_table_name' ]   = 'ts_tracking_orddd_lite_meta_data';
 	    $plugin_data[ 'ts_plugin_name' ]		   = 'Order Delivery Date for WooCommerce (Lite version)';
 	    
 	    $params[ 'plugin_data' ]  				   = $plugin_data;
