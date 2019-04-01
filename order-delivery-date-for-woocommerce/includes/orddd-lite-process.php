@@ -218,7 +218,6 @@ class orddd_lite_process {
             if( isset( $_POST[ 'h_deliverydate' ] ) ) {	    
                 $delivery_date = sanitize_text_field( $_POST[ 'h_deliverydate' ] );
             }
-            echo $delivery_date;exit;
 
             update_post_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), sanitize_text_field( $_POST[ 'e_deliverydate' ] ) );
 	    
