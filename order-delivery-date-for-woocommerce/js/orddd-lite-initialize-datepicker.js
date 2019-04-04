@@ -240,27 +240,20 @@ function minimum_date_to_set( delay_days ) {
 					}
 				}
 			} else {
-				day = 'orddd_lite_weekday_' + delay_days.getDay();
-				day_check = jQuery( "#" + day ).val();
-				if ( day_check == '' ) {
-					delay_days.setDate( delay_days.getDate()+1 );
-					delay_time = delay_days.getTime();					
-				}
-
 				if( current_day <= delay_days ) {
-					var m = current_day.getMonth(), d = current_day.getDate(), y = current_day.getFullYear();
-					if ( jQuery( "#orddd_lite_disable_for_holidays" ).val() != 'yes' ) {
-						if( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 ) {	
-							delay_days.setDate( delay_days.getDate()+1 );
-							delay_time = delay_days.getTime();
-						}
-					}
-
-					if( jQuery.inArray( ( m+1 ) + "-" + d + "-" + y, bookedDays ) != -1 ) {
+					var m = delay_days.getMonth(), d = delay_days.getDate(), y = delay_days.getFullYear();
+					day = 'orddd_lite_weekday_' + delay_days.getDay();
+					day_check = jQuery( "#" + day ).val();
+					if ( day_check == '' ) {
+						delay_days.setDate( delay_days.getDate()+1 );
+						delay_time = delay_days.getTime();					
+					} else if ( jQuery( "#orddd_lite_disable_for_holidays" ).val() != 'yes' && jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 ) {
+						delay_days.setDate( delay_days.getDate()+1 );
+						delay_time = delay_days.getTime();
+					} else if( jQuery.inArray( ( m+1 ) + "-" + d + "-" + y, bookedDays ) != -1 ) {
 			            delay_days.setDate( delay_days.getDate()+1 );
 			            delay_time = delay_days.getTime();
-			        } 
-
+				    }			     
 					current_day.setDate( current_day.getDate()+1 );
 					current_time = current_day.getTime();
 					current_weekday = current_day.getDay();
@@ -377,7 +370,7 @@ function avd( date ) {
 	}
 
 	var bookedDays = eval( "[" + jQuery( "#orddd_lite_lockout_days" ).val() + "]" );
-	
+
 	var delay_date = jQuery( "#orddd_lite_minimumOrderDays" ).val();
 	var split_date = delay_date.split('-');
 	var delay_days = new Date ( split_date[1] + '/' + split_date[0] + '/' + split_date[2] );
