@@ -288,7 +288,7 @@ function minimum_date_to_set( delay_days ) {
             delay_time = delay_days.getTime();
         } 
     }
-    
+   
 	return delay_days;
 }
 
@@ -376,6 +376,8 @@ function avd( date ) {
 		holidays[i] = holidays_array[ 1 ];
 	}
 
+	var bookedDays = eval( "[" + jQuery( "#orddd_lite_lockout_days" ).val() + "]" );
+	
 	var delay_date = jQuery( "#orddd_lite_minimumOrderDays" ).val();
 	var split_date = delay_date.split('-');
 	var delay_days = new Date ( split_date[1] + '/' + split_date[0] + '/' + split_date[2] );
@@ -421,6 +423,12 @@ function avd( date ) {
 									delay_time = delay_days.getTime();
 								}
 							}
+
+							if( jQuery.inArray( ( m+1 ) + "-" + d + "-" + y, bookedDays ) != -1 ) {
+					            delay_days.setDate( delay_days.getDate()+1 );
+					            delay_time = delay_days.getTime();
+					        } 
+
 							current_day.setDate( current_day.getDate()+1 );
 							current_time = current_day.getTime();
 							current_weekday = current_day.getDay();
