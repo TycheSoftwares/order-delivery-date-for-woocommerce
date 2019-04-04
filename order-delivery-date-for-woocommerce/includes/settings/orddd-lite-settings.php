@@ -539,7 +539,7 @@ class orddd_lite_settings {
      */    
 
     public static function orddd_lite_minimum_delivery_time_callback( $args ) {
-        printf( '<input type="text" name="orddd_lite_minimumOrderDays" id="orddd_lite_minimumOrderDays" value="' . get_option( 'orddd_lite_minimumOrderDays' ) . '"/>' );
+        printf( '<input type="number" name="orddd_lite_minimumOrderDays" id="orddd_lite_minimumOrderDays" value="' . get_option( 'orddd_lite_minimumOrderDays' ) . '"/>' );
         $html = '<label for="orddd_lite_minimumOrderDays"> '  . $args[0] . '</label>';
         echo $html;
     }
@@ -552,7 +552,7 @@ class orddd_lite_settings {
      */    
 
     public static function orddd_lite_number_of_dates_callback( $args ) {
-        printf( '<input type="text" name="orddd_lite_number_of_dates" id="orddd_lite_number_of_dates" value="' . get_option( 'orddd_lite_number_of_dates' ) . '"/>' );
+        printf( '<input type="number" name="orddd_lite_number_of_dates" id="orddd_lite_number_of_dates" value="' . get_option( 'orddd_lite_number_of_dates' ) . '"/>' );
         $html = '<label for="orddd_lite_number_of_dates"> '  . $args[0] . '</label>';
         echo $html;
     }
@@ -578,7 +578,7 @@ class orddd_lite_settings {
      */   
 
     public static function orddd_lite_lockout_date_after_orders_callback( $args ) {
-        printf( '<input type="text" name="orddd_lite_lockout_date_after_orders" id="orddd_lite_lockout_date_after_orders" value="' . get_option( 'orddd_lite_lockout_date_after_orders' ) . '"/>' );
+        printf( '<input type="number" name="orddd_lite_lockout_date_after_orders" id="orddd_lite_lockout_date_after_orders" value="' . get_option( 'orddd_lite_lockout_date_after_orders' ) . '"/>' );
         $html = '<label for="orddd_lite_lockout_date_after_orders"> ' . $args[ 0 ] . '</label>';
         echo $html;
     }
