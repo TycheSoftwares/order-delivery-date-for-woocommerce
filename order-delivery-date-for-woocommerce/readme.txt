@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, order delivery date, woocommerce delivery date, delivery, order delivery
 Requires at least: 1.3
-Tested up to: 5.0.3
+Tested up to: 5.1.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -217,6 +217,17 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+
+= 3.7 (04.04.2019) =
+
+There are some bug fixes in this update:
+* Incorrect delivery date was preselected in the delivery calendar on the checkout page when the current date is set as a holiday. This is fixed now. 
+* Preview calendar width was not coming proper on the Appearance link in Order Delivery Date -> Settings when the Eggplant calendar theme was selected. This is fixed now. 
+* Incorrect delivery date was preselected in the delivery calendar on the checkout page when the available dates have booked dates in between along with some weekdays disabled. This is fixed now. 
+* Incorrect delivery date was preselected on the checkout page due to the delivery date being stored in the session. This is fixed now. 
+* Width of the Delivery date field on the cart page was not proper. This is fixed now. 
+* On changing the first day of the week from Appearance link, the changes were not reflected in the admin calendars from the plugin. This is fixed now. 
+* WooCommerce Orders are not sorted in the descending order when "Sort on WooCommerce Orders Page" option is checked. This is fixed now. 
 
 = 3.6.1 (14.02.2019) =
 
