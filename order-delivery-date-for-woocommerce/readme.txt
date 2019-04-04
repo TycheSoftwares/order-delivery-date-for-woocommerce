@@ -5,7 +5,7 @@ Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, order delivery date, woocommerce delivery date, delivery, order delivery
 Requires at least: 1.3
 Tested up to: 5.1.1
-Stable tag: trunk
+Stable tag: 3.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
