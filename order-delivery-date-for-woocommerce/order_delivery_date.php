@@ -4,7 +4,7 @@ Plugin Name: Order Delivery Date for WooCommerce (Lite version)
 Plugin URI: https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/
 Description: This plugin allows customers to choose their preferred Order Delivery Date during checkout.
 Author: Tyche Softwares
-Version: 3.7
+Version: 3.8
 Author URI: https://www.tychesoftwares.com/
 Contributor: Tyche Softwares, https://www.tychesoftwares.com/
 Text Domain: order-delivery-date
@@ -18,7 +18,7 @@ WC tested up to: 3.5.7
  * Latest version of the plugin
  * @since 1.0
  */
-$wpefield_version = '3.7';
+$wpefield_version = '3.8';
 
 /**
  * Include the require files
@@ -119,6 +119,8 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
 				add_filter( 'ts_tracker_opt_out_data',                 array( 'orddd_lite_common', 'orddd_lite_get_data_for_opt_out' ), 10, 1 );
                 add_filter ( 'ts_deativate_plugin_questions',          array( 'orddd_lite_common', 'orddd_lite_deactivate_add_questions' ), 10, 1 );
             }
+
+            add_filter( 'plugin_row_meta',                             array( &$this, 'orddd_lite_plugin_row_meta' ), 10, 2 );
         }
 
         /**
@@ -259,7 +261,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         
         function orddd_lite_update_db_check() {
             global $wpefield_version;
-            if ( $wpefield_version == "3.7" ) {
+            if ( $wpefield_version == "3.8" ) {
                 order_delivery_date_lite::orddd_lite_update_install();
             }
         }
@@ -277,7 +279,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             //code to set the option to on as default
             $orddd_lite_plugin_version = get_option( 'orddd_lite_db_version' );
             if ( $orddd_lite_plugin_version != order_delivery_date_lite::get_orddd_lite_version() ) {
-                update_option( 'orddd_lite_db_version', '3.7' );
+                update_option( 'orddd_lite_db_version', '3.8' );
                 if ( get_option( 'orddd_lite_update_value' ) != 'yes' ) {
                     $i = 0;
                     foreach ( $orddd_lite_weekdays as $n => $day_name ) {
@@ -468,7 +470,22 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                  
                 wp_enqueue_script( $language_selected, esc_url( plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ) ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
             }
-        }               
+        }
+
+
+        public static function orddd_lite_plugin_row_meta( $links, $file ) {
+            if ( $file == plugin_basename( __FILE__ ) ) {
+                unset( $links[2] );
+
+                $row_meta = array(
+                    'docs'        => '<a href="' . esc_url( apply_filters( 'orddd_docs_url',        'https://www.tychesoftwares.com/docs/docs/order-delivery-date-for-woocommerce-lite/?utm_source=pluginwebsite&utm_medium=pluginspage&utm_campaign=OrderDeliveryDateLite' ) ) . '" target="_blank" title="' . esc_attr( __( 'Docs', 'order-delivery-date' ) ) . '">' . __( 'Docs', 'order-delivery-date' ) . '</a>',
+                    'support'     => '<a href="' . esc_url( apply_filters( 'orddd_support_url',     'https://tychesoftwares.freshdesk.com/support/tickets/new?utm_source=pluginwebsite&utm_medium=pluginspage&utm_campaign=OrderDeliveryDateLite' ) ) . '" target="_blank" title="' . esc_attr( __( 'Submit Ticket', 'order-delivery-date' ) ) . '">' . __( 'Submit Ticket', 'order-delivery-date' ) . '</a>',
+                    'plugin_site' => '<a href="' . esc_url( apply_filters( 'orddd_plugin_site_url', 'https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=pluginwebsite&utm_medium=pluginspage&utm_campaign=OrderDeliveryDateLite' ) ) . '" target="_blank" title="' . esc_attr( __( 'Go Pro', 'order-delivery-date' ) ) . '">' . __( 'Premium version', 'order-delivery-date' ) . '</a>',
+                );
+                return array_merge( $links, $row_meta );
+            }
+            return (array) $links;
+        }
     }
 } 
 $order_delivery_date_lite = new order_delivery_date_lite();
