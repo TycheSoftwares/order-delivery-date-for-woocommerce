@@ -440,43 +440,51 @@ class orddd_lite_common {
 	 * @since 1.7
 	 */
 	public static function orddd_lite_is_delivery_enabled() {
-	    global $woocommerce;
-	    $delivery_enabled = 'yes';
-	    if ( get_option( 'orddd_lite_no_fields_for_virtual_product' ) == 'on' && get_option( 'orddd_lite_no_fields_for_featured_product' ) == 'on' ) {
-	        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
-	            $product_id = $values[ 'product_id' ];
-                $_product = wc_get_product( $product_id );
-	            if( $_product->is_virtual() == false && $_product->is_featured() == false ) {
-	                $delivery_enabled = 'yes';
-	                break;
-	            } else {
-	                $delivery_enabled = 'no';
-	            }
-	        }
-	    } else if( get_option( 'orddd_lite_no_fields_for_virtual_product' ) == 'on' && get_option( 'orddd_lite_no_fields_for_featured_product' ) != 'on' ) {
-	        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
-	            $_product = $values[ 'data' ];
-	            if( $_product->is_virtual() == false ) {
-	                $delivery_enabled = 'yes';
-	                break;
-	            } else {
-	                $delivery_enabled = 'no';
-	            }
-	        }
-	    } else if( get_option( 'orddd_lite_no_fields_for_virtual_product' ) != 'on' && get_option( 'orddd_lite_no_fields_for_featured_product' ) == 'on' ) {
-	        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
-	            $product_id = $values[ 'product_id' ];
-                $_product = wc_get_product( $product_id );
-	            if( $_product->is_featured() == false ) {
-	                $delivery_enabled = 'yes';
-	                break;
-	            } else {
-	                $delivery_enabled = 'no';
-	            }
-	        }
-	    } else {
-	        $delivery_enabled = 'yes';
-	    }
+
+        $delivery_enabled = wp_cache_get( 'orddd_lite_delivery_enabled' );
+        if ( false === $delivery_enabled ) {
+    	    global $woocommerce;
+    	    $delivery_enabled = 'yes';
+            $fields_for_virtual_product  = get_option( 'orddd_lite_no_fields_for_virtual_product' );
+            $fields_for_featured_product = get_option( 'orddd_lite_no_fields_for_featured_product' );
+
+    	    if ( $fields_for_virtual_product == 'on' && $fields_for_featured_product == 'on' ) {
+    	        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
+    	            $product_id = $values[ 'product_id' ];
+                    $_product = wc_get_product( $product_id );
+    	            if( $_product->is_virtual() == false && $_product->is_featured() == false ) {
+    	                $delivery_enabled = 'yes';
+    	                break;
+    	            } else {
+    	                $delivery_enabled = 'no';
+    	            }
+    	        }
+    	    } else if( $fields_for_virtual_product == 'on' && $fields_for_featured_product != 'on' ) {
+    	        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
+    	            $_product = $values[ 'data' ];
+    	            if( $_product->is_virtual() == false ) {
+    	                $delivery_enabled = 'yes';
+    	                break;
+    	            } else {
+    	                $delivery_enabled = 'no';
+    	            }
+    	        }
+    	    } else if( $fields_for_virtual_product != 'on' && $fields_for_featured_product == 'on' ) {
+    	        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
+    	            $product_id = $values[ 'product_id' ];
+                    $_product = wc_get_product( $product_id );
+    	            if( $_product->is_featured() == false ) {
+    	                $delivery_enabled = 'yes';
+    	                break;
+    	            } else {
+    	                $delivery_enabled = 'no';
+    	            }
+    	        }
+    	    } else {
+    	        $delivery_enabled = 'yes';
+    	    }
+            wp_cache_set( 'orddd_lite_delivery_enabled', $delivery_enabled );
+        }
 	    return $delivery_enabled;
 	}
 
@@ -487,13 +495,18 @@ class orddd_lite_common {
 	 * @since 3.3
      */
     public static function orddd_get_version() {
-        $plugin_version = '';
-        $orddd_plugin_dir =  dirname ( dirname (__FILE__) );
-        $orddd_plugin_dir .= '/order-delivery-date-for-woocommerce/order_delivery_date.php';
 
-        $plugin_data = get_file_data( $orddd_plugin_dir, array( 'Version' => 'Version' ) );
-        if ( ! empty( $plugin_data['Version'] ) ) {
-            $plugin_version = $plugin_data[ 'Version' ];
+        $plugin_version = wp_cache_get( 'orddd_lite_get_version' );
+        if ( false === $plugin_version ) {
+
+            $orddd_plugin_dir =  dirname ( dirname (__FILE__) );
+            $orddd_plugin_dir .= '/order-delivery-date-for-woocommerce/order_delivery_date.php';
+
+            $plugin_data = get_file_data( $orddd_plugin_dir, array( 'Version' => 'Version' ) );
+            if ( ! empty( $plugin_data['Version'] ) ) {
+                $plugin_version = $plugin_data[ 'Version' ];
+            }
+            wp_cache_set( 'orddd_lite_get_version', $plugin_version );
         }
         return $plugin_version;
     }

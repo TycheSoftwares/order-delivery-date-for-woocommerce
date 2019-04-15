@@ -6,7 +6,7 @@ Description: This plugin allows customers to choose their preferred Order Delive
 Author: Tyche Softwares
 Version: 3.7
 Author URI: https://www.tychesoftwares.com/
-Contributor: Tyche Softwares, http://www.tychesoftwares.com/
+Contributor: Tyche Softwares, https://www.tychesoftwares.com/
 Text Domain: order-delivery-date
 Requires PHP: 5.6
 WC requires at least: 3.0.0
@@ -51,6 +51,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
          * @since 1.0
          */        
         public function __construct() {
+
             //Initialize settings
             register_activation_hook( __FILE__,  array( &$this, 'orddd_lite_activate' ) );
 
@@ -86,17 +87,20 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 add_filter( 'woocommerce_email_order_meta_keys', array( 'orddd_lite_process', 'orddd_lite_add_delivery_date_to_order_woo_deprecated' ), 11, 1 );
             }
             
-            if ( get_option( 'orddd_lite_date_field_mandatory' ) == 'checked' && get_option( 'orddd_lite_enable_delivery_date' ) == 'on' ) {
+            if ( get_option( 'orddd_lite_date_field_mandatory' ) == 'checked' && 
+                 get_option( 'orddd_lite_enable_delivery_date' ) == 'on' ) {
                 add_action( 'woocommerce_checkout_process', array( 'orddd_lite_process', 'orddd_lite_validate_date_wpefield' ) );
             }
 
             add_filter( 'woocommerce_order_details_after_order_table', array( 'orddd_lite_process', 'orddd_lite_add_delivery_date_to_order_page_woo' ) );
 
-            //WooCommerce Edit Order page
-            add_filter( 'manage_edit-shop_order_columns', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_order_delivery_date_column'), 20, 1 );
-            add_action( 'manage_shop_order_posts_custom_column', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_custom_column_value') , 20, 1 );
-            add_filter( 'manage_edit-shop_order_sortable_columns', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_custom_column_value_sort' ) );
-            add_filter( 'request', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_delivery_date_orderby' ) );
+            if ( is_admin() && 'shop_order' === $_GET[ 'post_type' ] ) {
+                //WooCommerce Edit Order page
+                add_filter( 'manage_edit-shop_order_columns', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_order_delivery_date_column'), 20, 1 );
+                add_action( 'manage_shop_order_posts_custom_column', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_custom_column_value') , 20, 1 );
+                add_filter( 'manage_edit-shop_order_sortable_columns', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_custom_column_value_sort' ) );
+                add_filter( 'request', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_delivery_date_orderby' ) );
+            }
 
             //To recover the delivery date when order is cancelled, refunded, failed or trashed.
             add_action( 'woocommerce_order_status_cancelled' , array( 'orddd_lite_common', 'orddd_lite_cancel_delivery' ), 10, 1 );
@@ -110,7 +114,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             /**
              * It will add the actions for the components.
              */
-            if ( true === is_admin() ) {
+            if ( is_admin() ) {
                 add_filter( 'ts_tracker_data',                         array( 'orddd_lite_common', 'orddd_lite_ts_add_plugin_tracking_data' ), 10, 1 );
 				add_filter( 'ts_tracker_opt_out_data',                 array( 'orddd_lite_common', 'orddd_lite_get_data_for_opt_out' ), 10, 1 );
                 add_filter ( 'ts_deativate_plugin_questions',          array( 'orddd_lite_common', 'orddd_lite_deactivate_add_questions' ), 10, 1 );

@@ -119,7 +119,6 @@ class orddd_lite_process {
                 $name = str_replace( "'", "&apos;", $v->n );
                 $name = str_replace( "'", "&quot;", $name );
                 $holidays_str .= '"' . $name . ":" . $v->d . '",';
-                
             }
             
             $holidays_str = substr( $holidays_str, 0, strlen( $holidays_str )-1 );
@@ -129,7 +128,6 @@ class orddd_lite_process {
 
             $var .= '<input type="hidden" name="orddd_lite_calculate_min_time_disabled_days" id="orddd_lite_calculate_min_time_disabled_days" value="' . get_option( 'orddd_lite_calculate_min_time_disabled_days' ) . '">';
 
-            $current_time = current_time( 'timestamp' );
 	    	$current_date = date( "j-n-Y", $current_time );
             $var .= '<input type="hidden" name="orddd_lite_current_day" id="orddd_lite_current_day" value="' . $current_date . '">';
 
@@ -155,8 +153,6 @@ class orddd_lite_process {
 
             $var .= '<input type="hidden" name="orddd_lite_delivery_date_on_cart_page" id="orddd_lite_delivery_date_on_cart_page" value ="' . get_option( 'orddd_lite_delivery_date_on_cart_page' ) . '">';
 
-            $current_time = current_time( 'timestamp' );
-            $current_date = date( "j-n-Y", $current_time );
             $current_hour = date( "H", $current_time );
             $current_minute  = date( "i", $current_time );
 
@@ -166,11 +162,7 @@ class orddd_lite_process {
 
 			echo $var;
 
-            $delivery_enabled = orddd_lite_common::orddd_lite_is_delivery_enabled();
-            $is_delivery_enabled = 'yes';
-            if ( $delivery_enabled == 'no' ) {
-                $is_delivery_enabled = 'no';
-            }
+            $is_delivery_enabled = orddd_lite_common::orddd_lite_is_delivery_enabled();
             
             if( $is_delivery_enabled == 'yes' ) {
                 $validate_wpefield = false;
@@ -225,7 +217,6 @@ class orddd_lite_process {
             update_post_meta( $order_id, '_orddd_lite_timestamp', $timestamp );
 		    orddd_lite_process::orddd_lite_update_lockout_days( $delivery_date );
         } else {
-		    global $woocommerce;
 		    $delivery_enabled = orddd_lite_common::orddd_lite_is_delivery_enabled();
 		    $is_delivery_enabled = 'yes';
 		    if ( $delivery_enabled == 'no' ) {
@@ -247,7 +238,6 @@ class orddd_lite_process {
      */
 
     public static function orddd_lite_update_lockout_days( $delivery_date ) {
-        global $wpdb;
         
         $lockout_date = date( 'n-j-Y', strtotime( $delivery_date ) );
         $lockout_days = get_option( 'orddd_lite_lockout_days' );
@@ -318,17 +308,12 @@ class orddd_lite_process {
      * Validate delivery date field
      *
      * @hook woocommerce_checkout_process
-     * @globals resource $woocommerce WooCommerce Object
      * @since 1.4
      **/
 
     public static function orddd_lite_validate_date_wpefield() {
-        global $woocommerce;
-        $delivery_enabled = orddd_lite_common::orddd_lite_is_delivery_enabled();
-        $is_delivery_enabled = 'yes';
-        if ( $delivery_enabled == 'no' ) {
-            $is_delivery_enabled = 'no';
-        }
+
+        $is_delivery_enabled = orddd_lite_common::orddd_lite_is_delivery_enabled();
         
         $delivery_date = '';
         if( isset( $_POST[ 'e_deliverydate' ] ) ) {
