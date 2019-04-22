@@ -94,7 +94,8 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
 
             add_filter( 'woocommerce_order_details_after_order_table', array( 'orddd_lite_process', 'orddd_lite_add_delivery_date_to_order_page_woo' ) );
 
-            if ( is_admin() && 'shop_order' === $_GET[ 'post_type' ] ) {
+            if ( is_admin() && 
+                ( isset( $_GET[ 'post_type' ] ) && 'shop_order' === $_GET[ 'post_type' ] ) ) {
                 //WooCommerce Edit Order page
                 add_filter( 'manage_edit-shop_order_columns', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_order_delivery_date_column'), 20, 1 );
                 add_action( 'manage_shop_order_posts_custom_column', array( 'orddd_lite_filter', 'orddd_lite_woocommerce_custom_column_value') , 20, 1 );
