@@ -5,7 +5,7 @@ Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, order delivery date, woocommerce delivery date, delivery, order delivery
 Requires at least: 1.3
 Tested up to: 5.1.1
-Stable tag: 3.7
+Stable tag: 3.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -217,6 +217,14 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+
+= 3.8.1 (22.04.2019) =
+* Fixed a warning that was appearing on Dashboard for some stores after the last update.
+* Removed unwanted code that was being executed on plugin update.
+
+= 3.8 (15.04.2019) =
+* We have done code refactoring by removing unwanted code & use of global variables where it was no longer required.
+* We have implemented use of wp_cache_get & wp_cache_set functions.
 
 = 3.7 (04.04.2019) =
 
