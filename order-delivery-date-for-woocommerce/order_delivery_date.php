@@ -4,13 +4,13 @@ Plugin Name: Order Delivery Date for WooCommerce (Lite version)
 Plugin URI: https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/
 Description: This plugin allows customers to choose their preferred Order Delivery Date during checkout.
 Author: Tyche Softwares
-Version: 3.8
+Version: 3.8.1
 Author URI: https://www.tychesoftwares.com/
 Contributor: Tyche Softwares, https://www.tychesoftwares.com/
 Text Domain: order-delivery-date
 Requires PHP: 5.6
 WC requires at least: 3.0.0
-WC tested up to: 3.5.7
+WC tested up to: 3.6.1
 * @package  Order-Delivery-Date-Lite-for-WooCommerce
 */
 
@@ -18,7 +18,7 @@ WC tested up to: 3.5.7
  * Latest version of the plugin
  * @since 1.0
  */
-$wpefield_version = '3.8';
+$wpefield_version = '3.8.1';
 
 /**
  * Include the require files
@@ -262,7 +262,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
         
         function orddd_lite_update_db_check() {
             global $wpefield_version;
-            if ( $wpefield_version == "3.8" ) {
+            if ( $wpefield_version == "3.8.1" ) {
                 order_delivery_date_lite::orddd_lite_update_install();
             }
         }
@@ -275,90 +275,12 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
          * @since 1.0
          */
         function orddd_lite_update_install() {
-            global $wpdb, $orddd_lite_weekdays;
+            global $wpdb, $orddd_lite_weekdays, $wpefield_version;
         
             //code to set the option to on as default
             $orddd_lite_plugin_version = get_option( 'orddd_lite_db_version' );
             if ( $orddd_lite_plugin_version != order_delivery_date_lite::get_orddd_lite_version() ) {
-                update_option( 'orddd_lite_db_version', '3.8' );
-                if ( get_option( 'orddd_lite_update_value' ) != 'yes' ) {
-                    $i = 0;
-                    foreach ( $orddd_lite_weekdays as $n => $day_name ) {
-        
-                        $orddd_lite_weekday = get_option( 'orddd_weekday_'.$i );
-                        update_option( $n , $orddd_lite_weekday );
-                        delete_option( 'orddd_weekday_'.$i );
-                        $i++;
-                    }
-        
-                    $orddd_lite_minimumOrderDays = get_option( 'orddd_minimumOrderDays' );
-                    update_option( 'orddd_lite_minimumOrderDays', $orddd_lite_minimumOrderDays );
-                    delete_option( 'orddd_minimumOrderDays' );
-            
-                    $orddd_lite_number_of_dates = get_option( 'orddd_number_of_dates' );
-                    update_option( 'orddd_lite_number_of_dates', $orddd_lite_number_of_dates );
-                    delete_option( 'orddd_number_of_dates' );
-        
-                    $orddd_lite_date_field_mandatory = get_option( 'orddd_date_field_mandatory' );
-                    update_option( 'orddd_lite_date_field_mandatory', $orddd_lite_date_field_mandatory );
-                    delete_option( 'orddd_date_field_mandatory' );
-        
-                    $orddd_lite_lockout_date_after_orders = get_option( 'orddd_lockout_date_after_orders' );
-                    update_option( 'orddd_lite_lockout_date_after_orders', $orddd_lite_lockout_date_after_orders );
-                    delete_option( 'orddd_lockout_date_after_orders' );
-        
-                    $orddd_lite_lockout_days = get_option( 'orddd_lockout_days' );
-                    update_option( 'orddd_lite_lockout_days', $orddd_lite_lockout_days );
-                    delete_option( 'orddd_lockout_days' );
-                    
-                    // Code to convert the Minimum delivery time(in days) to Minimum delivery time(in hours)
-                    $orddd_abp_hrs = get_option( 'orddd_lite_abp_hrs' );
-                    if ( $orddd_abp_hrs != 'HOURS' ) {
-                        // Convert the Minimum Delivery time in days to hours
-                        if ( get_option( 'orddd_lite_minimumOrderDays' ) > 0 ) {
-                            $advance_period_hrs = ( get_option( 'orddd_lite_minimumOrderDays' ) + 1 ) * 24;
-                            update_option( 'orddd_lite_minimumOrderDays', $advance_period_hrs );
-                        }
-                        update_option( 'orddd_lite_abp_hrs', 'HOURS' );
-                    }
-                    
-                    update_option( 'orddd_lite_update_value', 'yes' );
-                }
-
-                if( get_option( "orddd_lite_default_appearance_settings" ) != 'yes' ) {
-                    // appearance options
-                    update_option( 'orddd_lite_delivery_date_format', ORDDD_LITE_DELIVERY_DATE_FORMAT );
-                    update_option( 'orddd_lite_delivery_date_field_label', ORDDD_LITE_DELIVERY_DATE_FIELD_LABEL );
-                    update_option( 'orddd_lite_delivery_date_field_placeholder', ORDDD_LITE_DELIVERY_DATE_FIELD_PLACEHOLDER );
-                    update_option( 'orddd_lite_delivery_date_field_note', ORDDD_LITE_DELIVERY_DATE_FIELD_NOTE );
-                    update_option( 'orddd_lite_number_of_months', '1' );
-                    update_option( 'orddd_lite_calendar_theme', ORDDD_LITE_CALENDAR_THEME );
-                    update_option( 'orddd_lite_calendar_theme_name', ORDDD_LITE_CALENDAR_THEME_NAME );
-                    update_option( 'orddd_lite_language_selected', 'en-GB' );
-                    update_option( 'orddd_lite_date_in_shipping', '' );
-                    update_option( 'orddd_lite_default_appearance_settings', 'yes' );
-                }
-
-                if ( get_option( "orddd_lite_delivery_date_on_checkout_page_enabled" ) != 'yes' ) {
-                    if ( get_option( "orddd_lite_date_in_shipping" ) == 'on' ) {
-                        update_option( "orddd_lite_delivery_date_fields_on_checkout_page", "shipping_section" );
-                        delete_option( "orddd_lite_date_in_shipping" );                       
-                    } else {
-                        update_option( "orddd_lite_delivery_date_fields_on_checkout_page", "billing_section" );
-                        delete_option( "orddd_lite_date_in_shipping" );
-                    }
-                    update_option( "orddd_lite_delivery_date_on_checkout_page_enabled", 'yes' );
-                }
-                
-                if ( get_option( 'orddd_lite_enable_delivery_date_enabled' ) != 'yes' ) {
-                    update_option( 'orddd_lite_enable_delivery_date', 'on' );                    
-                    update_option( 'orddd_lite_enable_delivery_date_enabled', 'yes' );
-                }
-
-                if ( get_option( 'orddd_lite_update_calculate_min_time_disabled_days' ) != 'yes' ) {
-                    update_option( 'orddd_lite_calculate_min_time_disabled_days', 'on' );                    
-                    update_option( 'orddd_lite_update_calculate_min_time_disabled_days', 'yes' );
-                }
+                update_option( 'orddd_lite_db_version', $wpefield_version );
             }
         }
         
