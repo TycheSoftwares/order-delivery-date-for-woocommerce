@@ -538,7 +538,7 @@ function gd( date1, date2, interval ) {
 		case "weeks":
 			return Math.floor( timediff / week );
 		case "days":
-			return Math.floor( timediff / day );
+			return Math.floor( timediff / day ) + 1;
 		case "hours":
 			return Math.floor( timediff / hour );
 		case "minutes":
