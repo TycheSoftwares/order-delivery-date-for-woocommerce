@@ -66,6 +66,7 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
             add_action( 'admin_init', array( 'orddd_lite_settings', 'order_lite_appearance_admin_settings' ) );
             add_action( 'admin_init', array( 'orddd_lite_settings', 'order_lite_holidays_admin_settings' ) );
             add_action( 'admin_init', array( 'orddd_lite_settings', 'orddd_lite_delete_settings' ) );
+            add_action( 'admin_init', array( 'orddd_lite_settings', 'orddd_lite_calendar_sync_settings_callback' ) );
 
             //Admin scripts
             add_action( 'admin_enqueue_scripts', array( &$this,  'orddd_lite_my_enqueue' ) );
@@ -319,6 +320,10 @@ if ( !class_exists( 'order_delivery_date_lite' ) ) {
                 wp_enqueue_script( $value, plugins_url( "/js/i18n/jquery.ui.datepicker-$key.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
             }
             
+            wp_register_script( 'select2', plugins_url() . '/woocommerce/assets/js/select2/select2.min.js', array( 'jquery', 'jquery-ui-widget', 'jquery-ui-core' ), $wpefield_version );
+            wp_enqueue_script( 'select2' );
+            
+
             wp_register_style( 'woocommerce_admin_styles', plugins_url() . '/woocommerce/assets/css/admin.css', array(), WC_VERSION );
             wp_enqueue_style( 'woocommerce_admin_styles' );
             wp_enqueue_style( 'order-delivery-date', plugins_url('/css/order-delivery-date.css', __FILE__ ), '', $wpefield_version, false);
