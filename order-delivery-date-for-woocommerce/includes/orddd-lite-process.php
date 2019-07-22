@@ -117,8 +117,14 @@ class orddd_lite_process {
             $holidays_str = "";
             foreach ( $holidays_arr as $k => $v ) {
                 $name = str_replace( "'", "&apos;", $v->n );
-                $name = str_replace( "'", "&quot;", $name );
-                $holidays_str .= '"' . $name . ":" . $v->d . '",';
+                $name = str_replace( '"', "&quot;", $name );
+                if( isset( $v->r_type ) && $v->r_type == 'on' ) {
+                    $holiday_date_arr = explode( "-", $v->d );
+                    $recurring_date = $holiday_date_arr[ 0 ] . "-" . $holiday_date_arr[1];
+                    $holidays_str .= '"' . $name . ":" . $recurring_date . '",';    
+                } else {
+                    $holidays_str .= '"' . $name . ":" . $v->d . '",';  
+                }
             }
             
             $holidays_str = substr( $holidays_str, 0, strlen( $holidays_str )-1 );

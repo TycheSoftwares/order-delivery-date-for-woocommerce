@@ -224,7 +224,8 @@ function minimum_date_to_set( delay_days ) {
 					if( current_day <= delay_days ) {
 						var m = current_day.getMonth(), d = current_day.getDate(), y = current_day.getFullYear();
 						if ( jQuery( "#orddd_lite_disable_for_holidays" ).val() != 'yes' ) {
-							if( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 ) {	
+							if( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 || 
+								jQuery.inArray( ( m+1 ) + '-' + d, holidays ) != -1 ) {	
 								delay_days.setDate( delay_days.getDate()+1 );
 								delay_time = delay_days.getTime();
 							}
@@ -247,7 +248,11 @@ function minimum_date_to_set( delay_days ) {
 					if ( day_check == '' ) {
 						delay_days.setDate( delay_days.getDate()+1 );
 						delay_time = delay_days.getTime();					
-					} else if ( jQuery( "#orddd_lite_disable_for_holidays" ).val() != 'yes' && jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 ) {
+					} else if ( jQuery( "#orddd_lite_disable_for_holidays" ).val() != 'yes' &&  
+						( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 || 
+							jQuery.inArray( ( m+1 ) + '-' + d, holidays ) != -1 ) 
+
+						) {
 						delay_days.setDate( delay_days.getDate()+1 );
 						delay_time = delay_days.getTime();
 					} else if( jQuery.inArray( ( m+1 ) + "-" + d + "-" + y, bookedDays ) != -1 ) {
@@ -268,7 +273,8 @@ function minimum_date_to_set( delay_days ) {
     	if ( jQuery( "#orddd_lite_disable_for_holidays" ).val() != 'yes' ) {
 	    	for ( i = 0; i < holidays.length; i++ ) {
 		        var dm = delay_days.getMonth(), dd = delay_days.getDate(), dy = delay_days.getFullYear();
-		        if( jQuery.inArray( ( dm+1 ) + "-" + dd + "-" + dy, holidays ) != -1 ) {
+		        if( jQuery.inArray( ( dm+1 ) + "-" + dd + "-" + dy, holidays ) != -1 || 
+					jQuery.inArray( ( m+1 ) + '-' + d, holidays ) != -1 ) {
 		            delay_days.setDate( delay_days.getDate()+1 );
 		            delay_time = delay_days.getTime();
 		        }
@@ -303,7 +309,8 @@ function nd( date ) {
 	var today = dt.getMonth() + '-' + dt.getDate() + '-' + dt.getFullYear();
 	for ( i = 0; i < disabledDays.length; i++ ) {
 		var holidays_array = disabledDays[ i ].split( ":" );
-		if( holidays_array[ 1 ] == ( ( m+1 ) + '-' + d + '-' + y ) ) {
+		if( holidays_array[ 1 ] == ( ( m+1 ) + '-' + d + '-' + y ) ||
+			holidays_array[ 1 ] == ( ( m+1 ) + '-' + d ) ) {
 			if( '' == holidays_array[ 0 ] ) {
 				return [ false, "", jsL10n.holidayText ];
 			} else {
@@ -411,7 +418,8 @@ function avd( date ) {
 						if( current_day <= delay_days ) {
 							var m = current_day.getMonth(), d = current_day.getDate(), y = current_day.getFullYear();
 							if ( jQuery( "#orddd_lite_disable_for_holidays" ).val() != 'yes' ) {
-								if( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 ) {	
+								if( jQuery.inArray( ( m+1 ) + '-' + d + '-' + y, holidays ) != -1 || 
+									jQuery.inArray( ( m+1 ) + '-' + d, holidays ) != -1 ) {	
 									delay_days.setDate( delay_days.getDate()+1 );
 									delay_time = delay_days.getTime();
 								}
