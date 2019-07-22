@@ -101,6 +101,7 @@ class ORDDD_LITE_View_Holidays_Table extends WP_List_Table {
 		    'cb'                 =>  '<input type="checkbox" />',
     		'holiday_name'   => __( 'Name', 'order-delivery-date' ),
     		'holiday_date'   => __( 'Date', 'order-delivery-date' ),
+    		'holiday_type'   => __( 'Type', 'order-delivery-date' ),
 		);
 		return apply_filters( 'orddd_holidays_table_columns', $columns );
 	}
@@ -120,9 +121,16 @@ class ORDDD_LITE_View_Holidays_Table extends WP_List_Table {
 		$holiday_count = 0;
 		foreach ( $holidays_arr as $key => $value ) {
 		    $return_holidays[ $key ] = new stdClass();
+		    
 		    $return_holidays[ $key ]->holiday_name = $value->n;
 		    $date_from_arr = explode( "-", $value->d );
 		    $holiday_date = date( 'm-d-Y', gmmktime( 0, 0, 0, $date_from_arr[ 0 ], $date_from_arr[ 1 ], $date_from_arr[ 2 ] ) );
+		    if( isset( $value->r_type ) && $value->r_type == 'on' ) {
+		    	$return_holidays[ $key ]->holiday_type = __( 'Recurring', 'order-delivery-date' );
+		    } else {
+		    	$return_holidays[ $key ]->holiday_type = __( 'Current Year', 'order-delivery-date' );
+		    }
+
 		    $return_holidays[ $key ]->holiday_date = $holiday_date;
 		    $return_holidays[ $key ]->holiday_date_stored = $value->d;
 		}

@@ -13,6 +13,7 @@
  * Class for adding the settings of the plugin in admin.
  */
 
+include_once( 'orddd-lite-holidays-settings.php' );
 class orddd_lite_settings {
 
     /**
@@ -365,32 +366,48 @@ class orddd_lite_settings {
         add_settings_section (
             'orddd_lite_holidays_section',
             __( 'Add Holiday', 'order-delivery-date' ),
-            array( 'orddd_lite_settings', 'orddd_lite_holidays_admin_settings_callback' ),
+            array( 'orddd_lite_holidays_settings', 'orddd_lite_holidays_admin_settings_callback' ),
             'orddd_lite_holidays_page'
         );
     
         add_settings_field (
             'orddd_lite_holiday_name',
-            __( 'Name:', 'order-delivery-date' ),
-            array( 'orddd_lite_settings', 'orddd_lite_holidays_name_callback' ),
+            __( 'Holiday Name:', 'order-delivery-date' ),
+            array( 'orddd_lite_holidays_settings', 'orddd_lite_holidays_name_callback' ),
             'orddd_lite_holidays_page',
-            'orddd_lite_holidays_section',
-            array ( __( 'Enter the name of the holiday here.', 'order-delivery-date' ) )
+            'orddd_lite_holidays_section'
         );
     
         add_settings_field(
             'orddd_lite_holiday_date',
-            __( 'Date:', 'order-delivery-date' ),
-            array( 'orddd_lite_settings', 'orddd_lite_holidays_date_callback' ),
+            __( 'From Date:', 'order-delivery-date' ),
+            array( 'orddd_lite_holidays_settings', 'orddd_lite_holidays_from_date_callback' ),
             'orddd_lite_holidays_page',
-            'orddd_lite_holidays_section',
-            array ( __( 'Select the holiday date here.', 'order-delivery-date' ) )
+            'orddd_lite_holidays_section'
         );
    
+        add_settings_field(
+            'orddd_lite_holiday_to_date',
+            __( 'To Date:', 'order-delivery-date' ),
+            array( 'orddd_lite_holidays_settings', 'orddd_lite_holidays_to_date_callback' ),
+            'orddd_lite_holidays_page',
+            'orddd_lite_holidays_section',
+            array ( __( '<br>Leave the "To Date:" field unchanged for single day holidays.</i></b>', 'order-delivery-date' ) )
+        );
+        
+        add_settings_field(
+            'orddd_lite_allow_recurring_holiday',
+            __( 'Allow Recurring:', 'order-delivery-date' ),
+            array( 'orddd_lite_holidays_settings', 'orddd_lite_allow_recurring_holiday_callback' ),
+            'orddd_lite_holidays_page',
+            'orddd_lite_holidays_section',
+            array ( __( 'Enable to block the holidays for all future years.', 'order-delivery-date' ) )
+        );
+
         register_setting(
             'orddd_lite_holidays_settings',
             'orddd_lite_holidays',
-            array( 'orddd_lite_settings', 'orddd_lite_holidays_callback' )
+            array( 'orddd_lite_holidays_settings', 'orddd_lite_holidays_callback' )
         );
     }
 

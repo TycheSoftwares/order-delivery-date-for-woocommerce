@@ -519,5 +519,27 @@ class orddd_lite_common {
     public static function orddd_get_plugin_url() {
         return plugins_url() . '/order-delivery-date-for-woocommerce/';
     }
+
+    /** 
+     * Returns between days from a start date till end date
+     * 
+     * @param string $FromDate Start date of the range
+     * @param string $ToDate End date of the range
+     * @return array Dates between the start and the end date
+     * @since 3.9
+     */
+    public static function orddd_lite_get_betweendays( $FromDate, $ToDate ) {
+        $Days[] = $FromDate;
+        $FromDate_timestamp = strtotime( $FromDate );
+        $ToDate_timestamp = strtotime( $ToDate );
+        if( $FromDate_timestamp != $ToDate_timestamp ) {
+            while( $FromDate_timestamp < $ToDate_timestamp ) {
+                $FromDate = date( "d-n-Y", strtotime( "+1 day", strtotime( $FromDate ) ) );
+                $FromDate_timestamp = $FromDate_timestamp + 86400;
+                $Days[] = $FromDate;
+            }
+        }
+        return $Days;
+    }
 }
 ?>
