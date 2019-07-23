@@ -52,6 +52,9 @@ class orddd_lite_holidays_settings {
     public static function orddd_lite_holidays_from_date_callback() {
         $current_language = get_option( 'orddd_lite_language_selected' );
         $day_selected = get_option( 'orddd_lite_start_of_week' );
+        if( $day_selected == '' ) {
+            $day_selected = 0;
+        }
         print( '<script type="text/javascript">
                  jQuery( document ).ready( function() {
                     jQuery.datepicker.setDefaults( jQuery.datepicker.regional[ "en-GB" ] );
@@ -90,7 +93,9 @@ class orddd_lite_holidays_settings {
     public static function orddd_lite_holidays_to_date_callback( $args ) {
         $current_language = get_option( 'orddd_lite_language_selected' );
         $day_selected = get_option( 'orddd_lite_start_of_week' );
-
+        if( $day_selected == '' ) {
+            $day_selected = 0;
+        }
         print( '<script type="text/javascript">
                  jQuery( document ).ready( function() {
                     jQuery.datepicker.setDefaults( jQuery.datepicker.regional[ "en-GB" ] );
