@@ -166,15 +166,6 @@ class orddd_lite_calendar_sync_settings {
         $html = '<label for="orddd_lite_calendar_id"> ' . $args[0] . '</label>';
         echo $html;
     }
-
-    /**
-     * Callback for adding the 'Test Connection' link and checks if the connection is succesful or not
-     *
-     * @since 3.9
-     */
-    public static function orddd_lite_calendar_test_connection_callback() {
-        print "<a href='admin.php?page=order_delivery_date&action=calendar_sync_settings' id='test_connection' disabled>" . __( 'Test Connection', 'order-delivery-date' ) . "</a>";
-    }
     
     /**
      * Callback for adding the 'Add to Calendar' button in the New Order email notification

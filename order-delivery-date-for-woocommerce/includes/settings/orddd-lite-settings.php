@@ -600,14 +600,6 @@ class orddd_lite_settings {
         );
     
         add_settings_field(
-            'orddd_lite_calendar_test_connection',
-            '',
-            array( 'orddd_lite_calendar_sync_settings', 'orddd_lite_calendar_test_connection_callback' ),
-            'orddd_lite_calendar_sync_settings_page',
-            'orddd_lite_calendar_sync_admin_settings_section'
-        );
-    
-        add_settings_field(
             'orddd_lite_admin_add_to_calendar_delivery_calendar',
             __( 'Show "Export to Google Calendar" button on Delivery Calendar page', 'order-delivery-date' ),
             array( 'orddd_lite_calendar_sync_settings', 'orddd_lite_admin_add_to_calendar_delivery_calendar_callback' ),
