@@ -4,8 +4,8 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, order delivery date, woocommerce delivery date, delivery, order delivery
 Requires at least: 1.3
-Tested up to: 5.1.1
-Stable tag: 3.8.1
+Tested up to: 5.2.2
+Stable tag: 3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -217,6 +217,12 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+
+= 3.9 (23.07.2019) =
+* Feature - You can now set a range of dates as holidays.
+* Feature - You can now block the holidays for future years too. A checkbox named ‘Allow Recurring’ is added which if checked while adding holidays, it will disable the dates for all years in the calendar.
+* Bug Fix -  Delivery Date calendar was not working on the checkout page with the Prohauz child theme. This is fixed now. 
+* Bug Fix - Number of dates available in the calendar was one less than the value set for the "Number of Dates to choose" option. This is fixed now. 
 
 = 3.8.1 (22.04.2019) =
 * Fixed a warning that was appearing on Dashboard for some stores after the last update.
