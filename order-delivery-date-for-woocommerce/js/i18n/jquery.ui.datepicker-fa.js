@@ -1,13 +1,14 @@
 /* Persian (Farsi) Translation for the jQuery UI date picker plugin. */
 /* Javad Mowlanezhad -- jmowla@gmail.com */
 /* Jalali calendar should supported soon! (Its implemented but I have to test it) */
-jQuery(function($) {
-	$.datepicker.regional['fa'] = {
-		closeText: 'بستن',
-		prevText: '&#x3C;قبلی',
-		nextText: 'بعدی&#x3E;',
-		currentText: 'امروز',
-		monthNames: [
+jQuery(
+	function($) {
+		$.datepicker.regional['fa'] = {
+			closeText: 'بستن',
+			prevText: '&#x3C;قبلی',
+			nextText: 'بعدی&#x3E;',
+			currentText: 'امروز',
+			monthNames: [
 			'فروردين',
 			'ارديبهشت',
 			'خرداد',
@@ -20,9 +21,9 @@ jQuery(function($) {
 			'دی',
 			'بهمن',
 			'اسفند'
-		],
-		monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-		dayNames: [
+			],
+			monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+			dayNames: [
 			'يکشنبه',
 			'دوشنبه',
 			'سه‌شنبه',
@@ -30,8 +31,8 @@ jQuery(function($) {
 			'پنجشنبه',
 			'جمعه',
 			'شنبه'
-		],
-		dayNamesShort: [
+			],
+			dayNamesShort: [
 			'ی',
 			'د',
 			'س',
@@ -39,8 +40,8 @@ jQuery(function($) {
 			'پ',
 			'ج',
 			'ش'
-		],
-		dayNamesMin: [
+			],
+			dayNamesMin: [
 			'ی',
 			'د',
 			'س',
@@ -48,12 +49,13 @@ jQuery(function($) {
 			'پ',
 			'ج',
 			'ش'
-		],
-		weekHeader: 'هف',
-		dateFormat: 'yy/mm/dd',
-		firstDay: 6,
-		isRTL: true,
-		showMonthAfterYear: false,
-		yearSuffix: ''};
-	$.datepicker.setDefaults($.datepicker.regional['fa']);
-});
+			],
+			weekHeader: 'هف',
+			dateFormat: 'yy/mm/dd',
+			firstDay: 6,
+			isRTL: true,
+			showMonthAfterYear: false,
+			yearSuffix: ''};
+		$.datepicker.setDefaults( $.datepicker.regional['fa'] );
+	}
+);

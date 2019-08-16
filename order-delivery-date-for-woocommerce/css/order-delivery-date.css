@@ -4,7 +4,7 @@ input[type="checkbox"] {
   margin-right: 5px;
 }
 
-.orddd_lite_weekdays, 
+.orddd_lite_weekdays,
 .orddd_lite_shipping_days {
 	width: 300px;
 }
@@ -46,7 +46,7 @@ table.wp-list-table .column-holidays {
 }
 
 #datepicker {
-	width: fit-content !important; 
+	width: fit-content !important;
 }
 
 .ui-datepicker {
