@@ -17,13 +17,13 @@ delete_option( 'orddd_lite_db_version' );
 delete_option( 'orddd_lite_enable_delivery_date' );
 
 $orddd_lite_weekdays = array(
-	'orddd_weekday_0' => __( 'Sunday', 'order-delivery-date' ),
-	'orddd_weekday_1' => __( 'Monday', 'order-delivery-date' ),
-	'orddd_weekday_2' => __( 'Tuesday', 'order-delivery-date' ),
-	'orddd_weekday_3' => __( 'Wednesday', 'order-delivery-date' ),
-	'orddd_weekday_4' => __( 'Thursday', 'order-delivery-date' ),
-	'orddd_weekday_5' => __( 'Friday', 'order-delivery-date' ),
-	'orddd_weekday_6' => __( 'Saturday', 'order-delivery-date' ),
+	'orddd_lite_weekday_0' => __( 'Sunday', 'order-delivery-date' ),
+	'orddd_lite_weekday_1' => __( 'Monday', 'order-delivery-date' ),
+	'orddd_lite_weekday_2' => __( 'Tuesday', 'order-delivery-date' ),
+	'orddd_lite_weekday_3' => __( 'Wednesday', 'order-delivery-date' ),
+	'orddd_lite_weekday_4' => __( 'Thursday', 'order-delivery-date' ),
+	'orddd_lite_weekday_5' => __( 'Friday', 'order-delivery-date' ),
+	'orddd_lite_weekday_6' => __( 'Saturday', 'order-delivery-date' ),
 );
 
 foreach ( $orddd_lite_weekdays as $n => $day_name ) {
