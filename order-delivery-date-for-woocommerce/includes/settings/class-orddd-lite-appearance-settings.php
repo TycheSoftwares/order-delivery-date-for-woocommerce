@@ -94,7 +94,8 @@ class Orddd_Lite_Appearance_Settings {
 	public static function orddd_lite_appearance_first_day_of_week_callback( $args ) {
 		global $orddd_lite_days;
 		$day_selected = get_option( 'orddd_lite_start_of_week' );
-		if ( '' === $day_selected ) {
+		if ( '' === $day_selected ||
+		false === $day_selected ) {
 			$day_selected = 0;
 		}
 
@@ -253,15 +254,16 @@ class Orddd_Lite_Appearance_Settings {
 	public static function orddd_lite_appearance_calendar_theme_callback( $args ) {
 		global $orddd_lite_calendar_themes;
 		$language_selected = get_option( 'orddd_lite_language_selected' );
-		if ( '' === $language_selected ) {
+		if ( '' === $language_selected ||
+			false === $language_selected ) {
 			$language_selected = 'en-GB';
 		}
 
-		$first_day_of_week = '1';
-		if ( get_option( 'orddd_lite_start_of_week' ) !== '' ) {
-			$first_day_of_week = get_option( 'orddd_lite_start_of_week' );
+		$first_day_of_week = get_option( 'orddd_lite_start_of_week' );
+		if ( '' === $first_day_of_week ||
+			false === $first_day_of_week ) {
+			$first_day_of_week = 1;
 		}
-
 		?>
 			<input type="hidden" name="orddd_lite_calendar_theme" id="orddd_lite_calendar_theme" value="<?php echo esc_attr( get_option( 'orddd_lite_calendar_theme' ) ); ?>">
 			<input type="hidden" name="orddd_lite_calendar_theme_name" id="orddd_lite_calendar_theme_name" value="<?php echo esc_attr( get_option( 'orddd_lite_calendar_theme_name' ) ); ?>">
@@ -292,12 +294,14 @@ class Orddd_Lite_Appearance_Settings {
 
 				jQuery( function() {
 					jQuery.datepicker.setDefaults( jQuery.datepicker.regional[ "" ] );
-					jQuery( "#datepicker" ).datepicker({firstDay:' . esc_attr( $first_day_of_week ) . '});
-					jQuery( "#datepicker" ).datepicker( jQuery.datepicker.regional[ "' . esc_attr( $language_selected ) . '" ] );
-					jQuery( "#localisation_select" ).change(function() {
+					jQuery( "#datepicker" ).datepicker();
+					jQuery( "#datepicker" ).datepicker( "option", "firstDay", ' . esc_attr( $first_day_of_week ) . ' );
+					jQuery( "#datepicker" ).datepicker( "option", jQuery.datepicker.regional[ "' . esc_attr( $language_selected ) . '" ] );
+					jQuery( "#orddd_lite_language_selected" ).change(function() {
 						jQuery( "#datepicker" ).datepicker( "option", jQuery.datepicker.regional[ jQuery( this ).val() ] );
 						});
 					});
+					
 			</script>
 			<div id="switcher"></div>
 			<br><strong>' . esc_attr_e( 'Preview theme:', 'order-delivery-date' ) . '</strong><br>
