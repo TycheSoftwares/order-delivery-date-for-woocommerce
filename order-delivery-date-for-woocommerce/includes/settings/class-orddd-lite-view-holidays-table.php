@@ -124,7 +124,11 @@ class Orddd_Lite_View_Holidays_Table extends WP_List_Table {
 		$return_holidays = array();
 		$holidays        = get_option( 'orddd_lite_holidays' );
 
-		if ( '' !== $holidays && '{}' !== $holidays && '[]' !== $holidays && 'null' !== $holidays ) {
+		if ( '' !== $holidays &&
+			'{}' !== $holidays &&
+			'[]' !== $holidays &&
+			null !== $holidays &&
+			false !== $holidays ) {
 			$holidays_arr = json_decode( $holidays );
 		}
 

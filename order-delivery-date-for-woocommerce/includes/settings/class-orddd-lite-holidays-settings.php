@@ -49,7 +49,8 @@ class Orddd_Lite_Holidays_Settings {
 	public static function orddd_lite_holidays_from_date_callback() {
 		$current_language = get_option( 'orddd_lite_language_selected' );
 		$day_selected     = get_option( 'orddd_lite_start_of_week' );
-		if ( '' === $day_selected ) {
+		if ( '' === $day_selected ||
+			false === $day_selected ) {
 			$day_selected = 0;
 		}
 		print( '<script type="text/javascript">
@@ -91,7 +92,8 @@ class Orddd_Lite_Holidays_Settings {
 	public static function orddd_lite_holidays_to_date_callback( $args ) {
 		$current_language = get_option( 'orddd_lite_language_selected' );
 		$day_selected     = get_option( 'orddd_lite_start_of_week' );
-		if ( '' === $day_selected ) {
+		if ( '' === $day_selected ||
+		false === $day_selected ) {
 			$day_selected = 0;
 		}
 		print( '<script type="text/javascript">
