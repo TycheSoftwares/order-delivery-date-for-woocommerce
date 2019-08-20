@@ -5,7 +5,7 @@ Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, order delivery date, woocommerce delivery date, delivery, order delivery
 Requires at least: 1.3
 Tested up to: 5.2.2
-Stable tag: 3.9
+Stable tag: 3.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -217,6 +217,9 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 6. Holidays tab
 
 == Changelog ==
+
+= 3.10 (20.08.2019) =
+* Changes in code to make the plugin compliant as per WPCS rules.
 
 = 3.9 (23.07.2019) =
 * Feature - You can now set a range of dates as holidays.
