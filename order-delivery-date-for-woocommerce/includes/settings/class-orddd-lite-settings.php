@@ -789,7 +789,7 @@ class Orddd_Lite_Settings {
 			// phpcs:ignore WordPress.Security.NonceVerification
 			if ( isset( $_GET['holiday'] ) ) {
 				// phpcs:ignore WordPress.Security.NonceVerification
-				$holiday = sanitize_text_field( wp_unslash( $_GET['holiday'] ) );
+				$holiday = array_map( 'sanitize_text_field', wp_unslash( $_GET['holiday'] ) );
 			}
 
 			$holidays     = get_option( 'orddd_lite_holidays' );
