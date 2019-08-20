@@ -315,6 +315,11 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				return;
 			}
 
+			$calendar_theme = get_option( 'orddd_lite_calendar_theme' );
+			if ( '' === $calendar_theme ) {
+				$calendar_theme = 'base';
+			}
+
 			wp_dequeue_script( 'themeswitcher' );
 			wp_enqueue_script( 'themeswitcher-orddd', plugins_url( '/js/jquery.themeswitcher.min.js', __FILE__ ), array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-datepicker' ), $wpefield_version, true );
 
@@ -328,7 +333,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			wp_register_style( 'woocommerce_admin_styles', plugins_url() . '/woocommerce/assets/css/admin.css', array(), WC_VERSION );
 			wp_enqueue_style( 'woocommerce_admin_styles' );
 			wp_enqueue_style( 'order-delivery-date', plugins_url( '/css/order-delivery-date.css', __FILE__ ), '', $wpefield_version );
-			wp_register_style( 'jquery-ui-style', plugins_url( '/css/themes/smoothness/jquery-ui.css', __FILE__ ), '', $wpefield_version );
+			wp_register_style( 'jquery-ui-style', plugins_url( '/css/themes/' . $calendar_theme . '/jquery-ui.css', __FILE__ ), '', $wpefield_version );
 			wp_enqueue_style( 'jquery-ui-style' );
 			wp_enqueue_style( 'datepicker', plugins_url( '/css/datepicker.css', __FILE__ ), '', $wpefield_version );
 		}
