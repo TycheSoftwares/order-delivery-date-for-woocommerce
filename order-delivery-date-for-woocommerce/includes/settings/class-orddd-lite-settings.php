@@ -137,7 +137,7 @@ class Orddd_Lite_Settings {
 			array( 'orddd_Lite_Date_Settings', 'orddd_lite_calculate_min_time_disabled_days_callback' ),
 			'orddd_lite_date_settings_page',
 			'orddd_lite_date_settings_section',
-			array( __( 'If selected, then the Minimum Delivery Time (in hours) will be applied on the non working weekdays which are unchecked in Delivery Weekdays. If unchecked, then it will not be applied. For example, if Minimum Delivery Time (in hours) is set to 48 hours and Saturday is disabled for delivery. Now if a customer visits the website on Firday, then the first available date will be Monday and not Sunday.', 'order-delivery-date' ) )
+			array( __( 'If selected, then the Minimum Delivery Time (in hours) will be applied on the non working weekdays which are unchecked in Delivery Weekdays. If unchecked, then it will not be applied. For example, if Minimum Delivery Time (in hours) is set to 48 hours and Saturday is disabled for delivery. Now if a customer visits the website on Friday, then the first available date will be Monday and not Sunday.', 'order-delivery-date' ) )
 		);
 
 		register_setting(
