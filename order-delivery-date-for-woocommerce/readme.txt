@@ -25,7 +25,7 @@ You can set **minimum required time for delivery** in hours. The mandatory field
 
 The dates on which you do not deliver can be set as holidays in the calendar. Also, you can **disable delivery for Virtual or Featured products**.
 
-### This plugin allows you to do the following
+### This plugin allows you to do the following:
 
 * Ability to allow the customer to select <strong>Delivery date</strong> on the checkout page for the orders.
 * You can <strong>disable the weekdays</strong> on which you <strong>do not deliver</strong> the products.
@@ -38,14 +38,14 @@ The dates on which you do not deliver can be set as holidays in the calendar. Al
 * You can set holidays on the dates you do not deliver products under Holidays tab. <strong>Selected holidays</strong> will be <strong>disabled for delivery</strong> in the delivery calendar on the checkout page.
 * Selected Delivery date will be displayed on the WooCommerce Edit Order page in admin dashboard.
 
-You can check the detailed difference between Pro and Lite version **[here](https://www.tychesoftwares.com/differences-pro-lite-versions-order-delivery-date-woocommerce-plugin/?utm_source=wprepo&utm_medium=litelink&utm_campaign=OrderDeliveryDateLite "Lite and Pro version Difference")**
-
->The <strong>plugin worked as described</strong> and is extremely <strong>well supported</strong> which is key. It works by ordering the order screen by default – latest orders first – or by the delivery date. All one has to do is use a simple checkbox to flick between their preferred method. The plugin developer has responded to a request I had inside a few hours and resolved it very professionally. 5 stars for the plugin and its support.
-> - [allmyhoney](https://wordpress.org/support/topic/perfect-plugin-for-delivery-date/)
-
 ### Differences between Lite & PRO version
 
 You can check the detailed difference between Pro and Lite version **[here](https://www.tychesoftwares.com/differences-pro-lite-versions-order-delivery-date-woocommerce-plugin/?utm_source=wprepo&utm_medium=prolink1&utm_campaign=OrderDeliveryDateLite "Lite and Pro version Difference")**
+
+### Here is what some of our customers say about this plugin:
+
+>The <strong>plugin worked as described</strong> and is extremely <strong>well supported</strong> which is key. It works by ordering the order screen by default – latest orders first – or by the delivery date. All one has to do is use a simple checkbox to flick between their preferred method. The plugin developer has responded to a request I had inside a few hours and resolved it very professionally. 5 stars for the plugin and its support.
+> - [allmyhoney](https://wordpress.org/support/topic/perfect-plugin-for-delivery-date/)
 
 >We use this plugin for the web shop of our <strong>florist</strong> for customers to arrange deliveries Monday to Friday and on Saturday mornings. Being able to set an earlier cut off time for Saturdays (or Sundays when applicable) is great.
 > - [bnolan](https://wordpress.org/support/topic/custom-cut-off-times-for-each-day/)
