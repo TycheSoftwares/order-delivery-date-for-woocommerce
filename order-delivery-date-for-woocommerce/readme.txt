@@ -2,7 +2,7 @@
 Contributors: ashokrane, MoxaJogani, bhavik.kiri, komal-maru, tychesoftwares
 Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
-Tags: delivery date, order delivery date, woocommerce delivery date, delivery, order delivery
+Tags: delivery date, delivery time, same day delivery, pickup date, estimated date, next day delivery
 Requires at least: 1.3
 Tested up to: 5.2.2
 Stable tag: 3.10
