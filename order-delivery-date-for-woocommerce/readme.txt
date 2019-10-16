@@ -160,6 +160,10 @@ Option 3:
 
 == Frequently Asked Questions ==
 
+= What is the difference between Lite and Pro version of the plugin? =
+
+You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versions-order-delivery-date-woocommerce-plugin/?utm_source=wprepo&utm_medium=faqlink&utm_campaign=OrderDeliveryDate "Lite and Pro version Difference")**
+
 = Is it possible to add delivery date calendar for each product? =
 
 It is not possible to add Delivery date calendar for each product from Order Delivery Date for WooCommerce. However, we do have a plugin name [Product Delivery Date for WooCommerce Pro](https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite) and [Lite](https://wordpress.org/plugins/product-delivery-date-for-woocommerce-lite/) version both. 
@@ -195,10 +199,6 @@ Currently, it is not possible to edit the selected delivery date for the WooComm
 = Can we set different delivery settings for different shipping methods or different product categories? =
 
 Currently, it is not possible to add different delivery settings for different shipping methods or different products categories in the free version. However, this feature is available in the [Order Delivery Date Pro for WooCommerce plugin](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=faqlink&utm_campaign=OrderDeliveryDateLite).
-
-= Difference between Lite and Pro version of the plugin =
-
-You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versions-order-delivery-date-woocommerce-plugin/?utm_source=wprepo&utm_medium=faqlink&utm_campaign=OrderDeliveryDate "Lite and Pro version Difference")**
 
 == Screenshots ==
 
