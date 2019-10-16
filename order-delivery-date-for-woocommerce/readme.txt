@@ -43,9 +43,9 @@ You can check the detailed difference between Pro and Lite version **[here](http
 >The <strong>plugin worked as described</strong> and is extremely <strong>well supported</strong> which is key. It works by ordering the order screen by default – latest orders first – or by the delivery date. All one has to do is use a simple checkbox to flick between their preferred method. The plugin developer has responded to a request I had inside a few hours and resolved it very professionally. 5 stars for the plugin and its support.
 > - [allmyhoney](https://wordpress.org/support/topic/perfect-plugin-for-delivery-date/)
 
-### Addons
+### Differences between Lite & PRO version
 
-**[Post Delivery Product Reviews Addon](https://www.tychesoftwares.com/store/premium-plugins/post-delivery-product-reviews-addon-order-delivery-date-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Post Delivery Product Reviews Addons")** - This addon allow you accept the product reviews from the verified owners. An email will be sent to the customers a day after the delivery date. Email will include the details of the products customer purchased and allow them to post a review for them.
+You can check the detailed difference between Pro and Lite version **[here](https://www.tychesoftwares.com/differences-pro-lite-versions-order-delivery-date-woocommerce-plugin/?utm_source=wprepo&utm_medium=prolink1&utm_campaign=OrderDeliveryDateLite "Lite and Pro version Difference")**
 
 >We use this plugin for the web shop of our <strong>florist</strong> for customers to arrange deliveries Monday to Friday and on Saturday mornings. Being able to set an earlier cut off time for Saturdays (or Sundays when applicable) is great.
 > - [bnolan](https://wordpress.org/support/topic/custom-cut-off-times-for-each-day/)
