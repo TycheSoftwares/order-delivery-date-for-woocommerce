@@ -101,6 +101,20 @@ If you like Order Delivery Date, please leave a [5 star](https://wordpress.org/s
 
 5. **[Deposits For WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/deposits-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Deposits For WooCommerce")**
 
+6. **[Payment Gateway Based Fees and Discounts for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/payment-gateway-based-fees-and-discounts-for-woocommerce-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Payment Gateway Based Fees and Discounts for WooCommerce")**
+
+7. **[Custom Order Status for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/custom-order-status-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Custom Order Status for WooCommerce")**
+
+8. **[Custom Order Numbers for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/custom-order-numbers-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Custom Order Numbers for WooCommerce")**
+
+9. **[Product Input Fields for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/product-input-fields-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Product Input Fields for WooCommerce")**
+
+10. **[Call for Price for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-call-for-price-plugin/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Call for Price for WooCommerce")**
+
+11. **[Price based on User Role for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/price-user-role-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Price based on User Role for WooCommerce")**
+
+12. **[Currency per Product for WooCommerce](https://www.tychesoftwares.com/store/premium-plugins/currency-per-product-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Currency per Product for WooCommerce")**
+
 ### Some of our other free plugins
 
 1. **[Abandoned Cart Lite for WooCommerce](https://wordpress.org/plugins/woocommerce-abandoned-cart/ "Abandoned Cart Lite for WooCommerce")**
