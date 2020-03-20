@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, same day delivery, pickup date, estimated date, next day delivery
 Requires at least: 1.3
-Tested up to: 5.2.2
+Tested up to: 5.3.2
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -229,6 +229,9 @@ Currently, it is not possible to add different delivery settings for different s
 6. Holidays tab
 
 == Changelog ==
+
+= 3.10.1 (20.03.2020) =
+* Update compatibility with WooCommerce 4.0.0.
 
 = 3.10 (20.08.2019) =
 * Changes in code to make the plugin compliant as per WPCS rules.
