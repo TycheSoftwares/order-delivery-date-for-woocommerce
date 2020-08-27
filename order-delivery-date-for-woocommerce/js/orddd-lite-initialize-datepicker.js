@@ -4,13 +4,13 @@
  * @namespace orddd_lite_initialize
  * @since 1.0
  */
-jQuery( document ).ready(
-	function() {
+jQuery( document ).ready( function() {
 
-			// Clear local storage for the selected delivery date in next 2 hours.
-			var orddd_last_check_date = localStorage.getItem( "orddd_lite_storage_next_time" );
-			var current_date          = jQuery( "#orddd_lite_current_day" ).val();
+		// Clear local storage for the selected delivery date in next 2 hours.
+		var orddd_last_check_date = localStorage.getItem( "orddd_lite_storage_next_time" );
+		var current_date          = jQuery( "#orddd_lite_current_day" ).val();
 
+		jQuery("#orddd_time_slot").selectWoo();
 		if ( current_date != '' && typeof( current_date ) != 'undefined' ) {
 			  var split_current_date = current_date.split( '-' );
 			  var ordd_next_date     = new Date( split_current_date[ 2 ], ( split_current_date[ 1 ] - 1 ), split_current_date[ 0 ], jQuery( "#orddd_lite_current_hour" ).val(), jQuery( "#orddd_lite_current_minute" ).val() );
@@ -92,7 +92,34 @@ jQuery( document ).ready(
 			jQuery( "#e_deliverydate_field" ).append( "<small class='orddd_lite_field_note'>" + jQuery( "#orddd_lite_field_note" ).val() + "</small>" );
 		}
 
-			window.onload = load_lite_functions;
+		jQuery( document ).on( "change", "#orddd_time_slot", function() {
+			if( 'on' == jQuery( '#orddd_delivery_date_on_cart_page' ).val() ) {
+				var selected_val = jQuery(this).val();
+				jQuery(this).find('option[value="'+ selected_val + '"]').prop( 'selected', true );
+				localStorage.setItem( "e_deliverydate_lite_session", jQuery( "#e_deliverydate" ).val() );
+				localStorage.setItem( "h_deliverydate_lite_session", jQuery( "#h_deliverydate" ).val() );
+				localStorage.setItem( "orddd_lite_time_slot", selected_val );
+	
+				var current_date = jQuery( "#orddd_lite_current_day" ).val();
+				if ( typeof( current_date ) != 'undefined' && current_date != '' ) {
+					var split_current_date = current_date.split( '-' );
+					var ordd_next_date     = new Date( split_current_date[ 2 ], ( split_current_date[ 1 ] - 1 ), split_current_date[ 0 ], jQuery( "#orddd_lite_current_hour" ).val(), jQuery( "#orddd_lite_current_minute" ).val() );
+				} else {
+					var ordd_next_date = new Date();
+				}
+
+				ordd_next_date.setHours( ordd_next_date.getHours() + 2 );
+				localStorage.setItem( "orddd_lite_storage_next_time", ordd_next_date.getTime() );
+			}
+	
+			jQuery( "body" ).trigger( "update_checkout" );
+			if ( 'on' == jQuery( '#orddd_delivery_date_on_cart_page' ).val() && jQuery( '#orddd_is_cart' ).val() == '1' ) {
+				jQuery( "body" ).trigger( "wc_update_cart" );
+			}
+			jQuery( "body" ).trigger( "change_orddd_time_slot", [ jQuery( this ) ] );
+		});
+
+		window.onload = load_lite_functions;
 	}
 );
 
@@ -126,6 +153,63 @@ function orddd_on_select_date( date, inst ) {
 		ordd_next_date.setHours( ordd_next_date.getHours() + 2 );
 		localStorage.setItem( "orddd_lite_storage_next_time", ordd_next_date.getTime() );
 	}
+
+	show_times( date, inst );
+}
+
+
+function show_times( date, inst ) {
+	console.log("here");
+    var monthValue = inst.selectedMonth+1;
+    var dayValue = inst.selectedDay;
+    var yearValue = inst.selectedYear;
+    var all = dayValue + "-" + monthValue + "-" + yearValue;
+    jQuery( "#h_deliverydate" ).val( all );
+
+    if( jQuery( "#orddd_lite_enable_time_slot" ).val() == "on" ) {
+        if( typeof( inst.id ) !== "undefined" ) {
+            var data = {
+                current_date: all,
+                order_id: jQuery( "#orddd_my_account_order_id" ).val(),
+                min_date: jQuery( "#orddd_min_date_set" ).val(),
+                current_date_to_check: jQuery( "#orddd_current_date_set" ).val(),
+                time_slot_session: localStorage.getItem( "orddd_time_slot" ),
+                holidays_str: jQuery( "#orddd_delivery_date_holidays" ).val(),
+                lockout_str: jQuery( "#orddd_lockout_days" ).val(),
+                action: "check_for_time_slot_orddd"
+            };
+
+            var option_selected = jQuery( '#orddd_auto_populate_first_available_time_slot' ).val();
+            jQuery( "#orddd_time_slot" ).attr( "disabled", "disabled" );
+            jQuery( "#orddd_time_slot_field" ).attr( "style", "opacity: 0.5" );
+            if( jQuery( '#orddd_admin_url' ).val() != '' && typeof( jQuery( '#orddd_admin_url' ).val() ) != 'undefined' ) {
+                jQuery.post( jQuery( '#orddd_admin_url' ).val() + "admin-ajax.php", data, function( response ) {
+
+                    jQuery( "#orddd_time_slot_field" ).attr( "style", "opacity: 1" );
+                    if( jQuery( "#orddd_is_cart" ).val() == 1 ) {
+                        jQuery( "#orddd_time_slot" ).attr( "style", "cursor: pointer !important;max-width:300px" );
+                    } else {
+                        jQuery( "#orddd_time_slot" ).attr( "style", "cursor: pointer !important" );
+                    }
+                    jQuery( "#orddd_time_slot" ).removeAttr( "disabled" ); 
+
+                    orddd_load_time_slots( response ); 
+
+                    if( option_selected == "on" || ( 'on' == jQuery( '#orddd_lite_delivery_date_on_cart_page' ).val() && localStorage.getItem( "orddd_time_slot" ) != '' ) ) {
+							jQuery( "body" ).trigger( "update_checkout" );
+							if ( 'on' == jQuery( '#orddd_lite_delivery_date_on_cart_page' ).val() && jQuery( '#orddd_is_cart' ).val() == '1' ) {
+								jQuery( "body" ).trigger( "wc_update_cart" );
+							}
+                    }  
+                });
+            }
+        }
+    } else {
+        jQuery( "body" ).trigger( "update_checkout" );
+        if ( 'on' == jQuery( '#orddd_delivery_date_on_cart_page' ).val() && jQuery( '#orddd_is_cart' ).val() == '1' ) {
+            jQuery( "body" ).trigger( "wc_update_cart" );
+        }
+    }
 }
 
 /**
@@ -190,6 +274,10 @@ function orddd_lite_autofil_date_time() {
 	var date_to_set = delay_days;
 	jQuery( '#e_deliverydate' ).datepicker( "setDate", date_to_set );
 	jQuery( "#h_deliverydate" ).val( min_date_to_set );
+
+	var inst = jQuery.datepicker._getInst( jQuery( "#e_deliverydate" )[0] );
+	show_times( min_date_to_set, inst );
+
 }
 
 /**
@@ -570,3 +658,72 @@ function gd( date1, date2, interval ) {
 			return undefined;
 	}
 }
+
+
+/** 
+ * Load the time slots in the time slot dropdown on select of date
+ *
+ * @function orddd_load_time_slots
+ * @param {string} Response returned from the ajax call
+ * @since
+ */
+function orddd_load_time_slots( response ) {
+    var orddd_time_slots = response.split( "/" );
+    jQuery( "#orddd_time_slot" ).empty(); 
+	var selected_value = '';
+	console.log( orddd_time_slots );
+    for( i = 0; i < orddd_time_slots.length; i++ ) {
+        var time_slot_to_display = orddd_time_slots[ i ].split( "_" );
+        if( 'select' == time_slot_to_display[ 0 ].replace(/\s/g, "") ) {
+            jQuery( "#orddd_time_slot" ).append( jQuery( "<option></option>" ).attr( { value:"select", selected:"selected" } ).text( jsL10n.selectText ) );
+            selected_value = orddd_time_slots[ i ];
+        } else if( 'asap' == time_slot_to_display[ 0 ] ) {
+            if( typeof time_slot_to_display[ 3 ] != 'undefined' ) {
+                jQuery( "#orddd_time_slot option:selected" ).removeAttr( "selected" );
+                jQuery( "#orddd_time_slot" ).append( jQuery( "<option></option>" ).attr( {value:time_slot_to_display[ 0 ], selected:"selected"}).text( jsL10n.asapText ) );
+                selected_value = time_slot_to_display[ 0 ];    
+            } else {
+                jQuery( "#orddd_time_slot" ).append( jQuery( "<option></option>" ).attr( {value:time_slot_to_display[ 0 ]} ).text( jsL10n.asapText ) );
+            }
+        } else if( 'NA' == time_slot_to_display[ 0 ] ) {
+            if( typeof time_slot_to_display[ 3 ] != 'undefined' ) {
+                jQuery( "#orddd_time_slot option:selected" ).removeAttr( "selected" );
+                jQuery( "#orddd_time_slot" ).append( jQuery( "<option></option>" ).attr( {value:time_slot_to_display[ 0 ], selected:"selected"}).text( jsL10n.NAText ) );
+                selected_value = time_slot_to_display[ 0 ];    
+            } else {
+                jQuery( "#orddd_time_slot" ).append( jQuery( "<option></option>" ).attr( {value:time_slot_to_display[ 0 ]} ).text( jsL10n.NAText ) );
+            }
+        } else if( typeof time_slot_to_display[ 3 ] != 'undefined' ) {
+            jQuery( "#orddd_time_slot option:selected" ).removeAttr( "selected" );
+            if( typeof time_slot_to_display[ 2 ] != 'undefined' && time_slot_to_display[ 2 ] != '' ) {
+                var time_slot_charges = decodeHtml( time_slot_to_display[ 2 ] );
+                jQuery( "#orddd_time_slot" ).append( jQuery( "<option></option>" ).attr( {value:time_slot_to_display[ 0 ], selected:"selected"}).text( time_slot_to_display[ 1 ] + " " + time_slot_charges ) );
+            } else {
+                jQuery( "#orddd_time_slot" ).append( jQuery( "<option></option>" ).attr( {value:time_slot_to_display[ 0 ], selected:"selected"}).text( time_slot_to_display[ 1 ] ) );
+            }
+            selected_value = time_slot_to_display[ 0 ];
+        } else {
+            if( typeof time_slot_to_display[ 2 ] != 'undefined' && time_slot_to_display[ 2 ] != '' ) {
+                var time_slot_charges = decodeHtml( time_slot_to_display[ 2 ] );
+                jQuery( "#orddd_time_slot" ).append( jQuery( "<option></option>" ).attr( "value", time_slot_to_display[ 0 ] ).text( time_slot_to_display[ 1 ] + " " + time_slot_charges ) );
+            } else {
+                jQuery( "#orddd_time_slot" ).append( jQuery( "<option></option>" ).attr( "value", time_slot_to_display[ 0 ] ).text( time_slot_to_display[ 1 ] ) );
+            }
+        }                   
+	}
+	
+	/**
+	 * Decodes the html entities for currency symbol.
+	 *
+	 * @function decodeHtml
+	 * @param {string} html - String to decode
+	 * @returns {string} Decoded string.
+	 * @since 8.0
+	 */
+	function decodeHtml(html) {
+		var txt = document.createElement("textarea");
+		txt.innerHTML = html;
+		return txt.value;
+	}
+}
+

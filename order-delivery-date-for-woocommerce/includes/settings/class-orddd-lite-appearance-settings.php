@@ -86,6 +86,32 @@ class Orddd_Lite_Appearance_Settings {
 	}
 
 	/**
+	 * Callback for adding Time format for time sliders setting
+	 *
+	 * @param array $args Extra arguments containing label & class for the field.
+	 * @since
+	 */
+	public static function orddd_lite_time_format_callback( $args ) {
+		global $orddd_lite_time_formats;
+		echo '<select name="orddd_lite_delivery_time_format" id="orddd_lite_delivery_time_format" size="1">';
+
+		foreach ( $orddd_lite_time_formats as $k => $format ) {
+			printf(
+				"<option %s value='%s'>%s</option>\n",
+				selected( $k, get_option( 'orddd_lite_delivery_time_format' ), false ),
+				esc_attr( $k ),
+				esc_attr( $format )
+			);
+		}
+
+		echo '</select>';
+
+		?>
+		<label for="orddd_lite_delivery_time_format"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
+
+	/**
 	 * Callback for adding First day of week setting
 	 *
 	 * @param array $args Callback arguments.
@@ -131,6 +157,19 @@ class Orddd_Lite_Appearance_Settings {
 		?>
 		<input type="text" name="orddd_lite_delivery_date_field_label" id="orddd_lite_delivery_date_field_label" value="<?php echo esc_attr( get_option( 'orddd_lite_delivery_date_field_label' ) ); ?>" maxlength="40"/>
 		<label for="orddd_lite_delivery_date_field_label"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
+
+	/**
+	 * Callback for adding Time slot field label setting
+	 *
+	 * @param array $args Extra arguments containing label & class for the field.
+	 * @since 3.11.0
+	 */
+	public static function orddd_lite_delivery_timeslot_field_label_callback( $args ) {
+		?>
+		<input type="text" name="orddd_lite_delivery_timeslot_field_label" id="orddd_lite_delivery_timeslot_field_label" value="<?php echo esc_attr( get_option( 'orddd_lite_delivery_timeslot_field_label' ) ); ?>" maxlength="40"/>
+		<label for="orddd_lite_delivery_timeslot_field_label"><?php echo esc_attr( $args[0] ); ?></label>
 		<?php
 	}
 
@@ -192,10 +231,11 @@ class Orddd_Lite_Appearance_Settings {
 	 * @since 1.5
 	 */
 	public static function orddd_lite_delivery_date_in_shipping_section_callback( $args ) {
-		$orddd_lite_date_in_billing         = 'checked';
-		$orddd_lite_date_in_shipping        = '';
-		$orddd_lite_date_before_order_notes = '';
-		$orddd_lite_date_after_order_notes  = '';
+		$orddd_lite_date_in_billing             = 'checked';
+		$orddd_lite_date_in_shipping            = '';
+		$orddd_lite_date_before_order_notes     = '';
+		$orddd_lite_date_after_order_notes      = '';
+		$orddd_lite_date_after_your_order_table = '';
 		if ( get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) === 'billing_section' ) {
 			$orddd_lite_date_in_billing         = 'checked';
 			$orddd_lite_date_in_shipping        = '';
@@ -216,13 +256,20 @@ class Orddd_Lite_Appearance_Settings {
 			$orddd_lite_date_in_billing         = '';
 			$orddd_lite_date_in_shipping        = '';
 			$orddd_lite_date_before_order_notes = '';
+		} elseif ( 'after_your_order_table' === get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) ) {
+			$orddd_lite_date_after_your_order_table = 'checked';
+			$orddd_lite_date_in_billing             = '';
+			$orddd_lite_date_in_shipping            = '';
+			$orddd_lite_date_before_order_notes     = '';
+			$orddd_lite_date_after_order_notes      = '';
 		}
 
 		?>
-		<input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="billing_section" <?php echo esc_attr( $orddd_lite_date_in_billing ); ?> ><?php esc_attr_e( 'In Billing Section', 'order-delivery-date' ); ?> &nbsp;&nbsp;
-		<input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="shipping_section" <?php echo esc_attr( $orddd_lite_date_in_shipping ); ?> ><?php esc_attr_e( 'In Shipping Section', 'order-delivery-date' ); ?> &nbsp;&nbsp;
-		<input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="before_order_notes" <?php echo esc_attr( $orddd_lite_date_before_order_notes ); ?> ><?php esc_attr_e( 'Before Order Notes', 'order-delivery-date' ); ?>&nbsp;&nbsp;
-		<input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="after_order_notes" <?php echo esc_attr( $orddd_lite_date_after_order_notes ); ?> ><?php esc_attr_e( 'After Order Notes', 'order-delivery-date' ); ?>
+		<input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="billing_section" <?php echo esc_attr( $orddd_lite_date_in_billing ); ?> > <?php esc_attr_e( 'In Billing Section', 'order-delivery-date' ); ?> <br>
+		<input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="shipping_section" <?php echo esc_attr( $orddd_lite_date_in_shipping ); ?> > <?php esc_attr_e( 'In Shipping Section', 'order-delivery-date' ); ?> <br>
+		<input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="before_order_notes" <?php echo esc_attr( $orddd_lite_date_before_order_notes ); ?> > <?php esc_attr_e( 'Before Order Notes', 'order-delivery-date' ); ?> <br>
+		<input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="after_order_notes" <?php echo esc_attr( $orddd_lite_date_after_order_notes ); ?> > <?php esc_attr_e( 'After Order Notes', 'order-delivery-date' ); ?> <br>
+		<input type="radio" name="orddd_lite_delivery_date_fields_on_checkout_page" id="orddd_lite_delivery_date_fields_on_checkout_page" value="after_your_order_table" <?php echo esc_attr( $orddd_lite_date_after_your_order_table ); ?> > <?php esc_attr_e( 'Between Your Order & Payment Section', 'order-delivery-date' ); ?><br>
 		<label for="orddd_lite_delivery_date_fields_on_checkout_page"><?php echo wp_kses_post( $args[0] ); ?> </label>
 		<?php
 	}
@@ -309,37 +356,6 @@ class Orddd_Lite_Appearance_Settings {
 
 		?>
 		<label for="orddd_lite_calendar_theme_name"><?php echo wp_kses_post( $args[0] ); ?></label>
-		<?php
-	}
-
-	/**
-	 * Callback for adding checkbox to hide delivery date field for virtual products
-	 *
-	 * @param array $args Callback arguments.
-	 *
-	 * @since 1.5
-	 */
-	public static function orddd_lite_appearance_virtual_product_callback( $args ) {
-		if ( get_option( 'orddd_lite_no_fields_for_virtual_product' ) === 'on' ) {
-			$orddd_lite_no_fields_for_virtual_product = 'checked';
-		} else {
-			$orddd_lite_no_fields_for_virtual_product = '';
-		}
-
-		?>
-		<input type="checkbox" name="orddd_lite_no_fields_for_virtual_product" id="orddd_lite_no_fields_for_virtual_product" class="day-checkbox" <?php echo esc_attr( $orddd_lite_no_fields_for_virtual_product ); ?> />
-		<label class="orddd_lite_no_fields_for_product_type"><?php esc_attr_e( 'Virtual Products', 'order-delivery-date' ); ?></label>
-		<?php
-		$orddd_lite_no_fields_for_featured_product = '';
-		if ( get_option( 'orddd_lite_no_fields_for_featured_product' ) === 'on' ) {
-			$orddd_lite_no_fields_for_featured_product = 'checked';
-		}
-
-		?>
-		<input type="checkbox" name="orddd_lite_no_fields_for_featured_product" id="orddd_lite_no_fields_for_featured_product" class="day-checkbox" <?php echo esc_attr( $orddd_lite_no_fields_for_featured_product ); ?> />
-		<label class="orddd_lite_no_fields_for_product_type"><?php esc_attr_e( 'Featured Products', 'order-delivery-date' ); ?></label>
-
-		<label for="orddd_lite_no_fields_for_product_type"><?php echo wp_kses_post( $args[0] ); ?></label>
 		<?php
 	}
 }

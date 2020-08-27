@@ -323,39 +323,6 @@ class Orddd_Lite_Date_Settings {
 	}
 
 	/**
-	 * Callback for adding Default sorting checkbox of Delivery date column on edit order
-	 *
-	 * @param array $args Callback arguments.
-	 *
-	 * @since 1.5
-	 */
-	public static function orddd_lite_enable_default_sorting_of_column_callback( $args ) {
-		?>
-		<input type="checkbox" name="orddd_lite_enable_default_sorting_of_column" id="orddd_lite_enable_default_sorting_of_column" value="checked" <?php echo esc_attr( get_option( 'orddd_lite_enable_default_sorting_of_column' ) ); ?>/>
-		<label for="orddd_lite_enable_default_sorting_of_column"><?php echo esc_attr( $args[0] ); ?></label>
-		<?php
-	}
-
-	/**
-	 * Callback for adding Auto Populate First available delivery date checkbox
-	 *
-	 * @param array $args Callback arguments.
-	 *
-	 * @since 1.5
-	 */
-	public static function orddd_lite_auto_populate_first_available_date_callback( $args ) {
-		$orddd_lite_auto_populate_first_available_date = '';
-		if ( get_option( 'orddd_lite_auto_populate_first_available_date' ) === 'on' ) {
-			$orddd_lite_auto_populate_first_available_date = 'checked';
-		}
-
-		?>
-		<input type="checkbox" name="orddd_lite_auto_populate_first_available_date" id="orddd_lite_auto_populate_first_available_date" class="day-checkbox" <?php echo esc_attr( $orddd_lite_auto_populate_first_available_date ); ?> />
-		<label for="orddd_lite_auto_populate_first_available_date"><?php echo esc_attr( $args[0] ); ?></label>
-		<?php
-	}
-
-	/**
 	 * Callback for adding a checkbox of Calculating minimum delivery time on disable days
 	 *
 	 * @param array $args Callback arguments.
