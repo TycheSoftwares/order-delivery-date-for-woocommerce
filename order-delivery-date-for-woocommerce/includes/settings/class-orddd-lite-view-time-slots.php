@@ -127,7 +127,7 @@ class ORDDD_Lite_View_Time_Slots extends WP_List_Table {
 
 		$time_format         = get_option( 'orddd_lite_delivery_time_format' );
 		$time_format_to_show = 'H:i';
-		if ( '1' == $time_format ) {
+		if ( '1' === $time_format ) {
 			$time_format_to_show = 'h:i A';
 		}
 
@@ -141,20 +141,20 @@ class ORDDD_Lite_View_Time_Slots extends WP_List_Table {
 		$lockout_time           = get_option( 'orddd_lite_lockout_time_slot' );
 		$existing_timeslots_str = get_option( 'orddd_lite_delivery_time_slot_log' );
 		$existing_timeslots_arr = json_decode( $existing_timeslots_str );
-		if ( 'null' == $existing_timeslots_arr ) {
+		if ( 'null' == $existing_timeslots_arr ) { // phpcs:ignore
 			$existing_timeslots_arr = array();
 		}
 
 		if ( is_array( $existing_timeslots_arr ) && count( $existing_timeslots_arr ) > 0 ) {
 			$i = 0;
 			// Sort the multidimensional array.
-			// usort( $existing_timeslots_arr, array( 'orddd_common', 'orddd_custom_sort' ) );
+			usort( $existing_timeslots_arr, array( 'Orddd_Lite_Common', 'orddd_lite_custom_sort' ) );
 			foreach ( $existing_timeslots_arr as $k => $v ) {
 				$from_time = $v->fh . ':' . $v->fm;
-				$ft        = date( $time_format_to_show, strtotime( $from_time ) );
-				if ( 00 != $v->th || ( 00 == $v->th && 00 != $v->tm ) ) {
+				$ft        = date( $time_format_to_show, strtotime( $from_time ) ); //phpcs:ignore
+				if ( 00 != $v->th || ( 00 == $v->th && 00 != $v->tm ) ) { //phpcs:ignore
 					$to_time = $v->th . ':' . $v->tm;
-					$tt      = date( $time_format_to_show, strtotime( $to_time ) );
+					$tt      = date( $time_format_to_show, strtotime( $to_time ) ); //phpcs:ignore
 					$key     = $ft . ' - ' . $tt;
 				} else {
 					$key = $ft;
@@ -170,7 +170,7 @@ class ORDDD_Lite_View_Time_Slots extends WP_List_Table {
 					$additional_charges_label = $v->additional_charges_label;
 				}
 
-				if ( gettype( json_decode( $v->dd ) ) == 'array' && count( json_decode( $v->dd ) ) > 0 ) {
+				if ( gettype( json_decode( $v->dd ) ) === 'array' && count( json_decode( $v->dd ) ) > 0 ) {
 					$dd = json_decode( $v->dd );
 					foreach ( $dd as $dkey => $dval ) {
 						$return_time_slot[ $i ]     = new stdClass();
@@ -183,7 +183,7 @@ class ORDDD_Lite_View_Time_Slots extends WP_List_Table {
 						if ( isset( $orddd_lite_weekdays[ $dval ] ) ) {
 							$return_time_slot[ $i ]->delivery_days_dates = $orddd_lite_weekdays[ $dval ];
 							$return_time_slot[ $i ]->dd                  = $dval;
-						} elseif ( 'all' == $dval ) {
+						} elseif ( 'all' === $dval ) {
 							$return_time_slot[ $i ]->delivery_days_dates = 'All';
 							$return_time_slot[ $i ]->dd                  = $dval;
 						} else {
@@ -192,7 +192,7 @@ class ORDDD_Lite_View_Time_Slots extends WP_List_Table {
 						}
 						$return_time_slot[ $i ]->time_slot                              = $key;
 						$return_time_slot[ $i ]->maximum_order_deliveries_per_time_slot = $v->lockout;
-						if ( '' != $additional_charges ) {
+						if ( '' !== $additional_charges && 0 !== $additional_charges ) {
 							$return_time_slot[ $i ]->additional_charges_for_time_slot = $currency_symbol . '' . $additional_charges;
 						} else {
 							$return_time_slot[ $i ]->additional_charges_for_time_slot = '';
@@ -212,7 +212,7 @@ class ORDDD_Lite_View_Time_Slots extends WP_List_Table {
 					if ( isset( $orddd_lite_weekdays[ $dd ] ) ) {
 						$return_time_slot[ $i ]->delivery_days_dates = $orddd_lite_weekdays[ $dd ];
 						$return_time_slot[ $i ]->dd                  = $dd;
-					} elseif ( 'all' == $dd ) {
+					} elseif ( 'all' === $dd ) {
 						$return_time_slot[ $i ]->delivery_days_dates = 'All';
 						$return_time_slot[ $i ]->dd                  = $dd;
 					} else {
@@ -221,7 +221,7 @@ class ORDDD_Lite_View_Time_Slots extends WP_List_Table {
 					}
 					$return_time_slot[ $i ]->time_slot                              = $key;
 					$return_time_slot[ $i ]->maximum_order_deliveries_per_time_slot = $v->lockout;
-					if ( '' != $additional_charges ) {
+					if ( '' !== $additional_charges && 0 !== $additional_charges ) {
 						$return_time_slot[ $i ]->additional_charges_for_time_slot = $currency_symbol . '' . $additional_charges;
 					} else {
 						$return_time_slot[ $i ]->additional_charges_for_time_slot = '';

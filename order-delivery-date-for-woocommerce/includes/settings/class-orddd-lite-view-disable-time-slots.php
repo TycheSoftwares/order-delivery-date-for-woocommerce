@@ -68,7 +68,7 @@ class ORDDD_Lite_View_Disable_Time_Slots extends WP_List_Table {
 	 * @since 3.11.0
 	 **/
 	public function column_cb( $item ) {
-		if ( isset( $item->disable_dd ) && '' != $item->disable_dd ) {
+		if ( isset( $item->disable_dd ) && '' !== $item->disable_dd ) {
 			$dd = $item->disable_dd;
 			return sprintf(
 				'<input type="checkbox" name="%1$s[]" value="%2$s" />',
@@ -119,13 +119,13 @@ class ORDDD_Lite_View_Disable_Time_Slots extends WP_List_Table {
 		$existing_timeslots_str   = get_option( 'orddd_lite_disable_time_slot_log' );
 		$existing_timeslots_arr   = array();
 		$return_disable_time_slot = array();
-		if ( 'null' == $existing_timeslots_str || '' == $existing_timeslots_str || '{}' == $existing_timeslots_str || '[]' == $existing_timeslots_str ) {
+		if ( 'null' == $existing_timeslots_str || '' == $existing_timeslots_str || '{}' == $existing_timeslots_str || '[]' == $existing_timeslots_str ) { //phpcs:ignore
 			$existing_timeslots_arr = array();
 		} else {
 			$existing_timeslots_arr = json_decode( $existing_timeslots_str );
 		}
 		if ( is_array( $existing_timeslots_arr ) && count( $existing_timeslots_arr ) > 0 ) {
-			if ( 'null' == $existing_timeslots_arr ) {
+			if ( 'null' == $existing_timeslots_arr ) { //phpcs:ignore
 				$existing_timeslots_arr = array();
 			}
 			$i = 0;
@@ -140,9 +140,9 @@ class ORDDD_Lite_View_Disable_Time_Slots extends WP_List_Table {
 				$time_slots = json_decode( $v->ts );
 				foreach ( $time_slots as $time_key => $time_value ) {
 					$return_disable_time_slot[ $i ] = new stdClass();
-					if ( isset( $v->dtv ) && 'dates' == $v->dtv ) {
+					if ( isset( $v->dtv ) && 'dates' === $v->dtv ) {
 						$disable_date          = explode( '-', $v->dd );
-						$delivery_disable_date = date( 'm-d-Y', gmmktime( 0, 0, 0, $disable_date[0], $disable_date[1], $disable_date[2] ) );
+						$delivery_disable_date = date( 'm-d-Y', gmmktime( 0, 0, 0, $disable_date[0], $disable_date[1], $disable_date[2] ) ); //phpcs:ignore
 						$return_disable_time_slot[ $i ]->disable_delivery_days_dates = $delivery_disable_date;
 						$return_disable_time_slot[ $i ]->disable_dd                  = $v->dd;
 						$return_disable_time_slot[ $i ]->disable_time_slot           = $time_value;
@@ -150,7 +150,7 @@ class ORDDD_Lite_View_Disable_Time_Slots extends WP_List_Table {
 					} else {
 						if ( isset( $orddd_lite_weekdays[ $v->dd ] ) ) {
 							$return_disable_time_slot[ $i ]->disable_delivery_days_dates = $orddd_lite_weekdays[ $v->dd ];
-						} elseif ( 'all' == $v->dd ) {
+						} elseif ( 'all' === $v->dd ) {
 							$return_disable_time_slot[ $i ]->disable_delivery_days_dates = 'All';
 						} else {
 							$return_disable_time_slot[ $i ]->disable_delivery_days_dates = '';

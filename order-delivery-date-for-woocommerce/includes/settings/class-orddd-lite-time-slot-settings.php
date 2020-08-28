@@ -614,10 +614,10 @@ class Orddd_Lite_Time_Slot_Settings {
 					$from_time = $v->fh . ':' . trim( $v->fm );
 					// Send in format as requested.
 
-					$ft = date( $time_format_to_show, strtotime( $from_time ) );
-					if ( 0 != $v->th || ( 0 == $v->th && 0 != $v->tm ) ) {
+					$ft = date( $time_format_to_show, strtotime( $from_time ) ); //phpcs:ignore
+					if ( 0 != $v->th || ( 0 == $v->th && 0 != $v->tm ) ) { //phpcs:ignore
 						$to_time       = $v->th . ':' . $v->tm;
-						$tt            = date( $time_format_to_show, strtotime( $to_time ) );
+						$tt            = date( $time_format_to_show, strtotime( $to_time ) ); //phpcs:ignore
 						$time_slot_key = $ft . ' - ' . $tt;
 					} else {
 						$time_slot_key = $ft;

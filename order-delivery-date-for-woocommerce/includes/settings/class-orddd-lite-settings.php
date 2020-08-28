@@ -1363,7 +1363,7 @@ class Orddd_Lite_Settings {
 			<nav class="nav-tab-wrapper woo-nav-tab-wrapper" id="orddd_settings_tabs">
 				<a href="admin.php?page=order_delivery_date_lite&action=general_settings" class="nav-tab <?php echo esc_attr( $active_general_settings ); ?>"><?php esc_attr_e( 'General Settings', 'order-delivery-date' ); ?> </a>
 				<?php
-				if ( get_option( 'orddd_enable_day_wise_settings' ) == 'on' ) {
+				if ( 'on' === get_option( 'orddd_enable_day_wise_settings' ) ) {
 					?>
 					<a href="admin.php?page=order_delivery_date_lite&action=advance_settings" class="nav-tab <?php echo esc_attr( $active_advance_settings ); ?>"> <?php esc_attr_e( 'Weekday Settings', 'order-delivery-date' ); ?> </a>
 				<?php } ?>
@@ -1534,7 +1534,7 @@ class Orddd_Lite_Settings {
 
 					$existing_timeslots_str = get_option( 'orddd_lite_disable_time_slot_log' );
 					$existing_timeslots_arr = array();
-					if ( 'null' == $existing_timeslots_str || '' == $existing_timeslots_str || '{}' == $existing_timeslots_str || '[]' == $existing_timeslots_str ) {
+					if ( 'null' == $existing_timeslots_str || '' == $existing_timeslots_str || '{}' == $existing_timeslots_str || '[]' == $existing_timeslots_str ) { // phpcs:ignore
 						$existing_timeslots_arr = array();
 					} else {
 						$existing_timeslots_arr = json_decode( $existing_timeslots_str );
@@ -1547,8 +1547,12 @@ class Orddd_Lite_Settings {
 					?>
 
 					</a>
+					<h3 id='timeslots_table_head'>
 					<?php
-					echo "<h3 id='timeslots_table_head'>" . esc_attr_e( 'Time Slots', 'order-delivery-date' ) . '</h3>';
+						echo esc_attr_e( 'Time Slots', 'order-delivery-date' );
+					?>
+					</h3>
+					<?php
 					include_once 'class-orddd-lite-view-time-slots.php';
 					$orddd_table = new ORDDD_Lite_View_Time_Slots();
 					$orddd_table->orddd_lite_prepare_items();
@@ -1718,12 +1722,12 @@ class Orddd_Lite_Settings {
 					$time_slot_str    = get_option( 'orddd_lite_delivery_time_slot_log' );
 					$time_slots       = json_decode( $time_slot_str );
 					$timeslot_new_arr = array();
-					if ( 'null' == $time_slots || '' == $time_slots || '{}' == $time_slots || '[]' == $time_slots ) {
+					if ( 'null' == $time_slots || '' == $time_slots || '{}' == $time_slots || '[]' == $time_slots ) { // phpcs:ignore
 						$time_slots = array();
 					}
 
 					foreach ( $time_slots as $key => $v ) {
-						if ( gettype( json_decode( $v->dd ) ) == 'array' && count( json_decode( $v->dd ) ) > 0 ) {
+						if ( 'array' === gettype( json_decode( $v->dd ) ) && count( json_decode( $v->dd ) ) > 0 ) {
 							$dd         = json_decode( $v->dd );
 							$new_dd_str = '[';
 							$count_dd   = 0;
@@ -1731,14 +1735,12 @@ class Orddd_Lite_Settings {
 								$count_dd = count( $dd );
 							}
 							for ( $i = 0; $i < $count_dd; $i++ ) {
-								if ( $fh == $v->fh && $fm == $v->fm && $th == $v->th && $tm == $v->tm && $date_to_check == $dd[ $i ] && $tv == $v->tv ) {
-									// do nothing as this time slot needs to be deleted.
-								} else {
+								if ( ! ( $fh == $v->fh && $fm == $v->fm && $th == $v->th && $tm == $v->tm && $date_to_check == $dd[ $i ] && $tv == $v->tv ) ) { //phpcs:ignore
 									$new_dd_str .= '"' . $dd[ $i ] . '",';
 								}
 							}
 							$new_dd_str = substr( $new_dd_str, 0, strlen( $new_dd_str ) - 1 );
-							if ( trim( $new_dd_str ) != '' ) {
+							if ( trim( $new_dd_str ) !== '' ) {
 								$new_dd_str        .= ']';
 								$timeslot_new_arr[] = array(
 									'tv'                 => $v->tv,
@@ -1753,7 +1755,7 @@ class Orddd_Lite_Settings {
 								);
 							}
 						} else {
-							if ( $fh == $v->fh && $fm == $v->fm && $th == $v->th && $tm == $v->tm && $date_to_check == $v->dd && $tv == $v->tv ) {
+							if ( $fh == $v->fh && $fm == $v->fm && $th == $v->th && $tm == $v->tm && $date_to_check == $v->dd && $tv == $v->tv ) { //phpcs:ignore
 								unset( $v );
 							} else {
 								$timeslot_new_arr[] = array(
@@ -1770,7 +1772,7 @@ class Orddd_Lite_Settings {
 							}
 						}
 					}
-					$timeslot_jarr = json_encode( $timeslot_new_arr );
+					$timeslot_jarr = wp_json_encode( $timeslot_new_arr );
 					update_option( 'orddd_lite_delivery_time_slot_log', $timeslot_jarr );
 				}
 			}
@@ -1788,30 +1790,30 @@ class Orddd_Lite_Settings {
 				foreach ( $block_time_slot_to_delete as $t_key => $t_value ) {
 					$time_values   = explode( ',', $t_value );
 					$date_to_check = '';
-					$time_Slot     = '';
+					$timeslot      = '';
 					if ( isset( $time_values[0] ) ) {
 						$date_to_check = $time_values[0];
 					}
 					if ( isset( $time_values[1] ) ) {
-						$time_Slot = $time_values[1];
+						$timeslot = $time_values[1];
 					}
 
 					$disable_time_slot_str    = get_option( 'orddd_lite_disable_time_slot_log' );
 					$disable_time_slots       = json_decode( $disable_time_slot_str );
 					$disable_timeslot_new_arr = array();
-					if ( 'null' == $disable_time_slots || '' == $disable_time_slots || '{}' == $disable_time_slots || '[]' == $disable_time_slots ) {
+					if ( 'null' == $disable_time_slots || '' == $disable_time_slots || '{}' == $disable_time_slots || '[]' == $disable_time_slots ) { //phpcs:ignore
 						$disable_time_slots = array();
 					}
 
 					$timeslot_disable_new_arr = array();
 					foreach ( $disable_time_slots as $disable_key => $disable_v ) {
 						$time_slots = json_decode( $disable_v->ts );
-						if ( ( isset( $time_Slot ) && in_array( $time_Slot, $time_slots ) ) && ( isset( $date_to_check ) && $date_to_check == $disable_v->dd ) ) {
+						if ( ( isset( $timeslot ) && in_array( $timeslot, $time_slots, true ) ) && ( isset( $date_to_check ) && $date_to_check == $disable_v->dd ) ) { //phpcs:ignore
 							// do nothing as this time slot needs to be deleted.
-							$key = array_search( $time_Slot, $time_slots );
+							$key = array_search( $timeslot, $time_slots ); //phpcs:ignore
 							unset( $time_slots[ $key ] );
 
-							if ( is_array( $time_slots ) && count( $time_slots ) == 0 ) {
+							if ( is_array( $time_slots ) && count( $time_slots ) === 0 ) {
 								unset( $disable_time_slots[ $disable_key ] );
 							}
 
@@ -1821,7 +1823,7 @@ class Orddd_Lite_Settings {
 							}
 							$new_ts_str = substr( $new_ts_str, 0, strlen( $new_ts_str ) - 1 );
 
-							if ( trim( $new_ts_str ) != '' ) {
+							if ( trim( $new_ts_str ) !== '' ) {
 								$new_ts_str                .= ']';
 								$timeslot_disable_new_arr[] = array(
 									'dtv' => $disable_v->dtv,
@@ -1837,7 +1839,7 @@ class Orddd_Lite_Settings {
 							);
 						}
 					}
-					$disable_timeslot_jarr = json_encode( $timeslot_disable_new_arr );
+					$disable_timeslot_jarr = wp_json_encode( $timeslot_disable_new_arr );
 					update_option( 'orddd_lite_disable_time_slot_log', $disable_timeslot_jarr );
 				}
 			}
@@ -1853,7 +1855,7 @@ class Orddd_Lite_Settings {
 	 */
 	public function orddd_lite_info_notice() {
 
-		_e( '<div class="notice notice-info my-dismiss-notice is-dismissible"><p style="font-size:17px;">Across the world, businesses are going through a tough time with COVID-19. In such times, we want to do our bit to support small businesses. Since shoppers are increasingly relying on delivery right now, we are giving <strong>50% off on the Order Delivery Date Pro plugin until April 14 2020</strong>. If you don\'t love it, get a full refund in 30 days, no questions asked!<br><br>Please use the coupon code STAYSAFE to avail the discount. <strong><a target="_blank" href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=customerstore&utm_medium=link&utm_campaign=OrderDeliveryDateLiteCovidNotice"><u>BUY NOW FOR $49.50 (<span style="text-decoration:line-through;">$99.00</span>)</u></a><strong>.</p></div>', 'order-delivery-date' );
+		_e( '<div class="notice notice-info my-dismiss-notice is-dismissible"><p style="font-size:17px;">Across the world, businesses are going through a tough time with COVID-19. In such times, we want to do our bit to support small businesses. Since shoppers are increasingly relying on delivery right now, we are giving <strong>50% off on the Order Delivery Date Pro plugin until April 14 2020</strong>. If you don\'t love it, get a full refund in 30 days, no questions asked!<br><br>Please use the coupon code STAYSAFE to avail the discount. <strong><a target="_blank" href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=customerstore&utm_medium=link&utm_campaign=OrderDeliveryDateLiteCovidNotice"><u>BUY NOW FOR $49.50 (<span style="text-decoration:line-through;">$99.00</span>)</u></a><strong>.</p></div>', 'order-delivery-date' ); //phpcs:ignore
 	}
 }
 

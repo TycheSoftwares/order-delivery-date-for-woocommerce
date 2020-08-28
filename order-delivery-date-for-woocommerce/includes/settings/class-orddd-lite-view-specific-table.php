@@ -67,7 +67,7 @@ class ORDDD_Lite_View_Specific_Table extends WP_List_Table {
 	 */
 	public function column_cb( $item ) {
 		$row_id = '';
-		if ( isset( $item->dd ) && '' != $item->dd ) {
+		if ( isset( $item->dd ) && '' !== $item->dd ) {
 			$row_id = $item->dd;
 			return sprintf(
 				'<input type="checkbox" name="%1$s[]" value="%2$s" />',
