@@ -76,3 +76,17 @@ table.wp-list-table .column-holidays {
 table.form-table #orddd_lite_ics_url_list .orddd_lite_ics_feed_url {
 	padding: 0px 0px;
 }
+
+.form-table th, .form-table td {
+	font-weight:normal;
+}
+
+.orddd-col-left {
+    float: left;
+    width: 50%;
+}
+
+.orddd-col-right {
+    float: right;
+    width: 50%;
+}
