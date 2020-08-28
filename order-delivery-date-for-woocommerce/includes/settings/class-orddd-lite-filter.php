@@ -49,6 +49,8 @@ class Orddd_Lite_Filter {
 		if ( 'order_delivery_date' === $column ) {
 			$delivery_date_formatted = Orddd_Lite_Common::orddd_lite_get_order_delivery_date( $post->ID );
 			echo esc_attr( $delivery_date_formatted );
+			$time_slot = orddd_lite_common::orddd_get_order_timeslot( $post->ID );
+			echo '<p>' . esc_attr( $time_slot ) . '</p>';
 		}
 	}
 
