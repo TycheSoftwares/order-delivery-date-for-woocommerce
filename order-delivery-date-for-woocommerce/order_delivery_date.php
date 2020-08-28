@@ -4,7 +4,7 @@
  * Plugin URI: https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/
  * Description: This plugin allows customers to choose their preferred Order Delivery Date during checkout.
  * Author: Tyche Softwares
- * Version: 3.10.1
+ * Version: 3.10.2
  * Author URI: https://www.tychesoftwares.com/
  * Contributor: Tyche Softwares, https://www.tychesoftwares.com/
  * Text Domain: order-delivery-date
@@ -20,7 +20,7 @@
  *
  * @since 1.0
  */
-$wpefield_version = '3.10.1';
+$wpefield_version = '3.10.2';
 
 /**
  * Include the require files
@@ -69,6 +69,17 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'order_lite_holidays_admin_settings' ) );
 			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_lite_delete_settings' ) );
 			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_lite_calendar_sync_settings_callback' ) );
+			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_delivery_days_settings' ) );
+			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_time_settings' ) );
+			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_integration_of_plugins' ) );
+			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_lite_time_slot_settings' ) );
+			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_lite_disable_time_slot_settings' ) );
+
+			if ( isset( $_GET['page'] ) && 'order_delivery_date_lite' === $_GET['page'] ) { //phpcs:ignore
+				if ( strtotime( '15 April 2020' ) > current_time( 'timestamp' ) ) { //phpcs:ignore
+					add_action( 'admin_notices', array( 'Orddd_Lite_Settings', 'orddd_lite_info_notice' ) );
+				}
+			}
 
 			// Admin scripts.
 			add_action( 'admin_enqueue_scripts', array( &$this, 'orddd_lite_my_enqueue' ) );
@@ -84,18 +95,20 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 			add_action( 'woocommerce_checkout_update_order_meta', array( 'Orddd_Lite_Process', 'orddd_lite_my_custom_checkout_field_update_order_meta' ) );
 
+			add_action( 'woocommerce_checkout_update_order_meta', array( 'Orddd_Lite_Process', 'orddd_update_order_meta_time_slot' ) );
+
 			if ( defined( 'WOOCOMMERCE_VERSION' ) && version_compare( WOOCOMMERCE_VERSION, '2.3', '>=' ) < 0 ) {
 				add_filter( 'woocommerce_email_order_meta_fields', array( 'Orddd_Lite_Process', 'orddd_lite_add_delivery_date_to_order_woo_new' ), 11, 3 );
+				add_filter( 'woocommerce_email_order_meta_fields', array( 'Orddd_Lite_Process', 'orddd_lite_add_time_slot_to_order_woo_new' ), 11, 3 );
 			} else {
 				add_filter( 'woocommerce_email_order_meta_keys', array( 'Orddd_Lite_Process', 'orddd_lite_add_delivery_date_to_order_woo_deprecated' ), 11, 1 );
+				add_filter( 'woocommerce_email_order_meta_keys', array( 'Orddd_Lite_Process', 'orddd_lite_add_time_slot_to_order_woo_deprecated' ), 11, 1 );
 			}
 
-			if ( get_option( 'orddd_lite_date_field_mandatory' ) === 'checked' &&
-				get_option( 'orddd_lite_enable_delivery_date' ) === 'on' ) {
-				add_action( 'woocommerce_checkout_process', array( 'Orddd_Lite_Process', 'orddd_lite_validate_date_wpefield' ) );
-			}
+			add_action( 'woocommerce_checkout_process', array( 'Orddd_Lite_Process', 'orddd_lite_validate_date_wpefield' ) );
 
 			add_filter( 'woocommerce_order_details_after_order_table', array( 'Orddd_Lite_Process', 'orddd_lite_add_delivery_date_to_order_page_woo' ) );
+			add_filter( 'woocommerce_order_details_after_order_table', array( 'Orddd_Lite_Process', 'orddd_lite_add_time_slot_to_order_page_woo' ) );
 
 			// phpcs:ignore WordPress.Security.NonceVerification
 			if ( is_admin() && isset( $_GET['post_type'] ) ) {
@@ -116,6 +129,8 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			add_action( 'woocommerce_order_status_failed', array( 'Orddd_Lite_Common', 'orddd_lite_cancel_delivery' ), 10, 1 );
 			add_action( 'wp_trash_post', array( 'Orddd_Lite_Common', 'orddd_lite_cancel_delivery_for_trashed' ), 10, 1 );
 
+			add_action( 'woocommerce_cart_calculate_fees', array( 'Orddd_Lite_Process', 'orddd_lite_add_delivery_date_fee' ) );
+
 			// Ajax calls.
 			add_action( 'init', array( &$this, 'orddd_lite_add_component_file' ) );
 
@@ -126,7 +141,13 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				add_filter( 'ts_deativate_plugin_questions', array( 'Orddd_Lite_Common', 'orddd_lite_deactivate_add_questions' ), 10, 1 );
 			}
 
+			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( &$this, 'orddd_plugin_settings_link' ) );
 			add_filter( 'plugin_row_meta', array( &$this, 'orddd_lite_plugin_row_meta' ), 10, 2 );
+
+			add_action( 'wp_ajax_nopriv_check_for_time_slot_orddd', array( 'orddd_lite_process', 'check_for_time_slot_orddd' ) );
+			add_action( 'wp_ajax_check_for_time_slot_orddd', array( 'orddd_lite_process', 'check_for_time_slot_orddd' ) );
+
+			add_filter( 'admin_footer_text', array( &$this, 'orddd_lite_admin_rate_us' ) );
 		}
 
 		/**
@@ -174,7 +195,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 			// Pro admin Notices.
 			if ( ! get_option( 'orddd_lite_activate_time' ) ) {
-				add_option( 'orddd_lite_activate_time', current_time( 'timestamp' ) );
+				add_option( 'orddd_lite_activate_time', current_time( 'timestamp' ) ); //phpcs:ignore
 			}
 
 			add_option( 'orddd_lite_installed', 'yes' );
@@ -265,7 +286,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 		 */
 		public function orddd_lite_update_db_check() {
 			global $wpefield_version;
-			if ( '3.10.1' === $wpefield_version ) {
+			if ( '3.10.2' === $wpefield_version ) {
 				self::orddd_lite_update_install();
 			}
 		}
@@ -336,6 +357,11 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			wp_register_style( 'jquery-ui-style', plugins_url( '/css/themes/' . $calendar_theme . '/jquery-ui.css', __FILE__ ), '', $wpefield_version );
 			wp_enqueue_style( 'jquery-ui-style' );
 			wp_enqueue_style( 'datepicker', plugins_url( '/css/datepicker.css', __FILE__ ), '', $wpefield_version );
+
+			wp_register_script( 'datepick', plugins_url() . '/order-delivery-date-for-woocommerce/js/jquery.datepick.js', '', $wpefield_version, false );
+			wp_enqueue_script( 'datepick' );
+			wp_enqueue_style( 'orddd-datepick', plugins_url( '/css/jquery.datepick.css', __FILE__ ), '', $wpefield_version, false );
+
 		}
 
 		/**
@@ -374,10 +400,17 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 				wp_dequeue_script( 'initialize-datepicker' );
 				wp_enqueue_script( 'initialize-datepicker-orddd', plugins_url( '/js/orddd-lite-initialize-datepicker.js', __FILE__ ), '', $wpefield_version, false );
+				$is_admin = is_admin() ? true : false;
 
 				$js_args = array(
 					'clearText'   => __( 'Clear', 'order-delivery-date' ),
 					'holidayText' => __( 'Holiday', 'order-delivery-date' ),
+					'bookedText'  => __( 'Booked', 'order-delivery-date' ),
+					'selectText'  => __( 'Select a time slot', 'order-delivery-date' ),
+					'asapText'    => __( 'As Soon As Possible', 'order-delivery-date' ),
+					'NAText'      => __( 'No time slots are available', 'order-delivery-date' ),
+					'wooVersion'  => get_option( 'woocommerce_version' ),
+					'is_admin'    => $is_admin,
 					'bookedText'  => __( 'Booked', 'order-delivery-date' ),
 				);
 				wp_localize_script( 'initialize-datepicker-orddd', 'jsL10n', $js_args );
@@ -406,7 +439,22 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 		}
 
 		/**
-		 * Add links for Submitting a ticket, Link to Pro version and link to docs on the Plugins page in admin.
+		 * Settings link on Plugins page
+		 *
+		 * @hook plugin_action_links_order-delivery-date
+		 *
+		 * @param array $links Settings links.
+		 * @return array
+		 * @since 1.0
+		 */
+		public function orddd_plugin_settings_link( $links ) {
+			$setting_link['settings'] = '<a href="' . esc_url( get_admin_url( null, 'admin.php?page=order_delivery_date_lite' ) ) . '">Settings</a>';
+			$links                    = $setting_link + $links;
+			return $links;
+		}
+
+		/**
+		 * Add links to Pro version and link to docs on the Plugins page in admin.
 		 *
 		 * @hook plugin_row_meta
 		 *
@@ -421,12 +469,32 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 				$row_meta = array(
 					'docs'        => '<a href="' . esc_url( apply_filters( 'orddd_docs_url', 'https://www.tychesoftwares.com/docs/docs/order-delivery-date-for-woocommerce-lite/?utm_source=pluginwebsite&utm_medium=pluginspage&utm_campaign=OrderDeliveryDateLite' ) ) . '" target="_blank" title="' . esc_attr( __( 'Docs', 'order-delivery-date' ) ) . '">' . __( 'Docs', 'order-delivery-date' ) . '</a>',
-					'support'     => '<a href="' . esc_url( apply_filters( 'orddd_support_url', 'https://tychesoftwares.freshdesk.com/support/tickets/new?utm_source=pluginwebsite&utm_medium=pluginspage&utm_campaign=OrderDeliveryDateLite' ) ) . '" target="_blank" title="' . esc_attr( __( 'Submit Ticket', 'order-delivery-date' ) ) . '">' . __( 'Submit Ticket', 'order-delivery-date' ) . '</a>',
-					'plugin_site' => '<a href="' . esc_url( apply_filters( 'orddd_plugin_site_url', 'https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=pluginwebsite&utm_medium=pluginspage&utm_campaign=OrderDeliveryDateLite' ) ) . '" target="_blank" title="' . esc_attr( __( 'Go Pro', 'order-delivery-date' ) ) . '">' . __( 'Premium version', 'order-delivery-date' ) . '</a>',
+					'plugin_site' => '<a href="' . esc_url( apply_filters( 'orddd_plugin_site_url', 'https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=pluginwebsite&utm_medium=pluginspage&utm_campaign=OrderDeliveryDateLite' ) ) . '" target="_blank" title="' . esc_attr( __( 'Go Pro', 'order-delivery-date' ) ) . '">' . __( 'Unlock All', 'order-delivery-date' ) . '</a>',
 				);
 				return array_merge( $links, $row_meta );
 			}
 			return (array) $links;
+		}
+
+		/**
+		 * Add rating links to the admin dashboard
+		 *
+		 * @since 3.11.0
+		 * @param string $footer_text The existing footer text.
+		 * @return string
+		 */
+		public static function orddd_lite_admin_rate_us( $footer_text ) {
+			if ( isset( $_GET['page'] ) && 'order_delivery_date_lite' === $_GET['page'] ) { //phpcs:ignore
+				$rate_text = sprintf(
+					/* translators: %!$s: Website link, %2$s: Review link */
+					__( 'Thank you for using <a href="%1$s" target="_blank">Order Delivery Date</a>! Please <a href="%2$s" target="_blank">rate us on WordPress.org</a>', 'easy-digital-downloads' ),
+					'https://www.tychesoftwares.com/?utm_source=ordddlitefooter&utm_medium=link&utm_campaign=OrderDeliveryDateLite',
+					'https://wordpress.org/support/plugin/order-delivery-date-for-woocommerce/reviews/#new-post'
+				);
+				return str_replace( '</span>', '', $footer_text ) . ' | ' . $rate_text . '</span>';
+			} else {
+				return $footer_text;
+			}
 		}
 	}
 }
