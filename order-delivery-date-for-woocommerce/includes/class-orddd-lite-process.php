@@ -442,7 +442,7 @@ class Orddd_Lite_Process {
 			return;
 		}
 
-		$time_slot_label = get_option( 'orddd_lite_delivery_timeslot_field_label' );
+		$time_slot_label = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
 
 		if ( isset( $_POST['orddd_time_slot'] ) && '' != $_POST['orddd_time_slot'] ) { //phpcs:ignore
 			$time_slot = $_POST['orddd_time_slot']; //phpcs:ignore
@@ -664,7 +664,9 @@ class Orddd_Lite_Process {
 		} else {
 			$order_id = $order->id;
 		}
-		$time_slot_label            = get_option( 'orddd_lite_delivery_timeslot_field_label' );
+
+		$time_slot_label            = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
+
 		$fields[ $time_slot_label ] = array(
 			// phpcs:ignore
 			'label' => __( $time_slot_label, 'order-delivery-date' ),

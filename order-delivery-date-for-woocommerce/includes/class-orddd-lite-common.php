@@ -619,7 +619,7 @@ class Orddd_Lite_Common {
 		$items = $order->get_items();
 
 		global $typenow;
-		$field_label = get_option( 'orddd_lite_delivery_timeslot_field_label' );
+		$field_label = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
 
 		if ( isset( $data['_orddd_time_slot'] ) && '' !== $data['_orddd_time_slot'] ) {
 			$order_time_slot = $data['_orddd_time_slot'][0];
