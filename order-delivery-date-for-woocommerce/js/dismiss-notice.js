@@ -11,7 +11,7 @@ jQuery( document ).ready(
 				function() {
 					var $this = jQuery( this ),
 					$button   = jQuery( '<button type="button" class="notice-dismiss"><span class="screen-reader-text"></span></button>' ),
-					btnText   = commonL10n.dismiss || '';
+					btnText   = wp.i18n.dismiss || '';
 
 					// Ensure plain text
 					$button.find( '.screen-reader-text' ).text( btnText );
