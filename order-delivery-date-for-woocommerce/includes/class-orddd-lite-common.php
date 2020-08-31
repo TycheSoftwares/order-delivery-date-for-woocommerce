@@ -743,7 +743,7 @@ class Orddd_Lite_Common {
 		$min_hour_in_sec = $diff_min_hour_in_seconds > $min_hour_in_sec ? ( $diff_min_hour_in_seconds ) : $min_hour_in_sec;
 
 		$time_slots_to_show_timestamp = array( 'NA' => __( 'No time slots are available', 'order-delivery-date' ) );
-		if ( 'yes' === $asap_option ) {
+		if ( $asap_option ) {
 			$time_slots_to_show_timestamp['asap'] = __( 'As Soon As Possible', 'order-delivery-date' );
 		}
 
