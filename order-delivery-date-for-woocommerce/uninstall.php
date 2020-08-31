@@ -56,6 +56,8 @@ delete_option( 'orddd_lite_calendar_theme' );
 delete_option( 'orddd_lite_calendar_theme_name' );
 delete_option( 'orddd_lite_no_fields_for_virtual_product' );
 delete_option( 'orddd_lite_no_fields_for_featured_product' );
+delete_option( 'orddd_lite_delivery_timeslot_field_label' );
+
 
 // Delete Time slot options.
 delete_option( 'orddd_lite_enable_time_slot' );
