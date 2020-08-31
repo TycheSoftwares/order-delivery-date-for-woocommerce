@@ -57,5 +57,14 @@ delete_option( 'orddd_lite_calendar_theme_name' );
 delete_option( 'orddd_lite_no_fields_for_virtual_product' );
 delete_option( 'orddd_lite_no_fields_for_featured_product' );
 
+// Delete Time slot options.
+delete_option( 'orddd_lite_enable_time_slot' );
+delete_option( 'orddd_lite_time_slot_mandatory' );
+delete_option( 'orddd_lite_time_slot_asap' );
+delete_option( 'orddd_lite_auto_populate_first_available_time_slot' );
+delete_option( 'orddd_lite_time_slot_mandatory' );
+delete_option( 'orddd_lite_delivery_time_slot_log' );
+delete_option( 'orddd_lite_lockout_time_slot' );
+
 // Delete holidays.
 delete_option( 'orddd_lite_holidays' );

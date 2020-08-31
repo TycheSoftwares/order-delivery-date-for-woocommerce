@@ -105,6 +105,11 @@ $orddd_lite_date_formats = array(
 	'D, MM d, yy'  => 'D, F j, Y',
 );
 
+$orddd_lite_time_formats = array(
+	1 => '12 hour',
+	2 => '24 hour',
+);
+
 /**
  * Define the Number of months to be displayed in The Delivery Calendar
  *
@@ -255,6 +260,7 @@ $orddd_lite_languages = array(
  * @since 1.9
  */
 define( 'ORDDD_LITE_DELIVERY_DATE_FIELD_LABEL', 'Delivery Date' );
+define( 'ORDDD_LITE_DELIVERY_TIME_FIELD_LABEL', 'Time Slot' );
 define( 'ORDDD_LITE_DELIVERY_DATE_FIELD_PLACEHOLDER', 'Choose a Date' );
 define( 'ORDDD_LITE_DELIVERY_DATE_FIELD_NOTE', 'We will try our best to deliver your order on the specified date.' );
 define( 'ORDDD_LITE_DELIVERY_DATE_FORMAT', 'd MM, yy' );
