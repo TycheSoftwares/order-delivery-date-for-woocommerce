@@ -97,7 +97,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 			add_action( 'woocommerce_checkout_update_order_meta', array( 'Orddd_Lite_Process', 'orddd_update_order_meta_time_slot' ) );
 
-			if ( defined( 'WOOCOMMERCE_VERSION' ) && version_compare( WOOCOMMERCE_VERSION, '2.3', '>=' ) < 0 ) {
+			if ( version_compare( get_option( 'woocommerce_version' ), '2.3', '>=' ) > 0 ) {
 				add_filter( 'woocommerce_email_order_meta_fields', array( 'Orddd_Lite_Process', 'orddd_lite_add_delivery_date_to_order_woo_new' ), 11, 3 );
 				add_filter( 'woocommerce_email_order_meta_fields', array( 'Orddd_Lite_Process', 'orddd_lite_add_time_slot_to_order_woo_new' ), 11, 3 );
 			} else {
@@ -180,6 +180,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			// Appearance options.
 			add_option( 'orddd_lite_delivery_date_format', ORDDD_LITE_DELIVERY_DATE_FORMAT );
 			add_option( 'orddd_lite_delivery_date_field_label', ORDDD_LITE_DELIVERY_DATE_FIELD_LABEL );
+			add_option( 'orddd_lite_delivery_date_field_label', ORDDD_LITE_DELIVERY_TIME_FIELD_LABEL );
 			add_option( 'orddd_lite_delivery_date_field_placeholder', ORDDD_LITE_DELIVERY_DATE_FIELD_PLACEHOLDER );
 			add_option( 'orddd_lite_delivery_date_field_note', ORDDD_LITE_DELIVERY_DATE_FIELD_NOTE );
 			add_option( 'orddd_lite_number_of_months', '1' );
