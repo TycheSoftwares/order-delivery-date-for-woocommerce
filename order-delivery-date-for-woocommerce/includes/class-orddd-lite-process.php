@@ -386,6 +386,7 @@ class Orddd_Lite_Process {
 
 			<input type="hidden" name="orddd_min_date_set" id="orddd_min_date_set" value="<?php echo esc_attr( $min_date_array['min_date'] ); ?>">
 			<input type="hidden" name="orddd_is_cart" id="orddd_is_cart" value="<?php echo esc_attr( is_cart() ); ?>">
+			<input type="hidden" name="orddd_lite_auto_populate_first_available_time_slot" id="orddd_lite_auto_populate_first_available_time_slot" value="<?php echo esc_attr( get_option( 'orddd_lite_auto_populate_first_available_time_slot' ) ); ?>">
 			<?php
 		}
 	}
@@ -969,7 +970,7 @@ class Orddd_Lite_Process {
 					$tt            = $v->th . ':' . trim( $v->tm );
 					$time_slot_key = $ft . ' - ' . $tt;
 				} else {
-					$time_slot_key = $from_time;
+					$time_slot_key = $ft;
 				}
 
 				$weekday = date( 'w', strtotime( $delivery_date ) ); //phpcs:ignore
@@ -1013,11 +1014,8 @@ class Orddd_Lite_Process {
 				if ( is_object( $cart ) ) {
 					$cart->add_fee( __( $time_slot_charges_label, 'order-delivery-date' ), $time_slot_fees_to_add, false ); //phpcs:ignore
 				}
-				$total_fees += $time_slot_fees_to_add;
 			}
 		}
-		WC()->session->set( '_total_delivery_charges', $total_fees );
-
 	}
 }
 $orddd_lite_process = new Orddd_Lite_Process();
