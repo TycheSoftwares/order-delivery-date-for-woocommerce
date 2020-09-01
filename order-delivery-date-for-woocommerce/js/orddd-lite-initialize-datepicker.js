@@ -159,7 +159,6 @@ function orddd_on_select_date( date, inst ) {
 
 
 function show_times( date, inst ) {
-	console.log("here");
     var monthValue = inst.selectedMonth+1;
     var dayValue = inst.selectedDay;
     var yearValue = inst.selectedYear;
@@ -179,7 +178,7 @@ function show_times( date, inst ) {
                 action: "check_for_time_slot_orddd"
             };
 
-            var option_selected = jQuery( '#orddd_auto_populate_first_available_time_slot' ).val();
+            var option_selected = jQuery( '#orddd_lite_auto_populate_first_available_time_slot' ).val();
             jQuery( "#orddd_time_slot" ).attr( "disabled", "disabled" );
             jQuery( "#orddd_time_slot_field" ).attr( "style", "opacity: 0.5" );
             if( jQuery( '#orddd_admin_url' ).val() != '' && typeof( jQuery( '#orddd_admin_url' ).val() ) != 'undefined' ) {
