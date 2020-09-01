@@ -1,10 +1,10 @@
 === Order Delivery Date for WooCommerce ===
-Contributors: ashokrane, MoxaJogani, bhavik.kiri, komal-maru, tychesoftwares
+Contributors: ashokrane, tychesoftwares, rashmim
 Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
-Tags: delivery date, delivery time, same day delivery, pickup date, estimated date, next day delivery
+Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
-Tested up to: 5.3.2
+Tested up to: 5.5
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -40,6 +40,17 @@ The dates on which you do not deliver can be set as holidays in the calendar. Al
 
 ### Differences between Lite & PRO version
 
+* Custom delivery schedules by shipping methods, product categories, pickup locations
+* Google calendar sync
+* Business days option
+* Same-day & Next-day delivery charges
+* Same-day & Next-day cut-off
+* Weekday settings
+* Integration with 3rd party shipping plugins like table rate shipping & others
+* Compatibility with WooCommerce Subscriptions
+* Estimated delivery date feature
+* Reschedule deliveries
+
 You can check the detailed difference between Pro and Lite version **[here](https://www.tychesoftwares.com/differences-pro-lite-versions-order-delivery-date-woocommerce-plugin/?utm_source=wprepo&utm_medium=prolink1&utm_campaign=OrderDeliveryDateLite "Lite and Pro version Difference")**
 
 ### Here is what some of our customers say about this plugin:
@@ -53,6 +64,8 @@ You can check the detailed difference between Pro and Lite version **[here](http
 ### Pro Version
 
 **[Order Delivery Date Pro](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. 
+
+[youtube https://youtu.be/lxWCq6X6bPM]
 
 **Following features are available in PRO version:**
 
@@ -229,6 +242,11 @@ Currently, it is not possible to add different delivery settings for different s
 6. Holidays tab
 
 == Changelog ==
+
+= 3.11.0 (01.09.2020) =
+* Feature - Ability to add time slots for weekdays. You can now add time slots with maximum order deliveries per time slot, time slot charges.
+* Feature - Ability to block time slots for dates or weekdays.
+* Fix - Fixed the error coming with WordPress 5.5.
 
 = 3.10.1 (20.03.2020) =
 * Update compatibility with WooCommerce 4.0.0.
