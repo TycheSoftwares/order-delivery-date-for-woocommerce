@@ -130,6 +130,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			add_action( 'wp_trash_post', array( 'Orddd_Lite_Common', 'orddd_lite_cancel_delivery_for_trashed' ), 10, 1 );
 
 			add_action( 'woocommerce_order_status_changed', array( 'Orddd_Lite_Common', 'orddd_lite_restore_deliveries' ), 10, 3 );
+			add_action( 'untrash_post', array( 'Orddd_Lite_Common', 'orddd_lite_untrash_order' ), 10, 1 );
 
 			add_action( 'woocommerce_cart_calculate_fees', array( 'Orddd_Lite_Process', 'orddd_lite_add_delivery_date_fee' ) );
 
