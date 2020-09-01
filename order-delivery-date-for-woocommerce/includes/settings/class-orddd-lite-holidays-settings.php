@@ -148,7 +148,7 @@ class Orddd_Lite_Holidays_Settings {
 			$orddd_allow_recurring_holiday = '""';
 			$holiday_name                  = '';
 
-			if ( '' !== $holidays && '{}' !== $holidays && '[]' !== $holidays && null !== $holidays ) {
+			if ( false !== $holidays && '' !== $holidays && '{}' !== $holidays && '[]' !== $holidays && 'null' !== $holidays ) {
 				$holidays_arr = json_decode( $holidays );
 			}
 
