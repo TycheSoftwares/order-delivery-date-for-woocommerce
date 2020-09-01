@@ -68,13 +68,11 @@ jQuery( document ).ready( function() {
 							var dayValue   = inst.selectedDay;
 							var yearValue  = inst.selectedYear;
 							var all        = dayValue + "-" + monthValue + "-" + yearValue;
-							jQuery( "#h_deliverydate" ).val( all );
 							// If "Clear" gets clicked, then really clear it
 							var event = arguments.callee.caller.caller.arguments[0];
 							if ( typeof( event ) !== "undefined" ) {
 								if ( jQuery( event.delegateTarget ).hasClass( "ui-datepicker-close" ) ) {
 									jQuery( this ).val( "" );
-									jQuery( "#h_deliverydate" ).val( "" );
 								}
 							}
 						}
