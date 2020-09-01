@@ -406,7 +406,7 @@ class Orddd_Lite_Common {
 
 		$timeslot            = '';
 		$total_quantities    = 1;
-		$time_field_label    = get_option( 'orddd_lite_delivery_timeslot_field_label' );
+		$time_field_label    = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
 		$timeslot_post_meta  = get_post_meta( $order_id, $time_field_label );
 		$time_format_to_show = self::orddd_lite_get_time_format();
 
@@ -1448,7 +1448,7 @@ class Orddd_Lite_Common {
 	 * @since 3.11.0
 	 */
 	public static function orddd_lite_restore_deliveries( $order_id, $old_status, $new_status ) {
-		$old_status_arr = array( 'cancelled', 'refunded', 'trashed' );
+		$old_status_arr = array( 'cancelled', 'refunded', 'trashed', 'failed' );
 		if ( in_array( $old_status, $old_status_arr, true ) && ! in_array( $new_status, $old_status_arr, true ) ) {
 			$data = get_post_meta( $order_id );
 
@@ -1472,13 +1472,13 @@ class Orddd_Lite_Common {
 	 * @param int $post_id Order ID.
 	 * @since 3.11.0
 	 */
-	public static function orddd_untrash_order( $post_id ) {
+	public static function orddd_lite_untrash_order( $post_id ) {
 		$post_obj = get_post( $post_id );
 		$status   = array( 'wc-pending', 'wc-cancelled', 'wc-refunded', 'wc-failed' );
 
 		if ( 'shop_order' === $post_obj->post_type && ( ! in_array( $post_obj->post_status, $status, true ) ) ) {
 			// untrash the delivery dates as well.
-			self::orddd_lite_restore_deliveries( $post_id );
+			self::orddd_lite_restore_deliveries( $post_id, 'trashed', $post_obj->post_status );
 		}
 	}
 }
