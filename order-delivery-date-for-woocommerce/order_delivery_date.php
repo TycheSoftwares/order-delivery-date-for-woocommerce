@@ -183,7 +183,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			// Appearance options.
 			add_option( 'orddd_lite_delivery_date_format', ORDDD_LITE_DELIVERY_DATE_FORMAT );
 			add_option( 'orddd_lite_delivery_date_field_label', ORDDD_LITE_DELIVERY_DATE_FIELD_LABEL );
-			add_option( 'orddd_lite_delivery_date_field_label', ORDDD_LITE_DELIVERY_TIME_FIELD_LABEL );
+			add_option( 'orddd_lite_delivery_timeslot_field_label', ORDDD_LITE_DELIVERY_TIME_FIELD_LABEL );
 			add_option( 'orddd_lite_delivery_date_field_placeholder', ORDDD_LITE_DELIVERY_DATE_FIELD_PLACEHOLDER );
 			add_option( 'orddd_lite_delivery_date_field_note', ORDDD_LITE_DELIVERY_DATE_FIELD_NOTE );
 			add_option( 'orddd_lite_number_of_months', '1' );

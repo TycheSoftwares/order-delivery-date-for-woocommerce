@@ -1362,11 +1362,6 @@ class Orddd_Lite_Settings {
 		<div class="wrap woocommerce">
 			<nav class="nav-tab-wrapper woo-nav-tab-wrapper" id="orddd_settings_tabs">
 				<a href="admin.php?page=order_delivery_date_lite&action=general_settings" class="nav-tab <?php echo esc_attr( $active_general_settings ); ?>"><?php esc_attr_e( 'General Settings', 'order-delivery-date' ); ?> </a>
-				<?php
-				if ( 'on' === get_option( 'orddd_enable_day_wise_settings' ) ) {
-					?>
-					<a href="admin.php?page=order_delivery_date_lite&action=advance_settings" class="nav-tab <?php echo esc_attr( $active_advance_settings ); ?>"> <?php esc_attr_e( 'Weekday Settings', 'order-delivery-date' ); ?> </a>
-				<?php } ?>
 				<a href="admin.php?page=order_delivery_date_lite&action=shipping_based" class="nav-tab <?php echo esc_attr( $active_shipping_based ); ?>"> <?php esc_attr_e( 'Custom Delivery Settings', 'order-delivery-date' ); ?> </a>
 				<a href="admin.php?page=order_delivery_date_lite&action=calendar_sync_settings" class="nav-tab <?php echo esc_attr( $calendar_sync_settings ); ?>"> <?php esc_attr_e( 'Google Calendar Sync', 'order-delivery-date' ); ?> 
 				</a>
