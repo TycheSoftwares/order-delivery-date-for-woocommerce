@@ -404,10 +404,12 @@ class Orddd_Lite_Common {
 			$delivery_date_timestamp = $post_meta[0];
 		}
 
-		$timeslot           = '';
-		$total_quantities   = 1;
-		$time_field_label   = get_option( 'orddd_lite_delivery_timeslot_field_label' );
-		$timeslot_post_meta = get_post_meta( $order_id, $time_field_label );
+		$timeslot            = '';
+		$total_quantities    = 1;
+		$time_field_label    = get_option( 'orddd_lite_delivery_timeslot_field_label' );
+		$timeslot_post_meta  = get_post_meta( $order_id, $time_field_label );
+		$time_format_to_show = self::orddd_lite_get_time_format();
+
 		if ( isset( $timeslot_post_meta[0] ) && '' !== $timeslot_post_meta[0] && null !== $timeslot_post_meta[0] ) {
 			$timeslot = $timeslot_post_meta[0];
 		}
@@ -456,7 +458,8 @@ class Orddd_Lite_Common {
 			}
 
 			foreach ( $lockout_time_arr as $k => $v ) {
-				$orders = $v->o;
+				$orders        = $v->o;
+				$time_to_check = self::orddd_lite_change_time_slot_format( $v->t, $time_format_to_show );
 				if ( $timeslot == $v->t && $lockout_date == $v->d ) { //phpcs:ignore
 					if ( $v->o == $total_quantities ) { //phpcs:ignore
 						unset( $lockout_time_arr[ $k ] );
@@ -470,7 +473,6 @@ class Orddd_Lite_Common {
 					}
 				}
 			}
-
 			$lockout_time_jarr = wp_json_encode( $lockout_time_arr );
 			update_option( 'orddd_lite_lockout_time_slot', $lockout_time_jarr );
 		}
@@ -1434,5 +1436,32 @@ class Orddd_Lite_Common {
 		}
 
 		return $tstamp_from_1 > $tstamp_from_2;
+	}
+
+	/**
+	 * Restoring the deliveries when the order status is changed from cancelled/refunded/failed.
+	 *
+	 * @hook woocommerce_order_status_changed
+	 * @param int    $order_id Order ID.
+	 * @param string $old_status Previous status of the order.
+	 * @param string $new_status New status of the order.
+	 * @since 3.11.0
+	 */
+	public static function orddd_lite_restore_deliveries( $order_id, $old_status, $new_status ) {
+		$old_status_arr = array( 'cancelled', 'refunded', 'trashed' );
+		if ( in_array( $old_status, $old_status_arr, true ) && ! in_array( $new_status, $old_status_arr, true ) ) {
+			$data = get_post_meta( $order_id );
+
+			$time_field_label = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
+
+			if ( isset( $data['_orddd_lite_timestamp'][0] ) && '' !== $data['_orddd_lite_timestamp'][0] ) {
+				$delivery_date = date( 'j-n-Y', $data['_orddd_lite_timestamp'][0] ); //phpcs:ignore
+				Orddd_Lite_Process::orddd_lite_update_lockout_days( $delivery_date );
+				if ( isset( $data[ $time_field_label ][0] ) && '' !== $data[ $time_field_label ][0] ) {
+					$time_slot = $data[ $time_field_label ][0];
+					Orddd_Lite_Process::orddd_lite_update_lockout_timeslot( $delivery_date, $time_slot );
+				}
+			}
+		}
 	}
 }

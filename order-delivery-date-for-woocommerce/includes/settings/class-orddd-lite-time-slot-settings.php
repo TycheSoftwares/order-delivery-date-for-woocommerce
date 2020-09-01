@@ -491,7 +491,6 @@ class Orddd_Lite_Time_Slot_Settings {
 		<label><input type="radio" name="orddd_lite_disable_time_slot_for_delivery_days" id="orddd_lite_disable_time_slot_for_delivery_days" value="weekdays"<?php echo esc_attr( $orddd_disable_time_slot_for_weekdays ); ?>/><?php esc_html_e( 'Weekdays', 'order-delivery-date' ); ?></label></p>
 		<label for="orddd_lite_disable_time_slot_for_delivery_days"><?php echo wp_kses_post( $args[0] ); ?></label>
 
-		?>
 		<script type='text/javascript'>
 			jQuery( document ).ready( function(){
 				if ( jQuery( "input[type=radio][id=\"orddd_lite_disable_time_slot_for_delivery_days\"][value=\"weekdays\"]" ).is(":checked") ) {

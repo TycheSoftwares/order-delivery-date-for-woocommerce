@@ -117,15 +117,15 @@ class Orddd_Lite_Process {
 						$lockout_days_str .= '"' . $v->d . '",';
 					}
 				}
-				$lockout_days_str = substr( $lockout_days_str, 0, strlen( $lockout_days_str ) - 1 );
 			}
 			if ( 'on' === get_option( 'orddd_lite_enable_time_slot' ) ) {
 				$booked_timeslot_days = Orddd_Lite_Common::orddd_lite_get_booked_timeslot_days();
-
 				foreach ( $booked_timeslot_days as $booked_day ) {
 					$lockout_days_str .= '"' . $booked_day . '",';
 				}
+			}
 
+			if ( '' !== $lockout_days_str ) {
 				$lockout_days_str = substr( $lockout_days_str, 0, strlen( $lockout_days_str ) - 1 );
 			}
 			?>
@@ -666,7 +666,7 @@ class Orddd_Lite_Process {
 			$order_id = $order->id;
 		}
 
-		$time_slot_label            = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
+		$time_slot_label = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
 
 		$fields[ $time_slot_label ] = array(
 			// phpcs:ignore
@@ -756,7 +756,7 @@ class Orddd_Lite_Process {
 		}
 
 		$order_page_time_slot = Orddd_Lite_Common::orddd_get_order_timeslot( $order_id );
-		$time_field_label     = get_option( 'orddd_lite_delivery_timeslot_field_label' );
+		$time_field_label     = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
 		if ( '' !== $order_page_time_slot ) {
 			echo '<p><strong>' . __( $time_field_label, 'order-delivery-date' ) . ':</strong> ' . $order_page_time_slot . '</p>'; // phpcs:ignore
 		}
@@ -824,6 +824,7 @@ class Orddd_Lite_Process {
 		// Changing the seperator for time slots from comma(,) to backslash(/) to avoid conflicts with the
 		// decimal seperator and thousand seperator.
 		$time_slot_var .= 'select/';
+
 		foreach ( $time_slots_to_show_timestamp as $key => $value ) {
 
 			$sel = '';
@@ -898,13 +899,16 @@ class Orddd_Lite_Process {
 		$delivery_date = '';
 		$time_slot     = '';
 		$total_fees    = 0;
+
 		if ( isset( $_POST['post_data'] ) ) { // phpcs:ignore
+
 			$delivery_date_type = preg_match( '/h_deliverydate=(.*?)&/', $_POST['post_data'], $matches ); // phpcs:ignore
 			if ( isset( $matches[1] ) ) {
 				$delivery_date = $matches[1];
 			}
 
 			$time_slot_type = preg_match( '/&orddd_time_slot=(.*?)&/', $_POST['post_data'], $matches ); // phpcs:ignore
+
 			if ( isset( $matches[1] ) ) {
 				$time_slot = urldecode( $matches[1] );
 			}
