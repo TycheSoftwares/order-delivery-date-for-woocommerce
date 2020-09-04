@@ -282,6 +282,8 @@ if ( get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) === 'billi
 	define( 'ORDDD_LITE_SHOPPING_CART_HOOK', 'woocommerce_before_order_notes' );
 } elseif ( get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) === 'after_order_notes' ) {
 	define( 'ORDDD_LITE_SHOPPING_CART_HOOK', 'woocommerce_after_order_notes' );
+} elseif ( 'after_your_order_table' === get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) ) {
+	define( 'ORDDD_LITE_SHOPPING_CART_HOOK', 'woocommerce_review_order_before_payment' );
 } elseif ( get_option( 'orddd_lite_date_in_shipping' ) === 'on' ) {
 	define( 'ORDDD_LITE_SHOPPING_CART_HOOK', 'woocommerce_after_checkout_shipping_form' );
 } else {
