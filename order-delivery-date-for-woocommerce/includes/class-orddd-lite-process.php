@@ -666,7 +666,7 @@ class Orddd_Lite_Process {
 			$order_id = $order->id;
 		}
 
-		$time_slot_label = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
+		$time_slot_label = ( '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) && false !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
 
 		$fields[ $time_slot_label ] = array(
 			// phpcs:ignore
