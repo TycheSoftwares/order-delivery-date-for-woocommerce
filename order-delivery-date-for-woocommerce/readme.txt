@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
-Tested up to: 5.5
+Tested up to: 5.5.1
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -242,6 +242,10 @@ Currently, it is not possible to add different delivery settings for different s
 6. Holidays tab
 
 == Changelog ==
+
+= 3.11.1 (04.09.2020) =
+* Fix - 'Array' word was being displayed in the order emails.
+* Fix - The delivery date field was not placed correctly when the setting 'Field placement on the Checkout page' was set to 'Between Your Order & Payment Section'.
 
 = 3.11.0 (01.09.2020) =
 * Feature - Ability to add time slots for weekdays. You can now add time slots with maximum order deliveries per time slot, time slot charges.
