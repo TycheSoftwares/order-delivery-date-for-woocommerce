@@ -309,6 +309,9 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			$orddd_lite_plugin_version = get_option( 'orddd_lite_db_version' );
 			if ( self::get_orddd_lite_version() !== $orddd_lite_plugin_version ) {
 				update_option( 'orddd_lite_db_version', $wpefield_version );
+				if ( false === get_option( 'orddd_lite_delivery_timeslot_field_label' ) ) {
+					update_option( 'orddd_lite_delivery_timeslot_field_label', 'Time Slot' );
+				}
 			}
 		}
 
@@ -491,7 +494,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			if ( isset( $_GET['page'] ) && 'order_delivery_date_lite' === $_GET['page'] ) { //phpcs:ignore
 				$rate_text = sprintf(
 					/* translators: %!$s: Website link, %2$s: Review link */
-					__( 'Thank you for using <a href="%1$s" target="_blank">Order Delivery Date</a>! Please <a href="%2$s" target="_blank">rate us on WordPress.org</a>', 'easy-digital-downloads' ),
+					__( 'Thank you for using <a href="%1$s" target="_blank">Order Delivery Date</a>! Please <a href="%2$s" target="_blank">rate us on WordPress.org</a>', 'order-delivery-date' ),
 					'https://www.tychesoftwares.com/?utm_source=ordddlitefooter&utm_medium=link&utm_campaign=OrderDeliveryDateLite',
 					'https://wordpress.org/support/plugin/order-delivery-date-for-woocommerce/reviews/#new-post'
 				);
