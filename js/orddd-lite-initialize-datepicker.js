@@ -497,13 +497,14 @@ function avd( date ) {
 
 	if ( delay_date != "" ) {
 		var delay_time      = delay_days.getTime();
+		var delay_weekday   = delay_days.getDay();
 		var current_time    = current_day.getTime();
 		var current_weekday = current_day.getDay();
 		var j;
 		for ( j = current_weekday; current_time <= delay_time; j++ ) {
 			if ( j >= 0 ) {
 				if ( jQuery( "#orddd_lite_calculate_min_time_disabled_days" ).val() != 'on' ) {
-					day       = 'orddd_lite_weekday_' + current_weekday;
+					day       = 'orddd_lite_weekday_' + delay_weekday;
 					day_check = jQuery( "#" + day ).val();
 					if ( day_check == '' ) {
 						delay_days.setDate( delay_days.getDate() + 1 );

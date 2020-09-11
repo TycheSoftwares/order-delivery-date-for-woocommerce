@@ -253,11 +253,6 @@ class Orddd_Lite_Process {
 			<input type="hidden" name="orddd_lite_auto_populate_first_available_date" id="orddd_lite_auto_populate_first_available_date" value="<?php echo esc_attr( get_option( 'orddd_lite_auto_populate_first_available_date' ) ); ?>">
 			<input type="hidden" name="orddd_lite_calculate_min_time_disabled_days" id="orddd_lite_calculate_min_time_disabled_days" value="<?php echo esc_attr( get_option( 'orddd_lite_calculate_min_time_disabled_days' ) ); ?>">
 			<?php
-
-			$current_date = gmdate( 'j-n-Y', $current_time );
-			?>
-			<input type="hidden" name="orddd_lite_current_day" id="orddd_lite_current_day" value="<?php echo esc_attr( $current_date ); ?>">
-			<?php
 			$admin_url     = get_admin_url();
 			$admin_url_arr = explode( '://', $admin_url );
 			$home_url      = get_home_url();

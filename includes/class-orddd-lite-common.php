@@ -901,7 +901,7 @@ class Orddd_Lite_Common {
 		if ( 0 != $delivery_time_seconds && '' != $delivery_time_seconds ) { //phpcs:ignore
 			$calculate_min = true;
 		}
-
+		$apply_disabled_weekdays = get_option( 'orddd_lite_calculate_min_time_disabled_days' );
 		// Min Date calculation.
 		if ( $calculate_min ) {
 			$cut_off_timestamp = $current_time + $delivery_time_seconds;
@@ -917,7 +917,7 @@ class Orddd_Lite_Common {
 						$weekday_disabled = 'yes';
 					}
 
-					if ( 'yes' === $weekday_disabled && ! $is_all_disable_weekdays ) {
+					if ( 'on' !== $apply_disabled_weekdays && 'yes' === $weekday_disabled && ! $is_all_disable_weekdays ) {
 						$current_date_time_to_check = strtotime( '+1 day', $current_date_time_to_check );
 						$current_weekday_to_check   = date( 'w', $current_date_time_to_check ); //phpcs:ignore
 
