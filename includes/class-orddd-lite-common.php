@@ -699,7 +699,7 @@ class Orddd_Lite_Common {
 			$delivery_date   = date( 'n-j-Y', strtotime( $current_date ) ); //phpcs:ignore
 		}
 
-		$min_hour_in_sec = get_option( 'orddd_lite_minimumOrderDays' );
+		$min_hour_in_sec = '' !== get_option( 'orddd_lite_minimumOrderDays' ) ? get_option( 'orddd_lite_minimumOrderDays' ) * 60 * 60 : 0;
 		$min_date_array  = orddd_lite_common::get_min_date( $min_hour_in_sec, $holidays_str, $lockout_str );
 
 		if ( 'checked' === get_option( 'orddd_lite_time_slot_asap' ) ) {
