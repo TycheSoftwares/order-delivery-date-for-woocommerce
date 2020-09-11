@@ -301,6 +301,7 @@ function minimum_date_to_set( delay_days ) {
 	var current_day        = new Date( split_current_date[ 1 ] + "/" + split_current_date[ 0 ] + "/" + split_current_date[ 2 ] );
 
 	var delay_time      = delay_days.getTime();
+	var delay_weekday   = delay_days.getDay();
 	var current_time    = current_day.getTime();
 	var current_weekday = current_day.getDay();
 
@@ -308,7 +309,7 @@ function minimum_date_to_set( delay_days ) {
 	for ( j = current_weekday; current_time <= delay_time; j++ ) {
 		if ( j >= 0 ) {
 			if ( jQuery( "#orddd_lite_calculate_min_time_disabled_days" ).val() != 'on' ) {
-				day       = 'orddd_lite_weekday_' + current_weekday;
+				day       = 'orddd_lite_weekday_' + delay_weekday;
 				day_check = jQuery( "#" + day ).val();
 				if ( day_check == '' ) {
 					delay_days.setDate( delay_days.getDate() + 1 );
