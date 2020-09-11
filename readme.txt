@@ -243,6 +243,11 @@ Currently, it is not possible to add different delivery settings for different s
 
 == Changelog ==
 
+= 3.11.2 (11.09.2020) =
+* Fix - The first available date was coming wrong when the 'Apply Minimum Delivery Time for non working weekdays' setting was enabled.
+* Fix - Minimum Delivery time was not being calculated on the time slots.
+* Fix - Wrong date was being auto-populated on checkout page.
+
 = 3.11.1 (04.09.2020) =
 * Fix - 'Array' word was being displayed in the order emails.
 * Fix - The delivery date field was not placed correctly when the setting 'Field placement on the Checkout page' was set to 'Between Your Order & Payment Section'.
