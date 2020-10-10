@@ -469,7 +469,10 @@ function chd( date ) {
  * @returns {object} options object to update the datepicker
  * @since 1.0
  */
-function avd( date ) {
+function avd( date, inst ) {
+	// Added to not translate the calendar when the site is translated using Google Translator. 
+	inst.dpDiv.addClass( 'notranslate' );
+	
 	var disabledDays = eval( "[" + jQuery( "#orddd_lite_holidays" ).val() + "]" );
 	var holidays     = [];
 	for ( i = 0; i < disabledDays.length; i++ ) {
