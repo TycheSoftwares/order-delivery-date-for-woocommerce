@@ -400,6 +400,8 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				if ( '' === $calendar_theme ) {
 					$calendar_theme = 'base';
 				}
+				wp_register_script( 'select2', plugins_url() . '/woocommerce/assets/js/select2/select2.min.js', array( 'jquery', 'jquery-ui-widget', 'jquery-ui-core' ), $wpefield_version, false );
+				wp_enqueue_script( 'select2' );
 				wp_dequeue_style( 'jquery-ui-style' );
 				wp_register_style( 'jquery-ui-style-orddd-lite', plugins_url( '/css/themes/' . $calendar_theme . '/jquery-ui.css', __FILE__ ), '', $wpefield_version, false );
 				wp_enqueue_style( 'jquery-ui-style-orddd-lite' );
