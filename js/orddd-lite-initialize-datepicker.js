@@ -10,7 +10,8 @@ jQuery( document ).ready( function() {
 		var orddd_last_check_date = localStorage.getItem( "orddd_lite_storage_next_time" );
 		var current_date          = jQuery( "#orddd_lite_current_day" ).val();
 
-		jQuery("#orddd_time_slot").selectWoo();
+		jQuery("#orddd_time_slot").select2();
+
 		if ( current_date != '' && typeof( current_date ) != 'undefined' ) {
 			  var split_current_date = current_date.split( '-' );
 			  var ordd_next_date     = new Date( split_current_date[ 2 ], ( split_current_date[ 1 ] - 1 ), split_current_date[ 0 ], jQuery( "#orddd_lite_current_hour" ).val(), jQuery( "#orddd_lite_current_minute" ).val() );
