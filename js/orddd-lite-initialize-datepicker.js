@@ -314,6 +314,8 @@ function minimum_date_to_set( delay_days ) {
 				if ( day_check == '' ) {
 					delay_days.setDate( delay_days.getDate() + 1 );
 					delay_time = delay_days.getTime();
+					delay_weekday   = delay_days.getDay();
+
 					current_day.setDate( current_day.getDate() + 1 );
 					current_time    = current_day.getTime();
 					current_weekday = current_day.getDay();
@@ -510,6 +512,7 @@ function avd( date ) {
 					if ( day_check == '' ) {
 						delay_days.setDate( delay_days.getDate() + 1 );
 						delay_time = delay_days.getTime();
+						delay_weekday   = delay_days.getDay();
 						current_day.setDate( current_day.getDate() + 1 );
 						current_time    = current_day.getTime();
 						current_weekday = current_day.getDay();
