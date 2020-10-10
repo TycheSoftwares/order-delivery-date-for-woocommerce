@@ -1107,7 +1107,7 @@ class Orddd_Lite_Settings {
 		);
 
 		add_settings_field(
-			'orddd_lite_enable_autofill_of_delivery_date',
+			'orddd_lite_auto_populate_first_available_date',
 			__( 'Auto-populate first available Delivery date:', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_enable_autofill_of_delivery_date_callback' ),
 			'orddd_lite_additional_settings_page',
@@ -1270,7 +1270,7 @@ class Orddd_Lite_Settings {
 
 		register_setting(
 			'orddd_lite_additional_settings',
-			'orddd_lite_enable_autofill_of_delivery_date'
+			'orddd_lite_auto_populate_first_available_date'
 		);
 		register_setting(
 			'orddd_lite_additional_settings',
