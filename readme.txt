@@ -69,7 +69,7 @@ You can check the detailed difference between Pro and Lite version **[here](http
 
 **Following features are available in PRO version:**
 
-* Ability to allow the customer to select <strong>Delivery Time along with Delivery Date</strong>.
+* Create <strong>recurring delivery schedules</strong> using WooCommerce Subscriptions plugin.
 * <strong>Same-day & Next-day delivery</strong> with cut-off time.
 * <strong>Two-way deliveries sync</strong> with Google Calendar.
 * Create Delivery <strong>Settings by Shipping Zones & Shipping Classes</strong>.
