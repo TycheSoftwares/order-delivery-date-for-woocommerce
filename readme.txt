@@ -243,6 +243,12 @@ Currently, it is not possible to add different delivery settings for different s
 
 == Changelog ==
 
+= 3.11.3 (12.10.2020) =
+* Fix - The checkout page went into infinite loop when the current day was disabled in the settings.
+* Fix - 'jQuery.selectWoo is an undefined function' error was coming in the console for some themes.
+* Fix - The 'Auto-populate first available Delivery date' setting was not getting disabled.
+* Fix - The selected delivery date was showing as “NaN Undefined, NaN” when we translate the checkout page from the Google chrome.
+
 = 3.11.2 (11.09.2020) =
 * Fix - The first available date was coming wrong when the 'Apply Minimum Delivery Time for non working weekdays' setting was enabled.
 * Fix - Minimum Delivery time was not being calculated on the time slots.
