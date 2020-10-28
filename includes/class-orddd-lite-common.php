@@ -916,8 +916,8 @@ class Orddd_Lite_Common {
 					if ( '' === get_option( $day ) ) {
 						$weekday_disabled = 'yes';
 					}
-					
-					if( 'on' == $apply_disabled_weekdays  ) {
+
+					if ( 'on' === $apply_disabled_weekdays  ) {
 						$weekday_disabled = 'no';
 					}
 
