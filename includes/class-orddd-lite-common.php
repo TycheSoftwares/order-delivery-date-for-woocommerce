@@ -890,7 +890,7 @@ class Orddd_Lite_Common {
 			}
 		}
 
-		if ( ! $is_all_disable_weekdays && ( ( 'checked' !== get_option( 'orddd_lite_weekday_' . $current_weekday ) ) || ( in_array( $date_to_check, $holidays, true ) && 'yes' !== $orddd_min_hours_for_holidays ) ) ) {
+		if ( ! $is_all_disable_weekdays && ( ( in_array( $date_to_check, $holidays, true ) && 'yes' !== $orddd_min_hours_for_holidays ) ) ) {
 			$current_time = strtotime( $current_date );
 		} elseif ( $is_all_disable_weekdays ) {
 			$current_time = strtotime( $current_date );
@@ -917,7 +917,11 @@ class Orddd_Lite_Common {
 						$weekday_disabled = 'yes';
 					}
 
-					if ( 'on' !== $apply_disabled_weekdays && 'yes' === $weekday_disabled && ! $is_all_disable_weekdays ) {
+					if ( 'on' === $apply_disabled_weekdays  ) {
+						$weekday_disabled = 'no';
+					}
+
+					if ( 'yes' === $weekday_disabled && ! $is_all_disable_weekdays ) {
 						$current_date_time_to_check = strtotime( '+1 day', $current_date_time_to_check );
 						$current_weekday_to_check   = date( 'w', $current_date_time_to_check ); //phpcs:ignore
 
@@ -927,7 +931,6 @@ class Orddd_Lite_Common {
 						$current_time_check = strtotime( '+1 day', $current_time_check );
 						$current_weekday    = date( 'w', $current_time_check ); //phpcs:ignore
 					} else {
-
 						if ( $current_time_check <= $cut_off_date_time ) {
 							$m = date( 'n', $current_time_check ); //phpcs:ignore
 							$d = date( 'j', $current_time_check ); //phpcs:ignore
