@@ -239,15 +239,17 @@ Currently, it is not possible to add different delivery settings for different s
 
 1. The Delivery date field will be visible on checkout page, according to the settings
 
-2. The selected delivery date will be shown in "Custom Fields" in Sales Log
+2. Date Settings tab
 
-3. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date"
+3. Holidays settings
 
-4. Date Settings tab
+4. Time Slot settings
 
-5. Appearance tab
+5. View Time Slots table
 
-6. Holidays tab
+6. The selected delivery date will be shown in "Custom Fields" on Edit order page
+
+7. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date"
 
 == Changelog ==
 
