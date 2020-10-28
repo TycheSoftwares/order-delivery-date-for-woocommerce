@@ -10,13 +10,13 @@ Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Order Delivery Date plugin allows the customers to choose a delivery date on the checkout page. The WooCommerce delivery date will be displayed while viewing the order. The plugin is fully integrated with WooCommerce. 
+Order Delivery Date plugin allows the customers to choose a delivery date and time on the checkout page. The WooCommerce delivery date and time will be displayed while viewing the order. The plugin is fully integrated with WooCommerce. 
 
 == Description ==
 
 We believe that the post-purchase customer experience is as important as the acquisition process. That is why we built the [Order Delivery Date plugin](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=topprolink&utm_campaign=OrderDeliveryDateLite). It helps you to **improve your customer service** by delivering the orders on the customer's specified date.
 
-The plugin allows your customers to choose a delivery date on the checkout page. This reduces **cart abandonment by 50%**.
+The plugin allows your customers to choose a delivery date and time on the checkout page. Also, it gives the facility of selecting delivery date and time at cart page. This reduces **cart abandonment by 50%**.
 
 ><strong>A perfect plugin</strong>, says what it does and adds the functions simply with no fuss. I even had additional support when I wanted to tweak the plugin to fit my site better. Would recommend this to everyone.
 > - [creaselambert](https://wordpress.org/support/topic/just-what-i-needed-and-no-fuss/)
@@ -27,20 +27,24 @@ The dates on which you do not deliver can be set as holidays in the calendar. Al
 
 ### This plugin allows you to do the following:
 
-* Ability to allow the customer to select <strong>Delivery date</strong> on the checkout page for the orders.
+* Ability to allow the customer to select <strong>Delivery date & time</strong> on the checkout page for the orders.
 * You can <strong>disable the weekdays</strong> on which you <strong>do not deliver</strong> the products.
 * Minimum required time for delivery can be set in hours.
-* You can set the <strong>delivery date field mandatory</strong> on the checkout page. 
+* You can set the <strong>delivery date and time fields mandatory</strong> on the checkout page. 
 * <strong>Limit the number of deliveries/orders</strong> to be placed per day.  
-* The first available delivery date will be auto-populated in the delivery date field on the checkout page.
+* Admin can create <strong>timeslots</strong> for delivery days as well as for specific delivery dates.
+* Customers can choose <strong>"As Soon As Possible"</strong> deliveries.
+* Limit the number of deliveries/orders to be placed per timeslot too.
+* The first available delivery date & time will be auto-populated in the delivery date and time fields respectively on the checkout page.
 * You set <strong>delivery date field labels</strong> as per your business requirements.
 * <strong>Disable delivery for Virtual and Featured products</strong>.
 * You can set holidays on the dates you do not deliver products under Holidays tab. <strong>Selected holidays</strong> will be <strong>disabled for delivery</strong> in the delivery calendar on the checkout page.
-* Selected Delivery date will be displayed on the WooCommerce Edit Order page in admin dashboard.
+* Selected Delivery date and time will be displayed on the WooCommerce Order page in admin dashboard.
 
 ### Differences between Lite & PRO version
 
 * Custom delivery schedules by shipping methods, product categories, pickup locations
+* Create the timeslots in bulk
 * Google calendar sync
 * Business days option
 * Same-day & Next-day delivery charges
@@ -69,26 +73,24 @@ You can check the detailed difference between Pro and Lite version **[here](http
 
 **Following features are available in PRO version:**
 
-* Create <strong>recurring delivery schedules</strong> using WooCommerce Subscriptions plugin.
+* Ability to create timeslots <strong>individually as well as in bulk with set Time Duration & Interval</strong>.
 * <strong>Same-day & Next-day delivery</strong> with cut-off time.
 * <strong>Two-way deliveries sync</strong> with Google Calendar.
-* Create Delivery <strong>Settings by Shipping Zones & Shipping Classes</strong>.
+* Create Delivery <strong>Product Categories, Shipping Methods, Shipping Classes & Pickup Locations</strong>.
 * Set Shipping Days & Delivery Days separately.
 * Disable Delivery Date for selected Categories.
 * Customer & Admin can <strong>edit Delivery Date & Time</strong> for orders.
 * Capture Delivery Time by Time Slot or Specific Time of Delivery.
 * Separate Delivery Charges, Cut-off, etc. for Weekdays.
 * View upcoming Deliveries in Delivery Calendar.
-* Create Delivery Settings by Product Categories.
 * Set <strong>Maximum Deliveries</strong> per day by <strong>Orders or Product Quantity</strong>.
 * Filter your WooCommerce Orders by Delivery Dates.
 * Specify minimum delivery interval between the order and first available delivery.
 * Set Specific Delivery Dates for delivery instead of Weekdays.
 * <strong>Block a time slot</strong> for a date or weekday.
-* <strong>Auto-updates delivery dates for renewal orders</strong> from WooCommerce Subscriptions Plugin by Prospress Inc.
+* <strong>Auto-generate delivery dates for renewal orders</strong> from WooCommerce Subscriptions Plugin by Prospress Inc using PRO plugin and [WooCommerce Subscriptions Compatibility Addon](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-subscriptions-compatibility-addon-for-order-delivery-date-pro-for-woocommerce-plugin/).
 * Create Delivery <strong>Settings from USPS Shipping Method</strong> Plugin by WooCommerce.
 * Create Delivery <strong>Settings from Table Rate Shipping</strong> Plugin by WooCommerce.
-* Different Delivery dates when using WooCommerce Shipping Multiple addresses.
 
 You can check the detailed difference between Pro and Lite version **[here](https://www.tychesoftwares.com/differences-pro-lite-versions-order-delivery-date-woocommerce-plugin/?utm_source=wprepo&utm_medium=prolink&utm_campaign=OrderDeliveryDateLite "Lite and Pro version Difference")**
 
@@ -195,9 +197,15 @@ You can refer **[here](https://www.tychesoftwares.com/differences-pro-lite-versi
 
 It is not possible to add Delivery date calendar for each product from Order Delivery Date for WooCommerce. However, we do have a plugin name [Product Delivery Date for WooCommerce Pro](https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite) and [Lite](https://wordpress.org/plugins/product-delivery-date-for-woocommerce-lite/) version both. 
 
+= How does the 'Minimum Delivery Time(in hours)' works? =
+
+The plugin will consider current WordPress time. Thus, the Minimum Delivery Time can be set as 24 * number of days which needs to be disabled + the remaining hours of the current day.
+
+For eg, if you want that Wednesday should be available until 6 PM on Monday, then you can set Minimum Delivery Time to 54 hours( 24 hours * 2 days + ( 24 – 18 hours ) ). 
+
 = Can the customer enter the preferred order delivery time? =
 
-Currently, there is no provision for entering the delivery time in the free version. This is possible in the Pro version. [View Demo](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=demolink&utm_campaign=OrderDeliveryDateLite "View Demo")
+Yes, that's possible to choose the delivery time in the free version too. 
 
 = Is the order delivery date field mandatory on the checkout page? =
 
@@ -242,6 +250,9 @@ Currently, it is not possible to add different delivery settings for different s
 6. Holidays tab
 
 == Changelog ==
+
+= 3.11.4 (28.10.2020) =
+* Fix - The minimum delivery time was not calculated correctly when some of the weekdays were disabled.
 
 = 3.11.3 (12.10.2020) =
 * Fix - The checkout page went into infinite loop when the current day was disabled in the settings.
