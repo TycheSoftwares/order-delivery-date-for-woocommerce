@@ -138,78 +138,78 @@ class Orddd_Lite_Holidays_Settings {
 	 */
 	public static function orddd_lite_holidays_callback( $input ) {
 		// phpcs:ignore WordPress.Security.NonceVerification
-		if ( isset( $_POST['orddd_lite_holiday_from_date'] ) && '' !== $_POST['orddd_lite_holiday_from_date'] ) {
-			$output            = array();
-			$holidays          = get_option( 'orddd_lite_holidays' );
-			$holiday_dates_arr = array();
-			$holidays_new_arr  = array();
-			$holidays_arr      = array();
-
-			$orddd_allow_recurring_holiday = '""';
-			$holiday_name                  = '';
-
-			if ( false !== $holidays && '' !== $holidays && '{}' !== $holidays && '[]' !== $holidays && 'null' !== $holidays ) {
-				$holidays_arr = json_decode( $holidays );
-			}
-
-			foreach ( $holidays_arr as $k => $v ) {
-				if ( isset( $v->r_type ) ) {
-					$holidays_new_arr[] = array(
-						'n'      => $v->n,
-						'd'      => $v->d,
-						'r_type' => $v->r_type,
-					);
-				} else {
-					$holidays_new_arr[] = array(
-						'n'      => $v->n,
-						'd'      => $v->d,
-						'r_type' => '',
-					);
-				}
-				$holiday_dates_arr[] = $v->d;
-			}
-			// phpcs:ignore WordPress.Security.NonceVerification
-			if ( isset( $_POST['orddd_lite_holiday_name'] ) ) {
-				// phpcs:ignore WordPress.Security.NonceVerification
-				$holiday_name = str_replace( "\'", "'", sanitize_text_field( wp_unslash( $_POST['orddd_lite_holiday_name'] ) ) );
-				$holiday_name = str_replace( '\"', '"', $holiday_name );
-			}
-
-			// phpcs:ignore WordPress.Security.NonceVerification
-			if ( isset( $_POST['orddd_lite_allow_recurring_holiday'] ) ) {
-				// phpcs:ignore WordPress.Security.NonceVerification
-				$orddd_allow_recurring_holiday = sanitize_text_field( wp_unslash( $_POST['orddd_lite_allow_recurring_holiday'] ) );
-			}
-
-			// phpcs:ignore WordPress.Security.NonceVerification
-			if ( isset( $_POST['orddd_lite_holiday_from_date'] ) && '' !== $_POST['orddd_lite_holiday_from_date'] && isset( $_POST['orddd_lite_holiday_to_date'] ) && '' !== $_POST['orddd_lite_holiday_to_date'] ) {
-				// phpcs:ignore WordPress.Security.NonceVerification
-				$date_from_arr = explode( '-', sanitize_text_field( wp_unslash( $_POST['orddd_lite_holiday_from_date'] ) ) );
-				// phpcs:ignore WordPress.Security.NonceVerification
-				$date_to_arr   = explode( '-', sanitize_text_field( wp_unslash( $_POST['orddd_lite_holiday_to_date'] ) ) );
-				$tstmp_from    = gmdate( 'd-n-Y', gmmktime( 0, 0, 0, $date_from_arr[0], $date_from_arr[1], $date_from_arr[2] ) );
-				$tstmp_to      = gmdate( 'd-n-Y', gmmktime( 0, 0, 0, $date_to_arr[0], $date_to_arr[1], $date_to_arr[2] ) );
-				$holiday_dates = orddd_lite_common::orddd_lite_get_betweendays( $tstmp_from, $tstmp_to );
-
-				$holiday_date = '';
-				$output       = array();
-				foreach ( $holiday_dates as $k => $v ) {
-					$v1 = gmdate( ORDDD_LITE_HOLIDAY_DATE_FORMAT, strtotime( $v ) );
-					if ( ! in_array( $v1, $holiday_dates_arr, true ) ) {
-						$holidays_new_arr[] = array(
-							'n'      => $holiday_name,
-							'd'      => $v1,
-							'r_type' => $orddd_allow_recurring_holiday,
-						);
-					}
-				}
-			}
-
-			$holidays_save = wp_json_encode( $holidays_new_arr );
-			$output        = $holidays_save;
-		} else {
-			$output = $input;
+		if ( ( isset( $_GET['action'] ) && 'orddd_lite_delete' === $_GET['action'] ) || ( isset( $_GET['action2'] ) && 'orddd_lite_delete' === $_GET['action2'] ) ) {
+			return $input;
 		}
+		
+		$output            = array();
+		$holidays          = get_option( 'orddd_lite_holidays' );
+		$holiday_dates_arr = array();
+		$holidays_new_arr  = array();
+		$holidays_arr      = array();
+
+		$orddd_allow_recurring_holiday = '""';
+		$holiday_name                  = '';
+
+		if ( false !== $holidays && '' !== $holidays && '{}' !== $holidays && '[]' !== $holidays && 'null' !== $holidays ) {
+			$holidays_arr = json_decode( $holidays );
+		}
+
+		foreach ( $holidays_arr as $k => $v ) {
+			if ( isset( $v->r_type ) ) {
+				$holidays_new_arr[] = array(
+					'n'      => $v->n,
+					'd'      => $v->d,
+					'r_type' => $v->r_type,
+				);
+			} else {
+				$holidays_new_arr[] = array(
+					'n'      => $v->n,
+					'd'      => $v->d,
+					'r_type' => '',
+				);
+			}
+			$holiday_dates_arr[] = $v->d;
+		}
+		// phpcs:ignore WordPress.Security.NonceVerification
+		if ( isset( $_POST['orddd_lite_holiday_name'] ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification
+			$holiday_name = str_replace( "\'", "'", sanitize_text_field( wp_unslash( $_POST['orddd_lite_holiday_name'] ) ) );
+			$holiday_name = str_replace( '\"', '"', $holiday_name );
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification
+		if ( isset( $_POST['orddd_lite_allow_recurring_holiday'] ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification
+			$orddd_allow_recurring_holiday = sanitize_text_field( wp_unslash( $_POST['orddd_lite_allow_recurring_holiday'] ) );
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification
+		if ( isset( $_POST['orddd_lite_holiday_from_date'] ) && '' !== $_POST['orddd_lite_holiday_from_date'] && isset( $_POST['orddd_lite_holiday_to_date'] ) && '' !== $_POST['orddd_lite_holiday_to_date'] ) {
+			// phpcs:ignore WordPress.Security.NonceVerification
+			$date_from_arr = explode( '-', sanitize_text_field( wp_unslash( $_POST['orddd_lite_holiday_from_date'] ) ) );
+			// phpcs:ignore WordPress.Security.NonceVerification
+			$date_to_arr   = explode( '-', sanitize_text_field( wp_unslash( $_POST['orddd_lite_holiday_to_date'] ) ) );
+			$tstmp_from    = gmdate( 'd-n-Y', gmmktime( 0, 0, 0, $date_from_arr[0], $date_from_arr[1], $date_from_arr[2] ) );
+			$tstmp_to      = gmdate( 'd-n-Y', gmmktime( 0, 0, 0, $date_to_arr[0], $date_to_arr[1], $date_to_arr[2] ) );
+			$holiday_dates = orddd_lite_common::orddd_lite_get_betweendays( $tstmp_from, $tstmp_to );
+
+			$holiday_date = '';
+			$output       = array();
+			foreach ( $holiday_dates as $k => $v ) {
+				$v1 = gmdate( ORDDD_LITE_HOLIDAY_DATE_FORMAT, strtotime( $v ) );
+				if ( ! in_array( $v1, $holiday_dates_arr, true ) ) {
+					$holidays_new_arr[] = array(
+						'n'      => $holiday_name,
+						'd'      => $v1,
+						'r_type' => $orddd_allow_recurring_holiday,
+					);
+				}
+			}
+		}
+
+		$holidays_save = wp_json_encode( $holidays_new_arr );
+		$output        = $holidays_save;
 		return $output;
 	}
 
