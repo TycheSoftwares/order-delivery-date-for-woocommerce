@@ -141,7 +141,7 @@ class Orddd_Lite_Holidays_Settings {
 		if ( ( isset( $_GET['action'] ) && 'orddd_lite_delete' === $_GET['action'] ) || ( isset( $_GET['action2'] ) && 'orddd_lite_delete' === $_GET['action2'] ) ) {
 			return $input;
 		}
-		
+
 		$output            = array();
 		$holidays          = get_option( 'orddd_lite_holidays' );
 		$holiday_dates_arr = array();
