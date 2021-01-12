@@ -890,6 +890,11 @@ class Orddd_Lite_Common {
 			}
 		}
 
+		$orddd_min_hours_for_holidays = 'no';
+		if( has_filter( 'orddd_to_calculate_minimum_hours_for_holidays' ) ) {
+		    $orddd_min_hours_for_holidays = apply_filters('orddd_to_calculate_minimum_hours_for_holidays', $orddd_min_hours_for_holidays );
+		}
+
 		if ( ! $is_all_disable_weekdays && ( ( in_array( $date_to_check, $holidays, true ) && 'yes' !== $orddd_min_hours_for_holidays ) ) ) {
 			$current_time = strtotime( $current_date );
 		} elseif ( $is_all_disable_weekdays ) {
