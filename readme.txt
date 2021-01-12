@@ -255,7 +255,7 @@ Currently, it is not possible to add different delivery settings for different s
 
 = 3.11.5 (12.01.2020) =
 * Fix - 'Select a time slot' & 'As soon as Possible' string were not present in the .po files.
-* Fix - Saving empty hoildays removed all the holidays from the settings.
+* Fix - Saving empty holidays removed all the holidays from the settings.
 
 = 3.11.4 (28.10.2020) =
 * Fix - The minimum delivery time was not calculated correctly when some of the weekdays were disabled.
