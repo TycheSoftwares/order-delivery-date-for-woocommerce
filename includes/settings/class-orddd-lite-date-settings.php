@@ -254,8 +254,8 @@ class Orddd_Lite_Date_Settings {
 	 * @since 1.5
 	 */
 	public static function orddd_lite_minimum_delivery_time_callback( $args ) {
-		?>
-		<input type="number" min="0" name="orddd_lite_minimumOrderDays" id="orddd_lite_minimumOrderDays" value="<?php echo esc_attr( get_option( 'orddd_lite_minimumOrderDays' ) ); ?>"/>
+		?> 
+		<input type="number" min="0" step="0.25" name="orddd_lite_minimumOrderDays" id="orddd_lite_minimumOrderDays" value="<?php echo esc_attr( get_option( 'orddd_lite_minimumOrderDays' ) ); ?>"/>
 		<label for="orddd_lite_minimumOrderDays"><?php echo esc_attr( $args[0] ); ?></label>
 		<?php
 	}
