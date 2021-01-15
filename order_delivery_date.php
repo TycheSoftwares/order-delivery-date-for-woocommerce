@@ -324,7 +324,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 		 */
 		public function orddd_lite_capabilities() {
 			$role = get_role( 'shop_manager' );
-			if ( '' !== $role ) {
+			if ( isset( $role ) && '' !== $role ) {
 				$role->add_cap( 'manage_options' );
 			}
 		}
