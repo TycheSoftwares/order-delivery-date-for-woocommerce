@@ -254,8 +254,8 @@ Currently, it is not possible to add different delivery settings for different s
 == Changelog ==
 
 = 3.11.6 (15.01.2020) =
-* Tweak: The minimum delivery time can be set in decimals.
-* Fix: Fatal error was displayed when installing plugin with PHP v7.3.x
+* Tweak - The minimum delivery time can be set in decimals.
+* Fix - Fatal error was displayed when installing plugin with PHP v7.3.x
 
 = 3.11.5 (12.01.2020) =
 * Fix - 'Select a time slot' & 'As soon as Possible' string were not present in the .po files.
