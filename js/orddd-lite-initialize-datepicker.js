@@ -522,7 +522,7 @@ function avd( date, inst ) {
 						current_weekday = current_day.getDay();
 					} else {
 						if ( current_day <= delay_days ) {
-							var m = current_day.getMonth(), d = current_day.getDate(), y = current_day.getFullYear();
+							var m = delay_days.getMonth(), d = delay_days.getDate(), y = delay_days.getFullYear();
 							if ( jQuery( "#orddd_lite_disable_for_holidays" ).val() != 'yes' ) {
 								if ( jQuery.inArray( ( m + 1 ) + '-' + d + '-' + y, holidays ) != -1 ||
 									jQuery.inArray( ( m + 1 ) + '-' + d, holidays ) != -1 ) {
