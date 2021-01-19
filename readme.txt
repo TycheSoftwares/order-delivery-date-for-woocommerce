@@ -253,6 +253,10 @@ Currently, it is not possible to add different delivery settings for different s
 
 == Changelog ==
 
+= 3.11.7 (19.01.2020) =
+* Fix - First available day was coming a day later when minimum delivery time was set and a holiday was added.
+* Fix - Fixed the warning coming on checkout page when the current date was set as holiday.
+
 = 3.11.6 (15.01.2020) =
 * Tweak - The minimum delivery time can be set in decimals.
 * Fix - Fatal error was displayed when installing plugin with PHP v7.3.x
