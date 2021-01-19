@@ -118,7 +118,7 @@ jQuery( document ).ready( function() {
 			jQuery( "body" ).trigger( "change_orddd_time_slot", [ jQuery( this ) ] );
 		});
 
-		window.onload = load_lite_functions;
+		window.onload = load_lite_functions();
 	}
 );
 
@@ -322,7 +322,7 @@ function minimum_date_to_set( delay_days ) {
 					current_weekday = current_day.getDay();
 				} else {
 					if ( current_day <= delay_days ) {
-						var m = current_day.getMonth(), d = current_day.getDate(), y = current_day.getFullYear();
+						var m = delay_days.getMonth(), d = delay_days.getDate(), y = delay_days.getFullYear();
 						if ( jQuery( "#orddd_lite_disable_for_holidays" ).val() != 'yes' ) {
 							if ( jQuery.inArray( ( m + 1 ) + '-' + d + '-' + y, holidays ) != -1 ||
 								jQuery.inArray( ( m + 1 ) + '-' + d, holidays ) != -1 ) {
