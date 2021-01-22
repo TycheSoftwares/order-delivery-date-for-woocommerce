@@ -774,7 +774,7 @@ class Orddd_Lite_Process {
 
 		// Time slot in Session variable.
 		$session_time_slot = '';
-		if ( isset( $_POST['time_slot_session'] ) && 'on' == get_option( 'orddd_lite_delivery_date_on_cart_page' ) ) { // phpcs:ignore
+		if ( isset( $_POST['time_slot_session'] ) ) { // phpcs:ignore
 			$session_time_slot = $_POST['time_slot_session']; // phpcs:ignore
 		}
 
