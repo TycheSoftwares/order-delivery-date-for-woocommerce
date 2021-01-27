@@ -253,6 +253,9 @@ Currently, it is not possible to add different delivery settings for different s
 
 == Changelog ==
 
+= 3.11.9 (27.01.2021) =
+* Fix - The time slot dropdown remained disabled when the checkout page was loaded for the first time and the date was auto-populated.
+
 = 3.11.8 (22.01.2021) =
 * Fix - The first available date was getting selected on every page load even though another dat was selected.
 * Fix - The selected time slot on cart page was not passed to checkout page.
