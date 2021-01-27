@@ -296,8 +296,8 @@ function orddd_set_date_from_session() {
         h_deliverydate_session = localStorage.getItem( 'h_deliverydate_lite_session' );
     
     if ( ! e_deliverydate_session ) {
-        localStorage.setItem( "e_deliverydate_lite_session", jQuery( '#' + jQuery( "#orddd_field_name" ).val() ).val() );
-        e_deliverydate_session = jQuery( '#' + jQuery( "#orddd_field_name" ).val() ).val();
+        localStorage.setItem( "e_deliverydate_lite_session", jQuery( '#e_deliverydate' ).val() );
+        e_deliverydate_session = jQuery( '#e_deliverydate' ).val();
     }
 
     if ( ! h_deliverydate_session ) {
