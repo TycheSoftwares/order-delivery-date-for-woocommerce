@@ -300,7 +300,7 @@ class Orddd_Lite_Process {
 							'required'          => $validate_wpefield,
 							// phpcs:ignore
 							'placeholder'       => __( get_option( 'orddd_lite_delivery_date_field_placeholder' ), 'order-delivery-date' ),
-							'custom_attributes' => array( 'style' => 'cursor:text !important;' ),
+							'custom_attributes' => array( 'style' => 'cursor:text !important;', 'readonly' => 'readonly' ),
 							'class'             => array( 'form-row-cart' ),
 						)
 					);
@@ -314,7 +314,7 @@ class Orddd_Lite_Process {
 							'required'          => $validate_wpefield,
 							// phpcs:ignore
 							'placeholder'       => __( get_option( 'orddd_lite_delivery_date_field_placeholder' ), 'order-delivery-date' ),
-							'custom_attributes' => array( 'style' => 'cursor:text !important;' ),
+							'custom_attributes' => array( 'style' => 'cursor:text !important;', 'readonly' => 'readonly' ),
 							'class'             => array( 'form-row-wide' ),
 						),
 						$checkout->get_value( 'e_deliverydate' )
