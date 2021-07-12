@@ -97,12 +97,15 @@ class Orddd_Lite_Process {
 			$cut_off_date          = gmdate( 'd-m-Y', $cut_off_timestamp );
 			$min_date              = gmdate( 'j-n-Y', strtotime( $cut_off_date ) );
 
+			// It will check if the below filter returns true then it will shows the exact number of dates added in `Number of dates to choose` option even if there are holidays present within the date range.
+			$is_holiday_exclude = apply_filters( 'orddd_is_holidays_excluded_from_dates_to_choose', false );
 			?>
 
 			<input type="hidden" name="orddd_lite_number_of_dates" id="orddd_lite_number_of_dates" value="<?php echo esc_attr( get_option( 'orddd_lite_number_of_dates' ) ); ?>">
 			<input type="hidden" name="orddd_lite_date_field_mandatory" id="orddd_lite_date_field_mandatory" value="<?php echo esc_attr( get_option( 'orddd_lite_date_field_mandatory' ) ); ?>">
 			<input type="hidden" name="orddd_lite_number_of_months" id="orddd_lite_number_of_months" value="<?php echo esc_attr( get_option( 'orddd_lite_number_of_months' ) ); ?>">
 			<input type="hidden" name="h_deliverydate" id="h_deliverydate" value="">
+			<input type="hidden" id="is_holiday_exclude" value="<?php echo esc_attr( $is_holiday_exclude ); ?>">
 
 			<?php
 			$lockout_days_str = '';
