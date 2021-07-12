@@ -20,6 +20,22 @@ require_once WP_PLUGIN_DIR . '/order-delivery-date-for-woocommerce/includes/clas
 class Orddd_Lite_Filter {
 
 	/**
+	 * Default Constructor
+	 *
+	 * @since 3.12.0
+	 */
+	public function __construct() {
+		//Delivery Date & Time on WooCommerce Edit Order page in Admin
+		if ( get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) == 'billing_section' || get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) == 'after_your_order_table' || get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) == 'custom' ) {
+		    add_action( 'woocommerce_admin_order_data_after_billing_address',  array( &$this, 'orddd_lite_display_delivery_info_admin_order_meta') , 10, 1 );
+		} else if ( get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) == 'shipping_section'|| get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) == 'before_order_notes' || get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ) == 'after_order_notes' ) {
+		    add_action( 'woocommerce_admin_order_data_after_shipping_address', array( &$this, 'orddd_lite_display_delivery_info_admin_order_meta') , 10, 1 );
+		}
+		// Delivery date & Delivery Time in Order Preview in Admin
+		add_filter( 'woocommerce_admin_order_preview_get_order_details', array( &$this, 'orddd_lite_admin_order_preview_add_delivery_date' ), 20, 2 );
+	}
+
+	/**
 	 * This function adds the Delivery Date column to WooCommerce->Orders page
 	 *
 	 * @param array $columns - List of columns already present.
@@ -132,6 +148,62 @@ class Orddd_Lite_Filter {
 		}
 		return $vars;
 	}
-}
 
+	/**
+	 * Displays the Delivery date & Delivery time on WooCommerce->Orders->Edit Order page.
+	 * 
+	 * @param WC_Order $order - Order object
+	 * 
+	 * @hook woocommerce_admin_order_data_after_billing_address
+	 *       woocommerce_admin_order_data_after_shipping_address
+	 * @since 3.12.0      
+	 */
+	public static function orddd_lite_display_delivery_info_admin_order_meta( $order ) {		
+		if( version_compare( get_option( 'woocommerce_version' ), '3.0.0', ">=" ) ) {            
+            $order_id = $order->get_id();
+        } else {
+            $order_id = $order->id;
+        }
+		
+		$delivery_date_formatted = Orddd_Lite_Common::orddd_lite_get_order_delivery_date( $order_id );
+		$date_field_label        = get_option( 'orddd_lite_delivery_date_field_label' );
+
+		if( '' !== $delivery_date_formatted ) {
+			echo '<p><strong>' . __( $date_field_label, 'order-delivery-date' ) . ': </strong>' . $delivery_date_formatted;
+		}
+		
+		$time_slot        = Orddd_Lite_Common::orddd_get_order_timeslot( $order_id );
+		$time_field_label = get_option( 'orddd_lite_delivery_timeslot_field_label' );
+
+		if ( '' !== $time_slot ) {
+			echo '<p><strong>' . __( $time_field_label, 'order-delivery-date' ) . ': </strong>' . $time_slot . '</p>';
+		}
+	}
+
+	/**
+	 * Displays the Delivery Date & Delivery time on Order Preview page in Admin
+	 * 
+	 * @param $data 
+	 * @param WC_Order $order - Order object
+	 * 
+	 * @hook woocommerce_admin_order_preview_get_order_details
+	 * @since 3.12.0
+	 */
+	public static function orddd_lite_admin_order_preview_add_delivery_date( $data, $order ) {
+		$order_id                = $order->get_id();
+		$delivery_date_formatted = Orddd_Lite_Common::orddd_lite_get_order_delivery_date( $order_id );
+		$field_date_label        = get_option( 'orddd_lite_delivery_date_field_label' );
+		$orddd_timeslot          = Orddd_Lite_Common::orddd_get_order_timeslot( $order_id );
+
+		if ( '' != $delivery_date_formatted ) {
+	        $data[ 'payment_via' ] = $data[ 'payment_via' ] . '<br>' . '<strong>'.$field_date_label.'</strong>' . $delivery_date_formatted;
+
+	        if ( '' != $orddd_timeslot ) {
+	        	$data[ 'payment_via' ] = $data[ 'payment_via' ] . ',<br>' . $orddd_timeslot;
+	    	}
+		}
+    	return $data;
+	}
+}
+$orddd_lite_filter = new Orddd_Lite_Filter();
 
