@@ -646,6 +646,8 @@ function avd( date, inst ) {
 
 	var loopCounter = gd( start , end , 'days' );
 	var prev        = delay_days;
+
+	is_holiday_exclude = jQuery('#is_holiday_exclude').val();
 	var new_l_end, is_holiday;
 	for ( var i = 1; i <= loopCounter; i++ ) {
 		var l_start  = new Date( start );
@@ -657,7 +659,7 @@ function avd( date, inst ) {
 		day        = 'orddd_lite_weekday_' + new_date.getDay();
 		day_check  = jQuery( "#" + day ).val();
 		is_holiday = nd( new_date );
-		if ( day_check != "checked" || is_holiday != 'true' ) {
+		if ( day_check != "checked" || ( is_holiday != 'true' && ! is_holiday_exclude ) ) {
 			new_l_end   = l_end = new Date( ad( l_end, 2 ) );
 			end         = ( l_end.getMonth() + 1 ) + "/" + l_end.getDate() + "/" + l_end.getFullYear();
 			loopCounter = gd( start , end , 'days' );
