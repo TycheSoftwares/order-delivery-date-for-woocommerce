@@ -557,6 +557,7 @@ class Orddd_Lite_Process {
 		$existing_dates       = array();
 		$lockout_time_new_arr = array();
 		$total_quantities     = 1;
+		$timeslot             = Orddd_Lite_Common::orddd_lite_change_time_slot_format( $timeslot, $time_format_to_show );
 
 		foreach ( $lockout_time_arr as $k => $v ) {
 			$orders = $v->o;
@@ -571,8 +572,6 @@ class Orddd_Lite_Process {
 				'd' => $v->d,
 			);
 		}
-
-		$timeslot = Orddd_Lite_Common::orddd_lite_change_time_slot_format( $timeslot, $time_format_to_show );
 
 		// add the currently selected date if it does not already exist.
 		if ( ( isset( $existing_timeslots[ $lockout_date ] ) && ! in_array( $timeslot, $existing_timeslots[ $lockout_date ], true ) ) || ! in_array( $lockout_date, $existing_dates, true ) ) {
