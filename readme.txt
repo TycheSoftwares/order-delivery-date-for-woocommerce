@@ -253,6 +253,12 @@ Currently, it is not possible to add different delivery settings for different s
 
 == Changelog ==
 
+= 3.12.0 (13.07.2021) =
+* Enhancement - Displays the order delivery date and time on the edit order page. Earlier delivery date and time were only displayed in the custom fields.
+* Fix - Customers were able to choose (type) past delivery date in the date-picker field. This has been fixed.
+* Fix - Added a filter “orddd_is_holidays_excluded_from_dates_to_choose” that will not include holiday days in the Number of dates to choose.
+* Fix - Maximum Order Deliveries per time slot was not working. This has been fixed.
+
 = 3.11.9 (27.01.2021) =
 * Fix - The time slot dropdown remained disabled when the checkout page was loaded for the first time and the date was auto-populated.
 
