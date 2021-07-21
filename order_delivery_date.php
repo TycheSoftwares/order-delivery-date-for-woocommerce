@@ -10,7 +10,7 @@
  * Text Domain: order-delivery-date
  * Requires PHP: 5.6
  * WC requires at least: 3.0.0
- * WC tested up to: 4.9.2
+ * WC tested up to: 5.5
  *
  * @package  Order-Delivery-Date-Lite-for-WooCommerce
  */
