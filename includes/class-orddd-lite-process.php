@@ -1018,5 +1018,16 @@ class Orddd_Lite_Process {
 			}
 		}
 	}
+
+	/**
+     * Add hidden fields on the Cart page.
+     *
+     * @hook woocommerce_after_cart_table
+     *
+     * @since 3.12.0
+     */
+    public static function orddd_lite_show_hidden_fields() {
+        echo '<input type="hidden" name="orddd_time_slot" id="hidden_timeslot" value="">';
+    }
 }
 $orddd_lite_process = new Orddd_Lite_Process();

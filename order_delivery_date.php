@@ -151,6 +151,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			add_action( 'wp_ajax_check_for_time_slot_orddd', array( 'orddd_lite_process', 'check_for_time_slot_orddd' ) );
 
 			add_filter( 'admin_footer_text', array( &$this, 'orddd_lite_admin_rate_us' ) );
+			add_action( 'woocommerce_after_cart_table', array( 'Orddd_Lite_Process', 'orddd_lite_show_hidden_fields' ) );
 		}
 
 		/**
