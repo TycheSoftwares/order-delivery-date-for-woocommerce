@@ -486,11 +486,11 @@ class Orddd_Lite_Process {
 					update_post_meta( $order_id, '_orddd_lite_timeslot_timestamp', $timestamp );
 
 					$total_fees = WC()->session->get( '_total_delivery_charges' );
-					if( '' != $total_fees && null != $total_fees ) {
-						update_post_meta( $order_id, '_total_delivery_charges', $total_fees );   
-						WC()->session->__unset( '_total_delivery_charges' );   
+					if ( '' !== $total_fees && null !== $total_fees ) {
+						update_post_meta( $order_id, '_total_delivery_charges', $total_fees );
+						WC()->session->__unset( '_total_delivery_charges' );
 					} else {
-						update_post_meta( $order_id, '_total_delivery_charges', '0' );   
+						update_post_meta( $order_id, '_total_delivery_charges', '0' );
 					}
 
 					self::orddd_lite_update_lockout_timeslot( $h_deliverydate, $order_time_slot );
