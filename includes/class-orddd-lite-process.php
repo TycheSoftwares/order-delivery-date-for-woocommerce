@@ -385,6 +385,7 @@ class Orddd_Lite_Process {
 			<input type="hidden" name="orddd_min_date_set" id="orddd_min_date_set" value="<?php echo esc_attr( $min_date_array['min_date'] ); ?>">
 			<input type="hidden" name="orddd_is_cart" id="orddd_is_cart" value="<?php echo esc_attr( is_cart() ); ?>">
 			<input type="hidden" name="orddd_lite_auto_populate_first_available_time_slot" id="orddd_lite_auto_populate_first_available_time_slot" value="<?php echo esc_attr( get_option( 'orddd_lite_auto_populate_first_available_time_slot' ) ); ?>">
+			<input type="hidden" name="orddd_delivery_date_on_cart_page" id="orddd_delivery_date_on_cart_page" value="<?php echo esc_attr( get_option( 'orddd_lite_delivery_date_on_cart_page' ) ); ?>">
 			<?php
 		}
 	}
@@ -483,6 +484,14 @@ class Orddd_Lite_Process {
 					$timestamp      = strtotime( $delivery_date );
 
 					update_post_meta( $order_id, '_orddd_lite_timeslot_timestamp', $timestamp );
+
+					$total_fees = WC()->session->get( '_total_delivery_charges' );
+					if ( '' !== $total_fees && null !== $total_fees ) {
+						update_post_meta( $order_id, '_total_delivery_charges', $total_fees );
+						WC()->session->__unset( '_total_delivery_charges' );
+					} else {
+						update_post_meta( $order_id, '_total_delivery_charges', '0' );
+					}
 
 					self::orddd_lite_update_lockout_timeslot( $h_deliverydate, $order_time_slot );
 				}
@@ -784,7 +793,7 @@ class Orddd_Lite_Process {
 		$time_slot_for_order = '';
 		if ( isset( $_POST['order_id'] ) ) { // phpcs:ignore
 			$order_id            = $_POST['order_id']; // phpcs:ignore
-			$time_slot_for_order = Orddd_Lite_Common::orddd_lite_get_order_timeslot( $order_id );
+			$time_slot_for_order = Orddd_Lite_Common::orddd_get_order_timeslot( $order_id );
 		}
 
 		$time_slots_to_show_timestamp = Orddd_Lite_Common::orddd_lite_get_timeslot_display( $time_slot_for_order );
@@ -1016,6 +1025,8 @@ class Orddd_Lite_Process {
 					$cart->add_fee( __( $time_slot_charges_label, 'order-delivery-date' ), $time_slot_fees_to_add, false ); //phpcs:ignore
 				}
 			}
+
+			WC()->session->set( '_total_delivery_charges', $time_slot_fees_to_add );
 		}
 	}
 }
