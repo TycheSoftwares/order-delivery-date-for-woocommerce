@@ -27,7 +27,7 @@ $time_field_label = get_option( 'orddd_delivery_timeslot_field_label' );
 
 do_action( 'woocommerce_email_header', $email_heading );
 ?>
-<p><?php echo esc_url( $opening_paragraph ); ?></p>
+<p><?php echo esc_attr( $opening_paragraph ); ?></p>
 <?php
 
 do_action( 'woocommerce_email_order_details', $order_instance, $sent_to_admin, $plain_text, $email );
