@@ -253,6 +253,11 @@ Currently, it is not possible to add different delivery settings for different s
 
 == Changelog ==
 
+= 3.13.0 (28.07.2021) =
+* Enhancement - Added a meta box to edit delivery date and delivery time on the edit order page.
+* Fix - Time slot charges were not getting applied on the cart page. This has been fixed.
+* Fix - Delivery timeslot was not appearing in invoice pdf generated WooCommerce PDF Invoices & Packing Slips plugin. This has been fixed.
+
 = 3.12.0 (13.07.2021) =
 * Enhancement - Displays the order delivery date and time on the edit order page. Earlier delivery date and time were only displayed in the custom fields.
 * Fix - Customers were able to choose (type) past delivery date in the date-picker field. This has been fixed.
