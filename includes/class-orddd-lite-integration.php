@@ -69,12 +69,12 @@ class Orddd_Lite_Integration {
 		$delivery_date_formatted = orddd_lite_common::orddd_lite_get_order_delivery_date( $order_id );
 		if ( '' !== $delivery_date_formatted ) {
 			// phpcs:ignore
-			echo '<p><strong>' . __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ) . ': </strong>' . $delivery_date_formatted;
+			echo '<p><strong>' . get_option( 'orddd_lite_delivery_date_field_label' ) . ': </strong>' . $delivery_date_formatted;
 		}
 
 		$order_page_time_slot = orddd_lite_common::orddd_get_order_timeslot( $order_id );
-		if ( $order_page_time_slot != '' && $order_page_time_slot != '' ) {
-			echo '<p><strong>' . __( get_option( 'orddd_delivery_timeslot_field_label' ), 'order-delivery-date' ) . ': </strong>' . $order_page_time_slot;
+		if ( '' !== $order_page_time_slot && '' !== $order_page_time_slot ) {
+			echo '<p><strong>' . esc_attr( get_option( 'orddd_lite_delivery_timeslot_field_label' ) ) . ': </strong>' . esc_attr( $order_page_time_slot );
 		}
 	}
 

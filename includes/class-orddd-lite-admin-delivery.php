@@ -44,9 +44,6 @@ class Orddd_Lite_Admin_Delivery {
 	 */
 	public static function orddd_admin_delivery_box() {
 		add_meta_box( 'order-delivery-date', __( 'Edit Order Delivery Date and/or Time', 'order-delivery-date' ), array( 'Orddd_Lite_Admin_Delivery', 'orddd_lite_meta_box' ), 'shop_order', 'normal', 'core' );
-		if ( 'on' === get_option( 'orddd_enable_woo_subscriptions_compatibility' ) ) {
-			add_meta_box( 'order-delivery-date', __( 'Edit Order Delivery Date and/or Time', 'order-delivery-date' ), array( 'Orddd_Lite_Admin_Delivery', 'orddd_lite_meta_box' ), 'shop_subscription', 'normal', 'core' );
-		}
 	}
 
 	/**
@@ -65,38 +62,40 @@ class Orddd_Lite_Admin_Delivery {
 	 */
 	public static function orddd_lite_meta_box( $order, $post ) {
 		global $wpdb, $orddd_date_formats, $post, $woocommerce, $orddd_languages, $orddd_weekdays;
-		if ( 'on' === get_option( 'orddd_enable_delivery_date' ) ) {
+		if ( 'on' === get_option( 'orddd_lite_enable_delivery_date' ) ) {
 			$field_name              = 'e_deliverydate';
 			$orddd_post_type         = $post->post_type;
 			$order_id                = $order->ID;
 			$current_date            = date( 'j-n-Y' ); // phpcs:ignore
 			$data                    = get_post_meta( $order_id );
 			$date_field_label        = get_option( 'orddd_lite_delivery_date_field_label' );
-			$time_field_label        = get_option( 'orddd_delivery_timeslot_field_label' );
+			$time_field_label        = get_option( 'orddd_lite_delivery_timeslot_field_label' );
 			$delivery_date           = get_post_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), true );
 			$delivery_date_timestamp = get_post_meta( $order_id, '_orddd_lite_timestamp', true );
-			$delivery_time           = get_post_meta( $order_id, get_option( 'orddd_delivery_timeslot_field_label' ), true );
+			$delivery_time           = get_post_meta( $order_id, get_option( 'orddd_lite_delivery_timeslot_field_label' ), true );
 			$delivery_time_timestamp = get_post_meta( $order_id, '_orddd_lite_timeslot_timestamp', true );
 			$delivery_date_format    = get_option( 'orddd_lite_delivery_date_format' );
 			$holidays                = get_option( 'orddd_lite_holidays' );
 			$holidays_str            = '';
 			if ( '' !== $holidays && '{}' !== $holidays && '[]' !== $holidays && 'null' !== $holidays ) {
 				$holidays_arr = json_decode( $holidays );
-				foreach ( $holidays_arr as $k => $v ) {
-					// Replace single quote in the holiday name with the html entities
-					// @todo: Need to fix the double quotes issue in the holiday name.
-					// An error comes in console when the holiday name contains double quotes in it.
-					$name = str_replace( "'", '&apos;', $v->n );
-					$name = str_replace( '"', '&quot;', $name );
-					$name = str_replace( '/', ' ', $name );
-					$name = str_replace( '-', ' ', $name );
+				if ( ! empty( $holidays_arr ) && is_array( $holidays_arr ) ) {
+					foreach ( $holidays_arr as $k => $v ) {
+						// Replace single quote in the holiday name with the html entities
+						// @todo: Need to fix the double quotes issue in the holiday name.
+						// An error comes in console when the holiday name contains double quotes in it.
+						$name = str_replace( "'", '&apos;', $v->n );
+						$name = str_replace( '"', '&quot;', $name );
+						$name = str_replace( '/', ' ', $name );
+						$name = str_replace( '-', ' ', $name );
 
-					if ( isset( $v->r_type ) && 'on' === $v->r_type ) {
-						$holiday_date_arr = explode( '-', $v->d );
-						$recurring_date   = $holiday_date_arr[0] . '-' . $holiday_date_arr[1];
-						$holidays_str    .= '"' . $name . ':' . $recurring_date . '",';
-					} else {
-						$holidays_str .= '"' . $name . ':' . $v->d . '",';
+						if ( isset( $v->r_type ) && 'on' === $v->r_type ) {
+							$holiday_date_arr = explode( '-', $v->d );
+							$recurring_date   = $holiday_date_arr[0] . '-' . $holiday_date_arr[1];
+							$holidays_str    .= '"' . $name . ':' . $recurring_date . '",';
+						} else {
+							$holidays_str .= '"' . $name . ':' . $v->d . '",';
+						}
 					}
 				}
 				$holidays_str = apply_filters( 'ordd_add_to_holidays_str', $holidays_str );
@@ -221,10 +220,9 @@ class Orddd_Lite_Admin_Delivery {
 				<input type="hidden" name="orddd_lite_time_slot_mandatory" id="orddd_lite_time_slot_mandatory" value="' . esc_attr( get_option( 'orddd_lite_time_slot_mandatory' ) ) . '">
 				<input type="hidden" name="orddd_lite_admin_url" id="orddd_lite_admin_url" value="' . esc_attr( get_admin_url() ) . '">
 				<input type="hidden" name="orddd_lite_order_id" id="orddd_lite_order_id" value="' . esc_attr( $order_id ) . '">
-				<input type="hidden" name="orddd_lite_min_date_set" id="orddd_lite_min_date_set" value="' . esc_attr( $min_date_array )['min_date'] . '">
+				<input type="hidden" name="orddd_lite_min_date_set" id="orddd_lite_min_date_set" value="' . esc_attr( $min_date_array['min_date'] ) . '">
 				<input type="hidden" name="orddd_lite_field_label" id="orddd_lite_field_label" value="' . esc_attr( $date_field_label ) . '">
 			' );
-
 		}
 	}
 
@@ -248,7 +246,7 @@ class Orddd_Lite_Admin_Delivery {
 			$orddd_fees = ( isset( $_POST['orddd_charges'] ) && is_numeric( $_POST['orddd_charges'] ) ) ? $_POST['orddd_charges'] : 0; // phpcs:ignore
 
 			$date_field_label = get_option( 'orddd_lite_delivery_date_field_label' );
-			$time_field_label = get_option( 'orddd_delivery_timeslot_field_label' );
+			$time_field_label = get_option( 'orddd_lite_delivery_timeslot_field_label' );
 
 			$date_selected            = 'no';
 			$timeslot_selected        = 'no';
