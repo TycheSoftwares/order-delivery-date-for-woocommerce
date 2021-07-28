@@ -42,18 +42,18 @@ jQuery( document ).ready( function() {
 
 			var formats = ["MM d, yy","MM d, yy"];
 
-			jQuery.extend(
-				jQuery.datepicker,
-				{ afterShow: function( event ) {
-					jQuery.datepicker._getInst( event.target ).dpDiv.css( "z-index", 9999 );
-					if ( jQuery( "#orddd_lite_number_of_months" ).val() == "1" ) {
-						  jQuery.datepicker._getInst( event.target ).dpDiv.css( "width", "300px" );
-					} else {
-						 jQuery.datepicker._getInst( event.target ).dpDiv.css( "width", "40em" );
-					}
-				} }
-			);
-
+		jQuery.extend(
+			jQuery.datepicker,
+			{ afterShow: function( event ) {
+				jQuery.datepicker._getInst( event.target ).dpDiv.css( "z-index", 9999 );
+				if ( jQuery( "#orddd_lite_number_of_months" ).val() == "1" ) {
+						jQuery.datepicker._getInst( event.target ).dpDiv.css( "width", "300px" );
+				} else {
+						jQuery.datepicker._getInst( event.target ).dpDiv.css( "width", "40em" );
+				}
+			} }
+		);
+		if ( '1' !== jQuery( "#orddd_is_admin" ).val() ) {
 			jQuery( "#e_deliverydate" ).val( "" ).datepicker(
 				{
 					dateFormat: jQuery( "#orddd_lite_delivery_date_format" ).val(),
@@ -79,14 +79,13 @@ jQuery( document ).ready( function() {
 						}
 						jQuery( "#e_deliverydate" ).blur();
 					}
-				}
-			).focus(
+				}).focus(
 				function ( event ) {
 					jQuery( this ).trigger( "blur" );
 					jQuery.datepicker.afterShow( event );
 				}
 			);
-
+		}
 		if ( jQuery( "#orddd_lite_field_note" ).val() != '' ) {
 			jQuery( "#e_deliverydate_field" ).append( "<small class='orddd_lite_field_note'>" + jQuery( "#orddd_lite_field_note" ).val() + "</small>" );
 		}
@@ -116,9 +115,150 @@ jQuery( document ).ready( function() {
 			jQuery( "body" ).trigger( "change_orddd_time_slot", [ jQuery( this ) ] );
 		});
 
-		window.onload = load_lite_functions();
+		if ( '1' === jQuery( "#orddd_is_admin" ).val() ) {
+			window.onload = orddd_lite_init();
+		} else {
+			window.onload = load_lite_functions();
+		}
+
+		if( '1' == jQuery( "#orddd_is_admin" ).val() ) {
+			jQuery( "#save_delivery_date" ).click(function() {
+				save_delivery_dates( 'no' );
+			}); 
+	
+			jQuery( "#save_delivery_date_and_notify" ).click(function() {
+				save_delivery_dates( 'yes' );
+			});        
+		}
 	}
 );
+
+/**
+ * Adds the Delivery information on Admin order page load.
+ *
+ * @function orddd_lite_init
+ * @memberof orddd_initialize_functions
+ * @since 3.13.0
+ */
+ function orddd_lite_init() {
+    if( "auto-draft" == jQuery( "#original_post_status").val() ) {
+        jQuery( '#e_deliverydate' ).prop("disabled", true );
+    } else {
+        jQuery( '#e_deliverydate' ).prop("disabled", false );
+    }
+    var default_date_str = jQuery( "#orddd_lite_default_date" ).val();
+    if( default_date_str != "" ) {
+		
+        if( default_date_str != '' && typeof( default_date_str ) != 'undefined' ) {
+            var default_date_arr = default_date_str.split( "-" );
+            var default_date = new Date( default_date_arr[ 1 ] + "/" + default_date_arr[ 0 ] + "/" + default_date_arr[ 2 ] );
+        } else {
+            var default_date = new Date();
+        }
+		jQuery.extend(
+			jQuery.datepicker,
+			{ afterShow: function( event ) {
+				jQuery.datepicker._getInst( event.target ).dpDiv.css( "z-index", 9999 );
+				jQuery.datepicker._getInst( event.target ).dpDiv.css( "width", "300px" );
+			} }
+		);
+        jQuery( '#e_deliverydate' ).datepicker({
+			dateFormat: jQuery( "#orddd_lite_delivery_date_format" ).val(),
+			firstDay: parseInt( jQuery( "#orddd_first_day_of_week" ).val() ),
+			showButtonPanel: true,
+			closeText: jsL10n.clearText,
+			onSelect: show_admin_times,
+			onClose:function( dateStr, inst ) {
+				if ( dateStr != "" ) {
+					var monthValue = inst.selectedMonth + 1;
+					var dayValue   = inst.selectedDay;
+					var yearValue  = inst.selectedYear;
+					var all        = dayValue + "-" + monthValue + "-" + yearValue;
+					// If "Clear" gets clicked, then really clear it
+					var event = arguments.callee.caller.caller.arguments[0];
+					if ( typeof( event ) !== "undefined" ) {
+						if ( jQuery( event.delegateTarget ).hasClass( "ui-datepicker-close" ) ) {
+							jQuery( this ).val( "" );
+						}
+					}
+				}
+				jQuery( "#e_deliverydate" ).blur();
+			}
+		}).focus(
+		function ( event ) {
+			jQuery( this ).trigger( "blur" );
+			jQuery.datepicker.afterShow( event );
+		});
+        jQuery( '#e_deliverydate' ).datepicker( "setDate", default_date );
+        jQuery( "#h_deliverydate" ).val( jQuery( "#orddd_default_h_date" ).val() );
+        var default_date_inst = jQuery.datepicker._getInst( jQuery( "#e_deliverydate" )[0] );
+		show_admin_times( default_date_str, default_date_inst );
+    }
+    
+    if( 'no' == jQuery( "#orddd_delivery_enabled" ).val() ) {
+        jQuery( "#admin_time_slot_field" ).remove();
+        jQuery( "#admin_delivery_date_field" ).remove()
+        jQuery( "#save_delivery_date_button" ).remove();
+        jQuery( "#is_virtual_product" ).html( "Delivery date settings are not enabled for the products." );                    
+    }    
+
+}
+
+/**
+ * Shows the Time Slots in the admin Orders page
+ *
+ * @function show_admin_times
+ * @memberof orddd_initialize_functions
+ * @param {date} date - Date
+ * @param {object} inst 
+ * @since 3.13.0
+ */
+ function show_admin_times( date, inst ) {
+
+    jQuery( document ).trigger( 'on_select_additional_action', [ date, inst ] )
+
+    var monthValue = inst.selectedMonth+1;
+    var dayValue = inst.selectedDay;
+    var yearValue = inst.selectedYear;
+    var all = dayValue + "-" + monthValue + "-" + yearValue;
+    jQuery( "#h_deliverydate" ).val( all );
+    // jQuery( "#e_deliverydate" ).val(  jQuery('#' + jQuery( "#orddd_field_name" ).val() ).val() );
+
+    if( jQuery( "#orddd_lite_enable_time_slot" ).val() == "on" ) {
+        if( typeof( inst.id ) !== "undefined" ) {
+            var data = {
+                current_date: all,
+                order_id: jQuery( "#orddd_lite_order_id" ).val(),
+                min_date: jQuery( "#orddd_lite_min_date_set" ).val(),
+                current_date_to_check: jQuery( "#orddd_lite_current_date_set" ).val(),
+                holidays_str: jQuery( "#orddd_lite_holidays" ).val(),
+                lockout_str: jQuery( "#orddd_lockout_days" ).val(),
+                action: "check_for_time_slot_orddd",
+                admin: true,
+            };
+
+            jQuery( "#orddd_time_slot" ).attr( "disabled", "disabled" );
+            jQuery( "#orddd_time_slot_field" ).attr( "style", "opacity: 0.5" );
+            if( jQuery( '#orddd_lite_admin_url' ).val() != '' && typeof( jQuery( '#orddd_lite_admin_url' ).val() ) != 'undefined' ) {
+                jQuery.post( jQuery( '#orddd_lite_admin_url' ).val() + "admin-ajax.php", data, function( response ) {
+                    jQuery( "#orddd_time_slot_field" ).attr( "style" ,"opacity:1" );
+                    if( jQuery( "#orddd_is_cart" ).val() == 1 ) {
+                        jQuery( "#orddd_time_slot" ).attr( "style", "cursor: pointer !important;max-width:300px" );
+                    } else {
+                        jQuery( "#orddd_time_slot" ).attr( "style", "cursor: pointer !important" );
+                    }
+                    jQuery( "#orddd_time_slot" ).removeAttr( "disabled" ); 
+                    // If there is weglot plugin is active then it will return the response with non-translatable div with id time_slot_var so we will check for that below and if it has that div then it will use its html() as response text.
+                    response_text = jQuery( jQuery.parseHTML( response ) ).filter("#time_slot_var");
+                    if ( response_text.length ) {
+                        response = response_text.html();
+                    }
+                    orddd_load_time_slots( response );
+                });
+            }
+        }
+    }
+}
 
 /**
  * This function is called when the date is selected from the calendar.
@@ -805,4 +945,54 @@ function orddd_load_time_slots( response ) {
 		txt.innerHTML = html;
 		return txt.value;
 	}
+}
+
+/**
+ * Saves the delivery information which are changed in the admin Orders page
+ *
+ * @function save_delivery_dates
+ * @memberof orddd_initialize_functions
+ * @param {string} notify - Yes/No
+ * @since 3.13.0
+ */
+ function save_delivery_dates( notify ) {
+    var data = {
+        order_id: jQuery( "#orddd_lite_order_id" ).val(),
+        e_deliverydate: jQuery( '#e_deliverydate').val(),
+        h_deliverydate: jQuery( "#h_deliverydate" ).val(),
+        orddd_time_slot: jQuery( "#orddd_time_slot option:selected" ).val(),
+        orddd_post_type: jQuery( "#orddd_post_type" ).val(),
+        orddd_notify_customer: notify,
+        orddd_charges: jQuery( '#del_charges' ).val(),
+        action: "save_delivery_dates"
+    };
+
+    if( jQuery( '#orddd_lite_admin_url' ).val() != '' && typeof( jQuery( '#orddd_lite_admin_url' ).val() ) != 'undefined' ) {
+        jQuery( "#orddd_update_notice" ).html( 'Updating delivery details...' );
+        jQuery.post( jQuery( '#orddd_lite_admin_url' ).val() + 'admin-ajax.php', data, function( response ) {
+            var validations = response.split( "," );
+            if(  validations[ 0 ] == "yes" && validations[ 1 ] == "yes" && validations[2] == "yes" ) {
+                jQuery( "#orddd_update_notice" ).html( "Delivery details have been updated." );
+                jQuery( "#orddd_update_notice" ).attr( "color", "green" );
+                jQuery( "#orddd_update_notice" ).fadeIn();
+                setTimeout( function() {
+                    jQuery( "#orddd_update_notice" ).fadeOut();
+                },3000 );
+            } else if ( validations[ 0 ] == "no" && ( jQuery( "#orddd_lite_date_field_mandatory" ).val() == "checked" || jQuery( "#date_mandatory_for_shipping_method" ).val() == "checked" ) ) {
+                jQuery( "#orddd_update_notice" ).html( jQuery( "#orddd_lite_field_label" ).val() + " is mandatory." );
+                jQuery( "#orddd_update_notice" ).attr( "color", "red" );
+                jQuery( "#orddd_update_notice" ).fadeIn();
+                setTimeout( function() {
+                    jQuery( "#orddd_update_notice" ).fadeOut();
+                },3000 );
+            } else if ( validations[ 1 ] == "no" && ( ( jQuery( "#orddd_lite_time_slot_mandatory" ).val() == "on" && jQuery( "#orddd_timeslot_field_mandatory" ).val() == "checked" ) ) ) {
+                jQuery( "#orddd_update_notice" ).html( jQuery( "#orddd_timeslot_field_label" ).val() + " is mandatory." );
+                jQuery( "#orddd_update_notice" ).attr( "color", "red" );
+                jQuery( "#orddd_update_notice" ).fadeIn();
+                setTimeout( function() {
+                    jQuery( "#orddd_update_notice" ).fadeOut();
+                },3000 );
+            }
+        });
+    }
 }

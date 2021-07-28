@@ -34,6 +34,8 @@ require_once 'includes/settings/class-orddd-lite-settings.php';
 require_once 'includes/class-orddd-lite-process.php';
 require_once 'includes/settings/class-orddd-lite-filter.php';
 require_once 'includes/class-orddd-lite-privacy.php';
+require_once 'includes/class-orddd-lite-admin-delivery.php';
+require_once 'includes/class-orddd-lite-email-manager.php';
 
 /**
 * Defines the plugin version and url when on the admin page
@@ -82,6 +84,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			}
 
 			// Admin scripts.
+			add_action( 'admin_enqueue_scripts', array( &$this, 'orddd_lite_front_scripts_js' ), 200 );
 			add_action( 'admin_enqueue_scripts', array( &$this, 'orddd_lite_my_enqueue' ) );
 
 			// Frontend.
