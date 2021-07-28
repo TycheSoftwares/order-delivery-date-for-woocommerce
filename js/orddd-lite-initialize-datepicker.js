@@ -110,6 +110,7 @@ jQuery( document ).ready( function() {
 	
 			jQuery( "body" ).trigger( "update_checkout" );
 			if ( 'on' == jQuery( '#orddd_delivery_date_on_cart_page' ).val() && jQuery( '#orddd_is_cart' ).val() == '1' ) {
+				jQuery( "#hidden_timeslot" ).val( jQuery( "#orddd_time_slot" ).find(":selected").val() );
 				jQuery( "body" ).trigger( "wc_update_cart" );
 			}
 			jQuery( "body" ).trigger( "change_orddd_time_slot", [ jQuery( this ) ] );
@@ -332,6 +333,7 @@ function show_times( date, inst ) {
                     if( option_selected == "on" || ( 'on' == jQuery( '#orddd_lite_delivery_date_on_cart_page' ).val() && localStorage.getItem( "orddd_lite_time_slot" ) != '' ) ) {
 							jQuery( "body" ).trigger( "update_checkout" );
 							if ( 'on' == jQuery( '#orddd_lite_delivery_date_on_cart_page' ).val() && jQuery( '#orddd_is_cart' ).val() == '1' ) {
+								jQuery( "#hidden_timeslot" ).val( jQuery( "#orddd_time_slot" ).find(":selected").val() );
 								jQuery( "body" ).trigger( "wc_update_cart" );
 							}
                     }  
@@ -341,6 +343,7 @@ function show_times( date, inst ) {
     } else {
         jQuery( "body" ).trigger( "update_checkout" );
         if ( 'on' == jQuery( '#orddd_delivery_date_on_cart_page' ).val() && jQuery( '#orddd_is_cart' ).val() == '1' ) {
+			jQuery( "#hidden_timeslot" ).val( jQuery( "#orddd_time_slot" ).find(":selected").val() );
             jQuery( "body" ).trigger( "wc_update_cart" );
         }
 	}
@@ -481,6 +484,7 @@ function orddd_set_date_from_session() {
 
             jQuery( "body" ).trigger( "update_checkout" );
             if ( 'on' == jQuery( '#orddd_delivery_date_on_cart_page' ).val() && jQuery( '#orddd_is_cart' ).val() == '1') {
+				jQuery( "#hidden_timeslot" ).val( jQuery( "#orddd_time_slot" ).find(":selected").val() );
                 jQuery( "body" ).trigger( "wc_update_cart" );
             }
 
