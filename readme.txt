@@ -253,6 +253,11 @@ Currently, it is not possible to add different delivery settings for different s
 
 == Changelog ==
 
+= 3.14.0 (10.08.2021) =
+* Enhancement - Added a new setting to apply colors to the delivery calendar.
+* Enhancement - Added `Screen Reader` accessibility to read the calendar.
+* Fix - The auto populated delivery date was not getting translated. This has been fixed.
+
 = 3.13.0 (28.07.2021) =
 * Enhancement - Added a meta box to edit delivery date and delivery time on the edit order page.
 * Fix - Time slot charges were not getting applied on the cart page. This has been fixed.

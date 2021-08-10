@@ -70,3 +70,8 @@ delete_option( 'orddd_lite_lockout_time_slot' );
 
 // Delete holidays.
 delete_option( 'orddd_lite_holidays' );
+
+// Delete color code options.
+delete_option( 'orddd_lite_holiday_color' );
+delete_option( 'orddd_lite_booked_dates_color' );
+delete_option( 'orddd_lite_available_dates_color' );
