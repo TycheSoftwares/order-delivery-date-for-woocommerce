@@ -360,6 +360,13 @@ class Orddd_Lite_Appearance_Settings {
 	}
 
 	/**
+	 * Callback for adding Color code section in Appearance tab settings.
+	 *
+	 * @since 3.14.0
+	 */
+	public static function orddd_lite_color_picker_admin_setting_callback() { }
+
+	/**
 	 * Callback for adding Holidays Color setting
 	 *
 	 * @param array $args Extra arguments containing label & class for the field.
