@@ -405,6 +405,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 					$calendar_theme = 'base';
 				}
 				wp_register_script( 'select2', plugins_url() . '/woocommerce/assets/js/select2/select2.min.js', array( 'jquery', 'jquery-ui-widget', 'jquery-ui-core' ), $wpefield_version, false );
+				wp_register_script ( 'accessibility-orddd', plugins_url( '/js/accessibility.js', __FILE__ ), '', $orddd_version, true );
 				wp_enqueue_script( 'select2' );
 				wp_dequeue_style( 'jquery-ui-style' );
 				wp_register_style( 'jquery-ui-style-orddd-lite', plugins_url( '/css/themes/' . $calendar_theme . '/jquery-ui.css', __FILE__ ), '', $wpefield_version, false );
@@ -448,6 +449,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				}
 
 				wp_enqueue_script( $language_selected, plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
+				wp_enqueue_script( 'accessibility-orddd' );
 			}
 		}
 

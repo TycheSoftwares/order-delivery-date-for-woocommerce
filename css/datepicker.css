@@ -80,7 +80,7 @@
 
 .ui-datepicker .ui-datepicker-next span,
 .ui-datepicker .ui-datepicker-prev span {
-	display: none;
+	background: none;
 }
 
 .ui-datepicker .ui-datepicker-prev {
