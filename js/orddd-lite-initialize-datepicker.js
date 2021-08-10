@@ -6,7 +6,7 @@
  */
 jQuery( document ).ready( function() {
 
-		if ( '1' === jsL10n.is_admin ) {
+		if ( '1' === jsL10n.is_admin && jQuery('#orddd_lite_holiday_color').length > 0 ) {
 			// Add Color Picker to all inputs that have 'color-field' class
 			jQuery( '.cpa-color-picker' ).wpColorPicker();
 		}
