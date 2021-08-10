@@ -324,6 +324,40 @@ class Orddd_Lite_Settings {
 			array( __( 'Select the theme for the calendar which blends with the design of your website.', 'order-delivery-date' ) )
 		);
 
+		add_settings_section(
+			'orddd_lite_color_picker_section',
+			__( 'Color Code Your Calendar', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Appearance_Settings', 'orddd_lite_color_picker_admin_setting_callback' ),
+			'orddd_lite_appearance_page'
+		);
+
+		add_settings_field(
+			'orddd_lite_holiday_color',
+			__( 'Holidays:', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Appearance_Settings', 'orddd_lite_holiday_color_callback' ),
+			'orddd_lite_appearance_page',
+			'orddd_lite_color_picker_section',
+			array( __( 'Color in which holidays should be shown on the calendar on checkout page.', 'order-delivery-date' ) )
+		);
+
+		add_settings_field(
+			'orddd_lite_booked_dates_color',
+			__( 'Booked Dates:', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Appearance_Settings', 'orddd_lite_booked_dates_color_callback' ),
+			'orddd_lite_appearance_page',
+			'orddd_lite_color_picker_section',
+			array( __( 'Color in which booked dates should be shown on the calendar on checkout page.', 'order-delivery-date' ) )
+		);
+
+		add_settings_field(
+			'orddd_lite_available_dates_color',
+			__( 'Available Dates:', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Appearance_Settings', 'orddd_lite_available_dates_color_callback' ),
+			'orddd_lite_appearance_page',
+			'orddd_lite_color_picker_section',
+			array( __( 'Color in which available dates should be shown on the calendar on checkout page.', 'order-delivery-date' ) )
+		);
+
 		register_setting(
 			'orddd_lite_appearance_settings',
 			'orddd_lite_language_selected'
@@ -387,6 +421,21 @@ class Orddd_Lite_Settings {
 		register_setting(
 			'orddd_lite_appearance_settings',
 			'orddd_lite_calendar_theme'
+		);
+
+		register_setting(
+			'orddd_lite_appearance_settings',
+			'orddd_lite_holiday_color'
+		);
+
+		register_setting(
+			'orddd_lite_appearance_settings',
+			'orddd_lite_booked_dates_color'
+		);
+
+		register_setting(
+			'orddd_lite_appearance_settings',
+			'orddd_lite_available_dates_color'
 		);
 	}
 

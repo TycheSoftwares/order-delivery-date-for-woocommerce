@@ -6,6 +6,11 @@
  */
 jQuery( document ).ready( function() {
 
+		if ( '1' === jsL10n.is_admin ) {
+			// Add Color Picker to all inputs that have 'color-field' class
+			jQuery( '.cpa-color-picker' ).wpColorPicker();
+		}
+
 		// Clear local storage for the selected delivery date in next 2 hours.
 		var orddd_last_check_date = localStorage.getItem( "orddd_lite_storage_next_time" );
 		var current_date          = jQuery( "#orddd_lite_current_day" ).val();
@@ -630,13 +635,13 @@ function nd( date ) {
 		if ( holidays_array[ 1 ] == ( ( m + 1 ) + '-' + d + '-' + y ) ||
 			holidays_array[ 1 ] == ( ( m + 1 ) + '-' + d ) ) {
 			if ( '' == holidays_array[ 0 ] ) {
-				return [ false, "", jsL10n.holidayText ];
+				return [ false, "holidays", jsL10n.holidayText ];
 			} else {
-				return [ false, "", holidays_array[ 0 ]  ];
+				return [ false, "holidays", holidays_array[ 0 ]  ];
 			}
 		}
 	}
-	return [ true ];
+	return [ true, 'available-deliveries', 'Available' ];
 }
 
 /**
@@ -653,7 +658,7 @@ function dwd( date ) {
 	var lockoutDays = eval( '[' + jQuery( '#orddd_lite_lockout_days' ).val() + ']' );
 	for ( i = 0; i < lockoutDays.length; i++ ) {
 		if ( jQuery.inArray( ( m + 1 ) + '-' + d + '-' + y, lockoutDays ) != -1 ) {
-			return [ false, "", jsL10n.bookedText ];
+			return [ false, "booked_dates", jsL10n.bookedText ];
 		}
 	}
 	var day = 'orddd_lite_weekday_' + date.getDay();
@@ -803,7 +808,7 @@ function avd( date, inst ) {
 		day        = 'orddd_lite_weekday_' + new_date.getDay();
 		day_check  = jQuery( "#" + day ).val();
 		is_holiday = nd( new_date );
-		if ( day_check != "checked" || ( is_holiday != 'true' && ! is_holiday_exclude ) ) {
+		if ( day_check != "checked" || ( ! is_holiday[0]  && ! is_holiday_exclude ) ) {
 			new_l_end   = l_end = new Date( ad( l_end, 2 ) );
 			end         = ( l_end.getMonth() + 1 ) + "/" + l_end.getDate() + "/" + l_end.getFullYear();
 			loopCounter = gd( start , end , 'days' );
