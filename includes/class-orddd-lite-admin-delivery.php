@@ -28,7 +28,6 @@ class Orddd_Lite_Admin_Delivery {
 	 * @since 3.13.0
 	 */
 	public function __construct() {
-		add_action( 'woocommerce_saved_order_items', array( &$this, 'orddd_woocommerce_saved_order_items' ), 10, 2 );
 		add_action( 'wp_ajax_save_delivery_dates', array( &$this, 'save_delivery_dates' ) );
 		// Display Order Delivery Date meta box on Add/Edit Orders Page.
 		if ( 'on' === get_option( 'orddd_lite_enable_delivery_date' ) ) {
