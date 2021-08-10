@@ -358,4 +358,46 @@ class Orddd_Lite_Appearance_Settings {
 		<label for="orddd_lite_calendar_theme_name"><?php echo wp_kses_post( $args[0] ); ?></label>
 		<?php
 	}
+
+	/**
+	 * Callback for adding Holidays Color setting
+	 *
+	 * @param array $args Extra arguments containing label & class for the field.
+	 * @since 3.14.0
+	 */
+	public static function orddd_lite_holiday_color_callback( $args ) {
+		$orddd_lite_holiday_color = get_option( 'orddd_lite_holiday_color' );
+		?>
+		<input id="orddd_lite_holiday_color"  name="orddd_lite_holiday_color" class="cpa-color-picker" value="<?php echo esc_attr( $orddd_lite_holiday_color ); ?>">
+		<label for="orddd_lite_holiday_color"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
+
+	/**
+	 * Callback for adding Booked Dates Color setting
+	 *
+	 * @param array $args Extra arguments containing label & class for the field.
+	 * @since 3.14.0
+	 */
+	public static function orddd_lite_booked_dates_color_callback( $args ) {
+		$orddd_lite_booked_dates_color = get_option( 'orddd_lite_booked_dates_color' );
+		?>
+		<input id="orddd_lite_booked_dates_color"  name="orddd_lite_booked_dates_color" class="cpa-color-picker" value="<?php echo esc_attr( $orddd_lite_booked_dates_color ); ?>">
+		<label for="orddd_lite_booked_dates_color"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
+
+	/**
+	 * Callback for adding available dates Color setting
+	 *
+	 * @param array $args Extra arguments containing label & class for the field.
+	 * @since 3.14.0
+	 */
+	public static function orddd_lite_available_dates_color_callback( $args ) {
+		$orddd_lite_available_dates_color = get_option( 'orddd_lite_available_dates_color' );
+		?>
+		<input type="text" id="orddd_lite_available_dates_color"  name="orddd_lite_available_dates_color" class="cpa-color-picker" value="<?php echo esc_attr( $orddd_lite_available_dates_color ); ?>">
+		<label for="orddd_lite_available_dates_color"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
 }

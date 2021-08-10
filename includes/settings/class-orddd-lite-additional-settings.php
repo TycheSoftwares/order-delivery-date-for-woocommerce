@@ -233,10 +233,13 @@ class Orddd_Lite_Additional_Settings {
 	 * @param array $args Extra arguments containing label & class for the field.
 	 */
 	public static function orddd_lite_show_partially_booked_dates_callback( $args ) {
+		$orddd_lite_show_partially_booked_dates = '';
+		if ( 'on' === get_option( 'orddd_lite_show_partially_booked_dates' ) ) {
+			$orddd_lite_show_partially_booked_dates = 'checked';
+		}
 		?>
-		<input type="checkbox" name="orddd_show_partially_booked_dates" id="orddd_show_partially_booked_dates" class="day-checkbox" disabled />
-		<label for="orddd_show_partially_booked_dates"><?php echo wp_kses_post( $args[0] ); ?></label>
-		<br><strong><em>Upgrade to <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</em></strong>
+		<input type="checkbox" name="orddd_lite_show_partially_booked_dates" id="orddd_lite_show_partially_booked_dates" class="day-checkbox" <?php echo esc_attr( $orddd_lite_show_partially_booked_dates ); ?> />
+		<label for="orddd_lite_show_partially_booked_dates"><?php echo wp_kses_post( $args[0] ); ?></label>
 		<?php
 	}
 
