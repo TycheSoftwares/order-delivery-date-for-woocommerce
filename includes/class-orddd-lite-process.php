@@ -285,8 +285,25 @@ class Orddd_Lite_Process {
 			<input type="hidden" name="orddd_lite_current_hour" id="orddd_lite_current_hour" value="<?php echo esc_attr( $current_hour ); ?>">
 			<input type="hidden" name="orddd_lite_current_minute" id="orddd_lite_current_minute" value="<?php echo esc_attr( $current_minute ); ?>">
 			<?php
-			$is_delivery_enabled = Orddd_Lite_Common::orddd_lite_is_delivery_enabled();
+			$is_delivery_enabled              = Orddd_Lite_Common::orddd_lite_is_delivery_enabled();
+			$orddd_lite_holiday_color         = get_option( 'orddd_lite_holiday_color' );
+			$orddd_lite_booked_dates_color    = get_option( 'orddd_lite_booked_dates_color' );
+			$orddd_lite_available_dates_color = get_option( 'orddd_lite_available_dates_color' );
 
+			echo '<style type="text/css">
+				.holidays {
+					background-color: ' . esc_attr( $orddd_lite_holiday_color ) . ' !important;
+				}
+
+				.booked_dates {
+					background-color: ' . esc_attr( $orddd_lite_booked_dates_color ) . ' !important;
+				}
+
+				.available-deliveries, .available-deliveries a {
+					background: ' . esc_attr( $orddd_lite_available_dates_color ) . ' !important;
+				}
+
+			</style>';
 			if ( 'yes' === $is_delivery_enabled ) {
 				$validate_wpefield = false;
 				if ( get_option( 'orddd_lite_date_field_mandatory' ) === 'checked' ) {

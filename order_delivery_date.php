@@ -359,6 +359,9 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				wp_enqueue_script( $value, plugins_url( "/js/i18n/jquery.ui.datepicker-$key.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
 			}
 
+			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_script( 'wp-color-picker' );
+
 			wp_register_script( 'orddd-lite-select2', plugins_url() . '/woocommerce/assets/js/select2/select2.min.js', array( 'jquery', 'jquery-ui-widget', 'jquery-ui-core' ), $wpefield_version, false );
 			wp_enqueue_script( 'orddd-lite-select2' );
 
@@ -413,21 +416,6 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				wp_enqueue_style( 'datepicker', plugins_url( '/css/datepicker.css', __FILE__ ), '', $wpefield_version, false );
 
 				wp_dequeue_script( 'initialize-datepicker' );
-				wp_enqueue_script( 'initialize-datepicker-orddd', plugins_url( '/js/orddd-lite-initialize-datepicker.js', __FILE__ ), '', $wpefield_version, false );
-				$is_admin = is_admin() ? true : false;
-
-				$js_args = array(
-					'clearText'   => __( 'Clear', 'order-delivery-date' ),
-					'holidayText' => __( 'Holiday', 'order-delivery-date' ),
-					'bookedText'  => __( 'Booked', 'order-delivery-date' ),
-					'selectText'  => __( 'Select a time slot', 'order-delivery-date' ),
-					'asapText'    => __( 'As Soon As Possible', 'order-delivery-date' ),
-					'NAText'      => __( 'No time slots are available', 'order-delivery-date' ),
-					'wooVersion'  => get_option( 'woocommerce_version' ),
-					'is_admin'    => $is_admin,
-					'bookedText'  => __( 'Booked', 'order-delivery-date' ),
-				);
-				wp_localize_script( 'initialize-datepicker-orddd', 'jsL10n', $js_args );
 
 				if ( isset( $_GET['lang'] ) && '' !== $_GET['lang'] && null !== $_GET['lang'] ) {
 					$language_selected = wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['lang'] ) ) );
@@ -449,7 +437,24 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				}
 
 				wp_enqueue_script( $language_selected, plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
-				wp_enqueue_script( 'accessibility-orddd' );
+				
+
+				wp_enqueue_script( 'initialize-datepicker-orddd', plugins_url( '/js/orddd-lite-initialize-datepicker.js', __FILE__ ), '', $wpefield_version, false );
+				$is_admin = is_admin() ? true : false;
+
+				$js_args = array(
+					'clearText'   => __( 'Clear', 'order-delivery-date' ),
+					'holidayText' => __( 'Holiday', 'order-delivery-date' ),
+					'bookedText'  => __( 'Booked', 'order-delivery-date' ),
+					'selectText'  => __( 'Select a time slot', 'order-delivery-date' ),
+					'asapText'    => __( 'As Soon As Possible', 'order-delivery-date' ),
+					'NAText'      => __( 'No time slots are available', 'order-delivery-date' ),
+					'wooVersion'  => get_option( 'woocommerce_version' ),
+					'is_admin'    => $is_admin,
+					'bookedText'  => __( 'Booked', 'order-delivery-date' ),
+				);
+				wp_localize_script( 'initialize-datepicker-orddd', 'jsL10n', $js_args );
+        wp_enqueue_script( 'accessibility-orddd' );
 			}
 		}
 
