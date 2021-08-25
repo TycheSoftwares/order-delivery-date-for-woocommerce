@@ -90,3 +90,7 @@ table.form-table #orddd_lite_ics_url_list .orddd_lite_ics_feed_url {
     float: right;
     width: 50%;
 }
+
+.add-timeslot {
+	margin-top: 12px;
+}
