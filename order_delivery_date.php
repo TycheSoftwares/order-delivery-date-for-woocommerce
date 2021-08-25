@@ -375,7 +375,11 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			wp_register_script( 'datepick', plugins_url() . '/order-delivery-date-for-woocommerce/js/jquery.datepick.js', '', $wpefield_version, false );
 			wp_enqueue_script( 'datepick' );
 			wp_enqueue_style( 'orddd-datepick', plugins_url( '/css/jquery.datepick.css', __FILE__ ), '', $wpefield_version, false );
-
+			if ( isset( $_GET['section'] ) && 'time_slot' === $_GET['section'] ) { //phpcs:ignore
+				wp_enqueue_style( 'orddd-lite-timepicker-style', plugins_url( '/css/jquery.timepicker.min.css', __FILE__ ), '', $wpefield_version, false );
+				wp_enqueue_script( 'orddd-lite-timepicker', plugins_url( '/js/jquery.timepicker.min.js', __FILE__ ), array( 'jquery' ), $wpefield_version, true );
+				wp_enqueue_script( 'orddd-lite-timesetting', plugins_url( '/js/orddd-bulk-time-slots.js', __FILE__ ), array( 'jquery', 'orddd-lite-timepicker' ), $wpefield_version, true );
+			}
 		}
 
 		/**
@@ -450,6 +454,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 					'asapText'    => __( 'As Soon As Possible', 'order-delivery-date' ),
 					'NAText'      => __( 'No time slots are available', 'order-delivery-date' ),
 					'wooVersion'  => get_option( 'woocommerce_version' ),
+					'time_format' => get_option( 'orddd_lite_delivery_time_format' ),
 					'is_admin'    => $is_admin,
 					'bookedText'  => __( 'Booked', 'order-delivery-date' ),
 				);

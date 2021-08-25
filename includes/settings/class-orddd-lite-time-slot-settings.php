@@ -203,34 +203,15 @@ class Orddd_Lite_Time_Slot_Settings {
 	 * @since 2.4
 	 */
 	public static function orddd_lite_time_from_hours_callback( $args ) {
-		echo '<fieldset>
-            <label for="orddd_lite_time_from_hours">
-                <select name="orddd_lite_time_from_hours" id="orddd_lite_time_from_hours" size="1">';
+		?>
+		<section class="add-timeslot">
+			<input type="text" name="orddd_lite_time_from_hours[]" id="orddd_lite_time_from_hours" value=""/>
+			To
+			<input type="text" name="orddd_lite_time_to_hours[]" id="orddd_lite_time_to_hours" value=""/>
 
-		for ( $i = 0; $i <= 23; $i++ ) {
-			printf(
-				"<option value='%s'>%s</option>\n",
-				esc_attr( $i ),
-				esc_attr( $i )
-			);
-		}
-				echo '</select>
-                <label>&nbsp;' . esc_html__( 'Hours', 'order-delivery-date' ) . '</label>&nbsp&nbsp&nbsp;
-                <select name="orddd_lite_time_from_minutes" id="orddd_lite_time_from_minutes" size="1">';
-		for ( $i = 0; $i <= 59; $i++ ) {
-			if ( $i < 10 ) {
-				$i = '0' . $i;
-			}
-			printf(
-				"<option value='%s'>%s</option>\n",
-				esc_attr( $i ),
-				esc_attr( $i )
-			);
-		}
-				echo '</select>
-                <label>&nbsp;' . esc_html__( 'Minutes', 'order-delivery-date' ) . '</label>
-            </label>';
-		echo '<p>' . wp_kses_post( $args[0] ) . '</p></fieldset>';
+			<a href="#" id="add_another_slot" role="button">+ Add another slot</a>
+		</section>
+		<?php
 	}
 
 	/**
@@ -239,36 +220,7 @@ class Orddd_Lite_Time_Slot_Settings {
 	 * @param array $args Extra arguments containing label & class for the field.
 	 * @since 2.4
 	 */
-	public static function orddd_lite_time_to_hours_callback( $args ) {
-		echo '<fieldset>
-            <label for="orddd_lite_time_to_hours">
-                <select name="orddd_lite_time_to_hours" id="orddd_lite_time_to_hours" size="1">';
-
-		for ( $i = 0; $i <= 23; $i++ ) {
-			printf(
-				"<option value='%s'>%s</option>\n",
-				esc_attr( $i ),
-				esc_attr( $i )
-			);
-		}
-				echo '</select>
-                <label>&nbsp;' . esc_html__( 'Hours', 'order-delivery-date' ) . '</lable>&nbsp&nbsp&nbsp;
-                <select name="orddd_lite_time_to_minutes" id="orddd_lite_time_to_minutes" size="1">';
-		for ( $i = 0; $i <= 59; $i++ ) {
-			if ( $i < 10 ) {
-				$i = '0' . $i;
-			}
-			printf(
-				"<option value='%s'>%s</option>\n",
-				esc_attr( $i ),
-				esc_attr( $i )
-			);
-		}
-				echo '</select>
-                <label>&nbsp;' . esc_html__( 'Minutes', 'order-delivery-date' ) . '</label>
-            </label>';
-		echo '<p>' . wp_kses_post( $args[0] ) . '</p></fieldset>';
-	}
+	public static function orddd_lite_time_to_hours_callback( $args ) {}
 
 	/**
 	 * Callback for adding Lockout Time slot after X orders setting
@@ -298,12 +250,13 @@ class Orddd_Lite_Time_Slot_Settings {
 	}
 
 	/**
-	 * Callback for saving time slots
+	 * Callback for saving time slots.
 	 *
+	 * @param array $data Setting fields data in array.
 	 * @return string
 	 * @since 2.4
 	 */
-	public static function orddd_lite_delivery_time_slot_callback() {
+	public static function orddd_lite_delivery_time_slot_callback( $data ) {
 		global $orddd_lite_weekdays;
 		foreach ( $orddd_lite_weekdays as $n => $day_name ) {
 			$alldays[ $n ] = get_option( $n );
@@ -312,10 +265,7 @@ class Orddd_Lite_Time_Slot_Settings {
 
 		$timeslot         = get_option( 'orddd_lite_delivery_time_slot_log' );
 		$timeslot_new_arr = array();
-		if ( 'null' === $timeslot ||
-			'' === $timeslot ||
-			'{}' === $timeslot ||
-			'[]' === $timeslot ) {
+		if ( 'null' === $timeslot || '' === $timeslot || '{}' === $timeslot || '[]' === $timeslot ) {
 			$timeslot_arr = array();
 		} else {
 			$timeslot_arr = json_decode( $timeslot );
@@ -337,70 +287,173 @@ class Orddd_Lite_Time_Slot_Settings {
 			}
 		}
 
-		if ( ( ! isset( $_POST['orddd_lite_time_slot_for_weekdays'] ) ) && isset( $_POST['orddd_lite_time_from_hours'] ) && '0' !== $_POST['orddd_lite_time_from_hours'] && isset( $_POST['orddd_lite_time_to_hours'] ) && '0' !== $_POST['orddd_lite_time_to_hours'] ) { //phpcs:ignore
-			add_settings_error( 'orddd_delivery_time_slot_log_error', 'time_slot_save_error', 'Please Select Delivery Days/Dates for the Time slot', 'error' );
-		} else {
-			$devel_dates = '';
-			if ( isset( $_POST['orddd_lite_time_slot_for_delivery_days'] ) ) { //phpcs:ignore
-				$time_slot_value = $_POST['orddd_lite_time_slot_for_delivery_days']; //phpcs:ignore
-				if ( 'weekdays' === $time_slot_value ) {
-					if ( isset( $_POST['orddd_lite_time_slot_for_weekdays'] ) ) { //phpcs:ignore
-						$orddd_time_slot_for_weekdays = $_POST['orddd_lite_time_slot_for_weekdays']; //phpcs:ignore
+		$selected_dates           = '';
+		$time_slot_value          = '';
+		$lockouttime              = '';
+		$additional_charges       = '';
+		$additional_charges_label = '';
 
-						// Add all the individual enabled weekdays if 'all' is selected.
-						if ( in_array( 'all', $orddd_time_slot_for_weekdays, true ) ) {
-							$weekdays = array();
-							foreach ( $alldayskeys as $key ) {
-								if ( 'checked' === $alldays[ $key ] ) {
-									array_push( $weekdays, $key );
-								}
+		if ( isset( $_POST['orddd_lite_bulk_time_slot_for_delivery_days'] ) && '' !== $_POST['orddd_lite_bulk_time_slot_for_delivery_days'] && isset( $_POST['orddd_lite_individual_or_bulk'] ) && 'bulk' === $_POST['orddd_lite_individual_or_bulk'] ) { // phpcs:ignore
+			$time_slot_value = $_POST['orddd_lite_bulk_time_slot_for_delivery_days']; // phpcs:ignore
+			if ( isset( $_POST['orddd_lite_bulk_time_slot_lockout'] ) ) { //phpcs:ignore
+				$lockouttime = sanitize_text_field( wp_unslash( $_POST['orddd_lite_bulk_time_slot_lockout'] ) ); //phpcs:ignore
+			}
+
+			if ( isset( $_POST['orddd_lite_bulk_time_slot_additional_charges'] ) ) { //phpcs:ignore
+				$additional_charges = sanitize_text_field( wp_unslash( $_POST['orddd_lite_bulk_time_slot_additional_charges'] ) ); //phpcs:ignore
+			}
+
+			if ( isset( $_POST['orddd_lite_bulk_time_slot_additional_charges_label'] ) ) { //phpcs:ignore
+				$additional_charges_label = sanitize_text_field( wp_unslash( $_POST['orddd_lite_bulk_time_slot_additional_charges_label'] ) ); //phpcs:ignore
+			}
+
+			if ( 'weekdays' === $time_slot_value ) {
+				if ( isset( $_POST['orddd_lite_time_slot_for_weekdays_bulk'] ) ) { // phpcs:ignore
+					$orddd_time_slot_for_weekdays = $_POST['orddd_lite_time_slot_for_weekdays_bulk']; // phpcs:ignore
+
+					// Add all the individual enabled weekdays if 'all' is selected.
+					if ( in_array( 'all', $orddd_time_slot_for_weekdays, true ) ) {
+						$weekdays = array();
+						foreach ( $alldayskeys as $key ) {
+							if ( 'checked' === $alldays[ $key ] ) {
+								array_push( $weekdays, $key );
 							}
-						} else {
-							$weekdays = $_POST['orddd_lite_time_slot_for_weekdays']; //phpcs:ignore
 						}
-
-						$devel_dates = wp_json_encode( $weekdays );
+					} else {
+						$weekdays = $_POST['orddd_lite_time_slot_for_weekdays_bulk']; // phpcs:ignore
 					}
+
+					$selected_dates = wp_json_encode( $weekdays );
 				}
-			} else {
-				$time_slot_value = '';
 			}
-
-			$from_hour                = 0;
-			$from_minute              = 0;
-			$to_hour                  = 0;
-			$to_minute                = 0;
-			$lockouttime              = '';
-			$additional_charges       = '';
-			$additional_charges_label = '';
-
-			if ( isset( $_POST['orddd_lite_time_from_hours'] ) ) { //phpcs:ignore
-				$from_hour = $_POST['orddd_lite_time_from_hours']; //phpcs:ignore
-			}
-
-			if ( isset( $_POST['orddd_lite_time_from_minutes'] ) ) { //phpcs:ignore
-				$from_minute = $_POST['orddd_lite_time_from_minutes']; //phpcs:ignore
-			}
-
-			if ( isset( $_POST['orddd_lite_time_to_hours'] ) ) { //phpcs:ignore
-				$to_hour = $_POST['orddd_lite_time_to_hours']; //phpcs:ignore
-			}
-
-			if ( isset( $_POST['orddd_lite_time_to_minutes'] ) ) { //phpcs:ignore
-				$to_minute = $_POST['orddd_lite_time_to_minutes']; //phpcs:ignore
-			}
-
+		} elseif ( isset( $_POST['orddd_lite_time_slot_for_delivery_days'] ) && '' !== $_POST['orddd_lite_time_slot_for_delivery_days'] ) { // phpcs:ignore 
+			$time_slot_value = $_POST['orddd_lite_time_slot_for_delivery_days']; // phpcs:ignore
 			if ( isset( $_POST['orddd_lite_time_slot_lockout'] ) ) { //phpcs:ignore
-				$lockouttime = $_POST['orddd_lite_time_slot_lockout']; //phpcs:ignore
+				$lockouttime = sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot_lockout'] ) ); //phpcs:ignore
 			}
 
 			if ( isset( $_POST['orddd_lite_time_slot_additional_charges'] ) ) { //phpcs:ignore
-				$additional_charges = $_POST['orddd_lite_time_slot_additional_charges']; //phpcs:ignore
+				$additional_charges = sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot_additional_charges'] ) ); //phpcs:ignore
 			}
 
 			if ( isset( $_POST['orddd_lite_time_slot_additional_charges_label'] ) ) { //phpcs:ignore
-				$additional_charges_label = $_POST['orddd_lite_time_slot_additional_charges_label']; //phpcs:ignore
+				$additional_charges_label = sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot_additional_charges_label'] ) ); //phpcs:ignore
 			}
+
+			if ( 'weekdays' === $time_slot_value ) {
+				if ( isset( $_POST['orddd_lite_time_slot_for_weekdays'] ) ) { // phpcs:ignore
+					$orddd_time_slot_for_weekdays = $_POST['orddd_lite_time_slot_for_weekdays']; // phpcs:ignore
+
+					// Add all the individual enabled weekdays if 'all' is selected.
+					if ( in_array( 'all', $orddd_time_slot_for_weekdays, true ) ) {
+						$weekdays = array();
+						foreach ( $alldayskeys as $key ) {
+							if ( 'checked' === $alldays[ $key ] ) {
+								array_push( $weekdays, $key );
+							}
+						}
+					} else {
+						$weekdays = $_POST['orddd_lite_time_slot_for_weekdays']; // phpcs:ignore
+					}
+
+					$selected_dates = wp_json_encode( $weekdays );
+				}
+			}
+		}
+
+		if ( ( ( ! isset( $_POST['orddd_lite_time_slot_for_weekdays'] ) ) && ( ! isset( $_POST['orddd_lite_time_slot_for_weekdays_bulk'] ) ) ) //phpcs:ignore
+		&& ( ( ! empty( $_POST['orddd_lite_time_from_hours'] ) && '' !== $_POST['orddd_lite_time_from_hours'][0] ) //phpcs:ignore
+		|| ( isset( $_POST['orddd_lite_time_slot_starts_from'] ) && '' !== $_POST['orddd_lite_time_slot_starts_from'] ) ) ) { //phpcs:ignore
+
+			add_settings_error( 'orddd_delivery_time_slot_log_error', 'time_slot_save_error', 'Please Select Delivery Days/Dates for the Time slot', 'error' );
+
+		} elseif ( isset( $_POST['orddd_lite_time_slot_starts_from'] ) && '' !== $_POST['orddd_lite_time_slot_starts_from'] ) { //phpcs:ignore
+			$duration = isset( $_POST['orddd_lite_time_slot_duration'] ) && '' !== $_POST['orddd_lite_time_slot_duration'] ? wp_unslash( sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot_duration'] ) ) ) : 60; //phpcs:ignore
+
+			$frequency = isset( $_POST['orddd_lite_time_slot_interval'] ) && '' !== $_POST['orddd_lite_time_slot_interval'] ? sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot_interval'] ) ) : 0; //phpcs:ignore
+
+			$time_starts_from = isset( $_POST['orddd_lite_time_slot_starts_from'] ) && '' !== $_POST['orddd_lite_time_slot_starts_from'] ? sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot_starts_from'] ) ) : ''; //phpcs:ignore
+			$time_ends_at     = isset( $_POST['orddd_lite_time_slot_ends_at'] ) && '' !== $_POST['orddd_lite_time_slot_ends_at'] ? sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot_ends_at'] ) ) : $time_starts_from; //phpcs:ignore
+
+			if ( 0 === $duration ) {
+				add_settings_error( 'orddd_delivery_time_slot_log_error', 'time_slot_save_error', 'Please Set the Time Slot Duration to be Greater than 0.', 'error' );
+			} elseif ( '' !== $time_starts_from ) {
+				$duration_in_secs  = $duration * 60;
+				$frequency_in_secs = $frequency * 60;
+				$array_of_time     = array();
+				$start_time        = strtotime( $time_starts_from );
+				$end_time          = strtotime( $time_ends_at );
+
+				while ( $start_time <= $end_time ) {
+					$from_hours  = gmdate( 'G:i', $start_time );
+					$start_time += $duration_in_secs;
+
+					if ( $start_time > $end_time ) {
+						break;
+					}
+					$to_hours        = gmdate( 'G:i', $start_time );
+					$array_of_time[] = $from_hours . ' - ' . $to_hours;
+					if ( $frequency_in_secs > 0 ) {
+						$start_time += $frequency_in_secs;
+					}
+				}
+
+				$timeslot_new_arr = self::orddd_lite_save_timeslots( $array_of_time, $timeslot_new_arr, $time_slot_value, $selected_dates, $lockouttime, $additional_charges, $additional_charges_label );
+			}
+		} elseif ( isset( $_POST['orddd_lite_time_from_hours'] ) && '' !== $_POST['orddd_lite_time_from_hours'] ) { //phpcs:ignore
+			$from_hours = isset( $_POST['orddd_lite_time_from_hours'] ) && '' !== $_POST['orddd_lite_time_from_hours'] ? wp_unslash( array_map( 'sanitize_text_field', wp_unslash( $_POST['orddd_lite_time_from_hours'] ) ) ) : ''; //phpcs:ignore
+			$to_hours = isset( $_POST['orddd_lite_time_to_hours'] ) && '' !== $_POST['orddd_lite_time_to_hours'] ? wp_unslash( array_map( 'sanitize_text_field', wp_unslash( $_POST['orddd_lite_time_to_hours'] ) ) ) : $from_hours; //phpcs:ignore
+			$array_of_time = array();
+			if ( ! empty( $from_hours ) ) {
+				foreach ( $from_hours as $key => $from_hour ) {
+
+					if ( '' === $from_hour ) {
+						continue;
+					}
+					if ( '' === $to_hours[ $key ] ) {
+						$array_of_time[] = $from_hour;
+					} else {
+						$array_of_time[] = $from_hour . ' - ' . $to_hours[ $key ];
+					}
+				}
+
+				$timeslot_new_arr = self::orddd_lite_save_timeslots( $array_of_time, $timeslot_new_arr, $time_slot_value, $selected_dates, $lockouttime, $additional_charges, $additional_charges_label );
+			}
+		}
+
+		$timeslot_jarr = wp_json_encode( $timeslot_new_arr );
+		return $timeslot_jarr;
+	}
+
+	/**
+	 * Save the timeslots for weekdays or specific dates.
+	 *
+	 * @param array  $array_of_time Array of the time slots to save.
+	 * @param array  $timeslot_new_arr Existing time slots array.
+	 * @param string $time_slot_value Time slot for weekdays or specific dates.
+	 * @param string $selected_dates Selected weekdays or specific dates.
+	 * @param int    $lockouttime Maximum order deliveries for the time slot.
+	 * @param string $additional_charges Additional charges for time slot.
+	 * @param string $additional_charges_label Additional charges label.
+	 * @return array
+	 * @since 3.15.0
+	 */
+	public static function orddd_lite_save_timeslots( $array_of_time, $timeslot_new_arr, $time_slot_value, $selected_dates, $lockouttime, $additional_charges, $additional_charges_label ) {
+		$time_format = Orddd_Lite_Common::orddd_lite_get_time_format();
+
+		foreach ( $array_of_time as $timeslot ) {
+			if ( 'h:i A' === $time_format ) {
+				$timeslot = Orddd_Lite_Common::orddd_lite_change_time_slot_format( $timeslot );
+			}
+
+			$timeslot_array = explode( ' - ', $timeslot );
+			$from_time      = explode( ':', $timeslot_array[0] );
+			$to_time        = explode( ':', $timeslot_array[1] );
+
+			$from_hour   = $from_time[0];
+			$from_minute = $from_time[1];
+			$to_hour     = $to_time[0];
+			$to_minute   = $to_time[1];
 
 			$from_hour_new   = gmdate( 'G', gmmktime( $from_hour, $from_minute, 0, gmdate( 'm' ), gmdate( 'd' ), gmdate( 'Y' ) ) );
 			$from_minute_new = gmdate( 'i ', gmmktime( $from_hour, $from_minute, 0, gmdate( 'm' ), gmdate( 'd' ), gmdate( 'Y' ) ) );
@@ -415,7 +468,9 @@ class Orddd_Lite_Time_Slot_Settings {
 				$th = $value['th'];
 				$tm = $value['tm'];
 
-				if ( 'weekdays' === $value['tv'] && gettype( json_decode( $value['dd'] ) ) === 'array' && count( json_decode( $value['dd'] ) ) > 0 ) {
+				if ( 'weekdays' === $value['tv'] &&
+					gettype( json_decode( $value['dd'] ) ) === 'array' &
+					count( json_decode( $value['dd'] ) ) > 0 ) {
 					$dd = json_decode( $value['dd'] );
 
 					if ( 'all' === $dd[0] &&
@@ -427,9 +482,15 @@ class Orddd_Lite_Time_Slot_Settings {
 						break;
 					} else {
 						foreach ( $dd as $id => $day ) {
-							if ( isset( $_POST['orddd_litetime_slot_for_weekdays'] ) && in_array( $day, $_POST['orddd_lite_time_slot_for_weekdays'], true ) && $fh === $from_hour_new && $fm === $from_minute_new && $th === $to_hour_new && $tm === $to_minute_new ) { //phpcs:ignore
+							if ( isset( $_POST['orddd_lite_time_slot_for_weekdays'] ) && //phpcs:ignore
+							in_array( $day, $_POST['orddd_lite_time_slot_for_weekdays'], true ) && //phpcs:ignore
+							$fh === $from_hour_new &&
+							$fm === $from_minute_new &&
+							$th === $to_hour_new &&
+							$tm === $to_minute_new ) {
 								$timeslot_present = 'yes';
 								break;
+
 							}
 						}
 					}
@@ -437,25 +498,199 @@ class Orddd_Lite_Time_Slot_Settings {
 			}
 
 			if ( 'no' === $timeslot_present ) {
-				if ( $from_hour_new !== $to_hour_new || $from_minute_new !== $to_minute_new ) {
-					$timeslot_new_arr[] = array(
-						'tv'                       => $time_slot_value,
-						'dd'                       => $devel_dates,
-						'lockout'                  => $lockouttime,
-						'additional_charges'       => $additional_charges,
-						'additional_charges_label' => $additional_charges_label,
-						'fh'                       => $from_hour_new,
-						'fm'                       => $from_minute_new,
-						'th'                       => $to_hour_new,
-						'tm'                       => $to_minute_new,
-					);
-				}
+				$timeslot_new_arr[] = array(
+					'tv'                       => $time_slot_value,
+					'dd'                       => $selected_dates,
+					'lockout'                  => $lockouttime,
+					'additional_charges'       => $additional_charges,
+					'additional_charges_label' => $additional_charges_label,
+					'fh'                       => $from_hour_new,
+					'fm'                       => $from_minute_new,
+					'th'                       => $to_hour_new,
+					'tm'                       => $to_minute_new,
+				);
 			}
 		}
-		$timeslot_jarr = wp_json_encode( $timeslot_new_arr );
-		return $timeslot_jarr;
+
+		return $timeslot_new_arr;
 	}
 
+
+	/******************** Bulk Time slot settings ***********************/
+
+	/**
+	 * Callback for adding Time slot settings Extra arguments containing label & class for the field
+	 */
+	public static function orddd_lite_bulk_time_slot_admin_settings_callback() {}
+
+	/**
+	 * Callback to add time slots for weekday or specific dates
+	 *
+	 * @param array $args Extra arguments containing label & class for the field.
+	 * @since 3.15.0
+	 */
+	public static function orddd_lite_bulk_time_slot_for_delivery_days_callback( $args ) {
+		global $orddd_lite_weekdays;
+		$orddd_time_slot_for_weekdays       = 'checked';
+		$orddd_time_slot_for_specific_dates = '';
+		if ( 'weekdays' === get_option( 'orddd_lite_bulk_time_slot_for_delivery_days' ) ) {
+			$orddd_time_slot_for_weekdays       = 'checked';
+			$orddd_time_slot_for_specific_dates = '';
+		} elseif ( 'specific_dates' === get_option( 'orddd_lite_bulk_time_slot_for_delivery_days' ) ) {
+			$orddd_time_slot_for_specific_dates = 'checked';
+			$orddd_time_slot_for_weekdays       = '';
+		}
+
+		?>
+		<p><label><input type="radio" name="orddd_lite_bulk_time_slot_for_delivery_days" id="orddd_lite_bulk_time_slot_for_delivery_days" value="weekdays"<?php echo esc_attr( $orddd_time_slot_for_weekdays ); ?>/><?php esc_html_e( 'Weekdays', 'order-delivery-date' ); ?></label>
+		<label><input disabled='' type="radio" name="orddd_lite_bulk_time_slot_for_delivery_days" id="orddd_lite_bulk_time_slot_for_delivery_days" value="specific_dates"<?php echo esc_attr( $orddd_time_slot_for_specific_dates ); ?>/><?php esc_html_e( 'Specific Dates', 'order-delivery-date' ); ?></label>
+		</p>
+
+		<?php
+		$alldays = array();
+		foreach ( $orddd_lite_weekdays as $n => $day_name ) {
+			$alldays[ $n ] = get_option( $n );
+		}
+
+		$alldayskeys = array_keys( $alldays );
+		$checked     = 'No';
+		foreach ( $alldayskeys as $key ) {
+			if ( 'checked' === $alldays[ $key ] ) {
+				$checked = 'Yes';
+			}
+		}
+		?>
+		<label for="orddd_lite_bulk_time_slot_for_delivery_days"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
+
+	/**
+	 * Callback for adding Weekdays for Time slot setting
+	 *
+	 * @param array $args Extra arguments containing label & class for the field.
+	 * @since 3.15.0
+	 */
+	public static function orddd_lite_time_slot_for_weekdays_bulk_callback( $args ) {
+		global $orddd_lite_weekdays;
+		foreach ( $orddd_lite_weekdays as $n => $day_name ) {
+			$alldays[ $n ] = get_option( $n );
+		}
+		$alldayskeys = array_keys( $alldays );
+		$checked     = 'No';
+		foreach ( $alldayskeys as $key ) {
+			if ( 'checked' === $alldays[ $key ] ) {
+				$checked = 'Yes';
+			}
+		}
+
+		printf(
+			'<div class="time_slot_options_bulk time_slot_for_bulk_weekdays">
+             <select class="orddd_lite_time_slot_for_weekdays" id="orddd_lite_time_slot_for_weekdays_bulk" name="orddd_lite_time_slot_for_weekdays_bulk[]" multiple="multiple" placeholder="Select Weekdays">
+                <option name="all" value="all">All</option>'
+		);
+		$weekdays_arr = array();
+		foreach ( $orddd_lite_weekdays as $n => $day_name ) {
+			if ( 'checked' === get_option( $n ) ) {
+				$weekdays[ $n ] = $day_name;
+				printf( '<option name="' . esc_attr( $n ) . '" value="' . esc_attr( $n ) . '">' . esc_attr( $weekdays[ $n ] ) . '</option>' );
+			}
+		}
+
+		if ( 'No' === $checked ) {
+			foreach ( $orddd_lite_weekdays as $n => $day_name ) {
+				$weekdays[ $n ] = $day_name;
+				printf( '<option name="' . esc_attr( $n ) . '" value="' . esc_attr( $n ) . '">' . esc_attr( $weekdays[ $n ] ) . '</option>' );
+			}
+		}
+		print( '</select></div>' );
+
+		?>
+		<label for="orddd_lite_time_slot_for_weekdays_bulk"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
+
+	/**
+	 * Callback function for time duration in the bulk time slot.
+	 *
+	 * @param array $args Extra arguments.
+	 * @since 3.15.0
+	 * @return void
+	 */
+	public static function orddd_lite_time_slot_duration_callback( $args ) {
+		?>
+		<input type="number" min="0" step="1" name="orddd_lite_time_slot_duration" id="orddd_lite_time_slot_duration" value="<?php echo esc_attr( get_option( 'orddd_lite_time_slot_duration' ) ); ?>"/>
+		<label for="orddd_lite_time_slot_duration"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
+
+	/**
+	 * Callback function for time interval in the bulk time slot.
+	 *
+	 * @param array $args Extra arguments.
+	 * @since 3.15.0
+	 * @return void
+	 */
+	public static function orddd_lite_time_slot_interval_callback( $args ) {
+		?>
+		<input type="number" min="0" step="1" name="orddd_lite_time_slot_interval" id="orddd_lite_time_slot_interval" value="<?php echo esc_attr( get_option( 'orddd_lite_time_slot_interval' ) ); ?>"/>
+		<label for="orddd_lite_time_slot_interval"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
+
+	/**
+	 * Callback function for start time in the bulk time slot.
+	 *
+	 * @param array $args Extra arguments.
+	 * @since 3.15.0
+	 * @return void
+	 */
+	public static function orddd_lite_time_slot_starts_from_callback( $args ) {
+		?>
+		<input type="text" name="orddd_lite_time_slot_starts_from" id="orddd_lite_time_slot_starts_from" value="<?php echo esc_attr( get_option( 'orddd_lite_time_slot_starts_from' ) ); ?>"/>
+		<label for="orddd_lite_time_slot_starts_from"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
+
+	/**
+	 * Callback function for end time in the bulk time slot.
+	 *
+	 * @param array $args Extra arguments.
+	 * @return void
+	 * @since 3.15.0
+	 */
+	public static function orddd_lite_time_slot_ends_at_callback( $args ) {
+		?>
+		<input type="text" name="orddd_lite_time_slot_ends_at" id="orddd_lite_time_slot_ends_at" value="<?php echo esc_attr( get_option( 'orddd_lite_time_slot_ends_at' ) ); ?>"/>
+		<label for="orddd_lite_time_slot_ends_at"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
+
+	/**
+	 * Callback for adding Lockout Time slot after X orders setting
+	 *
+	 * @param array $args Extra arguments containing label & class for the field.
+	 * @since 2.4
+	 */
+	public static function orddd_lite_bulk_time_slot_lockout_callback( $args ) {
+		?>
+		<input type="number" min="0" step="1" name="orddd_lite_bulk_time_slot_lockout" id="orddd_lite_bulk_time_slot_lockout"/>
+		<label for="orddd_lite_bulk_time_slot_lockout"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
+
+	/**
+	 * Callback to add additional charges for a time slot
+	 *
+	 * @param array $args Extra arguments containing label & class for the field.
+	 * @since 2.4
+	 */
+	public static function orddd_lite_bulk_time_slot_additional_charges_callback( $args ) {
+		?>
+		<input type="text" name="orddd_lite_bulk_time_slot_additional_charges" id="orddd_lite_bulk_time_slot_additional_charges" placeholder="Charges"/>
+		<input type="text" name="orddd_lite_bulk_time_slot_additional_charges_label" id="orddd_lite_bulk_time_slot_additional_charges_label" placeholder="Time slot Charges Label" />
+		<label for="orddd_lite_bulk_time_slot_additional_charges_label"><?php echo wp_kses_post( $args[0] ); ?></label>
+		<?php
+	}
 
 	/******************** Block Time slot settings ***********************/
 

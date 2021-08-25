@@ -753,14 +753,14 @@ class Orddd_Lite_Settings {
 			'orddd_lite_add_time_slot_section',
 			__( 'Add Time Slot <a href=https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/setup-delivery-date-with-time/?utm_source=userwebsite&utm_medium=link&utm_campaign=OrderDeliveryDateProSetting" target="_blank" class="dashicons dashicons-external" style="line-height:unset;"></a>', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_add_time_slot_admin_settings_callback' ),
-			'orddd_lite_time_slot_page'
+			'orddd_lite_individual_time_slot_page'
 		);
 
 		add_settings_field(
 			'orddd_lite_time_slot_for_delivery_days',
 			__( 'Time Slot for:', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_time_slot_for_delivery_days_callback' ),
-			'orddd_lite_time_slot_page',
+			'orddd_lite_individual_time_slot_page',
 			'orddd_lite_add_time_slot_section',
 			array( __( 'Select Weekday option or Specific delivery dates option to create a time slot.', 'order-delivery-date' ) )
 		);
@@ -769,34 +769,25 @@ class Orddd_Lite_Settings {
 			'orddd_lite_time_slot_for_weekdays',
 			__( 'Select Delivery Days/Dates:', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_time_slot_for_weekdays_callback' ),
-			'orddd_lite_time_slot_page',
+			'orddd_lite_individual_time_slot_page',
 			'orddd_lite_add_time_slot_section',
 			array( __( 'Select Delivery Days/Dates for which you want to create an exclusive Time Slot. To create a time slot for all the weekdays, select "All".', 'order-delivery-date' ) )
 		);
 
 		add_settings_field(
 			'orddd_lite_time_from_hours',
-			__( 'Time From:', 'order-delivery-date' ),
+			__( 'Time From/To:', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_time_from_hours_callback' ),
-			'orddd_lite_time_slot_page',
+			'orddd_lite_individual_time_slot_page',
 			'orddd_lite_add_time_slot_section',
 			array( __( 'Start time for the time slot.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
-			'orddd_lite_time_to_hours',
-			__( 'Time To:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_time_to_hours_callback' ),
-			'orddd_lite_time_slot_page',
-			'orddd_lite_add_time_slot_section',
-			array( __( 'End time for the time slot.', 'order-delivery-date' ) )
 		);
 
 		add_settings_field(
 			'orddd_lite_time_slot_lockout',
 			__( 'Maximum Order Deliveries per time slot (based on per order):', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_time_slot_lockout_callback' ),
-			'orddd_lite_time_slot_page',
+			'orddd_lite_individual_time_slot_page',
 			'orddd_lite_add_time_slot_section',
 			array( __( 'A time slot will become unavailable for further deliveries once these many orders are placed for delivery for that time slot. <br> <em>Note: If Max order deliveries is set, then that will get priority over time slot lockout.</em>', 'order-delivery-date' ) )
 		);
@@ -805,8 +796,88 @@ class Orddd_Lite_Settings {
 			'orddd_lite_time_slot_additional_charges',
 			__( 'Additional Charges for time slot and Checkout label:', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_time_slot_additional_charges_callback' ),
-			'orddd_lite_time_slot_page',
+			'orddd_lite_individual_time_slot_page',
 			'orddd_lite_add_time_slot_section',
+			array( __( 'Add delivery charges (if applicable) for time slot and add the label to be displayed on Checkout page.', 'order-delivery-date' ) )
+		);
+
+		// Bulk Add time slots section.
+		add_settings_section(
+			'orddd_lite_bulk_time_slot_section',
+			__( 'Bulk Add Time Slots <a href=https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/setup-delivery-date-with-time/?utm_source=userwebsite&utm_medium=link&utm_campaign=OrderDeliveryDateProSetting" target="_blank" class="dashicons dashicons-external" style="line-height:unset;"></a>', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_bulk_time_slot_admin_settings_callback' ),
+			'orddd_lite_bulk_time_slot_page'
+		);
+
+		add_settings_field(
+			'orddd_lite_bulk_time_slot_for_delivery_days',
+			__( 'Time Slot for:', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_bulk_time_slot_for_delivery_days_callback' ),
+			'orddd_lite_bulk_time_slot_page',
+			'orddd_lite_bulk_time_slot_section',
+			array( __( 'Select Weekday option or Specific delivery dates option to create a time slot.', 'order-delivery-date' ) )
+		);
+
+		add_settings_field(
+			'orddd_lite_time_slot_for_weekdays_bulk',
+			__( 'Select Delivery Days/Dates:', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_time_slot_for_weekdays_bulk_callback' ),
+			'orddd_lite_bulk_time_slot_page',
+			'orddd_lite_bulk_time_slot_section',
+			array( __( 'Select Delivery Days/Dates for which you want to create an exclusive Time Slot. To create a time slot for all the weekdays, select "All".', 'order-delivery-date' ) )
+		);
+
+		add_settings_field(
+			'orddd_lite_time_slot_duration',
+			__( 'Time Slot Duration:', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_time_slot_duration_callback' ),
+			'orddd_lite_bulk_time_slot_page',
+			'orddd_lite_bulk_time_slot_section',
+			array( __( 'X minutes per time slot or Duration of each time slot in minutes', 'order-delivery-date' ) )
+		);
+
+		add_settings_field(
+			'orddd_lite_time_slot_interval',
+			__( 'Interval between time slots:', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_time_slot_interval_callback' ),
+			'orddd_lite_bulk_time_slot_page',
+			'orddd_lite_bulk_time_slot_section',
+			array( __( 'Minutes between each time slot if applicable.', 'order-delivery-date' ) )
+		);
+
+		add_settings_field(
+			'orddd_lite_time_slot_starts_from',
+			__( 'Time Slot Starts From:', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_time_slot_starts_from_callback' ),
+			'orddd_lite_bulk_time_slot_page',
+			'orddd_lite_bulk_time_slot_section',
+			array( __( 'Start time for the time slots.', 'order-delivery-date' ) )
+		);
+
+		add_settings_field(
+			'orddd_lite_time_slot_ends_at',
+			__( 'Time Slot Ends At:', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_time_slot_ends_at_callback' ),
+			'orddd_lite_bulk_time_slot_page',
+			'orddd_lite_bulk_time_slot_section',
+			array( __( 'End time for the time slots.', 'order-delivery-date' ) )
+		);
+
+		add_settings_field(
+			'orddd_lite_bulk_time_slot_lockout',
+			__( 'Maximum Order Deliveries per time slot (based on per order):', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_bulk_time_slot_lockout_callback' ),
+			'orddd_lite_bulk_time_slot_page',
+			'orddd_lite_bulk_time_slot_section',
+			array( __( 'A time slot will become unavailable for further deliveries once these many orders are placed for delivery for that time slot. <br> <em>Note: If Max order deliveries is set, then that will get priority over time slot lockout.</em>', 'order-delivery-date' ) )
+		);
+
+		add_settings_field(
+			'orddd_lite_bulk_time_slot_additional_charges',
+			__( 'Additional Charges for time slot and Checkout label:', 'order-delivery-date' ),
+			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_bulk_time_slot_additional_charges_callback' ),
+			'orddd_lite_bulk_time_slot_page',
+			'orddd_lite_bulk_time_slot_section',
 			array( __( 'Add delivery charges (if applicable) for time slot and add the label to be displayed on Checkout page.', 'order-delivery-date' ) )
 		);
 
@@ -1572,8 +1643,23 @@ class Orddd_Lite_Settings {
 						<form method="post" action="options.php">' );
 							settings_fields( 'orddd_lite_time_slot_settings' );
 							do_settings_sections( 'orddd_lite_time_slot_page' );
+					?>
+							<section>
+								<button id="orddd_lite_individual" class="button button-secondary">Add Individual Time Slots</button>
+								<button id="orddd_lite_bulk" class="button button-secondary">Add Time slots in Bulk</button>
+							</section>
+
+							<section id="orddd_lite_individual_time_slot_page">
+								<?php do_settings_sections( 'orddd_lite_individual_time_slot_page' ); ?>
+							</section>
+
+							<section id="orddd_lite_bulk_time_slot_page">
+								<?php do_settings_sections( 'orddd_lite_bulk_time_slot_page' ); ?>
+							</section>
+							<input type="hidden" name="orddd_lite_individual_or_bulk" id="orddd_lite_individual_or_bulk" value="individual">
+							<?php
 							submit_button( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save', true );
-						print( '</form>
+							print( '</form>
 					</div>' );
 
 					$existing_timeslots_str = get_option( 'orddd_lite_disable_time_slot_log' );
