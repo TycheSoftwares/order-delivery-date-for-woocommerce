@@ -59,14 +59,14 @@ jQuery(document).ready( function( $ ) {
 		` );
 		$('#orddd_lite_time_from_hours_' + count ).timepicker({ 
 			'scrollDefault': 'now', 
-			'timeFormat' : 'H:i',
+			'timeFormat' : time_format,
 			'step'	: 15,
 			'listWidth' : 1,
 		});
 	
 		$('#orddd_lite_time_to_hours_' + count ).timepicker({ 
 			'scrollDefault': 'now', 
-			'timeFormat' : 'H:i',
+			'timeFormat' : time_format,
 			'step'	: 15,
 			'listWidth' : 1,
 		});
