@@ -253,6 +253,9 @@ Currently, it is not possible to add different delivery settings for different s
 
 == Changelog ==
 
+= 3.15.0 (31.08.2021) =
+* Enhancement - Added new settings to add multiple time-slots and bulk time-slots.
+
 = 3.14.0 (10.08.2021) =
 * Enhancement - Added a new setting to apply colors to the delivery calendar.
 * Enhancement - Added `Screen Reader` accessibility to read the calendar.
