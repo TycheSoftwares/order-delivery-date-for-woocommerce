@@ -1688,7 +1688,7 @@ class Orddd_Lite_Settings {
 					$orddd_table->orddd_lite_prepare_items();
 					?>
 					<div id = "orddd_time_slot_list">
-						<form id="time-slot" method="get" >
+						<form id="time-slot" method="POST" >
 							<input type="hidden" name="page" value="order_delivery_date_lite" />
 							<input type="hidden" name="tab" value="general_settings" />
 							<input type="hidden" name="section" value="time_slot" />
@@ -1714,7 +1714,7 @@ class Orddd_Lite_Settings {
 						$orddd_table_test->orddd_prepare_items();
 						?>
 						<div id = "orddd_disable_time_slot_list">
-							<form id="time-slot" method="get" >
+							<form id="time-slot" method="POST" >
 								<input type="hidden" name="page" value="order_delivery_date_lite" />
 								<input type="hidden" name="tab" value="general_settings" />
 								<input type="hidden" name="section" value="block_time_slot_settings" />
@@ -1808,13 +1808,13 @@ class Orddd_Lite_Settings {
 			wp_safe_redirect( admin_url( '/admin.php?page=order_delivery_date_lite&action=general_settings&section=holidays' ) );
 		}
 
-		if ( ( isset( $_GET['page'] ) && sanitize_text_field( $_GET['page'] ) == 'order_delivery_date_lite' ) && ( isset( $_GET['tab'] ) && sanitize_text_field( $_GET['tab'] ) == 'general_settings' ) && ( isset( $_GET['section'] ) && sanitize_text_field( $_GET['section'] ) == 'time_slot' ) ) { //phpcs:ignore
+		if ( ( isset( $_POST['page'] ) && sanitize_text_field( $_POST['page'] ) == 'order_delivery_date_lite' ) && ( isset( $_POST['tab'] ) && sanitize_text_field( $_POST['tab'] ) == 'general_settings' ) && ( isset( $_POST['section'] ) && sanitize_text_field( $_POST['section'] ) == 'time_slot' ) ) { //phpcs:ignore
 
-			if ( ( isset( $_GET['action'] ) && sanitize_text_field( $_GET['action'] ) == 'orddd_delete' ) || ( isset( $_GET['action2'] ) && sanitize_text_field( $_GET['action2'] ) == 'orddd_delete' ) ) { //phpcs:ignore
+			if ( ( isset( $_POST['action'] ) && sanitize_text_field( $_POST['action'] ) == 'orddd_delete' ) || ( isset( $_POST['action2'] ) && sanitize_text_field( $_POST['action2'] ) == 'orddd_delete' ) ) { //phpcs:ignore
 
 				$time_slot_to_delete = array();
-				if ( isset( $_GET['time_slot'] ) ) { //phpcs:ignore
-					$time_slot_to_delete = $_GET['time_slot']; //phpcs:ignore
+				if ( isset( $_POST['time_slot'] ) ) { //phpcs:ignore
+					$time_slot_to_delete = $_POST['time_slot']; //phpcs:ignore
 				}
 				foreach ( $time_slot_to_delete as $t_key => $t_value ) {
 					$time_values   = explode( ',', $t_value );
@@ -1907,12 +1907,12 @@ class Orddd_Lite_Settings {
 			wp_safe_redirect( admin_url( '/admin.php?page=order_delivery_date_lite&action=general_settings&section=time_slot' ) );
 		}
 
-		if ( ( isset( $_GET['page'] ) && sanitize_text_field( $_GET['page'] ) == 'order_delivery_date_lite' ) && ( isset( $_GET['tab'] ) && sanitize_text_field( $_GET['tab'] ) == 'general_settings' ) && ( isset( $_GET['section'] ) && sanitize_text_field( $_GET['section'] ) == 'block_time_slot_settings' ) ) { //phpcs:ignore
+		if ( ( isset( $_POST['page'] ) && sanitize_text_field( $_POST['page'] ) == 'order_delivery_date_lite' ) && ( isset( $_POST['tab'] ) && sanitize_text_field( $_POST['tab'] ) == 'general_settings' ) && ( isset( $_POST['section'] ) && sanitize_text_field( $_POST['section'] ) == 'block_time_slot_settings' ) ) { //phpcs:ignore
 
-			if ( ( isset( $_GET['action'] ) && sanitize_text_field( $_GET['action'] ) == 'orddd_delete' ) || ( isset( $_GET['action2'] ) && sanitize_text_field( $_GET['action2'] ) == 'orddd_delete' ) ) { //phpcs:ignore
+			if ( ( isset( $_POST['action'] ) && sanitize_text_field( $_POST['action'] ) == 'orddd_delete' ) || ( isset( $_POST['action2'] ) && sanitize_text_field( $_POST['action2'] ) == 'orddd_delete' ) ) { //phpcs:ignore
 				$block_time_slot_to_delete = array();
-				if ( isset( $_GET['block_time_slot'] ) ) { //phpcs:ignore
-					$block_time_slot_to_delete = $_GET['block_time_slot']; //phpcs:ignore
+				if ( isset( $_POST['block_time_slot'] ) ) { //phpcs:ignore
+					$block_time_slot_to_delete = $_POST['block_time_slot']; //phpcs:ignore
 				}
 
 				foreach ( $block_time_slot_to_delete as $t_key => $t_value ) {
