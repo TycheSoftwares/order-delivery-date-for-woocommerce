@@ -448,7 +448,11 @@ class Orddd_Lite_Time_Slot_Settings {
 
 			$timeslot_array = explode( ' - ', $timeslot );
 			$from_time      = explode( ':', $timeslot_array[0] );
-			$to_time        = explode( ':', $timeslot_array[1] );
+			if ( isset( $timeslot_array[1] ) && '' !== $timeslot_array[1] ) {
+				$to_time = explode( ':', $timeslot_array[1] );
+			} else {
+				$to_time = array( 0, 0 );
+			}
 
 			$from_hour   = $from_time[0];
 			$from_minute = $from_time[1];
