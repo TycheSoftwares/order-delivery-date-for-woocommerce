@@ -641,7 +641,11 @@ function nd( date ) {
 			}
 		}
 	}
-	return [ true, 'available-deliveries', 'Available' ];
+	if ( currentdt >= today ) {
+		return [ true, 'available-deliveries', 'Available' ];
+	} else {
+		return [ false ];
+	}
 }
 
 /**
