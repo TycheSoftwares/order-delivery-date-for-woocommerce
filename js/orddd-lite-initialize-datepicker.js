@@ -626,10 +626,17 @@ function nd( date ) {
 
 	var disabledDays = eval( '[' + jQuery( '#orddd_lite_holidays' ).val() + ']' );
 	var m            = date.getMonth(), d = date.getDate(), y = date.getFullYear();
-	var currentdt    = m + '-' + d + '-' + y;
+	var currentdt    = date.getTime();
 
-	var dt    = new Date();
-	var today = dt.getMonth() + '-' + dt.getDate() + '-' + dt.getFullYear();
+	var delay_date = jQuery( "#orddd_lite_minimumOrderDays" ).val();
+	if ( '' !== delay_date ) {
+		var split_date = delay_date.split( '-' );
+		var delay_days = new Date( split_date[1] + '/' + split_date[0] + '/' + split_date[2] );
+		var dt = new Date( delay_days );
+	} else {
+		var dt = new Date();
+	}
+	var today = dt.getTime();
 	for ( i = 0; i < disabledDays.length; i++ ) {
 		var holidays_array = disabledDays[ i ].split( ":" );
 		if ( holidays_array[ 1 ] == ( ( m + 1 ) + '-' + d + '-' + y ) ||
