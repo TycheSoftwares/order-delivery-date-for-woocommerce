@@ -253,6 +253,9 @@ Currently, it is not possible to add different delivery settings for different s
 
 == Changelog ==
 
+= 3.15.1 (03.09.2021) =
+* Fix - Number of dates was getting blocked after updating the plugin to v3.15.0. This has been fixed.
+
 = 3.15.0 (31.08.2021) =
 * Enhancement - Added new settings to add multiple time-slots and bulk time-slots.
 
