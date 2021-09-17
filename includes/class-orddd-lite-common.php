@@ -922,7 +922,7 @@ class Orddd_Lite_Common {
 						$weekday_disabled = 'yes';
 					}
 
-					if ( 'on' === $apply_disabled_weekdays  ) {
+					if ( 'on' === $apply_disabled_weekdays ) {
 						$weekday_disabled = 'no';
 					}
 
@@ -1487,6 +1487,272 @@ class Orddd_Lite_Common {
 		if ( 'shop_order' === $post_obj->post_type && ( ! in_array( $post_obj->post_status, $status, true ) ) ) {
 			// untrash the delivery dates as well.
 			self::orddd_lite_restore_deliveries( $post_id, 'trashed', $post_obj->post_status );
+		}
+	}
+
+	/**
+	 * Load hidden fields on the checkout page
+	 *
+	 * @return string
+	 * @since 3.16.0
+	 */
+	public static function orddd_lite_load_hidden_fields() {
+		$var  = '';
+		$var .= '<input type="hidden" name="h_deliverydate" id="h_deliverydate" value="">';
+		return apply_filters( 'orddd_lite_hidden_variables', $var );
+	}
+
+	/**
+	 * Send the data to JS through localize_script.
+	 *
+	 * @param string $order_id - Order id.
+	 * @return array
+	 */
+	public static function orddd_lite_localize_data_script( $order_id = '' ) {
+		global $orddd_lite_weekdays;
+		$orddd_lite_settings = array();
+		$additional_data     = array();
+		if ( 'on' === get_option( 'orddd_lite_enable_delivery_date' ) ) {
+			$var = '';
+
+			$first_day_of_week = '1';
+			if ( '' !== get_option( 'orddd_lite_start_of_week' ) ) {
+				$first_day_of_week = get_option( 'orddd_lite_start_of_week' );
+			}
+			$orddd_lite_settings['orddd_first_day_of_week']         = $first_day_of_week;
+			$orddd_lite_settings['orddd_lite_delivery_date_format'] = esc_attr( get_option( 'orddd_lite_delivery_date_format' ) );
+
+			$field_note_text = get_option( 'orddd_lite_delivery_date_field_note' );
+			$field_note_text = str_replace( array( "\r\n", "\r", "\n" ), '<br/>', $field_note_text );
+			if ( strpos( $field_note_text, '"' ) !== false ) {
+				$orddd_lite_settings['orddd_lite_field_note'] = esc_attr( $field_note_text );
+			} else {
+				$orddd_lite_settings['orddd_lite_field_note'] = esc_attr( $field_note_text );
+			}
+
+			$alldays_orddd_lite = array();
+			foreach ( $orddd_lite_weekdays as $n => $day_name ) {
+				$alldays_orddd_lite[ $n ] = get_option( $n );
+			}
+			$alldayskeys_orddd_lite = array_keys( $alldays_orddd_lite );
+			$checked                = 'No';
+			foreach ( $alldayskeys_orddd_lite as $key ) {
+				if ( 'checked' === $alldays_orddd_lite[ $key ] ) {
+					$checked = 'Yes';
+				}
+			}
+
+			if ( 'Yes' === $checked ) {
+				foreach ( $alldayskeys_orddd_lite as $key ) {
+					$orddd_lite_settings[ $key ] = $alldays_orddd_lite[ $key ];
+				}
+			} elseif ( 'No' === $checked ) {
+				foreach ( $alldayskeys_orddd_lite as $key ) {
+					$orddd_lite_settings[ $key ] = 'checked';
+				}
+			}
+
+			$min_date        = '';
+			$current_time    = current_time( 'timestamp' ); //phpcs:ignore
+			$current_date    = date( 'j-n-Y', $current_time ); //phpcs:ignore
+			$current_hour    = date( 'H', $current_time ); //phpcs:ignore
+			$current_minute  = date( 'i', $current_time ); //phpcs:ignore
+			$current_weekday = date( 'w', $current_time ); //phpcs:ignore
+
+			if ( '' === get_option( 'orddd_lite_minimumOrderDays' ) ) {
+				$minimum_delivery_time_orddd_lite = 0;
+			} else {
+				$minimum_delivery_time_orddd_lite = get_option( 'orddd_lite_minimumOrderDays' );
+			}
+
+			$delivery_time_seconds = $minimum_delivery_time_orddd_lite * 60 * 60;
+			$cut_off_timestamp     = $current_time + $delivery_time_seconds;
+			$cut_off_date          = gmdate( 'd-m-Y', $cut_off_timestamp );
+			$min_date              = gmdate( 'j-n-Y', strtotime( $cut_off_date ) );
+
+			// It will check if the below filter returns true then it will shows the exact number of dates added in `Number of dates to choose` option even if there are holidays present within the date range.
+			$is_holiday_exclude = apply_filters( 'orddd_is_holidays_excluded_from_dates_to_choose', false );
+
+			$orddd_lite_settings['orddd_lite_number_of_dates']      = get_option( 'orddd_lite_number_of_dates' );
+			$orddd_lite_settings['orddd_lite_date_field_mandatory'] = get_option( 'orddd_lite_date_field_mandatory' );
+			$orddd_lite_settings['orddd_lite_number_of_months']     = get_option( 'orddd_lite_number_of_months' );
+			$orddd_lite_settings['h_deliverydate']                  = '';
+			$orddd_lite_settings['is_holiday_exclude']              = $is_holiday_exclude;
+
+			$lockout_days_str = '';
+			if ( get_option( 'orddd_lite_lockout_date_after_orders' ) > 0 ) {
+				$lockout_days_arr = array();
+				$lockout_days     = get_option( 'orddd_lite_lockout_days' );
+				if ( '' !== $lockout_days && '{}' !== $lockout_days && '[]' !== $lockout_days ) {
+					$lockout_days_arr = json_decode( get_option( 'orddd_lite_lockout_days' ) );
+				}
+				foreach ( $lockout_days_arr as $k => $v ) {
+					if ( $v->o >= get_option( 'orddd_lite_lockout_date_after_orders' ) ) {
+						$lockout_days_str .= '"' . $v->d . '",';
+					}
+				}
+			}
+			if ( 'on' === get_option( 'orddd_lite_enable_time_slot' ) ) {
+				$booked_timeslot_days = self::orddd_lite_get_booked_timeslot_days();
+				foreach ( $booked_timeslot_days as $booked_day ) {
+					$lockout_days_str .= '"' . $booked_day . '",';
+				}
+			}
+
+			if ( '' !== $lockout_days_str ) {
+				$lockout_days_str = substr( $lockout_days_str, 0, strlen( $lockout_days_str ) - 1 );
+			}
+			$orddd_lite_settings['orddd_lite_lockout_days'] = $lockout_days_str;
+
+			// fetch holidays.
+			$holidays_arr = array();
+			$holidays     = get_option( 'orddd_lite_holidays' );
+			if ( '' !== $holidays &&
+				'{}' !== $holidays &&
+				'[]' !== $holidays &&
+				null !== $holidays &&
+				false !== $holidays ) {
+				$holidays_arr = json_decode( get_option( 'orddd_lite_holidays' ) );
+			}
+			$holidays_str = '';
+			foreach ( $holidays_arr as $k => $v ) {
+				$name = str_replace( "'", '&apos;', $v->n );
+				$name = str_replace( '"', '&quot;', $name );
+				if ( isset( $v->r_type ) && 'on' === $v->r_type ) {
+					$holiday_date_arr = explode( '-', $v->d );
+					$recurring_date   = $holiday_date_arr[0] . '-' . $holiday_date_arr[1];
+					$holidays_str    .= '"' . $name . ':' . $recurring_date . '",';
+				} else {
+					$holidays_str .= '"' . $name . ':' . $v->d . '",';
+				}
+			}
+
+			$holidays_str   = substr( $holidays_str, 0, strlen( $holidays_str ) - 1 );
+			$min_date_array = self::get_min_date( $delivery_time_seconds, $holidays_str, $lockout_days_str );
+
+			// check mindate is today.. if yes, then check if all time slots are past, if yes, then set mindate to tomorrow.
+			if ( 'on' === get_option( 'orddd_lite_enable_time_slot' ) ) {
+				$last_slot_hrs          = 0;
+				$last_slot_min          = 0;
+				$current_date           = date( 'j-n-Y', $current_time ); //phpcs:ignore
+				$existing_timeslots_arr = json_decode( get_option( 'orddd_lite_delivery_time_slot_log' ) );
+				foreach ( $existing_timeslots_arr as $k => $v ) {
+					$hours = $v->fh;
+					$mins  = $v->fm;
+
+					if ( gettype( json_decode( $v->dd ) ) === 'array' && count( json_decode( $v->dd ) ) > 0 ) {
+						$dd             = json_decode( $v->dd );
+						$check_min_date = date( 'n-j-Y', strtotime( $min_date_array['min_date'] ) ); //phpcs:ignore
+
+						if ( is_array( $dd ) && count( $dd ) > 0 ) {
+							$min_weekday = date( 'w', strtotime( $min_date_array['min_date'] ) ); //phpcs:ignore
+							$min_weekday = 'orddd_lite_weekday_' . $min_weekday;
+							if ( in_array( $min_weekday, $dd ) ) { //phpcs:ignore
+								$current_slot_hrs  = $hours;
+								$current_slot_mins = $mins;
+
+								if ( $current_slot_hrs >= $last_slot_hrs || ( $current_slot_hrs == $last_slot_hrs && $current_slot_mins > $last_slot_min ) ) { //phpcs:ignore
+									$last_slot_hrs = $current_slot_hrs;
+									$last_slot_min = $current_slot_mins;
+								}
+							} elseif ( in_array( 'all', $dd, true ) ) {
+								$current_slot_hrs  = $hours;
+								$current_slot_mins = $mins;
+
+								if ( $current_slot_hrs > $last_slot_hrs || ( $current_slot_hrs == $last_slot_hrs && $current_slot_mins > $last_slot_min ) ) { //phpcs:ignore
+									$last_slot_hrs = $current_slot_hrs;
+									$last_slot_min = $current_slot_mins;
+								}
+							}
+						}
+					} else {
+						$current_slot_hrs  = $hours;
+						$current_slot_mins = $mins;
+
+						if ( $current_slot_hrs > $last_slot_hrs || ( $current_slot_hrs == $last_slot_hrs && $current_slot_mins > $last_slot_min ) ) { //phpcs:ignore
+							$last_slot_hrs = $current_slot_hrs;
+							$last_slot_min = $current_slot_mins;
+						}
+					}
+				}
+
+				if ( 0 != $last_slot_hrs ) { //phpcs:ignore
+					$last_slot     = $last_slot_hrs . ':' . trim( $last_slot_min );
+					$booking_date2 = $min_date_array['min_date'] . ' ' . $last_slot;
+					$booking_date2 = date( 'Y-m-d G:i', strtotime( $booking_date2 ) ); //phpcs:ignore
+
+					$date2              = new DateTime( $booking_date2 );
+					$date_to_check      = date( 'n-j-Y', $current_time ); //phpcs:ignore
+					$delivery_dates_arr = array();
+
+					if ( 'checked' !== get_option( 'orddd_lite_weekday_' . $current_weekday ) ) {
+						$current_time = strtotime( $current_date );
+					}
+
+					$booking_date1 = date( 'Y-m-d G:i', $current_time ); //phpcs:ignore
+					$date1         = new DateTime( $booking_date1 );
+
+					if ( '' !== $minimum_delivery_time_orddd_lite && 0 !== $minimum_delivery_time_orddd_lite ) {
+						$calculated_date = $min_date_array['min_date'] . ' ' . $min_date_array['min_hour'] . ':' . $min_date_array['min_minute'];
+					} else {
+						$calculated_date = $current_date . ' ' . $current_hour . ':' . $current_minute;
+					}
+
+					$calculated_min_date   = new DateTime( $calculated_date );
+					$calculated_difference = $date2->diff( $date1 );
+
+					if ( $calculated_difference->days > 0 ) {
+						$days_in_hour             = $calculated_difference->h + ( $calculated_difference->days * 24 );
+						$calculated_difference->h = $days_in_hour;
+					}
+
+					if ( $calculated_difference->i > 0 ) {
+						$min_in_hour                      = $calculated_difference->h + ( $calculated_difference->i / 60 );
+						$calculated_minimum_delivery_time = $min_in_hour * 60 * 60;
+					} else {
+						$calculated_minimum_delivery_time = $calculated_difference->h * 60 * 60;
+					}
+
+					if ( 0 === $calculated_difference->invert || $calculated_minimum_delivery_time < $delivery_time_seconds ) {
+						$min_date_array['min_date'] = date( 'j-n-Y', strtotime( $min_date_array['min_date'] . '+1 day' ) ); //phpcs:ignore
+					}
+				}
+			}
+			$orddd_lite_settings['orddd_lite_minimumOrderDays']                   = $min_date_array['min_date'];
+			$orddd_lite_settings['orddd_lite_holidays']                           = $holidays_str;
+			$orddd_lite_settings['orddd_lite_auto_populate_first_available_date'] = get_option( 'orddd_lite_auto_populate_first_available_date' );
+			$orddd_lite_settings['orddd_lite_calculate_min_time_disabled_days']   = get_option( 'orddd_lite_calculate_min_time_disabled_days' );
+
+			$admin_url     = get_admin_url();
+			$admin_url_arr = explode( '://', $admin_url );
+			$home_url      = get_home_url();
+			$home_url_arr  = explode( '://', $home_url );
+			if ( $admin_url_arr[0] !== $home_url_arr[0] ) {
+				$admin_url_arr[0] = $home_url_arr[0];
+				$ajax_url         = implode( '://', $admin_url_arr );
+			} else {
+				$ajax_url = $admin_url;
+			}
+			$orddd_lite_settings['orddd_lite_admin_url'] = $ajax_url;
+			$orddd_lite_disable_for_holidays             = 'no';
+			if ( has_filter( 'orddd_to_calculate_minimum_hours_for_holidays' ) ) {
+				$orddd_lite_disable_for_holidays = apply_filters( 'orddd_to_calculate_minimum_hours_for_holidays', $orddd_lite_disable_for_holidays );
+			}
+			$orddd_lite_settings['orddd_lite_disable_for_holidays']       = $orddd_lite_disable_for_holidays;
+			$orddd_lite_settings['orddd_lite_delivery_date_on_cart_page'] = get_option( 'orddd_lite_delivery_date_on_cart_page' );
+
+			$current_hour   = gmdate( 'H', $current_time );
+			$current_minute = gmdate( 'i', $current_time );
+
+			$orddd_lite_settings['orddd_lite_current_day']    = $current_date;
+			$orddd_lite_settings['orddd_lite_current_hour']   = $current_hour;
+			$orddd_lite_settings['orddd_lite_current_minute'] = $current_minute;
+
+			$orddd_lite_settings['orddd_lite_enable_time_slot']                        = get_option( 'orddd_lite_enable_time_slot' );
+			$orddd_lite_settings['orddd_min_date_set']                                 = $min_date_array['min_date'];
+			$orddd_lite_settings['orddd_is_cart']                                      = is_cart();
+			$orddd_lite_settings['orddd_lite_auto_populate_first_available_time_slot'] = get_option( 'orddd_lite_auto_populate_first_available_time_slot' );
+			return apply_filters( 'orddd_lite_hidden_variables_array', $orddd_lite_settings, $additional_data );
 		}
 	}
 }

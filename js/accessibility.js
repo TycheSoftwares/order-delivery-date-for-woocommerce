@@ -1,10 +1,10 @@
 jQuery(function (jQuery) {
-    jQuery( '#e_deliverydate' ).datepicker({
+    jQuery('#' + orddd_lite_access.orddd_lite_field_name ).datepicker({
       onClose: removeAria
     });
   
     // Add aria-describedby to the button referring to the label
-    jQuery('#e_deliverydate').attr('aria-describedby', 'Delivery Date');
+    jQuery('#' + orddd_lite_access.orddd_lite_field_name ).attr('aria-describedby', 'Delivery Date');
   
     dayTripper();
   
@@ -12,7 +12,7 @@ jQuery(function (jQuery) {
   
   
   function dayTripper() {
-    jQuery( '#e_deliverydate' ).focus(function () {
+    jQuery('#' + orddd_lite_access.orddd_lite_field_name ).focus(function () {
       setTimeout(function () {
         var today = jQuery('.ui-datepicker-today a')[0];
         
@@ -183,7 +183,7 @@ jQuery(function (jQuery) {
   function closeCalendar() {
     var container = jQuery('#ui-datepicker-div');
     jQuery(container).off('keydown');
-    var input = jQuery('#e_deliverydate')[0];
+    var input = jQuery('#' + orddd_lite_access.orddd_lite_field_name )[0];
     jQuery(input).datepicker('hide');
   
    // input.focus();
@@ -625,7 +625,7 @@ jQuery(function (jQuery) {
     var buttonText;
     var isNext = jQuery(button).hasClass('ui-datepicker-next');
     var months = jQuery.datepicker._defaults.monthNames;
-    var numberOfMonths = jQuery( '#orddd_lite_number_of_months' ).val();
+    var numberOfMonths = orddd_lite_access.orddd_lite_number_of_months;
 
     var currentMonth = jQuery('.ui-datepicker-title .ui-datepicker-month').text();
     var monthIndex = jQuery.inArray(currentMonth, months);

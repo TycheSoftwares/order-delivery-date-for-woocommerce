@@ -23,6 +23,13 @@
 $wpefield_version = '3.15.1';
 
 /**
+ * Template path.
+ *
+ * @since 3.16.0
+ */
+define( 'ORDDD_LITE_TEMPLATE_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
+
+/**
  * Include the require files
  *
  * @since 1.0
@@ -441,7 +448,6 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				}
 
 				wp_enqueue_script( $language_selected, plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
-				
 
 				wp_enqueue_script( 'initialize-datepicker-orddd', plugins_url( '/js/orddd-lite-initialize-datepicker.js', __FILE__ ), '', $wpefield_version, false );
 				$is_admin = is_admin() ? true : false;
@@ -458,8 +464,17 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 					'is_admin'    => $is_admin,
 					'bookedText'  => __( 'Booked', 'order-delivery-date' ),
 				);
+				$orddd_lite_settings = Orddd_Lite_Common::orddd_lite_localize_data_script();
+				wp_localize_script( 'initialize-datepicker-orddd', 'orddd_lite_params', $orddd_lite_settings );
+				$admin_params = Orddd_Lite_Admin_Delivery::orddd_lite_localize_admin_scripts();
+				wp_localize_script( 'initialize-datepicker-orddd', 'orddd_lite_admin_params', $admin_params );
 				wp_localize_script( 'initialize-datepicker-orddd', 'jsL10n', $js_args );
-        		wp_enqueue_script( 'accessibility-orddd' );
+				$accessibility_args = array(
+					'orddd_lite_field_name'       => 'e_deliverydate',
+					'orddd_lite_number_of_months' => get_option( 'orddd_lite_number_of_months' ),
+				);
+				wp_localize_script( 'accessibility-orddd', 'orddd_lite_access', $accessibility_args );
+				wp_enqueue_script( 'accessibility-orddd' );
 			}
 		}
 
