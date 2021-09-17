@@ -514,14 +514,14 @@ function orddd_set_date_from_session() {
  * @since 2.8
  */
 function minimum_date_to_set( delay_days ) {
-	var disabledDays = eval( '[' + orddd_lite_params.orddd_lite_holidays + ']' );
+	var disabledDays = JSON.parse( '[' + orddd_lite_params.orddd_lite_holidays + ']' );
 	var holidays     = [];
 	for ( i = 0; i < disabledDays.length; i++ ) {
 		var holidays_array = disabledDays[ i ].split( ":" );
 		holidays[i]        = holidays_array[ 1 ];
 	}
 
-	var bookedDays = eval( "[" + orddd_lite_params.orddd_lite_lockout_days + "]" );
+	var bookedDays = JSON.parse( "[" + orddd_lite_params.orddd_lite_lockout_days + "]" );
 
 	var current_date       = orddd_lite_params.orddd_lite_current_day
 	var split_current_date = current_date.split( "-" );
@@ -628,7 +628,7 @@ function minimum_date_to_set( delay_days ) {
  */
 function nd( date ) {
 
-	var disabledDays = eval( '[' + orddd_lite_params.orddd_lite_holidays + ']' );
+	var disabledDays = JSON.parse( '[' + orddd_lite_params.orddd_lite_holidays + ']' );
 	var m            = date.getMonth(), d = date.getDate(), y = date.getFullYear();
 	var currentdt    = date.getTime();
 
@@ -670,7 +670,7 @@ function nd( date ) {
  */
 function dwd( date ) {
 	var m           = date.getMonth(), d = date.getDate(), y = date.getFullYear();
-	var lockoutDays = eval( '[' + orddd_lite_params.orddd_lite_lockout_days + ']' );
+	var lockoutDays = JSON.parse( '[' + orddd_lite_params.orddd_lite_lockout_days + ']' );
 	for ( i = 0; i < lockoutDays.length; i++ ) {
 		if ( jQuery.inArray( ( m + 1 ) + '-' + d + '-' + y, lockoutDays ) != -1 ) {
 			return [ false, "booked_dates", jsL10n.bookedText ];
@@ -720,14 +720,14 @@ function avd( date, inst ) {
 	// Added to not translate the calendar when the site is translated using Google Translator. 
 	inst.dpDiv.addClass( 'notranslate' );
 	
-	var disabledDays = eval( '[' + orddd_lite_params.orddd_lite_holidays + ']' );
+	var disabledDays = JSON.parse( '[' + orddd_lite_params.orddd_lite_holidays + ']' );
 	var holidays     = [];
 	for ( i = 0; i < disabledDays.length; i++ ) {
 		var holidays_array = disabledDays[ i ].split( ":" );
 		holidays[i]        = holidays_array[ 1 ];
 	}
 
-	var bookedDays = eval( "[" + orddd_lite_params.orddd_lite_lockout_days + "]" );
+	var bookedDays = JSON.parse( "[" + orddd_lite_params.orddd_lite_lockout_days + "]" );
 
 	var delay_date = orddd_lite_params.orddd_lite_minimumOrderDays
 	var split_date = delay_date.split( '-' );
