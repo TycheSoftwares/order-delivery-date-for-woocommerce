@@ -14,48 +14,33 @@ Order Delivery Date plugin allows the customers to choose a delivery date and ti
 
 == Description ==
 
-We believe that the post-purchase customer experience is as important as the acquisition process. That is why we built the [Order Delivery Date plugin](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=topprolink&utm_campaign=OrderDeliveryDateLite). It helps you to **improve your customer service** by delivering the orders on the customer's specified date.
+Customer experience after purchase is as important as the acquisition process. That is why we built the [Order Delivery Date plugin](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=topprolink&utm_campaign=OrderDeliveryDateLite). It helps you to **improve your customer service** by delivering the orders based on the customer delivery date and time selection.
 
-The plugin allows your customers to choose a delivery date and time on the checkout page. Also, it gives the facility of selecting delivery date and time at cart page. This reduces **cart abandonment by 50%**.
+The plugin allows your customers delivery date and time selection  on the checkout and cart page. This reduces **cart abandonment by 50%** making it an extremely powerful WooCommerce order time delivery management tool!
 
 ><strong>A perfect plugin</strong>, says what it does and adds the functions simply with no fuss. I even had additional support when I wanted to tweak the plugin to fit my site better. Would recommend this to everyone.
 > - [creaselambert](https://wordpress.org/support/topic/just-what-i-needed-and-no-fuss/)
 
-You can set **minimum required time for delivery** in hours. The mandatory field setting will allow the delivery date field to be set as mandatory on the checkout page.
+You can set **minimum required time for delivery** in hours. The Mandatory Field setting allows you to make the delivery date field on the checkout page a required field.
 
-The dates on which you do not deliver can be set as holidays in the calendar. Also, you can **disable delivery for Virtual or Featured products**.
+You can set your calendar to show holidays on the dates when you won't deliver. Also, you can **disable delivery for Virtual or Featured products**.
 
-### This plugin allows you to do the following:
+### THIS PLUGIN ALLOWS YOU TO:
 
-* Ability to allow the customer to select <strong>Delivery date & time</strong> on the checkout page for the orders.
-* You can <strong>disable the weekdays</strong> on which you <strong>do not deliver</strong> the products.
-* Minimum required time for delivery can be set in hours.
-* You can set the <strong>delivery date and time fields mandatory</strong> on the checkout page. 
+* Enable the customer <strong>Delivery date & time selection</strong> on the checkout page.
+* Disable the weekdays on which you do not deliver the products.
+* Set the minimum required delivery time in hours.
+* Set the <strong>delivery date and time fields mandatory</strong> on the checkout page.
+* Show estimated order delivery or pick up date.
 * <strong>Limit the number of deliveries/orders</strong> to be placed per day.  
-* Admin can create <strong>timeslots</strong> for delivery days as well as for specific delivery dates.
-* Customers can choose <strong>"As Soon As Possible"</strong> deliveries.
-* Limit the number of deliveries/orders to be placed per timeslot too.
-* The first available delivery date & time will be auto-populated in the delivery date and time fields respectively on the checkout page.
-* You set <strong>delivery date field labels</strong> as per your business requirements.
+* <strong>Delivery time slots</strong> for specific delivery dates can be set by admin in addition to delivery days.
+* Enable the customers to choose <strong>“As Soon As Possible”</strong> deliveries.
+* Limit the number of deliveries/orders to be placed per delivery timeslot too.
+* Auto-populated the first available delivery date & time selection in the delivery date and time fields respectively on the checkout page.
+* Set <strong>delivery date field labels</strong> as per your business requirements and your opening hours delivery times.
 * <strong>Disable delivery for Virtual and Featured products</strong>.
-* You can set holidays on the dates you do not deliver products under Holidays tab. <strong>Selected holidays</strong> will be <strong>disabled for delivery</strong> in the delivery calendar on the checkout page.
-* Selected Delivery date and time will be displayed on the WooCommerce Order page in admin dashboard.
-
-### Differences between Lite & PRO version
-
-* Custom delivery schedules by shipping methods, product categories, pickup locations
-* Create the timeslots in bulk
-* Google calendar sync
-* Business days option
-* Same-day & Next-day delivery charges
-* Same-day & Next-day cut-off
-* Weekday settings
-* Integration with 3rd party shipping plugins like table rate shipping & others
-* Compatibility with WooCommerce Subscriptions
-* Estimated delivery date feature
-* Reschedule deliveries
-
-You can check the detailed difference between Pro and Lite version **[here](https://www.tychesoftwares.com/differences-pro-lite-versions-order-delivery-date-woocommerce-plugin/?utm_source=wprepo&utm_medium=prolink1&utm_campaign=OrderDeliveryDateLite "Lite and Pro version Difference")**
+* Set holidays on the dates you do not deliver products under the Holidays tab. <strong>Selected holidays</strong> will be <strong>disabled for delivery</strong> in the delivery calendar on the checkout page.
+* Customer delivery date and time selection will be displayed on the WooCommerce Order page in the admin dashboard.
 
 ### Here is what some of our customers say about this plugin:
 
@@ -67,32 +52,32 @@ You can check the detailed difference between Pro and Lite version **[here](http
 
 ### Pro Version
 
-**[Order Delivery Date Pro](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates allow the site owner to decide which dates should be made available for delivery. 
+**[ WooCommerce Order Delivery Date Pro](https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&utm_medium=link&utm_campaign=OrderDeliveryDateLite "Order Delivery Date Pro")** - The Pro version allows the customer to choose a delivery date & time on the checkout page. Date Settings, Time Settings, Appearance & Black-out dates let site owners decide which dates are available for delivery.
 
 [youtube https://youtu.be/lxWCq6X6bPM]
 
-**Following features are available in PRO version:**
+**Features available in Order Delivery Date PRO version:**
 
-* Ability to create timeslots <strong>individually as well as in bulk with set Time Duration & Interval</strong>.
+* Ability to create delivery time slots <strong>individually as well as in bulk with set Time Duration & Interval</strong>.
 * <strong>Same-day & Next-day delivery</strong> with cut-off time.
 * <strong>Two-way deliveries sync</strong> with Google Calendar.
 * Create Delivery <strong>Product Categories, Shipping Methods, Shipping Classes & Pickup Locations</strong>.
 * Set Shipping Days & Delivery Days separately.
 * Disable Delivery Date for selected Categories.
-* Customer & Admin can <strong>edit Delivery Date & Time</strong> for orders.
-* Capture Delivery Time by Time Slot or Specific Time of Delivery.
+* Allow Customer & Admin to edit Delivery Date & Time for orders.
+* Capture Delivery Time by Delivery Time Slot or Specific Time of Delivery.
 * Separate Delivery Charges, Cut-off, etc. for Weekdays.
 * View upcoming Deliveries in Delivery Calendar.
 * Set <strong>Maximum Deliveries</strong> per day by <strong>Orders or Product Quantity</strong>.
 * Filter your WooCommerce Orders by Delivery Dates.
 * Specify minimum delivery interval between the order and first available delivery.
 * Set Specific Delivery Dates for delivery instead of Weekdays.
-* <strong>Block a time slot</strong> for a date or weekday.
+* <strong>Block a delivery time slot</strong> for a date or weekday.
 * <strong>Auto-generate delivery dates for renewal orders</strong> from WooCommerce Subscriptions Plugin by Prospress Inc using PRO plugin and [WooCommerce Subscriptions Compatibility Addon](https://www.tychesoftwares.com/store/premium-plugins/woocommerce-subscriptions-compatibility-addon-for-order-delivery-date-pro-for-woocommerce-plugin/).
 * Create Delivery <strong>Settings from USPS Shipping Method</strong> Plugin by WooCommerce.
 * Create Delivery <strong>Settings from Table Rate Shipping</strong> Plugin by WooCommerce.
 
-You can check the detailed difference between Pro and Lite version **[here](https://www.tychesoftwares.com/differences-pro-lite-versions-order-delivery-date-woocommerce-plugin/?utm_source=wprepo&utm_medium=prolink&utm_campaign=OrderDeliveryDateLite "Lite and Pro version Difference")**
+Check a detailed comparison of Lite and Pro versions **[here](https://www.tychesoftwares.com/differences-pro-lite-versions-order-delivery-date-woocommerce-plugin/?utm_source=wprepo&utm_medium=prolink&utm_campaign=OrderDeliveryDateLite "Lite and Pro version Difference")**
 
 >This plugin is the **perfect solution for allowing your customers to tell you when they'll be available for delivery**. Especially if you're a **small business that tends directly to your customer**, this plugin will allow you to ensure their happiness with their order in that they'll know exactly when to expect their delivery. A definite 5 star rating for the plugin and a 5 star rating for the support that it comes with! Please don't have any doubts purchasing this one! Best money you'll ever spend!
 > - [brandonecarr](https://wordpress.org/support/topic/perfect-420/)
@@ -186,6 +171,10 @@ Option 3:
 3. Click on Upload Plugin link from top
 4. Upload the downloaded order-delivery-date-for-woocommerce.zip file and click on Install Now
 5. After installation, click on Activate Plugin link to activate the plugin.
+
+== Info ==
+
+The Lite version of Order Delivery Date Pro for WooCommerce plugin is used by over 10,000+ WooCommerce stores. Our WooCommerce Order delivery date and time plugin lite allows every customer delivery date and time selection and shows estimated delivery date! Not just that, you can limit the number of orders to be placed per day and set the minimum required delivery time. Certain delivery time slot lets you and your customers know exactly when to expect the package making it convenient for you to coordinate it with your opening hours delivery times. Option of a Delivery Date picker is completely compatible with WooCommerce making an Order delivery date plugin lite an essential work tool, and completely free!
 
 == Frequently Asked Questions ==
 
