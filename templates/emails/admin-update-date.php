@@ -23,7 +23,7 @@ if ( 'admin' === $updated_by ) {
 }
 
 $date_field_label = get_option( 'orddd_lite_delivery_date_field_label' );
-$time_field_label = get_option( 'orddd_delivery_timeslot_field_label' );
+$time_field_label = get_option( 'orddd_lite_delivery_timeslot_field_label' );
 
 do_action( 'woocommerce_email_header', $email_heading );
 ?>

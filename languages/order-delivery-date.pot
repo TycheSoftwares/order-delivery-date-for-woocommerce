@@ -1522,3 +1522,35 @@ msgstr ""
 #: includes/settings/class-orddd-lite-view-time-slots.php:114
 msgid "Checkout label"
 msgstr ""
+
+#: includes/class-orddd-lite-admin-delivery.php:45
+msgid "Edit Order Delivery Date and/or Time"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-delivery.php:96
+msgid "Delivery Charges:"
+msgstr ""
+
+#: templates/orddd-lite-admin-datepicker.php:37
+msgid "Any change in Delivery charges here will not change the order total. You will need to update the Item section above for delivery charges to reflect in order total."
+msgstr ""
+
+#: templates/orddd-lite-admin-datepicker.php:41
+msgid "Note: If you are creating the order manually, you can update the delivery date & time after creating the order."
+msgstr ""
+
+#: templates/orddd-lite-admin-datepicker.php:47
+msgid "Update"
+msgstr ""
+
+#: templates/orddd-lite-admin-datepicker.php:48
+msgid "Update & Notify Customer"
+msgstr ""
+
+#: templates/emails/plain/admin-update-date.php:21
+msgid "The Delivery Date & Time has been updated by the Administrator. The details of the order and the updated delivery details are as follows:"
+msgstr ""
+
+#: templates/emails/plain/admin-update-date.php:23
+msgid "The Delivery Date & Time has been updated by the customer. The details of the order and the updated delivery details are as follows:"
+msgstr ""
