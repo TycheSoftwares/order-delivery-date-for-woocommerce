@@ -198,7 +198,7 @@ class Orddd_Lite_Settings {
 			array( 'Orddd_Lite_Shipping_Days_Settings', 'orddd_lite_shipping_days_callback' ),
 			'orddd_lite_date_settings_page',
 			'orddd_shipping_days_settings_section',
-			array( '&nbsp' . __( 'Select weekdays for shipping.<br><b><i>Upgrade to <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>', 'order-delivery-date' ) )
+			array( '&nbsp;' . __( 'Select weekdays for shipping.<br><b><i>Upgrade to <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>', 'order-delivery-date' ) )
 		);
 	}
 
