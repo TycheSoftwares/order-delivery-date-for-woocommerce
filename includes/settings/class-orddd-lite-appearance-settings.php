@@ -342,10 +342,11 @@ class Orddd_Lite_Appearance_Settings {
 				jQuery( function() {
 					jQuery.datepicker.setDefaults( jQuery.datepicker.regional[ "" ] );
 					jQuery( "#datepicker" ).datepicker();
-					jQuery( "#datepicker" ).datepicker( "option", "firstDay", ' . esc_attr( $first_day_of_week ) . ' );
 					jQuery( "#datepicker" ).datepicker( "option", jQuery.datepicker.regional[ "' . esc_attr( $language_selected ) . '" ] );
+					jQuery( "#datepicker" ).datepicker( "option", "firstDay", ' . esc_attr( $first_day_of_week ) . ' );
 					jQuery( "#orddd_lite_language_selected" ).change(function() {
 						jQuery( "#datepicker" ).datepicker( "option", jQuery.datepicker.regional[ jQuery( this ).val() ] );
+						jQuery( "#datepicker" ).datepicker( "option", "firstDay", ' . esc_attr( $first_day_of_week ) . ' );
 						});
 					});
 					
