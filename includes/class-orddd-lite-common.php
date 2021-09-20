@@ -153,13 +153,24 @@ class Orddd_Lite_Common {
 	 * @since 1.9
 	 */
 	public static function delivery_date_lite_language( $delivery_date_formatted, $delivery_date_timestamp ) {
-		global $orddd_lite_languages, $orddd_lite_languages_locale;
+		global $orddd_lite_languages, $orddd_lite_languages_locale, $orddd_lite_date_formats;
+		require_once ABSPATH . 'wp-admin/includes/translation-install.php';
+		require_once ABSPATH . 'wp-admin/includes/file.php';
 		$date_language = get_option( 'orddd_lite_language_selected' );
 		if ( '' !== $delivery_date_timestamp ) {
 			if ( 'en-GB' !== $date_language ) {
 				$locale_format = $orddd_lite_languages[ $date_language ];
 				$time          = setlocale( LC_ALL, $orddd_lite_languages_locale[ $locale_format ] );
 				$date_format   = get_option( 'orddd_lite_delivery_date_format' );
+
+				$lang = explode( '.', $orddd_lite_languages_locale[ $locale_format ][0] );
+
+				// Load the language selected in the Appearance settings.
+				$loaded_language = wp_download_language_pack( $lang[0] );
+				if ( $loaded_language ) {
+					load_default_textdomain( $loaded_language );
+					$GLOBALS['wp_locale'] = new WP_Locale(); //phpcs:ignore
+				}
 				switch ( $date_format ) {
 					case 'd M, y':
 						$date_str  = str_replace( 'd', '%d', $date_format );
@@ -215,8 +226,12 @@ class Orddd_Lite_Common {
 
 				if ( isset( $year_str ) ) {
 					$delivery_date_formatted = strftime( $year_str, $delivery_date_timestamp );
+					$delivery_date_formatted = date_i18n( $orddd_lite_date_formats[ $date_format ], $delivery_date_timestamp );
 				}
 				setlocale( LC_ALL, 'en_GB.utf8' );
+				// Load the default language again after setting the delivery date to required language.
+				load_default_textdomain( 'en_GB' );
+				$GLOBALS['wp_locale'] = new WP_Locale(); //phpcs:ignore
 			}
 		}
 		return $delivery_date_formatted;
