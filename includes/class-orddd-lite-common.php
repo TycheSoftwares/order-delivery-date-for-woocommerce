@@ -1579,7 +1579,22 @@ class Orddd_Lite_Common {
 			$orddd_lite_settings['h_deliverydate']                  = '';
 			$orddd_lite_settings['is_holiday_exclude']              = $is_holiday_exclude;
 
+			$orddd_lite_settings['orddd_lite_show_partially_booked_dates'] = get_option( 'orddd_lite_show_partially_booked_dates' );
+
 			$lockout_days_str = '';
+			$partial_days_str = '';
+			if ( '' !== get_option( 'orddd_lite_show_partially_booked_dates' ) ) {
+				$partial_days_arr = array();
+				$lockout_days     = get_option( 'orddd_lite_lockout_days' );
+				if ( '' !== $lockout_days && '{}' !== $lockout_days && '[]' !== $lockout_days ) {
+					$partial_days_arr = json_decode( get_option( 'orddd_lite_lockout_days' ) );
+				}
+				foreach ( $partial_days_arr as $k => $v ) {
+					if ( $v->o < get_option( 'orddd_lite_lockout_date_after_orders' ) ) {
+						$partial_days_str .= '"' . $v->d . '",';
+					}
+				}
+			}
 			if ( get_option( 'orddd_lite_lockout_date_after_orders' ) > 0 ) {
 				$lockout_days_arr = array();
 				$lockout_days     = get_option( 'orddd_lite_lockout_days' );
@@ -1603,7 +1618,10 @@ class Orddd_Lite_Common {
 				$lockout_days_str = substr( $lockout_days_str, 0, strlen( $lockout_days_str ) - 1 );
 			}
 			$orddd_lite_settings['orddd_lite_lockout_days'] = $lockout_days_str;
-
+			if ( '' !== $partial_days_str ) {
+				$partial_days_str = substr( $partial_days_str, 0, strlen( $partial_days_str ) - 1 );
+			}
+			$orddd_lite_settings['orddd_lite_partial_days'] = $partial_days_str;
 			// fetch holidays.
 			$holidays_arr = array();
 			$holidays     = get_option( 'orddd_lite_holidays' );

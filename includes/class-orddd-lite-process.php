@@ -49,6 +49,9 @@ class Orddd_Lite_Process {
 		.available-deliveries, .available-deliveries a {
 			background: ' . esc_attr( $orddd_lite_available_dates_color ) . ' !important;
 		}
+		.partially-booked, .partially-booked a {
+			background: linear-gradient(to bottom right, ' . esc_attr( $orddd_lite_booked_dates_color ) . '59 0%, ' . esc_attr( $orddd_lite_booked_dates_color ) . '59 50%, ' . esc_attr( $orddd_lite_available_dates_color ) . ' 50%, ' . esc_attr( $orddd_lite_available_dates_color ) . ' 100%) !important;
+		}  
 		</style>';
 
 		$validate_date_field = ( 'checked' === get_option( 'orddd_lite_date_field_mandatory' ) ) ? true : false;
