@@ -94,3 +94,7 @@ table.form-table #orddd_lite_ics_url_list .orddd_lite_ics_feed_url {
 .add-timeslot {
 	margin-top: 12px;
 }
+
+#orddd_delivery_dates_list .tablenav {
+	display: none;
+}
