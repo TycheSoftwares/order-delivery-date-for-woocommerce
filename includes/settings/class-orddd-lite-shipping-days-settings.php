@@ -21,8 +21,7 @@ class Orddd_Lite_Shipping_Days_Settings {
 	 * Callback for adding Shipping days tab settings
 	 */
 	public static function orddd_lite_shipping_days_settings_section_callback() {
-		?><b><?php echo esc_attr_e( 'Shipping Days', 'order-delivery-date' ); ?> </b><?php echo esc_attr_e( 'refers to the working days of your own company.', 'order-delivery-date' ); ?> <b><?php echo esc_attr_e( 'Delivery Days', 'order-delivery-date' ); ?></b><?php echo esc_attr_e( 'refers to the working days of your shipping company to whom you submit your orders for deliveries.', 'order-delivery-date' ); ?><br> <?php echo esc_attr_e( 'Leave this unchanged if you handle delivery & shipping by yourself.', 'order-delivery-date' ); ?> <a href="https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/setup-delivery-dates/?utm_source=userwebsite&utm_medium=link&utm_campaign=OrderDeliveryDateProSetting" target="_blank" class="dashicons dashicons-external" style="line-height:unset;"></a>
-		<?php
+		echo __( 'Please enable the business days of your store so all the calculations of cut-off time and minimum delivery time will be done based on these weekdays and not based on delivery weekdays. You can leave this unchanged if you handle delivery & shipping by yourself. Please refer <a href="https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/setup-shipping-days/?utm_source=userwebsite&amp;utm_medium=link&amp;utm_campaign=OrderDeliveryDateLiteSetting" target="_blank"> this post </a> to know more.', 'order-delivery-date' ); //phpcs:ignore
 	}
 
 	/**

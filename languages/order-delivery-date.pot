@@ -1554,3 +1554,23 @@ msgstr ""
 #: templates/emails/plain/admin-update-date.php:23
 msgid "The Delivery Date & Time has been updated by the customer. The details of the order and the updated delivery details are as follows:"
 msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:179
+msgid "Business Days Settings"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-shipping-days-settings.php:24
+msgid "Please enable the business days of your store so all the calculations of cut-off time and minimum delivery time will be done based on these weekdays and not based on delivery weekdays. You can leave this unchanged if you handle delivery & shipping by yourself. Please refer <a href=\"https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/setup-shipping-days/?utm_source=userwebsite&utm_medium=link&utm_campaign=OrderDeliveryDateProSetting\" target=\"_blank\"> this post </a> to know more."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:187
+msgid "Enable Business days based calculation:"
+
+#: includes/settings/class-orddd-lite-settings.php:192
+msgid "Calculate Minimum Delivery Time, Same Day cut-off and Next Day cut-off based on the business days selected."
+
+#: includes/settings/class-orddd-lite-settings.php:197
+msgid "Business Days:"
+
+#: includes/settings/class-orddd-lite-settings.php:201
+msgid "Business days of your store."

@@ -175,30 +175,30 @@ class Orddd_Lite_Settings {
 			array( __( 'Enable this setting to add Additional charges, Additional charges\' checkout label, Same day cut-off time, Next day cut-off time and Minimum Delivery Time (in hours) for each weekday.<br><b><i>Upgrade to <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>' ) )
 		);
 
-		// Shipping Days section.
+		// Business Days Settings.
 		add_settings_section(
 			'orddd_shipping_days_settings_section',
-			__( 'Shipping Days Settings', 'order-delivery-date' ),
+			__( 'Business Days Settings', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Shipping_Days_Settings', 'orddd_lite_shipping_days_settings_section_callback' ),
 			'orddd_lite_date_settings_page'
 		);
 
 		add_settings_field(
 			'orddd_enable_shipping_days',
-			__( 'Enable Shipping days based calculation:', 'order-delivery-date' ),
+			__( 'Enable Business days based calculation:', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Shipping_Days_Settings', 'orddd_lite_enable_shipping_days_callback' ),
 			'orddd_lite_date_settings_page',
 			'orddd_shipping_days_settings_section',
-			array( __( 'Calculate Minimum Delivery Time (in hours), Same Day cut-off and Next Day cut-off based on the shipping days selected.<br><b><i>Upgrade to <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>', 'order-delivery-date' ) )
+			array( __( 'Calculate Minimum Delivery Time, Same Day cut-off and Next Day cut-off based on the business days selected.', 'order-delivery-date' ) )
 		);
 
 		add_settings_field(
 			'orddd_shipping_days',
-			__( 'Shipping Days:', 'order-delivery-date' ),
+			__( 'Business Days:', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Shipping_Days_Settings', 'orddd_lite_shipping_days_callback' ),
 			'orddd_lite_date_settings_page',
 			'orddd_shipping_days_settings_section',
-			array( '&nbsp;' . __( 'Select weekdays for shipping.<br><b><i>Upgrade to <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>', 'order-delivery-date' ) )
+			array( '&nbsp;' . __( 'Business days of your store.<br><b><i>Upgrade to <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>', 'order-delivery-date' ) )
 		);
 	}
 
