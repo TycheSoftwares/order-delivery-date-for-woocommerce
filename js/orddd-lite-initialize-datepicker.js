@@ -653,7 +653,12 @@ function nd( date ) {
 		}
 	}
 	if ( currentdt >= today ) {
-		return [ true, 'available-deliveries', 'Available' ];
+		var PartialBooked = JSON.parse( '[' + orddd_lite_params.orddd_lite_partial_days + ']' );
+		if ( PartialBooked.length && jQuery.inArray( ( m + 1 ) + '-' + d + '-' + y, PartialBooked ) != -1 ) {
+			return [ true, "partially-booked available-deliveries", 'Available' ];
+		} else {
+			return [ true, 'available-deliveries', 'Available' ];
+		}
 	} else {
 		return [ false ];
 	}
