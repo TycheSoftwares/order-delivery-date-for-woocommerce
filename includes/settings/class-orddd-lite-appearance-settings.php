@@ -347,8 +347,12 @@ class Orddd_Lite_Appearance_Settings {
 					jQuery( "#orddd_lite_language_selected" ).change(function() {
 						jQuery( "#datepicker" ).datepicker( "option", jQuery.datepicker.regional[ jQuery( this ).val() ] );
 						jQuery( "#datepicker" ).datepicker( "option", "firstDay", ' . esc_attr( $first_day_of_week ) . ' );
-						});
 					});
+					jQuery( "#orddd_lite_start_of_week" ).change(function() {
+						jQuery( "#datepicker" ).datepicker( "option", jQuery.datepicker.regional[ jQuery( "#orddd_lite_language_selected" ).val() ] );
+						jQuery( "#datepicker" ).datepicker( "option", "firstDay", jQuery( this ).val() );
+					});
+				});
 					
 			</script>
 			<div id="switcher"></div>
