@@ -58,7 +58,7 @@ class Orddd_Lite_Process {
 		$validate_time_field = ( 'checked' === get_option( 'orddd_lite_time_slot_mandatory' ) ) ? true : false;
 		$number_of_dates     = get_option( 'orddd_lite_number_of_dates' );
 		$date_field_label    = '' !== get_option( 'orddd_lite_delivery_date_field_label' ) ? get_option( 'orddd_lite_delivery_date_field_label' ) : __( 'Delivery Date', 'order-delivery-date' );
-		$time_field_label    = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_delivery_timeslot_field_label' ) : __( 'Delivery Time', 'order-delivery-date' );
+		$time_field_label    = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : __( 'Delivery Time', 'order-delivery-date' );
 		$time_slot_options   = array();
 		$time_slot_enabled   = false;
 
