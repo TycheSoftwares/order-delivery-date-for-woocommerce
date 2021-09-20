@@ -1607,7 +1607,7 @@ class Orddd_Lite_Settings {
 							<form method="post" action="options.php">' );
 								settings_fields( 'orddd_delivery_days_settings' );
 								do_settings_sections( 'orddd_delivery_days_page' );
-								submit_button( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save', true );
+								submit_button( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save', true, array( 'disabled' => true ) );
 							print( '</form>
 						</div>
 					</div>' );
@@ -1633,7 +1633,7 @@ class Orddd_Lite_Settings {
 						<form method="post" action="options.php">' );
 							settings_fields( 'orddd_time_settings' );
 							do_settings_sections( 'orddd_time_settings_page' );
-							submit_button( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save', true );
+							submit_button( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save', true, array( 'disabled' => true ) );
 						print( '</form>
 					</div>' );
 					break;
