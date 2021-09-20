@@ -1611,7 +1611,7 @@ class Orddd_Lite_Settings {
 							print( '</form>
 						</div>
 					</div>' );
-					echo "<div class='orddd-col-right'><h3 id='delivery_date_table_head'>" . esc_attr_e( 'Specific Delivery Dates', 'order-delivery-date' ) . '</h3>';
+					echo "<div class='orddd-col-right'><h2 id='delivery_date_table_head'>" . esc_attr__( 'Specific Delivery Dates', 'order-delivery-date' ) . '</h2>';
 					include_once 'class-orddd-lite-view-specific-table.php';
 					$orddd_table = new ORDDD_Lite_View_Specific_Table();
 					$orddd_table->orddd_prepare_items();
