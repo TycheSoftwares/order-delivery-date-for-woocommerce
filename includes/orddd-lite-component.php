@@ -117,8 +117,8 @@ if ( ! class_exists( 'Orddd_Lite_All_Component' ) ) {
 					'answer'   => 'It is not possible to add Delivery date calendar for each product from Order Delivery Date for WooCommerce. However, we do have a plugin name <a href="https://www.tychesoftwares.com/store/premium-plugins/product-delivery-date-pro-for-woocommerce/?utm_source=wprepo&amp;utm_medium=link&amp;utm_campaign=OrderDeliveryDateLite" rel="nofollow">Product Delivery Date for WooCommerce Pro</a> and <a href="https://wordpress.org/plugins/product-delivery-date-for-woocommerce-lite/">Lite</a> version both.',
 				),
 				2  => array(
-					'question' => 'Can the customer enter the preferred order delivery time?',
-					'answer'   => 'Currently, there is no provision for entering the delivery time in the free version. This is possible in the Pro version. <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=wprepo&amp;utm_medium=demolink&amp;utm_campaign=OrderDeliveryDateLite" title="View Demo" rel="nofollow">View Demo</a>.',
+					'question' => 'Can the customer select a preferred delivery time slot for their order?',
+					'answer'   => 'Yes. The admin can add delivery time slots and the customer can choose them when placing the order.',
 				),
 				3  => array(
 					'question' => 'Is the order delivery date field mandatory on the checkout page?',
