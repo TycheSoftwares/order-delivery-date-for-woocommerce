@@ -242,6 +242,13 @@ Currently, it is not possible to add different delivery settings for different s
 
 == Changelog ==
 
+= 3.16.0 (21.09.2021) =
+* Dev - Removed the hidden input fields and sent the data to JS through wp_localize_script.
+* Dev - Created template structure for the delivery date & time fields.
+* Fix - Preview theme calendar not come as per First day of week is selected. This has been fixed.
+* Fix - We have updated .pot file for missing string translations.
+* Fix - &nbsp text appeared in the Shipping Days Settings section. This has been fixed.
+
 = 3.15.1 (03.09.2021) =
 * Fix - Number of dates was getting blocked after updating the plugin to v3.15.0. This has been fixed.
 
