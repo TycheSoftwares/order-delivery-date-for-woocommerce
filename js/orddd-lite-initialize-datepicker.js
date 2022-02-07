@@ -80,14 +80,7 @@ jQuery( document ).ready( function() {
 							var monthValue = inst.selectedMonth + 1;
 							var dayValue   = inst.selectedDay;
 							var yearValue  = inst.selectedYear;
-							var all        = dayValue + "-" + monthValue + "-" + yearValue;
-							// If "Clear" gets clicked, then really clear it
-							var event = arguments.callee.caller.caller.arguments[0];
-							if ( typeof( event ) !== "undefined" ) {
-								if ( jQuery( event.delegateTarget ).hasClass( "ui-datepicker-close" ) ) {
-									jQuery( this ).val( "" );
-								}
-							}
+							var all        = dayValue + "-" + monthValue + "-" + yearValue;							
 						}
 						jQuery( "#e_deliverydate" ).blur();
 					}
@@ -101,6 +94,9 @@ jQuery( document ).ready( function() {
 		if ( orddd_lite_params.orddd_lite_field_note != '' ) {
 			jQuery( "#e_deliverydate_field" ).append( "<small class='orddd_lite_field_note'>" + orddd_lite_params.orddd_lite_field_note + "</small>" );
 		}
+		jQuery( document ).on( "click", '.ui-datepicker-close', function() {
+			jQuery( "#e_deliverydate" ).val( "" );
+		})
 
 		jQuery( document ).on( "change", "#orddd_lite_time_slot", function() {
 			var selected_val = jQuery(this).val();
