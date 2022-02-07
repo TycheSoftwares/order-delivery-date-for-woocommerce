@@ -71,23 +71,25 @@ class Orddd_Lite_Process {
 		}
 
 		do_action( 'orddd_lite_before_checkout_fields', $checkout );
+		$is_delivery_enabled = Orddd_Lite_Common::orddd_lite_is_delivery_enabled();
+		if ( 'yes' === $is_delivery_enabled ) {
+			wc_get_template(
+				'orddd-lite-datepicker-template.php',
+				array(
+					'date_field_label'    => $date_field_label,
+					'checkout'            => $checkout,
+					'validate_date_field' => $validate_date_field,
+					'time_slot_enabled'   => $time_slot_enabled,
+					'time_field_label'    => $time_field_label,
+					'time_slot_options'   => $time_slot_options,
+					'validate_time_field' => $validate_time_field,
+				),
+				'order-delivery-date-for-woocommerce/',
+				ORDDD_LITE_TEMPLATE_PATH
+			);
 
-		wc_get_template(
-			'orddd-lite-datepicker-template.php',
-			array(
-				'date_field_label'    => $date_field_label,
-				'checkout'            => $checkout,
-				'validate_date_field' => $validate_date_field,
-				'time_slot_enabled'   => $time_slot_enabled,
-				'time_field_label'    => $time_field_label,
-				'time_slot_options'   => $time_slot_options,
-				'validate_time_field' => $validate_time_field,
-			),
-			'order-delivery-date-for-woocommerce/',
-			ORDDD_LITE_TEMPLATE_PATH
-		);
-
-		do_action( 'orddd_lite_after_checkout_fields', $checkout );
+			do_action( 'orddd_lite_after_checkout_fields', $checkout );
+		}
 	}
 
 	/**
