@@ -509,7 +509,10 @@ class Orddd_Lite_Common {
 			$delivery_enabled            = 'yes';
 			$fields_for_virtual_product  = get_option( 'orddd_lite_no_fields_for_virtual_product' );
 			$fields_for_featured_product = get_option( 'orddd_lite_no_fields_for_featured_product' );
-
+			$orddd_lite_enable_delivery_date = get_option( 'orddd_lite_enable_delivery_date');
+			if ( $orddd_lite_enable_delivery_date !=='on' ) {
+				return 'no';
+			}
 			if ( 'on' === $fields_for_virtual_product && 'on' === $fields_for_featured_product ) {
 				foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
 					$product_id = $values['product_id'];
