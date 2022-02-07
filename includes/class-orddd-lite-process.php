@@ -72,7 +72,7 @@ class Orddd_Lite_Process {
 
 		do_action( 'orddd_lite_before_checkout_fields', $checkout );
 		$is_delivery_enabled = Orddd_Lite_Common::orddd_lite_is_delivery_enabled();
-		if ( $is_delivery_enabled ==='yes' ) {
+		if ( 'yes' === $is_delivery_enabled ) {
 			wc_get_template(
 				'orddd-lite-datepicker-template.php',
 				array(
