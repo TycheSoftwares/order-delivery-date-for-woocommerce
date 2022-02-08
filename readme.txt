@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
-Tested up to: 5.8
+Tested up to: 5.9
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -241,6 +241,10 @@ Currently, it is not possible to add different delivery settings for different s
 7. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date"
 
 == Changelog ==
+
+= 3.16.1 (08.02.2022) =
+* Fix - Delivery date field was not working after updating to WordPress 5.9
+* Fix - Delivery date field was displayed on checkout for virtual products even when 'Disable the Delivery Date and Time Slot Fields for: Virtual Products' setting was enabled.
 
 = 3.16.0 (21.09.2021) =
 * Dev - Removed the hidden input fields and sent the data to JS through wp_localize_script.
