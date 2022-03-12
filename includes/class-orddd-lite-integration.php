@@ -151,6 +151,14 @@ class Orddd_Lite_Integration {
 				'value' => $delivery_date_formatted,
 			);
 		}
+		$order_time_slot = orddd_lite_common::orddd_get_order_timeslot( $order_id );
+		if ( '' !== $order_time_slot ) {
+			$new_fields[ get_option( 'orddd_lite_delivery_timeslot_field_label' ) ] = array(
+				//phpcs:ignore
+				'label' => __( get_option( 'orddd_lite_delivery_timeslot_field_label' ), 'order-delivery-date' ),
+				'value' => $order_time_slot,
+			);
+		}
 		return array_merge( $fields, $new_fields );
 	}
 
