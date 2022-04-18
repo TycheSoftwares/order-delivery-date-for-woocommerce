@@ -1209,15 +1209,6 @@ class Orddd_Lite_Settings {
 		);
 
 		add_settings_field(
-			'orddd_lite_show_column_on_orders_page_check',
-			__( 'Show on Orders Listing Page:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_show_column_on_orders_page_check_callback' ),
-			'orddd_lite_additional_settings_page',
-			'orddd_lite_additional_settings_section',
-			array( __( 'Displays the Delivery Date on the WooCommerce->Orders page.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
 			'orddd_lite_show_filter_on_orders_page_check',
 			__( 'Show Filter on Orders Listing Page:', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_show_filter_on_orders_page_check_callback' ),

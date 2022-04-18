@@ -25,25 +25,6 @@ class Orddd_Lite_Additional_Settings {
 	public static function orddd_lite_additional_settings_section_callback() { }
 
 	/**
-	 * Callback for adding Delivery date column on WooCommerce->Orders page setting
-	 *
-	 * @param array $args Extra arguments containing label & class for the field.
-	 * @since 1.5
-	 */
-	public static function orddd_lite_show_column_on_orders_page_check_callback( $args ) {
-		?>
-		<input type="checkbox" name="orddd_show_column_on_orders_page_check" id="orddd_show_column_on_orders_page_check" class="day-checkbox" disabled/>
-		<label for="orddd_show_column_on_orders_page_check"><?php echo wp_kses_post( $args[0] ); ?></label>
-		<strong><em>Upgrade to <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</em></strong>
-
-		<br>
-		<input type="checkbox" name="orddd_lite_enable_default_sorting_of_column" id="orddd_lite_enable_default_sorting_of_column" value="checked" <?php echo esc_attr( get_option( 'orddd_lite_enable_default_sorting_of_column' ) ); ?>/>
-		<label for="orddd_lite_enable_default_sorting_of_column"><?php echo esc_attr( __( 'Enable default sorting of orders (in descending order) by Delivery Date on WooCommerce -> Orders page', 'order-delivery-date' ) ); ?></label>
-
-		<?php
-	}
-
-	/**
 	 * Autofill date & time on the checkout page
 	 *
 	 * @param array $args Extra arguments containing label & class for the field.
