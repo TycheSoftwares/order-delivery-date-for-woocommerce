@@ -419,6 +419,46 @@ class Orddd_Lite_Process {
 					wc_add_notice( $message, $notice_type = 'error' );
 				}
 			}
+			
+			$min_time_in_secs = '' !== get_option( 'orddd_lite_minimumOrderDays' ) ? get_option( 'orddd_lite_minimumOrderDays' ) * 60 * 60 : 0;
+			
+			if ( isset( $_POST['h_deliverydate'] ) ) {
+				$delivery_date = sanitize_text_field( wp_unslash( $_POST['h_deliverydate'] ) );
+			} elseif ( isset( $_POST['e_deliverydate'] ) ) {
+				$delivery_date = date( 'd-m-Y', strtotime( $delivery_date ) );
+			}
+			
+			$delivery_time = strtotime( $delivery_date );
+			
+			$gmt = false;
+			if( has_filter( 'orddd_gmt_calculations' ) ) {
+				$gmt = apply_filters( 'orddd_gmt_calculations', '' );
+			}
+			$current_time  = current_time( 'timestamp', $gmt );			
+			
+			if ( isset( $_POST['orddd_lite_time_slot'] ) ) {
+				
+				$time_slot_arr = explode( ' - ', sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot'] ) ) );
+				$from_time     = $time_slot_arr[0];
+				$to_time       = $time_slot_arr[1];
+				
+				$min_time_on_last_slot = apply_filters( 'orddd_min_delivery_on_last_slot', false );
+				if ( $min_time_on_last_slot ) {
+					$delivery_time = strtotime( $delivery_date . " " . $to_time );
+				} else {
+					$delivery_time = strtotime( $delivery_date . " " . $from_time );   
+				}				
+			}
+			
+			if ( $min_time_in_secs > 0 ) {
+				$delivery_time = $delivery_time - $min_time_in_secs;
+			}
+			
+			if ( $current_time > $delivery_time ) {
+				$message = __( 'The selected time slot has expired. Please select another time slot for delivery.', 'order-delivery-date' );
+				wc_add_notice( $message, $notice_type = 'error' );
+			}
+			
 		}
 	}
 
