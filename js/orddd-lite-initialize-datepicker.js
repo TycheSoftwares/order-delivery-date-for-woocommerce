@@ -155,14 +155,7 @@ jQuery( document ).ready( function() {
         jQuery( '#e_deliverydate' ).prop("disabled", false );
     }
     var default_date_str = orddd_lite_admin_params.orddd_lite_default_date;
-    if( default_date_str != "" && typeof( default_date_str ) != 'undefined' ) {
-        if( default_date_str != '' && typeof( default_date_str ) != 'undefined' ) {
-            var default_date_arr = default_date_str.split( "-" );
-            var default_date = new Date( default_date_arr[ 1 ] + "/" + default_date_arr[ 0 ] + "/" + default_date_arr[ 2 ] );
-        } else {
-            var default_date = new Date();
-        }
-		jQuery.extend(
+			jQuery.extend(
 			jQuery.datepicker,
 			{ afterShow: function( event ) {
 				jQuery.datepicker._getInst( event.target ).dpDiv.css( "z-index", 9999 );
@@ -181,13 +174,6 @@ jQuery( document ).ready( function() {
 					var dayValue   = inst.selectedDay;
 					var yearValue  = inst.selectedYear;
 					var all        = dayValue + "-" + monthValue + "-" + yearValue;
-					// If "Clear" gets clicked, then really clear it
-					var event = arguments.callee.caller.caller.arguments[0];
-					if ( typeof( event ) !== "undefined" ) {
-						if ( jQuery( event.delegateTarget ).hasClass( "ui-datepicker-close" ) ) {
-							jQuery( this ).val( "" );
-						}
-					}
 				}
 				jQuery( "#e_deliverydate" ).blur();
 			}
@@ -196,6 +182,15 @@ jQuery( document ).ready( function() {
 			jQuery( this ).trigger( "blur" );
 			jQuery.datepicker.afterShow( event );
 		});
+	
+    if( default_date_str != "" && typeof( default_date_str ) != 'undefined' ) {
+        if( default_date_str != '' && typeof( default_date_str ) != 'undefined' ) {
+            var default_date_arr = default_date_str.split( "-" );
+            var default_date = new Date( default_date_arr[ 1 ] + "/" + default_date_arr[ 0 ] + "/" + default_date_arr[ 2 ] );
+        } else {
+            var default_date = new Date();
+        }
+
         jQuery( '#e_deliverydate' ).datepicker( "setDate", default_date );
         jQuery( "#h_deliverydate" ).val( orddd_lite_admin_params.orddd_lite_default_h_date );
         var default_date_inst = jQuery.datepicker._getInst( jQuery( "#e_deliverydate" )[0] );
@@ -209,7 +204,11 @@ jQuery( document ).ready( function() {
         jQuery( "#delivery_charges" ).remove();
         jQuery( "#delivery_charges_notes" ).remove();
         jQuery( "#is_virtual_product" ).html( "Delivery date settings are not enabled for the products." );                    
-    }    
+    } 
+
+	jQuery('.ui-datepicker-close').on( 'click', function(){
+		jQuery( '#e_deliverydate' ).val( "" );
+	})
 
 }
 
