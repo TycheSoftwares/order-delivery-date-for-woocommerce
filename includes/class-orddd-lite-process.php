@@ -349,11 +349,22 @@ class Orddd_Lite_Process {
 		} else {
 			$order_id = $order->id;
 		}
-		$fields[ get_option( 'orddd_lite_delivery_date_field_label' ) ] = array(
+		
+		$label = '' !== get_option( 'orddd_lite_delivery_date_field_label' ) ? get_option( 'orddd_lite_delivery_date_field_label' ) : 'Delivery Date';
+		$value = get_post_meta( $order_id, $label, true );
+		if ( 'Delivery Date' === $label ) {
+			$label = __( 'Delivery Date', 'order-delivery-date' );
+		}
+		if ( '' === $value ) {
+			$time_format_to_show = Orddd_Lite_Common::orddd_lite_get_time_format();
+			$value               = date( $time_format_to_show, get_post_meta( $order_id, '_orddd_lite_timestamp', true ) );
+		}
+		$fields[ $label ] = array(
 			// phpcs:ignore
-			'label' => __( get_option( 'orddd_lite_delivery_date_field_label' ), 'order-delivery-date' ),
-			'value' => get_post_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), true ),
+			'label' => $label,
+			'value' => $value,
 		);
+
 		return $fields;
 	}
 
