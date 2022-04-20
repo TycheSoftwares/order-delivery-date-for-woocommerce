@@ -60,12 +60,12 @@ class Orddd_Lite_Filter {
 	 * @param str $column - Name of the column.
 	 * @since 1.9
 	 */
-	public static function orddd_lite_woocommerce_custom_column_value( $column ) {
-		global $post, $orddd_lite_date_formats;
+	public static function orddd_lite_woocommerce_custom_column_value( $column, $post_id ) {
+		global $post, $the_order, $orddd_lite_date_formats;
 		if ( 'order_delivery_date' === $column ) {
-			$delivery_date_formatted = Orddd_Lite_Common::orddd_lite_get_order_delivery_date( $post->ID );
+			$delivery_date_formatted = Orddd_Lite_Common::orddd_lite_get_order_delivery_date(  $post_id );
 			echo esc_attr( $delivery_date_formatted );
-			$time_slot = orddd_lite_common::orddd_get_order_timeslot( $post->ID );
+			$time_slot = orddd_lite_common::orddd_get_order_timeslot(  $post_id );
 			echo '<p>' . esc_attr( $time_slot ) . '</p>';
 		}
 	}
