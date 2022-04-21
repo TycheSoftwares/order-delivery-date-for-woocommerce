@@ -624,7 +624,13 @@ class Orddd_Lite_Process {
 
 		$delivery_on_cart = get_option( 'orddd_delivery_date_on_cart_page' );
 		$is_cart          = is_cart();
-		$is_ajax          = wp_doing_ajax();
+		
+		if ( version_compare( get_bloginfo( 'version' ), '4.7.0', '>=' ) ) {
+			$is_ajax = wp_doing_ajax();
+		} else {
+			$is_ajax = is_ajax();
+		}
+		
 		
 		if ( '' === $delivery_date ) {
 			if ( isset( $_POST['h_deliverydate'] ) ) { // phpcs:ignore
