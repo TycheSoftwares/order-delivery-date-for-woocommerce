@@ -30,7 +30,7 @@ woocommerce_form_field(
 		'type'              => 'text',
 		'label'             => $date_field_label,
 		'required'          => $validate_date_field,
-		'placeholder'       => get_option( 'orddd_delivery_date_field_placeholder' ),
+		'placeholder'       => get_option( 'orddd_lite_delivery_date_field_placeholder' ),
 		'custom_attributes' => $custom_attributes,
 		'autocomplete'      => 'off',
 		'class'             => array( 'form-row-wide' ),
