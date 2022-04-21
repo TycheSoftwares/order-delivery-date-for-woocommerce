@@ -172,6 +172,9 @@ class Orddd_Lite_Admin_Delivery {
 			$previous_order_date_check    = '';
 			if ( ( isset( $_POST['e_deliverydate'] ) && '' !== $_POST['e_deliverydate'] ) ) { // phpcs:ignore
 				$data = get_post_meta( $order_id );
+				if ( strstr(  $_POST['e_deliverydate'], '/' ) ) {
+					$_POST['e_deliverydate'] = implode( '-', explode( '/', $_POST['e_deliverydate'] ) );
+				}
 
 				if ( isset( $data['_orddd_lite_timestamp'][0] ) && '' !== $data['_orddd_lite_timestamp'][0] ) {
 					$previous_order_h_date        = date( 'j-n-Y', $data['_orddd_lite_timestamp'][0] ); // phpcs:ignore
