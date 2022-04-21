@@ -47,8 +47,11 @@ class Orddd_Lite_Filter {
 		unset( $new_columns['wc_actions'] );
 		// edit this for you column(s).
 		// all of your columns will be added before the actions column.
-		$date_field_label = get_option( 'orddd_lite_delivery_date_field_label' );
+		$date_field_label = '' !== get_option( 'orddd_lite_delivery_date_field_label' ) ? get_option( 'orddd_lite_delivery_date_field_label' ) : 'Delivery Date';
 		// phpcs:ignore
+		if ( 'Delivery Date' === $date_field_label ) {
+			$date_field_label = __( 'Delivery Date', 'order-delivery-date' );
+		}
 		$new_columns['order_delivery_date'] = __( $date_field_label, 'order-delivery-date' ); // Title for column heading.
 		$new_columns['wc_actions']          = $columns['wc_actions'];
 		return $new_columns;
@@ -82,73 +85,42 @@ class Orddd_Lite_Filter {
 		$columns['order_delivery_date'] = '_orddd_lite_timestamp';
 		return $columns;
 	}
+	
 
+	
 	/**
-	 * Delivery date column orderby. This help WooCommerce to understand the field on which the sorting should be based on.
-	 * The delivery date is stored as a timestamp in the _orddd_lite_timestamp variable in wp_postmeta
-	 *
-	 * @param array $vars Query attributes for sorting delivery date column.
-	 * @return array
-	 * @since 1.9
-	 **/
-	public static function orddd_lite_woocommerce_delivery_date_orderby( $vars ) {
-		global $typenow;
-		$delivery_field_label = '_orddd_lite_timestamp';
-		if ( isset( $vars['orderby'] ) && '' !== $vars['orderby'] ) {
-			if ( $delivery_field_label === $vars['orderby'] ) {
-				$sorting_vars = array(
-					'orderby' => array(
-						'meta_value_num' => $vars['order'],
-						'date'           => 'ASC',
-					),
-				);
-				// phpcs:ignore
-				$sorting_vars['meta_query'] = array(
-					'relation' => 'OR',
-					array(
-						'key'     => $delivery_field_label,
-						'value'   => '',
-						'compare' => 'NOT EXISTS',
-					),
-					array(
-						'key'     => $delivery_field_label,
-						'compare' => 'EXISTS',
-					),
-				);
+	 * Delivery date column orderby. 
+	 * 
+	 * Helps WooCommerce understand using the value based on which a column should be sorted.
+	 * The delivery date is stored as a timestamp in the _orddd_timestamp variable in wp_postmeta
+	 * 
+	 * @param array $clauses      - Query clauses
+	 * @param array $query_object - Query object
+	 * @return array $clauses     - Updated Query clauses.
+	 * 
+	 * @hook request
+	 * @since 9.30
+	 */
+	public static function orddd_lite_woocommerce_delivery_datetime_orderby( $clauses, $query_object ) {
 
-				$vars = array_merge( $vars, $sorting_vars );
-			}
-		} elseif ( get_option( 'orddd_lite_enable_default_sorting_of_column' ) === 'checked' ) {
-			if ( 'shop_order' !== $typenow ) {
-				return $vars;
-			}
+		if( get_option( "orddd_lite_enable_default_sorting_of_column" ) == 'on' ) {
+			global $wpdb;
+           
+			if (  isset( $_GET['post_type'] ) && 'shop_order' === $_GET['post_type'] && ( ( isset( $_GET[ 'orderby' ] ) && '_orddd_lite_timestamp' === $_GET[ 'orderby' ] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( "orddd_lite_enable_default_sorting_of_column" ) && 'on' === get_option( "orddd_lite_enable_default_sorting_of_column" ) ) ) ) {
 
-			$sorting_vars = array(
-				'orderby' => array(
-					'meta_value_num' => 'DESC',
-					'date'           => 'ASC',
-				),
-				'order'   => 'DESC',
-			);
-			// phpcs:ignore
-			$sorting_vars['meta_query'] = array(
-				'relation' => 'OR',
-				array(
-					'key'     => $delivery_field_label,
-					'value'   => '',
-					'compare' => 'NOT EXISTS',
-				),
-				array(
-					'key'     => $delivery_field_label,
-					'compare' => 'EXISTS',
-				),
-			);
 
-			$vars = array_merge( $vars, $sorting_vars );
+				$clauses['join'] .= "LEFT JOIN " . $wpdb->prefix . "postmeta wpm ON ( " . $wpdb->prefix . "posts.Id = wpm.post_id AND wpm.meta_key = '_orddd_lite_timestamp' )
+				LEFT JOIN " . $wpdb->prefix . "postmeta wpm2 ON ( " . $wpdb->prefix . "posts.Id = wpm2.post_id AND wpm2.meta_key = '_orddd_lite_timeslot_timestamp' )";
+
+				$orderby = ( ! isset( $_GET['order'] ) || 'desc' === $_GET['order'] ) ? 'desc' : 'asc';
+				$orderby = " COALESCE( wpm2.meta_value, wpm.meta_value ) " . $orderby ." " ;
+
+				$clauses['orderby'] =  ! empty( $clauses['orderby'] ) ? $orderby . ', ' . $clauses['orderby'] : $orderby;
+            }
+
 		}
-		return $vars;
+		return $clauses;
 	}
-
 	/**
 	 * Displays the Delivery date & Delivery time on WooCommerce->Orders->Edit Order page.
 	 * 
