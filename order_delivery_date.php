@@ -126,10 +126,13 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				$post_type = sanitize_text_field( wp_unslash( $_GET['post_type'] ) );
 				if ( 'shop_order' === $post_type ) {
 					// WooCommerce Edit Order page.
-					add_filter( 'manage_edit-shop_order_columns', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_order_delivery_date_column' ), 20, 1 );
-					add_action( 'manage_shop_order_posts_custom_column', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_custom_column_value' ), 20, 2 );
-					add_filter( 'manage_edit-shop_order_sortable_columns', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_custom_column_value_sort' ) );
-					add_filter( 'request', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_delivery_date_orderby' ) );
+					if ( get_option( 'orddd_lite_show_column_on_orders_page_check' ) === 'on' ) {
+						add_filter( 'manage_edit-shop_order_columns', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_order_delivery_date_column' ), 20, 1 );
+						add_action( 'manage_shop_order_posts_custom_column', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_custom_column_value' ), 20, 2 );
+						add_filter( 'manage_edit-shop_order_sortable_columns', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_custom_column_value_sort' ) );
+						add_filter( 'posts_clauses',                           array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_delivery_datetime_orderby' ), 10,2 );	
+					}
+					
 				}
 			}
 
