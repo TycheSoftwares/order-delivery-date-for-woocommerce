@@ -356,8 +356,7 @@ class Orddd_Lite_Process {
 			$label = __( 'Delivery Date', 'order-delivery-date' );
 		}
 		if ( '' === $value ) {
-			$time_format_to_show = Orddd_Lite_Common::orddd_lite_get_time_format();
-			$value               = date( $time_format_to_show, get_post_meta( $order_id, '_orddd_lite_timestamp', true ) );
+			$value = Orddd_Lite_Common::orddd_lite_get_order_delivery_date( $order_id );
 		}
 		$fields[ $label ] = array(
 			// phpcs:ignore
