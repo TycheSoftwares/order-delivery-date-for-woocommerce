@@ -467,7 +467,11 @@ class Orddd_Lite_Process {
 		}
 
 		if ( $current_time > $delivery_time ) {
-			$message = __( 'The selected time slot has expired. Please select another time slot for delivery.', 'order-delivery-date' );
+			if ( empty( $time_slot_arr ) ) {
+				$message = __( 'The selected Delivery date has expired. Please select another delivery date.', 'order-delivery-date' );
+			} else {
+				$message = __( 'The selected time slot has expired. Please select another time slot for delivery.', 'order-delivery-date' );
+			}
 			wc_add_notice( $message, $notice_type = 'error' );
 		}
 	}
