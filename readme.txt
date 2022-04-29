@@ -164,6 +164,9 @@ Option 3:
 
 == Changelog ==
 
+= 3.17.1 (29.04.2022) =
+* Fix - Cut-off time error was appearing on checkout page for valid dates when no timeslot was enabled.
+
 = 3.17.0 (26.04.2022) =
 * Fix - is_ajax deprecated error was removed on checkout page and cart page
 * Fix - Delivery date field placeholder text was not appearing on the checkout page.
