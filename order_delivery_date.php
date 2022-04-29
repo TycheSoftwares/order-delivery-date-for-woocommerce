@@ -326,6 +326,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				if ( false === get_option( 'orddd_lite_delivery_timeslot_field_label' ) ) {
 					update_option( 'orddd_lite_delivery_timeslot_field_label', 'Time Slot' );
 				}
+				update_option( 'orddd_lite_show_column_on_orders_page_check', 'on' );
 			}
 		}
 
