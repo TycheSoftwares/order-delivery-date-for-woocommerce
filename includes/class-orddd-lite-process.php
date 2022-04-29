@@ -460,6 +460,9 @@ class Orddd_Lite_Process {
 				$delivery_time = strtotime( $delivery_date . " " . $from_time );   
 			}				
 		}
+		if ( 'on' !== get_option( 'orddd_lite_enable_time_slot' ) ) {
+			$delivery_time = $delivery_time + 24 * 60 * 60 ; 
+		}
 
 		if ( $min_time_in_secs > 0 ) {
 			$delivery_time = $delivery_time - $min_time_in_secs;
