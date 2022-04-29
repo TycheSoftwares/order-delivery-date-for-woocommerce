@@ -445,22 +445,29 @@ class Orddd_Lite_Process {
 		if( has_filter( 'orddd_gmt_calculations' ) ) {
 			$gmt = apply_filters( 'orddd_gmt_calculations', '' );
 		}
-		$current_time  = current_time( 'timestamp', $gmt );			
+		$current_time  = current_time( 'timestamp', $gmt );
+	
 
-		if ( isset( $_POST['orddd_lite_time_slot'] ) ) {
+		if ( 'on' === get_option( 'orddd_lite_enable_time_slot' ) ) {
+			
+			$time_slot = sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot'] ) );
+			
+			if ( ! ( '' === $time_slot || 'select' === $time_slot ) ) {
+				$time_slot_arr = explode( ' - ', $time_slot );
+				$from_time     = $time_slot_arr[0];
+				$to_time       = $time_slot_arr[1];
 
-			$time_slot_arr = explode( ' - ', sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot'] ) ) );
-			$from_time     = $time_slot_arr[0];
-			$to_time       = $time_slot_arr[1];
-
-			$min_time_on_last_slot = apply_filters( 'orddd_min_delivery_on_last_slot', false );
-			if ( $min_time_on_last_slot ) {
-				$delivery_time = strtotime( $delivery_date . " " . $to_time );
+				$min_time_on_last_slot = apply_filters( 'orddd_min_delivery_on_last_slot', false );
+				if ( $min_time_on_last_slot ) {
+					$delivery_time = strtotime( $delivery_date . " " . $to_time );
+				} else {
+					$delivery_time = strtotime( $delivery_date . " " . $from_time );   
+				}
 			} else {
-				$delivery_time = strtotime( $delivery_date . " " . $from_time );   
-			}				
-		}
-		if ( 'on' !== get_option( 'orddd_lite_enable_time_slot' ) ) {
+				$delivery_time = $delivery_time + 24 * 60 * 60 ;
+			}
+			 
+		} else {
 			$delivery_time = $delivery_time + 24 * 60 * 60 ; 
 		}
 
