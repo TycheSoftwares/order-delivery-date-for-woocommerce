@@ -429,6 +429,8 @@ class Orddd_Lite_Process {
 					wc_add_notice( $message, $notice_type = 'error' );
 				}
 			}
+		} else {
+			return;
 		}
 		
 		$min_time_in_secs = '' !== get_option( 'orddd_lite_minimumOrderDays' ) ? get_option( 'orddd_lite_minimumOrderDays' ) * 60 * 60 : 0;
