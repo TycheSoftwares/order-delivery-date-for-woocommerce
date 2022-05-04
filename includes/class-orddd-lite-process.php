@@ -405,8 +405,12 @@ class Orddd_Lite_Process {
 		$is_delivery_enabled = Orddd_Lite_Common::orddd_lite_is_delivery_enabled();
 
 		$delivery_date = '';
-		if ( isset( $_POST['e_deliverydate'] ) ) { // phpcs:ignore
-			$delivery_date = sanitize_text_field( wp_unslash( $_POST['e_deliverydate'] ) ); // phpcs:ignore
+
+		if ( isset( $_POST['h_deliverydate'] )  && ! empty( $_POST['h_deliverydate'] ) ) {
+			$delivery_date = sanitize_text_field( wp_unslash( $_POST['h_deliverydate'] ) );
+		} elseif ( isset( $_POST['e_deliverydate'] ) && ! empty( $_POST['e_deliverydate'] ) ) {
+			$delivery_date = sanitize_text_field( wp_unslash( $_POST['e_deliverydate'] ) ); 
+			$delivery_date = date( 'd-m-Y', strtotime( $delivery_date ) );
 		}
 
 		if ( isset( $_POST['orddd_lite_time_slot'] ) ) { // phpcs:ignore
@@ -435,11 +439,7 @@ class Orddd_Lite_Process {
 		
 		$min_time_in_secs = '' !== get_option( 'orddd_lite_minimumOrderDays' ) ? get_option( 'orddd_lite_minimumOrderDays' ) * 60 * 60 : 0;
 
-		if ( isset( $_POST['h_deliverydate'] ) ) {
-			$delivery_date = sanitize_text_field( wp_unslash( $_POST['h_deliverydate'] ) );
-		} elseif ( isset( $_POST['e_deliverydate'] ) ) {
-			$delivery_date = date( 'd-m-Y', strtotime( $delivery_date ) );
-		}
+
 		
 		if ( '' === $delivery_date ) {
 			return;

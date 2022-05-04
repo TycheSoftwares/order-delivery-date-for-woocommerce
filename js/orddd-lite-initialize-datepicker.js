@@ -208,6 +208,7 @@ jQuery( document ).ready( function() {
 
 	jQuery('.ui-datepicker-close').on( 'click', function(){
 		jQuery( '#e_deliverydate' ).val( "" );
+		jQuery( '#h_deliverydate' ).val( "" );
 	})
 
 }
@@ -284,6 +285,13 @@ function orddd_on_select_date( date, inst ) {
 
 	localStorage.setItem( "e_deliverydate_lite_session", jQuery( "#e_deliverydate" ).val() );
 	localStorage.setItem( "h_deliverydate_lite_session", all );
+	
+	jQuery('input[name="e_deliverydate"]').each( function( index ) {
+		id = jQuery(this).attr('id');
+		if ( id !=='e_deliverydate'){
+			jQuery(this).val(dayValue + '-' + monthValue + '-' + yearValue );
+		}
+	});
 
 	var current_date = orddd_lite_params.orddd_lite_current_day
 	if ( typeof( current_date ) != 'undefined' && current_date != '' ) {
@@ -1030,3 +1038,17 @@ function orddd_load_time_slots( response ) {
         });
     }
 }
+
+jQuery.ajaxPrefilter( function(options, originalOptions, jqXHR) {
+
+	const query = options.url.substring(options.url.indexOf('?') + 1);	
+	var urlParams = new URLSearchParams(query);
+	const wcAjax = urlParams.get('wc-ajax');
+	
+	if ( 'checkout' == wcAjax && options.data.indexOf( 'h_deliverydate' ) == -1 ) {	
+		if( '' !== jQuery('#h_deliverydate').val() ){
+			options.data += '&h_deliverydate=' + jQuery('#h_deliverydate').val();
+		}
+	}
+
+})
