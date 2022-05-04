@@ -439,7 +439,9 @@ class Orddd_Lite_Process {
 			$delivery_date = sanitize_text_field( wp_unslash( $_POST['h_deliverydate'] ) );
 		} elseif ( isset( $_POST['e_deliverydate'] ) ) {
 			$delivery_date = date( 'd-m-Y', strtotime( $delivery_date ) );
-		} else {
+		}
+		
+		if ( '' === $delivery_date ) {
 			return;
 		}
 
