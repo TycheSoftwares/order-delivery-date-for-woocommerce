@@ -164,6 +164,9 @@ Option 3:
 
 == Changelog ==
 
+= 3.17.2 (05.05.2022) =
+* Fix - Cut-off time error was appearing on checkout page when plugin was not used and no date sent.
+
 = 3.17.1 (29.04.2022) =
 * Fix - Cut-off time error was appearing on checkout page for valid dates when no timeslot was enabled.
 
