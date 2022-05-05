@@ -260,8 +260,8 @@ class Orddd_Lite_Common {
 				$delivery_date_formatted = gmdate( $orddd_lite_date_formats[ get_option( 'orddd_lite_delivery_date_format' ) ], $delivery_date_timestamp );
 			} else {
 				if ( array_key_exists( get_option( 'orddd_lite_delivery_date_field_label' ), $data ) ) {
-					$delivery_date_timestamp = strtotime( $data[ get_option( 'orddd_lite_delivery_date_field_label' ) ][0] );
-					if ( '' !== $delivery_date_timestamp ) {
+					if ( '' !== $data[ get_option( 'orddd_lite_delivery_date_field_label' ) ][0] ) {
+						$delivery_date_timestamp = strtotime( $data[ get_option( 'orddd_lite_delivery_date_field_label' ) ][0] );
 						$delivery_date_formatted = gmdate( $orddd_lite_date_formats[ get_option( 'orddd_lite_delivery_date_format' ) ], $delivery_date_timestamp );
 					}
 				} elseif ( array_key_exists( ORDDD_DELIVERY_DATE_FIELD_LABEL, $data ) ) {
