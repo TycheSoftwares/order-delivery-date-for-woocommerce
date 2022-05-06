@@ -458,7 +458,7 @@ class Orddd_Lite_Process {
 			
 			$time_slot = sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot'] ) );
 			
-			if ( ! ( '' === $time_slot || 'select' === $time_slot || 'asap' === $time_slot ) ) {
+			if ( ! ( '' === $time_slot || 'select' === $time_slot || 'asap' === $time_slot || 'NA' === $time_slot ) ) {
 				
 				$time_slot_arr = explode( ' - ', $time_slot );
 				$from_time     = $time_slot_arr[0];
