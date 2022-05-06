@@ -458,10 +458,15 @@ class Orddd_Lite_Process {
 			
 			$time_slot = sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot'] ) );
 			
-			if ( ! ( '' === $time_slot || 'select' === $time_slot ) ) {
+			if ( ! ( '' === $time_slot || 'select' === $time_slot || 'asap' === $time_slot ) ) {
+				
 				$time_slot_arr = explode( ' - ', $time_slot );
 				$from_time     = $time_slot_arr[0];
-				$to_time       = $time_slot_arr[1];
+				if ( isset( $time_slot_arr[1] ) ) {
+					$to_time = $time_slot_arr[1];
+				} else {
+					$to_time = '00';
+				}				
 
 				$min_time_on_last_slot = apply_filters( 'orddd_min_delivery_on_last_slot', false );
 				if ( $min_time_on_last_slot ) {
