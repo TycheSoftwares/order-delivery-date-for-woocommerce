@@ -163,6 +163,8 @@ Option 3:
 7. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date"
 
 == Changelog ==
+= 3.17.3 (05.05.2022) =
+* Fix - Cut-off time error was appearing on checkout page when 'Select Time slot' or 'Timeslot Not Available' is chosen.
 
 = 3.17.2 (05.05.2022) =
 * Fix - Cut-off time error was appearing on checkout page when plugin was not used and no date sent.
