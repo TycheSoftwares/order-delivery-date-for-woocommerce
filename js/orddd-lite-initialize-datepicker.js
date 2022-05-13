@@ -149,11 +149,7 @@ jQuery( document ).ready( function() {
  * @since 3.13.0
  */
  function orddd_lite_init() {
-    if( "auto-draft" == jQuery( "#original_post_status").val() ) {
-        jQuery( '#e_deliverydate' ).prop("disabled", true );
-    } else {
-        jQuery( '#e_deliverydate' ).prop("disabled", false );
-    }
+
     var default_date_str = orddd_lite_admin_params.orddd_lite_default_date;
 			jQuery.extend(
 			jQuery.datepicker,
