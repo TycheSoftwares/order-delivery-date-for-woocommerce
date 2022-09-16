@@ -94,6 +94,7 @@ $orddd_lite_date_formats = array(
 	'y.mm.dd'      => 'y.m.d',
 	'yy-mm-dd'     => 'Y-m-d',
 	'dd-mm-y'      => 'd-m-y',
+	'dd-mm-yy'     => 'd-m-Y',
 	'd M, y'       => 'j M, y',
 	'd M, yy'      => 'j M, Y',
 	'd MM, y'      => 'j F, y',
