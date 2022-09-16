@@ -199,7 +199,7 @@ class Orddd_Lite_Process {
 				}
 			}
 
-			do_action( 'orddd_after_timeslot_update', $time_slot );
+			do_action( 'orddd_after_timeslot_update', $time_slot, $order_id );
 		}
 	}
 
