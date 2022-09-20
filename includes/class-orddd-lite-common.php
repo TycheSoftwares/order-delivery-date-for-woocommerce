@@ -1750,7 +1750,7 @@ class Orddd_Lite_Common {
 						$calculated_minimum_delivery_time = $calculated_difference->h * 60 * 60;
 					}
 
-					if ( 0 === $calculated_difference->invert || $calculated_minimum_delivery_time < $delivery_time_seconds ) {
+					if ( 0 === $calculated_difference->invert || $calculated_minimum_delivery_time < $delivery_time_seconds || $calculated_min_date > $date2 ) {
 						$min_date_array['min_date'] = date( 'j-n-Y', strtotime( $min_date_array['min_date'] . '+1 day' ) ); //phpcs:ignore
 					}
 				}
