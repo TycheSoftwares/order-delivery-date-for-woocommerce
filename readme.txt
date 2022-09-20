@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date, woocommerce delivery date ,woocommerce delivery plugin ,woocommerce order delivery ,Woocommerce food delivery ,order delivery date for woocommerce ,woocommerce delivery time ,woocommerce delivery date checkout page
 Requires at least: 1.3
-Tested up to: 5.9.3
+Tested up to: 6.0
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -163,6 +163,13 @@ Option 3:
 7. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date"
 
 == Changelog ==
+= 3.18.0 (20.09.2022) =
+* Enhancement - Added a new date format d-m-Y. Props to @joostvanderzanden.
+* Tweak - Added an order_id parameter to 'orddd_after_timeslot_update' action so other plugins can use it.
+* Fix - When creating an order manually from the backend, the delivery date field would remain disabled and would not allow to add a delivery date. This has been fixed now.
+* Fix - Time slots were not coming up for the first available delivery date on the delivery calendar. This has been fixed now.
+* Fix – It was not allowing admin to edit the checkout page with Elementor when our plugin is active. This has now been fixed.
+
 = 3.17.3 (09.05.2022) =
 * Fix - Cut-off time error was appearing on checkout page when 'Select Time slot' or 'Timeslot Not Available' is chosen.
 
