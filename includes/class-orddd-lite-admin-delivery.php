@@ -42,7 +42,8 @@ class Orddd_Lite_Admin_Delivery {
 	 * @since 3.13.0
 	 */
 	public static function orddd_admin_delivery_box() {
-		add_meta_box( 'order-delivery-date', __( 'Edit Order Delivery Date and/or Time', 'order-delivery-date' ), array( 'Orddd_Lite_Admin_Delivery', 'orddd_lite_meta_box' ), 'shop_order', 'normal', 'core' );
+		$screen = Orddd_Lite_Common::is_hpos_enabled() ? wc_get_page_screen_id( 'shop-order' ) : 'shop_order';
+		add_meta_box( 'order-delivery-date', __( 'Edit Order Delivery Date and/or Time', 'order-delivery-date' ), array( 'Orddd_Lite_Admin_Delivery', 'orddd_lite_meta_box' ), $screen, 'normal', 'core' );
 	}
 
 	/**
@@ -63,9 +64,16 @@ class Orddd_Lite_Admin_Delivery {
 		global $wpdb, $orddd_date_formats, $post, $woocommerce, $orddd_languages, $orddd_weekdays;
 		if ( 'on' === get_option( 'orddd_lite_enable_delivery_date' ) ) {
 			$field_name      = 'e_deliverydate';
-			$orddd_post_type = $post->post_type;
-			$order_id        = $order->ID;
-
+			
+			$order_id = ( $order instanceof WP_Post ) ? $order->ID : $order->get_id();
+			
+			if ( ! Orddd_Lite_Common::is_hpos_enabled() ) {
+				$order = wc_get_order( $order_id );
+				$orddd_post_type = $post->post_type;
+			} else {
+				$orddd_post_type = $order->get_type();
+			}
+			
 			$date_field_label = get_option( 'orddd_lite_delivery_date_field_label' );
 			$time_field_label = get_option( 'orddd_lite_delivery_timeslot_field_label' );
 
@@ -91,7 +99,7 @@ class Orddd_Lite_Admin_Delivery {
 			echo $hidden_variables; //phpcs:ignore
 
 			// Default the fees.
-			$fee = get_post_meta( $order_id, '_total_delivery_charges', true );
+			$fee = Orddd_Lite_Common::get_order_meta( $order_id, '_total_delivery_charges', true );
 			if ( '' !== $fee || '{}' !== $fee || '[]' !== $fee ) {
 				$fee_name = 'Delivery Charges:';
 			} else {
@@ -171,7 +179,7 @@ class Orddd_Lite_Admin_Delivery {
 			$previous_charges_label       = '';
 			$previous_order_date_check    = '';
 			if ( ( isset( $_POST['e_deliverydate'] ) && '' !== $_POST['e_deliverydate'] ) ) { // phpcs:ignore
-				$data = get_post_meta( $order_id );
+				$data = Orddd_Lite_Common::get_order_meta( $order_id );
 				if ( strstr(  $_POST['e_deliverydate'], '/' ) ) {
 					$_POST['e_deliverydate'] = implode( '-', explode( '/', $_POST['e_deliverydate'] ) );
 				}
@@ -199,10 +207,12 @@ class Orddd_Lite_Admin_Delivery {
 					$previous_order_timeslot = $data[ $time_field_label ][0];
 				}
 
+				$order = wc_get_order( $order_id );
+
 				if ( isset( $_POST['e_deliverydate'] ) && '' !== $_POST['e_deliverydate'] && $_POST['e_deliverydate'] !== $previous_order_date ) { // phpcs:ignore
 					/* translators: %1s: date label, %2s old delivery date, %3s new delivery date */
 					$notes_array[] = sprintf( __( '%1$s is updated from %2$s to %3$s', 'order-delivery-date' ), $date_field_label, $previous_order_date, $_POST['e_deliverydate'] ); // phpcs:ignore
-					update_post_meta( $order_id, $date_field_label, $_POST['e_deliverydate'] ); // phpcs:ignore
+					Orddd_Lite_Common::update_order_meta( $order_id, $date_field_label, $_POST['e_deliverydate'], $order ); // phpcs:ignore
 					$delivery_details_updated = 'yes';
 				}
 
@@ -212,7 +222,7 @@ class Orddd_Lite_Admin_Delivery {
 					if ( $previous_order_h_date !== $_POST['h_deliverydate'] || // phpcs:ignore
 						( $previous_order_h_date == $_POST['h_deliverydate'] ) ) { // phpcs:ignore
 						$timestamp = Orddd_Lite_Common::orddd_lite_get_timestamp( $delivery_date, $date_format );
-						update_post_meta( $order_id, '_orddd_lite_timestamp', $timestamp );
+						Orddd_Lite_Common::update_order_meta( $order_id, '_orddd_lite_timestamp', $timestamp, $order );
 					}
 				}
 				$date_selected = 'yes';
@@ -222,20 +232,41 @@ class Orddd_Lite_Admin_Delivery {
 				$time_slot = $_POST['orddd_time_slot']; // phpcs:ignore
 				if ( $previous_order_h_date !== $_POST['h_deliverydate'] ) { // phpcs:ignore
 					$delivery_details_updated = 'yes';
-					update_post_meta( $order_id, $time_field_label, esc_attr( $time_slot ) );
-					update_post_meta( $order_id, '_orddd_time_slot', esc_attr( $time_slot ) );
+					Orddd_Lite_Common::update_order_meta( $order_id, $time_field_label, esc_attr( $time_slot ), $order );
+					Orddd_Lite_Common::update_order_meta( $order_id, '_orddd_time_slot', esc_attr( $time_slot ), $order );
 				} elseif ( $time_slot !== $previous_order_timeslot ) {
 					$delivery_details_updated = 'yes';
 
 					if ( 'asap' === $time_slot ) {
-						update_post_meta( $order_id, $time_field_label, esc_attr( __( 'As Soon As Possible.', 'order-delivery-date' ) ) );
-						update_post_meta( $order_id, '_orddd_time_slot', esc_attr( __( 'As Soon As Possible.', 'order-delivery-date' ) ) );
+						Orddd_Lite_Common::update_order_meta( $order_id, $time_field_label, esc_attr( __( 'As Soon As Possible.', 'order-delivery-date' ) ), $order );
+						Orddd_Lite_Common::update_order_meta( $order_id, '_orddd_time_slot', esc_attr( __( 'As Soon As Possible.', 'order-delivery-date' ) ), $order );
 						$time_slot = __( 'As Soon As Possible.', 'order-delivery-date' );
 					} else {
-						update_post_meta( $order_id, $time_field_label, esc_attr( $time_slot ) );
-						update_post_meta( $order_id, '_orddd_time_slot', esc_attr( $time_slot ) );
+						Orddd_Lite_Common::update_order_meta( $order_id, $time_field_label, esc_attr( $time_slot ), $order );
+						Orddd_Lite_Common::update_order_meta( $order_id, '_orddd_time_slot', esc_attr( $time_slot ), $order );
 					}
+
 				}
+				$h_deliverydate = '';
+				if ( isset( $_POST['h_deliverydate'] ) ) { //phpcs:ignore
+					$h_deliverydate = $_POST['h_deliverydate']; //phpcs:ignore
+				}
+				$time_format   = get_option( 'orddd_lite_delivery_time_format' );
+				$time_slot_arr = explode( ' - ', $time_slot );
+
+				if ( '1' === $time_format ) {
+					$from_time = date( 'H:i', strtotime( $time_slot_arr[0] ) ); //phpcs:ignore
+
+				} else {
+					$from_time = date( 'H:i', strtotime( $time_slot_arr[0] ) ); //phpcs:ignore
+				}
+
+				$delivery_date  = $h_deliverydate;
+				$delivery_date .= ' ' . $from_time;
+				$timestamp      = strtotime( $delivery_date );
+
+				Orddd_Lite_Common::update_order_meta( $order_id, '_orddd_lite_timeslot_timestamp', $timestamp, $order );
+
 				/* translators: %1s: time slot label, %2s old delivery time slot, %3s delivery time slot */
 				$notes_array[]     = sprintf( __( '%1$s is updated from %2$s to %3$s', 'order-delivery-date' ), $time_field_label, $previous_order_timeslot, $time_slot );
 				$timeslot_selected = 'yes';
@@ -245,7 +276,8 @@ class Orddd_Lite_Admin_Delivery {
 				$timeslot_selected = 'yes';
 			}
 			// Update the Delivery Charges.
-			update_post_meta( $order_id, '_total_delivery_charges', $orddd_fees );
+			Orddd_Lite_Common::update_order_meta( $order_id, '_total_delivery_charges', $orddd_fees, $order );
+			$order->save();
 
 			// Add order notes mentioning the same.
 			if ( is_array( $notes_array ) && count( $notes_array ) > 0 ) {
@@ -258,7 +290,7 @@ class Orddd_Lite_Admin_Delivery {
 				ORDDD_Lite_Email_Manager::orddd_lite_send_email_on_update( $order_id, 'admin' );
 			}
 
-			echo esc_attr( $date_selected . ',' . $timeslot_selected . ',' . $delivery_details_updated );
+			echo esc_attr( $date_selected . ',' . $timeslot_selected . ',' . $delivery_details_updated );			
 		}
 		die();
 	}
@@ -267,23 +299,30 @@ class Orddd_Lite_Admin_Delivery {
 	 * Send admin side data to JS.
 	 */
 	public static function orddd_lite_localize_admin_scripts() {
-		global $wpdb, $orddd_date_formats, $post, $woocommerce, $orddd_languages, $orddd_weekdays;
+		global $wpdb, $orddd_date_formats, $post, $order, $woocommerce, $orddd_languages, $orddd_weekdays;
 		$admin_lite_params = array();
-		if ( ! isset( $post ) || empty( $post ) ) {
+		if ( ( ! isset( $post ) || empty( $post ) ) && ! Orddd_Lite_Common::is_hpos_enabled() ) {
+			return $admin_lite_params;
+		} elseif ( Orddd_Lite_Common::is_hpos_enabled() && ! ( isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && isset( $_GET['id'] ) ) ) {
 			return $admin_lite_params;
 		}
 		if ( 'on' === get_option( 'orddd_lite_enable_delivery_date' ) ) {
-			$field_name              = 'e_deliverydate';
-			$orddd_post_type         = $post->post_type;
-			$order_id                = $post->ID;
+			$field_name = 'e_deliverydate';
+			if ( ! Orddd_Lite_Common::is_hpos_enabled() ) {
+				$orddd_post_type = $post->post_type;
+				$order_id        = $post->ID;
+			} else {
+				$orddd_post_type = 'wc-orders';
+				$order_id        = sanitize_text_field( wp_unslash( $_GET['id'] ) );
+			}
 			$current_date            = date( 'j-n-Y' ); // phpcs:ignore
-			$data                    = get_post_meta( $order_id );
+			$data                    = Orddd_Lite_Common::get_order_meta( $order_id );
 			$date_field_label        = get_option( 'orddd_lite_delivery_date_field_label' );
 			$time_field_label        = get_option( 'orddd_lite_delivery_timeslot_field_label' );
-			$delivery_date           = get_post_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), true );
-			$delivery_date_timestamp = get_post_meta( $order_id, '_orddd_lite_timestamp', true );
-			$delivery_time           = get_post_meta( $order_id, get_option( 'orddd_lite_delivery_timeslot_field_label' ), true );
-			$delivery_time_timestamp = get_post_meta( $order_id, '_orddd_lite_timeslot_timestamp', true );
+			$delivery_date           = Orddd_Lite_Common::get_order_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), true );
+			$delivery_date_timestamp = Orddd_Lite_Common::get_order_meta( $order_id, '_orddd_lite_timestamp', true );
+			$delivery_time           = Orddd_Lite_Common::get_order_meta( $order_id, get_option( 'orddd_lite_delivery_timeslot_field_label' ), true );
+			$delivery_time_timestamp = Orddd_Lite_Common::get_order_meta( $order_id, '_orddd_lite_timeslot_timestamp', true );
 			$delivery_date_format    = get_option( 'orddd_lite_delivery_date_format' );
 			$holidays                = get_option( 'orddd_lite_holidays' );
 			$holidays_str            = '';
@@ -326,7 +365,7 @@ class Orddd_Lite_Admin_Delivery {
 				$default_h_deliverydate = '';
 			}
 			// Default fees.
-			$fee = get_post_meta( $order_id, '_total_delivery_charges', true );
+			$fee = Orddd_Lite_Common::get_order_meta( $order_id, '_total_delivery_charges', true );
 			if ( '' !== $fee || '{}' !== $fee || '[]' !== $fee ) {
 				$fee_name = 'Delivery Charges:';
 			} else {
