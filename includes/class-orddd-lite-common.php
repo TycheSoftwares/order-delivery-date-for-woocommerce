@@ -8,6 +8,8 @@
  * @package     Order-Delivery-Date-Lite-for-WooCommerce/Common-Functions
  * @since       3.5
  */
+ 
+ use Automattic\WooCommerce\Utilities\OrderUtil;
 
 /**
  * Class for the common functions used in the plugin
@@ -247,7 +249,7 @@ class Orddd_Lite_Common {
 	 */
 	public static function orddd_lite_get_order_delivery_date( $order_id ) {
 		global $orddd_lite_date_formats;
-		$data                    = get_post_meta( $order_id );
+		$data                    = Orddd_Lite_Common::get_order_meta( $order_id );
 		$field_date_label        = get_option( 'orddd_lite_delivery_date_field_label' );
 		$delivery_date_formatted = '';
 		$delivery_date_timestamp = '';
@@ -387,13 +389,29 @@ class Orddd_Lite_Common {
 	 */
 	public static function orddd_lite_cancel_delivery_for_trashed( $order_id ) {
 		global $typenow;
-		$post_obj = get_post( $order_id );
-		if ( 'shop_order' !== $typenow ) {
+
+		if ( self::is_hpos_enabled() ) {
+			$order       = wc_get_order( $order_id );
+			if ( ! $order ) {
+				return;
+			}
+			$post_status = $order->get_status();
+			$post_type   = $order->get_type();		
+		} else {
+			$post_obj    = get_post( $order_id );
+			if ( ! $post_obj ) {
+				return;
+			}
+			$post_status = $post_status->post_status;
+			$post_type   = $post_obj->post_type;
+		}
+
+		if ( 'shop_order' !== $post_type ) {
 			return;
 		} else {
-			if ( 'wc-cancelled' !== $post_obj->post_status &&
-			'wc-refunded' !== $post_obj->post_status &&
-			'wc-failed' !== $post_obj->post_status ) {
+			if ( 'wc-cancelled' !== $post_status &&
+			'wc-refunded' !== $post_status &&
+			'wc-failed' !== $post_status ) {
 				self::orddd_lite_cancel_delivery( $order_id );
 			}
 		}
@@ -413,7 +431,7 @@ class Orddd_Lite_Common {
 	 */
 	public static function orddd_lite_cancel_delivery( $order_id ) {
 		global $wpdb, $typenow;
-		$post_meta               = get_post_meta( $order_id, '_orddd_lite_timestamp' );
+		$post_meta               = Orddd_Lite_Common::get_order_meta( $order_id, '_orddd_lite_timestamp' );
 		$delivery_date_timestamp = '';
 		if ( isset( $post_meta[0] ) && '' !== $post_meta[0] && null !== $post_meta[0] ) {
 			$delivery_date_timestamp = $post_meta[0];
@@ -422,7 +440,7 @@ class Orddd_Lite_Common {
 		$timeslot            = '';
 		$total_quantities    = 1;
 		$time_field_label    = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
-		$timeslot_post_meta  = get_post_meta( $order_id, $time_field_label );
+		$timeslot_post_meta  = Orddd_Lite_Common::get_order_meta( $order_id, $time_field_label );
 		$time_format_to_show = self::orddd_lite_get_time_format();
 
 		if ( isset( $timeslot_post_meta[0] ) && '' !== $timeslot_post_meta[0] && null !== $timeslot_post_meta[0] ) {
@@ -635,7 +653,7 @@ class Orddd_Lite_Common {
 		$order_time_slot     = '';
 		$time_format_to_show = self::orddd_lite_get_time_format();
 
-		$data  = get_post_meta( $order_id );
+		$data  = Orddd_Lite_Common::get_order_meta( $order_id );
 		$order = new WC_Order( $order_id );
 		$items = $order->get_items();
 
@@ -1477,7 +1495,7 @@ class Orddd_Lite_Common {
 	public static function orddd_lite_restore_deliveries( $order_id, $old_status, $new_status ) {
 		$old_status_arr = array( 'cancelled', 'refunded', 'trashed', 'failed' );
 		if ( in_array( $old_status, $old_status_arr, true ) && ! in_array( $new_status, $old_status_arr, true ) ) {
-			$data = get_post_meta( $order_id );
+			$data = Orddd_Lite_Common::get_order_meta( $order_id );
 
 			$time_field_label = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
 
@@ -1500,12 +1518,20 @@ class Orddd_Lite_Common {
 	 * @since 3.11.0
 	 */
 	public static function orddd_lite_untrash_order( $post_id ) {
-		$post_obj = get_post( $post_id );
+		if ( self::is_hpos_enabled() ) {
+			$order       = wc_get_order( $order_id );
+			$post_status = $order->get_status();
+			$post_type   = $order->get_type();			
+		} else {
+			$post_obj    = get_post( $order_id );
+			$post_status = $post_status->post_status;
+			$post_type   = $post_obj->post_type;
+		}
 		$status   = array( 'wc-pending', 'wc-cancelled', 'wc-refunded', 'wc-failed' );
 
-		if ( 'shop_order' === $post_obj->post_type && ( ! in_array( $post_obj->post_status, $status, true ) ) ) {
+		if ( 'shop_order' === $post_type && ( ! in_array( $post_status, $status, true ) ) ) {
 			// untrash the delivery dates as well.
-			self::orddd_lite_restore_deliveries( $post_id, 'trashed', $post_obj->post_status );
+			self::orddd_lite_restore_deliveries( $post_id, 'trashed', $post_status );
 		}
 	}
 
@@ -1792,4 +1818,122 @@ class Orddd_Lite_Common {
 			return apply_filters( 'orddd_lite_hidden_variables_array', $orddd_lite_settings, $additional_data );
 		}
 	}
+
+	/**
+	 * Returns if HPOS is enabled
+	 *
+	 * @return bool
+	 * @since 3.19.0
+	 */
+	public static function is_hpos_enabled() {
+
+		if ( version_compare( get_option( 'woocommerce_version' ), '7.1.0' ) < 0 ) {
+				return false;
+		}
+
+		if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Returns Post meta data
+	 *
+	 * @param int    $order_id order id.
+	 * @param string $key meta key.
+	 * @param bool   $single get single or all meta.
+	 * @param object $order order object
+	 * @return array
+	 * @since 3.19.0
+	 */
+	public static function get_order_meta( $order_id, $key = '', $single = false, $order = null ) {
+		$data = array();
+		if ( self::is_hpos_enabled() ) {
+			if ( ! $order ) {
+				$order = wc_get_order( $order_id );
+			}
+			if ( ! $order ) {
+				return $data;
+			}
+			if ( '' !== $key ) {
+				return $order->get_meta( $key );
+			}
+
+			$meta_data = $order->get_meta_data();
+			$data      = array();
+			foreach ( $meta_data  as $key => $meta_value ) {
+				$meta_key            = $meta_value->key;
+				$data[ $meta_key ][] = $meta_value->value;
+			}
+
+		} else {		
+			$data  = get_post_meta( $order_id, $key, $single );
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Update Post meta data
+	 *
+	 * @param int    $order_id order id.
+	 * @param string $key meta key.
+	 * @param bool   $single get single or all meta.
+	 * @param object $order order object
+	 * @return array
+	 * @since 3.19.0
+	 */
+	public static function update_order_meta( $order_id, $key, $value = false, $order = null, $save = false ) {
+		$data = array();
+		if ( self::is_hpos_enabled() ) {
+			if ( ! $order ) {
+				$order = wc_get_order( $order_id );
+			}
+			if ( ! $order ) {
+				return false;
+			}
+
+			$order->update_meta_data( $key, $value );
+
+			if ( $save ) {
+				$order->save();
+			}
+
+		} else {
+			$data  = update_post_meta( $order_id, $key, $value );
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Delivery date column orderby.
+	 *
+	 * @param string $query  - Query string 
+	 *
+	 * @hook request
+	 * @since 3.19.0
+	 */
+	public static function modify_query_for_sort_by_date( $query  ) {			
+			
+			
+       if (  isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && ( ( isset( $_GET[ 'orderby' ] ) && '_orddd_lite_timestamp' === $_GET[ 'orderby' ] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( "orddd_show_column_on_orders_page_check" ) && 'on' === get_option( "orddd_enable_default_sorting_of_column" ) ) ) && strpos( $query, 'SQL_CALC_FOUND_ROWS DISTINCT' ) && strpos( $query, 'wc_orders' ) ) {
+						
+			global $wpdb;		
+			
+			$query2 = str_replace( 'WHERE', 'LEFT JOIN ' . $wpdb->prefix . "wc_orders_meta wom ON ( wom.order_id = " . $wpdb->prefix . "wc_orders.id AND wom.meta_key = '_orddd_lite_timestamp' )
+			LEFT JOIN " . $wpdb->prefix . "wc_orders_meta wom2 ON ( wom2.order_id = " . $wpdb->prefix . "wc_orders.id AND wom2.meta_key = '_orddd_lite_timeslot_timestamp' ) WHERE ", $query );
+			
+			$order = ( isset( $_GET['order'] ) && 'asc' === $_GET['order'] ) ? 'ASC' : 'DESC';
+			$query2 = str_replace( 'ORDER BY', 'ORDER BY COALESCE( wom2.meta_value, wom.meta_value ) '. $order .' ,' , $query2 );  
+			
+			return $query2;
+		}
+
+		 return $query;
+	}
+	
+	
 }

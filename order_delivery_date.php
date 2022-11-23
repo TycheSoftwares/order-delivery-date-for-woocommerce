@@ -28,6 +28,17 @@ $wpefield_version = '3.18.0';
  * @since 3.16.0
  */
 define( 'ORDDD_LITE_TEMPLATE_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
+/**
+ * Add HPOS compatability
+ *
+ * @since 3.19.0
+ */
+add_action( 'before_woocommerce_init', function() {
+	if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+		$file = __FILE__;		
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $file , true );
+	}
+} );
 
 /**
  * Include the require files
@@ -119,22 +130,36 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 			add_filter( 'woocommerce_order_details_after_order_table', array( 'Orddd_Lite_Process', 'orddd_lite_add_delivery_date_to_order_page_woo' ) );
 			add_filter( 'woocommerce_order_details_after_order_table', array( 'Orddd_Lite_Process', 'orddd_lite_add_time_slot_to_order_page_woo' ) );
-
+			add_action( 'woocommerce_loaded', function() {
 			// phpcs:ignore WordPress.Security.NonceVerification
-			if ( is_admin() && isset( $_GET['post_type'] ) ) {
-				// phpcs:ignore WordPress.Security.NonceVerification
-				$post_type = sanitize_text_field( wp_unslash( $_GET['post_type'] ) );
-				if ( 'shop_order' === $post_type ) {
-					// WooCommerce Edit Order page.
-					if ( get_option( 'orddd_lite_show_column_on_orders_page_check' ) === 'on' ) {
-						add_filter( 'manage_edit-shop_order_columns', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_order_delivery_date_column' ), 20, 1 );
-						add_action( 'manage_shop_order_posts_custom_column', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_custom_column_value' ), 20, 2 );
-						add_filter( 'manage_edit-shop_order_sortable_columns', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_custom_column_value_sort' ) );
-						add_filter( 'posts_clauses',                           array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_delivery_datetime_orderby' ), 10,2 );	
-					}
+			if ( ( is_admin() && isset( $_GET['post_type'] ) && 'shop_order' === $_GET['post_type'] ) || ( is_admin() && ! isset( $_GET['id'] ) && isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] ) ) {
+				// phpcs:ignore WordPress.Security.NonceVerification				
+			
+				// WooCommerce Edit Order page.
+				if ( get_option( 'orddd_lite_show_column_on_orders_page_check' ) === 'on' ) {
+					if ( Orddd_Lite_Common::is_hpos_enabled() ) {
+						add_action( 'manage_woocommerce_page_wc-orders_columns',   array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_order_delivery_date_column' ), 20, 2 );
+						add_action( 'manage_woocommerce_page_wc-orders_custom_column',   array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_custom_column_value'  ), 20, 2 );
+						add_action( 'manage_woocommerce_page_wc-orders_sortable_columns',   array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_custom_column_value_sort' ), 20, 2 );
+						//if (  isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && ( ( isset( $_GET[ 'orderby' ] ) && '_orddd_lite_timestamp' === $_GET[ 'orderby' ] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( "orddd_show_column_on_orders_page_check" ) && 'on' === get_option( "orddd_enable_default_sorting_of_column" ) ) ) &&  ! isset( $_GET['id'] ) ) {
+						if (  isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && ( ( isset( $_GET[ 'orderby' ] ) && '_orddd_lite_timestamp' === $_GET[ 'orderby' ] ) ) &&  ! isset( $_GET['id'] ) ) {
 					
+								add_filter( 'query', array( 'Orddd_Lite_Common', 'modify_query_for_sort_by_date' ), 10,1 );
+								//add_filter( 'woocommerce_order_query_args', array( &$this, 'orddd_woocommerce_delivery_datetime_orderby' ), 10,1 );
+							}
+			
+						} else {
+						
+							add_filter( 'manage_edit-shop_order_columns', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_order_delivery_date_column' ), 20, 1 );
+							add_action( 'manage_shop_order_posts_custom_column', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_custom_column_value' ), 20, 2 );
+							add_filter( 'manage_edit-shop_order_sortable_columns', array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_custom_column_value_sort' ) );
+							add_filter( 'posts_clauses',                           array( 'Orddd_Lite_Filter', 'orddd_lite_woocommerce_delivery_datetime_orderby' ), 10,2 );	
+						}
+				
+					}					
+				
 				}
-			}
+			}, 10 );
 
 			// To recover the delivery date when order is cancelled, refunded, failed or trashed.
 			add_action( 'woocommerce_order_status_cancelled', array( 'Orddd_Lite_Common', 'orddd_lite_cancel_delivery' ), 10, 1 );

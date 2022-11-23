@@ -103,10 +103,10 @@ class Orddd_Lite_Filter {
 	 */
 	public static function orddd_lite_woocommerce_delivery_datetime_orderby( $clauses, $query_object ) {
 
-		if( get_option( "orddd_lite_enable_default_sorting_of_column" ) == 'on' ) {
+		if ( get_option( "orddd_lite_enable_default_sorting_of_column" ) == 'on' ) {
 			global $wpdb;
-           
-			if (  isset( $_GET['post_type'] ) && 'shop_order' === $_GET['post_type'] && ( ( isset( $_GET[ 'orderby' ] ) && '_orddd_lite_timestamp' === $_GET[ 'orderby' ] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( "orddd_lite_enable_default_sorting_of_column" ) && 'on' === get_option( "orddd_lite_enable_default_sorting_of_column" ) ) ) ) {
+
+			if (  isset( $_GET['post_type'] ) && 'shop_order' === $_GET['post_type'] && ( ( isset( $_GET[ 'orderby' ] ) && '_orddd_lite_timestamp' === $_GET[ 'orderby' ] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( "orddd_lite_enable_default_sorting_of_column" ) ) ) ) {
 
 
 				$clauses['join'] .= "LEFT JOIN " . $wpdb->prefix . "postmeta wpm ON ( " . $wpdb->prefix . "posts.Id = wpm.post_id AND wpm.meta_key = '_orddd_lite_timestamp' )

@@ -101,6 +101,7 @@ class Orddd_Lite_Process {
 	 * @since 1.5
 	 */
 	public static function orddd_lite_my_custom_checkout_field_update_order_meta( $order_id ) {
+		$order = wc_get_order( $order_id );
 		if ( isset( $_POST['e_deliverydate'] ) && '' !== $_POST['e_deliverydate'] ) { //phpcs:ignore
 			$delivery_date = '';
 			$date_format   = 'dd-mm-y';
@@ -109,10 +110,10 @@ class Orddd_Lite_Process {
 				$delivery_date = sanitize_text_field( wp_unslash( $_POST['h_deliverydate'] ) ); //phpcs:ignore
 			}
 
-			update_post_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), sanitize_text_field( wp_unslash( $_POST['e_deliverydate'] ) ) ); //phpcs:ignore
+			Orddd_Lite_Common::update_order_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), sanitize_text_field( wp_unslash( $_POST['e_deliverydate'] ) ), $order ); //phpcs:ignore
 
 			$timestamp = Orddd_Lite_Common::orddd_lite_get_timestamp( $delivery_date, $date_format );
-			update_post_meta( $order_id, '_orddd_lite_timestamp', $timestamp );
+			Orddd_Lite_Common::update_order_meta( $order_id, '_orddd_lite_timestamp', $timestamp, $order );
 			self::orddd_lite_update_lockout_days( $delivery_date );
 		} else {
 			$delivery_enabled    = Orddd_Lite_Common::orddd_lite_is_delivery_enabled();
@@ -122,9 +123,10 @@ class Orddd_Lite_Process {
 			}
 
 			if ( 'yes' === $is_delivery_enabled ) {
-				update_post_meta( $order_id, get_option( 'orddd_delivery_date_field_label' ), '' );
+				Orddd_Lite_Common::update_order_meta( $order_id, get_option( 'orddd_delivery_date_field_label' ), '', $order );
 			}
 		}
+		$order->save();
 	}
 
 	/**
@@ -157,11 +159,13 @@ class Orddd_Lite_Process {
 			if ( isset( $_POST['h_deliverydate'] ) ) { //phpcs:ignore
 				$h_deliverydate = $_POST['h_deliverydate']; //phpcs:ignore
 			}
-
+			
+			$order = wc_get_order( $order_id );
+			
 			if ( '' !== $time_slot && 'choose' !== $time_slot && 'NA' !== $time_slot && 'select' !== $time_slot ) {
 				if ( 'asap' === $time_slot ) {
-					update_post_meta( $order_id, $time_slot_label, esc_attr( __( 'As Soon As Possible.', 'order-delivery-date' ) ) );
-					update_post_meta( $order_id, '_orddd_time_slot', esc_attr( __( 'As Soon As Possible.', 'order-delivery-date' ) ) );
+					Orddd_Lite_Common::update_order_meta( $order_id, $time_slot_label, esc_attr( __( 'As Soon As Possible.', 'order-delivery-date' ) ), $order );
+					Orddd_Lite_Common::update_order_meta( $order_id, '_orddd_time_slot', esc_attr( __( 'As Soon As Possible.', 'order-delivery-date' ) ), $order  );
 				} else {
 					$order_time_slot = $time_slot;
 					$time_format     = get_option( 'orddd_lite_delivery_time_format' );
@@ -178,25 +182,27 @@ class Orddd_Lite_Process {
 					} else {
 						$from_time = date( 'H:i', strtotime( $time_slot_arr[0] ) ); //phpcs:ignore
 					}
-					update_post_meta( $order_id, $time_slot_label, esc_attr( $time_slot ) );
-					update_post_meta( $order_id, '_orddd_time_slot', $order_time_slot );
+					Orddd_Lite_Common::update_order_meta( $order_id, $time_slot_label, esc_attr( $time_slot ), $order  );
+					Orddd_Lite_Common::update_order_meta( $order_id, '_orddd_time_slot', $order_time_slot, $order  );
 
 					$delivery_date  = $h_deliverydate;
 					$delivery_date .= ' ' . $from_time;
 					$timestamp      = strtotime( $delivery_date );
 
-					update_post_meta( $order_id, '_orddd_lite_timeslot_timestamp', $timestamp );
+					Orddd_Lite_Common::update_order_meta( $order_id, '_orddd_lite_timeslot_timestamp', $timestamp, $order  );
 
 					$total_fees = WC()->session->get( '_total_delivery_charges' );
 					if ( '' !== $total_fees && null !== $total_fees ) {
-						update_post_meta( $order_id, '_total_delivery_charges', $total_fees );
+						Orddd_Lite_Common::update_order_meta( $order_id, '_total_delivery_charges', $total_fees, $order  );
 						WC()->session->__unset( '_total_delivery_charges' );
 					} else {
-						update_post_meta( $order_id, '_total_delivery_charges', '0' );
+						Orddd_Lite_Common::update_order_meta( $order_id, '_total_delivery_charges', '0', $order  );
 					}
 
 					self::orddd_lite_update_lockout_timeslot( $h_deliverydate, $order_time_slot );
 				}
+				
+				$order->save();
 			}
 
 			do_action( 'orddd_after_timeslot_update', $time_slot, $order_id );
@@ -351,7 +357,7 @@ class Orddd_Lite_Process {
 		}
 		
 		$label = '' !== get_option( 'orddd_lite_delivery_date_field_label' ) ? get_option( 'orddd_lite_delivery_date_field_label' ) : 'Delivery Date';
-		$value = get_post_meta( $order_id, $label, true );
+		$value = Orddd_Lite_Common::get_order_meta( $order_id, $label, true );
 		if ( 'Delivery Date' === $label ) {
 			$label = __( 'Delivery Date', 'order-delivery-date' );
 		}
@@ -389,7 +395,7 @@ class Orddd_Lite_Process {
 		$fields[ $time_slot_label ] = array(
 			// phpcs:ignore
 			'label' => __( $time_slot_label, 'order-delivery-date' ),
-			'value' => get_post_meta( $order_id, $time_slot_label, true ),
+			'value' => Orddd_Lite_Common::get_order_meta( $order_id, $time_slot_label, true ),
 		);
 		return $fields;
 	}
