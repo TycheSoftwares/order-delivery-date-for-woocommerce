@@ -96,6 +96,7 @@
 	}
 	jQuery( document ).on( "click", '.ui-datepicker-close', function() {
 		jQuery( "#e_deliverydate" ).val( "" );
+		jQuery( "#h_deliverydate" ).val( '' );
 	})
 
 	jQuery( document ).on( "change", "#orddd_lite_time_slot", function() {
