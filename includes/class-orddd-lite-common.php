@@ -1480,7 +1480,7 @@ class Orddd_Lite_Common {
 			$tstamp_from_2 = strtotime( date( 'd' ) . ' ' . date( 'M' ) . ' ' . date( 'Y' ) . ' ' . $b->fh . ':' . $b->fm ); //phpcs:ignore
 		}
 
-		return $tstamp_from_1 > $tstamp_from_2;
+		return (int) ( $tstamp_from_1 > $tstamp_from_2 );
 	}
 
 	/**
