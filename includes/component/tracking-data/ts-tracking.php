@@ -185,8 +185,8 @@ class Orddd_Lite_TS_tracking {
 	 * To capture the data from the client site.
 	 */
 	public static function ts_schedule_cron_job() {
-		if ( ! wp_next_scheduled( self::$plugin_prefix . '_ts_tracker_send_event' ) ) {
-			wp_schedule_event( time(), 'once_in_week', self::$plugin_prefix . '_ts_tracker_send_event' );
+		if ( false === as_next_scheduled_action( self::$plugin_prefix . '_ts_tracker_send_event' ) ) {
+			as_schedule_single_action( time() + ( 604800 ), self::$plugin_prefix . '_ts_tracker_send_event' );
 		}
 	}
 
