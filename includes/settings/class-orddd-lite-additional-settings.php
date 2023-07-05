@@ -74,10 +74,10 @@ class Orddd_Lite_Additional_Settings {
 	 * @since 2.8.3
 	 */
 	public static function orddd_lite_show_filter_on_orders_page_check_callback( $args ) {
+		$show_filter_on_orders_page = 'on' === get_option( 'orddd_lite_show_filter_on_orders_page_check' ) ? 'checked' : '';
 		?>
-		<input type="checkbox" name="orddd_show_filter_on_orders_page_check" id="orddd_show_filter_on_orders_page_check" class="day-checkbox" disabled />
-		<label for="orddd_show_filter_on_orders_page_check"><?php echo wp_kses_post( $args[0] ); ?></label>
-		<br><strong><em>Upgrade to <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</em></strong>
+		<input type="checkbox" name="orddd_lite_show_filter_on_orders_page_check" id="orddd_lite_show_filter_on_orders_page_check" class="day-checkbox" <?php echo esc_attr( $show_filter_on_orders_page ); ?> />
+		<label for="orddd_lite_show_filter_on_orders_page_check"><?php echo wp_kses_post( $args[0] ); ?></label>
 		<?php
 	}
 

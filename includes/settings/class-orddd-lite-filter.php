@@ -33,6 +33,12 @@ class Orddd_Lite_Filter {
 		}
 		// Delivery date & Delivery Time in Order Preview in Admin
 		add_filter( 'woocommerce_admin_order_preview_get_order_details', array( &$this, 'orddd_lite_admin_order_preview_add_delivery_date' ), 20, 2 );
+
+		if ( 'on' === get_option('orddd_lite_show_filter_on_orders_page_check') ) {
+			add_action( 'restrict_manage_posts',                array( &$this, 'orddd_lite_restrict_orders' ), 15 );
+		    add_filter( 'request',                              array( &$this, 'orddd_lite_add_filterable_field' ) );
+		    add_filter( 'woocommerce_shop_order_search_fields', array( &$this, 'orddd_lite_add_search_fields' ) );
+		}
 	}
 
 	/**
@@ -176,6 +182,230 @@ class Orddd_Lite_Filter {
 		}
     	return $data;
 	}
+
+	/**
+	 * Add a delivery date dropdown filter on WooCommerce Orders page.
+	 *
+	 * @return void
+	 */
+	public static function orddd_lite_restrict_orders() {
+		global $typenow, $wpdb, $wp_locale;
+
+		if ( 'shop_order' !== $typenow ) {
+			return;
+		}
+
+		$gmt = false;
+		if ( has_filter( 'orddd_gmt_calculations' ) ) {
+			$gmt = apply_filters( 'orddd_gmt_calculations', '' );
+		}
+
+		$current_time      = current_time( 'timestamp', $gmt );
+		$javascript        = '';
+		$filter_field_name = 'order_delivery_date_lite_filter';
+		$db_field_name     = '_orddd_lite_timestamp';
+		$date_display      = 'display:none;';
+		$startdate         = '';
+		$enddate           = '';
+
+		$months = $wpdb->get_results(
+			$wpdb->prepare(
+				'SELECT YEAR( FROM_UNIXTIME( meta_value ) ) as year, MONTH( FROM_UNIXTIME( meta_value ) ) as month, CAST( meta_value AS UNSIGNED ) AS meta_value_num
+				FROM ' . $wpdb->postmeta . '
+				WHERE meta_key = %s
+				GROUP BY year, month
+				ORDER BY meta_value_num DESC',
+				$db_field_name
+			)
+		);
+
+		$month_count = 0;
+		if ( is_array( $months ) ) {
+			$month_count = count( $months );
+		}
+
+		if ( ! $month_count || ( 1 == $month_count && 0 == $months[0]->month ) ) {
+			return;
+		}
+
+		if ( isset( $_GET[ $filter_field_name ] ) && 'today' === $_GET[ $filter_field_name ] ) {
+			$m = $_GET[ $filter_field_name ];
+		} elseif ( isset( $_GET[ $filter_field_name ] ) && 'tomorrow' === $_GET[ $filter_field_name ] ) {
+			$m = $_GET[ $filter_field_name ];
+		} elseif ( isset( $_GET[ $filter_field_name ] ) && 'custom' === $_GET[ $filter_field_name ] ) {
+			$m            = $_GET[ $filter_field_name ];
+			$date_display = '';
+			$startdate    = isset( $_GET[ 'orddd_lite_custom_startdate' ] ) ? $_GET[ 'orddd_lite_custom_startdate' ] : '';
+			$enddate      = isset( $_GET[ 'orddd_lite_custom_enddate' ] ) ? $_GET[ 'orddd_lite_custom_enddate' ] : '';
+		} else {
+			$m = isset( $_GET[ $filter_field_name ] ) ? (int) $_GET[ $filter_field_name ] : 0;
+		}
+
+		$today_name          = __( 'Today', 'order-delivery-date' );
+		$tomorrow_name       = __( 'Tomorrow', 'order-delivery-date' );
+		$custom_filter_label = __( 'Custom', 'order-delivery-date' );
+
+		$today_option = array(
+			'year'           => date( 'Y', $current_time ),
+			'month'          => 'today',
+			'meta_value_num' => $current_time,
+			'month_name'     => $today_name,
+		);
+
+		$tomorrow_date   = date( 'Y-m-d', strtotime( '+1 day', $current_time ) );
+		$tomorrow_time   = strtotime( $tomorrow_date );
+		$tomorrow_option = array(
+			'year'           => date( 'Y', $tomorrow_time ),
+			'month'          => 'tomorrow',
+			'meta_value_num' => $tomorrow_time,
+			'month_name'     => $tomorrow_name,
+		);
+
+		$custom  = array(
+			'year'           => '',
+			'month'          => 'custom',
+			'meta_value_num' => '',
+			'month_name'     => $custom_filter_label,
+		);
+
+		array_unshift( $months, (object)$today_option, (object)$tomorrow_option, (object)$custom );
+		?>
+
+		<select name="order_delivery_date_lite_filter" id="order_delivery_date_lite_filter" class="orddd_filter">
+			<option value=""><?php esc_html_e( 'Show all Delivery Dates', 'order-delivery-date' ); ?></option>
+			<?php
+			foreach ( $months as $arc_row ) {
+				if ( 'today' !== $arc_row->month && 'tomorrow' !== $arc_row->month && 'custom' !== $arc_row->month ) {
+					if ( 0 == $arc_row->year || '1969' == $arc_row->year ) {
+						continue;
+					}
+					$month = zeroise( $arc_row->month, 2 );
+					$year = $arc_row->year;
+
+					printf( '<option %s value="%s">%s</option>',
+						selected( $m, $year . $month, false ),
+						esc_attr( $arc_row->year . $month ),
+						/* translators: 1: month name, 2: 4-digit year */
+						sprintf( __( '%1$s %2$d', 'order-delivery-date' ), $wp_locale->get_month( $month ), $year )
+					);
+				} else {
+					$arc_row->year = $year = '';
+					$month = $arc_row->month;
+					printf( '<option %s value="%s">%s</option>',
+						selected( $m, $arc_row->month, false ),
+						$arc_row->month,
+						$arc_row->month_name
+					);
+				}
+			}
+		?>
+		</select>
+
+		<input type="text" name="orddd_lite_custom_startdate" id="orddd_lite_custom_startdate" class="orddd_datepicker" value="<?php echo $startdate; ?>" style="width:100px;<?php echo $date_display; ?>" placeholder="<?php esc_html_e( 'Start Date', 'order-delivery-date' ); ?>" readonly>
+		<input type="text" name="orddd_lite_custom_enddate" id="orddd_lite_custom_enddate" class="orddd_datepicker" value="<?php echo $enddate; ?>" style="width:100px;<?php echo $date_display; ?>" placeholder="<?php esc_html_e( 'End Date', 'order-delivery-date' ); ?>" readonly>
+		<?php
+	}
+
+	/**
+	 * Filter the orders based on option selected from delivery date filter dropdown.
+	 *
+	 * @param array $vars array of queries.
+	 * @return array
+	 */
+	public static function orddd_lite_add_filterable_field( $vars ) {
+		global $typenow;
+		if ( 'shop_order' != $typenow ) {
+			return $vars;
+		}
+
+		$gmt = false;
+		if( has_filter( 'orddd_gmt_calculations' ) ) {
+			$gmt = apply_filters( 'orddd_gmt_calculations', '' );
+		}
+		$current_time = current_time( 'timestamp', $gmt );
+
+		$meta_queries = array( 'relation' => 'AND' );
+
+		// if the field is filterable and selected by the user.
+		if ( isset( $_GET[ 'order_delivery_date_lite_filter' ] ) && $_GET[ 'order_delivery_date_lite_filter' ] ) {
+			$date = $_GET[ 'order_delivery_date_lite_filter' ];
+
+			switch( $date ) {
+				case 'today':
+					// from the start to the end of the month.
+					$current_date = date( 'Y-m-d', $current_time );
+
+					$from_date = date( 'Y-m-d H:i:s', strtotime( $current_date . '00:00:00' ) );
+					$to_date = date( 'Y-m-d H:i:s', strtotime( $current_date . '23:59:59' ) );
+	
+					$meta_queries[] = array(
+						'key'     => '_orddd_lite_timestamp',
+						'value'   => array( strtotime( $from_date ), strtotime( $to_date ) ),
+						'type'    => 'NUMERIC',
+						'compare' => 'BETWEEN',
+					);
+					break;
+				case 'tomorrow':
+					$current_date = date( 'Y-m-d', strtotime('+1 day', $current_time ) );
+
+					$from_date = date( 'Y-m-d H:i:s', strtotime( $current_date . '00:00:00' ) );
+					$to_date = date( 'Y-m-d H:i:s', strtotime( $current_date . '23:59:59' ) );
+	
+					$meta_queries[] = array(
+						'key'     => '_orddd_lite_timestamp',
+						'value'   => array( strtotime( $from_date ), strtotime( $to_date ) ),
+						'type'    => 'NUMERIC',
+						'compare' => 'BETWEEN'
+					);
+					break;
+				case 'custom':
+					$current_date = date( 'Y-m-d', $current_time );
+					$startdate    = isset( $_GET[ 'orddd_lite_custom_startdate' ] ) && '' !== $_GET[ 'orddd_lite_custom_startdate' ] ? $_GET[ 'orddd_lite_custom_startdate' ] : $current_date;
+					$enddate      = isset( $_GET[ 'orddd_lite_custom_enddate' ] ) && '' !== $_GET[ 'orddd_lite_custom_enddate' ] ? $_GET[ 'orddd_lite_custom_enddate' ] : $startdate;
+					$from_date    = date( 'Y-m-d H:i:s', strtotime( $startdate . '00:00:00' ) );
+					$to_date      = date( 'Y-m-d H:i:s', strtotime( $enddate . '23:59:59' ) );
+
+					$meta_queries[] = array(
+						'key'     => '_orddd_lite_timestamp',
+						'value'   => array( strtotime( $from_date ), strtotime( $to_date ) ),
+						'type'    => 'NUMERIC',
+						'compare' => 'BETWEEN',
+					);
+					break;
+				default:
+					// from the start to the end of the month.
+					$from_date = substr( $date, 0, 4 ) . '-' . substr( $date, 4, 2 ) . '-01';
+					$to_date   = substr( $date, 0, 4 ) . '-' . substr( $date, 4, 2 ) . '-' . date( 't', strtotime( $from_date ) );
+					$meta_queries[] = array(
+						'key'     => '_orddd_lite_timestamp',
+						'value'   => array( strtotime( $from_date.' 00:00:00' ), strtotime( $to_date .' 23:59:59' ) ),
+						'type'    => 'NUMERIC',
+						'compare' => 'BETWEEN',
+					);
+			}
+		}
+
+		// update the query vars with our meta filter queries, if needed
+		if ( is_array( $meta_queries ) && count( $meta_queries ) > 1 ) {
+			$vars = array_merge(
+				$vars,
+				array( 'meta_query' => $meta_queries )
+			);
+		}
+		return $vars;
+	}
+
+	/**
+	 * Search orders based on delivery date entered in search field.
+	 *
+	 * @param array $search_fields Search fields.
+	 * @return array
+	 */
+	public static function orddd_lite_add_search_fields( $search_fields ) {
+		array_push( $search_fields, get_option( 'orddd_lite_delivery_date_field_label' ) );
+		return $search_fields;
+	}
+
 }
 $orddd_lite_filter = new Orddd_Lite_Filter();
 
