@@ -102,7 +102,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			}
 
 			// Admin scripts.
-			add_action( 'admin_enqueue_scripts', array( &$this, 'orddd_lite_front_scripts_js' ), 200 );
+			add_action( 'admin_enqueue_scripts', array( &$this, 'orddd_lite_admin_scripts_js' ), 200 );
 			add_action( 'admin_enqueue_scripts', array( &$this, 'orddd_lite_my_enqueue' ) );
 
 			// Frontend.
@@ -351,6 +351,10 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				if ( false === get_option( 'orddd_lite_delivery_timeslot_field_label' ) ) {
 					update_option( 'orddd_lite_delivery_timeslot_field_label', 'Time Slot' );
 				}
+
+				if ( false === get_option( 'orddd_lite_show_filter_on_orders_page_check' ) ) {
+					update_option( 'orddd_lite_show_filter_on_orders_page_check', 'on' );
+				}
 				update_option( 'orddd_lite_show_column_on_orders_page_check', 'on' );
 			}
 		}
@@ -411,10 +415,106 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			wp_register_script( 'datepick', plugins_url() . '/order-delivery-date-for-woocommerce/js/jquery.datepick.js', '', $wpefield_version, false );
 			wp_enqueue_script( 'datepick' );
 			wp_enqueue_style( 'orddd-datepick', plugins_url( '/css/jquery.datepick.css', __FILE__ ), '', $wpefield_version, false );
+			$is_admin = is_admin() ? true : false;
+
+			$js_args = array(
+				'clearText'   => __( 'Clear', 'order-delivery-date' ),
+				'holidayText' => __( 'Holiday', 'order-delivery-date' ),
+				'bookedText'  => __( 'Booked', 'order-delivery-date' ),
+				'selectText'  => __( 'Select a time slot', 'order-delivery-date' ),
+				'asapText'    => __( 'As Soon As Possible', 'order-delivery-date' ),
+				'NAText'      => __( 'No time slots are available', 'order-delivery-date' ),
+				'wooVersion'  => get_option( 'woocommerce_version' ),
+				'time_format' => get_option( 'orddd_lite_delivery_time_format' ),
+				'is_admin'    => $is_admin,
+				'bookedText'  => __( 'Booked', 'order-delivery-date' ),
+			);
+
 			if ( isset( $_GET['section'] ) && 'time_slot' === $_GET['section'] ) { //phpcs:ignore
 				wp_enqueue_style( 'orddd-lite-timepicker-style', plugins_url( '/css/jquery.timepicker.min.css', __FILE__ ), '', $wpefield_version, false );
 				wp_enqueue_script( 'orddd-lite-timepicker', plugins_url( '/js/jquery.timepicker.min.js', __FILE__ ), array( 'jquery' ), $wpefield_version, true );
 				wp_enqueue_script( 'orddd-lite-timesetting', plugins_url( '/js/orddd-bulk-time-slots.js', __FILE__ ), array( 'jquery', 'orddd-lite-timepicker' ), $wpefield_version, true );
+				wp_localize_script( 'orddd-lite-timesetting', 'jsL10n', $js_args );
+			}
+		}
+
+		/**
+		 * Enqueue scripts on admin WooCommerce orders page.
+		 *
+		 * @return void
+		 */
+		public function orddd_lite_admin_scripts_js() {
+			global $wpefield_version;
+			$current_screen = get_current_screen();
+
+			if ( 'on' === get_option( 'orddd_lite_enable_delivery_date' ) ) {
+				$calendar_theme = get_option( 'orddd_lite_calendar_theme' );
+				if ( '' === $calendar_theme ) {
+					$calendar_theme = 'base';
+				}
+				wp_register_script( 'select2', plugins_url() . '/woocommerce/assets/js/select2/select2.min.js', array( 'jquery', 'jquery-ui-widget', 'jquery-ui-core' ), $wpefield_version, false );
+
+				wp_enqueue_script( 'select2' );
+				wp_dequeue_style( 'jquery-ui-style' );
+				wp_register_style( 'jquery-ui-style-orddd-lite', plugins_url( '/css/themes/' . $calendar_theme . '/jquery-ui.css', __FILE__ ), '', $wpefield_version, false );
+				wp_enqueue_style( 'jquery-ui-style-orddd-lite' );
+
+				if ( isset( $_GET['lang'] ) && '' !== $_GET['lang'] && null !== $_GET['lang'] ) {
+					$language_selected = wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['lang'] ) ) );
+				} else {
+					$language_selected = get_option( 'orddd_lite_language_selected' );
+					if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+						if ( constant( 'ICL_LANGUAGE_CODE' ) !== '' ) {
+							$wpml_current_language = constant( 'ICL_LANGUAGE_CODE' );
+							if ( ! empty( $wpml_current_language ) ) {
+								$language_selected = $wpml_current_language;
+							} else {
+								$language_selected = get_option( 'orddd_lite_language_selected' );
+							}
+						}
+					}
+					if ( '' === $language_selected ) {
+						$language_selected = 'en-GB';
+					}
+				}
+
+				wp_enqueue_script( $language_selected, plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
+
+				$show_on_order_page = 'shop_order' === $current_screen->id || ( "woocommerce_page_wc-orders"  === $current_screen->id && isset( $_GET['id'] ) );
+
+				if ( $show_on_order_page ) {
+					wp_enqueue_script( 'initialize-datepicker-orddd', plugins_url( '/js/orddd-lite-initialize-datepicker.js', __FILE__ ), '', $wpefield_version, false );
+				}
+
+				$is_admin = is_admin() ? true : false;
+
+				$js_args = array(
+					'clearText'   => __( 'Clear', 'order-delivery-date' ),
+					'holidayText' => __( 'Holiday', 'order-delivery-date' ),
+					'bookedText'  => __( 'Booked', 'order-delivery-date' ),
+					'selectText'  => __( 'Select a time slot', 'order-delivery-date' ),
+					'asapText'    => __( 'As Soon As Possible', 'order-delivery-date' ),
+					'NAText'      => __( 'No time slots are available', 'order-delivery-date' ),
+					'wooVersion'  => get_option( 'woocommerce_version' ),
+					'time_format' => get_option( 'orddd_lite_delivery_time_format' ),
+					'is_admin'    => $is_admin,
+					'bookedText'  => __( 'Booked', 'order-delivery-date' ),
+				);
+				$orddd_lite_settings = Orddd_Lite_Common::orddd_lite_localize_data_script();
+				wp_localize_script( 'initialize-datepicker-orddd', 'orddd_lite_params', $orddd_lite_settings );
+				$admin_params = Orddd_Lite_Admin_Delivery::orddd_lite_localize_admin_scripts();
+				wp_localize_script( 'initialize-datepicker-orddd', 'orddd_lite_admin_params', $admin_params );
+				wp_localize_script( 'initialize-datepicker-orddd', 'jsL10n', $js_args );
+
+				if ( isset( $_GET['post_type'] ) && 'shop_order' === $_GET['post_type'] ) {
+					wp_enqueue_script(
+						'orddd-lite-shop-order',
+						plugins_url( 'js/orddd-lite-shop-order.js', __FILE__ ),
+						array( 'jquery' ),
+						$wpefield_version,
+						false
+					);
+				}
 			}
 		}
 

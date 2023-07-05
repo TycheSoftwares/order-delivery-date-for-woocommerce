@@ -1,255 +1,240 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
+# Copyright (C) 2023 Tyche Softwares
+# This file is distributed under the same license as the Order Delivery Date for WooCommerce (Lite version) plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: yyyy-mm-dd hh:mm+0000\n"
-"PO-Revision-Date: 2021-01-12 10:35+0500\n"
+"Project-Id-Version: Order Delivery Date for WooCommerce (Lite version) 3.20.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-delivery-date-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Eazy Po 0.9.5.3\n"
+"POT-Creation-Date: 2023-07-05T08:14:56+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: order-delivery-date\n"
 
-#: order_delivery_date.php:266
-msgid ""
-"Order Delivery Date for WooCommerce (Lite version) plugin requires "
-"WooCommerce installed and activate."
+#. Plugin Name of the plugin
+msgid "Order Delivery Date for WooCommerce (Lite version)"
 msgstr ""
 
-#: order_delivery_date.php:415
-msgid "Clear"
+#. Plugin URI of the plugin
+msgid "https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/"
 msgstr ""
 
-#: order_delivery_date.php:416
-msgid "Holiday"
+#. Description of the plugin
+msgid "This plugin allows customers to choose their preferred Order Delivery Date during checkout."
 msgstr ""
 
-#: order_delivery_date.php:417 order_delivery_date.php:423
-msgid "Booked"
+#. Author of the plugin
+msgid "Tyche Softwares"
 msgstr ""
 
-#: order_delivery_date.php:418 includes/class-orddd-lite-process.php:325
-msgid "Select a time slot"
+#. Author URI of the plugin
+msgid "https://www.tychesoftwares.com/"
 msgstr ""
 
-#: order_delivery_date.php:419 includes/class-orddd-lite-common.php:749
-msgid "As Soon As Possible"
+#: emails/class-orddd-lite-email-update-date.php:34
+#: emails/class-orddd-lite-email-update-date.php:151
+msgid "Delivery Date & Time Updated"
 msgstr ""
 
-#: order_delivery_date.php:420 includes/class-orddd-lite-common.php:747
-msgid "No time slots are available"
+#: emails/class-orddd-lite-email-update-date.php:35
+msgid "Delivery Date & Time is is being updated for the order."
 msgstr ""
 
-#: order_delivery_date.php:480
-msgid "Docs"
+#: emails/class-orddd-lite-email-update-date.php:141
+msgid "[{blogname}] Delivery Date & Time is Updated for (Order {order_number}) - {order_date}"
 msgstr ""
 
-#: order_delivery_date.php:481
-msgid "Go Pro"
+#: emails/class-orddd-lite-email-update-date.php:164
+msgid "Enable/Disable"
 msgstr ""
 
-#: order_delivery_date.php:481
-msgid "Unlock All"
+#: emails/class-orddd-lite-email-update-date.php:166
+msgid "Enable this email notification"
 msgstr ""
 
-#: order_delivery_date.php:499
-#, php-format
-msgid ""
-"Thank you for using <a href=\"%1$s\" target=\"_blank\">Order Delivery Date</"
-"a>! Please <a href=\"%2$s\" target=\"_blank\">rate us on WordPress.org</a>"
+#: emails/class-orddd-lite-email-update-date.php:178
+msgid "Subject"
 msgstr ""
 
-#: uninstall.php:20 includes/orddd-lite-config.php:161
-msgid "Sunday"
+#. translators: %s: subject
+#: emails/class-orddd-lite-email-update-date.php:181
+msgid "This controls the email subject line. Leave blank to use the default subject: <code>%s</code>."
 msgstr ""
 
-#: uninstall.php:21 includes/orddd-lite-config.php:162
-msgid "Monday"
+#: emails/class-orddd-lite-email-update-date.php:186
+msgid "Email Heading"
 msgstr ""
 
-#: uninstall.php:22 includes/orddd-lite-config.php:163
-msgid "Tuesday"
+#. translators: %s: heading
+#: emails/class-orddd-lite-email-update-date.php:189
+msgid "This controls the main heading contained within the email notification. Leave blank to use the default heading: <code>%s</code>."
 msgstr ""
 
-#: uninstall.php:23 includes/orddd-lite-config.php:164
-msgid "Wednesday"
+#: emails/class-orddd-lite-email-update-date.php:194
+msgid "Email type"
 msgstr ""
 
-#: uninstall.php:24 includes/orddd-lite-config.php:165
-msgid "Thursday"
+#: emails/class-orddd-lite-email-update-date.php:196
+msgid "Choose which format of email to send."
 msgstr ""
 
-#: uninstall.php:25 includes/orddd-lite-config.php:166
-msgid "Friday"
+#: emails/class-orddd-lite-email-update-date.php:200
+msgid "Plain text"
 msgstr ""
 
-#: uninstall.php:26 includes/orddd-lite-config.php:167
-msgid "Saturday"
+#: emails/class-orddd-lite-email-update-date.php:201
+msgid "HTML"
 msgstr ""
 
-#: includes/class-orddd-lite-common.php:115
-msgid "Minimum Delivery Time (in hours) is not working as expected."
+#: emails/class-orddd-lite-email-update-date.php:202
+msgid "Multipart"
 msgstr ""
 
-#: includes/class-orddd-lite-common.php:121
-msgid "I need delivery time along with the delivery date."
+#: includes/class-orddd-lite-admin-delivery.php:46
+msgid "Edit Order Delivery Date and/or Time"
 msgstr ""
 
-#: includes/class-orddd-lite-common.php:127
-msgid "The plugin is not compatible with another plugin."
+#: includes/class-orddd-lite-admin-delivery.php:110
+#: includes/class-orddd-lite-admin-delivery.php:376
+msgid "Delivery Charges:"
 msgstr ""
 
-#: includes/class-orddd-lite-common.php:133
-msgid "I have purchased the Pro version of the Plugin."
+#. translators: %1s: date label, %2s old delivery date, %3s new delivery date
+#. translators: %1s: time slot label, %2s old delivery time slot, %3s delivery time slot
+#: includes/class-orddd-lite-admin-delivery.php:214
+#: includes/class-orddd-lite-admin-delivery.php:271
+msgid "%1$s is updated from %2$s to %3$s"
 msgstr ""
 
-#: includes/class-orddd-lite-common.php:638
-#: includes/class-orddd-lite-process.php:457
-#: includes/class-orddd-lite-process.php:458
-#: includes/class-orddd-lite-process.php:544
-#: includes/settings/class-orddd-lite-time-slot-settings.php:629
+#: includes/class-orddd-lite-admin-delivery.php:241
+#: includes/class-orddd-lite-admin-delivery.php:242
+#: includes/class-orddd-lite-admin-delivery.php:243
+#: includes/class-orddd-lite-common.php:675
+#: includes/class-orddd-lite-process.php:167
+#: includes/class-orddd-lite-process.php:168
+#: includes/class-orddd-lite-process.php:264
+#: includes/settings/class-orddd-lite-time-slot-settings.php:868
 msgid "As Soon As Possible."
 msgstr ""
 
+#: includes/class-orddd-lite-common.php:117
+msgid "Minimum Delivery Time (in hours) is not working as expected."
+msgstr ""
+
+#: includes/class-orddd-lite-common.php:123
+msgid "I need delivery time along with the delivery date."
+msgstr ""
+
+#: includes/class-orddd-lite-common.php:129
+msgid "The plugin is not compatible with another plugin."
+msgstr ""
+
+#: includes/class-orddd-lite-common.php:135
+msgid "I have purchased the Pro version of the Plugin."
+msgstr ""
+
+#: includes/class-orddd-lite-common.php:784
+#: order_delivery_date.php:426
+#: order_delivery_date.php:497
+#: order_delivery_date.php:591
+msgid "No time slots are available"
+msgstr ""
+
+#: includes/class-orddd-lite-common.php:786
+#: order_delivery_date.php:425
+#: order_delivery_date.php:496
+#: order_delivery_date.php:590
+msgid "As Soon As Possible"
+msgstr ""
+
 #: includes/class-orddd-lite-privacy.php:43
+#: includes/class-orddd-lite-process.php:60
+#: includes/class-orddd-lite-process.php:362
+#: includes/settings/class-orddd-lite-filter.php:59
 msgid "Delivery Date"
 msgstr ""
 
-#: includes/class-orddd-lite-process.php:699
-#: includes/class-orddd-lite-process.php:705
+#: includes/class-orddd-lite-process.php:61
+msgid "Delivery Time"
+msgstr ""
+
+#: includes/class-orddd-lite-process.php:69
+#: order_delivery_date.php:424
+#: order_delivery_date.php:495
+#: order_delivery_date.php:589
+#: templates/orddd-lite-admin-datepicker.php:22
+msgid "Select a time slot"
+msgstr ""
+
+#: includes/class-orddd-lite-process.php:432
+#: includes/class-orddd-lite-process.php:438
 msgid "is a required field."
 msgstr ""
 
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:77
-msgid "If you have a moment, please let us know why you are deactivating"
+#: includes/class-orddd-lite-process.php:497
+msgid "The cut-off time for the selected date has expired. Please select another delivery date."
 msgstr ""
 
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:78
-msgid "Submit & Deactivate"
+#: includes/class-orddd-lite-process.php:499
+msgid "The selected time slot has expired. Please select another time slot for delivery."
 msgstr ""
 
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:79
-msgid "Deactivate"
+#: includes/orddd-lite-config.php:162
+#: uninstall.php:20
+msgid "Sunday"
 msgstr ""
 
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:80
-msgid "Cancel"
+#: includes/orddd-lite-config.php:163
+#: uninstall.php:21
+msgid "Monday"
 msgstr ""
 
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:81
-msgid "Yes - Deactivate"
+#: includes/orddd-lite-config.php:164
+#: uninstall.php:22
+msgid "Tuesday"
 msgstr ""
 
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:85
-msgid "I found a better plugin"
+#: includes/orddd-lite-config.php:165
+#: uninstall.php:23
+msgid "Wednesday"
 msgstr ""
 
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:86
-msgid "What's the plugin's name?"
+#: includes/orddd-lite-config.php:166
+#: uninstall.php:24
+msgid "Thursday"
 msgstr ""
 
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:87
-msgid "I only needed the plugin for a short period"
+#: includes/orddd-lite-config.php:167
+#: uninstall.php:25
+msgid "Friday"
 msgstr ""
 
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:88
-msgid "The plugin is not working"
+#: includes/orddd-lite-config.php:168
+#: uninstall.php:26
+msgid "Saturday"
 msgstr ""
 
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:89
-msgid "Kindly share what didn't work so we can fix it for future users..."
+#: includes/settings/class-orddd-lite-additional-settings.php:47
+msgid "Enable default sorting of orders (in descending order) by Delivery Date on WooCommerce -> Orders page"
 msgstr ""
 
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:90
-msgid "The plugin is great, but I need specific feature that you don't support"
-msgstr ""
-
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:91
-msgid "What feature?"
-msgstr ""
-
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:92
-msgid "I don't like to share my information with you"
-msgstr ""
-
-#: includes/component/deactivate-survey-popup/class-ts-deactivation.php:93
-msgctxt ""
-"the text of the 'other' reason for deactivating the plugin that is shown in "
-"the modal box."
-msgid "Other"
-msgstr ""
-
-#: includes/component/faq-support/ts-faq-support.php:125
-#, php-format
-msgid "Frequently Asked Questions for %s"
-msgstr ""
-
-#: includes/component/faq-support/ts-faq-support.php:126
-msgid "Frequently Asked Questions for "
-msgstr ""
-
-#: includes/component/faq-support/ts-faq-support.php:175
-msgid "FAQ & Support"
-msgstr ""
-
-#: includes/component/tracking-data/ts-tracking.php:132
-msgid "Reset usage tracking"
-msgstr ""
-
-#: includes/component/tracking-data/ts-tracking.php:178
-msgid "Once in a Week"
-msgstr ""
-
-#: includes/component/tracking-data/ts-tracking.php:265
-msgid "Want to help make "
-msgstr ""
-
-#: includes/component/tracking-data/ts-tracking.php:267
-msgid "Allow"
-msgstr ""
-
-#: includes/component/tracking-data/ts-tracking.php:268
-msgid "No thanks"
-msgstr ""
-
-#: includes/component/woocommerce-check/ts-woo-active.php:79
-msgid " plugin requires WooCommerce installed and active."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-additional-settings.php:41
-msgid ""
-"Enable default sorting of orders (in descending order) by Delivery Date on "
-"WooCommerce -> Orders page"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-additional-settings.php:93
+#: includes/settings/class-orddd-lite-additional-settings.php:99
 msgid "Virtual Products"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-additional-settings.php:102
+#: includes/settings/class-orddd-lite-additional-settings.php:108
 msgid "Featured Products"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-additional-settings.php:255
-msgid ""
-"When enabled, email notification will be sent to the admin when the Delivery "
-"Date & Time is edited by the customers on the My Account -> Orders -> View "
-"page. So customers will be able to edit the date and time once the order is "
-"placed."
+#: includes/settings/class-orddd-lite-additional-settings.php:264
+msgid "When enabled, email notification will be sent to the admin when the Delivery Date & Time is edited by the customers on the My Account -> Orders -> View page. So customers will be able to edit the date and time once the order is placed."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-additional-settings.php:258
-msgid ""
-"Do not allow customers to edit the delivery date after cut off time has "
-"passed."
+#: includes/settings/class-orddd-lite-additional-settings.php:267
+msgid "Do not allow customers to edit the delivery date after cut off time has passed."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-appearance-settings.php:268
@@ -272,7 +257,7 @@ msgstr ""
 msgid "Between Your Order & Payment Section"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-appearance-settings.php:354
+#: includes/settings/class-orddd-lite-appearance-settings.php:359
 msgid "Preview theme:"
 msgstr ""
 
@@ -288,12 +273,6 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-calendar-sync-settings.php:153
-msgid ""
-"To set up Google Calendar API, please click on \"Show me how\" link and "
-"carefully follow these steps:"
-msgstr ""
-
 #: includes/settings/class-orddd-lite-calendar-sync-settings.php:154
 #: includes/settings/class-orddd-lite-calendar-sync-settings.php:239
 msgid "Click to toggle instructions"
@@ -305,17 +284,11 @@ msgid "Show me how"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-calendar-sync-settings.php:228
-msgid ""
-"Events will be imported using the ICS Feed url. Each event will create a new "
-"WooCommerce Order. The event's date & time will be set as that order's "
-"Delivery Date & Time. <br>Lockout will be updated for global settings for "
-"the set Delivery Date & Time."
+msgid "Events will be imported using the ICS Feed url. Each event will create a new WooCommerce Order. The event's date & time will be set as that order's Delivery Date & Time. <br>Lockout will be updated for global settings for the set Delivery Date & Time."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-calendar-sync-settings.php:237
-msgid ""
-"To set up Import events using ics feed urls, please click on \"Show me how\" "
-"link and carefully follow these steps:"
+msgid "To set up Import events using ics feed urls, please click on \"Show me how\" link and carefully follow these steps:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-date-settings.php:63
@@ -351,31 +324,44 @@ msgstr ""
 #: includes/settings/class-orddd-lite-time-settings.php:166
 #: includes/settings/class-orddd-lite-time-settings.php:183
 #: includes/settings/class-orddd-lite-time-slot-settings.php:81
-msgid "Order Delivery Date Pro for WooCommerce"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-date-settings.php:64
-#: includes/settings/class-orddd-lite-delivery-days-settings.php:27
-#: includes/settings/class-orddd-lite-time-settings.php:37
-#: includes/settings/class-orddd-lite-time-settings.php:67
-#: includes/settings/class-orddd-lite-time-settings.php:86
-#: includes/settings/class-orddd-lite-time-settings.php:110
-#: includes/settings/class-orddd-lite-time-settings.php:124
-#: includes/settings/class-orddd-lite-time-settings.php:143
-#: includes/settings/class-orddd-lite-time-settings.php:166
-#: includes/settings/class-orddd-lite-time-settings.php:183
-#: includes/settings/class-orddd-lite-time-slot-settings.php:81
 msgid "to enable the setting."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-delivery-days-settings.php:25
-msgid ""
-"Add delivery charges (if applicable), maximum order deliveries per day and "
-"select the specific delivery date."
+msgid "Add delivery charges (if applicable), maximum order deliveries per day and select the specific delivery date."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-filter.php:244
+msgid "Today"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-filter.php:245
+msgid "Tomorrow"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-filter.php:246
+msgid "Custom"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-filter.php:275
+msgid "Show all Delivery Dates"
+msgstr ""
+
+#. translators: 1: month name, 2: 4-digit year
+#: includes/settings/class-orddd-lite-filter.php:289
+msgid "%1$s %2$d"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-filter.php:304
+msgid "Start Date"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-filter.php:305
+msgid "End Date"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:51
-#: includes/settings/class-orddd-lite-settings.php:1358
+#: includes/settings/class-orddd-lite-settings.php:1478
 msgid "Order Delivery Date Settings"
 msgstr ""
 
@@ -420,7 +406,7 @@ msgid "Number of dates available for delivery."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:104
-#: includes/settings/class-orddd-lite-settings.php:669
+#: includes/settings/class-orddd-lite-settings.php:718
 msgid "Mandatory field?:"
 msgstr ""
 
@@ -441,62 +427,31 @@ msgid "Apply Minimum Delivery Time for non working weekdays:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:126
-msgid ""
-"If selected, then the Minimum Delivery Time (in hours) will be applied on "
-"the non working weekdays which are unchecked in Delivery Weekdays. If "
-"unchecked, then it will not be applied. For example, if Minimum Delivery "
-"Time (in hours) is set to 48 hours and Saturday is disabled for delivery. "
-"Now if a customer visits the website on Friday, then the first available "
-"date will be Monday and not Sunday."
+msgid "If selected, then the Minimum Delivery Time (in hours) will be applied on the non working weekdays which are unchecked in Delivery Weekdays. If unchecked, then it will not be applied. For example, if Minimum Delivery Time (in hours) is set to 48 hours and Saturday is disabled for delivery. Now if a customer visits the website on Friday, then the first available date will be Sunday and not Monday."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:171
 msgid "Weekday Settings:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:175
-msgid ""
-"Enable this setting to add Additional charges, Additional charges' checkout "
-"label, Same day cut-off time, Next day cut-off time and Minimum Delivery "
-"Time (in hours) for each weekday.<br><b><i>Upgrade to <a href=\"https://www."
-"tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-"
-"pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
 #: includes/settings/class-orddd-lite-settings.php:181
-msgid "Shipping Days Settings"
+msgid "Business Days Settings"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:188
-msgid "Enable Shipping days based calculation:"
+msgid "Enable Business days based calculation:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:192
-msgid ""
-"Calculate Minimum Delivery Time (in hours), Same Day cut-off and Next Day "
-"cut-off based on the shipping days selected.<br><b><i>Upgrade to <a href="
-"\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-"
-"for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+msgid "Calculate Minimum Delivery Time, Same Day cut-off and Next Day cut-off based on the business days selected."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:197
-msgid "Shipping Days:"
+msgid "Business Days:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:201
-msgid ""
-"Select weekdays for shipping.<br><b><i>Upgrade to <a href=\"https://www."
-"tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-"
-"pro-21?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+msgid "Business days of your store.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:214
@@ -516,9 +471,7 @@ msgid "Date Format:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:234
-msgid ""
-"The format in which the Delivery Date appears to the customers on the "
-"checkout page once the date is selected."
+msgid "The format in which the Delivery Date appears to the customers on the checkout page once the date is selected."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:239
@@ -526,9 +479,7 @@ msgid "Time Format:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:243
-msgid ""
-"The time range will come in the selected format. If 12 hour format is "
-"selected, then the time slider will appear in am/pm format."
+msgid "The time range will come in the selected format. If 12 hour format is selected, then the time slider will appear in am/pm format."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:248
@@ -544,8 +495,7 @@ msgid "Field Label:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:261
-msgid ""
-"Choose the label that is to be displayed for the field on checkout page."
+msgid "Choose the label that is to be displayed for the field on checkout page."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:266
@@ -553,9 +503,7 @@ msgid "Time slot Field Label:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:270
-msgid ""
-"Choose a label that is to be displayed for the time slot field on the "
-"checkout page."
+msgid "Choose a label that is to be displayed for the time slot field on the checkout page."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:275
@@ -563,9 +511,7 @@ msgid "Field Placeholder Text:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:279
-msgid ""
-"Choose the placeholder text that is to be displayed for the field on "
-"checkout page."
+msgid "Choose the placeholder text that is to be displayed for the field on checkout page."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:284
@@ -573,9 +519,7 @@ msgid "Field Note Text:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:288
-msgid ""
-"Choose the note to be displayed below the delivery date field on checkout "
-"page."
+msgid "Choose the note to be displayed below the delivery date field on checkout page."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:293
@@ -591,10 +535,7 @@ msgid "Field placement on the Checkout page:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:306
-msgid ""
-"</br>The Delivery Date field will be displayed in the selected section.</"
-"br><i>Note: WooCommerce automatically hides the Shipping section fields for "
-"Virtual products.</i>"
+msgid "</br>The Delivery Date field will be displayed in the selected section.</br><i>Note: WooCommerce automatically hides the Shipping section fields for Virtual products.</i>"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:311
@@ -602,8 +543,7 @@ msgid "Delivery Date field on Cart page:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:315
-msgid ""
-"Add the Delivery Date field on the cart page along with the Checkout page."
+msgid "Add the Delivery Date field on the cart page along with the Checkout page."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:320
@@ -611,791 +551,659 @@ msgid "Theme:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:324
-msgid ""
-"Select the theme for the calendar which blends with the design of your "
-"website."
+msgid "Select the theme for the calendar which blends with the design of your website."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:403
+#: includes/settings/class-orddd-lite-settings.php:329
+msgid "Color Code Your Calendar"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:336
+msgid "Holidays:"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:340
+msgid "Color in which holidays should be shown on the calendar on checkout page."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:345
+msgid "Booked Dates:"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:349
+msgid "Color in which booked dates should be shown on the calendar on checkout page."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:354
+msgid "Available Dates:"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:358
+msgid "Color in which available dates should be shown on the calendar on checkout page."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:452
 msgid "Add Holiday"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:410
+#: includes/settings/class-orddd-lite-settings.php:459
 msgid "Holiday Name:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:418
+#: includes/settings/class-orddd-lite-settings.php:467
 msgid "From Date:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:426
+#: includes/settings/class-orddd-lite-settings.php:475
 msgid "To Date:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:430
-msgid ""
-"<br>Leave the \"To Date:\" field unchanged for single day holidays.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:479
+msgid "<br>Leave the \"To Date:\" field unchanged for single day holidays.</i></b>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:435
+#: includes/settings/class-orddd-lite-settings.php:484
 msgid "Allow Recurring:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:439
+#: includes/settings/class-orddd-lite-settings.php:488
 msgid "Enable to block the holidays for all future years."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:459
-#: includes/settings/class-orddd-lite-settings.php:1364
+#: includes/settings/class-orddd-lite-settings.php:508
+#: includes/settings/class-orddd-lite-settings.php:1484
 msgid "General Settings"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:466
+#: includes/settings/class-orddd-lite-settings.php:515
 msgid "Event Location"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:470
-msgid ""
-"<br>Enter the text that will be used in the location field of the calendar "
-"event. If left empty, the website description will be used. <br><i>Note: You "
-"can use ADDRESS, FULL_ADDRESS and CITY placeholders which will be replaced "
-"by their real values.</i><br><b><i>Upgrade to <a href=\"https://www."
-"tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-"
-"pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:519
+msgid "<br>Enter the text that will be used in the location field of the calendar event. If left empty, the website description will be used. <br><i>Note: You can use ADDRESS, FULL_ADDRESS and CITY placeholders which will be replaced by their real values.</i><br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:475
+#: includes/settings/class-orddd-lite-settings.php:524
 msgid "Event summary (name)"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:483
+#: includes/settings/class-orddd-lite-settings.php:532
 msgid "Event Description"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:487
-msgid ""
-"<br>For the above 2 fields, you can use the following placeholders which "
-"will be replaced by their real values:&nbsp;SITE_NAME, CLIENT, PRODUCTS, "
-"PRODUCT_WITH_QTY, ORDER_DATE_TIME, ORDER_DATE, ORDER_NUMBER, PRICE, PHONE, "
-"NOTE, ADDRESS, FULL_ADDRESS , EMAIL (Client's email).<br><b><i>Upgrade to <a "
-"href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-"
-"date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:536
+msgid "<br>For the above 2 fields, you can use the following placeholders which will be replaced by their real values:&nbsp;SITE_NAME, CLIENT, PRODUCTS, PRODUCT_WITH_QTY, ORDER_DATE_TIME, ORDER_DATE, ORDER_NUMBER, PRICE, PHONE, NOTE, ADDRESS, FULL_ADDRESS , EMAIL (Client's email).<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:492
+#: includes/settings/class-orddd-lite-settings.php:541
 msgid "Customer Add to Calendar button Settings"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:499
+#: includes/settings/class-orddd-lite-settings.php:548
 msgid "Show Add to Calendar button on Order received page"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:503
-msgid ""
-"Show Add to Calendar button on the Order Received page for the customers."
-"<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-"
-"plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:552
+msgid "Show Add to Calendar button on the Order Received page for the customers.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:508
+#: includes/settings/class-orddd-lite-settings.php:557
 msgid "Show Add to Calendar button in the Customer notification email"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:512
-msgid ""
-"Show Add to Calendar button in the Customer notification email."
-"<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-"
-"plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:561
+msgid "Show Add to Calendar button in the Customer notification email.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:517
+#: includes/settings/class-orddd-lite-settings.php:566
 msgid "Show Add to Calendar button on My account"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:521
-msgid ""
-"Show Add to Calendar button on My account page for the customers."
-"<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-"
-"plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:570
+msgid "Show Add to Calendar button on My account page for the customers.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:526
+#: includes/settings/class-orddd-lite-settings.php:575
 msgid "Open Calendar in Same Window"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:530
-msgid ""
-"As default, the Calendar is opened in a new tab or window. If you check this "
-"option, user will be redirected to the Calendar from the same page, without "
-"opening a new tab or window.<br><b><i>Upgrade to <a href=\"https://www."
-"tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-"
-"pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:579
+msgid "As default, the Calendar is opened in a new tab or window. If you check this option, user will be redirected to the Calendar from the same page, without opening a new tab or window.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:535
+#: includes/settings/class-orddd-lite-settings.php:584
 msgid "Admin Calendar Sync Settings"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:542
+#: includes/settings/class-orddd-lite-settings.php:591
 msgid "Integration Mode"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:546
-msgid ""
-"<br>Select method of integration. \"Sync Automatically\" will add the "
-"delivery events to the Google calendar, which is set in the \"Calendar to be "
-"used\" field, automatically when a customer places an order. Also, an \"Add "
-"to Calendar\" button is added on the Delivery Calendar page in admin to Sync "
-"past orders. <br>\"Sync Manually\" will add an \"Add to Google Calendar\" "
-"button in emails received by admin and New customer order.<br>\"Disabled\" "
-"will disable the integration with Google Calendar.<br>Note: Import of the "
-"events will work manually using .ics link.<br><b><i>Upgrade to <a href="
-"\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-"
-"for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:595
+msgid "<br>Select method of integration. \"Sync Automatically\" will add the delivery events to the Google calendar, which is set in the \"Calendar to be used\" field, automatically when a customer places an order. Also, an \"Add to Calendar\" button is added on the Delivery Calendar page in admin to Sync past orders. <br>\"Sync Manually\" will add an \"Add to Google Calendar\" button in emails received by admin and New customer order.<br>\"Disabled\" will disable the integration with Google Calendar.<br>Note: Import of the events will work manually using .ics link.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:551
-#: includes/settings/class-orddd-lite-settings.php:611
+#: includes/settings/class-orddd-lite-settings.php:600
+#: includes/settings/class-orddd-lite-settings.php:660
 msgid "Instructions"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:559
+#: includes/settings/class-orddd-lite-settings.php:608
 msgid "Key file name"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:563
-msgid ""
-"<br>Enter key file name here without extention, e.g. ab12345678901234567890-"
-"privatekey.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/"
-"store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:612
+msgid "<br>Enter key file name here without extention, e.g. ab12345678901234567890-privatekey.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:568
+#: includes/settings/class-orddd-lite-settings.php:617
 msgid "Service account email address"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:572
-msgid ""
-"<br>Enter Service account email address here, e.g. 1234567890@developer."
-"gserviceaccount.com.<br><b><i>Upgrade to <a href=\"https://www."
-"tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-"
-"pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:621
+msgid "<br>Enter Service account email address here, e.g. 1234567890@developer.gserviceaccount.com.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:577
+#: includes/settings/class-orddd-lite-settings.php:626
 msgid "Calendar to be used"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:581
-msgid ""
-"<br>Enter the ID of the calendar in which your deliveries will be saved, e."
-"g. abcdefg1234567890@group.calendar.google.com.<br><b><i>Upgrade to <a href="
-"\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-"
-"for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:630
+msgid "<br>Enter the ID of the calendar in which your deliveries will be saved, e.g. abcdefg1234567890@group.calendar.google.com.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:586
+#: includes/settings/class-orddd-lite-settings.php:635
 msgid "Show \"Export to Google Calendar\" button on Delivery Calendar page"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:590
-msgid ""
-"Show \"Export to Google Calendar\" button on the Order Delivery Date -> "
-"Delivery Calendar page.<br><i>Note: This button can be used to export the "
-"already placed orders with future deliveries from the current date to the "
-"calendar used above.</i><br><b><i>Upgrade to <a href=\"https://www."
-"tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-"
-"pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:639
+msgid "Show \"Export to Google Calendar\" button on the Order Delivery Date -> Delivery Calendar page.<br><i>Note: This button can be used to export the already placed orders with future deliveries from the current date to the calendar used above.</i><br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:595
+#: includes/settings/class-orddd-lite-settings.php:644
 msgid "Show Add to Calendar button in New Order email notification"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:599
-msgid ""
-"Show \"Add to Calendar\" button in the New Order email notification."
-"<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-"
-"plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:604
-msgid "Import Events"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:619
-msgid "iCalendar/.ics Feed URL"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:627
-msgid "Import frequency"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:631
-msgid ""
-"Import events from Google calendar based on the time set below. By default, "
-"all events from the Google calendar will be imported once every 24 hours."
-"<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-"
-"plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:636
-msgid "Enter Import frequency (in minutes)"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:640
-msgid ""
-"The duration in minutes at which events from the Google Calendar ICS feeds "
-"will be imported automatically in the store. <i>Note: Setting this to a "
-"lower value then 10 minutes may impact the performance of your store.</"
-"i><br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/"
-"premium-plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
+#: includes/settings/class-orddd-lite-settings.php:648
+msgid "Show \"Add to Calendar\" button in the New Order email notification.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:653
+msgid "Import Events"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:668
+msgid "iCalendar/.ics Feed URL"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:676
+msgid "Import frequency"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:680
+msgid "Import events from Google calendar based on the time set below. By default, all events from the Google calendar will be imported once every 24 hours.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:685
+msgid "Enter Import frequency (in minutes)"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:702
 msgid "Time Slot Settings"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:660
+#: includes/settings/class-orddd-lite-settings.php:709
 msgid "Enable time slot capture:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:664
-msgid ""
-"Allows the customer to choose a time slot for delivery on the checkout page."
+#: includes/settings/class-orddd-lite-settings.php:713
+msgid "Allows the customer to choose a time slot for delivery on the checkout page."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:673
+#: includes/settings/class-orddd-lite-settings.php:722
 msgid "Selection of Time slot on the checkout page will become mandatory."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:678
+#: includes/settings/class-orddd-lite-settings.php:727
 msgid "Show 'As Soon As Possible' option:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:682
+#: includes/settings/class-orddd-lite-settings.php:731
 msgid "A new option will be added in the Time slot dropdown on checkout page."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:687
+#: includes/settings/class-orddd-lite-settings.php:736
 msgid "Global Maximum Order Deliveries for Time slots:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:691
-msgid ""
-"Maximum deliveries/orders applied to all the Time slots if the individual "
-"Maximum Order Deliveries for Time slots is blank for Custom Delivery "
-"Settings.<br><i>Note: Leave blank for Unlimited Deliveries."
+#: includes/settings/class-orddd-lite-settings.php:740
+msgid "Maximum deliveries/orders applied to all the Time slots if the individual Maximum Order Deliveries for Time slots is blank for Custom Delivery Settings.<br><i>Note: Leave blank for Unlimited Deliveries."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:696
+#: includes/settings/class-orddd-lite-settings.php:745
 msgid "Auto-populate first available delivery time slot:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:700
-msgid ""
-"Auto-populate first available Delivery time slot when the date is selected "
-"on the checkout page."
+#: includes/settings/class-orddd-lite-settings.php:749
+msgid "Auto-populate first available Delivery time slot when the date is selected on the checkout page."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:705
-msgid ""
-"Add Time Slot <a href=https://www.tychesoftwares.com/docs/docs/order-"
-"delivery-date-pro-for-woocommerce/setup-delivery-date-with-time/?"
-"utm_source=userwebsite&utm_medium=link&utm_campaign=OrderDeliveryDateProSetting"
-"\" target=\"_blank\" class=\"dashicons dashicons-external\" style=\"line-"
-"height:unset;\"></a>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:712
-msgid "Time Slot for:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:716
-msgid ""
-"Select Weekday option or Specific delivery dates option to create a time "
-"slot."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:721
-msgid "Select Delivery Days/Dates:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:725
-msgid ""
-"Select Delivery Days/Dates for which you want to create an exclusive Time "
-"Slot. To create a time slot for all the weekdays, select \"All\"."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:730
-msgid "Time From:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:734
-msgid "Start time for the time slot."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:739
-msgid "Time To:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:743
-msgid "End time for the time slot."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:748
-msgid "Maximum Order Deliveries per time slot (based on per order):"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:752
-msgid ""
-"A time slot will become unavailable for further deliveries once these many "
-"orders are placed for delivery for that time slot. <br> <em>Note: If Max "
-"order deliveries is set, then that will get priority over time slot lockout."
-"</em>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:757
-msgid "Additional Charges for time slot and Checkout label:"
+#: includes/settings/class-orddd-lite-settings.php:754
+msgid "Add Time Slot <a href=https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/setup-delivery-date-with-time/?utm_source=userwebsite&utm_medium=link&utm_campaign=OrderDeliveryDateProSetting\" target=\"_blank\" class=\"dashicons dashicons-external\" style=\"line-height:unset;\"></a>"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:761
-msgid ""
-"Add delivery charges (if applicable) for time slot and add the label to be "
-"displayed on Checkout page."
+#: includes/settings/class-orddd-lite-settings.php:814
+msgid "Time Slot for:"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:765
+#: includes/settings/class-orddd-lite-settings.php:818
+msgid "Select Weekday option or Specific delivery dates option to create a time slot."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:770
+#: includes/settings/class-orddd-lite-settings.php:823
+msgid "Select Delivery Days/Dates:"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:774
+#: includes/settings/class-orddd-lite-settings.php:827
+msgid "Select Delivery Days/Dates for which you want to create an exclusive Time Slot. To create a time slot for all the weekdays, select \"All\"."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:779
+msgid "Time From/To:"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:783
+msgid "Start time for the time slot."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:788
+#: includes/settings/class-orddd-lite-settings.php:868
+msgid "Maximum Order Deliveries per time slot (based on per order):"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:792
+#: includes/settings/class-orddd-lite-settings.php:872
+msgid "A time slot will become unavailable for further deliveries once these many orders are placed for delivery for that time slot. <br> <em>Note: If Max order deliveries is set, then that will get priority over time slot lockout.</em>"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:797
+#: includes/settings/class-orddd-lite-settings.php:877
+msgid "Additional Charges for time slot and Checkout label:"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:801
+#: includes/settings/class-orddd-lite-settings.php:881
+msgid "Add delivery charges (if applicable) for time slot and add the label to be displayed on Checkout page."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:807
-msgid "Block a Time Slot"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:814
-msgid "Block Time Slot for:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:818
-msgid ""
-"Select \"Dates\" option to block time slots for individual dates. Select "
-"\"Weekdays\" option to block the time slots for a weekday or multiple "
-"weekdays."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:823
-msgid "Select Weekdays:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:827
-msgid "Select Weekdays for which you want to block the time slots."
+msgid "Bulk Add Time Slots <a href=https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/setup-delivery-date-with-time/?utm_source=userwebsite&utm_medium=link&utm_campaign=OrderDeliveryDateProSetting\" target=\"_blank\" class=\"dashicons dashicons-external\" style=\"line-height:unset;\"></a>"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:832
-msgid "Select Time Slots to block:"
+msgid "Time Slot Duration:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:836
-msgid ""
-"This will list all the time slots which are created in General Settings or "
-"in Custom Delivery Settings."
+msgid "X minutes per time slot or Duration of each time slot in minutes"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:855
-msgid "Add Specific Delivery Dates"
+#: includes/settings/class-orddd-lite-settings.php:841
+msgid "Interval between time slots:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:862
-msgid "Enable Specific Delivery Dates:"
+#: includes/settings/class-orddd-lite-settings.php:845
+msgid "Minutes between each time slot if applicable."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:866
-msgid ""
-"Enable this option to choose specific delivery dates on the checkout page."
+#: includes/settings/class-orddd-lite-settings.php:850
+msgid "Time Slot Starts From:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:871
-#: includes/settings/class-orddd-lite-settings.php:880
-#: includes/settings/class-orddd-lite-settings.php:889
-msgid "Specific Delivery Date:"
+#: includes/settings/class-orddd-lite-settings.php:854
+msgid "Start time for the time slots."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:915
-msgid "Order Delivery Time Settings"
+#: includes/settings/class-orddd-lite-settings.php:859
+msgid "Time Slot Ends At:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:922
-#: includes/settings/class-orddd-lite-settings.php:1429
-msgid "Time Settings"
+#: includes/settings/class-orddd-lite-settings.php:863
+msgid "End time for the time slots."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:929
-msgid "Enable delivery time capture:"
+#: includes/settings/class-orddd-lite-settings.php:927
+msgid "Block a Time Slot"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:933
-msgid "Enable to choose the time for delivery on the checkout page."
+#: includes/settings/class-orddd-lite-settings.php:934
+msgid "Block Time Slot for:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:938
-msgid "Time Range:"
+msgid "Select \"Dates\" option to block time slots for individual dates. Select \"Weekdays\" option to block the time slots for a weekday or multiple weekdays."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:942
-msgid "Select time range for the time sliders."
+#: includes/settings/class-orddd-lite-settings.php:943
+msgid "Select Weekdays:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-settings.php:947
+msgid "Select Weekdays for which you want to block the time slots."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:952
+msgid "Select Time Slots to block:"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:956
+msgid "This will list all the time slots which are created in General Settings or in Custom Delivery Settings."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:975
+msgid "Add Specific Delivery Dates"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:982
+msgid "Enable Specific Delivery Dates:"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:986
+msgid "Enable this option to choose specific delivery dates on the checkout page."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:991
+#: includes/settings/class-orddd-lite-settings.php:1000
+#: includes/settings/class-orddd-lite-settings.php:1009
+msgid "Specific Delivery Date:"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:1035
+msgid "Order Delivery Time Settings"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:1042
+#: includes/settings/class-orddd-lite-settings.php:1549
+msgid "Time Settings"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:1049
+msgid "Enable delivery time capture:"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:1053
+msgid "Enable to choose the time for delivery on the checkout page."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:1058
+msgid "Time Range:"
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:1062
+msgid "Select time range for the time sliders."
+msgstr ""
+
+#: includes/settings/class-orddd-lite-settings.php:1067
 msgid "Same Day Delivery"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:954
+#: includes/settings/class-orddd-lite-settings.php:1074
 msgid "Enable Same day delivery:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:958
+#: includes/settings/class-orddd-lite-settings.php:1078
 msgid "Enable same day delivery for the orders."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:958
-msgid ""
-"This is very useful in cases when your customers are gifting items to their "
-"loved ones, especially on birthdays, anniversaries, etc."
+#: includes/settings/class-orddd-lite-settings.php:1078
+msgid "This is very useful in cases when your customers are gifting items to their loved ones, especially on birthdays, anniversaries, etc."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:963
+#: includes/settings/class-orddd-lite-settings.php:1083
 msgid "Cut-off time for same day delivery orders:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:967
-msgid ""
-"Current day will be disabled if an order is placed after the time mentioned "
-"in this field."
+#: includes/settings/class-orddd-lite-settings.php:1087
+msgid "Current day will be disabled if an order is placed after the time mentioned in this field."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:967
-#: includes/settings/class-orddd-lite-settings.php:1001
+#: includes/settings/class-orddd-lite-settings.php:1087
+#: includes/settings/class-orddd-lite-settings.php:1121
 msgid "The timezone is taken from the Settings -> General -> Timezone field."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:972
+#: includes/settings/class-orddd-lite-settings.php:1092
 msgid "Additional Charges for same day delivery:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:976
+#: includes/settings/class-orddd-lite-settings.php:1096
 msgid "Set additional charges for same day delivery."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:981
+#: includes/settings/class-orddd-lite-settings.php:1101
 msgid "Next Day Delivery"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:988
+#: includes/settings/class-orddd-lite-settings.php:1108
 msgid "Enable Next day delivery:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:992
+#: includes/settings/class-orddd-lite-settings.php:1112
 msgid "If you deliver on the next day, enable this option."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:997
+#: includes/settings/class-orddd-lite-settings.php:1117
 msgid "Cut-off time for next day delivery orders:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1001
-msgid ""
-"Next day will be disabled if an order is placed after the time mentioned in "
-"this field."
+#: includes/settings/class-orddd-lite-settings.php:1121
+msgid "Next day will be disabled if an order is placed after the time mentioned in this field."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1006
+#: includes/settings/class-orddd-lite-settings.php:1126
 msgid "Additional Charges for next day delivery:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1010
+#: includes/settings/class-orddd-lite-settings.php:1130
 msgid "Set additional charges for next day delivery."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1086
-#: includes/settings/class-orddd-lite-settings.php:1441
+#: includes/settings/class-orddd-lite-settings.php:1206
+#: includes/settings/class-orddd-lite-settings.php:1561
 msgid "Additional Settings"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1093
+#: includes/settings/class-orddd-lite-settings.php:1213
 msgid "Show on Orders Listing Page:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1097
+#: includes/settings/class-orddd-lite-settings.php:1217
 msgid "Displays the Delivery Date on the WooCommerce->Orders page."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1102
+#: includes/settings/class-orddd-lite-settings.php:1222
 msgid "Show Filter on Orders Listing Page:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1106
-msgid ""
-"Displays the Filter on the WooCommerce->Orders page that allows you to view "
-"orders to be delivered today, tomorrow or in any month."
+#: includes/settings/class-orddd-lite-settings.php:1226
+msgid "Displays the Filter on the WooCommerce->Orders page that allows you to view orders to be delivered today, tomorrow or in any month."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1111
+#: includes/settings/class-orddd-lite-settings.php:1231
 msgid "Auto-populate first available Delivery date:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1115
-msgid ""
-"Auto-populate first available Delivery date when the checkout page loads."
+#: includes/settings/class-orddd-lite-settings.php:1235
+msgid "Auto-populate first available Delivery date when the checkout page loads."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1120
+#: includes/settings/class-orddd-lite-settings.php:1240
 msgid "Enable Tax calculation for Delivery charges"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1124
+#: includes/settings/class-orddd-lite-settings.php:1244
 msgid "Enable Tax calculation for Delivery charges on the checkout page."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1129
+#: includes/settings/class-orddd-lite-settings.php:1249
 msgid "Disable the Delivery Date and Time Slot Fields for:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1133
-msgid ""
-"<br>Disable the Delivery Date and Time Slot on the Checkout page for Virtual "
-"products and Featured products."
+#: includes/settings/class-orddd-lite-settings.php:1253
+msgid "<br>Disable the Delivery Date and Time Slot on the Checkout page for Virtual products and Featured products."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1138
+#: includes/settings/class-orddd-lite-settings.php:1258
 msgid "Allow Customers to edit Delivery Date & Time:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1142
-msgid ""
-"When enabled, it will add Delivery Date & Time field on the My Account -> "
-"Orders -> View page. So customers will be able to edit the date and time "
-"once the order is placed.<br>"
+#: includes/settings/class-orddd-lite-settings.php:1262
+msgid "When enabled, it will add Delivery Date & Time field on the My Account -> Orders -> View page. So customers will be able to edit the date and time once the order is placed.<br>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1147
+#: includes/settings/class-orddd-lite-settings.php:1267
 msgid "Display availability on date"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1151
-msgid ""
-"When enabled, it will display the availability on hover of the dates in the "
-"delivery calendar on checkout page."
+#: includes/settings/class-orddd-lite-settings.php:1271
+msgid "When enabled, it will display the availability on hover of the dates in the delivery calendar on checkout page."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1156
+#: includes/settings/class-orddd-lite-settings.php:1276
 msgid "Show Partially Booked Dates on the Delivery Calendar"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1160
-msgid ""
-"When enabled, it will show the dates with diagonally separated colors of "
-"Booked dates and Available Dates if 1 or more orders are placed for that "
-"date. <div class=\"orddd-tooltip\">"
+#: includes/settings/class-orddd-lite-settings.php:1280
+msgid "When enabled, it will show the dates with diagonally separated colors of Booked dates and Available Dates if 1 or more orders are placed for that date. <div class=\"orddd-tooltip\">"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1165
+#: includes/settings/class-orddd-lite-settings.php:1285
 msgid "Integration with Other Plugins:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1172
+#: includes/settings/class-orddd-lite-settings.php:1292
 msgid "WooCommerce Customer/ Order CSV Export plugin"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1176
+#: includes/settings/class-orddd-lite-settings.php:1296
 msgid "Displays the Delivery details in the CSV Export File."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1181
+#: includes/settings/class-orddd-lite-settings.php:1301
 msgid "WooCommerce PDF Invoices & Packing Slips plugin"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1185
+#: includes/settings/class-orddd-lite-settings.php:1305
 msgid "Displays the Delivery details in the PDF Invoice and Packing Slips."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1190
+#: includes/settings/class-orddd-lite-settings.php:1310
 msgid "WooCommerce Print Invoice & Delivery Note plugin"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1194
+#: includes/settings/class-orddd-lite-settings.php:1314
 msgid "Displays the Delivery details in the Invoice and Delivery Note."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1199
+#: includes/settings/class-orddd-lite-settings.php:1319
 msgid "WooCommerce Print orders plugin"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1203
+#: includes/settings/class-orddd-lite-settings.php:1323
 msgid "Displays the Delivery details in the print copy of the order."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1208
+#: includes/settings/class-orddd-lite-settings.php:1328
 msgid "Compatibility with Other Plugins:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1215
+#: includes/settings/class-orddd-lite-settings.php:1335
 msgid "WooCommerce Shipping Multiple addresses"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1219
-msgid ""
-"When enabled, it will allow to choose a Delivery Date & Time (if enabled) "
-"for each shipping address chosen on checkout page with the WooCommerce "
-"Shipping Multiple addresses plugin."
+#: includes/settings/class-orddd-lite-settings.php:1339
+msgid "When enabled, it will allow to choose a Delivery Date & Time (if enabled) for each shipping address chosen on checkout page with the WooCommerce Shipping Multiple addresses plugin."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1224
+#: includes/settings/class-orddd-lite-settings.php:1344
 msgid "WooCommerce Amazon Payments Advanced Gateway"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1228
-msgid ""
-"If enabled, it will add the Delivery Date and Time fields when the customer "
-"clicks on \"Pay with Amazon\" button."
+#: includes/settings/class-orddd-lite-settings.php:1348
+msgid "If enabled, it will add the Delivery Date and Time fields when the customer clicks on \"Pay with Amazon\" button."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1365
+#: includes/settings/class-orddd-lite-settings.php:1485
 msgid "Custom Delivery Settings"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1366
+#: includes/settings/class-orddd-lite-settings.php:1486
 msgid "Google Calendar Sync"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1423
+#: includes/settings/class-orddd-lite-settings.php:1543
 msgid "Date Settings"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1426
-#: includes/settings/class-orddd-lite-settings.php:1494
+#: includes/settings/class-orddd-lite-settings.php:1546
+#: includes/settings/class-orddd-lite-settings.php:1614
 msgid "Specific Delivery Dates"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1432
-#: includes/settings/class-orddd-lite-settings.php:1468
+#: includes/settings/class-orddd-lite-settings.php:1552
+#: includes/settings/class-orddd-lite-settings.php:1588
 msgid "Holidays"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1435
+#: includes/settings/class-orddd-lite-settings.php:1555
 msgid "Appearance"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1438
+#: includes/settings/class-orddd-lite-settings.php:1558
 #: includes/settings/class-orddd-lite-view-disable-time-slots.php:106
 #: includes/settings/class-orddd-lite-view-time-slots.php:111
 msgid "Time Slot"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1455
-#: includes/settings/class-orddd-lite-settings.php:1464
-#: includes/settings/class-orddd-lite-settings.php:1490
-#: includes/settings/class-orddd-lite-settings.php:1516
-#: includes/settings/class-orddd-lite-settings.php:1526
-#: includes/settings/class-orddd-lite-settings.php:1573
-#: includes/settings/class-orddd-lite-settings.php:1596
-#: includes/settings/class-orddd-lite-settings.php:1606
-#: includes/settings/class-orddd-lite-settings.php:1616
-#: includes/settings/class-orddd-lite-settings.php:1639
+#: includes/settings/class-orddd-lite-settings.php:1575
+#: includes/settings/class-orddd-lite-settings.php:1584
+#: includes/settings/class-orddd-lite-settings.php:1610
+#: includes/settings/class-orddd-lite-settings.php:1636
+#: includes/settings/class-orddd-lite-settings.php:1661
+#: includes/settings/class-orddd-lite-settings.php:1708
+#: includes/settings/class-orddd-lite-settings.php:1731
+#: includes/settings/class-orddd-lite-settings.php:1741
+#: includes/settings/class-orddd-lite-settings.php:1751
+#: includes/settings/class-orddd-lite-settings.php:1774
 msgid "Save Settings"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1540
+#: includes/settings/class-orddd-lite-settings.php:1675
 msgid "Block Time Slots"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1547
+#: includes/settings/class-orddd-lite-settings.php:1682
 msgid "Time Slots"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1567
+#: includes/settings/class-orddd-lite-settings.php:1702
 msgid "Back to Time Slots"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1576
+#: includes/settings/class-orddd-lite-settings.php:1711
 msgid "Blocked Time Slots"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:1853
-#, php-format
-msgid ""
-"<div class=\"notice notice-info my-dismiss-notice is-dismissible\"><p style="
-"\"font-size:17px;\">Across the world, businesses are going through a tough "
-"time with COVID-19. In such times, we want to do our bit to support small "
-"businesses. Since shoppers are increasingly relying on delivery right now, "
-"we are giving <strong>50% off on the Order Delivery Date Pro plugin until "
-"April 14 2020</strong>. If you don't love it, get a full refund in 30 days, "
-"no questions asked!<br><br>Please use the coupon code STAYSAFE to avail the "
-"discount. <strong><a target=\"_blank\" href=\"https://www.tychesoftwares.com/"
-"store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=customerstore&utm_medium=link&utm_campaign=OrderDeliveryDateLiteCovidNotice"
-"\"><u>BUY NOW FOR $49.50 (<span style=\"text-decoration:line-through;\">"
-"$99.00</span>)</u></a><strong>.</p></div>"
+#: includes/settings/class-orddd-lite-settings.php:1986
+msgid "<div class=\"notice notice-info my-dismiss-notice is-dismissible\"><p style=\"font-size:17px;\">Across the world, businesses are going through a tough time with COVID-19. In such times, we want to do our bit to support small businesses. Since shoppers are increasingly relying on delivery right now, we are giving <strong>50% off on the Order Delivery Date Pro plugin until April 14 2020</strong>. If you don't love it, get a full refund in 30 days, no questions asked!<br><br>Please use the coupon code STAYSAFE to avail the discount. <strong><a target=\"_blank\" href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=customerstore&utm_medium=link&utm_campaign=OrderDeliveryDateLiteCovidNotice\"><u>BUY NOW FOR $49.50 (<span style=\"text-decoration:line-through;\">$99.00</span>)</u></a><strong>.</p></div>"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-shipping-days-settings.php:24
-msgid "Shipping Days"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-shipping-days-settings.php:24
-msgid "refers to the working days of your own company."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-shipping-days-settings.php:24
-msgid "Delivery Days"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-shipping-days-settings.php:24
-msgid ""
-"refers to the working days of your shipping company to whom you submit your "
-"orders for deliveries."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-shipping-days-settings.php:24
-msgid "Leave this unchanged if you handle delivery & shipping by yourself."
+msgid "Please enable the business days of your store so all the calculations of cut-off time and minimum delivery time will be done based on these weekdays and not based on delivery weekdays. You can leave this unchanged if you handle delivery & shipping by yourself. Please refer <a href=\"https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/setup-shipping-days/?utm_source=userwebsite&amp;utm_medium=link&amp;utm_campaign=OrderDeliveryDateLiteSetting\" target=\"_blank\"> this post </a> to know more."
 msgstr ""
 
 #: includes/settings/class-orddd-lite-time-settings.php:98
@@ -1409,25 +1217,17 @@ msgid "Mins:"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-time-slot-settings.php:122
-#: includes/settings/class-orddd-lite-time-slot-settings.php:491
+#: includes/settings/class-orddd-lite-time-slot-settings.php:549
+#: includes/settings/class-orddd-lite-time-slot-settings.php:730
 msgid "Weekdays"
 msgstr ""
 
 #: includes/settings/class-orddd-lite-time-slot-settings.php:123
+#: includes/settings/class-orddd-lite-time-slot-settings.php:550
 msgid "Specific Dates"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-time-slot-settings.php:218
-#: includes/settings/class-orddd-lite-time-slot-settings.php:255
-msgid "Hours"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-time-slot-settings.php:231
-#: includes/settings/class-orddd-lite-time-slot-settings.php:268
-msgid "Minutes"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-time-slot-settings.php:490
+#: includes/settings/class-orddd-lite-time-slot-settings.php:729
 msgid "Dates"
 msgstr ""
 
@@ -1523,12 +1323,56 @@ msgstr ""
 msgid "Checkout label"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-delivery.php:45
-msgid "Edit Order Delivery Date and/or Time"
+#: order_delivery_date.php:305
+msgid "Order Delivery Date for WooCommerce (Lite version) plugin requires WooCommerce installed and activate."
 msgstr ""
 
-#: includes/class-orddd-lite-admin-delivery.php:96
-msgid "Delivery Charges:"
+#: order_delivery_date.php:421
+#: order_delivery_date.php:492
+#: order_delivery_date.php:586
+msgid "Clear"
+msgstr ""
+
+#: order_delivery_date.php:422
+#: order_delivery_date.php:493
+#: order_delivery_date.php:587
+msgid "Holiday"
+msgstr ""
+
+#: order_delivery_date.php:423
+#: order_delivery_date.php:430
+#: order_delivery_date.php:494
+#: order_delivery_date.php:501
+#: order_delivery_date.php:588
+#: order_delivery_date.php:595
+msgid "Booked"
+msgstr ""
+
+#: order_delivery_date.php:642
+msgid "Docs"
+msgstr ""
+
+#: order_delivery_date.php:643
+msgid "Go Pro"
+msgstr ""
+
+#: order_delivery_date.php:643
+msgid "Unlock All"
+msgstr ""
+
+#. translators: %!$s: Website link, %2$s: Review link
+#: order_delivery_date.php:661
+msgid "Thank you for using <a href=\"%1$s\" target=\"_blank\">Order Delivery Date</a>! Please <a href=\"%2$s\" target=\"_blank\">rate us on WordPress.org</a>"
+msgstr ""
+
+#: templates/emails/admin-update-date.php:20
+#: templates/emails/plain/admin-update-date.php:21
+msgid "The Delivery Date & Time has been updated by the Administrator. The details of the order and the updated delivery details are as follows:"
+msgstr ""
+
+#: templates/emails/admin-update-date.php:22
+#: templates/emails/plain/admin-update-date.php:23
+msgid "The Delivery Date & Time has been updated by the customer. The details of the order and the updated delivery details are as follows:"
 msgstr ""
 
 #: templates/orddd-lite-admin-datepicker.php:37
@@ -1546,31 +1390,3 @@ msgstr ""
 #: templates/orddd-lite-admin-datepicker.php:48
 msgid "Update & Notify Customer"
 msgstr ""
-
-#: templates/emails/plain/admin-update-date.php:21
-msgid "The Delivery Date & Time has been updated by the Administrator. The details of the order and the updated delivery details are as follows:"
-msgstr ""
-
-#: templates/emails/plain/admin-update-date.php:23
-msgid "The Delivery Date & Time has been updated by the customer. The details of the order and the updated delivery details are as follows:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:179
-msgid "Business Days Settings"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-shipping-days-settings.php:24
-msgid "Please enable the business days of your store so all the calculations of cut-off time and minimum delivery time will be done based on these weekdays and not based on delivery weekdays. You can leave this unchanged if you handle delivery & shipping by yourself. Please refer <a href=\"https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/setup-shipping-days/?utm_source=userwebsite&utm_medium=link&utm_campaign=OrderDeliveryDateProSetting\" target=\"_blank\"> this post </a> to know more."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:187
-msgid "Enable Business days based calculation:"
-
-#: includes/settings/class-orddd-lite-settings.php:192
-msgid "Calculate Minimum Delivery Time, Same Day cut-off and Next Day cut-off based on the business days selected."
-
-#: includes/settings/class-orddd-lite-settings.php:197
-msgid "Business Days:"
-
-#: includes/settings/class-orddd-lite-settings.php:201
-msgid "Business days of your store."
