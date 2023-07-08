@@ -253,27 +253,29 @@ class Orddd_Lite_Common {
 		$field_date_label        = get_option( 'orddd_lite_delivery_date_field_label' );
 		$delivery_date_formatted = '';
 		$delivery_date_timestamp = '';
+		$date_format             = get_option( 'orddd_lite_delivery_date_format' );
+
 		if ( isset( $data['_orddd_lite_timestamp'] ) || isset( $data[ get_option( 'orddd_lite_delivery_date_field_label' ) ] ) ) {
 			if ( isset( $data['_orddd_lite_timestamp'] ) ) {
 				$delivery_date_timestamp = $data['_orddd_lite_timestamp'][0];
 			}
+			
 			$delivery_date_formatted = '';
 			if ( '' !== $delivery_date_timestamp ) {
 				$delivery_date_formatted = gmdate( $orddd_lite_date_formats[ get_option( 'orddd_lite_delivery_date_format' ) ], $delivery_date_timestamp );
+
+				$delivery_date_timestamp += 0; // this will convert to long type.
+				$delivery_date_formatted  = date_i18n( $orddd_lite_date_formats[ $date_format ], $delivery_date_timestamp );
+				$delivery_date_formatted = self::delivery_date_lite_language( $delivery_date_formatted, $delivery_date_timestamp );
 			} else {
 				if ( array_key_exists( get_option( 'orddd_lite_delivery_date_field_label' ), $data ) ) {
 					if ( '' !== $data[ get_option( 'orddd_lite_delivery_date_field_label' ) ][0] ) {
-						$delivery_date_timestamp = strtotime( $data[ get_option( 'orddd_lite_delivery_date_field_label' ) ][0] );
-						$delivery_date_formatted = gmdate( $orddd_lite_date_formats[ get_option( 'orddd_lite_delivery_date_format' ) ], $delivery_date_timestamp );
+						$delivery_date_formatted = $data[ get_option( 'orddd_lite_delivery_date_field_label' ) ][0];
 					}
 				} elseif ( array_key_exists( ORDDD_DELIVERY_DATE_FIELD_LABEL, $data ) ) {
-					$delivery_date_timestamp = strtotime( $data[ ORDDD_DELIVERY_DATE_FIELD_LABEL ][0] );
-					if ( '' !== $delivery_date_timestamp ) {
-						$delivery_date_formatted = gmdate( $orddd_lite_date_formats[ get_option( 'orddd_lite_delivery_date_format' ) ], $delivery_date_timestamp );
-					}
+					$delivery_date_formatted = $data[ ORDDD_DELIVERY_DATE_FIELD_LABEL ][0];
 				}
 			}
-			$delivery_date_formatted = self::delivery_date_lite_language( $delivery_date_formatted, $delivery_date_timestamp );
 		}
 		return $delivery_date_formatted;
 	}
