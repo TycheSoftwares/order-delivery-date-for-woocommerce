@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date, woocommerce delivery date ,woocommerce delivery plugin ,woocommerce order delivery ,Woocommerce food delivery ,order delivery date for woocommerce ,woocommerce delivery time ,woocommerce delivery date checkout page
 Requires at least: 1.3
-Tested up to: 6.1
+Tested up to: 6.2.2
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -163,6 +163,9 @@ Option 3:
 7. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date"
 
 == Changelog ==
+= 3.20.0 (11.07.2023) =
+* Enhancement: Added a setting 'Show filters on order listing page' to display filter dropdown based on delivery dates on WooCommerce orders page.
+
 = 3.19.0 (29.11.2022) =
 * Enhancement: Plugin has been made compatible with WooCommerce HPOS.
 * Fix: The delivery date field was not being validated even though made mandatory.
