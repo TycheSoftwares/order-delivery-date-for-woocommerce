@@ -235,8 +235,8 @@ class Orddd_Lite_Filter {
 		} elseif ( isset( $_GET[ $filter_field_name ] ) && 'custom' === $_GET[ $filter_field_name ] ) {
 			$m            = $_GET[ $filter_field_name ];
 			$date_display = '';
-			$startdate    = isset( $_GET[ 'orddd_lite_custom_startdate' ] ) ? $_GET[ 'orddd_lite_custom_startdate' ] : '';
-			$enddate      = isset( $_GET[ 'orddd_lite_custom_enddate' ] ) ? $_GET[ 'orddd_lite_custom_enddate' ] : '';
+			$startdate    = isset( $_GET[ 'orddd_lite_custom_startdate' ] ) ? wp_unslash( sanitize_key( $_GET[ 'orddd_lite_custom_startdate' ] ) ) : '';
+			$enddate      = isset( $_GET[ 'orddd_lite_custom_enddate' ] ) ? wp_unslash( sanitize_key( $_GET[ 'orddd_lite_custom_enddate' ] ) ) : '';
 		} else {
 			$m = isset( $_GET[ $filter_field_name ] ) ? (int) $_GET[ $filter_field_name ] : 0;
 		}
@@ -286,23 +286,23 @@ class Orddd_Lite_Filter {
 						selected( $m, $year . $month, false ),
 						esc_attr( $arc_row->year . $month ),
 						/* translators: 1: month name, 2: 4-digit year */
-						sprintf( __( '%1$s %2$d', 'order-delivery-date' ), $wp_locale->get_month( $month ), $year )
+						sprintf( esc_html_x( '%1$s %2$d', 'order-delivery-date' ), $wp_locale->get_month( $month ), $year )
 					);
 				} else {
 					$arc_row->year = $year = '';
 					$month = $arc_row->month;
 					printf( '<option %s value="%s">%s</option>',
 						selected( $m, $arc_row->month, false ),
-						$arc_row->month,
-						$arc_row->month_name
+						esc_attr( $arc_row->month ),
+						esc_html( $arc_row->month_name )
 					);
 				}
 			}
 		?>
 		</select>
 
-		<input type="text" name="orddd_lite_custom_startdate" id="orddd_lite_custom_startdate" class="orddd_datepicker" value="<?php echo $startdate; ?>" style="width:100px;<?php echo $date_display; ?>" placeholder="<?php esc_html_e( 'Start Date', 'order-delivery-date' ); ?>" readonly>
-		<input type="text" name="orddd_lite_custom_enddate" id="orddd_lite_custom_enddate" class="orddd_datepicker" value="<?php echo $enddate; ?>" style="width:100px;<?php echo $date_display; ?>" placeholder="<?php esc_html_e( 'End Date', 'order-delivery-date' ); ?>" readonly>
+		<input type="text" name="orddd_lite_custom_startdate" id="orddd_lite_custom_startdate" class="orddd_datepicker" value="<?php echo esc_attr( $startdate ); ?>" style="width:100px;<?php echo $date_display; ?>" placeholder="<?php esc_html_e( 'Start Date', 'order-delivery-date' ); ?>" readonly>
+		<input type="text" name="orddd_lite_custom_enddate" id="orddd_lite_custom_enddate" class="orddd_datepicker" value="<?php echo esc_attr( $enddate ); ?>" style="width:100px;<?php echo $date_display; ?>" placeholder="<?php esc_html_e( 'End Date', 'order-delivery-date' ); ?>" readonly>
 		<?php
 	}
 
