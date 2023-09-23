@@ -699,7 +699,7 @@ class Orddd_Lite_Settings {
 
 		add_settings_section(
 			'orddd_lite_time_slot_section',
-			__( 'Time Slot Settings', 'order-delivery-date' ),
+			__( 'Delivery Time Settings', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_time_slot_admin_settings_callback' ),
 			'orddd_lite_time_slot_page'
 		);
@@ -1517,6 +1517,10 @@ class Orddd_Lite_Settings {
 				$delivery_date_class = 'current';
 			}
 
+			if ( 'time_slot' === $section ) {
+				$time_slot_class = 'current';
+			}
+			
 			if ( 'time_settings' === $section ) {
 				$time_settings_class = 'current';
 			}
@@ -1540,22 +1544,22 @@ class Orddd_Lite_Settings {
 			?>
 			<ul class="subsubsub" id="orddd_general_settings_list">
 				<li>
-					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=date_settings" class="<?php echo esc_attr( $date_settings_class ); ?>"><?php esc_attr_e( 'Date Settings', 'order-delivery-date' ); ?> </a> |
+					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=date_settings" class="<?php echo esc_attr( $date_settings_class ); ?>"><?php esc_attr_e( 'Customize Delivery Date', 'order-delivery-date' ); ?> </a> |
 				</li>
 				<li>
-					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=delivery_dates" class="<?php echo esc_attr( $delivery_date_class ); ?>"><?php esc_attr_e( 'Specific Delivery Dates', 'order-delivery-date' ); ?> </a> | 
+					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=time_slot" class="<?php echo esc_attr( $time_slot_class ); ?>"><?php esc_attr_e( 'Define Delivery Times', 'order-delivery-date' ); ?> </a> |
 				</li>
 				<li>
-					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=time_settings" class="<?php echo esc_attr( $time_settings_class ); ?>"><?php esc_attr_e( 'Time Settings', 'order-delivery-date' ); ?> </a> | 
+					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=delivery_dates" class="<?php echo esc_attr( $delivery_date_class ); ?>"><?php esc_attr_e( 'Special Dates & Charges', 'order-delivery-date' ); ?> </a> | 
 				</li>
 				<li>
-					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=holidays" class="<?php echo esc_attr( $holidays_class ); ?>"><?php esc_attr_e( 'Holidays', 'order-delivery-date' ); ?> </a> |
+					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=time_settings" class="<?php echo esc_attr( $time_settings_class ); ?>"><?php esc_attr_e( 'Expedited Delivery', 'order-delivery-date' ); ?> </a> | 
+				</li>
+				<li>
+					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=holidays" class="<?php echo esc_attr( $holidays_class ); ?>"><?php esc_attr_e( 'Holiday Calendar', 'order-delivery-date' ); ?> </a> |
 				</li>
 				<li>
 					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=appearance" class="<?php echo esc_attr( $appearance_class ); ?>"><?php esc_attr_e( 'Appearance', 'order-delivery-date' ); ?> </a> |
-				</li>
-				<li>
-					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=time_slot" class="<?php echo esc_attr( $time_slot_class ); ?>"><?php esc_attr_e( 'Time Slot', 'order-delivery-date' ); ?> </a> |
 				</li>
 				<li>
 					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=additional_settings" class="<?php echo esc_attr( $additional_settings_class ); ?>"><?php esc_attr_e( 'Additional Settings', 'order-delivery-date' ); ?> </a>
