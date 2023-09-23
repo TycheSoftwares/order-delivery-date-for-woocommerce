@@ -1520,7 +1520,7 @@ class Orddd_Lite_Settings {
 			if ( 'time_slot' === $section ) {
 				$time_slot_class = 'current';
 			}
-			
+
 			if ( 'time_settings' === $section ) {
 				$time_settings_class = 'current';
 			}
