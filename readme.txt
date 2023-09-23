@@ -167,6 +167,9 @@ Option 3:
 7. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date"
 
 == Changelog ==
+= 3.20.2 (23.09.2023) =
+* Tweak: Modified the setting sections labels to make them user friendly. 
+
 = 3.20.1 (02.08.2023) =
 * Fix: A vulnerability issue was found when filtering the orders based on delivery date on WooCommerce orders page.
 
