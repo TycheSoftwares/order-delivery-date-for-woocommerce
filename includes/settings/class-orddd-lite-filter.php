@@ -116,6 +116,7 @@ class Orddd_Lite_Filter {
 
 
 				$clauses['join'] .= "LEFT JOIN " . $wpdb->prefix . "postmeta wpm ON ( " . $wpdb->prefix . "posts.Id = wpm.post_id AND wpm.meta_key = '_orddd_lite_timestamp' )
+				LEFT JOIN " . $wpdb->prefix . "postmeta wpm1 ON ( " . $wpdb->prefix . "posts.Id = wpm1.post_id AND wpm1.meta_key = '_orddd_timestamp' )
 				LEFT JOIN " . $wpdb->prefix . "postmeta wpm2 ON ( " . $wpdb->prefix . "posts.Id = wpm2.post_id AND wpm2.meta_key = '_orddd_lite_timeslot_timestamp' )";
 
 				$orderby = ( ! isset( $_GET['order'] ) || 'desc' === $_GET['order'] ) ? 'desc' : 'asc';
