@@ -394,6 +394,7 @@ if ( typeof( e_deliverydate_session ) != 'undefined' && e_deliverydate_session !
 		var default_date     = new Date( default_date_arr[ 1 ] + '/' + default_date_arr[ 0 ] + '/' + default_date_arr[ 2 ] );
 		jQuery( '#e_deliverydate' ).datepicker( "setDate", default_date );
 		jQuery( "#h_deliverydate" ).val( h_deliverydate_session );
+		jQuery( 'input[name="e_deliverydate"]' ).val( h_deliverydate_session );
 	}
 }
 }
