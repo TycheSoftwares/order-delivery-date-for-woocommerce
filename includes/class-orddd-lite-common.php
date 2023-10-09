@@ -526,17 +526,18 @@ class Orddd_Lite_Common {
 	 */
 	public static function orddd_lite_changed_delivery( $previous_order_date, $new_order_date ) {
 
-		$lockout_days = get_option( 'orddd_lite_lockout_days' );
+		$lockout_days              = get_option( 'orddd_lite_lockout_days' );
+		$lockout_date_after_orders = get_option( 'orddd_lite_lockout_date_after_orders');
 		if ( '' === $lockout_days || '{}' === $lockout_days || '[]' === $lockout_days || 'null' === $lockout_days ) {
 			$lockout_days_arr = array();
 		} else {
 			$lockout_days_arr = (array) json_decode( $lockout_days );
 		}
-		$new_order_date = gmdate( ORDDD_LITE_LOCKOUT_DATE_FORMAT, $new_order_date );
-		$previous_order_date = gmdate( ORDDD_LITE_LOCKOUT_DATE_FORMAT, strtotime( $previous_order_date ) );
+		$new_order_date = date( ORDDD_LITE_LOCKOUT_DATE_FORMAT, $new_order_date );
+		$previous_order_date = date( ORDDD_LITE_LOCKOUT_DATE_FORMAT, strtotime( $previous_order_date ) );
 		foreach ( $lockout_days_arr as $k => $v ) {
 			$orders = $v->o;
-			if ( $previous_order_date !== $new_order_date && $previous_order_date === $v->d ) {
+			if ( $previous_order_date !== $new_order_date && $previous_order_date === $v->d && $lockout_date_after_orders == $v->o ) {
 				$orders                 = $v->o - 1;
 				$lockout_days_arr[ $k ] = array(
 					'o' => $orders,
