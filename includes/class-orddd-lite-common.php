@@ -1681,7 +1681,7 @@ class Orddd_Lite_Common {
 			}
 			$holidays_str = '';
 			foreach ( $holidays_arr as $k => $v ) {
-				$name = str_replace( "'", '&apos;', $v->n );
+				$name = str_replace( '"', '&apos;', $v->n );
 				$name = str_replace( '"', '&quot;', $name );
 				if ( isset( $v->r_type ) && 'on' === $v->r_type ) {
 					$holiday_date_arr = explode( '-', $v->d );
