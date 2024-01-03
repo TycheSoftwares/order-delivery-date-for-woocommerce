@@ -433,6 +433,7 @@ if ( delay_date != "" ) {
 
 var date_to_set = delay_days;
 jQuery( '#e_deliverydate' ).datepicker( "setDate", date_to_set );
+jQuery( 'input[name="e_deliverydate"]' ).val(min_date_to_set);
 jQuery( "#h_deliverydate" ).val( min_date_to_set );
 
 var inst = jQuery.datepicker._getInst( jQuery( "#e_deliverydate" )[0] );
