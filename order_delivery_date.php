@@ -536,8 +536,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			if ( is_admin() ) {
 				global $wpefield_version;
 				require_once 'includes/orddd-lite-component.php';
-				require_once 'includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php';
-				
+				require_once 'includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php';				
 				new Tyche_Plugin_Deactivation(
 					array(
 						'plugin_name'       => 'Order Delivery Date for WooCommerce (Lite version)',
@@ -545,7 +544,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 						'script_file'       => plugins_url( '/js/plugin-deactivation.js', __FILE__ ),
 						'plugin_short_name' => 'orddd_lite',
 						'version'           => $wpefield_version,
-						'plugin_locale'     => 'order-delivery-date'
+						'plugin_locale'     => 'order-delivery-date',
 					)
 				);
 				require_once 'includes/component/plugin-tracking/class-tyche-plugin-tracking.php';

@@ -215,7 +215,6 @@ class Orddd_Lite_TS_Tracking {
 	 * Reset setting section callback function.
 	 */
 	public static function ts_reset_tracking_setting_section_callback() {
-
 	}
 
 	/**
@@ -260,5 +259,4 @@ class Orddd_Lite_TS_Tracking {
 				)
 			);
 	}
-
 }
