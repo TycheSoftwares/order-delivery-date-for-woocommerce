@@ -536,7 +536,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			if ( is_admin() ) {
 				global $wpefield_version;
 				require_once 'includes/orddd-lite-component.php';
-				require_once 'includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php';				
+				require_once 'includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php';
 				new Tyche_Plugin_Deactivation(
 					array(
 						'plugin_name'       => 'Order Delivery Date for WooCommerce (Lite version)',
