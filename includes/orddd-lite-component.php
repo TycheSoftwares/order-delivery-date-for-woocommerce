@@ -25,7 +25,7 @@ if ( ! class_exists( 'Orddd_Lite_All_Component' ) ) {
 
 				require_once 'component/woocommerce-check/ts-woo-active.php';
 
-				require_once 'component/tracking-data/ts-tracking.php';
+				require_once 'component/plugin-tracking/ts-tracking.php';
 
 				require_once 'component/faq-support/ts-faq-support.php';
 
@@ -56,8 +56,6 @@ if ( ! class_exists( 'Orddd_Lite_All_Component' ) ) {
 				new Orddd_Lite_TS_Woo_Active( $orddd_lite_plugin_name, $orddd_lite_file_name, $orddd_lite_locale );
 
 				new Orddd_Lite_TS_tracking( $orddd_lite_plugin_prefix, $orddd_lite_plugin_name, $orddd_lite_blog_post_link, $orddd_lite_locale, $orddd_lite_plugin_url, $ordd_lite_settings_page, $ordd_lite_setting_add_on, $ordd_lite_setting_section, $ordd_lite_register_setting );
-
-				new Orddd_Lite_TS_Tracker( $orddd_lite_plugin_prefix, $orddd_lite_plugin_name );
 
 				$ts_pro_faq = self::orddd_lite_get_faq();
 				new Orddd_Lite_TS_Faq_Support( $orddd_lite_plugin_name, $orddd_lite_plugin_prefix, $orddd_lite_plugins_page, $orddd_lite_locale, $orddd_lite_plugin_folder_name, $orddd_lite_plugin_slug, $ts_pro_faq );

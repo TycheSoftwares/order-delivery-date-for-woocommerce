@@ -548,6 +548,16 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 						'plugin_locale'     => 'order-delivery-date'
 					)
 				);
+				require_once 'includes/component/plugin-tracking/class-tyche-plugin-tracking.php';
+				new Tyche_Plugin_Tracking(
+					array(
+						'plugin_name'       => 'Order Delivery Date for WooCommerce (Lite version)',
+						'plugin_locale'     => 'order-delivery-date',
+						'plugin_short_name' => 'orddd_lite',
+						'version'           => $wpefield_version,
+						'blog_link'         => '',
+					)
+				);
 			}
 		}
 
