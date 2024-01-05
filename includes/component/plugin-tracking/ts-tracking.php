@@ -3,8 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once 'class-ts-tracker.php';
-
 /** Adds the Tracking non-senstive data notice
  *
  * @since 6.8
