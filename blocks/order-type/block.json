@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "order-delivery-date/order-type",
+	"version": "1.0.0",
+	"title": "Order Type",
+	"category": "woocommerce",
+    "parent": [ "woocommerce/checkout-contact-information-block" ],
+	"attributes": {
+		"lock": {
+			"type": "object",
+			"default": {
+				"remove": true,
+				"move": true
+			}
+		}
+	},
+	"textdomain": "order-delivery-date",
+	"editorScript": "file:./build/order-type-block.js"
+}
