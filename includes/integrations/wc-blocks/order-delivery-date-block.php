@@ -11,21 +11,21 @@ use Automattic\WooCommerce\StoreApi\Schemas\V1\CheckoutSchema;
 
 add_action(
 	'woocommerce_blocks_loaded',
-	function() {
+	function () {
 		require_once __DIR__ . '/class-order-delivery-date-blocks-integration.php';
 		require_once __DIR__ . '/class-order-delivery-date-cart-block-integration.php';
 		$delivery_on_cart = get_option( 'orddd_lite_delivery_date_on_cart_page' );
 		if ( 'on' === $delivery_on_cart ) {
 			add_action(
 				'woocommerce_blocks_cart_block_registration',
-				function( $integration_registry ) {
+				function ( $integration_registry ) {
 					$integration_registry->register( new Order_DeliveryDate_Lite_Cart_Block_Integration() );
 				}
 			);
 		}
 		add_action(
 			'woocommerce_blocks_checkout_block_registration',
-			function( $integration_registry ) {
+			function ( $integration_registry ) {
 				$integration_registry->register( new Order_DeliveryDate_Lite_Blocks_Integration() );
 			}
 		);
@@ -60,12 +60,12 @@ add_action(
  */
 function orddd_lite_data_callback() {
 	return array(
-		'e_deliverydate'    => '',
-		'h_deliverydate'    => '',
-		'orddd_lite_time_slot'   => '',
-		'delivery_schedule'   => '',
-		'time_slot_mandatory' => '',
-		'time_slot_label'     => '',
+		'e_deliverydate'       => '',
+		'h_deliverydate'       => '',
+		'orddd_lite_time_slot' => '',
+		'delivery_schedule'    => '',
+		'time_slot_mandatory'  => '',
+		'time_slot_label'      => '',
 	);
 }
 
@@ -76,32 +76,32 @@ function orddd_lite_data_callback() {
  */
 function orddd_lite_schema_callback() {
 	return array(
-		'e_deliverydate'    => array(
+		'e_deliverydate'       => array(
 			'description' => __( 'Delivery Date', 'order-delivery-date' ),
 			'type'        => array( 'string', 'null' ),
 			'readonly'    => true,
 		),
-		'h_deliverydate'    => array(
+		'h_deliverydate'       => array(
 			'description' => __( 'Delivery Date (d-m-y format)', 'order-delivery-date' ),
 			'type'        => array( 'string', 'null' ),
 			'readonly'    => true,
 		),
-		'orddd_lite_time_slot'   => array(
+		'orddd_lite_time_slot' => array(
 			'description' => __( 'Time Slot', 'order-delivery-date' ),
 			'type'        => array( 'string', 'null' ),
 			'readonly'    => true,
 		),
-		'delivery_schedule'   => array(
+		'delivery_schedule'    => array(
 			'description' => __( 'Delivery Schedule', 'order-delivery-date' ),
 			'type'        => array( 'string', 'null' ),
 			'readonly'    => true,
 		),
-		'time_slot_mandatory' => array(
+		'time_slot_mandatory'  => array(
 			'description' => __( 'Time Slot Mandatory', 'order-delivery-date' ),
 			'type'        => array( 'bool', 'null' ),
 			'readonly'    => true,
 		),
-		'time_slot_label'     => array(
+		'time_slot_label'      => array(
 			'description' => __( 'Time Slot Label', 'order-delivery-date' ),
 			'type'        => array( 'string', 'null' ),
 			'readonly'    => true,

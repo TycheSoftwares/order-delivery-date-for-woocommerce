@@ -233,7 +233,6 @@ class ORDDD_Lite_Delivery_Blocks {
 
 		$lockout_time_jarr = wp_json_encode( $lockout_time_new_arr );
 		update_option( 'orddd_lite_lockout_time_slot', $lockout_time_jarr );
-
 	}
 
 	/**
