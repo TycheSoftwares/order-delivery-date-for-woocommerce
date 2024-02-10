@@ -24,7 +24,6 @@ class ORDDD_Lite_Delivery_Blocks {
 	public function __construct() {
 		add_action( 'woocommerce_store_api_checkout_update_order_from_request', array( &$this, 'orddd_lite_update_block_order_meta_delivery_date' ), 10, 2 );
 		add_action( 'woocommerce_store_api_checkout_update_order_from_request', array( &$this, 'orddd_lite_orddd_update_order_meta_time_slot' ), 10, 2 );
-		add_action( 'woocommerce_store_api_checkout_update_order_from_request', array( &$this, 'orddd_lite_validate_date_wpefield_cart_block' ), 10, 2 );
 	}
 
 	/**
@@ -49,7 +48,7 @@ class ORDDD_Lite_Delivery_Blocks {
 
 			$timestamp = Orddd_Lite_Common::orddd_lite_get_timestamp( $delivery_date, $date_format );
 			Orddd_Lite_Common::update_order_meta( $order_id, '_orddd_lite_timestamp', $timestamp, $order );
-			self::orddd_lite_update_lockout_days( $delivery_date );
+			Orddd_Lite_Process::orddd_lite_update_lockout_days( $delivery_date );
 		} else {
 			$delivery_enabled    = Orddd_Lite_Common::orddd_lite_is_delivery_enabled();
 			$is_delivery_enabled = 'yes';
@@ -61,46 +60,8 @@ class ORDDD_Lite_Delivery_Blocks {
 				Orddd_Lite_Common::update_order_meta( $order_id, get_option( 'orddd_delivery_date_field_label' ), '', $order );
 			}
 		}
+		self::orddd_lite_validate_date_wpefield_cart_block( $order, $request );
 		$order->save();
-	}
-
-	/**
-	 * Updates the lockout for the delivery date in the options table
-	 *
-	 * @param string $delivery_date Selected Delivery Date.
-	 * @since 1.5
-	 */
-	public static function orddd_lite_update_lockout_days( $delivery_date ) {
-
-		$lockout_date = gmdate( 'n-j-Y', strtotime( $delivery_date ) );
-		$lockout_days = get_option( 'orddd_lite_lockout_days' );
-		if ( '' === $lockout_days || '{}' === $lockout_days || '[]' === $lockout_days ) {
-			$lockout_days_arr = array();
-		} else {
-			$lockout_days_arr = json_decode( $lockout_days );
-		}
-		// existing lockout days.
-		$existing_days = array();
-		foreach ( $lockout_days_arr as $k => $v ) {
-			$orders = $v->o;
-			if ( $lockout_date === $v->d ) {
-				$orders = $v->o + 1;
-			}
-			$existing_days[]        = $v->d;
-			$lockout_days_new_arr[] = array(
-				'o' => $orders,
-				'd' => $v->d,
-			);
-		}
-		// add the currently selected date if it does not already exist.
-		if ( ! in_array( $lockout_date, $existing_days, true ) ) {
-			$lockout_days_new_arr[] = array(
-				'o' => 1,
-				'd' => $lockout_date,
-			);
-		}
-		$lockout_days_jarr = wp_json_encode( $lockout_days_new_arr );
-		update_option( 'orddd_lite_lockout_days', $lockout_days_jarr );
 	}
 	/**
 	 * Add selected time slot in the post meta
@@ -171,68 +132,14 @@ class ORDDD_Lite_Delivery_Blocks {
 						Orddd_Lite_Common::update_order_meta( $order_id, '_total_delivery_charges', '0', $order );
 					}
 
-					self::orddd_lite_update_lockout_timeslot( $h_deliverydate, $order_time_slot );
+					Orddd_Lite_Process::orddd_lite_update_lockout_timeslot( $h_deliverydate, $order_time_slot );
 				}
+				self::orddd_lite_validate_date_wpefield_cart_block( $order, $request );
 				$order->save();
 			}
 
 			do_action( 'orddd_after_timeslot_update', $time_slot, $order_id );
 		}
-	}
-	/**
-	 * Update number of order for Delivery date and Time slot in options table
-	 *
-	 * @globals resource $wpdb WordPress Object
-	 *
-	 * @param string $delivery_date Selected Delivery date on the checkout page.
-	 * @param string $timeslot Selected time slot on the checkout page.
-	 *
-	 * @since 3.11.0
-	 */
-	public static function orddd_lite_update_lockout_timeslot( $delivery_date, $timeslot ) {
-		if ( '' === $timeslot || __( 'As Soon As Possible.', 'order-delivery-date' ) === $timeslot ) {
-			return;
-		}
-
-		$lockout_date        = $delivery_date;
-		$time_format_to_show = Orddd_Lite_Common::orddd_lite_get_time_format();
-		$lockout_time        = get_option( 'orddd_lite_lockout_time_slot' );
-		if ( '' == $lockout_time || '{}' == $lockout_time || '[]' == $lockout_time || 'null' == $lockout_time ) { //phpcs:ignore
-			$lockout_time_arr = array();
-		} else {
-			$lockout_time_arr = json_decode( $lockout_time );
-		}
-		$existing_timeslots   = array();
-		$existing_dates       = array();
-		$lockout_time_new_arr = array();
-		$total_quantities     = 1;
-		$timeslot             = Orddd_Lite_Common::orddd_lite_change_time_slot_format( $timeslot, $time_format_to_show );
-
-		foreach ( $lockout_time_arr as $k => $v ) {
-			$orders = $v->o;
-			if ( $timeslot == $v->t && $lockout_date == $v->d ) { //phpcs:ignore
-				$orders = $v->o + $total_quantities;
-			}
-			$existing_timeslots[ $v->d ][] = $v->t;
-			$existing_dates[]              = $v->d;
-			$lockout_time_new_arr[]        = array(
-				'o' => $orders,
-				't' => $v->t,
-				'd' => $v->d,
-			);
-		}
-
-		// add the currently selected date if it does not already exist.
-		if ( ( isset( $existing_timeslots[ $lockout_date ] ) && ! in_array( $timeslot, $existing_timeslots[ $lockout_date ], true ) ) || ! in_array( $lockout_date, $existing_dates, true ) ) {
-			$lockout_time_new_arr[] = array(
-				'o' => $total_quantities,
-				't' => $timeslot,
-				'd' => $lockout_date,
-			);
-		}
-
-		$lockout_time_jarr = wp_json_encode( $lockout_time_new_arr );
-		update_option( 'orddd_lite_lockout_time_slot', $lockout_time_jarr );
 	}
 
 	/**
