@@ -222,8 +222,8 @@ class Orddd_Lite_Admin_Delivery {
 					if ( $previous_order_h_date !== $_POST['h_deliverydate'] || // phpcs:ignore
 						( $previous_order_h_date == $_POST['h_deliverydate'] ) ) { // phpcs:ignore
 						$timestamp = Orddd_Lite_Common::orddd_lite_get_timestamp( $delivery_date, $date_format );
+						Orddd_Lite_Common::orddd_lite_cancel_delivery( $order_id );
 						Orddd_Lite_Common::update_order_meta( $order_id, '_orddd_lite_timestamp', $timestamp, $order );
-						Orddd_Lite_Common::orddd_lite_changed_delivery( $previous_order_h_date, $timestamp );
 					}
 				}
 				$date_selected = 'yes';
