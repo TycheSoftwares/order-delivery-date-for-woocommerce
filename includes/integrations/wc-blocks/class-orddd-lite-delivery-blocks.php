@@ -96,7 +96,6 @@ class ORDDD_Lite_Delivery_Blocks {
 				$h_deliverydate = $data['h_deliverydate']; //phpcs:ignore
 			}
 			if ( '' !== $time_slot && 'choose' !== $time_slot && 'NA' !== $time_slot && 'select' !== $time_slot ) {
-				self::orddd_lite_validate_date_wpefield_cart_block( $order, $request );
 				if ( 'asap' === $time_slot ) {
 					Orddd_Lite_Common::update_order_meta( $order_id, $time_slot_label, esc_attr( __( 'As Soon As Possible.', 'order-delivery-date' ) ), $order );
 					Orddd_Lite_Common::update_order_meta( $order_id, '_orddd_time_slot', esc_attr( __( 'As Soon As Possible.', 'order-delivery-date' ) ), $order );
@@ -135,6 +134,7 @@ class ORDDD_Lite_Delivery_Blocks {
 
 					Orddd_Lite_Process::orddd_lite_update_lockout_timeslot( $h_deliverydate, $order_time_slot );
 				}
+				self::orddd_lite_validate_date_wpefield_cart_block( $order, $request );
 				$order->save();
 			}
 
