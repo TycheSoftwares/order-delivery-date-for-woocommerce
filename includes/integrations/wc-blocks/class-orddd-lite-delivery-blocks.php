@@ -43,6 +43,7 @@ class ORDDD_Lite_Delivery_Blocks {
 			if ( isset( $data['h_deliverydate'] ) ) { //phpcs:ignore
 				$delivery_date = sanitize_text_field( wp_unslash( $data['h_deliverydate'] ) ); //phpcs:ignore
 			}
+			self::orddd_lite_validate_date_wpefield_cart_block( $order, $request );
 
 			Orddd_Lite_Common::update_order_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), sanitize_text_field( wp_unslash( $data['e_deliverydate'] ) ), $order ); //phpcs:ignore
 
@@ -60,7 +61,6 @@ class ORDDD_Lite_Delivery_Blocks {
 				Orddd_Lite_Common::update_order_meta( $order_id, get_option( 'orddd_delivery_date_field_label' ), '', $order );
 			}
 		}
-		self::orddd_lite_validate_date_wpefield_cart_block( $order, $request );
 		$order->save();
 	}
 	/**
