@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "order-delivery-date/delivery-date",
+	"version": "1.0.1",
+	"title": "Order Delivery Date",
+	"category": "woocommerce",
+    "parent": [ "woocommerce/checkout-shipping-address-block" ],
+	"attributes": {
+		"lock": {
+			"type": "object",
+			"default": {
+				"remove": true,
+				"move": true
+			}
+		}
+	},
+	"textdomain": "order-delivery-date",
+	"editorScript": "file:./build/index.js"
+}
