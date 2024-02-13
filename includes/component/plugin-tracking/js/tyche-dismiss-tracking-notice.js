@@ -23,7 +23,8 @@ jQuery(document).ready( function() {
 					jQuery.post(
 						orddd_ts_dismiss_notice.ts_admin_url,
 						{
-							action: orddd_ts_dismiss_notice.ts_prefix_of_plugin + "_tracker_dismiss_notice"
+							action: orddd_ts_dismiss_notice.ts_prefix_of_plugin + "_tracker_dismiss_notice",
+							tracking_notice : orddd_ts_dismiss_notice.tracking_notice,
 						},
 						function( response ) {}
 					);

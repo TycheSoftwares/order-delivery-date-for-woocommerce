@@ -126,7 +126,7 @@ class Orddd_Lite_TS_Tracking {
 
 		add_action( 'admin_init', array( 'Orddd_Lite_TS_tracking', 'ts_reset_tracking_setting' ) );
 		// Include JS script for the notice.
-		add_filter( 'ts_tracker_data', array( __CLASS__, 'orddd_lite_ts_add_plugin_tracking_data' ), 10, 1 );
+		add_filter( 'orddd_lite_ts_tracker_data', array( __CLASS__, 'orddd_lite_ts_add_plugin_tracking_data' ), 10, 1 );
 		add_action( 'admin_footer', array( __CLASS__, 'ts_admin_notices_scripts' ) );
 		// Send Tracker Data.
 		add_action( 'orddd_lite_init_tracker_completed', array( __CLASS__, 'init_tracker_completed' ), 10, 2 );
@@ -240,6 +240,7 @@ class Orddd_Lite_TS_Tracking {
 	 * @access public
 	 */
 	public static function ts_admin_notices_scripts() {
+		$nonce = wp_create_nonce( 'tracking_notice' );
 			wp_enqueue_script(
 				'orddd_ts_dismiss_notice',
 				self::$ts_file_path . '/js/tyche-dismiss-tracking-notice.js',
@@ -254,6 +255,7 @@ class Orddd_Lite_TS_Tracking {
 				array(
 					'ts_prefix_of_plugin' => 'orddd_lite',
 					'ts_admin_url'        => admin_url( 'admin-ajax.php' ),
+					'tracking_notice'     => $nonce,
 				)
 			);
 	}
