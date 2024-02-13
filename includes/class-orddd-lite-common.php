@@ -1817,6 +1817,12 @@ class Orddd_Lite_Common {
 			$orddd_lite_settings['orddd_min_date_set']                                 = $min_date_array['min_date'];
 			$orddd_lite_settings['orddd_is_cart']                                      = is_cart();
 			$orddd_lite_settings['orddd_lite_auto_populate_first_available_time_slot'] = get_option( 'orddd_lite_auto_populate_first_available_time_slot' );
+			$orddd_lite_settings['orddd_is_cart_block']                                = has_block( 'woocommerce/checkout' ) || has_block( 'woocommerce/cart' );
+			$orddd_lite_settings['is_enable_delivery_date']                            = 'on' === get_option( 'orddd_lite_enable_delivery_date' ) ? true : false;
+			$orddd_lite_settings['orddd_lite_time_slot_mandatory']                     = get_option( 'orddd_lite_time_slot_mandatory' );
+			$orddd_lite_settings['orddd_lite_delivery_date_field_label']               = get_option( 'orddd_lite_delivery_date_field_label' );
+			$orddd_lite_settings['orddd_lite_delivery_timeslot_field_label']           = get_option( 'orddd_lite_delivery_timeslot_field_label' );
+			$orddd_lite_settings['orddd_lite_delivery_date_field_placeholder']         = get_option( 'orddd_lite_delivery_date_field_placeholder' );
 			return apply_filters( 'orddd_lite_hidden_variables_array', $orddd_lite_settings, $additional_data );
 		}
 	}

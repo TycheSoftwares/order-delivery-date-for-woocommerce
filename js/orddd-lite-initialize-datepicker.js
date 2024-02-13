@@ -95,6 +95,7 @@
 		jQuery( "#e_deliverydate_field" ).append( "<small class='orddd_lite_field_note'>" + orddd_lite_params.orddd_lite_field_note + "</small>" );
 	}
 	jQuery( document ).on( "click", '.ui-datepicker-close', function() {
+		jQuery( document ).trigger( "orddd_on_clear_text" );
 		jQuery( "#e_deliverydate" ).val( "" );
 		jQuery( "#h_deliverydate" ).val( '' );
 	})
@@ -126,7 +127,7 @@
 	});
 	if ( '1' === jsL10n.is_admin ) {
 		window.onload = orddd_lite_init();
-	} else {
+	} else if ( '1' !== orddd_lite_params.orddd_is_cart_block ) {
 		window.onload = load_lite_functions();
 	}
 
@@ -336,15 +337,21 @@ if( orddd_lite_params.orddd_lite_enable_time_slot == "on" ) {
 				}
 				jQuery( "#orddd_lite_time_slot" ).removeAttr( "disabled" ); 
 
-				orddd_load_time_slots( response ); 
+				if( '1' !== orddd_lite_params.orddd_is_cart_block ) {
+					orddd_load_time_slots( response );
+				} 
 
 				if( option_selected == "on" || ( 'on' == orddd_lite_params.orddd_lite_delivery_date_on_cart_page && localStorage.getItem( "orddd_lite_time_slot" ) != '' ) ) {
 						jQuery( "body" ).trigger( "update_checkout" );
 						if ( 'on' == orddd_lite_params.orddd_lite_delivery_date_on_cart_page && orddd_lite_params.orddd_is_cart == '1' ) {
 							jQuery( "#hidden_timeslot" ).val( jQuery( "#orddd_lite_time_slot" ).find(":selected").val() );
-							jQuery( "body" ).trigger( "wc_update_cart" );
+							if ( '1' !== orddd_lite_params.orddd_is_cart_block ) {
+								jQuery( "body" ).trigger( "wc_update_cart" );
+							}
 						}
-				}  
+				}
+				jQuery( document ).trigger( 'orddd_lite_on_load_time_slots', [ response ] );
+
 			});
 		}
 	}
@@ -494,7 +501,9 @@ if( typeof( e_deliverydate_session ) != 'undefined' && e_deliverydate_session !=
 		jQuery( "body" ).trigger( "update_checkout" );
 		if ( 'on' == orddd_lite_params.orddd_lite_delivery_date_on_cart_page && orddd_lite_params.orddd_is_cart == '1') {
 			jQuery( "#hidden_timeslot" ).val( jQuery( "#orddd_lite_time_slot" ).find(":selected").val() );
-			jQuery( "body" ).trigger( "wc_update_cart" );
+			if ( '1' !== orddd_lite_params.orddd_is_cart_block ) {
+				jQuery( "body" ).trigger( "wc_update_cart" );
+			}
 		}
 
 		var inst = jQuery.datepicker._getInst( jQuery( '#e_deliverydate' )[0] );
