@@ -42,19 +42,17 @@ class Orddd_Lite_Common {
 	 */
 	public static function orddd_lite_ts_add_plugin_tracking_data( $data ) {
 		// phpcs:ignore WordPress.Security.NonceVerification
-		if ( isset( $_GET['orddd_lite_tracker_optin'] ) ) {
-			$plugin_data['ts_meta_data_table_name'] = 'ts_tracking_orddd_lite_meta_data';
-			$plugin_data['ts_plugin_name']          = 'Order Delivery Date for WooCommerce (Lite version)';
+		$plugin_data['ts_meta_data_table_name'] = 'ts_tracking_orddd_lite_meta_data';
+		$plugin_data['ts_plugin_name']          = 'Order Delivery Date for WooCommerce (Lite version)';
 
-			// Store count info.
-			$plugin_data['deliveries_count'] = self::orddd_lite_ts_get_order_counts();
+		// Store count info.
+		$plugin_data['deliveries_count'] = self::orddd_lite_ts_get_order_counts();
 
-			// Get all plugin options info.
-			$plugin_data['deliveries_settings']       = self::orddd_lite_ts_get_all_plugin_options_values();
-			$plugin_data['orddd_lite_plugin_version'] = self::orddd_get_version();
-			$plugin_data['orddd_lite_allow_tracking'] = get_option( 'orddd_lite_allow_tracking' );
-			$data['plugin_data']                      = $plugin_data;
-		}
+		// Get all plugin options info.
+		$plugin_data['deliveries_settings']       = self::orddd_lite_ts_get_all_plugin_options_values();
+		$plugin_data['orddd_lite_plugin_version'] = self::orddd_get_version();
+		$plugin_data['orddd_lite_allow_tracking'] = get_option( 'orddd_lite_allow_tracking' );
+		$data['plugin_data']                      = $plugin_data;
 		return $data;
 	}
 

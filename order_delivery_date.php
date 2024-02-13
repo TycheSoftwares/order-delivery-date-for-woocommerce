@@ -450,6 +450,14 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 		public function orddd_lite_admin_scripts_js() {
 			global $wpefield_version;
 			$current_screen = get_current_screen();
+			wp_register_script(
+				'tyche',
+				plugins_url( '/js/tyche.js', __FILE__ ),
+				array( 'jquery' ),
+				$wpefield_version,
+				true
+			);
+			wp_enqueue_script( 'tyche' );
 
 			if ( 'on' === get_option( 'orddd_lite_enable_delivery_date' ) ) {
 				$calendar_theme = get_option( 'orddd_lite_calendar_theme' );
@@ -530,7 +538,29 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 		 */
 		public static function orddd_lite_add_component_file() {
 			if ( is_admin() ) {
+				global $wpefield_version;
 				require_once 'includes/orddd-lite-component.php';
+				require_once 'includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php';
+				new Tyche_Plugin_Deactivation(
+					array(
+						'plugin_name'       => 'Order Delivery Date for WooCommerce (Lite version)',
+						'plugin_base'       => 'order-delivery-date-for-woocommerce/order_delivery_date.php',
+						'script_file'       => plugins_url( '/js/plugin-deactivation.js', __FILE__ ),
+						'plugin_short_name' => 'orddd_lite',
+						'version'           => $wpefield_version,
+						'plugin_locale'     => 'order-delivery-date',
+					)
+				);
+				require_once 'includes/component/plugin-tracking/class-tyche-plugin-tracking.php';
+				new Tyche_Plugin_Tracking(
+					array(
+						'plugin_name'       => 'Order Delivery Date for WooCommerce (Lite version)',
+						'plugin_locale'     => 'order-delivery-date',
+						'plugin_short_name' => 'orddd_lite',
+						'version'           => $wpefield_version,
+						'blog_link'         => '',
+					)
+				);
 			}
 		}
 
