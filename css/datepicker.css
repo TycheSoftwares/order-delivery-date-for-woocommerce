@@ -171,3 +171,13 @@
 
 /* To hide the Today button in the calendar */
 .ui-datepicker-current { display: none; }
+
+@media only screen and (max-width: 768px) {
+	.ui-datepicker-multi-2 .ui-datepicker-group {
+    	width: 49%;
+    	margin-top: 20px;
+	}
+	.ui-datepicker-multi .ui-datepicker-group {
+    	float: none;
+	}
+}
