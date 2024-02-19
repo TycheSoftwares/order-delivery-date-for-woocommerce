@@ -431,10 +431,11 @@ class Orddd_Lite_Common {
 	 */
 	public static function orddd_lite_cancel_delivery( $order_id ) {
 		global $wpdb, $typenow;
-		$post_meta               = Orddd_Lite_Common::get_order_meta( $order_id, '_orddd_lite_timestamp' );
+		$order                   = wc_get_order( $order_id );
+		$post_meta               = $order->get_meta( '_orddd_lite_timestamp', true );
 		$delivery_date_timestamp = '';
-		if ( isset( $post_meta[0] ) && '' !== $post_meta[0] && null !== $post_meta[0] ) {
-			$delivery_date_timestamp = $post_meta[0];
+		if ( isset( $post_meta ) && '' !== $post_meta && null !== $post_meta ) {
+			$delivery_date_timestamp = $post_meta;
 		}
 
 		$timeslot            = '';
