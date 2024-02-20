@@ -270,8 +270,8 @@ class Orddd_Lite_Common {
 					if ( '' !== $data[ get_option( 'orddd_lite_delivery_date_field_label' ) ][0] ) {
 						$delivery_date_formatted = $data[ get_option( 'orddd_lite_delivery_date_field_label' ) ][0];
 					}
-				} elseif ( array_key_exists( ORDDD_DELIVERY_DATE_FIELD_LABEL, $data ) ) {
-					$delivery_date_formatted = $data[ ORDDD_DELIVERY_DATE_FIELD_LABEL ][0];
+				} elseif ( array_key_exists( ORDDD_LITE_DELIVERY_DATE_FIELD_LABEL, $data ) ) {
+					$delivery_date_formatted = $data[ ORDDD_LITE_DELIVERY_DATE_FIELD_LABEL ][0];
 				}
 			}
 		}
@@ -1918,29 +1918,38 @@ class Orddd_Lite_Common {
 	/**
 	 * Delivery date column orderby.
 	 *
-	 * @param string $query  - Query string 
+	 * @param string $args  - Query string.
 	 *
 	 * @hook request
 	 * @since 3.19.0
 	 */
-	public static function modify_query_for_sort_by_date( $query  ) {			
-			
-			
-       if (  isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && ( ( isset( $_GET[ 'orderby' ] ) && '_orddd_lite_timestamp' === $_GET[ 'orderby' ] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( "orddd_show_column_on_orders_page_check" ) && 'on' === get_option( "orddd_enable_default_sorting_of_column" ) ) ) && strpos( $query, 'SQL_CALC_FOUND_ROWS DISTINCT' ) && strpos( $query, 'wc_orders' ) ) {
-						
-			global $wpdb;		
-			
-			$query2 = str_replace( 'WHERE', 'LEFT JOIN ' . $wpdb->prefix . "wc_orders_meta wom ON ( wom.order_id = " . $wpdb->prefix . "wc_orders.id AND wom.meta_key = '_orddd_lite_timestamp' )
-			LEFT JOIN " . $wpdb->prefix . "wc_orders_meta wom2 ON ( wom2.order_id = " . $wpdb->prefix . "wc_orders.id AND wom2.meta_key = '_orddd_lite_timeslot_timestamp' ) WHERE ", $query );
-			
-			$order = ( isset( $_GET['order'] ) && 'asc' === $_GET['order'] ) ? 'ASC' : 'DESC';
-			$query2 = str_replace( 'ORDER BY', 'ORDER BY COALESCE( wom2.meta_value, wom.meta_value ) '. $order .' ,' , $query2 );  
-			
-			return $query2;
-		}
+	public static function modify_query_for_sort_by_date( $args ) {
 
-		 return $query;
+		if ( isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && ( ( isset( $_GET['orderby'] ) && '_orddd_lite_timestamp' === $_GET['orderby'] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( 'orddd_show_column_on_orders_page_check' ) && 'on' === get_option( 'orddd_enable_default_sorting_of_column' ) ) ) ) {// phpcs:ignore WordPress.Security.NonceVerification
+			$order              = ( isset( $_GET['order'] ) && 'asc' === $_GET['order'] ) ? 'ASC' : 'DESC';// phpcs:ignore WordPress.Security.NonceVerification
+			$meta_query         = array(
+				'relation'                    => 'OR',
+				'orddd_lite_timestamp_clause' => array(
+					'key'     => '_orddd_lite_timestamp',
+					'compare' => 'EXISTS',
+				),
+				'orddd_lite_timeslot_clause'  => array(
+					'key'     => '_orddd_lite_timeslot_timestamp',
+					'compare' => 'EXISTS',
+				),
+			);
+			$orderby            = array(
+				'orddd_lite_timestamp_clause' => $order,
+				'orddd_lite_timeslot_clause'  => $order,
+			);
+			$args['orderby']    = 'meta_value_num';
+			$args['meta_key']   = '_orddd_lite_timestamp';// phpcs:ignore
+			$args['meta_query'] = $meta_query;// phpcs:ignore
+			$args['order']      = $order;
+			return $args;
+		}
+		return $args;
 	}
-	
-	
+
 }
+

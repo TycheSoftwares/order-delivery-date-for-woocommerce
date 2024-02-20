@@ -148,7 +148,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 						//if (  isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && ( ( isset( $_GET[ 'orderby' ] ) && '_orddd_lite_timestamp' === $_GET[ 'orderby' ] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( "orddd_show_column_on_orders_page_check" ) && 'on' === get_option( "orddd_enable_default_sorting_of_column" ) ) ) &&  ! isset( $_GET['id'] ) ) {
 						if (  isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && ( ( isset( $_GET[ 'orderby' ] ) && '_orddd_lite_timestamp' === $_GET[ 'orderby' ] ) ) &&  ! isset( $_GET['id'] ) ) {
 					
-								add_filter( 'query', array( 'Orddd_Lite_Common', 'modify_query_for_sort_by_date' ), 10,1 );
+								add_filter( 'woocommerce_order_query_args', array( 'Orddd_Lite_Common', 'modify_query_for_sort_by_date' ), 10,1 );
 								//add_filter( 'woocommerce_order_query_args', array( &$this, 'orddd_woocommerce_delivery_datetime_orderby' ), 10,1 );
 							}
 			
