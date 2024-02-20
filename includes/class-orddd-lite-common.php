@@ -1933,16 +1933,15 @@ class Orddd_Lite_Common {
 					'compare' => 'EXISTS',
 				),
 				'orddd_lite_timeslot_clause'  => array(
-					'key'     => '_orddd_lite_timeslot_timestamp',
+					'key'     => '_orddd_timestamp',
 					'compare' => 'EXISTS',
 				),
-			);
-			$orderby            = array(
-				'orddd_lite_timestamp_clause' => $order,
-				'orddd_lite_timeslot_clause'  => $order,
+				'orddd_lite_timeslot_clause'  => array(
+					'key'     => '_orddd_lite_timestamp',
+					'compare' => 'NOT EXISTS',
+				),
 			);
 			$args['orderby']    = 'meta_value_num';
-			$args['meta_key']   = '_orddd_lite_timestamp';// phpcs:ignore
 			$args['meta_query'] = $meta_query;// phpcs:ignore
 			$args['order']      = $order;
 			return $args;
