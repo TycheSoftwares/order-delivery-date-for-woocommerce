@@ -173,7 +173,7 @@ Option 3:
 * Fix - The delivery calendar was not responsive if "Number of Months" set to 2.
 * Fix - Added Compatibility with cart and checkout block pages.
 * Fix - The delivery date was missing on order received page and in order email when the order is placed with autopopulate delivary date.
-* Fix - The delivery calender was not appearing when holiday name contain double quotes.
+* Fix - The delivery calender was not appearing when holiday name contains double quotes.
 
 = 3.20.2 (23.09.2023) =
 * Tweak: Modified the setting sections labels to make them user friendly. 
