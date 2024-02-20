@@ -1917,38 +1917,38 @@ class Orddd_Lite_Common {
 	/**
 	 * Delivery date column orderby.
 	 *
-	 * @param string $query  - Query string 
+	 * @param string $args  - Query string.
 	 *
 	 * @hook request
 	 * @since 3.19.0
 	 */
-	public static function modify_query_for_sort_by_date( $args  ) {			
-			
-	if (  isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && ( ( isset( $_GET[ 'orderby' ] ) && '_orddd_lite_timestamp' === $_GET[ 'orderby' ] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( "orddd_show_column_on_orders_page_check" ) && 'on' === get_option( "orddd_enable_default_sorting_of_column" ) ) )  ) {						
-		$order      = ( isset( $_GET['order'] ) && 'asc' === $_GET['order'] ) ? 'ASC' : 'DESC';
-		$meta_query = array(
-			'relation' => 'OR',
-			'orddd_lite_timestamp_clause' => array(
-				'key'     => '_orddd_lite_timestamp',
-				'compare' => 'EXISTS',
-			),
-			'orddd_lite_timeslot_clause' => array(
-				'key'     => '_orddd_lite_timeslot_timestamp',
-				'compare' => 'EXISTS',
-			),
-		);
-		$orderby = array(
-			'orddd_lite_timestamp_clause' => $order,
-			'orddd_lite_timeslot_clause' => $order,
-		);
-		$args['orderby'] = 'meta_value_num';
-		$args['meta_key'] = '_orddd_lite_timestamp';
-		$args['meta_query'] = $meta_query;
-		$args['order'] = $order;
+	public static function modify_query_for_sort_by_date( $args ) {
+
+		if ( isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && ( ( isset( $_GET['orderby'] ) && '_orddd_lite_timestamp' === $_GET['orderby'] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( 'orddd_show_column_on_orders_page_check' ) && 'on' === get_option( 'orddd_enable_default_sorting_of_column' ) ) ) ) {// phpcs:ignore WordPress.Security.NonceVerification
+			$order              = ( isset( $_GET['order'] ) && 'asc' === $_GET['order'] ) ? 'ASC' : 'DESC';// phpcs:ignore WordPress.Security.NonceVerification
+			$meta_query         = array(
+				'relation'                    => 'OR',
+				'orddd_lite_timestamp_clause' => array(
+					'key'     => '_orddd_lite_timestamp',
+					'compare' => 'EXISTS',
+				),
+				'orddd_lite_timeslot_clause'  => array(
+					'key'     => '_orddd_lite_timeslot_timestamp',
+					'compare' => 'EXISTS',
+				),
+			);
+			$orderby            = array(
+				'orddd_lite_timestamp_clause' => $order,
+				'orddd_lite_timeslot_clause'  => $order,
+			);
+			$args['orderby']    = 'meta_value_num';
+			$args['meta_key']   = '_orddd_lite_timestamp';// phpcs:ignore
+			$args['meta_query'] = $meta_query;// phpcs:ignore
+			$args['order']      = $order;
+			return $args;
+		}
 		return $args;
 	}
-	return $args;
-	}
-	
+
 }
 
