@@ -701,7 +701,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			}
 		}
 		/**
-		 * bakery_enqueue_scripts.
+		 * Bakery_enqueue_scripts.
 		 *
 		 * @since 3.11.0
 		 * @param array $scripts The all scripts name.
