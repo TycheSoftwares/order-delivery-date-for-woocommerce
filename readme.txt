@@ -4,8 +4,8 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date, woocommerce delivery date ,woocommerce delivery plugin ,woocommerce order delivery ,Woocommerce food delivery ,order delivery date for woocommerce ,woocommerce delivery time ,woocommerce delivery date checkout page
 Requires at least: 1.3
-Tested up to: 6.4.3
-Stable tag: trunk
+Tested up to: 6.5.0
+Stable tag: 3.21.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -167,6 +167,12 @@ Option 3:
 7. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date"
 
 == Changelog ==
+
+= 3.21.1 (03.04.2024) =
+* Fix - Cross Site Request Forgery (CSRF) vulnerability.
+* Tweak - Update compatibility with WordPress 6.5
+* Tweak - Update compatibility with WooCommerce 8.7
+
 = 3.21.0 (20.02.2024) =
 * Fix - Unable to sort the delivery dates on WooCommerce Order page.
 * Fix - Locked out date was not getting released when a date is changed in the admin order edit page.
