@@ -2,7 +2,7 @@
 Contributors: ashokrane, tychesoftwares, rashmim
 Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
-Tags: delivery date, delivery time, preparation time, woocommerce, pickup date, woocommerce delivery date ,woocommerce delivery plugin ,woocommerce order delivery ,Woocommerce food delivery ,order delivery date for woocommerce ,woocommerce delivery time ,woocommerce delivery date checkout page
+Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
 Tested up to: 6.5.0
 Stable tag: 3.21.1
@@ -11,7 +11,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
-Order Delivery Date plugin allows the customers to choose a delivery date and time on the checkout page. The WooCommerce delivery date and time will be displayed while viewing the order. The plugin is fully integrated with WooCommerce. 
+Let customers choose delivery dates & times on checkout. Simplify delivery management by blocking holidays & setting max deliveries per day. 
 
 == Description ==
 
