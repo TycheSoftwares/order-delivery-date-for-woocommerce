@@ -339,6 +339,8 @@ if( orddd_lite_params.orddd_lite_enable_time_slot == "on" ) {
 
 				if( '1' !== orddd_lite_params.orddd_is_cart_block ) {
 					orddd_load_time_slots( response );
+					//for Divi theme hidden field on checkout page.
+					jQuery( "input[name='orddd_lite_time_slot']" ).val( jQuery( "#orddd_lite_time_slot" ).find(":selected").val() );
 				} 
 
 				if( option_selected == "on" || ( 'on' == orddd_lite_params.orddd_lite_delivery_date_on_cart_page && localStorage.getItem( "orddd_lite_time_slot" ) != '' ) ) {
