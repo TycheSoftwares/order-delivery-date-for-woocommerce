@@ -581,8 +581,13 @@ class Orddd_Lite_Process {
 		$time_slots_to_show_timestamp = Orddd_Lite_Common::orddd_lite_get_timeslot_display( $time_slot_for_order );
 
 		$auto_populate_time_slot = get_option( 'orddd_auto_populate_first_available_time_slot' );
-
 		asort( $time_slots_to_show_timestamp );
+		if ( isset( $time_slots_to_show_timestamp['asap'] ) ) {
+			$asap_value  = $time_slots_to_show_timestamp['asap'];
+			$merge_array = array( 'asap' => $asap_value );
+			unset( $time_slots_to_show_timestamp['asap'] );
+			$time_slots_to_show_timestamp = array_merge( $merge_array, $time_slots_to_show_timestamp );
+		}
 
 		if ( is_array( $time_slots_to_show_timestamp ) && count( $time_slots_to_show_timestamp ) > 1 ) {
 			unset( $time_slots_to_show_timestamp['NA'] );
