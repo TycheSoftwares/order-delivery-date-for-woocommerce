@@ -1515,24 +1515,29 @@ class Orddd_Lite_Common {
 	 * Block the delivery date & time again when the order is restored from the trash
 	 *
 	 * @hook untrash_post
-	 * @param int $post_id Order ID.
+	 * @param int $order_id Order ID.
 	 * @since 3.11.0
 	 */
-	public static function orddd_lite_untrash_order( $post_id ) {
+	public static function orddd_lite_untrash_order( $order_id ) {
+		$screen = get_current_screen();
+		if ( 'post' === $screen && $screen->base && 'post' === $screen->post_type ) {
+			// The current page is a post edit page in the admin area.
+			return false;
+		}
 		if ( self::is_hpos_enabled() ) {
 			$order       = wc_get_order( $order_id );
 			$post_status = $order->get_status();
-			$post_type   = $order->get_type();			
+			$post_type   = $order->get_type();
 		} else {
 			$post_obj    = get_post( $order_id );
 			$post_status = $post_status->post_status;
 			$post_type   = $post_obj->post_type;
 		}
-		$status   = array( 'wc-pending', 'wc-cancelled', 'wc-refunded', 'wc-failed' );
+		$status = array( 'wc-pending', 'wc-cancelled', 'wc-refunded', 'wc-failed' );
 
 		if ( 'shop_order' === $post_type && ( ! in_array( $post_status, $status, true ) ) ) {
 			// untrash the delivery dates as well.
-			self::orddd_lite_restore_deliveries( $post_id, 'trashed', $post_status );
+			self::orddd_lite_restore_deliveries( $order_id, 'trashed', $post_status );
 		}
 	}
 
