@@ -708,8 +708,10 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 		 * @return array
 		 */
 		public function bakery_enqueue_scripts( $scripts ) {
-			if ( 'bootstrap-datepicker' === $scripts[5] ) {
-				unset( $scripts[5] );
+			foreach ( $scripts as $key => $value )
+				if ( 'bootstrap-datepicker' === $value ) {
+					unset( $scripts[$key] );
+				}
 			}
 			return $scripts;
 		}
