@@ -582,8 +582,6 @@ class Orddd_Lite_Process {
 
 		$auto_populate_time_slot = get_option( 'orddd_auto_populate_first_available_time_slot' );
 
-		asort( $time_slots_to_show_timestamp );
-
 		if ( is_array( $time_slots_to_show_timestamp ) && count( $time_slots_to_show_timestamp ) > 1 ) {
 			unset( $time_slots_to_show_timestamp['NA'] );
 		}
