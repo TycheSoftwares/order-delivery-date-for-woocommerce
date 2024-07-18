@@ -194,6 +194,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 			add_filter( 'admin_footer_text', array( &$this, 'orddd_lite_admin_rate_us' ) );
 			add_action( 'woocommerce_after_cart_table', array( 'Orddd_Lite_Process', 'orddd_lite_show_hidden_fields' ) );
+			add_filter( 'bakery_enqueue_scripts', array( &$this, 'bakery_enqueue_scripts' ), 10, 2 );
 		}
 
 		/**
@@ -698,6 +699,19 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			} else {
 				return $footer_text;
 			}
+		}
+		/**
+		 * Bakery_enqueue_scripts.
+		 *
+		 * @since 3.11.0
+		 * @param array $scripts The all scripts name.
+		 * @return array
+		 */
+		public function bakery_enqueue_scripts( $scripts ) {
+			if ( 'bootstrap-datepicker' === $scripts[5] ) {
+				unset( $scripts[5] );
+			}
+			return $scripts;
 		}
 	}
 }
