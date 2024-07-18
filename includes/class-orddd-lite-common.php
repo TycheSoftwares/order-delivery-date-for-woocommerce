@@ -156,7 +156,8 @@ class Orddd_Lite_Common {
 		global $orddd_lite_languages, $orddd_lite_languages_locale, $orddd_lite_date_formats;
 		require_once ABSPATH . 'wp-admin/includes/translation-install.php';
 		require_once ABSPATH . 'wp-admin/includes/file.php';
-		$date_language = get_option( 'orddd_lite_language_selected' );
+		$date_language  = get_option( 'orddd_lite_language_selected' );
+		$initial_locale = get_locale();
 		if ( '' !== $delivery_date_timestamp ) {
 			if ( 'en-GB' !== $date_language ) {
 				$locale_format = $orddd_lite_languages[ $date_language ];
@@ -230,7 +231,7 @@ class Orddd_Lite_Common {
 				}
 				setlocale( LC_ALL, 'en_GB.utf8' );
 				// Load the default language again after setting the delivery date to required language.
-				load_default_textdomain( 'en_GB' );
+				load_default_textdomain( $initial_locale );
 				$GLOBALS['wp_locale'] = new WP_Locale(); //phpcs:ignore
 			}
 		}
