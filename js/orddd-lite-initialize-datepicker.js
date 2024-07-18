@@ -442,9 +442,6 @@ var date_to_set = delay_days;
 jQuery( '#e_deliverydate' ).datepicker( "setDate", date_to_set );
 jQuery( 'input[name="e_deliverydate"]' ).val(min_date_to_set);
 jQuery( "#h_deliverydate" ).val( min_date_to_set );
-if ( typeof jQuery( "#e_deliverydate" )[0] === 'undefined' ) {
-	return;
-}
 
 var inst = jQuery.datepicker._getInst( jQuery( "#e_deliverydate" )[0] );
 orddd_set_date_from_session();
