@@ -300,6 +300,7 @@ if ( typeof( current_date ) != 'undefined' && current_date != '' ) {
 
 ordd_next_date.setHours( ordd_next_date.getHours() + 2 );
 localStorage.setItem( "orddd_lite_storage_next_time", ordd_next_date.getTime() );
+jQuery( document ).trigger( 'orddd_lite_on_select_date', date );
 show_times( date, inst );
 }
 
