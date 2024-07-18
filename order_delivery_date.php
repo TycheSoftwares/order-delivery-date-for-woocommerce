@@ -613,8 +613,10 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 				wp_enqueue_script( $language_selected, plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
 
-				wp_enqueue_script( 'initialize-datepicker-orddd', plugins_url( '/js/orddd-lite-initialize-datepicker.js', __FILE__ ), '', $wpefield_version, false );
-				$is_admin = is_admin() ? true : false;
+				if ( ( ( is_cart() || has_block( 'woocommerce/cart' ) ) && 'on' === get_option('orddd_lite_delivery_date_on_cart_page' ) ) || is_checkout() || has_block( 'woocommerce/checkout' ) ) {
+
+					wp_enqueue_script( 'initialize-datepicker-orddd', plugins_url( '/js/orddd-lite-initialize-datepicker.js', __FILE__ ), '', $wpefield_version, false );
+				}
 
 				$js_args = array(
 					'clearText'   => __( 'Clear', 'order-delivery-date' ),
