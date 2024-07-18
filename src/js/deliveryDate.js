@@ -30,20 +30,9 @@ const DeliveryDate = ({ checkoutData, shippingMethod, updateSession, setLoading 
 			return;
 		}
 
-        jQuery( document ).on( 'change', '#e_deliverydate', function( e ) {
-			setDeliveryDate( e.target.value );
-            setExtensionData( 'order-delivery-date', 'e_deliverydate', e.target.value );
-            setExtensionData( 'order-delivery-date', 'h_deliverydate', localStorage.getItem( 'h_deliverydate_lite_session' ) );
-            setLoading( true );
-            var update_cart = extensionCartUpdate( {
-                namespace: 'order-delivery-date',
-                data: {
-                    e_deliverydate: e.target.value,
-                    h_deliverydate: localStorage.getItem( 'h_deliverydate_lite_session' )
-                },
-            });
-            update_cart.then( () => { setLoading( false ) } )
-		});
+        jQuery( document ).on( 'orddd_lite_on_select_date', function( data, values ) {
+            setDeliveryDate( values );
+        });
 
         /** For inline datepicker */
         jQuery( document ).on( 'change', '#orddd_lite_datepicker', function( e ) {
