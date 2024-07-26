@@ -710,7 +710,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 		 * @return array
 		 */
 		public function bakery_enqueue_scripts( $scripts ) {
-			foreach ( $scripts as $key => $value )
+			foreach ( $scripts as $key => $value ) {
 				if ( 'bootstrap-datepicker' === $value ) {
 					unset( $scripts[$key] );
 				}
