@@ -617,6 +617,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 					wp_enqueue_script( 'initialize-datepicker-orddd', plugins_url( '/js/orddd-lite-initialize-datepicker.js', __FILE__ ), '', $wpefield_version, false );
 				}
+				$is_admin = is_admin() ? true : false;
 
 				$js_args = array(
 					'clearText'   => __( 'Clear', 'order-delivery-date' ),
