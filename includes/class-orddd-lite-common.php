@@ -1521,7 +1521,7 @@ class Orddd_Lite_Common {
 	 */
 	public static function orddd_lite_untrash_order( $order_id ) {
 		$screen = get_current_screen();
-		if ( 'post' === $screen && $screen->base && 'post' === $screen->post_type ) {
+		if ( ( 'post' === $screen->base || 'post' === $screen->post_type ) ) {
 			// The current page is a post edit page in the admin area.
 			return false;
 		}
