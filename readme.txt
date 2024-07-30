@@ -4,8 +4,8 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
-Tested up to: 6.5.0
-Stable tag: 3.21.1
+Tested up to: 6.6.1
+Stable tag: 3.22.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -167,6 +167,17 @@ Option 3:
 7. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date"
 
 == Changelog ==
+
+= 3.22.0 (30.07.2024) =
+* Fix - Resolved warning error on the checkout page.
+* Fix - Addressed issue where language change on plugin activation forced some order statuses to be translated incorrectly.
+* Fix - Fixed The "As soon as possible" option was not appears first in the dropdown list.
+* Fix - Fixed fatal error when untrashing a post from the site.
+* Fix - Fixed "Uncaught Missing instance data for this datepicker" error.
+* Fix - Corrected issue where the delivery date was reverting to the previously selected date on the cart block page.
+* Fix - Resolved conflict issues with Gravity Form fields.
+* Fix - Fixed the "selected timeslot has expired" error on the checkout page when the Divi theme is active.
+* Fix - Addressed compatibility issues with the Bakery WordPress theme.
 
 = 3.21.1 (03.04.2024) =
 * Fix - Cross Site Request Forgery (CSRF) vulnerability.
