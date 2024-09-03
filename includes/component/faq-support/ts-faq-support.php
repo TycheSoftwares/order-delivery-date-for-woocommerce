@@ -80,7 +80,7 @@ class Orddd_Lite_TS_Faq_Support {
 		self::$ts_faq_submenu_slug = ( '' == $faq_submenu_slug ) ? self::$plugin_slug : $faq_submenu_slug;
 
 		// Add a sub menu in the main menu of the plugin if added.
-		add_action( self::$plugin_prefix . '_add_submenu', array( &$this, 'ts_add_submenu' ) );
+		//add_action( self::$plugin_prefix . '_add_submenu', array( &$this, 'ts_add_submenu' ) );
 
 		// Add a tab for FAQ & Support along with other plugin settings tab.
 		add_action( self::$plugin_prefix . '_add_settings_tab', array( &$this, 'ts_add_new_settings_tab' ) );

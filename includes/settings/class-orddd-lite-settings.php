@@ -10,14 +10,11 @@
  */
 
 // Include required files.
-
 require_once 'class-orddd-lite-date-settings.php';
 require_once 'class-orddd-lite-shipping-days-settings.php';
 require_once 'class-orddd-lite-appearance-settings.php';
 require_once 'class-orddd-lite-holidays-settings.php';
 require_once 'class-orddd-lite-calendar-sync-settings.php';
-require_once 'class-orddd-lite-delivery-days-settings.php';
-require_once 'class-orddd-lite-time-settings.php';
 require_once 'class-orddd-lite-additional-settings.php';
 require_once 'class-orddd-lite-time-slot-settings.php';
 
@@ -33,7 +30,25 @@ class Orddd_Lite_Settings {
 	 * @since 1.5
 	 */
 	public static function orddd_lite_order_delivery_date_menu() {
-		add_menu_page( 'Order Delivery Date', 'Order Delivery Date', 'manage_woocommerce', 'order_delivery_date_lite', array( 'Orddd_Lite_Settings', 'orddd_lite_order_delivery_date_settings' ) );
+		add_menu_page(
+			'Order Delivery Date',
+			'Order Delivery Date',
+			'manage_woocommerce',
+			'order_delivery_date_lite',
+			array( 'Orddd_Lite_Settings', 'orddd_lite_order_delivery_date_settings' )
+		);
+
+		// Submenu - General Settings.
+		add_submenu_page(
+			'order_delivery_date_lite',
+			'General Settings',
+			'General Settings',
+			'manage_woocommerce',
+			'order_delivery_date_lite',
+			array( 'Orddd_Lite_Settings', 'orddd_lite_order_delivery_date_settings' ) // Callback function
+		);
+
+		do_action( 'orddd_lite_add_submenu' );
 	}
 
 	/**
@@ -60,16 +75,6 @@ class Orddd_Lite_Settings {
 			'orddd_lite_date_settings_page',
 			'orddd_lite_date_settings_section',
 			array( __( 'Enable Delivery Date capture on the checkout page.', 'order-delivery-date' ) )
-		);
-
-		// Setting available for Pro Version Only.
-		add_settings_field(
-			'orddd_delivery_checkout_options',
-			__( 'Delivery Checkout options:', 'order-delivery-date' ),
-			array( 'orddd_Lite_Date_Settings', 'orddd_lite_delivery_checkout_options_callback' ),
-			'orddd_lite_date_settings_page',
-			'orddd_lite_date_settings_section',
-			array( __( 'Choose the delivery date option to be displayed on the checkout page.', 'order-delivery-date' ) )
 		);
 
 		add_settings_field(
@@ -165,41 +170,6 @@ class Orddd_Lite_Settings {
 		);
 
 		do_action( 'orddd_lite_add_new_settings' );
-
-		add_settings_field(
-			'orddd_enable_day_wise_settings',
-			__( 'Weekday Settings:', 'order-delivery-date' ),
-			array( 'orddd_Lite_Date_Settings', 'orddd_lite_enable_day_wise_settings_callback' ),
-			'orddd_lite_date_settings_page',
-			'orddd_lite_date_settings_section',
-			array( __( 'Enable this setting to add Additional charges, Additional charges\' checkout label, Same day cut-off time, Next day cut-off time and Minimum Delivery Time (in hours) for each weekday.<br><b><i>Upgrade to <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>' ) )
-		);
-
-		// Business Days Settings.
-		add_settings_section(
-			'orddd_shipping_days_settings_section',
-			__( 'Business Days Settings', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Shipping_Days_Settings', 'orddd_lite_shipping_days_settings_section_callback' ),
-			'orddd_lite_date_settings_page'
-		);
-
-		add_settings_field(
-			'orddd_enable_shipping_days',
-			__( 'Enable Business days based calculation:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Shipping_Days_Settings', 'orddd_lite_enable_shipping_days_callback' ),
-			'orddd_lite_date_settings_page',
-			'orddd_shipping_days_settings_section',
-			array( __( 'Calculate Minimum Delivery Time, Same Day cut-off and Next Day cut-off based on the business days selected.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
-			'orddd_shipping_days',
-			__( 'Business Days:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Shipping_Days_Settings', 'orddd_lite_shipping_days_callback' ),
-			'orddd_lite_date_settings_page',
-			'orddd_shipping_days_settings_section',
-			array( '&nbsp;' . __( 'Business days of your store.<br><b><i>Upgrade to <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank">Order Delivery Date Pro for WooCommerce</a> to enable the setting.</i></b>', 'order-delivery-date' ) )
-		);
 	}
 
 	/**
@@ -505,7 +475,7 @@ class Orddd_Lite_Settings {
 
 		add_settings_section(
 			'orddd_lite_calendar_sync_general_settings_section',
-			__( 'General Settings', 'order-delivery-date' ),
+			__( 'Google Calendar Sync', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Calendar_Sync_Settings', 'orddd_lite_calendar_sync_general_settings_callback' ),
 			'orddd_lite_calendar_sync_settings_page'
 		);
@@ -732,15 +702,6 @@ class Orddd_Lite_Settings {
 		);
 
 		add_settings_field(
-			'orddd_lite_global_lockout_time_slots',
-			__( 'Global Maximum Order Deliveries for Time slots:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_global_lockout_time_slots_callback' ),
-			'orddd_lite_time_slot_page',
-			'orddd_lite_time_slot_section',
-			array( __( 'Maximum deliveries/orders applied to all the Time slots if the individual Maximum Order Deliveries for Time slots is blank for Custom Delivery Settings.<br><i>Note: Leave blank for Unlimited Deliveries.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
 			'orddd_lite_auto_populate_first_available_time_slot',
 			__( 'Auto-populate first available delivery time slot:', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Time_Slot_Settings', 'orddd_lite_show_first_available_time_slot_callback' ),
@@ -964,239 +925,6 @@ class Orddd_Lite_Settings {
 	}
 
 	/**
-	 * Specific dates settings tab.
-	 *
-	 * @return void
-	 */
-	public static function orddd_delivery_days_settings() {
-
-		add_settings_section(
-			'orddd_delivery_days_section',
-			__( 'Add Specific Delivery Dates', 'order-delivery-date' ),
-			array( 'ORDDD_Lite_Delivery_Days_Settings', 'orddd_delivery_days_admin_setting_callback' ),
-			'orddd_delivery_days_page'
-		);
-
-		add_settings_field(
-			'orddd_enable_specific_delivery_dates',
-			__( 'Enable Specific Delivery Dates:', 'order-delivery-date' ),
-			array( 'ORDDD_Lite_Delivery_Days_Settings', 'orddd_delivery_days_enable_callback' ),
-			'orddd_delivery_days_page',
-			'orddd_delivery_days_section',
-			array( __( 'Enable this option to choose specific delivery dates on the checkout page.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
-			'orddd_delivery_date_1',
-			__( 'Specific Delivery Date:', 'order-delivery-date' ),
-			array( 'ORDDD_Lite_Delivery_Days_Settings', 'orddd_delivery_days_datepicker_1_callback' ),
-			'orddd_delivery_days_page',
-			'orddd_delivery_days_section',
-			array( '' )
-		);
-
-		add_settings_field(
-			'orddd_delivery_date_2',
-			__( 'Specific Delivery Date:', 'order-delivery-date' ),
-			array( 'ORDDD_Lite_Delivery_Days_Settings', 'orddd_delivery_days_datepicker_2_callback' ),
-			'orddd_delivery_days_page',
-			'orddd_delivery_days_section',
-			array( '' )
-		);
-
-		add_settings_field(
-			'orddd_delivery_date_3',
-			__( 'Specific Delivery Date:', 'order-delivery-date' ),
-			array( 'ORDDD_Lite_Delivery_Days_Settings', 'orddd_delivery_days_datepicker_3_callback' ),
-			'orddd_delivery_days_page',
-			'orddd_delivery_days_section',
-			array( '' )
-		);
-
-		register_setting(
-			'orddd_delivery_days_settings',
-			'orddd_enable_specific_delivery_dates'
-		);
-
-		register_setting(
-			'orddd_delivery_days_settings',
-			'orddd_delivery_dates',
-			array( 'orddd_delivery_days_settings', 'orddd_delivery_dates_callback' )
-		);
-	}
-
-	/**
-	 * Add settings fields & Register settings in Time Settings tab
-	 */
-	public static function orddd_time_settings() {
-
-		add_settings_section(
-			'orddd_time_settings',
-			__( 'Order Delivery Time Settings', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Settings', 'orddd_delivery_time_settings_callback' ),
-			'orddd_time_settings_page'
-		);
-
-		add_settings_section(
-			'orddd_time_settings_section',
-			__( 'Time Settings', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Settings', 'orddd_delivery_time_settings_callback' ),
-			'orddd_time_settings_page'
-		);
-
-		add_settings_field(
-			'orddd_enable_delivery_time',
-			__( 'Enable delivery time capture:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Settings', 'orddd_enable_delivery_time_capture_callback' ),
-			'orddd_time_settings_page',
-			'orddd_time_settings_section',
-			array( __( 'Enable to choose the time for delivery on the checkout page.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
-			'orddd_time_range',
-			__( 'Time Range:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Settings', 'orddd_time_range_callback' ),
-			'orddd_time_settings_page',
-			'orddd_time_settings_section',
-			array( '<br>' . __( 'Select time range for the time sliders.', 'order-delivery-date' ) )
-		);
-
-		add_settings_section(
-			'orddd_same_day_delivery_section',
-			__( 'Same Day Delivery', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Settings', 'orddd_same_day_delivery_callback' ),
-			'orddd_time_settings_page'
-		);
-
-		add_settings_field(
-			'orddd_enable_same_day_delivery',
-			__( 'Enable Same day delivery:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Settings', 'orddd_enable_same_day_delivery_callback' ),
-			'orddd_time_settings_page',
-			'orddd_same_day_delivery_section',
-			array( __( 'Enable same day delivery for the orders.', 'order-delivery-date' ) . '<br><i>' . __( 'This is very useful in cases when your customers are gifting items to their loved ones, especially on birthdays, anniversaries, etc.', 'order-delivery-date' ) . '</i>' )
-		);
-
-		add_settings_field(
-			'cutoff_time_for_same_day_delivery_orders',
-			__( 'Cut-off time for same day delivery orders:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Settings', 'orddd_cutoff_time_for_same_day_delivery_orders_callback' ),
-			'orddd_time_settings_page',
-			'orddd_same_day_delivery_section',
-			array( '<br>' . __( 'Current day will be disabled if an order is placed after the time mentioned in this field.', 'order-delivery-date' ) . '<br><i>' . __( 'The timezone is taken from the Settings -> General -> Timezone field.', 'order-delivery-date' ) . '</i>' )
-		);
-
-		add_settings_field(
-			'orddd_same_day_additional_charges',
-			__( 'Additional Charges for same day delivery:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Settings', 'orddd_additional_charges_for_same_day_delivery_callback' ),
-			'orddd_time_settings_page',
-			'orddd_same_day_delivery_section',
-			array( __( 'Set additional charges for same day delivery.', 'order-delivery-date' ) )
-		);
-
-		add_settings_section(
-			'orddd_next_day_delivery_section',
-			__( 'Next Day Delivery', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Settings', 'orddd_next_day_delivery_callback' ),
-			'orddd_time_settings_page'
-		);
-
-		add_settings_field(
-			'orddd_enable_next_day_delivery',
-			__( 'Enable Next day delivery:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Settings', 'orddd_enable_next_day_delivery_callback' ),
-			'orddd_time_settings_page',
-			'orddd_next_day_delivery_section',
-			array( __( 'If you deliver on the next day, enable this option.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
-			'cutoff_time_for_next_day_delivery_orders',
-			__( 'Cut-off time for next day delivery orders:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Settings', 'orddd_cutoff_time_for_next_day_delivery_orders_callback' ),
-			'orddd_time_settings_page',
-			'orddd_next_day_delivery_section',
-			array( '<br>' . __( 'Next day will be disabled if an order is placed after the time mentioned in this field.', 'order-delivery-date' ) . '<br><i>' . __( 'The timezone is taken from the Settings -> General -> Timezone field.', 'order-delivery-date' ) . '</i>' )
-		);
-
-		add_settings_field(
-			'orddd_next_day_additional_charges',
-			__( 'Additional Charges for next day delivery:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Time_Settings', 'orddd_additional_charges_for_next_day_delivery_callback' ),
-			'orddd_time_settings_page',
-			'orddd_next_day_delivery_section',
-			array( __( 'Set additional charges for next day delivery.', 'order-delivery-date' ) )
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_enable_delivery_time'
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_delivery_from_hours'
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_delivery_from_mins'
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_delivery_to_hours'
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_delivery_to_mins'
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_enable_same_day_delivery'
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_disable_same_day_delivery_after_hours'
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_disable_same_day_delivery_after_minutes'
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_same_day_additional_charges'
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_enable_next_day_delivery'
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_disable_next_day_delivery_after_hours'
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_disable_next_day_delivery_after_minutes'
-		);
-
-		register_setting(
-			'orddd_time_settings',
-			'orddd_next_day_additional_charges'
-		);
-	}
-
-	/**
 	 * Add settings fields & Register settings in Date Settings tab for Integration with our plugins
 	 */
 	public static function orddd_integration_of_plugins() {
@@ -1236,15 +964,6 @@ class Orddd_Lite_Settings {
 		);
 
 		add_settings_field(
-			'orddd_lite_enable_tax_calculation_for_delivery_charges',
-			__( 'Enable Tax calculation for Delivery charges', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_enable_tax_calculation_for_delivery_charges_callback' ),
-			'orddd_lite_additional_settings_page',
-			'orddd_lite_additional_settings_section',
-			array( __( 'Enable Tax calculation for Delivery charges on the checkout page.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
 			'orddd_lite__no_fields_for_product_type',
 			__( 'Disable the Delivery Date and Time Slot Fields for:', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_appearance_virtual_product_callback' ),
@@ -1254,98 +973,12 @@ class Orddd_Lite_Settings {
 		);
 
 		add_settings_field(
-			'orddd_lite_allow_customers_to_edit_date',
-			__( 'Allow Customers to edit Delivery Date & Time:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_allow_customers_to_edit_date_callback' ),
-			'orddd_lite_additional_settings_page',
-			'orddd_lite_additional_settings_section',
-			array( __( 'When enabled, it will add Delivery Date & Time field on the My Account -> Orders -> View page. So customers will be able to edit the date and time once the order is placed.<br>', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
-			'orddd_lite_enable_availability_display',
-			__( 'Display availability on date', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_enable_availability_display_callback' ),
-			'orddd_lite_additional_settings_page',
-			'orddd_lite_additional_settings_section',
-			array( __( 'When enabled, it will display the availability on hover of the dates in the delivery calendar on checkout page.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
 			'orddd_lite_show_partially_booked_dates',
 			__( 'Show Partially Booked Dates on the Delivery Calendar', 'order-delivery-date' ),
 			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_show_partially_booked_dates_callback' ),
 			'orddd_lite_additional_settings_page',
 			'orddd_lite_additional_settings_section',
 			array( __( 'When enabled, it will show the dates with diagonally separated colors of Booked dates and Available Dates if 1 or more orders are placed for that date. <div class="orddd-tooltip">', 'order-delivery-date' ) )
-		);
-
-		add_settings_section(
-			'orddd_lite_integration_with_other_plugins',
-			__( 'Integration with Other Plugins:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_integration_with_other_plugins_callback' ),
-			'orddd_lite_additional_settings_page'
-		);
-
-		add_settings_field(
-			'orddd_lite_show_fields_in_csv_export_check',
-			__( 'WooCommerce Customer/ Order CSV Export plugin', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_show_fields_in_csv_export_check_callback' ),
-			'orddd_lite_additional_settings_page',
-			'orddd_lite_integration_with_other_plugins',
-			array( __( 'Displays the Delivery details in the CSV Export File.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
-			'orddd_lite_show_fields_in_pdf_invoice_and_packing_slips',
-			__( 'WooCommerce PDF Invoices & Packing Slips plugin', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_show_fields_in_pdf_invoice_and_packing_slips_callback' ),
-			'orddd_lite_additional_settings_page',
-			'orddd_lite_integration_with_other_plugins',
-			array( __( 'Displays the Delivery details in the PDF Invoice and Packing Slips.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
-			'orddd_lite_show_fields_in_invoice_and_delivery_note',
-			__( 'WooCommerce Print Invoice & Delivery Note plugin', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_show_fields_in_invoice_and_delivery_note_callback' ),
-			'orddd_lite_additional_settings_page',
-			'orddd_lite_integration_with_other_plugins',
-			array( __( 'Displays the Delivery details in the Invoice and Delivery Note.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
-			'orddd_lite_show_fields_in_cloud_print_orders',
-			__( 'WooCommerce Print orders plugin', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_show_fields_in_cloud_print_orders_callback' ),
-			'orddd_lite_additional_settings_page',
-			'orddd_lite_integration_with_other_plugins',
-			array( __( 'Displays the Delivery details in the print copy of the order.', 'order-delivery-date' ) )
-		);
-
-		add_settings_section(
-			'orddd_lite_compatibility_with_other_plugins',
-			__( 'Compatibility with Other Plugins:', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_compatibility_with_other_plugins_callback' ),
-			'orddd_lite_additional_settings_page'
-		);
-
-		add_settings_field(
-			'orddd_lite_shipping_multiple_address_compatibility',
-			__( 'WooCommerce Shipping Multiple addresses', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_shipping_multiple_address_compatibility_callback' ),
-			'orddd_lite_additional_settings_page',
-			'orddd_lite_compatibility_with_other_plugins',
-			array( __( 'When enabled, it will allow to choose a Delivery Date & Time (if enabled) for each shipping address chosen on checkout page with the WooCommerce Shipping Multiple addresses plugin.', 'order-delivery-date' ) )
-		);
-
-		add_settings_field(
-			'orddd_lite_amazon_payments_advanced_gateway_compatibility',
-			__( 'WooCommerce Amazon Payments Advanced Gateway', 'order-delivery-date' ),
-			array( 'Orddd_Lite_Additional_Settings', 'orddd_lite_amazon_payments_advanced_gateway_compatibility_callback' ),
-			'orddd_lite_additional_settings_page',
-			'orddd_lite_compatibility_with_other_plugins',
-			array( __( 'If enabled, it will add the Delivery Date and Time fields when the customer clicks on "Pay with Amazon" button.', 'order-delivery-date' ) )
 		);
 
 		register_setting(
@@ -1482,9 +1115,10 @@ class Orddd_Lite_Settings {
 		<div class="wrap woocommerce">
 			<nav class="nav-tab-wrapper woo-nav-tab-wrapper" id="orddd_settings_tabs">
 				<a href="admin.php?page=order_delivery_date_lite&action=general_settings" class="nav-tab <?php echo esc_attr( $active_general_settings ); ?>"><?php esc_attr_e( 'General Settings', 'order-delivery-date' ); ?> </a>
-				<a href="admin.php?page=order_delivery_date_lite&action=shipping_based" class="nav-tab <?php echo esc_attr( $active_shipping_based ); ?>"> <?php esc_attr_e( 'Custom Delivery Settings', 'order-delivery-date' ); ?> </a>
-				<a href="admin.php?page=order_delivery_date_lite&action=calendar_sync_settings" class="nav-tab <?php echo esc_attr( $calendar_sync_settings ); ?>"> <?php esc_attr_e( 'Google Calendar Sync', 'order-delivery-date' ); ?> 
-				</a>
+				<?php if ( 'yes' === get_option( 'orddd_pro_installed', '' ) ) : ?>
+				<a href="admin.php?page=order_delivery_date_lite&action=shipping_based" class="nav-tab <?php echo esc_attr( $active_shipping_based ); ?>"> <?php esc_attr_e( 'Delivery Schedules', 'order-delivery-date' ); ?> </a>
+				<a href="admin.php?page=order_delivery_date_lite&action=calendar_sync_settings" class="nav-tab <?php echo esc_attr( $calendar_sync_settings ); ?>"> <?php esc_attr_e( 'Integrations', 'order-delivery-date' ); ?></a>
+				<?php endif; ?>
 				<?php
 					do_action( 'orddd_lite_add_settings_tab' );
 				?>
@@ -1550,12 +1184,6 @@ class Orddd_Lite_Settings {
 					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=time_slot" class="<?php echo esc_attr( $time_slot_class ); ?>"><?php esc_attr_e( 'Define Delivery Times', 'order-delivery-date' ); ?> </a> |
 				</li>
 				<li>
-					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=delivery_dates" class="<?php echo esc_attr( $delivery_date_class ); ?>"><?php esc_attr_e( 'Special Dates & Charges', 'order-delivery-date' ); ?> </a> | 
-				</li>
-				<li>
-					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=time_settings" class="<?php echo esc_attr( $time_settings_class ); ?>"><?php esc_attr_e( 'Expedited Delivery', 'order-delivery-date' ); ?> </a> | 
-				</li>
-				<li>
 					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=holidays" class="<?php echo esc_attr( $holidays_class ); ?>"><?php esc_attr_e( 'Holiday Calendar', 'order-delivery-date' ); ?> </a> |
 				</li>
 				<li>
@@ -1603,43 +1231,6 @@ class Orddd_Lite_Settings {
 						</form>
 					</div>
 					<?php
-					break;
-
-				case 'delivery_dates':
-					print( '<div id="content">
-						<div class="orddd-col-left" >
-							<form method="post" action="options.php">' );
-								settings_fields( 'orddd_delivery_days_settings' );
-								do_settings_sections( 'orddd_delivery_days_page' );
-								submit_button( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save', true, array( 'disabled' => true ) );
-							print( '</form>
-						</div>
-					</div>' );
-					echo "<div class='orddd-col-right'><h2 id='delivery_date_table_head'>" . esc_attr__( 'Specific Delivery Dates', 'order-delivery-date' ) . '</h2>';
-					include_once 'class-orddd-lite-view-specific-table.php';
-					$orddd_table = new ORDDD_Lite_View_Specific_Table();
-					$orddd_table->orddd_prepare_items();
-					?>
-						<div id = "orddd_delivery_dates_list">
-							<form id="delivery-dates" method="get" >
-								<input type="hidden" name="page" value="order_delivery_date_lite" />
-								<input type="hidden" name="tab" value="general_settings" />
-								<input type="hidden" name="section" value="delivery_dates" />
-								<?php $orddd_table->display(); ?>
-							</form>
-						</div>
-					</div>
-					<?php
-					break;
-
-				case 'time_settings':
-					print( '<div id="content">
-						<form method="post" action="options.php">' );
-							settings_fields( 'orddd_time_settings' );
-							do_settings_sections( 'orddd_time_settings_page' );
-							submit_button( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save', true, array( 'disabled' => true ) );
-						print( '</form>
-					</div>' );
 					break;
 
 				case 'time_slot':
@@ -1757,27 +1348,36 @@ class Orddd_Lite_Settings {
 					</div>' );
 					break;
 			}
-		} elseif ( 'shipping_based' === $action ) {
-			echo '<br>
-            <b>
-                <i>Upgrade to <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank">Order Delivery Date Pro for WooCommerce</a> to enable creating delivery schedules by Product Categories, Shipping Methods, Shipping Classes, Table Rate Shipping Methods & Pickup Locations.
-                </i>
-            </b>
-            <br>
-            <br>
-            <b>
-                <i>You can refer to our documentation for creating Custom Delivery Schedules <a href="https://www.tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/custom-delivery-settings/" target="_blank">here</a>.
-                </i>
-            </b>';
+		} elseif ( 'shipping_based' === $action || 'upgrade_to_pro_page' === $action ) {
+			ob_start();
+			wc_get_template(
+				'orddd-lite-delivery-schedule-html.php',
+				array(),
+				'order-delivery-date-for-woocommerce',
+				ORDDD_LITE_TEMPLATE_PATH
+			);
+			echo ob_get_clean();
 
 		} elseif ( 'calendar_sync_settings' === $action ) {
-			print( '<div id="content">
+			/* print( '<div id="content" class="orddd-calendar-sync">
                 <form method="post" action="options.php">' );
 					settings_fields( 'orddd_lite_calendar_sync_settings' );
 					do_settings_sections( 'orddd_lite_calendar_sync_settings_page' );
 					submit_button( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save', true );
-				print( '</form>
-            </div>' );
+				print( '</form>');
+
+				do_action( 'orddd_lite_after_settings_page_form' );
+
+				print( '</div>' ); */
+
+			ob_start();
+			wc_get_template(
+				'orddd-lite-integrations-html.php',
+				array(),
+				'order-delivery-date-for-woocommerce',
+				ORDDD_LITE_TEMPLATE_PATH
+			);
+			echo ob_get_clean();
 		}
 	}
 

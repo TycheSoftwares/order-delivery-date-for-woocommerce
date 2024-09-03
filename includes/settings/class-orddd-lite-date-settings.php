@@ -46,28 +46,6 @@ class Orddd_Lite_Date_Settings {
 	}
 
 	/**
-	 * Callback for delivery checkout option to select Calendar or Text Block
-	 *
-	 * @param array $args Extra arguments containing label & class for the field.
-	 * @since 3.9
-	 *
-	 * @todo: disable this field
-	 */
-	public static function orddd_lite_delivery_checkout_options_callback( $args ) {
-		global $orddd_weekdays;
-
-		$orddd_delivery_checkout_options_delivery_calendar = 'checked';
-
-		?>
-		<p>
-			<label><input type="radio" name="orddd_lite_delivery_checkout_options" id="orddd_lite_delivery_checkout_options" value="delivery_calendar"<?php echo esc_attr( $orddd_delivery_checkout_options_delivery_calendar ); ?>/><?php esc_attr_e( 'Calendar', 'order-delivery-date' ); ?></label>
-			<label><input type="radio" name="orddd_delivery_checkout_options" id="orddd_delivery_checkout_options" value="text_block" disabled readonly/><?php esc_attr_e( 'Text block', 'order-delivery-date' ); ?> <b><i><?php esc_attr_e( 'Upgrade to', 'order-delivery-date' ); ?> <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank"> <?php esc_attr_e( 'Order Delivery Date Pro for WooCommerce' ); ?> </a> <?php esc_attr_e( 'to enable the setting.', 'order-delivery-date' ); ?></i></b></label>
-		</p>
-		<label for="orddd_lite_delivery_checkout_options"><?php echo esc_attr( $args[0] ); ?></label>
-		<?php
-	}
-
-	/**
 	 * Callback for adding Delivery Weekdays setting
 	 *
 	 * @param string $input Value of the weekday setting.
@@ -228,21 +206,6 @@ class Orddd_Lite_Date_Settings {
 
 		?>
 		<label for="orddd_lite_weekdays"><?php echo esc_html( $args[0] ); ?></label>
-		<?php
-	}
-
-	/**
-	 * Callback to add Weekday Settings field
-	 *
-	 * @param array $args Extra arguments containing label & class for the field.
-	 * @since 3.9
-	 *
-	 * @todo: disable this field
-	 */
-	public static function orddd_lite_enable_day_wise_settings_callback( $args ) {
-		?>
-		<input type="checkbox" name="orddd_enable_day_wise_settings" id="orddd_enable_day_wise_settings" class="day-checkbox" value="on" disabled readonly />
-		<label for="orddd_enable_day_wise_settings"><?php echo wp_kses_post( $args[0] ); ?></label>
 		<?php
 	}
 
