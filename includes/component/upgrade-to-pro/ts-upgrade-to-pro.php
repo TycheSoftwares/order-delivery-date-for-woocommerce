@@ -207,18 +207,21 @@ class Ts_Upgrade_To_Pro {
 		if ( 'trial' === $trial ) {
 			$trial_expired = get_option( 'orddd_deactivated_due_to_trial_expiry', '' );
 			$license_key   = trim( get_option( self::$ts_license_key_option_name, '' ) );
-			$renew_link    = add_query_arg(
-				array(
-					'edd_license_key' => $license_key,
-					'download_id'     => self::$ts_item_id,
-				),
-				'https://www.tychesoftwares.com/checkout'
-			);
-			/* translators: %s: Renew Link */
-			$message = sprintf( __( 'Your Woo store is losing its WOW factor. Your Order Delivery Date Pro for WooCommerce license has expired. <a href="%s" target="_blank" class="button">Renew Now</a>', 'order-delivery-date' ), $renew_link );
+
+			if ( '' !== $license_key ) {
+				$renew_link = add_query_arg(
+					array(
+						'edd_license_key' => $license_key,
+						'download_id'     => self::$ts_item_id,
+					),
+					'https://www.tychesoftwares.com/checkout'
+				);
+				/* translators: %s: Renew Link */
+				$message = sprintf( __( 'Your Woo store is losing its WOW factor. Your Order Delivery Date Pro for WooCommerce license has expired. <a href="%s" target="_blank" class="button">Renew Now</a>', 'order-delivery-date' ), $renew_link );
+			}
 		} else {
 			/* translators: %s: Orddd Trial Version Download page Link */
-			$message = sprintf( __( 'Upgrade to the PRO version of Order Delivery Date for WooCommerce plugin for FREE! Enjoy pro features for 60 days at absolutely no cost. Limited-time deal for holiday season sale <a href="%s" class="button-primary button button-large" target="_blank"><b>Act now!</b></a>', 'order-delivery-date' ), 'https://www.tychesoftwares.com/products/order-delivery-date-pro-for-woocommerce-trial/' );
+			$message = sprintf( __( 'Upgrade to the PRO version of Order Delivery Date for WooCommerce plugin for FREE! Enjoy pro features for 60 days at absolutely no cost. Limited-time deal for holiday season sale <a href="%s" class="button-primary button button-large" target="_blank"><b>Act now!</b></a>', 'order-delivery-date' ), 'https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin-trial/' );
 		}
 
 		if ( '' !== $message ) { ?>
