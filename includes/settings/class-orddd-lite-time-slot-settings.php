@@ -69,20 +69,6 @@ class Orddd_Lite_Time_Slot_Settings {
 	}
 
 	/**
-	 * Callback for adding Global lockout for Time slot setting
-	 *
-	 * @param array $args Extra arguments containing label & class for the field.
-	 * @since 2.4
-	 */
-	public static function orddd_lite_global_lockout_time_slots_callback( $args ) {
-		?>
-		<input type="number" min="0" step="1" name="orddd_lite_global_lockout_time_slots" id="orddd_lite_global_lockout_time_slots" value="" disabled/>
-		<label for="orddd_lite_global_lockout_time_slots"><?php echo wp_kses_post( $args[0] ); ?></label>
-		<br><strong><em><?php esc_attr_e( 'Upgrade to', 'order-delivery-date' ); ?> <a href="https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite" target="_blank"> <?php esc_attr_e( 'Order Delivery Date Pro for WooCommerce' ); ?> </a> <?php esc_attr_e( 'to enable the setting.', 'order-delivery-date' ); ?></em></strong>
-		<?php
-	}
-
-	/**
 	 * Callback for adding Show first available Time slot setting
 	 *
 	 * @param array $args Extra arguments containing label & class for the field.

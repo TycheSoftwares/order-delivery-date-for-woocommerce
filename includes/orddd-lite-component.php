@@ -29,6 +29,8 @@ if ( ! class_exists( 'Orddd_Lite_All_Component' ) ) {
 
 				require_once 'component/faq-support/ts-faq-support.php';
 
+				require_once 'component/upgrade-to-pro/ts-upgrade-to-pro.php';
+
 				$orddd_lite_plugin_name = self::ts_get_plugin_name();
 
 				$orddd_lite_locale = self::ts_get_plugin_locale();
@@ -59,6 +61,9 @@ if ( ! class_exists( 'Orddd_Lite_All_Component' ) ) {
 
 				$ts_pro_faq = self::orddd_lite_get_faq();
 				new Orddd_Lite_TS_Faq_Support( $orddd_lite_plugin_name, $orddd_lite_plugin_prefix, $orddd_lite_plugins_page, $orddd_lite_locale, $orddd_lite_plugin_folder_name, $orddd_lite_plugin_slug, $ts_pro_faq );
+
+				/* Adding Upgrade to Pro related things to plugin */
+				new Ts_Upgrade_To_Pro( $orddd_lite_plugin_name, $orddd_lite_plugin_prefix, $orddd_lite_plugins_page, $orddd_lite_locale, $orddd_lite_plugin_folder_name, $orddd_lite_plugin_slug );
 			}
 		}
 

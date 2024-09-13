@@ -93,8 +93,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'order_lite_holidays_admin_settings' ) );
 			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_lite_delete_settings' ) );
 			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_lite_calendar_sync_settings_callback' ) );
-			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_delivery_days_settings' ) );
-			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_time_settings' ) );
+
 			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_integration_of_plugins' ) );
 			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_lite_time_slot_settings' ) );
 			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_lite_disable_time_slot_settings' ) );
@@ -440,6 +439,15 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				wp_enqueue_script( 'orddd-lite-timepicker', plugins_url( '/js/jquery.timepicker.min.js', __FILE__ ), array( 'jquery' ), $wpefield_version, true );
 				wp_enqueue_script( 'orddd-lite-timesetting', plugins_url( '/js/orddd-bulk-time-slots.js', __FILE__ ), array( 'jquery', 'orddd-lite-timepicker' ), $wpefield_version, true );
 				wp_localize_script( 'orddd-lite-timesetting', 'jsL10n', $js_args );
+			}
+
+			if ( isset( $_GET['action'] ) && in_array( $_GET['action'], array( 'calendar_sync_settings', 'shipping_based', 'upgrade_to_pro_page' ), true ) ) { //phpcs:ignore
+				wp_enqueue_style(
+					'orddd-theme-style',
+					plugins_url( '/css/theme-style.css', __FILE__ ),
+					array(),
+					$wpefield_version
+				);
 			}
 		}
 
