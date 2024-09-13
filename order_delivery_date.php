@@ -441,7 +441,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				wp_localize_script( 'orddd-lite-timesetting', 'jsL10n', $js_args );
 			}
 
-			if ( isset( $_GET['action'] ) && in_array( $_GET['action'], array( 'calendar_sync_settings', 'shipping_based', 'upgrade_to_pro_page' ), true ) ) {
+			if ( isset( $_GET['action'] ) && in_array( $_GET['action'], array( 'calendar_sync_settings', 'shipping_based', 'upgrade_to_pro_page' ), true ) ) { //phpcs:ignore
 				wp_enqueue_style(
 					'orddd-theme-style',
 					plugins_url( '/css/theme-style.css', __FILE__ ),
