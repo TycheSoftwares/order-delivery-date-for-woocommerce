@@ -219,12 +219,17 @@ class Ts_Upgrade_To_Pro {
 				/* translators: %s: Renew Link */
 				$message = sprintf( __( 'Your Woo store is losing its WOW factor. Your Order Delivery Date Pro for WooCommerce license has expired. <a href="%s" target="_blank" class="button">Renew Now</a>', 'order-delivery-date' ), $renew_link );
 			}
-		} else {
+		} elseif ( ! is_plugin_active( 'order-delivery-date/order_delivery_date.php' ) ) {
 			/* translators: %s: Orddd Trial Version Download page Link */
 			$message = sprintf( __( 'Upgrade to the PRO version of Order Delivery Date for WooCommerce plugin for FREE! Enjoy pro features for 60 days at absolutely no cost. Limited-time deal for holiday season sale <a href="%s" class="button-primary button button-large" target="_blank"><b>Act now!</b></a>', 'order-delivery-date' ), 'https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin-trial/' );
 		}
 
-		if ( '' !== $message ) { ?>
+		if ( isset( $_GET['action'] ) && 'upload-plugin' === $_GET['action']  ) { // phpcs:ignore.
+			$message = '';
+		}
+
+		if ( '' !== $message ) {
+			?>
 			<div class="orddd-message notice">
 				<div class="orddd-content">
 					<img class="orddd-site-logo" src="<?php echo esc_url( plugins_url( '/assets/images/tyche-logo.png', __FILE__ ) ); ?> ">
