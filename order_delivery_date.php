@@ -263,6 +263,11 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			} else {
 				load_plugin_textdomain( $domain, false, basename( dirname( __FILE__ ) ) . '/languages/' );
 			}
+			if ( class_exists( 'FluidCheckout' ) ) {
+				$fluid_checkout_steps = FluidCheckout_Steps::instance();
+				remove_filter( 'woocommerce_update_order_review_fragments', array( $fluid_checkout_steps, 'add_shipping_methods_text_fragment' ), 10 );
+				remove_filter( 'woocommerce_update_order_review_fragments', array( $fluid_checkout_steps, 'add_checkout_billing_address_fields_fragment' ), 10 );
+			}
 		}
 
 		/**

@@ -15,6 +15,10 @@ Let customers choose delivery dates & times on checkout. Simplify delivery manag
 
 == Description ==
 
+> ###🚀&nbsp;&nbsp;New Launch: Flexi BOGO for WooCommerce
+>
+> The only BOGO plugin with a revenue tracking feature. **Now, at an attractive introductory price**. [Check out our new plugin here](https://www.tychesoftwares.com/products/woocommerce-flexi-bogo-plugin/?utm_source=wprepo&utm_medium=pluginpagetop&utm_campaign=OrderDeliveryDateLite).
+
 The Best FREE WordPress Delivery Date & Time Plugin
 
 The Order Delivery Date for WooCommerce Lite is a FREE plugin that helps you to give your customer the power of selecting order delivery date & time during the WooCommerce checkout.  
