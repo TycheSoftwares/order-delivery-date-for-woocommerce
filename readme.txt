@@ -4,8 +4,8 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
-Tested up to: 6.6.1
-Stable tag: 3.22.0
+Tested up to: 6.6.2
+Stable tag: 3.23.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -167,6 +167,9 @@ Option 3:
 7. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date"
 
 == Changelog ==
+
+= 3.23.0 (16.10.2024)
+* Supporting code changes for the Trial Version of Order Delivery Date Pro for WooCommerce.
 
 = 3.22.0 (30.07.2024) =
 * Fix - Resolved warning error on the checkout page.

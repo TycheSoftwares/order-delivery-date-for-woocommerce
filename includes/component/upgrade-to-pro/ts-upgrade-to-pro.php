@@ -221,7 +221,7 @@ class Ts_Upgrade_To_Pro {
 			}
 		} elseif ( ! is_plugin_active( 'order-delivery-date/order_delivery_date.php' ) ) {
 			/* translators: %s: Orddd Trial Version Download page Link */
-			$message = sprintf( __( 'Upgrade to the PRO version of Order Delivery Date for WooCommerce plugin for FREE! Enjoy pro features for 45 days at absolutely no cost. Limited time offer <a href="%s" class="button-primary button button-large" target="_blank"><b>Act now!</b></a>', 'order-delivery-date' ), 'https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin-trial/' );
+			$message = sprintf( __( 'Upgrade to the PRO version of Order Delivery Date for WooCommerce plugin for $1! Enjoy all Pro features for 30 days at this insane price. Limited time offer <a href="%s" class="button-primary button button-large" target="_blank"><b>Act now!</b></a>', 'order-delivery-date' ), 'https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin-trial/' );
 		}
 
 		if ( isset( $_GET['action'] ) && 'upload-plugin' === $_GET['action']  ) { // phpcs:ignore.
