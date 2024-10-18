@@ -19,7 +19,9 @@ The Best FREE WordPress Delivery Date & Time Plugin
 
 The Order Delivery Date for WooCommerce Lite is a FREE plugin that helps you to give your customer the power of selecting order delivery date & time during the WooCommerce checkout.  
 
-44% of consumers say that they will likely become repeat buyers after a personalized shopping experience with a particular company. With the Order Delivery Date lite version, you can deliver a personalized shopping experience where the user can pick a delivery date and time at their convenience. As a WooCommerce store owner, you can easily manage your delivery and utilize the time to grow your business. 
+44% of consumers say that they will likely become repeat buyers after a personalized shopping experience with a particular company. With the Order Delivery Date lite version, you can deliver a personalized shopping experience where the user can pick a delivery date and time at their convenience. As a WooCommerce store owner, you can easily manage your delivery and utilize the time to grow your business.
+
+**What if you can get better features for less money? -[Try Order Delivery Date PRO for just $1](https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin-trial/?utm_source=wprepo&utm_medium=descriptionlink&utm_campaign=OrderDeliveryDateLite)**
 
 ### Order Delivery Date for WooCommerce Lite Features
 
@@ -28,6 +30,8 @@ The Order Delivery Date for WooCommerce lite version gives you **20+ features!**
 Add products to the cart and experience how the Order delivery date works- [Live Demo](https://demo.tychesoftwares.com/woocommercepro/shop/).
 
 Also, Use and become familiar with the admin dashboard controls- [Admin Demo](http://demo.tychesoftwares.com/woocommercepro/wp-admin/).
+
+**While the lite has 20+ features, the Order Delivery Date Pro has 50+ features. [Unlock all the PRO features for just $1 with our trial offer](https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin-trial/?utm_source=wprepo&utm_medium=litefeatureslink&utm_campaign=OrderDeliveryDateLite).**
 
 Here are the Order Delivery Date for WooCommerce lite features:
 
@@ -103,6 +107,8 @@ The PRO version offers 25+ additional features along with the 20+ Lite version f
 * Customers/Admin are notified once the delivery is rescheduled
 * Setup same-day & next-day deliveries with cut-off times
 * Compatibility with [Pickup Date Addon](https://www.tychesoftwares.com/store/premium-plugins/pickup-date-addon-order-delivery-date-woocommerce-plugin/)
+
+**Wondering how all these PRO features can help your store? Stop thinking and [try all the PRO features on your WooCommerce store with our $1 trial offer](https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin-trial/?utm_source=wprepo&utm_medium=profeatureslink&utm_campaign=OrderDeliveryDateLite).**
 
 You can check the entire features on our [Order Delivery Date for the WooCommerce Lite Vs. Pro comparison post](https://www.tychesoftwares.com/differences-pro-lite-versions-order-delivery-date-woocommerce-plugin). 
 
