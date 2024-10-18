@@ -27,9 +27,9 @@ The Order Delivery Date for WooCommerce Lite is a FREE plugin that helps you to 
 
 The Order Delivery Date for WooCommerce lite version gives you **20+ features!**  
 
-Add products to the cart and experience how the Order delivery date works- [Live Demo](https://demo.tychesoftwares.com/woocommercepro/shop/).
+Add products to the cart and experience how the Order delivery date works- [Live Demo](https://app.instawp.io/launch?t=order-delivery-date-pro-for-woocommerce&d=v1).
 
-Also, Use and become familiar with the admin dashboard controls- [Admin Demo](http://demo.tychesoftwares.com/woocommercepro/wp-admin/).
+Also, Use and become familiar with the admin dashboard controls- [Admin Demo](https://app.instawp.io/launch?t=order-delivery-date-pro-for-woocommerce&d=v1).
 
 **While the lite has 20+ features, the Order Delivery Date Pro has 50+ features. [Unlock all the PRO features for just $1 with our trial offer](https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin-trial/?utm_source=wprepo&utm_medium=litefeatureslink&utm_campaign=OrderDeliveryDateLite).**
 
