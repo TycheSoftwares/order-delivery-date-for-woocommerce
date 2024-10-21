@@ -403,7 +403,7 @@ class Orddd_Lite_Common {
 			if ( ! $post_obj ) {
 				return;
 			}
-			$post_status = $post_status->post_status;
+			$post_status = $post_obj->post_status;
 			$post_type   = $post_obj->post_type;
 		}
 
@@ -1531,7 +1531,7 @@ class Orddd_Lite_Common {
 			$post_type   = $order->get_type();
 		} else {
 			$post_obj    = get_post( $order_id );
-			$post_status = $post_status->post_status;
+			$post_status = $post_obj->post_status;
 			$post_type   = $post_obj->post_type;
 		}
 		$status = array( 'wc-pending', 'wc-cancelled', 'wc-refunded', 'wc-failed' );
