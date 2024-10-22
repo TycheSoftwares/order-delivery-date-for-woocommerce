@@ -5,7 +5,7 @@ Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
 Tested up to: 6.6.2
-Stable tag: 3.23.0
+Stable tag: 3.24.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -177,6 +177,11 @@ Option 3:
 7. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date"
 
 == Changelog ==
+
+= 3.24.0 (22.10.2024)
+* Fix - Compatibility with Fluid Checkout for WooCommerce - Lite plugin (Timeslot feature).
+* Fix - Debug log warning when trashing an order.
+* Fix - Deactivation survey request was being sent even though 'Skip & deactivate' was selected while deactivating the plugin.
 
 = 3.23.0 (16.10.2024)
 * Supporting code changes for the Trial Version of Order Delivery Date Pro for WooCommerce.
