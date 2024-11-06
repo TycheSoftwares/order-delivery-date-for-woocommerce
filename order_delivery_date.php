@@ -177,7 +177,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			add_action( 'woocommerce_cart_calculate_fees', array( 'Orddd_Lite_Process', 'orddd_lite_add_delivery_date_fee' ) );
 
 			// Ajax calls.
-			add_action( 'admin_init', array( &$this, 'orddd_lite_add_component_file' ) );
+			add_action( 'init', array( &$this, 'orddd_lite_add_component_file' ), 1 );
 
 			// It will add the actions for the components.
 			if ( is_admin() ) {
