@@ -240,12 +240,14 @@ class Orddd_Lite_TS_Tracking {
 	 * @access public
 	 */
 	public static function ts_admin_notices_scripts() {
+		global $wpefield_version;
+
 		$nonce = wp_create_nonce( 'tracking_notice' );
 			wp_enqueue_script(
 				'orddd_ts_dismiss_notice',
 				self::$ts_file_path . '/js/tyche-dismiss-tracking-notice.js',
 				array( 'jquery' ),
-				'4.5.6',
+				$wpefield_version,
 				false
 			);
 
