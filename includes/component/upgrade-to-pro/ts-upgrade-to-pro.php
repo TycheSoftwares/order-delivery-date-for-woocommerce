@@ -128,9 +128,35 @@ class Ts_Upgrade_To_Pro {
 		add_action( 'admin_enqueue_scripts', array( &$this, 'ts_custom_notice_style' ) );
 		add_action( 'admin_head', array( &$this, 'ts_add_submenu_class' ) );
 
+		add_action( 'wp_ajax_ordd_lite_dismiss_upgrade_to_pro', array( &$this, 'dismiss_upgrade_to_pro_notice' ) );
+
 		self::$plugin_folder = $ts_plugin_folder_name;
 		self::$plugin_url    = $this->ts_get_plugin_url();
 		self::$template_base = $this->ts_get_template_path();
+	}
+
+	/**
+	 * Called when the dismiss icon is clicked on the notice.
+	 */
+	public function dismiss_upgrade_to_pro_notice() {
+		if ( current_user_can( 'manage_woocommerce' ) && isset( $_POST['security'] ) && ( isset( $_POST['security'] ) && wp_verify_nonce( sanitize_key( $_POST['security'] ), 'tracking_notice' ) ) ) {
+			if ( isset( $_POST['upgrade_to_pro_type'] ) ) {
+				$type = sanitize_text_field( wp_unslash( $_POST['upgrade_to_pro_type'] ) );
+				switch ( $type ) {
+					case 'purchase':
+						update_option( 'orddd_lite_upgrade_to_pro_notice_dismissed', 'yes' );
+						break;
+					case 'expired':
+						update_option( 'orddd_lite_upgrade_to_pro_notice_expired_dismissed', 'yes' );
+						break;
+					default:
+						break;
+				}
+			}
+			return 'success';
+		} else {
+			die( 'Security check failed' );
+		}
 	}
 
 	/**
@@ -201,42 +227,49 @@ class Ts_Upgrade_To_Pro {
 	 */
 	public function ts_lite_trial_purchase_notices() {
 
-		$message = '';
-		$trial   = get_option( 'orddd_edd_license_download_type', '' ); // If trial license is used then we are storing it as trial as this option.
-
-		if ( 'trial' === $trial ) {
-			$trial_expired = get_option( 'orddd_deactivated_due_to_trial_expiry', '' );
-			$license_key   = trim( get_option( self::$ts_license_key_option_name, '' ) );
-
-			if ( '' !== $license_key ) {
-				$renew_link = add_query_arg(
-					array(
-						'edd_license_key' => $license_key,
-						'download_id'     => self::$ts_item_id,
-					),
-					'https://www.tychesoftwares.com/checkout'
-				);
-				/* translators: %s: Renew Link */
-				$message = sprintf( __( 'Your Woo store is losing its WOW factor. Your Order Delivery Date Pro for WooCommerce license has expired. <a href="%s" target="_blank" class="button">Renew Now</a>', 'order-delivery-date' ), $renew_link );
-			}
-		} elseif ( ! is_plugin_active( 'order-delivery-date/order_delivery_date.php' ) ) {
-			/* translators: %s: Orddd Trial Version Download page Link */
-			$message = sprintf( __( 'Upgrade to the PRO version of Order Delivery Date for WooCommerce plugin for $1! Enjoy all Pro features for 30 days at this insane price. Limited time offer <a href="%s" class="button-primary button button-large" target="_blank"><b>Act now!</b></a>', 'order-delivery-date' ), 'https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin-trial/' );
-		}
-
-		if ( isset( $_GET['action'] ) && 'upload-plugin' === $_GET['action']  ) { // phpcs:ignore.
+		if ( isset( $_GET['page'] ) && 'order_delivery_date_lite' === $_GET['page'] ) { // phpcs:ignore.
 			$message = '';
-		}
+			$trial   = get_option( 'orddd_edd_license_download_type', '' ); // If trial license is used then we are storing it as trial as this option.
 
-		if ( '' !== $message ) {
-			?>
-			<div class="orddd-message notice">
-				<div class="orddd-content">
-					<img class="orddd-site-logo" src="<?php echo esc_url( plugins_url( '/assets/images/tyche-logo.png', __FILE__ ) ); ?> ">
-					<p><?php echo $message; //phpcs:ignore ?></p>
+			if ( 'trial' === $trial ) {
+
+				if ( 'yes' === get_option( 'orddd_lite_upgrade_to_pro_notice_expired_dismissed', '' ) ) {
+					return;
+				}
+				$notice_purchase_or_expired = 'orddd-pro-expired-notice';
+				$trial_expired              = get_option( 'orddd_deactivated_due_to_trial_expiry', '' );
+				$license_key                = trim( get_option( self::$ts_license_key_option_name, '' ) );
+
+				if ( '' !== $license_key ) {
+					$renew_link = add_query_arg(
+						array(
+							'edd_license_key' => $license_key,
+							'download_id'     => self::$ts_item_id,
+						),
+						'https://www.tychesoftwares.com/checkout'
+					);
+					/* translators: %s: Renew Link */
+					$message = sprintf( __( 'Your Woo store is losing its WOW factor. Your Order Delivery Date Pro for WooCommerce license has expired. <a href="%s" target="_blank" class="button">Renew Now</a>', 'order-delivery-date' ), $renew_link );
+				}
+			} elseif ( ! is_plugin_active( 'order-delivery-date/order_delivery_date.php' ) ) {
+				if ( 'yes' === get_option( 'orddd_lite_upgrade_to_pro_notice_dismissed', '' ) ) {
+					return;
+				}
+				$notice_purchase_or_expired = 'orddd-upgrade-to-pro-notice';
+				/* translators: %s: Orddd Trial Version Download page Link */
+				$message = sprintf( __( 'Upgrade to the PRO version of Order Delivery Date for WooCommerce plugin for $1! Enjoy all Pro features for 30 days at this insane price. Limited time offer <a href="%s" class="button-primary button button-large" target="_blank"><b>Act now!</b></a>', 'order-delivery-date' ), 'https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin-trial/' );
+			}
+
+			if ( '' !== $message ) {
+				?>
+				<div class="<?php echo esc_html( $notice_purchase_or_expired ); ?> orddd-message notice is-dismissible">
+					<div class="orddd-content">
+						<img class="orddd-site-logo" src="<?php echo esc_url( plugins_url( '/assets/images/tyche-logo.png', __FILE__ ) ); ?> ">
+						<p><?php echo $message; //phpcs:ignore ?></p>
+					</div>
 				</div>
-			</div>
-				<?php
+					<?php
+			}
 		}
 	}
 

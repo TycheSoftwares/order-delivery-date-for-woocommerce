@@ -18,17 +18,36 @@ jQuery(document).ready( function() {
 			event.preventDefault();
 			$this.fadeTo( 100 , 0, function() {
 				//alert();
-				jQuery(this).slideUp( 100, function() {
-					jQuery(this).remove();				
-					jQuery.post(
-						orddd_ts_dismiss_notice.ts_admin_url,
-						{
-							action: orddd_ts_dismiss_notice.ts_prefix_of_plugin + "_tracker_dismiss_notice",
-							tracking_notice : orddd_ts_dismiss_notice.tracking_notice,
-						},
-						function( response ) {}
-					);
-				});
+				let data = {};
+				if ( $this.hasClass( 'orddd-upgrade-to-pro-notice' ) ) {
+					data = {
+						action: 'ordd_lite_dismiss_upgrade_to_pro',
+						upgrade_to_pro_type: 'purchase',
+						security: orddd_ts_dismiss_notice.tracking_notice
+					};
+				} else if ( $this.hasClass( 'orddd-pro-expired-notice' ) ) {
+					data = {
+						action: 'ordd_lite_dismiss_upgrade_to_pro',
+						upgrade_to_pro_type: 'expired',
+						security: orddd_ts_dismiss_notice.tracking_notice
+					};
+				} else if ( $this.hasClass( 'ordd_lite-tracker' ) ) {
+					data = {
+						action: orddd_ts_dismiss_notice.ts_prefix_of_plugin + "_tracker_dismiss_notice",
+						tracking_notice : orddd_ts_dismiss_notice.tracking_notice,
+					};;
+				}
+
+				if ( Object.keys(data).length !== 0 ) {
+					jQuery(this).slideUp( 100, function() {
+						jQuery(this).remove();				
+						jQuery.post(
+							orddd_ts_dismiss_notice.ts_admin_url,
+							data,
+							function( response ) {}
+						);
+					});
+				}
 			});
 		});
 	});
