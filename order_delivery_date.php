@@ -111,7 +111,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 			// Frontend.
 			add_action( ORDDD_LITE_SHOPPING_CART_HOOK, array( 'Orddd_Lite_Process', 'orddd_lite_my_custom_checkout_field' ) );
-			add_action( 'wp_enqueue_scripts', array( &$this, 'orddd_lite_front_scripts_js' ) );
+			add_action( 'wp_enqueue_scripts', array( &$this, 'orddd_lite_front_scripts_js' ), 100 );
 
 			if ( 'on' === get_option( 'orddd_lite_delivery_date_on_cart_page' ) ) {
 				add_action( 'woocommerce_cart_collaterals', array( 'Orddd_Lite_Process', 'orddd_lite_my_custom_checkout_field' ) );
