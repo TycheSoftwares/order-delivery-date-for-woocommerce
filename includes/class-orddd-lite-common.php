@@ -1934,31 +1934,21 @@ class Orddd_Lite_Common {
 	 * @hook request
 	 * @since 3.19.0
 	 */
-	public static function modify_query_for_sort_by_date( $args ) {
+	public static function modify_query_for_sort_by_date( $clauses  ) {
+		if ( ! isset( $_GET['search-filter'] ) ) {	
+			if (  isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && ( ( isset( $_GET[ 'orderby' ] ) && '_orddd_lite_timestamp' === $_GET[ 'orderby' ] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( 'orddd_lite_show_column_on_orders_page_check' ) && 'on' === get_option( 'orddd_lite_enable_default_sorting_of_column' ) ) ) ) {
+				global $wpdb;
+				if( isset( $clauses['join'] ) ) {
+					$clauses['join'] .= "LEFT JOIN " . $wpdb->prefix . "wc_orders_meta wpm ON ( " . $wpdb->prefix . "wc_orders.id = wpm.order_id AND wpm.meta_key = '_orddd_lite_timestamp' ) LEFT JOIN " . $wpdb->prefix . "wc_orders_meta wpm2 ON ( " . $wpdb->prefix . "wc_orders.id = wpm2.order_id AND wpm2.meta_key = '_orddd_lite_timeslot_timestamp' )";
 
-		if ( isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && ( ( isset( $_GET['orderby'] ) && '_orddd_lite_timestamp' === $_GET['orderby'] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( 'orddd_show_column_on_orders_page_check' ) && 'on' === get_option( 'orddd_enable_default_sorting_of_column' ) ) ) ) {// phpcs:ignore WordPress.Security.NonceVerification
-			$order              = ( isset( $_GET['order'] ) && 'asc' === $_GET['order'] ) ? 'ASC' : 'DESC';// phpcs:ignore WordPress.Security.NonceVerification
-			$meta_query         = array(
-				'relation'                    => 'OR',
-				'orddd_lite_timestamp_clause' => array(
-					'key'     => '_orddd_lite_timestamp',
-					'compare' => 'EXISTS',
-				),
-				'orddd_lite_timeslot_clause'  => array(
-					'key'     => '_orddd_timestamp',
-					'compare' => 'EXISTS',
-				),
-				'orddd_lite_timeslot_clause'  => array(
-					'key'     => '_orddd_lite_timestamp',
-					'compare' => 'NOT EXISTS',
-				),
-			);
-			$args['orderby']    = 'meta_value_num';
-			$args['meta_query'] = $meta_query;// phpcs:ignore
-			$args['order']      = $order;
-			return $args;
+					$orderby = ( ! isset( $_GET['order'] ) || 'desc' === $_GET['order'] ) ? 'DESC' : 'ASC';
+					$orderby = " ( wpm.meta_value IS NULL OR wpm.meta_value = '' ), COALESCE( wpm2.meta_value, wpm.meta_value ) " . $orderby ." " ;
+
+					$clauses['orderby'] =  ! empty( $clauses['orderby'] ) ? $orderby . ', ' . $clauses['orderby'] : $orderby;
+				}
+			}
 		}
-		return $args;
+		return $clauses;
 	}
 
 }
