@@ -152,7 +152,7 @@ if ( ! class_exists( 'Tyche_Plugin_Deactivation' ) ) {
 
 			wp_enqueue_style(
 				'tyche_plugin_deactivation',
-				$this->api_url . '/assets/plugin-deactivation/css/style.css',
+				plugins_url( '/css/style.css', __FILE__ ),
 				array(),
 				$this->plugin_version
 			);
@@ -164,18 +164,103 @@ if ( ! class_exists( 'Tyche_Plugin_Deactivation' ) ) {
 				$this->plugin_version,
 				true
 			);
-
-			$request = wp_remote_get( $this->api_url . '?action=fetch-deactivation-data&plugin=' . $this->plugin_short_name . '&language=' . apply_filters( 'tyche_plugin_deactivation_language', 'en' ) . '&version=' . $this->version );
-
-			if ( is_wp_error( $request ) || 200 !== wp_remote_retrieve_response_code( $request ) ) {
-				return false; // In case the user is offline or something else that could have probably caused an error.
-			}
-
-			$data = json_decode( wp_remote_retrieve_body( $request ), true );
-
-			if ( ! is_array( $data ) ) {
-				return false;
-			}
+			// Hardcoded deactivation data.
+			$data = array(
+				'reasons'  => array(
+					array(
+						'id'                => 1,
+						'text'              => __( 'I only needed the plugin for a short period.', 'order-delivery-date' ),
+						'input_type'        => '',
+						'input_placeholder' => '',
+					),
+					array(
+						'id'                => 2,
+						'text'              => __( 'I found a better plugin.', 'order-delivery-date' ),
+						'input_type'        => 'textfield',
+						'input_placeholder' => __( 'Please let us have the plugin\'s name so that we can make improvements', 'order-delivery-date' ),
+					),
+					array(
+						'id'                => 3,
+						'text'              => __( 'The plugin is not working.', 'order-delivery-date' ),
+						'input_type'        => 'textfield',
+						'input_placeholder' => __( 'Please share what was faulty with the plugin so that we may get the issue fixed.', 'order-delivery-date' ),
+					),
+					array(
+						'id'                => 7,
+						'text'              => __( 'The plugin is not compatible with another plugin.', 'order-delivery-date' ),
+						'input_type'        => 'textfield',
+						'input_placeholder' => __( 'We’re sorry! Please tell us about the issues so that we can get them fixed.', 'order-delivery-date' ),
+					),
+					array(
+						'id'                => 8,
+						'text'              => __( 'Some features I need are not working as per my expectation', 'order-delivery-date' ),
+						'input_type'        => 'textfield',
+						'input_placeholder' => __( 'Please tell us about these features.', 'order-delivery-date' ),
+					),
+					array(
+						'id'                => 13,
+						'text'              => __( 'I have purchased the Pro version of the plugin', 'order-delivery-date' ),
+						'input_type'        => 'textfield',
+						'input_placeholder' => __( 'We’re sorry! We would like you to tell us the plugin/theme so that we can work on the compatibility.', 'order-delivery-date' ),
+					),
+					array(
+						'id'                => 14,
+						'text'              => __( 'The plugin is great, but I need specific feature(s) that is not supported.', 'order-delivery-date' ),
+						'input_type'        => '',
+						'input_placeholder' => '',
+					),
+					array(
+						'id'                => 5,
+						'text'              => __( 'Minimum Delivery Time (in hours) is not working as expected', 'order-delivery-date' ),
+						'input_type'        => '',
+						'input_placeholder' => '',
+					),
+					array(
+						'id'                => 12,
+						'text'              => __( 'We do not have a need for the plugin as we aren’t doing deliveries anymore', 'order-delivery-date' ),
+						'input_type'        => '',
+						'input_placeholder' => '',
+					),
+					array(
+						'id'                => 9,
+						'text'              => __( "I don't like to share my information with you.", 'order-delivery-date' ),
+						'input_type'        => '',
+						'input_placeholder' => '',
+					),
+					array(
+						'id'                => 10,
+						'text'              => __( 'Other', 'order-delivery-date' ),
+						'input_type'        => 'textfield',
+						'input_placeholder' => '',
+					),
+				),
+				'template' => '<div class="{PLUGIN} ts-modal no-confirmation-message">
+								<div class="ts-modal-dialog">
+									<div class="ts-modal-body">
+										<div class="ts-modal-panel" data-panel-id="confirm">
+											<p></p>
+										</div>
+										<div class="ts-modal-panel active" data-panel-id="reasons">
+											<h3>
+												<strong>
+													' . __( 'If you have a moment, please let us know why you are deactivating:', 'order-delivery-date' ) . '
+												</strong>
+											</h3>
+											
+											<ul id="reasons-list">
+												{HTML}
+											</ul>
+										</div>
+									</div>
+		
+									<div class="ts-modal-footer">
+										<a href="javascript:void(0);" class="button button-secondary button-skip-deactivate"> ' . __( 'Skip & Deactivate', 'order-delivery-date' ) . '</a>
+										<a href="javascript:void(0);" class="button button-secondary button-deactivate"> ' . __( 'Submit & Deactivate', 'order-delivery-date' ) . '</a>
+										<a href="javascript:void(0);" class="button button-primary button-close">' . __( 'Cancel', 'order-delivery-date' ) . '</a>
+									</div>
+								</div>
+							</div>',
+			);
 
 			wp_localize_script(
 				'tyche_plugin_deactivation_' . $this->plugin_short_name,

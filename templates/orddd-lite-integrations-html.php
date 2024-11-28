@@ -1,7 +1,7 @@
 <?php
 
-$icon_info_grey = plugins_url() . '/order-delivery-date-for-woocommerce/includes/component/upgrade-to-pro/assets/images/icon-info.svg';
-$icon_trash     = plugins_url() . '/order-delivery-date-for-woocommerce/includes/component/upgrade-to-pro/assets/images/icon-trash.svg';
+$icon_info_grey = plugins_url() . '/order-delivery-date-for-woocommerce/includes/component/upgrade-to-pro/assets/images/icon-info.png';
+$icon_trash     = plugins_url() . '/order-delivery-date-for-woocommerce/includes/component/upgrade-to-pro/assets/images/icon-trash.png';
 ?>
 
 <div id="content" class="orddd-calendar-sync">
