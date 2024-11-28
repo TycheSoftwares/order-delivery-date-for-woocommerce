@@ -102,7 +102,7 @@
 											</tr>
 											<tr class="alt-in-tbl">
 												<td colspan="9">
-													<div role="alert" class="alert alert-dark alert-dismissible fade show"><img src="<?php echo plugins_url() . '/order-delivery-date-for-woocommerce/includes/component/upgrade-to-pro/assets/images/icon-info-grey.svg'; ?>" alt="Logo" class="msg-icon"> Hey, don't forget - The custom settings you add below will override the default settings.
+													<div role="alert" class="alert alert-dark alert-dismissible fade show"><img src="<?php echo plugins_url() . '/order-delivery-date-for-woocommerce/includes/component/upgrade-to-pro/assets/images/icon-info-grey.png'; ?>" alt="Logo" class="msg-icon"> Hey, don't forget - The custom settings you add below will override the default settings.
 														</div>
 												</td>
 											</tr>
@@ -110,7 +110,7 @@
 									</table>
 								</div>
 								<div class="add-more-link">
-									<a id="shiping-method" data-toggle="collapse" href="#acds-collapse-opt" role="button" aria-expanded="false" aria-controls="collapseExample"><img src="<?php echo plugins_url() . '/order-delivery-date-for-woocommerce/includes/component/upgrade-to-pro/assets/images/icon-plus.svg'; ?>" alt="Icon"> Add custom delivery schedule</a>
+									<a id="shiping-method" data-toggle="collapse" href="#acds-collapse-opt" role="button" aria-expanded="false" aria-controls="collapseExample"><img src="<?php echo plugins_url() . '/order-delivery-date-for-woocommerce/includes/component/upgrade-to-pro/assets/images/icon-plus.png'; ?>" alt="Icon"> Add custom delivery schedule</a>
 								</div>
 							</div>
 						</div>

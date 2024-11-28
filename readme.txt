@@ -176,6 +176,9 @@ Option 3:
 
 7. Delivery Date will be displayed on the Orders page in a new column titled "Delivery Date"
 
+== External Services ==
+This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-order-delivery-date-lite/order-delivery-lite-usage-tracking/).
+
 == Changelog ==
 
 = 3.24.1 (06.11.2024)
