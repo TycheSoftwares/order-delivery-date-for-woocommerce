@@ -183,7 +183,7 @@ This plugin communicates with our tracking server to send usage data **only** if
 
 = 3.25.0 (03.12.2024)
 * Tweak: Removed the call to our tracking server to fetch the deactivation reasons and added them in the plugin itself.
-* Fix: Delivery date column not sorting when HPOS is enabled.
+* Fix: Addressed sorting issues with the delivery date column on WooCommerce Orders page when HPOS was activated.
 * Fix: Date Picker allows selection of invalid delivery days and does not display time slots on the WooCommerce checkout page.
 
 = 3.24.1 (06.11.2024)
