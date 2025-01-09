@@ -1387,7 +1387,7 @@ class Orddd_Lite_Common {
 		foreach ( $existing_timeslots_arr as $k => $v ) {
 			$from_time = date( $time_format_to_show, strtotime( $v->fh . ':' . trim( $v->fm, ' ' ) ) ); //phpcs:ignore
 			$to_time   = date( $time_format_to_show, strtotime( $v->th . ':' . trim( $v->tm, ' ' ) ) ); //phpcs:ignore
-			if ( '' != $v->th && '00' != $v->th && '' != $v->tm && '00' != $v->tm ) { //phpcs:ignore
+			if ( '' != $v->th && '00' != $v->th && '' != $v->tm && '00' !== $v->tm ) { //phpcs:ignore
 				$timeslot = $from_time . ' - ' . $to_time;
 			} else {
 				$timeslot = $from_time;
