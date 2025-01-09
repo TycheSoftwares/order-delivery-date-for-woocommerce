@@ -96,7 +96,7 @@ const TimeSlot = ({ checkoutData, updateSession, setLoading }) => {
                 namespace: 'order-delivery-date',
                 data: {
                     orddd_lite_time_slot: value,
-					h_deliverydate: localStorage.getItem( 'h_deliverydate_session' ),
+					h_deliverydate: localStorage.getItem( 'h_deliverydate_lite_session' ),
                 },
             });
 			update_cart.then( () => { setLoading( false ) } )
