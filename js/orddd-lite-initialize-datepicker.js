@@ -573,6 +573,15 @@ for ( j = current_weekday; current_time <= delay_time; j++ ) {
 						delay_days.setDate( delay_days.getDate() + 1 );
 						delay_time = delay_days.getTime();
 					}
+					// holidays after weekday is disabled.
+					delay_weekday_after_holiday = delay_days.getDay();
+					day                         = 'orddd_lite_weekday_' + delay_weekday_after_holiday;
+					day_check                   = orddd_lite_day_check( day );
+					if ( day_check == '' ) {
+						delay_days.setDate( delay_days.getDate() + 1 );
+						delay_time = delay_days.getTime();
+					}
+					
 					current_day.setDate( current_day.getDate() + 1 );
 					current_time    = current_day.getTime();
 					current_weekday = current_day.getDay();
