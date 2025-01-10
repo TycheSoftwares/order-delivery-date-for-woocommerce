@@ -30,6 +30,12 @@ const DeliveryDate = ({ checkoutData, shippingMethod, updateSession, setLoading 
 			return;
 		}
 
+        setTimeout(() => {
+            setDeliveryDate( localStorage.getItem('orddd_deliverydate_lite_session' ) );
+            setExtensionData( 'order-delivery-date', 'e_deliverydate', deliveryDate );
+            setExtensionData( 'order-delivery-date', 'h_deliverydate', localStorage.getItem( 'h_deliverydate_lite_session' ) );
+        }, 3000 );
+
         jQuery( document ).on( 'orddd_lite_on_select_date', function( data, values ) {
             setDeliveryDate( values );
         });
