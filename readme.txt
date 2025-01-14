@@ -182,7 +182,7 @@ This plugin communicates with our tracking server to send usage data **only** if
 == Changelog ==
 
 = 3.26.1 (14.01.2025)
-* Fix - Fix - Loader was being displayed on all pages after the v3.26.0 update.
+* Fix - Loader was being displayed on all pages after the v3.26.0 update.
 
 = 3.26.0 (14.01.2025)
 * Fix - First delivery date auto-populates on the checkout page, but the required field error message appears when attempting to place an order.
