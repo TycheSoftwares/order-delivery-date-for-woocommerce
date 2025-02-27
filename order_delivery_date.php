@@ -456,6 +456,9 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 		public function orddd_lite_admin_scripts_js() {
 			global $wpefield_version;
 			$current_screen = get_current_screen();
+			if ( 'toplevel_page_et_divi_options' === $current_screen->id ) {
+				return false;
+			}
 			wp_register_script(
 				'tyche',
 				plugins_url( '/js/tyche.js', __FILE__ ),
