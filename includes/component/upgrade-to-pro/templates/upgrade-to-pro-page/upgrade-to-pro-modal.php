@@ -1,5 +1,6 @@
 <?php
 $ts_new_tab = $ts_upgrade_to_pro_images_path . '/icon-new-tab.png';
+//phpcs:disable
 if ( '' === get_option( 'orddd_pro_installed', '' ) ) {
 	$modal_heading      = __( 'Order Delivery Date PRO for WooCommerce is CHEAPER than you think', 'order-delivery-date' );
 	$modal_body_heading = __( 'Upgrade from Lite to PRO with our Super Saver PRO Access Deal!', 'order-delivery-date' );

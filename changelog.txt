@@ -1,0 +1,88 @@
+*** Order Delivery Date for WooCommerce ***
+2025-01-14 - version 3.26.1
+* Fix - Loader was being displayed on all pages after the v3.26.0 update.
+
+2025-01-14 - version 3.26.0
+* Fix - First delivery date auto-populates on the checkout page, but the required field error message appears when attempting to place an order.
+* Fix - Delivery date displayed incorrectly on the checkout page when the next day is set as a holiday.
+* Fix - Delivery date remains available for selection even after the time slot lockout value is reached.
+
+2024-12-03 - version 3.25.0
+* Tweak - Removed the call to our tracking server to fetch the deactivation reasons and added them in the plugin itself.
+* Fix - Addressed sorting issues with the delivery date column on WooCommerce Orders page when HPOS was activated.
+* Fix - Date Picker allows selection of invalid delivery days and does not display time slots on the WooCommerce checkout page.
+
+2024-11-06 - version 3.24.1
+* Fix - Upgrade to Pro notice will appear only on the Order Delivery Date Plugin's settings page and also allowed to dismiss the notice.
+
+2024-10-22 - version 3.24.0
+* Fix - Compatibility with Fluid Checkout for WooCommerce - Lite plugin (Timeslot feature).
+* Fix - Debug log warning when trashing an order.
+* Fix - Deactivation survey request was being sent even though 'Skip & deactivate' was selected while deactivating the plugin.
+
+2024-10-16 - version 3.23.0
+* Fix - Supporting code changes for the Trial Version of Order Delivery Date Pro for WooCommerce.
+
+2024-07-30 - version 3.22.0
+* Fix - Resolved warning error on the checkout page.
+* Fix - Addressed issue where language change on plugin activation forced some order statuses to be translated incorrectly.
+* Fix - * Fixed "As soon as possible" option was not appearing first in the dropdown list.
+* Fix - * Fixed fatal error when untrashing a post from the site.
+* Fix - * Fixed "Uncaught Missing instance data for this datepicker" error.
+* Fix - Corrected issue where the delivery date was reverting to the previously selected date on the cart block page.
+* Fix - Resolved conflict issues with Gravity Form fields.
+* Fix - * Fixed "selected timeslot has expired" error on the checkout page when the Divi theme is active.
+* Fix - Addressed compatibility issues with the Bakery WordPress theme.
+
+2024-04-03 - version 3.21.1
+* Fix - Cross Site Request Forgery (CSRF) vulnerability.
+* Tweak - Update compatibility with WordPress 6.5
+* Tweak - Update compatibility with WooCommerce 8.7
+
+2024-02-20 - version 3.21.0
+* Fix - Unable to sort the delivery dates on WooCommerce Order page.
+* Fix - Locked out date was not getting released when a date is changed in the admin order edit page.
+* Fix - The delivery calendar was not responsive if "Number of Months" set to 2.
+* Fix - Added Compatibility with cart and checkout block pages.
+* Fix - The delivery date was missing on order received page and in order email when the order is placed with autopopulate delivery date.
+* Fix - The delivery calendar was not appearing when holiday name contains double quotes.
+* Fix - Cross Site Request Forgery (CSRF) vulnerability.
+
+2023-09-23 - version 3.20.2
+* Tweak - Modified the setting sections labels to make them user friendly.
+
+2023-08-02 - version 3.20.1
+* Fix - A vulnerability issue was found when filtering the orders based on delivery date on WooCommerce orders page.
+
+2023-07-11 - version 3.20.0
+* Enhancement - Added a setting 'Show filters on order listing page' to display filter dropdown based on delivery dates on WooCommerce orders page.
+
+2022-11-29 - version 3.19.0
+* Enhancement - Plugin has been made compatible with WooCommerce HPOS.
+* Fix - The delivery date field was not being validated even though made mandatory.
+
+2022-09-20 - version 3.18.0
+* Enhancement - Added a new date format d-m-Y * Props to @joostvanderzanden.
+* Tweak - Added an order_id parameter to 'orddd_after_timeslot_update' action so other plugins can use it.
+* Fix - When creating an order manually from the backend, the delivery date field would remain disabled and would not allow to add a delivery date * This has been * Fixed now.
+* Fix - Time slots were not coming up for the first available delivery date on the delivery calendar * This has been * Fixed now.
+* Fix - It was not allowing admin to edit the checkout page with Elementor when our plugin is active * This has now been * Fixed.
+
+2022-05-09 - version 3.17.3
+* Fix - Cut-off time error was appearing on checkout page when 'Select Time slot' or 'Timeslot Not Available' is chosen.
+
+2022-05-05 - version 3.17.2
+* Fix - Cut-off time error was appearing on checkout page when plugin was not used and no date sent.
+
+2022-04-29 - version 3.17.1
+* Fix - Cut-off time error was appearing on checkout page for valid dates when no timeslot was enabled.
+
+2022-04-26 - version 3.17.0
+* Fix - is_ajax deprecated error was removed on checkout page and cart page.
+* Fix - Delivery date field placeholder text was not appearing on the checkout page.
+* Fix - Wrong delivery date was appearing on orders page when order was created in the admin side.
+* Fix - Word "Array" was appearing when delivery date field label is blank.
+* Fix - Was not able to save delivery date while editing orders created in the admin side or editing orders not having a delivery date.
+* Fix - Word "Array" was appearing in the PDF invoice generated by "Invoice for WooCommerce" plugin when location field label is blank.
+* Fix - Was able to place orders when cut-off time for delivery date or delivery time slot was reached * * Fixed it by adding an error message when cut-off time is expired.
+* Tweak - Added an option to enable/disable adding of delivery date/time column in the orders page in the admin * Also added an option to sort the orders based on delivery date/time by default.

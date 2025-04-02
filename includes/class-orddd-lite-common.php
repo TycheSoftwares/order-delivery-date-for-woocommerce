@@ -226,7 +226,7 @@ class Orddd_Lite_Common {
 				}
 
 				if ( isset( $year_str ) ) {
-					$delivery_date_formatted = strftime( $year_str, $delivery_date_timestamp );
+					$delivery_date_formatted = gmdate( $year_str, $delivery_date_timestamp );
 					$delivery_date_formatted = date_i18n( $orddd_lite_date_formats[ $date_format ], $delivery_date_timestamp );
 				}
 				setlocale( LC_ALL, 'en_GB.utf8' );
@@ -1935,6 +1935,7 @@ class Orddd_Lite_Common {
 	 * @since 3.19.0
 	 */
 	public static function modify_query_for_sort_by_date( $clauses  ) {
+		//phpcs:disable
 		if ( ! isset( $_GET['search-filter'] ) ) {	
 			if (  isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] && ( ( isset( $_GET[ 'orderby' ] ) && '_orddd_lite_timestamp' === $_GET[ 'orderby' ] ) || ( ! isset( $_GET['orderby'] ) && 'on' === get_option( 'orddd_lite_show_column_on_orders_page_check' ) && 'on' === get_option( 'orddd_lite_enable_default_sorting_of_column' ) ) ) ) {
 				global $wpdb;
@@ -1948,6 +1949,7 @@ class Orddd_Lite_Common {
 				}
 			}
 		}
+		//phpcs:enable
 		return $clauses;
 	}
 

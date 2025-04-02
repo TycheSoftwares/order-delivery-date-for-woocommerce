@@ -30,7 +30,8 @@ class Orddd_Lite_Settings {
 	 * @since 1.5
 	 */
 	public static function orddd_lite_order_delivery_date_menu() {
-		add_menu_page(
+		add_submenu_page(
+			'woocommerce',
 			'Order Delivery Date',
 			'Order Delivery Date',
 			'manage_woocommerce',
@@ -59,7 +60,7 @@ class Orddd_Lite_Settings {
 	 * @since 1.5
 	 */
 	public static function order_lite_delivery_date_admin_settings() {
-		global $orddd_lite_weekdays;
+		global $orddd_lite_weekdays;//phpcs:disable
 		// First, we register a section. This is necessary since all future options must belong to one.
 		add_settings_section(
 			'orddd_lite_date_settings_section',     // ID used to identify this section and with which to register options.

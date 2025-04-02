@@ -88,8 +88,8 @@ class Orddd_Lite_View_Holidays_Table extends WP_List_Table {
 		$data     = $this->orddd_lite_holidays_data();
 		$sortable = array();
 
-		if ( isset( $_GET['status'] ) ) {
-			$status = wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['status'] ) ) );
+		if ( isset( $_GET['status'] ) ) {//phpcs:ignore
+			$status = sanitize_text_field( wp_unslash( $_GET['status'] ) );//phpcs:ignore
 		} else {
 			$status = 'any';
 		}

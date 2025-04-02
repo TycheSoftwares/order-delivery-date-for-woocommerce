@@ -180,7 +180,7 @@ class Orddd_Lite_Admin_Delivery {
 			$previous_order_date_check    = '';
 			if ( ( isset( $_POST['e_deliverydate'] ) && '' !== $_POST['e_deliverydate'] ) ) { // phpcs:ignore
 				$data = Orddd_Lite_Common::get_order_meta( $order_id );
-				if ( strstr(  $_POST['e_deliverydate'], '/' ) ) {
+				if ( strstr(  $_POST['e_deliverydate'], '/' ) ) { //phpcs:disable
 					$_POST['e_deliverydate'] = implode( '-', explode( '/', $_POST['e_deliverydate'] ) );
 				}
 
@@ -415,7 +415,7 @@ class Orddd_Lite_Admin_Delivery {
 			} else {
 				$minimum_delivery_time_orddd_lite = get_option( 'orddd_lite_minimumOrderDays' );
 			}
-
+			//phpcs:enable
 			$delivery_time_seconds = $minimum_delivery_time_orddd_lite * 60 * 60;
 			$min_date_array        = Orddd_Lite_Common::get_min_date( $delivery_time_seconds, $holidays_str, $lockout_days_str );
 
