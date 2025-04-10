@@ -20,7 +20,7 @@
 		e_deliverydate_width = jQuery( '#e_deliverydate' ).outerWidth();
 		jQuery("#orddd_lite_time_slot").css( 'width', e_deliverydate_width );
 		jQuery( '#orddd_lite_time_slot' ).select2({ width: e_deliverydate_width + 'px' });
-	} else {
+	} else if ( '1' !== orddd_lite_params.orddd_is_cart_block ) {
 		jQuery("#orddd_lite_time_slot").select2();
 	}
 
