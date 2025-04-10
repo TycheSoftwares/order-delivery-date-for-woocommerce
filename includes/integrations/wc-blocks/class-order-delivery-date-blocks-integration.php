@@ -137,7 +137,7 @@ class Order_DeliveryDate_Lite_Blocks_Integration implements IntegrationInterface
 			'delivery-date-block-frontend',
 			$style_url,
 			array(),
-			$script_asset['version']
+			time()
 		);
 	}
 

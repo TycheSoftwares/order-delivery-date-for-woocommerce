@@ -3,7 +3,8 @@
     flex-direction: column;
 }
 
-#orddd_pickup_location, #orddd_lite_time_slot {
+#orddd_pickup_location,
+#orddd_lite_time_slot {
     margin-bottom: 1.5em;
 }
 
@@ -18,9 +19,10 @@
 }
 
 .orddd-datepicker-fields .orddd_lite_field_note {
-    margin-top: -15px ;
+    margin-top: -15px;
     margin-bottom: 10px;
 }
+
 div#orddd_lite_time_slot {
     max-width: 100% !important;
 }
@@ -33,22 +35,43 @@ div#orddd_lite_time_slot {
     box-sizing: content-box;
     text-align: center;
     font-size: 1.25em;
+}
 
-    &::after {
-        content: " ";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin: -0.5em 0 0 -0.5em;
-        width: 1em;
-        height: 1em;
-        box-sizing: border-box;
-        transform-origin: 50% 50%;
-        transform: translateZ(0) scale(0.5);
-        backface-visibility: hidden;
-        border-radius: 50%;
-        border: 0.2em solid currentColor;
-        border-left-color: transparent;
-        animation: spinner__animation 1s infinite linear;
-    }
+.wc-block-components-spinner::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -0.5em 0 0 -0.5em;
+    width: 1em;
+    height: 1em;
+    box-sizing: border-box;
+    transform-origin: 50% 50%;
+    transform: translateZ(0) scale(0.5);
+    backface-visibility: hidden;
+    border-radius: 50%;
+    border: 0.2em solid currentColor;
+    border-left-color: transparent;
+    animation: spinner__animation 1s infinite linear;
+}
+
+#orddd_lite_time_slot ul li {
+    padding: 5px;
+    margin-left: 13px;
+}
+
+#orddd_lite_time_slot ul {
+    margin-top: 9px;
+    background: #f2f2f2;
+    margin-left: 0;
+    width: 100%;
+    list-style: none;
+}
+
+div#orddd_lite_time_slot input{
+    width: 100% !important;
+}
+
+#orddd_lite_time_slot label {
+    text-transform: none !important;
 }
