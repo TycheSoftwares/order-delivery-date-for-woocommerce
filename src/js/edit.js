@@ -9,7 +9,7 @@ import { ValidatedTextInput } from '@woocommerce/blocks-checkout';
 /**
  * Internal dependencies
  */
-
+import './style.scss';
 export const Edit = ({ attributes, setAttributes }) => {
 	const blockProps = useBlockProps();
 	return (

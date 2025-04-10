@@ -116,7 +116,7 @@ function orddd_lite_schema_callback() {
  * @return void
  */
 function orddd_lite_update_cart_fees( $data ) {
-	if ( isset( $data['orddd_time_slot'] ) ) {
+	if ( isset( $data['orddd_lite_time_slot'] ) ) {
 		WC()->session->set( 'orddd_lite_time_slot', $data['orddd_lite_time_slot'] );
 	}
 
