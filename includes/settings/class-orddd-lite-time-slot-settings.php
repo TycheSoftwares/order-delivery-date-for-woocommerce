@@ -106,7 +106,13 @@ class Orddd_Lite_Time_Slot_Settings {
 		}
 		?>
 		<p><label><input type="radio" name="orddd_lite_time_slot_for_delivery_days" id="orddd_lite_time_slot_for_delivery_days" value="weekdays"<?php echo esc_attr( $orddd_time_slot_for_weekdays ); ?>/><?php esc_html_e( 'Weekdays', 'order-delivery-date' ); ?></label>
-		<label><input type="radio" name="orddd_lite_time_slot_for_delivery_days" id="orddd_lite_time_slot_for_delivery_days" value="specific_dates" disabled /><?php esc_html_e( 'Specific Dates', 'order-delivery-date' ); ?></label></p>
+		<label title="<?php esc_html_e( 'You will need the Order Delivery Date Pro for WooCommerce plugin to set this option.', 'order-delivery-date' ); ?>"><input type="radio" name="orddd_lite_time_slot_for_delivery_days" id="orddd_lite_time_slot_for_delivery_days" value="specific_dates" disabled /><?php esc_html_e( 'Specific Dates', 'order-delivery-date' ); ?></label>
+		<span style="font-weight: 700;margin-left: 5px;">
+			<a href="https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin/" target="_blank" style="font-size: 90%; color: #0073aa; text-decoration: none;">
+				<?php esc_html_e( 'Upgrade to Pro &#8599;', 'order-delivery-date' ); ?>
+			</a>
+		</span>
+		</p>
 		<?php
 		$alldays = array();
 		foreach ( $orddd_lite_weekdays as $n => $day_name ) {
@@ -533,7 +539,12 @@ class Orddd_Lite_Time_Slot_Settings {
 
 		?>
 		<p><label><input type="radio" name="orddd_lite_bulk_time_slot_for_delivery_days" id="orddd_lite_bulk_time_slot_for_delivery_days" value="weekdays"<?php echo esc_attr( $orddd_time_slot_for_weekdays ); ?>/><?php esc_html_e( 'Weekdays', 'order-delivery-date' ); ?></label>
-		<label><input disabled='' type="radio" name="orddd_lite_bulk_time_slot_for_delivery_days" id="orddd_lite_bulk_time_slot_for_delivery_days" value="specific_dates"<?php echo esc_attr( $orddd_time_slot_for_specific_dates ); ?>/><?php esc_html_e( 'Specific Dates', 'order-delivery-date' ); ?></label>
+		<label title="<?php esc_html_e( 'You will need the Order Delivery Date Pro for WooCommerce plugin to set this option.', 'order-delivery-date' ); ?>"><input disabled='' type="radio" name="orddd_lite_bulk_time_slot_for_delivery_days" id="orddd_lite_bulk_time_slot_for_delivery_days" value="specific_dates"<?php echo esc_attr( $orddd_time_slot_for_specific_dates ); ?>/><?php esc_html_e( 'Specific Dates', 'order-delivery-date' ); ?></label>
+		<span style="font-weight: 700;margin-left: 5px;">
+			<a href="https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin/" target="_blank" style="font-size: 90%; color: #0073aa; text-decoration: none;">
+				<?php esc_html_e( 'Upgrade to Pro &#8599;', 'order-delivery-date' ); ?>
+			</a>
+		</span>
 		</p>
 
 		<?php
