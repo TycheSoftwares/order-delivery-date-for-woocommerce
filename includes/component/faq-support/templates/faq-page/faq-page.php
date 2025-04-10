@@ -55,7 +55,7 @@
 </style>
 
 <div class="main-panel">
-	<h3>Frequently Asked Questions for <?php echo $ts_plugin_name; ?> Plugin</h3>
+	<h3>Frequently Asked Questions for <?php echo $ts_plugin_name;//phpcs:disable ?> Plugin</h3>
 	<button class="faq-ts-accordion"><span class="dashicons dashicons-editor-help"></span><strong><?php echo $ts_faq[1]['question']; ?></strong></button>
 	<div class="panel">
 		<p><?php echo $ts_faq[1]['answer']; ?></p>

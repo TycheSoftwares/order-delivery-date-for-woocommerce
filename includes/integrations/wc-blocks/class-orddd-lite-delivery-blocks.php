@@ -159,7 +159,7 @@ class ORDDD_Lite_Delivery_Blocks {
 
 		if ( isset( $data['h_deliverydate'] ) && ! empty( $data['h_deliverydate'] ) ) {
 			$delivery_date = sanitize_text_field( wp_unslash( $data['h_deliverydate'] ) );
-		} elseif ( isset( $data['e_deliverydate'] ) && ! empty( $$data['e_deliverydate'] ) ) {
+		} elseif ( isset( $data['e_deliverydate'] ) && ! empty( $data['e_deliverydate'] ) ) {
 			$delivery_date = sanitize_text_field( wp_unslash( $data['e_deliverydate'] ) );
 			$delivery_date = date( 'd-m-Y', strtotime( $delivery_date ) );// phpcs:ignore
 		}

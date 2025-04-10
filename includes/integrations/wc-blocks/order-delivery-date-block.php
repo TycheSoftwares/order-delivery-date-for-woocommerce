@@ -160,19 +160,19 @@ function orddd_lite_add_calendar_styles() {
 
 	echo '<style type="text/css">
 			.holidays {
-				background-color: ' . $orddd_holiday_color . ' !important;
+				background-color: ' . esc_html( $orddd_holiday_color ) . ' !important;
 			}
 
 			.booked_dates {
-				background-color: ' . $orddd_booked_dates_color . ' !important;
+				background-color: ' . esc_html( $orddd_booked_dates_color ) . ' !important;
 			}
 
 			.available-deliveries, .available-deliveries a {
-				background: ' . $orddd_available_dates_color . ' !important;
+				background: ' . esc_html( $orddd_available_dates_color ) . ' !important;
 			}
 
 			.partially-booked, .partially-booked a {
-				background: linear-gradient(to bottom right, ' . $orddd_booked_dates_color . '59 0%, ' . $orddd_booked_dates_color . '59 50%, ' . $orddd_available_dates_color . ' 50%, ' . $orddd_available_dates_color . ' 100%) !important;
+				background: linear-gradient(to bottom right, ' . esc_html( $orddd_booked_dates_color ) . '59 0%, ' . esc_html( $orddd_booked_dates_color ) . '59 50%, ' . esc_html( $orddd_available_dates_color ) . ' 50%, ' . esc_html( $orddd_available_dates_color ) . ' 100%) !important;
 			}
 		</style>';
 }

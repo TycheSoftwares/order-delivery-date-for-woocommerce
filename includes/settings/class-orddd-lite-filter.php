@@ -11,6 +11,7 @@
 
 // Include Common file.
 require_once WP_PLUGIN_DIR . '/order-delivery-date-for-woocommerce/includes/class-orddd-lite-common.php';
+//phpcs:disable
 
 /**
  * Order Delivery Date Filter Class
@@ -59,7 +60,9 @@ class Orddd_Lite_Filter {
 			$date_field_label = __( 'Delivery Date', 'order-delivery-date' );
 		}
 		$new_columns['order_delivery_date'] = __( $date_field_label, 'order-delivery-date' ); // Title for column heading.
-		$new_columns['wc_actions']          = $columns['wc_actions'];
+		if ( isset( $columns['wc_actions'] ) ) {
+			$new_columns['wc_actions'] = $columns['wc_actions'];
+		}
 		return $new_columns;
 	}
 

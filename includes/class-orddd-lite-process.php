@@ -411,12 +411,13 @@ class Orddd_Lite_Process {
 		$is_delivery_enabled = Orddd_Lite_Common::orddd_lite_is_delivery_enabled();
 
 		$delivery_date = '';
+		//phpcs:disable
 
 		if ( isset( $_POST['h_deliverydate'] )  && ! empty( $_POST['h_deliverydate'] ) ) {
 			$delivery_date = sanitize_text_field( wp_unslash( $_POST['h_deliverydate'] ) );
 		} elseif ( isset( $_POST['e_deliverydate'] ) && ! empty( $_POST['e_deliverydate'] ) ) {
 			$delivery_date = sanitize_text_field( wp_unslash( $_POST['e_deliverydate'] ) ); 
-			$delivery_date = date( 'd-m-Y', strtotime( $delivery_date ) );
+			$delivery_date = gmdate( 'd-m-Y', strtotime( $delivery_date ) );
 		}
 
 		if ( isset( $_POST['orddd_lite_time_slot'] ) ) { // phpcs:ignore
@@ -463,6 +464,7 @@ class Orddd_Lite_Process {
 		if ( 'on' === get_option( 'orddd_lite_enable_time_slot' ) ) {
 			
 			$time_slot = sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot'] ) );
+			//phpcs:enable
 			
 			if ( ! ( '' === $time_slot || 'select' === $time_slot || 'asap' === $time_slot || 'NA' === $time_slot ) ) {
 				
