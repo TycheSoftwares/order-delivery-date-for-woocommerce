@@ -463,11 +463,11 @@ class Orddd_Lite_Process {
 
 		if ( 'on' === get_option( 'orddd_lite_enable_time_slot' ) ) {
 			
-			$time_slot = sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot'] ) );
+			$time_slot = isset( $_POST['orddd_lite_time_slot'] ) ? sanitize_text_field( wp_unslash( $_POST['orddd_lite_time_slot'] ) ) : '';
 			//phpcs:enable
-			
+
 			if ( ! ( '' === $time_slot || 'select' === $time_slot || 'asap' === $time_slot || 'NA' === $time_slot ) ) {
-				
+
 				$time_slot_arr = explode( ' - ', $time_slot );
 				$from_time     = $time_slot_arr[0];
 				if ( isset( $time_slot_arr[1] ) ) {
