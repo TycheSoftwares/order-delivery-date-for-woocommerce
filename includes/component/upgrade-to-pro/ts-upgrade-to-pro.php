@@ -127,6 +127,8 @@ class Ts_Upgrade_To_Pro {
 		add_action( self::$plugin_prefix . '_after_settings_page_form', array( &$this, 'ts_add_upgrade_to_pro_modal' ) );
 		add_action( 'admin_enqueue_scripts', array( &$this, 'ts_custom_notice_style' ) );
 		add_action( 'admin_head', array( &$this, 'ts_add_submenu_class' ) );
+		add_action( 'admin_notices', array( &$this, 'orddd_admin_menu_notice' ) );
+		add_action( 'wp_ajax_orddd_dismiss_menu_notice', array( &$this, 'orddd_handle_notice_dismiss' ) );
 
 		add_action( 'wp_ajax_ordd_lite_dismiss_upgrade_to_pro', array( &$this, 'dismiss_upgrade_to_pro_notice' ) );
 
@@ -332,5 +334,43 @@ class Ts_Upgrade_To_Pro {
 	 */
 	public function ts_get_template_path() {
 		return untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/';
+	}
+
+	/**
+	 * Displays a notice on the admin menu.
+	 */
+	public function orddd_admin_menu_notice() {
+		global $wpefield_version;
+		$screen = get_current_screen();
+		if ( current_user_can( 'manage_woocommerce' ) && $screen && strpos( $screen->id, 'woocommerce' ) !== false ) {
+			$dismissed = get_option( 'orddd_notice_dismissed' );
+			$nonce     = wp_create_nonce( 'orddd_dismiss_nonce' );
+
+			if ( ! $dismissed ) {
+				?>
+				<div class="notice notice-info is-dismissible oddl-admin-notice">
+					<p><strong>Order Delivery Date Lite:</strong> The plugin menu has moved! You can now find it under <strong>WooCommerce → Order Delivery Date</strong>.</p>
+				</div>
+				<script>
+				(function($){
+				$(document).on('click', '.oddl-admin-notice .notice-dismiss', function() {
+				$.post(ajaxurl, {
+					action: 'orddd_dismiss_menu_notice',
+					nonce: '<?php echo esc_js( $nonce ); ?>'
+					});
+					});
+					})(jQuery);
+					</script>
+					<?php
+			}
+		}
+	}
+	/**
+	 * Handles a ajax on the admin menu.
+	 */
+	public function orddd_handle_notice_dismiss() {
+		check_ajax_referer( 'orddd_dismiss_nonce', 'nonce' );
+		update_option( 'orddd_notice_dismissed', true );
+		wp_die();
 	}
 }
