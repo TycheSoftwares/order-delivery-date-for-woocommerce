@@ -4,13 +4,13 @@
  * Plugin URI: https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/
  * Description: This plugin allows customers to choose their preferred Order Delivery Date during checkout.
  * Author: Tyche Softwares
- * Version: 3.26.1
+ * Version: 4.0.0
  * Author URI: https://www.tychesoftwares.com/
  * Contributor: Tyche Softwares, https://www.tychesoftwares.com/
  * Text Domain: order-delivery-date
  * Requires PHP: 7.3
  * WC requires at least: 3.0.0
- * WC tested up to: 9.5.2
+ * WC tested up to: 9.8.1
  * Requires Plugins: woocommerce
  *
  * @package  Order-Delivery-Date-Lite-for-WooCommerce
@@ -21,7 +21,7 @@
  *
  * @since 1.0
  */
-$wpefield_version = '3.26.1';
+$wpefield_version = '4.0.0';
 
 /**
  * Template path.
@@ -331,7 +331,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 		 */
 		public function orddd_lite_update_db_check() {
 			global $wpefield_version;
-			if ( '3.26.1' === $wpefield_version ) {
+			if ( '4.0.0' === $wpefield_version ) {
 				self::orddd_lite_update_install();
 			}
 		}
