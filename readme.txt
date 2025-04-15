@@ -4,8 +4,8 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
-Tested up to: 6.7.1
-Stable tag: 3.26.1
+Tested up to: 6.8.0
+Stable tag: 4.0.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,13 @@ Option 3:
 This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-order-delivery-date-lite/order-delivery-lite-usage-tracking/).
 
 == Changelog ==
+
+= 4.0.0 (15.04.2025)
+* Fix - Indicate Premium Features in Lite Version Instead of Disabling Without Explanation.
+* Fix - The javascript errors displayed when we add date field in formatinator form.
+* Fix - Conflict with Order Delivery Date plugin affecting styling on the Divi Theme options page.
+* Fix - Resolved all PHPCS warnings and aligned the code with WordPress Coding Standards to improve quality and maintainability.
+* Fix - Time slots occasionally appeared blank or failed to display correctly upon refreshing the page in Firefox.
 
 = 3.26.1 (14.01.2025)
 * Fix - Loader was being displayed on all pages after the v3.26.0 update.
