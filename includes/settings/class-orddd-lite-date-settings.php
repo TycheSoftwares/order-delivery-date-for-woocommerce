@@ -191,11 +191,11 @@ class Orddd_Lite_Date_Settings {
 		foreach ( $orddd_lite_weekdays as $n => $day_name ) {
 			if ( 'checked' === get_option( $n ) ) {
 				?>
-				<option name="<?php echo esc_attr( $n ); ?>" value="<?php echo esc_attr( $n ); ?>" selected><?php echo esc_attr( $day_name ); ?></option>
+				<option name="<?php echo esc_attr( $n ); ?>" value="<?php echo esc_attr( $n ); ?>" selected><?php echo esc_attr( __( $day_name, 'order-delivery-date' ) ); ?></option>
 				<?php
 			} else {
 				?>
-				<option name="<?php echo esc_attr( $n ); ?>" value="<?php echo esc_attr( $n ); ?>"><?php echo esc_attr( $day_name ); ?></option>
+				<option name="<?php echo esc_attr( $n ); ?>" value="<?php echo esc_attr( $n ); ?>"><?php echo esc_attr( __( $day_name, 'order-delivery-date' ) ); ?></option>
 				<?php
 			}
 		}

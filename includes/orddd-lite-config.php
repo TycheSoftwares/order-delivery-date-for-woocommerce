@@ -159,13 +159,13 @@ $orddd_lite_calendar_themes = array(
  * @since 1.9
  */
 $orddd_lite_weekdays = array(
-	'orddd_lite_weekday_0' => __( 'Sunday', 'order-delivery-date' ),
-	'orddd_lite_weekday_1' => __( 'Monday', 'order-delivery-date' ),
-	'orddd_lite_weekday_2' => __( 'Tuesday', 'order-delivery-date' ),
-	'orddd_lite_weekday_3' => __( 'Wednesday', 'order-delivery-date' ),
-	'orddd_lite_weekday_4' => __( 'Thursday', 'order-delivery-date' ),
-	'orddd_lite_weekday_5' => __( 'Friday', 'order-delivery-date' ),
-	'orddd_lite_weekday_6' => __( 'Saturday', 'order-delivery-date' ),
+	'orddd_lite_weekday_0' => 'Sunday',
+	'orddd_lite_weekday_1' => 'Monday',
+	'orddd_lite_weekday_2' => 'Tuesday',
+	'orddd_lite_weekday_3' => 'Wednesday',
+	'orddd_lite_weekday_4' => 'Thursday',
+	'orddd_lite_weekday_5' => 'Friday',
+	'orddd_lite_weekday_6' => 'Saturday',
 );
 
 /**

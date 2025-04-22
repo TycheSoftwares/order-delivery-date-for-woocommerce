@@ -181,7 +181,7 @@ class ORDDD_Lite_View_Time_Slots extends WP_List_Table {
 						$return_time_slot[ $i ]->tv = $v->tv;
 
 						if ( isset( $orddd_lite_weekdays[ $dval ] ) ) {
-							$return_time_slot[ $i ]->delivery_days_dates = $orddd_lite_weekdays[ $dval ];
+							$return_time_slot[ $i ]->delivery_days_dates = __( $orddd_lite_weekdays[ $dval ], 'order-delivery-date' );
 							$return_time_slot[ $i ]->dd                  = $dval;
 						} elseif ( 'all' === $dval ) {
 							$return_time_slot[ $i ]->delivery_days_dates = 'All';

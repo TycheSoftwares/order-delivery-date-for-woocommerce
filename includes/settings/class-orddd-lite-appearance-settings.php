@@ -138,7 +138,7 @@ class Orddd_Lite_Appearance_Settings {
 				"<option value='%s' %s>%s</option>",
 				esc_attr( $key ),
 				esc_attr( $sel ),
-				esc_attr( $value )
+				esc_attr( __( $value, 'order-delivery-date' ) )
 			);
 		}
 		?>
