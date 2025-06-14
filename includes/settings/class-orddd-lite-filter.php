@@ -39,6 +39,9 @@ class Orddd_Lite_Filter {
 			add_action( 'restrict_manage_posts',                array( &$this, 'orddd_lite_restrict_orders' ), 15 );
 		    add_filter( 'request',                              array( &$this, 'orddd_lite_add_filterable_field' ) );
 		    add_filter( 'woocommerce_shop_order_search_fields', array( &$this, 'orddd_lite_add_search_fields' ) );
+			add_action( 'woocommerce_order_list_table_restrict_manage_orders', array( &$this, 'orddd_lite_restrict_orders' ), 15 );
+			add_filter( 'woocommerce_order_list_table_prepare_items_query_args', array( &$this, 'orddd_lite_add_filterable_field' ) );
+			add_filter( 'woocommerce_order_table_search_query_meta_keys', array( &$this, 'orddd_lite_add_search_fields' ) );
 		}
 	}
 
@@ -195,8 +198,10 @@ class Orddd_Lite_Filter {
 	public static function orddd_lite_restrict_orders() {
 		global $typenow, $wpdb, $wp_locale;
 
-		if ( 'shop_order' !== $typenow ) {
-			return;
+		if ( false === Orddd_Lite_Common::is_hpos_enabled() ) {
+			if ( 'shop_order' != $typenow ) {
+				return;
+			}
 		}
 
 		$gmt = false;
@@ -318,8 +323,10 @@ class Orddd_Lite_Filter {
 	 */
 	public static function orddd_lite_add_filterable_field( $vars ) {
 		global $typenow;
-		if ( 'shop_order' != $typenow ) {
-			return $vars;
+		if ( false === Orddd_Lite_Common::is_hpos_enabled() ) {
+			if ( 'shop_order' != $typenow ) {
+				return;
+			}
 		}
 
 		$gmt = false;
