@@ -171,14 +171,14 @@ class Orddd_Lite_Time_Slot_Settings {
 		foreach ( $orddd_lite_weekdays as $n => $day_name ) {
 			if ( 'checked' === get_option( $n ) ) {
 				$weekdays[ $n ] = $day_name;
-				printf( '<option name="' . esc_attr( $n ) . '" value="' . esc_attr( $n ) . '">' . esc_attr( $weekdays[ $n ] ) . '</option>' );
+				printf( '<option name="' . esc_attr( $n ) . '" value="' . esc_attr( $n ) . '">' . esc_attr( __( $weekdays[ $n ], 'order-delivery-date' ) ) . '</option>' );
 			}
 		}
 
 		if ( 'No' === $checked ) {
 			foreach ( $orddd_lite_weekdays as $n => $day_name ) {
 				$weekdays[ $n ] = $day_name;
-				printf( '<option name="' . esc_attr( $n ) . '" value="' . esc_attr( $n ) . '">' . esc_attr( $weekdays[ $n ] ) . '</option>' );
+				printf( '<option name="' . esc_attr( $n ) . '" value="' . esc_attr( $n ) . '">' . esc_attr( __( $weekdays[ $n ], 'order-delivery-date' ) ) . '</option>' );
 			}
 		}
 		print( '</select></div>' );
@@ -593,14 +593,14 @@ class Orddd_Lite_Time_Slot_Settings {
 		foreach ( $orddd_lite_weekdays as $n => $day_name ) {
 			if ( 'checked' === get_option( $n ) ) {
 				$weekdays[ $n ] = $day_name;
-				printf( '<option name="' . esc_attr( $n ) . '" value="' . esc_attr( $n ) . '">' . esc_attr( $weekdays[ $n ] ) . '</option>' );
+				printf( '<option name="' . esc_attr( $n ) . '" value="' . esc_attr( $n ) . '">' . esc_attr( __( $weekdays[ $n ], 'order-delivery-date' ) ) . '</option>' );
 			}
 		}
 
 		if ( 'No' === $checked ) {
 			foreach ( $orddd_lite_weekdays as $n => $day_name ) {
 				$weekdays[ $n ] = $day_name;
-				printf( '<option name="' . esc_attr( $n ) . '" value="' . esc_attr( $n ) . '">' . esc_attr( $weekdays[ $n ] ) . '</option>' );
+				printf( '<option name="' . esc_attr( $n ) . '" value="' . esc_attr( $n ) . '">' . esc_attr( __( $weekdays[ $n ], 'order-delivery-date' ) ) . '</option>' );
 			}
 		}
 		print( '</select></div>' );
@@ -766,7 +766,7 @@ class Orddd_Lite_Time_Slot_Settings {
 		$weekdays_arr = array();
 		foreach ( $orddd_lite_weekdays as $n => $day_name ) {
 			$weekdays[ $n ] = $day_name;
-			printf( '<option name="' . esc_attr( $n ) . '" value="' . esc_attr( $n ) . '">' . esc_attr( $weekdays[ $n ] ) . '</option>' );
+			printf( '<option name="' . esc_attr( $n ) . '" value="' . esc_attr( $n ) . '">' . esc_attr( __( $weekdays[ $n ], 'order-delivery-date' ) ) . '</option>' );
 		}
 		print( '</select></div>' );
 
