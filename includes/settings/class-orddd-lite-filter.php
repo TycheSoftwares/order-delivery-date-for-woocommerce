@@ -323,10 +323,8 @@ class Orddd_Lite_Filter {
 	 */
 	public static function orddd_lite_add_filterable_field( $vars ) {
 		global $typenow;
-		if ( false === Orddd_Lite_Common::is_hpos_enabled() ) {
-			if ( 'shop_order' != $typenow ) {
-				return;
-			}
+		if ( 'shop_order' != $typenow && false === Orddd_Lite_Common::is_hpos_enabled() ) {
+			return $vars;
 		}
 
 		$gmt = false;
