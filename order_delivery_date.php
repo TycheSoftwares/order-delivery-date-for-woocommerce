@@ -528,7 +528,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				wp_localize_script( 'initialize-datepicker-orddd', 'orddd_lite_admin_params', $admin_params );
 				wp_localize_script( 'initialize-datepicker-orddd', 'jsL10n', $js_args );
 
-				if ( isset( $_GET['post_type'] ) && 'shop_order' === $_GET['post_type'] ) {//phpcs:ignore
+				if ( ( isset( $_GET['post_type'] ) && 'shop_order' === $_GET['post_type'] ) || ( isset( $_GET['page'] ) && 'wc-orders' === $_GET['page'] ) ) {//phpcs:ignore
 					wp_enqueue_script(
 						'orddd-lite-shop-order',
 						plugins_url( 'js/orddd-lite-shop-order.js', __FILE__ ),
