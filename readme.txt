@@ -4,8 +4,8 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
-Tested up to: 6.8.0
-Stable tag: 4.0.0
+Tested up to: 6.8.1
+Stable tag: 4.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,11 @@ Option 3:
 This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-order-delivery-date-lite/order-delivery-lite-usage-tracking/).
 
 == Changelog ==
+
+= 4.1.0 (24.06.2025)
+* Fix - Delivery date filters were not displayed on the Orders listing page when HPOS was enabled.
+* Fix - A notice error occurred when changing the site language in WordPress version 6.7 and above.
+* Fix - The Delivery theme showed an oversized calendar on the Appearance page with WordPress version 6.8.
 
 = 4.0.0 (15.04.2025)
 * Fix - Indicate Premium Features in Lite Version Instead of Disabling Without Explanation.
