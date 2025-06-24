@@ -1,4 +1,8 @@
 *** Order Delivery Date for WooCommerce ***
+2025-06-24 - version 4.1.0
+* Fix - Delivery date filters were not displayed on the Orders listing page when HPOS was enabled.
+* Fix - A PHP notice appeared when changing the site language in WordPress version 6.7 and above.
+* Fix - The Delivery date calendar theme field in the Appearance settings showed an oversized calendar with WordPress version 6.8.
 2025-04-15 - version 4.0.0
 * Fix - Indicate Premium Features in Lite Version Instead of Disabling Without Explanation.
 * Fix - The javascript errors displayed when we add date field in formatinator form.
