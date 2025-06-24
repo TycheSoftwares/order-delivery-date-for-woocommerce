@@ -183,8 +183,8 @@ This plugin communicates with our tracking server to send usage data **only** if
 
 = 4.1.0 (24.06.2025)
 * Fix - Delivery date filters were not displayed on the Orders listing page when HPOS was enabled.
-* Fix - A notice error occurred when changing the site language in WordPress version 6.7 and above.
-* Fix - The Delivery theme showed an oversized calendar on the Appearance page with WordPress version 6.8.
+* Fix - A PHP notice appeared when changing the site language in WordPress version 6.7 and above.
+* Fix - The Delivery date calendar theme field in the Appearance settings showed an oversized calendar with WordPress version 6.8.
 
 = 4.0.0 (15.04.2025)
 * Fix - Indicate Premium Features in Lite Version Instead of Disabling Without Explanation.
