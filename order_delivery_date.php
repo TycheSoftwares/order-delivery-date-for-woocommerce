@@ -622,7 +622,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 					}
 				}
 
-				if ( ( ( is_cart() || has_block( 'woocommerce/cart' ) ) && 'on' === get_option('orddd_lite_delivery_date_on_cart_page' ) ) || is_checkout() || has_block( 'woocommerce/checkout' ) ) {
+				if ( ( ( is_cart() || has_block( 'woocommerce/cart' ) ) && 'on' === get_option('orddd_lite_delivery_date_on_cart_page' ) ) || is_checkout() || has_block( 'woocommerce/checkout' ) || ( function_exists( 'icl_object_id' ) && is_page( icl_object_id( wc_get_page_id( 'checkout' ), 'page', true ) ) ) ) {
 					wp_enqueue_script( $language_selected, plugins_url( "/js/i18n/jquery.ui.datepicker-$language_selected.js", __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ), $wpefield_version, false );
 					wp_enqueue_script( 'initialize-datepicker-orddd', plugins_url( '/js/orddd-lite-initialize-datepicker.js', __FILE__ ), '', $wpefield_version, false );
 				}
