@@ -1024,6 +1024,7 @@ var data = {
 	orddd_post_type: orddd_lite_admin_params.orddd_post_type,
 	orddd_notify_customer: notify,
 	orddd_charges: jQuery( '#del_charges' ).val(),
+	security: orddd_lite_admin_params.security,
 	action: "save_delivery_dates"
 };
 
@@ -1047,6 +1048,13 @@ if( orddd_lite_admin_params.orddd_lite_admin_url != '' && typeof( orddd_lite_adm
 			},3000 );
 		} else if ( validations[ 1 ] == "no" && ( ( orddd_lite_admin_params.orddd_lite_enable_time_slot == "on" && orddd_lite_admin_params.orddd_lite_time_slot_mandatory == "checked" ) ) ) {
 			jQuery( "#orddd_lite_update_notice" ).html( orddd_lite_admin_params.orddd_lite_timeslot_field_label + " is mandatory." );
+			jQuery( "#orddd_lite_update_notice" ).attr( "color", "red" );
+			jQuery( "#orddd_lite_update_notice" ).fadeIn();
+			setTimeout( function() {
+				jQuery( "#orddd_lite_update_notice" ).fadeOut();
+			},3000 );
+		} else {
+			jQuery( "#orddd_lite_update_notice" ).html( response );
 			jQuery( "#orddd_lite_update_notice" ).attr( "color", "red" );
 			jQuery( "#orddd_lite_update_notice" ).fadeIn();
 			setTimeout( function() {

@@ -153,6 +153,16 @@ class Orddd_Lite_Admin_Delivery {
 	public static function save_delivery_dates() {
 		global $wpdb, $orddd_weekdays;
 
+		if ( ! check_ajax_referer( 'orddd_save_delivery_dates', 'security', false ) ) {
+			echo esc_html__( 'Invalid request. Please refresh the page and try again.', 'order-delivery-date-for-woocommerce' );
+			wp_die();
+		}
+
+		if ( ! current_user_can( 'edit_shop_orders' ) ) {
+			echo esc_html__( 'You are not authorized to update order delivery dates.', 'order-delivery-date-for-woocommerce' );
+			wp_die();
+		}
+
 		$delivery_details_updated = 'yes';
 		$notes_array              = array();
 
@@ -438,6 +448,7 @@ class Orddd_Lite_Admin_Delivery {
 			$admin_lite_params['orddd_lite_min_date_set']         = esc_attr( $min_date_array['min_date'] );
 			$admin_lite_params['orddd_lite_field_label']          = esc_attr( $date_field_label );
 			$admin_lite_params['orddd_lite_timeslot_field_label'] = esc_attr( $time_field_label );
+			$admin_lite_params['security']                        = wp_create_nonce( 'orddd_save_delivery_dates' );
 			return $admin_lite_params;
 		}
 	}
