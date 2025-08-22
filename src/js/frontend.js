@@ -6,7 +6,7 @@ import Block from './block';
 // Global import
 const { registerCheckoutBlock } = wc.blocksCheckout;
 
-if ( wcSettings.shippingEnabled && ! wcSettings.forcedBillingAddress ) {
+if ( wcSettings.shippingMethodsExist && !wcSettings.localPickupEnabled ) {
 	metadata.parent = [ "woocommerce/checkout-shipping-address-block" ]
 } else {
 	metadata.parent = [ "woocommerce/checkout-billing-address-block" ]
