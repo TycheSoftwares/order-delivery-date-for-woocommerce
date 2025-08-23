@@ -728,7 +728,7 @@ class Orddd_Lite_Process {
 			} elseif ( ( $is_cart || $is_ajax ) && 'on' === $delivery_on_cart && WC()->session->get( 'h_deliverydate' ) ) {
 				$delivery_date = WC()->session->get( 'h_deliverydate' );
 			} else {
-				$delivery_date = '';
+				$delivery_date = WC()->session->get( 'h_deliverydate' );
 			}
 		}
 
@@ -741,11 +741,11 @@ class Orddd_Lite_Process {
 			} elseif ( ( $is_cart || $is_ajax ) && 'on' === $delivery_on_cart && WC()->session->get( 'orddd_lite_time_slot' ) ) {
 				$time_slot = WC()->session->get( 'orddd_lite_time_slot' );
 			} else {
-				$time_slot = '';
+				$time_slot = WC()->session->get( 'orddd_lite_time_slot' );
 			}
 		}
 
-		if ( '' !== $time_slot && 'choose' !== $time_slot && 'NA' !== $time_slot && 'select' !== $time_slot ) {
+		if ( '' !== $time_slot && 'choose' !== $time_slot && 'NA' !== $time_slot && 'select' !== $time_slot && !is_null( $time_slot ) ) {
 			$time_slot_arr = explode( ' - ', $time_slot );
 			$from_time     = date( 'G:i', strtotime( $time_slot_arr[0] ) ); //phpcs:ignore
 			if ( isset( $time_slot_arr[1] ) && '' !== $time_slot_arr[1] ) {
