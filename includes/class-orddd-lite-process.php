@@ -727,6 +727,12 @@ class Orddd_Lite_Process {
 				}
 			} elseif ( ( $is_cart || $is_ajax ) && 'on' === $delivery_on_cart && WC()->session->get( 'h_deliverydate' ) ) {
 				$delivery_date = WC()->session->get( 'h_deliverydate' );
+			} elseif ( function_exists( 'wc_is_block_cart' ) && wc_is_block_cart() ) {
+				$delivery_date = WC()->session->get( 'h_deliverydate' );
+			} elseif ( function_exists( 'wc_is_block_checkout' ) && wc_is_block_checkout() ) {
+				$delivery_date = WC()->session->get( 'h_deliverydate' );
+			} elseif ( ! $is_cart ) {
+				$delivery_date = WC()->session->get( 'h_deliverydate' );
 			} else {
 				$delivery_date = '';
 			}
@@ -740,12 +746,18 @@ class Orddd_Lite_Process {
 				}
 			} elseif ( ( $is_cart || $is_ajax ) && 'on' === $delivery_on_cart && WC()->session->get( 'orddd_lite_time_slot' ) ) {
 				$time_slot = WC()->session->get( 'orddd_lite_time_slot' );
+			} elseif ( function_exists( 'wc_is_block_cart' ) && wc_is_block_cart() ) {
+				$time_slot = WC()->session->get( 'orddd_lite_time_slot' );
+			} elseif ( function_exists( 'wc_is_block_checkout' ) && wc_is_block_checkout() ) {
+				$time_slot = WC()->session->get( 'orddd_lite_time_slot' );
+			} elseif ( ! $is_cart ) {
+				$time_slot = WC()->session->get( 'orddd_lite_time_slot' );
 			} else {
 				$time_slot = '';
 			}
 		}
 
-		if ( '' !== $time_slot && 'choose' !== $time_slot && 'NA' !== $time_slot && 'select' !== $time_slot ) {
+		if ( '' !== $time_slot && 'choose' !== $time_slot && 'NA' !== $time_slot && 'select' !== $time_slot && ! is_null( $time_slot ) ) {
 			$time_slot_arr = explode( ' - ', $time_slot );
 			$from_time     = date( 'G:i', strtotime( $time_slot_arr[0] ) ); //phpcs:ignore
 			if ( isset( $time_slot_arr[1] ) && '' !== $time_slot_arr[1] ) {
