@@ -1,4 +1,10 @@
 *** Order Delivery Date for WooCommerce ***
+2025-08-26 - version 4.2.0
+* Fix – Time slot charges were not appearing on the Checkout block page.
+* Fix – Broken Access Control vulnerability in versions ≤ 4.1.0.
+* Fix – Datepicker was not appearing on the translated checkout page set as default in WPML.
+* Fix – Delivery date field was not appearing on the Checkout block page when shipping settings were disabled.
+
 2025-06-24 - version 4.1.0
 * Fix - Delivery date filters were not displayed on the Orders listing page when HPOS was enabled.
 * Fix - A PHP notice appeared when changing the site language in WordPress version 6.7 and above.
