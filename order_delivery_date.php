@@ -593,6 +593,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				if ( '' === $calendar_theme ) {
 					$calendar_theme = 'base';
 				}
+				wp_enqueue_script( 'jquery-ui-datepicker' );
 				wp_register_script( 'select2', plugins_url() . '/woocommerce/assets/js/select2/select2.min.js', array( 'jquery', 'jquery-ui-widget', 'jquery-ui-core' ), $wpefield_version, false );
 				wp_register_script( 'accessibility-orddd', plugins_url( '/js/accessibility.js', __FILE__ ), '', $wpefield_version, true );
 				wp_enqueue_script( 'select2' );
