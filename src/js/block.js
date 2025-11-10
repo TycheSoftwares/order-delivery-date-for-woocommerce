@@ -52,6 +52,10 @@ const Block = ({ children, checkoutExtensionData }) => {
 		setIsLoading( load );
 	}
 
+	if ( orddd_lite_params.is_enable_delivery_date_for_virtual_product || orddd_lite_params.is_enable_delivery_date_for_featured_product ) {
+		return null;
+	}
+
     return (
 		<LoadingMask
 			isLoading={ isLoading }
