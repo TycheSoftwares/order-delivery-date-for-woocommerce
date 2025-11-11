@@ -780,7 +780,7 @@ class Orddd_Lite_Process {
 				$timeslot_log_arr = json_decode( $timeslot_log_str );
 			}
 
-			$date_to_check = date( 'n-j-Y', strtotime( $delivery_date ) ); //phpcs:ignore
+			$date_to_check = ! empty( $delivery_date ) ? date( 'n-j-Y', strtotime( $delivery_date ) ) : ''; //phpcs:ignore
 			foreach ( $timeslot_log_arr as $k => $v ) {
 				$ft = $v->fh . ':' . trim( $v->fm );
 				if ( $v->th != 00 ) { //phpcs:ignore
@@ -790,7 +790,7 @@ class Orddd_Lite_Process {
 					$time_slot_key = $ft;
 				}
 
-				$weekday = date( 'w', strtotime( $delivery_date ) ); //phpcs:ignore
+				$weekday = ! empty( $delivery_date ) ? date( 'w', strtotime( $delivery_date ) ) : ''; //phpcs:ignore
 				if ( gettype( json_decode( $v->dd ) ) === 'array' && count( json_decode( $v->dd ) ) > 0 ) {
 					$dd = json_decode( $v->dd );
 					foreach ( $dd as $dkey => $dval ) {
