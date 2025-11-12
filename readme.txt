@@ -5,7 +5,7 @@ Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
 Tested up to: 6.8.2
-Stable tag: 4.2.0
+Stable tag: 4.3.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,13 @@ Option 3:
 This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-order-delivery-date-lite/order-delivery-lite-usage-tracking/).
 
 == Changelog ==
+
+= 4.3.0 (12.11.2025)
+* Fix – Resolved jQuery(...).datepicker error occurring on Shop, Product, and Cart pages.
+* Fix – The Delivery Date field did not appear on the WooCommerce Checkout Block when “Force shipping to the customer billing address” was enabled under WooCommerce → Settings → Shipping.
+* Fix – Addressed CSS warnings displayed in Firefox.
+* Fix – Delivery Date and Time Slot fields were appearing for Virtual Products even when the “Disable Delivery Date and Time Slot fields for Virtual Products” setting was enabled.
+* Fix – Prevent PHP deprecated warnings from appearing in the debug log.
 
 = 4.2.0 (26.08.2025)
 * Fix – Time slot charges were not appearing on the Checkout block page.
