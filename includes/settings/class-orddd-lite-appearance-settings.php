@@ -356,7 +356,7 @@ class Orddd_Lite_Appearance_Settings {
 					
 			</script>
 			<div id="switcher"></div>
-			<br><strong>' . esc_attr_e( 'Preview theme:', 'order-delivery-date' ) . '</strong><br>
+			<br><strong>' . esc_html__( 'Preview theme:', 'order-delivery-date' ) . '</strong><br>
 			<div id="datepicker" style="width:300px"></div>';
 
 		?>
