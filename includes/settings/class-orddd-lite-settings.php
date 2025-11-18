@@ -1417,6 +1417,13 @@ class Orddd_Lite_Settings {
 
 			if ( ( isset( $_POST['action'] ) && sanitize_text_field( $_POST['action'] ) == 'orddd_delete' ) || ( isset( $_POST['action2'] ) && sanitize_text_field( $_POST['action2'] ) == 'orddd_delete' ) ) { //phpcs:ignore
 
+				if ( ! is_admin() || ! current_user_can( 'manage_woocommerce' ) ) {
+					return;
+				}
+				if ( ! isset( $_POST['orddd_bulk_delete_nonce'] ) || ! wp_verify_nonce( $_POST['orddd_bulk_delete_nonce'], 'orddd_bulk_delete_action' ) ) { //phpcs:ignore
+					wp_die( 'Security check failed (invalid nonce).' );
+				}
+
 				$time_slot_to_delete = array();
 				if ( isset( $_POST['time_slot'] ) ) { //phpcs:ignore
 					$time_slot_to_delete = $_POST['time_slot']; //phpcs:ignore

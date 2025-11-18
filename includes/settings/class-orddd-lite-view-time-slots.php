@@ -71,6 +71,7 @@ class ORDDD_Lite_View_Time_Slots extends WP_List_Table {
 	 * @since 3.11.0
 	 **/
 	public function column_cb( $item ) {
+		wp_nonce_field( 'orddd_bulk_delete_action', 'orddd_bulk_delete_nonce' );
 		$dd = '';
 		if ( isset( $item->dd ) ) {
 			$dd = $item->dd;
