@@ -1,4 +1,7 @@
 *** Order Delivery Date for WooCommerce ***
+2025-11-19 - version 4.3.1
+* Fix - Resolved a security issue where unauthenticated requests could trigger deletion of time slots in the Order Delivery Date settings.
+
 2025-11-12 - version 4.3.0
 * Fix – Resolved jQuery(...).datepicker error occurring on Shop, Product, and Cart pages.
 * Fix – The Delivery Date field did not appear on the WooCommerce Checkout Block when “Force shipping to the customer billing address” was enabled under WooCommerce → Settings → Shipping.
