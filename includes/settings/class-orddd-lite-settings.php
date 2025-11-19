@@ -1304,7 +1304,7 @@ class Orddd_Lite_Settings {
 								submit_button( __( 'Save Settings', 'order-delivery-date' ), 'primary', 'save', true );
 							print( '</form>
 						</div>' );
-						echo "<h3 id='block_timeslot_table_head'>" . esc_attr_e( 'Blocked Time Slots', 'order-delivery-date' ) . '</h3>';
+						echo "<h3 id='block_timeslot_table_head'>" . esc_html__( 'Blocked Time Slots', 'order-delivery-date' ) . '</h3>';
 						include_once 'class-orddd-lite-view-disable-time-slots.php';
 						$orddd_table_test = new ORDDD_Lite_View_Disable_Time_Slots();
 						$orddd_table_test->orddd_prepare_items();
