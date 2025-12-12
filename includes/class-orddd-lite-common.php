@@ -539,7 +539,7 @@ class Orddd_Lite_Common {
 	        $has_featured  = false;
 	        $product_count = 0;
 
-	        foreach ( $woocommerce->cart->get_cart() as $values ) {
+	        foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
 	            $_product = $values['data'];
 	            $product_count++;
 
@@ -1838,8 +1838,7 @@ class Orddd_Lite_Common {
 			$orddd_lite_settings['orddd_lite_delivery_date_field_label']               = get_option( 'orddd_lite_delivery_date_field_label' );
 			$orddd_lite_settings['orddd_lite_delivery_timeslot_field_label']           = get_option( 'orddd_lite_delivery_timeslot_field_label' );
 			$orddd_lite_settings['orddd_lite_delivery_date_field_placeholder']         = get_option( 'orddd_lite_delivery_date_field_placeholder' );
-			$orddd_lite_settings['is_enable_delivery_date_for_virtual_product']        = 'on' === get_option( 'orddd_lite_no_fields_for_virtual_product' ) ? true : false;
-			$orddd_lite_settings['is_enable_delivery_date_for_featured_product']       = 'on' === get_option( 'orddd_lite_no_fields_for_featured_product' ) ? true : false;
+			$orddd_lite_settings['orddd_lite_is_delivery_enabled']                     = is_admin() ? 'yes' : self::orddd_lite_is_delivery_enabled();
 			return apply_filters( 'orddd_lite_hidden_variables_array', $orddd_lite_settings, $additional_data );
 		}
 	}
