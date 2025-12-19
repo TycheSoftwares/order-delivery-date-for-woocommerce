@@ -51,7 +51,7 @@ const Block = ({ extensions, cart }) => {
 		setIsLoading( load );
 	}
 
-	if ( orddd_lite_params.is_enable_delivery_date_for_virtual_product || orddd_lite_params.is_enable_delivery_date_for_featured_product ) {
+	if ( 'yes' !== orddd_lite_params.orddd_lite_is_delivery_enabled ) {
 		return null;
 	}
 
