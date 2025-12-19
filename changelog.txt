@@ -1,4 +1,6 @@
 *** Order Delivery Date for WooCommerce ***
+2025-12-19 - version 4.3.2
+* Fix - Resolved a security issue where unauthenticated requests could trigger deletion of block time slots & holidays in the Order Delivery Date settings.
 2025-11-19 - version 4.3.1
 * Fix - Resolved a security issue where unauthenticated requests could trigger deletion of time slots in the Order Delivery Date settings.
 

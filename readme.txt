@@ -4,8 +4,8 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
-Tested up to: 6.8.2
-Stable tag: 4.3.1
+Tested up to: 6.9
+Stable tag: 4.3.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,9 @@ Option 3:
 This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-order-delivery-date-lite/order-delivery-lite-usage-tracking/).
 
 == Changelog ==
+
+= 4.3.2 (19.12.2025)
+* Fix - Resolved a security issue where unauthenticated requests could trigger deletion of block time slots & holidays in the Order Delivery Date settings.
 
 = 4.3.1 (19.11.2025)
 * Fix - Resolved a security issue where unauthenticated requests could trigger deletion of time slots in the Order Delivery Date settings.
