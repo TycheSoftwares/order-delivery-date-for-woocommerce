@@ -12,6 +12,10 @@ if ( wcSettings.shippingMethodsExist && !wcSettings.localPickupEnabled && true !
 	metadata.parent = [ "woocommerce/checkout-billing-address-block" ]
 }
 
+if ( 'yes' === orddd_lite_params.orddd_lite_has_virtual_products ) {
+	metadata.parent = [ "woocommerce/checkout-billing-address-block" ]
+}
+
 const options = {
 	metadata,
 	component: Block

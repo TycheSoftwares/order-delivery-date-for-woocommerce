@@ -580,6 +580,31 @@ class Orddd_Lite_Common {
 	}
 
 	/**
+	 * Checks if there is a Virtual product in cart
+	 *
+	 * @globals resource $woocommerce WooCommerce Object
+	 * @return string yes if virtual product is there in the cart else no
+	 * @since 1.7
+	 */
+	public static function orddd_lite_check_if_virtual_product_exists_in_cart() {
+
+	    $has_virtual = 'no';
+	    global $woocommerce;
+	    if ( get_option( 'orddd_lite_enable_delivery_date' ) !== 'on' ) {
+	    	return $has_virtual;
+	    }
+
+	    foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
+	        $_product = $values['data'];
+
+	        if ( ! $_product->is_virtual() ) {
+            	return 'no';
+        	}
+	    }
+	    return 'yes';
+	}
+
+	/**
 	 * This function returns the Order Delivery Date Lite plugin version number.
 	 *
 	 * @return string Version of the plugin
@@ -1839,6 +1864,7 @@ class Orddd_Lite_Common {
 			$orddd_lite_settings['orddd_lite_delivery_timeslot_field_label']           = get_option( 'orddd_lite_delivery_timeslot_field_label' );
 			$orddd_lite_settings['orddd_lite_delivery_date_field_placeholder']         = get_option( 'orddd_lite_delivery_date_field_placeholder' );
 			$orddd_lite_settings['orddd_lite_is_delivery_enabled']                     = is_admin() ? 'yes' : self::orddd_lite_is_delivery_enabled();
+			$orddd_lite_settings['orddd_lite_has_virtual_products']                    = is_admin() ? 'no' : self::orddd_lite_check_if_virtual_product_exists_in_cart();
 			return apply_filters( 'orddd_lite_hidden_variables_array', $orddd_lite_settings, $additional_data );
 		}
 	}
