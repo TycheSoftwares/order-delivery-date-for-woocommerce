@@ -88,6 +88,9 @@ class Order_DeliveryDate_Lite_Cart_Block_Integration implements IntegrationInter
 	 * @return void
 	 */
 	public function register_block_editor_scripts() {
+		if ( $this->is_editing_checkout_page() ) {
+			return; // don't load cart block JS here
+		}
 		$script_path       = '/build/cart-block.js';
 		$script_url        = plugins_url( 'order-delivery-date-for-woocommerce' . $script_path );
 		$script_asset_path = plugins_url( 'order-delivery-date-for-woocommerce/build/cart-block.asset.php' );
@@ -152,5 +155,11 @@ class Order_DeliveryDate_Lite_Cart_Block_Integration implements IntegrationInter
 			return filemtime( $file );
 		}
 		return ORDD_LITE_CART_BLOCK_VERSION;
+	}
+
+	public function is_editing_checkout_page() {
+		if ( ! is_admin() ) return false;
+		$post_id = $_GET['post'] ?? 0;
+		return ( absint($post_id) === wc_get_page_id( 'checkout' ) );
 	}
 }
