@@ -165,7 +165,7 @@ class Delivery_Calendar_lite_Event_JSON {
 
 				$time_settings = '';
 				if ( isset( $delivery_date_timestamp ) && $delivery_date_timestamp != '' ) {
-					$time_settings = date( 'H:i', $delivery_date_timestamp ); // phpcs:ignore
+					$time_settings = date( 'H:i', $delivery_date_timestamp );
 				}
 
 				$end_date = '';

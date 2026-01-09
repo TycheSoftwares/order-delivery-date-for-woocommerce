@@ -249,8 +249,8 @@ class orddd_lite_class_view_deliveries {
 	 */
 	public static function orddd_generate_data() {
 		global $wpdb;
-		if ( isset( $_GET['orderStatus'] ) && ( $_GET['orderStatus'] != '' ) ) { // phpcs:ignore
-			$order_status1 = $_GET['orderStatus']; // phpcs:ignore
+		if ( isset( $_GET['orderStatus'] ) && ( sanitize_text_field( wp_unslash( $_GET['orderStatus'] ) ) != '' ) ) {
+			$order_status1 = sanitize_text_field( wp_unslash( $_GET['orderStatus'] ) );
 			$order_status  = explode( ',', $order_status1 );
 		} else {
 			$all_order_status = wc_get_order_statuses();
@@ -265,25 +265,25 @@ class orddd_lite_class_view_deliveries {
 		}
 
 		$order_shipping = array();
-		if ( isset( $_GET['orderShipping'] ) && ( $_GET['orderShipping'] != '' ) ) { // phpcs:ignore
-			$order_shipping1 = $_GET['orderShipping']; // phpcs:ignore
+		if ( isset( $_GET['orderShipping'] ) && ( sanitize_text_field( wp_unslash( $_GET['orderShipping'] ) ) != '' ) ) {
+			$order_shipping1 = sanitize_text_field( wp_unslash( $_GET['orderShipping'] ) );
 			$order_shipping  = explode( ',', $order_shipping1 );
 		}
 
 		$event_start = $event_start_timestamp = $event_end = $event_end_timestamp = '';
 
-		if ( isset( $_GET['start'] ) ) { // phpcs:ignore
-			$event_start           = $_GET['start']; // phpcs:ignore
-			$event_start_timestamp = strtotime( $_GET['start'] ); // phpcs:ignore
+		if ( isset( $_GET['start'] ) ) {
+			$event_start           = sanitize_text_field( wp_unslash( $_GET['start'] ) );
+			$event_start_timestamp = strtotime( $event_start );
 		}
 
-		if ( isset( $_GET['end'] ) ) { // phpcs:ignore
-			$event_end           = $_GET['end']; // phpcs:ignore
-			$event_end_timestamp = strtotime( $_GET['end'] ); // phpcs:ignore
+		if ( isset( $_GET['end'] ) ) {
+			$event_end           = sanitize_text_field( wp_unslash( $_GET['end'] ) );
+			$event_end_timestamp = strtotime( $event_end );
 		}
 
 		// Start and end date is same then check for same date with end time ie 10th Nov 2018 23:59:59.
-		if ( $event_start_timestamp != '' && $event_start_timestamp == $event_end_timestamp ) { // phpcs:ignore
+		if ( $event_start_timestamp != '' && $event_start_timestamp == $event_end_timestamp ) {
 			$event_end_timestamp += 86399;
 		}
 
@@ -352,12 +352,12 @@ class orddd_lite_class_view_deliveries {
 				}
 			}
 
-			if ( 'order' === $_GET['eventType'] ) { // phpcs:ignore
+			if ( 'order' === sanitize_text_field( wp_unslash( $_GET['eventType'] ) ) ) {
 				$i = $order_id;
 			}
 			$products = array();
 			foreach ( $order_items as $item ) {
-				if ( 'product' == $_GET['eventType'] ) { // phpcs:ignore
+				if ( 'product' == sanitize_text_field( wp_unslash( $_GET['eventType'] ) ) ) {
 					$products = array();
 				}
 
