@@ -1954,6 +1954,165 @@ class Orddd_Lite_Common {
 		//phpcs:enable
 		return $clauses;
 	}
+	/**
+	 * Convert php date formats mysql date formats
+	 *
+	 * @return string Mysql date format
+	 *
+	 * @since 4.0
+	 */
+
+	public static function str_to_date_format() {
+		$date_format = get_option( 'orddd_delivery_date_format' );
+		switch ( $date_format ) {
+			case 'mm/dd/y':
+				$date_str  = str_replace( 'dd', '%d', $date_format );
+				$month_str = str_replace( 'mm', '%m', $date_str );
+				$year_str  = str_replace( 'y', '%y', $month_str );
+				break;
+			case 'dd/mm/y':
+				$date_str  = str_replace( 'dd', '%d', $date_format );
+				$month_str = str_replace( 'mm', '%m', $date_str );
+				$year_str  = str_replace( 'y', '%y', $month_str );
+				break;
+			case 'dd/mm/yy':
+				$date_str  = str_replace( 'dd', '%d', $date_format );
+				$month_str = str_replace( 'mm', '%m', $date_str );
+				$year_str  = str_replace( 'yy', '%Y', $month_str );
+				break;
+			case 'y/mm/dd':
+				$date_str  = str_replace( 'dd', '%d', $date_format );
+				$month_str = str_replace( 'mm', '%m', $date_str );
+				$year_str  = str_replace( 'y', '%y', $month_str );
+				break;
+			case 'mm/dd/y, D':
+				$day_str   = str_replace( 'D', '%a', $date_format );
+				$date_str  = str_replace( 'dd', '%d', $day_str );
+				$month_str = str_replace( 'mm', '%m', $date_str );
+				$year_str  = str_replace( 'y', '%y', $month_str );
+				break;
+			case 'dd.mm.y':
+				$date_str  = str_replace( 'dd', '%d', $date_format );
+				$month_str = str_replace( 'mm', '%m', $date_str );
+				$year_str  = str_replace( 'y', '%y', $month_str );
+				break;
+			case 'y.mm.dd':
+				$date_str  = str_replace( 'dd', '%d', $date_format );
+				$month_str = str_replace( 'mm', '%m', $date_str );
+				$year_str  = str_replace( 'y', '%y', $month_str );
+				break;
+			case 'yy-mm-dd':
+				$date_str  = str_replace( 'dd', '%d', $date_format );
+				$month_str = str_replace( 'mm', '%m', $date_str );
+				$year_str  = str_replace( 'yy', '%Y', $month_str );
+				break;
+			case 'dd-mm-y':
+				$date_str  = str_replace( 'dd', '%d', $date_format );
+				$month_str = str_replace( 'mm', '%m', $date_str );
+				$year_str  = str_replace( 'y', '%y', $month_str );
+				break;
+			case 'd M, y':
+				$date_str  = str_replace( 'd', '%e', $date_format );
+				$month_str = str_replace( 'M', '%b', $date_str );
+				$year_str  = str_replace( 'y', '%y', $month_str );
+				break;
+			case 'd M, yy':
+				$date_str  = str_replace( 'd', '%e', $date_format );
+				$month_str = str_replace( 'M', '%b', $date_str );
+				$year_str  = str_replace( 'yy', '%Y', $month_str );
+				break;
+			case 'd MM, y':
+				$date_str  = str_replace( 'd', '%e', $date_format );
+				$month_str = str_replace( 'MM', '%M', $date_str );
+				$year_str  = str_replace( 'y', '%y', $month_str );
+				break;
+			case 'd MM, yy':
+				$date_str  = str_replace( 'd', '%e', $date_format );
+				$month_str = str_replace( 'MM', '%M', $date_str );
+				$year_str  = str_replace( 'yy', '%Y', $month_str );
+				break;
+			case 'DD, d MM, yy':
+				$day_str   = str_replace( 'DD', '%W', $date_format );
+				$date_str  = str_replace( 'd', '%e', $day_str );
+				$month_str = str_replace( 'MM', '%M', $date_str );
+				$year_str  = str_replace( 'yy', '%Y', $month_str );
+				break;
+			case 'DD d MM yy':
+				$day_str   = str_replace( 'DD', '%W', $date_format );
+				$date_str  = str_replace( 'd', '%e', $day_str );
+				$month_str = str_replace( 'MM', '%M', $date_str );
+				$year_str  = str_replace( 'yy', '%Y', $month_str );
+				break;
+			case 'DD d MM':
+				$day_str   = str_replace( 'DD', '%W', $date_format );
+				$date_str  = str_replace( 'd', '%e', $day_str );
+				$month_str = str_replace( 'MM', '%M', $date_str );
+				$year_str  = str_replace( 'yy', '%Y', $month_str );
+				break;
+			case 'D, M d, yy':
+				$day_str   = str_replace( 'D', '%a', $date_format );
+				$date_str  = str_replace( 'd', '%e', $day_str );
+				$month_str = str_replace( 'M', '%b', $date_str );
+				$year_str  = str_replace( 'yy', '%Y', $month_str );
+				break;
+			case 'DD, M d, yy':
+				$day_str   = str_replace( 'DD', '%W', $date_format );
+				$date_str  = str_replace( 'd', '%e', $day_str );
+				$month_str = str_replace( 'M', '%b', $date_str );
+				$year_str  = str_replace( 'yy', '%Y', $month_str );
+				break;
+			case 'DD, MM d, yy':
+				$day_str   = str_replace( 'DD', '%W', $date_format );
+				$date_str  = str_replace( 'd', '%e', $day_str );
+				$month_str = str_replace( 'MM', '%M', $date_str );
+				$year_str  = str_replace( 'yy', '%Y', $month_str );
+				break;
+			case 'D, MM d, yy':
+				$day_str   = str_replace( 'D', '%a', $date_format );
+				$date_str  = str_replace( 'd', '%e', $day_str );
+				$month_str = str_replace( 'MM', '%M', $date_str );
+				$year_str  = str_replace( 'yy', '%Y', $month_str );
+				break;
+		}
+		return $year_str;
+	}
+	public static function get_all_wc_shipping_methods() {
+
+		$shipping_methods = array();
+
+		if ( ! class_exists( 'WC_Shipping_Zones' ) ) {
+			return $shipping_methods;
+		}
+
+		// Get all zones
+		$zones = WC_Shipping_Zones::get_zones();
+
+		// Add "Rest of the World" zone
+		$zones[] = array(
+			'zone_id'   => 0,
+			'zone_name' => __( 'Rest of the World', 'order-delivery-date' ),
+		);
+
+		foreach ( $zones as $zone_data ) {
+
+			$zone = new WC_Shipping_Zone( $zone_data['zone_id'] );
+			$methods = $zone->get_shipping_methods( true );
+
+			foreach ( $methods as $method ) {
+
+				if ( 'yes' !== $method->enabled ) {
+					continue;
+				}
+
+				$shipping_methods[] = array(
+					'title'      => $zone_data['zone_name'] . ' → ' . $method->get_title(),
+					'method_key' => $method->id . ':' . $method->instance_id,
+				);
+			}
+		}
+		return $shipping_methods;
+	}
+
 
 }
 

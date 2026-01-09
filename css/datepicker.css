@@ -181,3 +181,26 @@
     	float: none;
 	}
 }
+.orddd_label {
+    margin-bottom: 5px;
+    display: block;
+    font-size: 14px;
+}
+.orddd_delivery_table {
+    margin-bottom: 50px;
+}
+.orddd_delivery_table {
+    table-layout: fixed;
+    width: 100%;
+    margin-top: 10px;
+}
+.orddd_delivery_table tr td {
+    padding-right: 20px;
+}
+.orddd_delivery_table td {
+    vertical-align: top;
+}
+.fc-event-title-container {
+    cursor: pointer;
+}
+
