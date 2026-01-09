@@ -68,6 +68,7 @@ class ORDDD_Lite_View_Disable_Time_Slots extends WP_List_Table {
 	 * @since 3.11.0
 	 **/
 	public function column_cb( $item ) {
+		wp_nonce_field( 'orddd_block_time_slot_nonce', 'orddd_block_time_slot_nonce' );
 		if ( isset( $item->disable_dd ) && '' !== $item->disable_dd ) {
 			$dd = $item->disable_dd;
 			return sprintf(

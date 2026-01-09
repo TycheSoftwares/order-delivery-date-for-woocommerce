@@ -274,7 +274,7 @@ class Orddd_Lite_Settings {
 			array( 'Orddd_Lite_Appearance_Settings', 'orddd_lite_delivery_date_in_shipping_section_callback' ),
 			'orddd_lite_appearance_page',
 			'orddd_lite_appearance_section',
-			array( __( '</br>The Delivery Date field will be displayed in the selected section.</br><i>Note: WooCommerce automatically hides the Shipping section fields for Virtual products.</i>', 'order-delivery-date' ) )
+			array( __( '</br>The Delivery Date field will be displayed in the selected section.</br><i>Note: WooCommerce automatically hides the Shipping section fields for Virtual products.</i></br><i>Note: In Checkout Block, please add the Order Delivery Date block manually from the Edit Checkout page in any preferred section.</i>', 'order-delivery-date' ) )
 		);
 
 		add_settings_field(
@@ -1392,6 +1392,13 @@ class Orddd_Lite_Settings {
 		// phpcs:ignore WordPress.Security.NonceVerification
 		if ( ( isset( $_GET['page'] ) && 'order_delivery_date_lite' === $_GET['page'] ) && ( isset( $_GET['tab'] ) && 'general_settings' === $_GET['tab'] && ( isset( $_GET['section'] ) && sanitize_text_field( $_GET['section'] ) == 'holidays' ) ) && ( ( isset( $_GET['action'] ) && 'orddd_lite_delete' === $_GET['action'] ) || ( isset( $_GET['action2'] ) && 'orddd_lite_delete' === $_GET['action2'] ) ) ) { //phpcs:ignore
 
+			if ( ! is_admin() || ! current_user_can( 'manage_woocommerce' ) ) {
+					return;
+			}
+			if ( ! isset( $_GET['orddd_lite_holidays_nonce'] ) || ! wp_verify_nonce( $_GET['orddd_lite_holidays_nonce'], 'orddd_lite_holidays_nonce' ) ) { //phpcs:ignore
+				wp_die( 'Security check failed (invalid nonce).' );
+			}
+
 			$holiday = array();
 			// phpcs:ignore WordPress.Security.NonceVerification
 			if ( isset( $_GET['holiday'] ) ) {
@@ -1522,6 +1529,13 @@ class Orddd_Lite_Settings {
 		if ( ( isset( $_POST['page'] ) && sanitize_text_field( $_POST['page'] ) == 'order_delivery_date_lite' ) && ( isset( $_POST['tab'] ) && sanitize_text_field( $_POST['tab'] ) == 'general_settings' ) && ( isset( $_POST['section'] ) && sanitize_text_field( $_POST['section'] ) == 'block_time_slot_settings' ) ) { //phpcs:ignore
 
 			if ( ( isset( $_POST['action'] ) && sanitize_text_field( $_POST['action'] ) == 'orddd_delete' ) || ( isset( $_POST['action2'] ) && sanitize_text_field( $_POST['action2'] ) == 'orddd_delete' ) ) { //phpcs:ignore
+
+				if ( ! is_admin() || ! current_user_can( 'manage_woocommerce' ) ) {
+					return;
+				}
+				if ( ! isset( $_POST['orddd_block_time_slot_nonce'] ) || ! wp_verify_nonce( $_POST['orddd_block_time_slot_nonce'], 'orddd_block_time_slot_nonce' ) ) { //phpcs:ignore
+					wp_die( 'Security check failed (invalid nonce).' );
+				}
 				$block_time_slot_to_delete = array();
 				if ( isset( $_POST['block_time_slot'] ) ) { //phpcs:ignore
 					$block_time_slot_to_delete = $_POST['block_time_slot']; //phpcs:ignore

@@ -137,7 +137,27 @@ class Order_DeliveryDate_Lite_Blocks_Integration implements IntegrationInterface
 			'delivery-date-block-frontend',
 			$style_url,
 			array(),
-			time()
+			$script_asset['version'],
+			true
+		);
+
+		// Check if Order Delivery Date block is present on the checkout page.
+		$page_id = wc_get_page_id( 'checkout' );
+		$post    = get_post( $page_id );
+
+		$is_orddd_block_present = false;
+		if ( $post ) {
+			if ( has_block( 'order-delivery-date/delivery-date', $post->post_content ) ) {
+				$is_orddd_block_present = true;
+			}
+		}
+
+		wp_localize_script(
+			'delivery-date-block-frontend',
+			'orddd_block_params',
+			array(
+				'is_orddd_block_present' => $is_orddd_block_present,
+			)
 		);
 	}
 

@@ -4,12 +4,6 @@ import { SVG } from '@wordpress/components';
 import { Edit } from './edit';
 import metadata from '../../block.json';
 
-if ( wcSettings.shippingEnabled ) {
-	metadata.parent = [ "woocommerce/checkout-shipping-address-block" ]
-} else {
-	metadata.parent = [ "woocommerce/checkout-billing-address-block" ]
-}
-
 registerBlockType(metadata, {
 	icon: {
 		src: (
@@ -42,5 +36,12 @@ registerBlockType(metadata, {
 		),
 		foreground: '#874FB9',
 	},
-	edit: Edit
+	edit: Edit,
+	save: () => {
+		return wp.element.createElement(
+			'div',
+			{ className: 'order-delivery-date' },
+			"Order Delivery Date Field - Saved Content"
+		);
+	}
 });
