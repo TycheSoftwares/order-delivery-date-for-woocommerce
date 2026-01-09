@@ -53,6 +53,22 @@ add_action(
 	}
 );
 
+add_filter(
+    '__experimental_woocommerce_blocks_add_data_attributes_to_namespace',
+    function( $allowed_namespaces ) {
+        $allowed_namespaces[] = 'order-delivery-date';
+        return $allowed_namespaces;
+    }
+);
+
+add_filter(
+    '__experimental_woocommerce_blocks_add_data_attributes_to_block',
+    function( $allowed_blocks ) {
+        $allowed_blocks[] = 'order-delivery-date/delivery-date';
+        return $allowed_blocks;
+    }
+);
+
 /**
  * Callback function to register endpoint data for blocks.
  *

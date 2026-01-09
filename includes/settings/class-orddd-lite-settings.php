@@ -274,7 +274,7 @@ class Orddd_Lite_Settings {
 			array( 'Orddd_Lite_Appearance_Settings', 'orddd_lite_delivery_date_in_shipping_section_callback' ),
 			'orddd_lite_appearance_page',
 			'orddd_lite_appearance_section',
-			array( __( '</br>The Delivery Date field will be displayed in the selected section.</br><i>Note: WooCommerce automatically hides the Shipping section fields for Virtual products.</i>', 'order-delivery-date' ) )
+			array( __( '</br>The Delivery Date field will be displayed in the selected section.</br><i>Note: WooCommerce automatically hides the Shipping section fields for Virtual products.</i></br><i>Note: In Checkout Block, please add the Order Delivery Date block manually from the Edit Checkout page in any preferred section.</i>', 'order-delivery-date' ) )
 		);
 
 		add_settings_field(
