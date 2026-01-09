@@ -38,14 +38,14 @@ class Delivery_Calendar_lite_Event_JSON {
 	 */
 	public static function handle_event_json() {
 
-		$action    = isset( $_GET['action'] ) ? $_GET['action'] : ''; // phpcs:ignore
-		$vendor_id = isset( $_GET['vendor_id'] ) ? sanitize_text_field( wp_unslash( $_GET['vendor_id'] ) ) : ''; // phpcs:ignore
+		$action    = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
+		$vendor_id = isset( $_GET['vendor_id'] ) ? sanitize_text_field( wp_unslash( $_GET['vendor_id'] ) ) : '';
 		$is_vendor = '' !== $vendor_id && 0 !== $vendor_id;
 
 		if ( 'orddd-delivery-calendar-event-json' === $action ) {
 			global $wpdb;
-			if ( isset( $_GET['orderStatus'] ) && ( $_GET['orderStatus'] != '' ) ) { // phpcs:ignore
-				$order_status1 = $_GET['orderStatus']; // phpcs:ignore
+			if ( isset( $_GET['orderStatus'] ) && ( sanitize_text_field( wp_unslash( $_GET['orderStatus'] ) ) != '' ) ) {
+				$order_status1 = sanitize_text_field( wp_unslash( $_GET['orderStatus'] ) );
 				$order_status  = explode( ',', $order_status1 );
 			} else {
 				$all_order_status = wc_get_order_statuses();
@@ -60,8 +60,8 @@ class Delivery_Calendar_lite_Event_JSON {
 			}
 
 			$order_shipping = array();
-			if ( isset( $_GET['orderShipping'] ) && ( $_GET['orderShipping'] != '' ) ) { // phpcs:ignore
-				$order_shipping1 = $_GET['orderShipping']; // phpcs:ignore
+			if ( isset( $_GET['orderShipping'] ) && ( sanitize_text_field( wp_unslash( $_GET['orderShipping'] ) ) != '' ) ) {
+				$order_shipping1 = sanitize_text_field( wp_unslash( $_GET['orderShipping'] ) );
 				$order_shipping  = explode( ',', $order_shipping1 );
 			}
 
@@ -70,14 +70,14 @@ class Delivery_Calendar_lite_Event_JSON {
 			$event_end             = '';
 			$event_end_timestamp   = '';
 
-			if ( isset( $_GET['start'] ) ) { // phpcs:ignore
-				$event_start           = $_GET['start']; // phpcs:ignore
-				$event_start_timestamp = strtotime( $_GET['start'] ); // phpcs:ignore
+			if ( isset( $_GET['start'] ) ) {
+				$event_start           = sanitize_text_field( wp_unslash( $_GET['start'] ) );
+				$event_start_timestamp = strtotime( $event_start );
 			}
 
-			if ( isset( $_GET['end'] ) ) { // phpcs:ignore
-				$event_end           = $_GET['end']; // phpcs:ignore
-				$event_end_timestamp = strtotime( $_GET['end'] ); // phpcs:ignore
+			if ( isset( $_GET['end'] ) ) {
+				$event_end           = sanitize_text_field( wp_unslash( $_GET['end'] ) );
+				$event_end_timestamp = strtotime( $event_end );
 			}
 
 			$date_str            = Orddd_Lite_Common::str_to_date_format();
@@ -179,8 +179,8 @@ class Delivery_Calendar_lite_Event_JSON {
 				$is_addon_plugin_active = is_plugin_active( 'woocommerce-product-addons/woocommerce-product-addons.php' );
 
 				if ( in_array( $post_status, $order_status ) ) {
-					if ( ( isset( $_GET['eventType'] ) && ( $_GET['eventType'] == '' || $_GET['eventType'] == 'product' ) ) ||
-						! isset( $_GET['eventType'] ) ) { // phpcs:ignore
+					if ( ( isset( $_GET['eventType'] ) && ( sanitize_text_field( wp_unslash( $_GET['eventType'] ) ) == '' || sanitize_text_field( wp_unslash( $_GET['eventType'] ) ) == 'product' ) ) ||
+						! isset( $_GET['eventType'] ) ) {
 						if ( ! $order ) {
 							$order = new WC_Order( $order_id );
 						}
