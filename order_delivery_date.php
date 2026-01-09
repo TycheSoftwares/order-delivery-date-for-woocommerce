@@ -53,8 +53,9 @@ require_once 'includes/settings/class-orddd-lite-settings.php';
 require_once 'includes/class-orddd-lite-process.php';
 require_once 'includes/settings/class-orddd-lite-filter.php';
 require_once 'includes/class-orddd-lite-privacy.php';
+require_once 'includes/settings/class-orddd-lite-delivery-calendar.php';
 require_once 'includes/class-orddd-lite-admin-delivery.php';
-require_once 'includes/class-orddd-lite-email-manager.php';
+require_once 'includes/settings/class-delivery-calendar-event-json.php';
 if ( 'on' === get_option( 'orddd_lite_enable_delivery_date' ) ) {
 	require_once 'includes/integrations/wc-blocks/order-delivery-date-block.php';
 	require_once 'includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php';
@@ -108,6 +109,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			// Admin scripts.
 			add_action( 'admin_enqueue_scripts', array( &$this, 'orddd_lite_admin_scripts_js' ), 200 );
 			add_action( 'admin_enqueue_scripts', array( &$this, 'orddd_lite_my_enqueue' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'orddd_lite_do_enqueue_delivery_calendar_js_scripts' ), 99999 );
 
 			// Frontend.
 			add_action( ORDDD_LITE_SHOPPING_CART_HOOK, array( 'Orddd_Lite_Process', 'orddd_lite_my_custom_checkout_field' ) );
@@ -187,6 +189,8 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			add_action( 'woocommerce_after_cart_table', array( 'Orddd_Lite_Process', 'orddd_lite_show_hidden_fields' ) );
 			add_filter( 'bakery_enqueue_scripts', array( &$this, 'bakery_enqueue_scripts' ), 10, 2 );
 			add_filter( 'wp_plugin_check_checks', array( __CLASS__, 'orddd_lite_plugin_check_ignore_files' ), 10 );
+			add_action( 'wp_ajax_nopriv_orddd_order_calendar_content', array( 'orddd_lite_class_view_deliveries', 'orddd_order_calendar_content' ) );
+			add_action( 'wp_ajax_orddd_order_calendar_content', array( 'orddd_lite_class_view_deliveries', 'orddd_order_calendar_content' ) );
 		}
 
 		/**
@@ -447,6 +451,21 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 					$wpefield_version
 				);
 			}
+
+			wp_enqueue_style(
+				'fullcalendar-orddd',
+				plugins_url( 'js/fullcalendar/lib/main.min.css', __FILE__ ),
+				array(),
+				$wpefield_version
+			);
+
+			// Hover effect.
+			wp_enqueue_style(
+				'qtip-orddd-css',
+				plugins_url( 'css/jquery.qtip.min.css', __FILE__ ),
+				array(),
+				$wpefield_version
+			);
 		}
 
 		/**
@@ -537,6 +556,127 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 						false
 					);
 				}
+			}
+		}
+
+		/**
+		 * Enqueue Delivery Calendar JS files.
+		 *
+		 * @param string $hook Current page.
+		 * @since 9.28.3
+		 */
+		public static function orddd_lite_do_enqueue_delivery_calendar_js_scripts( $hook = '' ) { // phpcs:ignore
+
+			global $wpefield_version;
+
+			$do_enqueue = isset( $_GET['action'] ) && 'delivery_calendar' === $_GET['action'] ? true: false; // phpcs:ignore
+
+			if ( $do_enqueue ) {
+				wp_dequeue_script( 'tyche' );
+				wp_enqueue_script(
+					'orddd_lite_tyche',
+					plugins_url( 'js/tyche.js', __FILE__ ),
+					array( 'jquery' ),
+					$wpefield_version,
+					false
+				);
+				wp_enqueue_script(
+					'orddd-lite-vue',
+					plugins_url( 'js/vue.js', __FILE__ ),
+					array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker' ),
+					$wpefield_version,
+					true
+				);
+
+				wp_register_script(
+					'select2',
+					plugins_url() . '/woocommerce/assets/js/select2/select2.min.js',
+					array( 'jquery', 'jquery-ui-widget', 'jquery-ui-core' ),
+					array(),
+					$wpefield_version
+				);
+
+				$handle = ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '10.3.0', '>=' ) ) ? 'wc-select2' : 'select2';
+				wp_enqueue_script( $handle );
+				wp_enqueue_script( 'jquery' );
+
+				wp_register_script( // phpcs:ignore
+					'moment-orddd-js',
+					plugins_url( 'js/moment.min.js', __FILE__ ),
+					array(),
+					$wpefield_version
+				);
+
+				wp_register_script( // phpcs:ignore
+					'lang-all-js',
+					plugins_url( 'js/fullcalendar/lib/locales-all.min.js', __FILE__ ),
+					array(),
+					$wpefield_version
+				);
+
+				wp_register_script( // phpcs:ignore
+					'full-orddd-js',
+					plugins_url( 'js/fullcalendar/lib/main.min.js', __FILE__ ),
+					array(),
+					$wpefield_version
+				);
+
+				wp_register_script( // phpcs:ignore
+					'orddd-images-loaded',
+					plugins_url( 'js/imagesloaded.pkg.min.js', __FILE__ ),
+					array(),
+					$wpefield_version
+				);
+
+				wp_register_script(
+					'orddd-qtip',
+					plugins_url( 'js/jquery.qtip.min.js', __FILE__ ),
+					array( 'jquery', 'orddd-images-loaded' ),
+					array(),
+					$wpefield_version
+				);
+
+				wp_enqueue_script( 'orddd-qtip' );
+				wp_enqueue_script( 'moment-orddd-js' );
+				wp_enqueue_script( 'full-orddd-js' );
+				wp_enqueue_script( 'lang-all-js' );
+				wp_enqueue_script( 'orddd-images-loaded' );
+				wp_enqueue_script( 'jquery-ui-position' );
+				wp_enqueue_script( 'jquery-ui-selectmenu' );
+
+				
+
+				$language_selected = get_option( 'orddd_lite_language_selected' );
+
+				if ( '' === $language_selected ) {
+					$language_selected = 'en-GB';
+				}
+
+				$holidays_str = '';
+
+				$args = array(
+					'orddd_holiday_color' => get_option( 'orddd_lite_holiday_color' ),
+					'orddd_holidays'      => $holidays_str,
+					'calendar_language'   => $language_selected,
+					'admin_url'           => get_admin_url(),
+					'ajax_url'            => get_admin_url() . 'admin-ajax.php',
+					'pluginurl'           => admin_url() . 'admin.php?action=orddd-delivery-calendar-event-json&vendor_id=0',
+					'security'            => wp_create_nonce( 'orddd-delivery-calendar-event-json' ),
+					'vendor_id'           => 0,
+				);
+
+				wp_localize_script(
+					'full-orddd-js',
+					'orddd_calendar_js',
+					$args
+				);
+
+				wp_enqueue_script(
+					'orddd-calendar-js',
+					plugins_url( 'js/orddd-lite-view-calendar.js', __FILE__ ),
+					array(),
+					$wpefield_version
+				);
 			}
 		}
 
