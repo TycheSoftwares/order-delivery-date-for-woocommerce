@@ -599,6 +599,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				$handle = ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '10.3.0', '>=' ) ) ? 'wc-select2' : 'select2';
 				wp_enqueue_script( $handle );
 				wp_enqueue_script( 'jquery' );
+				wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' );
 
 				wp_register_script( // phpcs:ignore
 					'moment-orddd-js',
