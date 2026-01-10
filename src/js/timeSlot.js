@@ -35,7 +35,7 @@ const TimeSlot = ({ checkoutData, updateSession, setLoading }) => {
 		setTimeSlot( timeValue );
 		setIsRequired( 'checked' === orddd_lite_params.orddd_lite_time_slot_mandatory ? true : false );
 		setTimeLabel(orddd_lite_params.orddd_lite_delivery_timeslot_field_label);
-		onChangeTimeSlot( timeSlot );
+		onChangeTimeSlot( timeValue );
 
 		setExtensionData( 'order-delivery-date', 'orddd_lite_time_slot', timeSlot );
         setExtensionData( 'order-delivery-date', 'time_slot_mandatory', isRequired );
