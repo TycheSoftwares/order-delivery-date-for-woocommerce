@@ -31,11 +31,11 @@ const TimeSlot = ({ checkoutData, updateSession, setLoading }) => {
 			return;
 		}
 
-		let timeValue = 'undefined' !== localStorage.getItem( 'orddd_lite_time_slot' ) ? localStorage.getItem( 'orddd_lite_time_slot' ) : 'select';
+		let timeValue = 'undefined' !== localStorage.getItem( 'orddd_lite_time_slot' ) ? localStorage.getItem( 'orddd_lite_time_slot' ) : '';
 		setTimeSlot( timeValue );
 		setIsRequired( 'checked' === orddd_lite_params.orddd_lite_time_slot_mandatory ? true : false );
 		setTimeLabel(orddd_lite_params.orddd_lite_delivery_timeslot_field_label);
-		onChangeTimeSlot( timeSlot );
+		onChangeTimeSlot( timeValue );
 
 		setExtensionData( 'order-delivery-date', 'orddd_lite_time_slot', timeSlot );
         setExtensionData( 'order-delivery-date', 'time_slot_mandatory', isRequired );
@@ -65,7 +65,9 @@ const TimeSlot = ({ checkoutData, updateSession, setLoading }) => {
 						value: time_slot_to_display[0]
 					})
 				}
-				if ( 1 === i && 'on' === option_selected ) {
+				if ( typeof( time_slot_session ) !== "undefined" && time_slot_session !== null ) {
+					setTimeSlot( time_slot_session );
+				} else if ( 1 === i && 'on' === option_selected ) {
 					setTimeSlot( time_slot_to_display[1] );
 					onChangeTimeSlot( time_slot_to_display[0] );
 				}
