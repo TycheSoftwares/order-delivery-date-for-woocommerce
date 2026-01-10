@@ -5,8 +5,7 @@
 <div id="content" class="orddd-shipping-based">
 	<div class="container-fluid pl-info-wrap">
 		<div class="row">
-			<h2><?php _e( 'Delivery Calendar', 'order-delivery-date' ); ?></h2>
-
+			<h2 style="padding-left: 16px;"><?php _e( 'Filters', 'order-delivery-date' ); ?></h2>
 			<div class="orddd-filters-card">
 
 				<div class="orddd-filters-row">

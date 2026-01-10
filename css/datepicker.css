@@ -348,17 +348,26 @@ div.orddd-filter-field .select2-selection__choice__remove {
 	background: #2271b1 !important;
     border-color: #2271b1 !important;
 }
-.fc .fc-button-group>.fc-prev-button,.fc .fc-button-group>.fc-next-button,.fc-today-button {
+.fc .fc-button-group>.fc-prev-button,.fc .fc-button-group>.fc-next-button, .fc .fc-button-group>.fc-today-button {
 	background: #2271b1 !important;
     border-color: #2271b1;
+    text-transform: capitalize !important;
+    margin-right: 5px;
+    border-radius: 11%;
 }
 .fc .fc-button-group>.fc-button.fc-button-primary {
 	border-color: #ccc;
     color: black;
     background-color: #f0f0f1;
+    text-transform: capitalize;
 }
 .fc .fc-button-group>.fc-button.fc-button-primary span.fc-icon {
 	color: white;
+}
+button.fc-today-button.fc-button.fc-button-primary {
+    color: white !important;
+    background-color: #2271b1 !important;
+    opacity: 99;
 }
 
 
