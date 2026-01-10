@@ -181,26 +181,184 @@
     	float: none;
 	}
 }
-.orddd_label {
-    margin-bottom: 5px;
-    display: block;
+/* ===============================
+   Filters Card
+   =============================== */
+.orddd-filters-card {
+    background: #f6f7f7;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+}
+
+/* Filters Title */
+.orddd-filters-title {
+    margin: 0 0 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+/* ===============================
+   Filters Layout
+   =============================== */
+.orddd-filters-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+/* Each Field */
+.orddd-filter-field {
+    display: flex;
+    flex-direction: column;
+    min-width: 220px;
+    flex: 1 1 auto; /* allows fields to shrink/grow */
+}
+
+/* Labels */
+.orddd-filter-field label {
+    font-size: 14px;
+    font-weight: 450;
+    margin-bottom: 4px;
+    color: #1d2327;
+}
+
+/* ===============================
+   Select2 Styling
+   =============================== */
+
+/* Force width (override inline styles) */
+.orddd-filter-field .select2-container {
+    width: 220px !important;
+    min-width: 220px;
     font-size: 14px;
 }
-.orddd_delivery_table {
-    margin-bottom: 50px;
+
+/* Specific wider fields */
+#orddd_filter_by_order_status ~ .select2-container,
+#orddd_filter_by_order_shipping ~ .select2-container {
+    width: 320px !important;
+    min-width: 320px;
 }
-.orddd_delivery_table {
-    table-layout: fixed;
+
+/* Single Select */
+div.orddd-filter-field .select2-container--default .select2-selection--single {
+    height: 32px;
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+
+div.orddd-filter-field .select2-selection--single .select2-selection__rendered {
+    line-height: 30px;
+    padding-left: 8px;
+}
+
+/* Multi Select */
+div.orddd-filter-field .select2-container--default .select2-selection--multiple {
+    min-height: 32px;
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+    padding: 2px 6px;
+    max-height: 66px;
+    overflow-y: auto;
+}
+
+/* Status / Choice Pills */
+div.orddd-filter-field .select2-selection__choice {
+    background: #f0f0f1 !important;
+    border: 1px solid #c3c4c7 !important;
+    border-radius: 3px;
+    font-size: 13px;
+    padding: 2px 6px;
+    margin: 3px 4px 0 0;
+    color: #1d2327;
+}
+
+/* Remove blue highlight for remove button */
+div.orddd-filter-field .select2-selection__choice__remove {
+    color: #50575e;
+}
+
+/* ===============================
+   Actions (Apply / CSV / Print)
+   =============================== */
+
+/* Filter Buttons Container */
+.orddd-filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 22px;
+}
+
+/* Apply Filters Button */
+#orddd_filter_calendar_data.button-primary {
+    height: 32px;
+    line-height: 30px;
+    padding: 0 14px;
+    font-size: 13px;
+}
+
+/* CSV & Print */
+.orddd-export-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 12px;
 }
-.orddd_delivery_table tr td {
-    padding-right: 20px;
+
+.orddd-export-actions .button {
+    height: 32px;
+    line-height: 30px;
+    padding: 0 10px;
+    font-size: 13px;
+    background: #fff;
 }
-.orddd_delivery_table td {
-    vertical-align: top;
+
+/* ===============================
+   Responsive Adjustments
+   =============================== */
+@media (max-width: 1200px) {
+    .orddd-filters-row {
+        flex-wrap: wrap;
+    }
+
+    .orddd-filter-actions {
+        padding-top: 10px;
+    }
+
+    /* Make all fields 100% width on small screens */
+    .orddd-filter-field {
+        min-width: 100%;
+    }
+
+    #orddd_filter_by_order_status ~ .select2-container,
+    #orddd_filter_by_order_shipping ~ .select2-container {
+        width: 100% !important;
+        min-width: 100% !important;
+    }
 }
-.fc-event-title-container {
-    cursor: pointer;
+.fc .fc-button-group>.fc-button.fc-button-active {
+	background: #2271b1 !important;
+    border-color: #2271b1 !important;
 }
+.fc .fc-button-group>.fc-prev-button,.fc .fc-button-group>.fc-next-button,.fc-today-button {
+	background: #2271b1 !important;
+    border-color: #2271b1;
+}
+.fc .fc-button-group>.fc-button.fc-button-primary {
+	border-color: #ccc;
+    color: black;
+    background-color: #f0f0f1;
+}
+.fc .fc-button-group>.fc-button.fc-button-primary span.fc-icon {
+	color: white;
+}
+
 
