@@ -1,6 +1,13 @@
 *** Order Delivery Date for WooCommerce ***
+2026-01-13 - version 4.4.0
+* Enhancement – Added a Delivery Calendar to capture and manage delivery dates during checkout, making it easier for store owners to collect and manage customers’ delivery preferences.
+* Tweak - Ability to add Order Delivery Date block in any section on the checkout block page.
+* Fix - The “Disable Delivery Date and Time Slot Fields for Virtual Products” option was incorrectly hiding the fields for all products.
+* Fix - The selected delivery time slot was not retained on the Block Checkout page.
+
 2025-12-19 - version 4.3.2
 * Fix - Resolved a security issue where unauthenticated requests could trigger deletion of block time slots & holidays in the Order Delivery Date settings.
+
 2025-11-19 - version 4.3.1
 * Fix - Resolved a security issue where unauthenticated requests could trigger deletion of time slots in the Order Delivery Date settings.
 
