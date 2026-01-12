@@ -369,5 +369,25 @@ button.fc-today-button.fc-button.fc-button-primary {
     background-color: #2271b1 !important;
     opacity: 99;
 }
+#orddd_lite_time_slot ul li {
+    padding: 5px;
+    margin-left: 13px
+}
+
+#orddd_lite_time_slot ul {
+    margin-top: 9px;
+    background: #f2f2f2;
+    margin-left: 0;
+    width: 100%;
+    list-style: none
+}
+
+div#orddd_lite_time_slot input {
+    width: 100% !important
+}
+
+#orddd_lite_time_slot label {
+    text-transform: none !important
+}
 
 
