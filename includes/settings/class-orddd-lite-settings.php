@@ -1121,11 +1121,11 @@ class Orddd_Lite_Settings {
 		<div class="wrap woocommerce">
 			<nav class="nav-tab-wrapper woo-nav-tab-wrapper" id="orddd_settings_tabs">
 				<a href="admin.php?page=order_delivery_date_lite&action=general_settings" class="nav-tab <?php echo esc_attr( $active_general_settings ); ?>"><?php esc_attr_e( 'General Settings', 'order-delivery-date' ); ?> </a>
+				<a href="admin.php?page=order_delivery_date_lite&action=delivery_calendar" class="nav-tab <?php echo esc_attr( $active_delivery_calendar ); ?>"> <?php esc_attr_e( 'Delivery Calendar', 'order-delivery-date' ); ?> </a>
 				<?php if ( 'yes' === get_option( 'orddd_pro_installed', '' ) ) : ?>
 				<a href="admin.php?page=order_delivery_date_lite&action=shipping_based" class="nav-tab <?php echo esc_attr( $active_shipping_based ); ?>"> <?php esc_attr_e( 'Delivery Schedules', 'order-delivery-date' ); ?> </a>
 				<a href="admin.php?page=order_delivery_date_lite&action=calendar_sync_settings" class="nav-tab <?php echo esc_attr( $calendar_sync_settings ); ?>"> <?php esc_attr_e( 'Integrations', 'order-delivery-date' ); ?></a>
 				<?php endif; ?>
-				<a href="admin.php?page=order_delivery_date_lite&action=delivery_calendar" class="nav-tab <?php echo esc_attr( $active_delivery_calendar ); ?>"> <?php esc_attr_e( 'Delivery Calendar', 'order-delivery-date' ); ?> </a>
 				<?php
 					do_action( 'orddd_lite_add_settings_tab' );
 				?>
