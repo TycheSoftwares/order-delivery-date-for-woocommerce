@@ -91,7 +91,7 @@
 
 			<div id="orddd_events_loader">
 			<div class="orddd_events_loader_wrapper">
-				Loading delivery events...<img src=<?php echo plugins_url() . '/order-delivery-date/images/ajax-loader.gif'; ?>>
+				Loading delivery events...<img src=<?php echo plugins_url() . '/order-delivery-date-for-woocommerce/images/ajax-loader.gif'; ?>>
 			</div>
 		</div>
 		<div id='calendar' style="padding:10px"></div>

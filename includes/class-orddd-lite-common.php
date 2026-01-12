@@ -1982,7 +1982,7 @@ class Orddd_Lite_Common {
 	 */
 
 	public static function str_to_date_format() {
-		$date_format = get_option( 'orddd_delivery_date_format' );
+		$date_format = get_option( 'orddd_lite_delivery_date_format' );
 		switch ( $date_format ) {
 			case 'mm/dd/y':
 				$date_str  = str_replace( 'dd', '%d', $date_format );
