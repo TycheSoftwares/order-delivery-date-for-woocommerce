@@ -182,7 +182,7 @@ This plugin communicates with our tracking server to send usage data **only** if
 == Changelog ==
 
 = 4.4.0 (13.01.2026)
-* Enhancement – Added a Delivery Calendar to capture and manage delivery dates during checkout, making it easier for store owners to collect and manage customers’ delivery preferences.
+* Enhancement – Added a Delivery Calendar view in the backend to review and manage delivery dates for received orders.
 * Tweak - Ability to add Order Delivery Date block in any section on the checkout block page.
 * Fix - The “Disable Delivery Date and Time Slot Fields for Virtual Products” option was incorrectly hiding the fields for all products.
 * Fix - The selected delivery time slot was not retained on the Block Checkout page.
