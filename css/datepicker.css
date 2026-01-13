@@ -185,10 +185,10 @@
    Filters Card
    =============================== */
 .orddd-filters-card {
-    background: #f6f7f7;
+    background: #f1f1f5;
     border: 1px solid #dcdcde;
     border-radius: 4px;
-    padding: 16px 18px;
+    padding: 30px 18px;
     margin-bottom: 18px;
 }
 
@@ -207,21 +207,21 @@
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    gap: 14px;
+    gap: 12px;
 }
 
 /* Each Field */
 .orddd-filter-field {
     display: flex;
     flex-direction: column;
-    min-width: 220px;
-    flex: 1 1 auto; /* allows fields to shrink/grow */
+    min-width: 160px;
+    margin-right: 10px;
 }
 
 /* Labels */
 .orddd-filter-field label {
     font-size: 14px;
-    font-weight: 450;
+    font-weight: 500;
     margin-bottom: 4px;
     color: #1d2327;
 }
@@ -232,16 +232,16 @@
 
 /* Force width (override inline styles) */
 .orddd-filter-field .select2-container {
-    width: 220px !important;
-    min-width: 220px;
+    width: 160px !important;
+    min-width: 160px;
     font-size: 14px;
 }
 
 /* Specific wider fields */
 #orddd_filter_by_order_status ~ .select2-container,
 #orddd_filter_by_order_shipping ~ .select2-container {
-    width: 320px !important;
-    min-width: 320px;
+    width: 230px !important;
+    min-width: 230px;
 }
 
 /* Single Select */
@@ -290,9 +290,6 @@ div.orddd-filter-field .select2-selection__choice__remove {
 
 /* Filter Buttons Container */
 .orddd-filter-actions {
-    display: flex;
-    align-items: center;
-    gap: 6px;
     padding-top: 22px;
 }
 
@@ -306,11 +303,10 @@ div.orddd-filter-field .select2-selection__choice__remove {
 
 /* CSV & Print */
 .orddd-export-actions {
+    margin-left: auto;
     display: flex;
-    justify-content: flex-end;
-    gap: 6px;
-    width: 100%;
-    margin-top: 12px;
+    gap: 8px;
+    margin-top: 22px;
 }
 
 .orddd-export-actions .button {
@@ -388,6 +384,64 @@ div#orddd_lite_time_slot input {
 
 #orddd_lite_time_slot label {
     text-transform: none !important
+}
+.fc-h-event .fc-event-title-container, div.fc-daygrid-event-harness {
+	cursor: pointer !important;
+}
+.orddd-tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.orddd-tooltiptext {
+    position: absolute;
+    top: 165%;
+    right: 95%;                 /* show on right side */
+    transform: translateY(-50%);
+    background: #ffffff;
+    color: #1d2327;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.4;
+    width: 150px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 9999;
+}
+
+/* Tooltip arrow (left side) */
+.orddd-tooltiptext::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 80%;
+    transform: translateY(-50%);
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent #ffffff transparent transparent;
+}
+
+/* Show on hover */
+.orddd-tooltip:hover .orddd-tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+.orddd-export-actions {
+    overflow: visible;
+}
+.orddd-tooltiptext {
+    width: 150px;          /* decrease width */
+    max-width: 150px;
+    white-space: normal;  /* allow wrapping */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+.orddd-tooltiptext {
+    width: 150px;
 }
 
 
