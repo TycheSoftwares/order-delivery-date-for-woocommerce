@@ -443,5 +443,8 @@ div#orddd_lite_time_slot input {
 .orddd-tooltiptext {
     width: 150px;
 }
+table.fc-scrollgrid-liquid .fc-scrollgrid-sync-inner a {
+    color: #1d2327;
+}
 
 
