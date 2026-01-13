@@ -5,7 +5,6 @@
 <div id="content" class="orddd-shipping-based">
 	<div class="container-fluid pl-info-wrap">
 		<div class="row">
-			<h2 style="padding-left: 16px;"><?php _e( 'Filters', 'order-delivery-date' ); ?></h2>
 			<div class="orddd-filters-card">
 
 				<div class="orddd-filters-row">
@@ -70,20 +69,21 @@
 							<?php _e( 'Apply Filters', 'order-delivery-date' ); ?>
 						</a>
 					</div>
-				</div>
+					<div class="orddd-export-actions">
+						<a href="<?php echo esc_url( add_query_arg( 'download', 'orddd_data.csv' ) ); ?>"
+								   id="orddd_csv_orders" class="button orddd-tooltip">
+							<i class="fa-solid fa-file-csv" style="margin-right:6px;"></i>
+							<?php _e( 'CSV', 'order-delivery-date' ); ?>
+							<span class="orddd-tooltiptext"><?php _e( 'Print the data by using the Order status filter and Month, Week and Day option of the calendar to filter the print data.', 'order-delivery-date-for-woocommerce' ); ?></span>
+						</a>
 
-				<div class="orddd-export-actions">
-					<a href="<?php echo esc_url( add_query_arg( 'download', 'orddd_data.csv' ) ); ?>"
-							   id="orddd_csv_orders" class="button">
-						<i class="fa-solid fa-file-csv" style="margin-right:6px;"></i>
-						<?php _e( 'CSV', 'order-delivery-date' ); ?>
-					</a>
-
-					<a href="<?php echo esc_url( add_query_arg( 'download', 'orddd_data.print' ) ); ?>"
-							   target="_blank" id="orddd_print_orders" class="button">
-						<i class="fa-solid fa-print" style="margin-right:6px;"></i>
-						<?php _e( 'Print', 'order-delivery-date' ); ?>
-					</a>
+						<a href="<?php echo esc_url( add_query_arg( 'download', 'orddd_data.print' ) ); ?>"
+								   target="_blank" id="orddd_print_orders" class="button orddd-tooltip">
+							<i class="fa-solid fa-print" style="margin-right:6px;"></i>
+							<?php _e( 'Print', 'order-delivery-date' ); ?>
+							<span class="orddd-tooltiptext"><?php _e( 'Export Deliveries in CSV format. You can use the Order status filter and Month, Week and Day option of the calendar to filter the export data.', 'order-delivery-date' ); ?></span>
+						</a>
+					</div>
 				</div>
 
 			</div>
