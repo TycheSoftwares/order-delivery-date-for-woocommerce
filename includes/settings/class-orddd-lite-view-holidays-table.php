@@ -66,7 +66,6 @@ class Orddd_Lite_View_Holidays_Table extends WP_List_Table {
 	 * @since 2.8
 	 **/
 	public function column_cb( $item ) {
-		wp_nonce_field( 'orddd_lite_holidays_nonce', 'orddd_lite_holidays_nonce' );
 		$row_id = '';
 		if ( isset( $item->holiday_date_stored ) && '' !== $item->holiday_date_stored ) {
 			$row_id = $item->holiday_date_stored;

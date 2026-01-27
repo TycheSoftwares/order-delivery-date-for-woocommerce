@@ -1234,6 +1234,7 @@ class Orddd_Lite_Settings {
 							<input type="hidden" name="page" value="order_delivery_date_lite" />
 							<input type="hidden" name="tab" value="general_settings" />
 							<input type="hidden" name="section" value="holidays" />
+							<input type="hidden" name="orddd_lite_holidays_nonce" value="<?php echo wp_create_nonce( 'orddd_lite_holidays_nonce' ); ?>">
 							<?php $orddd_table->display(); ?>
 						</form>
 					</div>
@@ -1294,6 +1295,7 @@ class Orddd_Lite_Settings {
 							<input type="hidden" name="page" value="order_delivery_date_lite" />
 							<input type="hidden" name="tab" value="general_settings" />
 							<input type="hidden" name="section" value="time_slot" />
+							<input type="hidden" name="orddd_bulk_delete_nonce" value="<?php echo wp_create_nonce( 'orddd_bulk_delete_nonce' ); ?>">
 							<?php $orddd_table->display(); ?>
 						</form>
 					</div>
@@ -1320,6 +1322,7 @@ class Orddd_Lite_Settings {
 								<input type="hidden" name="page" value="order_delivery_date_lite" />
 								<input type="hidden" name="tab" value="general_settings" />
 								<input type="hidden" name="section" value="block_time_slot_settings" />
+								<input type="hidden" name="orddd_block_time_slot_nonce" value="<?php echo wp_create_nonce( 'orddd_block_time_slot_nonce' ); ?>">
 								<?php $orddd_table_test->display(); ?>
 							</form>
 						</div>
@@ -1442,7 +1445,7 @@ class Orddd_Lite_Settings {
 				if ( ! is_admin() || ! current_user_can( 'manage_woocommerce' ) ) {
 					return;
 				}
-				if ( ! isset( $_POST['orddd_bulk_delete_nonce'] ) || ! wp_verify_nonce( $_POST['orddd_bulk_delete_nonce'], 'orddd_bulk_delete_action' ) ) { //phpcs:ignore
+				if ( ! isset( $_POST['orddd_bulk_delete_nonce'] ) || ! wp_verify_nonce( $_POST['orddd_bulk_delete_nonce'], 'orddd_bulk_delete_nonce' ) ) { //phpcs:ignore
 					wp_die( 'Security check failed (invalid nonce).' );
 				}
 
