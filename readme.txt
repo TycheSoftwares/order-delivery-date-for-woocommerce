@@ -69,6 +69,7 @@ Here are the Order Delivery Date for WooCommerce lite features:
 * Admin can edit delivery dates from Orders page & notify the customer.
 * Selected Delivery Date will be displayed on the WooCommerce Order page at the backend.
 * The selected delivery date will be displayed on the WooCommerce Edit Order page in the admin dashboard.
+* View delivery dates of received orders in a calendar inside the admin dashboard, making it easier to review delivery schedules in one place.
 * Admins can filter orders based on the delivery dates on the WooCommerce orders page.
 * Compatible with WooCommerce HPOS.
 
