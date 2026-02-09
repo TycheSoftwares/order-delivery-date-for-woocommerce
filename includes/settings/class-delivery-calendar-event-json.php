@@ -27,7 +27,6 @@ class Delivery_Calendar_lite_Event_JSON {
 	 * @since 8.1
 	 */
 	public function __construct() {
-		add_action( 'init', array( &$this, 'handle_event_json' ) );
 		add_action( 'admin_init', array( &$this, 'handle_event_json' ) );
 	}
 
@@ -37,12 +36,20 @@ class Delivery_Calendar_lite_Event_JSON {
 	 * @since 1.0
 	 */
 	public static function handle_event_json() {
+		if ( ! current_user_can( 'manage_woocommerce' ) && ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'Unauthorized', 'order-delivery-date' ), 403 );
+		}
 
 		$action    = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
 		$vendor_id = isset( $_GET['vendor_id'] ) ? sanitize_text_field( wp_unslash( $_GET['vendor_id'] ) ) : '';
 		$is_vendor = '' !== $vendor_id && 0 !== $vendor_id;
 
 		if ( 'orddd-delivery-calendar-event-json' === $action ) {
+			$import_nonce = isset( $_GET['security'] ) ? sanitize_text_field( wp_unslash( $_GET['security'] ) ) : '';
+			if ( ! wp_verify_nonce( $import_nonce, 'orddd-delivery-calendar-event-json' ) ) {
+				esc_html_e( 'Authentication has failed.', 'order-delivery-date' );
+				return;
+			}
 			global $wpdb;
 			if ( isset( $_GET['orderStatus'] ) && ( sanitize_text_field( wp_unslash( $_GET['orderStatus'] ) ) != '' ) ) {
 				$order_status1 = sanitize_text_field( wp_unslash( $_GET['orderStatus'] ) );
@@ -121,6 +128,7 @@ class Delivery_Calendar_lite_Event_JSON {
 			)";
 
 			$orddd_query = apply_filters( 'orddd_lite_calendar_where_filter', $orddd_query );
+			$orddd_query = $wpdb->prepare( $orddd_query );
 			$results     = $wpdb->get_results( $orddd_query );// nosemgrep:audit.php.wp.security.sqli.input-in-sinks
 			$data        = array();
 
@@ -512,6 +520,7 @@ class Delivery_Calendar_lite_Event_JSON {
 			}
 
 			$orddd_query = 'SELECT ID FROM `' . $wpdb->prefix . "posts` WHERE post_type = 'shop_order' AND post_status NOT IN ('wc-cancelled', 'wc-refunded', 'trash', 'wc-failed') AND ID IN ( SELECT post_id FROM `" . $wpdb->prefix . "postmeta` WHERE meta_key LIKE '%_orddd_shipping_multiple_addresss_timestamp_%' AND meta_value >= '" . $event_start_timestamp . "' AND meta_value <= '" . $event_end_timestamp . "' ) ";
+			$orddd_query = $wpdb->prepare( $orddd_query );
 			$results     = $wpdb->get_results( $orddd_query );// nosemgrep:audit.php.wp.security.sqli.input-in-sinks
 			if ( is_array( $results ) && count( $results ) > 0 ) {
 				foreach ( $results as $key => $value ) {
@@ -522,6 +531,7 @@ class Delivery_Calendar_lite_Event_JSON {
 					if ( in_array( $post_status, $order_status ) ) {
 						$shipping_packages = $order->get_meta( '_shipping_packages', true );
 						$query             = 'SELECT meta_key, meta_value FROM `' . $wpdb->prefix . "postmeta` WHERE post_id='" . $value->ID . "' AND meta_key LIKE '%_orddd_shipping_multiple_addresss_%'";
+						$query             = $wpdb->prepare( $query );
 						$results_array     = $wpdb->get_results( $query );// nosemgrep:audit.php.wp.security.sqli.input-in-sinks
 						$delivery_dates    = array();
 						foreach ( $results_array as $r_key => $r_value ) {
