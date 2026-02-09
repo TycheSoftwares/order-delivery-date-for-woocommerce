@@ -59,21 +59,46 @@ class orddd_lite_class_view_deliveries {
 	            $delivery_date_formatted = Orddd_Lite_Common::orddd_lite_get_order_delivery_date( $order_id );
 	            $order_page_time_slot    = Orddd_Lite_Common::orddd_get_order_timeslot( $order_id );
 
-	            $content = '<table>
-	                <tr><td> <strong>Order:</strong></td><td><a href="' . esc_url( $edit_order_url ) . '">#' . $order->get_order_number() . ' </a></td></tr>
-	                <tr><td> <strong>Product Name:</strong></td><td> ' . esc_html( $product_name ) . ' x' . esc_html( $product_quantity ) . '</td></tr>
-	                <tr><td> <strong>Customer Name:</strong></td><td> ' . esc_html( $billing_first_name ) . ' ' . esc_html( $billing_last_name ) . '</td></tr>';
+	            $content .= '
+				<div class="orddd-popup-card">
+
+				<div class="orddd-popup-header">
+					<span>
+						Order <a href="' . esc_url( $edit_order_url ) . '">#' . esc_html( $order->get_order_number() ) . '</a>
+					</span>
+				</div>
+				<div class="orddd-popup-body">';
+
+				if ( $product_id ) {
+	                $post_image = get_the_post_thumbnail( $product_id, array( 100, 100 ) );
+	                if ( ! empty( $post_image ) ) {
+	                    $content .= '<div class="orddd_product_image">' . $post_image . '</div>';
+	                }
+	            }
+
+	            $content .= '
+					<div class="orddd-popup-details">
+						<div class="orddd-product-name">
+							<i class="fa-solid fa-cube"></i>
+							' . esc_html( $product_name ) . '
+							<span class="qty">x' . esc_html( $product_quantity ) . '</span>
+						</div>
+
+						<div class="orddd-row">
+							<i class="fas fa-user"></i>
+							' . esc_html( trim( $billing_first_name . ' ' . $billing_last_name ) ) . '
+						</div>';
 
 	            if ( isset( $delivery_date_formatted ) && $delivery_date_formatted != '0000-00-00' && isset( $_REQUEST['event_date'] ) && $_REQUEST['event_date'] == '' ) {
-	                $content .= '<tr> <td> <strong>Delivery Date:</strong></td><td> ' . esc_html( $delivery_date_formatted ) . '</td></tr>';
+	                $content .= '<div class="orddd-row"><i class="fas fa-calendar-alt"></i> ' . esc_html( $delivery_date_formatted ) . '</div>';
 	            } elseif ( isset( $_REQUEST['event_date'] ) && $_REQUEST['event_date'] != '' ) {
-	                $content .= '<tr> <td> <strong>Delivery Date:</strong></td><td> ' . esc_html( $_REQUEST['event_date'] ) . '</td></tr>';
+	                $content .= '<div class="orddd-row"><i class="fas fa-calendar-alt"></i> ' . esc_html( $_REQUEST['event_date'] ) . '</div>';
 	            }
 
 	            if ( isset( $order_page_time_slot ) && $order_page_time_slot != '' && isset( $_REQUEST['event_date'] ) && $_REQUEST['event_date'] == '' ) {
-	                $content .= '<tr> <td> <strong>Time Slot:</strong></td><td> ' . esc_html( $order_page_time_slot ) . '</td></tr>';
+	                $content .= '<div class="orddd-row"><i class="fas fa-clock"></i> ' . esc_html( $order_page_time_slot ) . '</div>';
 	            } elseif ( isset( $_REQUEST['event_timeslot'] ) && $_REQUEST['event_timeslot'] != '' ) {
-	                $content .= '<tr> <td> <strong>Time Slot:</strong></td><td> ' . esc_html( $_REQUEST['event_timeslot'] ) . '</td></tr>';
+	                $content .= '<div class="orddd-row"><i class="fas fa-clock"></i> ' . esc_html( $_REQUEST['event_timeslot'] ) . '</div>';
 	            }
 
 	            $custom_fields = '';
@@ -82,36 +107,44 @@ class orddd_lite_class_view_deliveries {
 	            }
 
 	            if ( $custom_fields != '' ) {
-	                $content .= esc_html( $custom_fields );
+	                $content .= '<div class="orddd-row">' . esc_html( $custom_fields ) . '</div>';
 	            }
 
-	            $content .= '</table>';
-
-	            if ( $product_id ) {
-	                $post_image = get_the_post_thumbnail( $product_id, array( 100, 100 ) );
-	                if ( ! empty( $post_image ) ) {
-	                    $content = '<div class="orddd_product_image">' . $post_image . '</div>' . $content;
-	                }
-	            }
+	            $content .= ' </div>
+				</div>
+				<a class="orddd-view-order" href="' . esc_url( $edit_order_url ) . '">
+					View Order
+				</a> </div>';
 	        } elseif ( $_REQUEST['event_type'] == 'order' ) {
 	        	$delivery_date_formatted = Orddd_Lite_Common::orddd_lite_get_order_delivery_date( $order_id );
 	            $order_page_time_slot    = Orddd_Lite_Common::orddd_get_order_timeslot( $order_id );
 
 	            $value[] = sanitize_text_field( $_REQUEST['event_value'] );
-	            $content = '<table>
-	                <tr> <td> <strong>Order:</strong></td><td><a href="'. esc_url( $edit_order_url ) . '">#' . $order->get_order_number() . ' </a> </td> </tr>
-	                <tr> <td> <strong>Customer Name:</strong></td><td> ' . esc_html( $billing_first_name ) . ' ' . esc_html( $billing_last_name ) . '</td> </tr>';
+	            $content .= '
+					<div class="orddd-popup-card">
+						<div class="orddd-popup-header">
+							<span>
+								Order <a href="' . esc_url( $edit_order_url ) . '">#' . esc_html( $order->get_order_number() ) . '</a>
+							</span>
+						</div>
+						<div class="orddd-popup-body">
+							<div class="orddd-popup-details full">
+
+								<div class="orddd-row">
+									<i class="fas fa-user"></i>
+									' . esc_html( trim( $billing_first_name . ' ' . $billing_last_name ) ) . '
+								</div>';
 
 	            if ( isset( $delivery_date_formatted ) && $delivery_date_formatted != '0000-00-00' && isset( $_REQUEST['event_date'] ) && $_REQUEST['event_date'] == '' ) {
-	                $content .= '<tr> <td> <strong>Delivery Date:</strong></td><td> ' . esc_html( $delivery_date_formatted ) . '</td></tr>';
+	                $content .= '<div class="orddd-row"><i class="fas fa-calendar-alt"></i> ' . esc_html( $delivery_date_formatted ) . '</div>';
 	            } elseif ( isset( $_REQUEST['event_date'] ) && $_REQUEST['event_date'] != '' ) {
-	                $content .= '<tr> <td> <strong>Delivery Date:</strong></td><td> ' . esc_html( $_REQUEST['event_date'] ) . '</td></tr>';
+	                $content .= '<div class="orddd-row"><i class="fas fa-calendar-alt"></i> ' . esc_html( $_REQUEST['event_date'] ) . '</div>';
 	            }
 
 	            if ( isset( $order_page_time_slot ) && $order_page_time_slot != '' && isset( $_REQUEST['event_date'] ) && $_REQUEST['event_date'] == '' ) {
-	                $content .= '<tr> <td> <strong>Time Slot:</strong></td><td> ' . esc_html( $order_page_time_slot ) . '</td></tr>';
+	                $content .= '<div class="orddd-row"><i class="fas fa-clock"></i> ' . esc_html( $order_page_time_slot ) . '</div>';
 	            } elseif ( isset( $_REQUEST['event_timeslot'] ) && $_REQUEST['event_timeslot'] != '' ) {
-	                $content .= '<tr> <td> <strong>Time Slot:</strong></td><td> ' . esc_html( $_REQUEST['event_timeslot'] ) . '</td></tr>';
+	                $content .= '<div class="orddd-row"><i class="fas fa-clock"></i> ' . esc_html( $_REQUEST['event_timeslot'] ) . '</div>';
 	            }
 
 	            $custom_fields = '';
@@ -120,7 +153,7 @@ class orddd_lite_class_view_deliveries {
 	            }
 
 	            if ( $custom_fields != '' ) {
-	                $content .= esc_html( $custom_fields );
+	                $content .= '<div class="orddd-row">' . esc_html( $custom_fields ) . '</div>';
 	            }
 
 	            $product_name = '';
@@ -159,8 +192,18 @@ class orddd_lite_class_view_deliveries {
 	                    $product_name = apply_filters( 'orddd_lite_modify_calendar_product_info', $product_name, $item );
 	                }
 	            }
-	            $content .= '<tr> <td> <strong>Item Details:</strong></td><td> ' . wp_kses_post( $product_name ) . '</td> </tr>';
-	            $content .= '</table>';
+	            $content .= '
+						<div class="orddd-row">
+							<i class="fas fa-cube"></i>
+							' . wp_kses_post( $product_name ) . '
+						</div>
+					</div>
+				</div>
+
+				<a class="orddd-view-order" href="' . esc_url( $edit_order_url ) . '">
+					View Order
+				</a>
+			</div>';
 	        }
 	    }
 	    echo wp_kses_post( $content );
