@@ -79,7 +79,7 @@ class orddd_lite_class_view_deliveries {
 	            $content .= '
 					<div class="orddd-popup-details">
 						<div class="orddd-product-name">
-							<i class="fa-solid fa-cube"></i>
+							<i class="dashicons dashicons-archive"></i>
 							' . esc_html( $product_name ) . '
 							<span class="qty">x' . esc_html( $product_quantity ) . '</span>
 						</div>
@@ -194,7 +194,7 @@ class orddd_lite_class_view_deliveries {
 	            }
 	            $content .= '
 						<div class="orddd-row">
-							<i class="fas fa-cube"></i>
+							<i class="dashicons dashicons-archive"></i>
 							' . wp_kses_post( $product_name ) . '
 						</div>
 					</div>

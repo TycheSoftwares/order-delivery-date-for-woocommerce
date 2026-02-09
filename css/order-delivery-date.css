@@ -160,7 +160,7 @@ a.qtip-close.qtip-icon span.ui-icon.ui-icon-close {
 .orddd-popup-body {
   display: flex;
   gap: 16px;
-  padding: 20px 20px 11px;
+  padding: 20px 20px 0px;
 }
 
 .orddd-product-image {
@@ -195,9 +195,9 @@ a.qtip-close.qtip-icon span.ui-icon.ui-icon-close {
 }
 
 .orddd-row {
-  font-size: 14px;
+  font-size: 13px;
   color: #444;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 /* Button */
@@ -216,4 +216,12 @@ a.qtip-close.qtip-icon span.ui-icon.ui-icon-close {
 
 .orddd-view-order:hover {
   background: #dbe9ff;
+}
+i.dashicons-archive {
+    height: 0px !important;
+    margin-left: -2px;
+    margin-right: 0px;
+    font-size: 17px;
+    text-align: left;
+    line-height: normal;
 }
