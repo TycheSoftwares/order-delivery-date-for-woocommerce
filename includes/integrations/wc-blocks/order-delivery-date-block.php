@@ -53,6 +53,7 @@ add_action(
 	}
 );
 
+// Allow your namespace in WooCommerce blocks data
 add_filter(
     '__experimental_woocommerce_blocks_add_data_attributes_to_namespace',
     function( $allowed_namespaces ) {
@@ -61,6 +62,7 @@ add_filter(
     }
 );
 
+// Allow your block in checkout blocks
 add_filter(
     '__experimental_woocommerce_blocks_add_data_attributes_to_block',
     function( $allowed_blocks ) {
@@ -68,6 +70,18 @@ add_filter(
         return $allowed_blocks;
     }
 );
+
+// Register dynamic block for Order Delivery Date
+add_action( 'init', function() {
+
+    if ( is_admin() || ! function_exists( 'register_block_type' ) ) {
+        return;
+    }
+
+    register_block_type( 'order-delivery-date/delivery-date', array(
+        'render_callback' => 'orddd_lite_render_delivery_date_block',
+    ) );
+} );
 
 /**
  * Callback function to register endpoint data for blocks.
@@ -191,4 +205,14 @@ function orddd_lite_add_calendar_styles() {
 				background: linear-gradient(to bottom right, ' . esc_html( $orddd_booked_dates_color ) . '59 0%, ' . esc_html( $orddd_booked_dates_color ) . '59 50%, ' . esc_html( $orddd_available_dates_color ) . ' 50%, ' . esc_html( $orddd_available_dates_color ) . ' 100%) !important;
 			}
 		</style>';
+}
+/**
+ * Render callback for dynamic block.
+ *
+ * @param array $attributes Block attributes.
+ * @return string HTML output for block
+ */
+function orddd_lite_render_delivery_date_block( $attributes ) {
+    // You can render your checkout field dynamically here
+    return '<div class="order-delivery-date">Order Delivery Date Field - Rendered Dynamically</div>';
 }
