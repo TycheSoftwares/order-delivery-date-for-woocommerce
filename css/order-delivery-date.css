@@ -101,3 +101,127 @@ table.form-table #orddd_lite_ics_url_list .orddd_lite_ics_feed_url {
 div.ui-widget-content table.ui-datepicker-calendar th {
     width: max-content;
 }
+div#calendar .fc-button-primary.fc-today-button {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+/* Remove qTip default look */
+.qtip.qtip-default {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Card */
+.qtip.qtip-default .qtip-content {
+  padding: 0 !important;
+}
+
+.orddd-popup-card {
+  width: 340px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  font-family: Inter, system-ui, sans-serif;
+  overflow: hidden;
+}
+
+/* Header */
+.orddd-popup-header {
+	border-bottom: 1px solid #d7d3d3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.qtip.qtip-default .qtip-content {
+	overflow: visible;
+}
+
+.orddd-popup-header a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+a.qtip-close.qtip-icon {
+    margin-top: 23px;
+    margin-right: -31px;
+    background: none;
+    border: none;
+}
+a.qtip-close.qtip-icon span.ui-icon.ui-icon-close {
+    font-size: 26px !important;
+    color: #a39d9d;
+}
+
+/* Body */
+.orddd-popup-body {
+  display: flex;
+  gap: 16px;
+  padding: 20px 20px 0px;
+}
+
+.orddd-product-image {
+  width: 96px;
+  height: 72px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Details */
+.orddd-popup-details {
+	font-size: 14px;
+	flex: 1;
+}
+.orddd-popup-details i{
+	margin-right: 5px;
+}
+
+.orddd-product-name {
+  margin-bottom: 18px;
+}
+
+.orddd-product-name a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.qty {
+  color: #666;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.orddd-row {
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+/* Button */
+.orddd-view-order {
+    font-size: 14px;
+    display: block;
+    margin: 5px 12px 20px;
+    padding: 13px;
+    background: #e8f1ff;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    color: #1a73e8 !important;
+    text-decoration: none;
+}
+
+.orddd-view-order:hover {
+  background: #dbe9ff;
+}
+i.dashicons-archive {
+    height: 0px !important;
+    margin-left: -2px;
+    margin-right: 0px;
+    font-size: 17px;
+    text-align: left;
+    line-height: normal;
+}
