@@ -38,10 +38,6 @@ registerBlockType(metadata, {
 	},
 	edit: Edit,
 	save: () => {
-		return wp.element.createElement(
-			'div',
-			{ className: 'order-delivery-date' },
-			"Order Delivery Date Field - Saved Content"
-		);
+    	return null;
 	}
 });
