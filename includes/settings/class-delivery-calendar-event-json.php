@@ -36,15 +36,15 @@ class Delivery_Calendar_lite_Event_JSON {
 	 * @since 1.0
 	 */
 	public static function handle_event_json() {
-		if ( ! current_user_can( 'manage_woocommerce' ) && ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( __( 'Unauthorized', 'order-delivery-date' ), 403 );
-		}
 
 		$action    = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
 		$vendor_id = isset( $_GET['vendor_id'] ) ? sanitize_text_field( wp_unslash( $_GET['vendor_id'] ) ) : '';
 		$is_vendor = '' !== $vendor_id && 0 !== $vendor_id;
 
 		if ( 'orddd-delivery-calendar-event-json' === $action ) {
+			if ( ! current_user_can( 'manage_woocommerce' ) && ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( __( 'Unauthorized', 'order-delivery-date' ), 403 );
+			}
 			$import_nonce = isset( $_GET['security'] ) ? sanitize_text_field( wp_unslash( $_GET['security'] ) ) : '';
 			if ( ! wp_verify_nonce( $import_nonce, 'orddd-delivery-calendar-event-json' ) ) {
 				esc_html_e( 'Authentication has failed.', 'order-delivery-date' );
