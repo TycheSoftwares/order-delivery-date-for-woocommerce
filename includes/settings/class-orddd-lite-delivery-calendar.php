@@ -76,12 +76,13 @@ class orddd_lite_class_view_deliveries {
 	                }
 	            }
 
+	            $product_link = '<a href="' . esc_url( get_edit_post_link( $product_id ) ) . '" target="_blank">' . esc_html( $product_name ) . ' x' . esc_html( $product_quantity ) . '</a>';
+
 	            $content .= '
 					<div class="orddd-popup-details">
 						<div class="orddd-product-name">
 							<i class="dashicons dashicons-archive"></i>
-							' . esc_html( $product_name ) . '
-							<span class="qty">x' . esc_html( $product_quantity ) . '</span>
+							' . $product_link . '
 						</div>
 
 						<div class="orddd-row">
@@ -187,7 +188,7 @@ class orddd_lite_class_view_deliveries {
 	                            $product_name          .= $variable_product_name;
 	                        }
 	                    } else {
-	                        $product_name .= '<a href="' . esc_url( get_edit_post_link( $data['product_id'] ) ) . '" target="_blank">' . esc_html( $item['name'] ) . ' x' . esc_html( $item['quantity'] ) . '</a><br><br>';
+	                        $product_name .= '<a href="' . esc_url( get_edit_post_link( $data['product_id'] ) ) . '" target="_blank">' . esc_html( $item['name'] ) . ' x' . esc_html( $item['quantity'] ) . '</a><br>';
 	                    }
 	                    $product_name = apply_filters( 'orddd_lite_modify_calendar_product_info', $product_name, $item );
 	                }
@@ -195,7 +196,9 @@ class orddd_lite_class_view_deliveries {
 	            $content .= '
 						<div class="orddd-row">
 							<i class="dashicons dashicons-archive"></i>
+							<div class="orddd-product-list">
 							' . wp_kses_post( $product_name ) . '
+							</div>
 						</div>
 					</div>
 				</div>
