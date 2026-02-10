@@ -180,14 +180,17 @@ a.qtip-close.qtip-icon span.ui-icon.ui-icon-close {
 }
 
 .orddd-product-name {
-  margin-bottom: 18px;
+    line-height: 1.3;
+    margin-bottom: 4px;
+    display: flex;
 }
 
+/* Force product name link to appear on next line (below icon/text) */
 .orddd-product-name a {
-  color: #1a73e8;
-  text-decoration: none;
+    margin-top: -2px;
+    color: #1a73e8;
+    text-decoration: none;
 }
-
 .qty {
   color: #666;
   font-weight: 500;
@@ -218,10 +221,12 @@ a.qtip-close.qtip-icon span.ui-icon.ui-icon-close {
   background: #dbe9ff;
 }
 i.dashicons-archive {
-    height: 0px !important;
-    margin-left: -2px;
-    margin-right: 0px;
-    font-size: 17px;
-    text-align: left;
-    line-height: normal;
+    margin-left: -3px;
+    font-size: 14px;
+}
+.orddd-product-list{
+  display: inline-block;
+}
+.orddd-product-list a {
+    display: block;
 }
