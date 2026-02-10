@@ -1,4 +1,10 @@
 *** Order Delivery Date for WooCommerce ***
+2026-02-10 - version 4.5.0
+* Fix: Resolved an unauthenticated SQL injection vulnerability in the Delivery Calendar JSON endpoint.
+* Fix: Resolved an issue where bulk actions in Holidays, Blocked Time Slots, and Time Slot Listing generated excessively long URLs due to repeated query parameter appending.
+* Fix: Resolved a Gutenberg block validation error for the Order Delivery Date block.
+* Fix: Improved the Delivery Calendar pop-up layout and usability.
+
 2026-01-13 - version 4.4.0
 * Enhancement – Added a Delivery Calendar view in the backend to review and manage delivery dates for received orders.
 * Tweak - Ability to add Order Delivery Date block in any section on the checkout block page.
