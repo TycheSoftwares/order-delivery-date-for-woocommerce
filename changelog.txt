@@ -1,4 +1,7 @@
 *** Order Delivery Date for WooCommerce ***
+2026-03-20 - version 4.5.1
+* Fix - Resolved SQL injection vulnerabilities in the Delivery Calendar by properly sanitizing inputs and using $wpdb->prepare() with placeholders in dynamic queries.
+
 2026-02-10 - version 4.5.0
 * Fix: Resolved an unauthenticated SQL injection vulnerability in the Delivery Calendar JSON endpoint.
 * Fix: Resolved an issue where bulk actions in Holidays, Blocked Time Slots, and Time Slot Listing generated excessively long URLs due to repeated query parameter appending.
