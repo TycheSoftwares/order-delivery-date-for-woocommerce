@@ -664,6 +664,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 					'pluginurl'           => admin_url() . 'admin.php?action=orddd-delivery-calendar-event-json&vendor_id=0&security='.wp_create_nonce( 'orddd-delivery-calendar-event-json' ),
 					'security'            => wp_create_nonce( 'orddd-delivery-calendar-event-json' ),
 					'vendor_id'           => 0,
+					'orddd_export_nonce'  => wp_create_nonce( 'orddd_export_nonce' ),
 				);
 
 				wp_localize_script(

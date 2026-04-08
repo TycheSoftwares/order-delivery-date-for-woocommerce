@@ -46,7 +46,7 @@ let calendar_element;
 					orddd_this_href = cpurl + '/admin.php?page=order_delivery_date_lite&action=view-orders&download=orddd_data.csv';
 				}
 
-				return orddd_this_href + '&eventType=' + jQuery( ".orddd_filter_delivery_calendar" ).val() + '&orderStatus=' + jQuery( ".orddd_filter_by_order_status" ).val() + '&orderShipping=' + jQuery( ".orddd_filter_by_order_shipping" ).val() + '&start=' + start_date + "&end=" + end_date;
+				return orddd_this_href + '&orddd_export_nonce=' + encodeURIComponent(orddd_calendar_js.orddd_export_nonce) + '&eventType=' + jQuery( ".orddd_filter_delivery_calendar" ).val() + '&orderStatus=' + jQuery( ".orddd_filter_by_order_status" ).val() + '&orderShipping=' + jQuery( ".orddd_filter_by_order_shipping" ).val() + '&start=' + start_date + "&end=" + end_date;
 			});
 		},
 
@@ -345,7 +345,7 @@ let calendar_element;
 							orddd_this_href = cpurl + '/admin.php?page=order_delivery_date_lite&action=view-orders&download=orddd_data.csv';
 						}
 
-						return orddd_this_href + '&eventType=' + jQuery(".orddd_filter_delivery_calendar").val() + '&orderStatus=' + jQuery(".orddd_filter_by_order_status").val() + '&orderShipping=' + jQuery(".orddd_filter_by_order_shipping").val() + '&start=' + start_date + "&end=" + end_date;
+						return orddd_this_href + '&orddd_export_nonce=' + encodeURIComponent(orddd_calendar_js.orddd_export_nonce) + '&eventType=' + jQuery(".orddd_filter_delivery_calendar").val() + '&orderStatus=' + jQuery(".orddd_filter_by_order_status").val() + '&orderShipping=' + jQuery(".orddd_filter_by_order_shipping").val() + '&start=' + start_date + "&end=" + end_date;
 					});
 				}
 			});

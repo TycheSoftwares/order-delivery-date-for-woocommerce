@@ -223,6 +223,34 @@ class orddd_lite_class_view_deliveries {
 
 	public static function orddd_data_export() {
 		global $wpdb;
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		// Capability check.
+		if ( ! current_user_can( 'manage_woocommerce' ) && ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		// Check required params.
+		if ( ! isset( $_GET['download'], $_GET['page'] ) ) {
+			return;
+		}
+
+		// Nonce verification.
+		if ( ! isset( $_GET['orddd_export_nonce'] ) || 
+			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['orddd_export_nonce'] ) ), 'orddd_export_nonce' ) ) {
+			wp_die( esc_html__( 'Security check failed.', 'order-delivery-date' ) );
+		}
+
+		$download = sanitize_text_field( wp_unslash( $_GET['download'] ) );
+		$page     = sanitize_text_field( wp_unslash( $_GET['page'] ) );
+
+		// Allowed downloads only.
+		$allowed_downloads = array( 'orddd_data.csv', 'orddd_data.print' );
+		if ( ! in_array( $download, $allowed_downloads, true ) ) {
+			return;
+		}
 		if ( isset( $_GET['download'] ) && ( $_GET['download'] == 'orddd_data.csv' ) && ( ( isset( $_GET['page'] ) && $_GET['page'] = 'orddd_view_orders' ) ) ) {
 			$report = self::orddd_generate_data();
 			$csv    = self::orddd_generate_csv( $report );
@@ -356,25 +384,65 @@ class orddd_lite_class_view_deliveries {
 			$id               = 'id';
 		}
 
-		$orddd_query = "SELECT DISTINCT wp.{$id}, {$post_status}, wpm1.meta_value AS orddd_timestamp , wpm2.meta_value AS delivery_date , wpm3.meta_value AS time_slot
-			FROM `" . $wpdb->prefix . "$order_table` wp
-			INNER JOIN `" . $wpdb->prefix . "$order_meta_table` wpm1 ON ( wp.{$id} = wpm1.{$post_id} AND wpm1.meta_key ='" . $order_timestamp_key . "' )
-			LEFT JOIN `" . $wpdb->prefix . "$order_meta_table` wpm2 ON ( wp.{$id} = wpm2.{$post_id} AND ( wpm2.meta_key ='" . $orddd_delivery_date_key . "' ) )
-			LEFT JOIN `" . $wpdb->prefix . "$order_meta_table` wpm3 ON ( wp.{$id} = wpm3.{$post_id} AND wpm3.meta_key ='_orddd_time_slot' ) ";
+		$order_status = array_map( 'sanitize_text_field', (array) $order_status );
+		$order_status = array_filter( $order_status );
 
-			$orddd_query = apply_filters( 'orddd_lite_calendar_join_filter', $orddd_query );
+		if ( empty( $order_status ) ) {
+			return array();
+		}
 
-			$orddd_query .= "WHERE $post_type = 'shop_order' AND $post_status IN ( '" . implode( "','", $order_status ) . "')
-			AND 
-			(
-			( wpm1.meta_key = '" . $order_timestamp_key . "' AND wpm1.meta_value >= '" . $event_start_timestamp . "' AND wpm1.meta_value <= '" . $event_end_timestamp . "' ) OR 
-			( wpm2.meta_key = '" . $delivery_date_field_label . "' AND STR_TO_DATE( wpm2.meta_value, '" . $date_str . "' ) >= '" . $event_start . "' AND STR_TO_DATE( wpm2.meta_value, '" . $date_str . "' ) <= '" . $event_end . "' )
-			OR ( wpm2.meta_key = '" . $delivery_date_field_label . "' AND STR_TO_DATE( wpm2.meta_value, '" . $date_str . "' ) >= '" . $event_start . "' AND STR_TO_DATE( wpm2.meta_value, '" . $date_str . "' ) <= '" . $event_end . "' ) 
-			OR ( wpm2.meta_key = '" . $orddd_delivery_date_key . "' AND STR_TO_DATE( wpm2.meta_value, '" . $date_str . "' ) >= '" . $event_start . "' AND STR_TO_DATE( wpm2.meta_value, '" . $date_str . "' ) <= '" . $event_end . "' )
-			)";
+		$status_placeholders = implode( ',', array_fill( 0, count( $order_status ), '%s' ) );
 
-			$orddd_query = apply_filters( 'orddd_lite_calendar_where_filter', $orddd_query );
-			$results     = $wpdb->get_results( $orddd_query );// nosemgrep:audit.php.wp.security.sqli.input-in-sinks
+		$event_start = ! empty( $event_start ) ? date( 'Y-m-d', strtotime( $event_start ) ) : '';
+		$event_end   = ! empty( $event_end ) ? date( 'Y-m-d', strtotime( $event_end ) ) : '';
+
+		$event_start_timestamp = ! empty( $event_start_timestamp ) ? intval( $event_start_timestamp ) : 0;
+		$event_end_timestamp   = ! empty( $event_end_timestamp ) ? intval( $event_end_timestamp ) : 0;
+
+		$query = "
+			SELECT DISTINCT wp.{$id}, {$post_status}, 
+				wpm1.meta_value AS orddd_timestamp, 
+				wpm2.meta_value AS delivery_date, 
+				wpm3.meta_value AS time_slot
+			FROM `{$wpdb->prefix}{$order_table}` wp
+			INNER JOIN `{$wpdb->prefix}{$order_meta_table}` wpm1 
+				ON ( wp.{$id} = wpm1.{$post_id} AND wpm1.meta_key = %s )
+			LEFT JOIN `{$wpdb->prefix}{$order_meta_table}` wpm2 
+				ON ( wp.{$id} = wpm2.{$post_id} AND wpm2.meta_key = %s )
+			LEFT JOIN `{$wpdb->prefix}{$order_meta_table}` wpm3 
+				ON ( wp.{$id} = wpm3.{$post_id} AND wpm3.meta_key = %s )
+			WHERE {$post_type} = %s
+			AND {$post_status} IN ($status_placeholders)
+			AND (
+				( wpm1.meta_value >= %d AND wpm1.meta_value <= %d )
+				OR
+				( STR_TO_DATE( wpm2.meta_value, %s ) >= %s 
+				  AND STR_TO_DATE( wpm2.meta_value, %s ) <= %s )
+			)
+		";
+
+		// Prepare values.
+		$query_args = array_merge(
+			array(
+				$order_timestamp_key,
+				$orddd_delivery_date_key,
+				'_orddd_time_slot',
+				'shop_order',
+			),
+			$order_status,
+			array(
+				$event_start_timestamp,
+				$event_end_timestamp,
+				$date_str,
+				$event_start,
+				$date_str,
+				$event_end,
+			)
+		);
+
+		$prepared_query = $wpdb->prepare( $query, $query_args );
+		$prepared_query = apply_filters( 'orddd_lite_calendar_where_filter', $prepared_query );
+		$results        = $wpdb->get_results( $prepared_query );
 
 		$report = array();
 		$i      = 0;
