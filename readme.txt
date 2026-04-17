@@ -5,7 +5,7 @@ Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
 Tested up to: 6.9.4
-Stable tag: 4.5.1
+Stable tag: 4.5.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -181,6 +181,9 @@ Option 3:
 This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-order-delivery-date-lite/order-delivery-lite-usage-tracking/).
 
 == Changelog ==
+
+= 4.5.2 (17.04.2026)
+* Fix - Resolved SQL injection vulnerability in Delivery Calendar by using $wpdb->prepare() and securing input handling.
 
 = 4.5.1 (20.03.2026)
 * Fix - Resolved SQL injection vulnerabilities in the Delivery Calendar by properly sanitizing inputs and using $wpdb->prepare() with placeholders in dynamic queries.
