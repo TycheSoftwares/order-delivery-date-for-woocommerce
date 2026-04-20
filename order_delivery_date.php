@@ -54,6 +54,7 @@ require_once 'includes/class-orddd-lite-process.php';
 require_once 'includes/settings/class-orddd-lite-filter.php';
 require_once 'includes/class-orddd-lite-privacy.php';
 require_once 'includes/settings/class-orddd-lite-delivery-calendar.php';
+require_once 'includes/class-orddd-lite-email-manager.php';
 require_once 'includes/class-orddd-lite-admin-delivery.php';
 require_once 'includes/settings/class-delivery-calendar-event-json.php';
 if ( 'on' === get_option( 'orddd_lite_enable_delivery_date' ) ) {
