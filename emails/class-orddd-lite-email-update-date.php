@@ -22,6 +22,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 class ORDDD_Lite_Email_Update_Date extends WC_Email {
 
 	/**
+	 * Order ID.
+	 *
+	 * @var int
+	 */
+	public $order_id;
+
+	/**
+	 * Updated by.
+	 *
+	 * @var string
+	 */
+	public $updated_by;
+	/**
 	 * Constructor.
 	 *
 	 * Defines class variables and hooks as needed.
