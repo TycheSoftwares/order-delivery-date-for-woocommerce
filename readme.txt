@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
-Tested up to: 6.9.4
+Tested up to: 7.0.0
 Stable tag: 4.5.3
 Requires PHP: 7.4
 License: GPLv2 or later
