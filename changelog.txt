@@ -1,4 +1,7 @@
 *** Order Delivery Date for WooCommerce ***
+2026-05-15 - version 4.5.3
+* Fix - Addressed an issue where updating delivery details using “Update & Notify Customer” would not complete, resulting in no confirmation feedback or email being triggered.
+
 2026-04-17 - version 4.5.2
 * Fix - Resolved SQL injection vulnerability in Delivery Calendar by using $wpdb->prepare() and securing input handling.
 
