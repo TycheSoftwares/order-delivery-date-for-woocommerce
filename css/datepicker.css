@@ -341,12 +341,12 @@ div.orddd-filter-field .select2-selection__choice__remove {
     }
 }
 .fc .fc-button-group>.fc-button.fc-button-active {
-	background: #2271b1 !important;
-    border-color: #2271b1 !important;
+	background: #3858e9 !important;
+    border-color: #3858e9 !important;
 }
 .fc .fc-button-group>.fc-prev-button,.fc .fc-button-group>.fc-next-button, .fc .fc-button-group>.fc-today-button {
-	background: #2271b1 !important;
-    border-color: #2271b1;
+	background: #3858e9 !important;
+    border-color: #3858e9;
     text-transform: capitalize !important;
     margin-right: 5px;
     border-radius: 11%;
@@ -362,7 +362,7 @@ div.orddd-filter-field .select2-selection__choice__remove {
 }
 button.fc-today-button.fc-button.fc-button-primary {
     color: white !important;
-    background-color: #2271b1 !important;
+    background-color: #3858e9 !important;
     opacity: 99;
 }
 #orddd_lite_time_slot ul li {
