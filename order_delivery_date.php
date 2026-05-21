@@ -795,6 +795,14 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				);
 				wp_localize_script( 'accessibility-orddd', 'orddd_lite_access', $accessibility_args );
 				wp_enqueue_script( 'accessibility-orddd' );
+
+				wp_enqueue_script(
+			        'orddd-wcpay-express-bridge',
+			        plugin_dir_url( __FILE__ ) . 'js/express-checkout-delivery-date.js',
+			        [ 'wp-hooks' ],   // wp-hooks is already enqueued by WooPayments.
+			        time(),
+			        false
+			    );
 			}
 		}
 
