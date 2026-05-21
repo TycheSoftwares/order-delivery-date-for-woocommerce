@@ -11,26 +11,25 @@
             'wcpay.express-checkout.cart-place-order-extension-data',
             'orddd/express-checkout-delivery-date',
             function ( extensionData ) {
-                // Read the delivery date the shopper selected in the datepicker.
-                // e_deliverydate = the formatted display value (e.g. "23/05/2026")
-                // h_deliverydate = the machine-readable value used for timestamps
-                var eDate = document.getElementById( 'e_deliverydate' );
-                var hDate = document.getElementById( 'h_deliverydate' );
+                var eDate    = document.getElementById( 'e_deliverydate' );
+                var hDate    = document.getElementById( 'h_deliverydate' );
                 var timeSlot = localStorage.getItem( 'orddd_lite_time_slot' );
 
-                //console.log(eDate);
-
                 if ( ! eDate || ! eDate.value ) {
-                    // No date selected — return unchanged.
                     return extensionData;
                 }
 
+                var deliveryData = {
+                    e_deliverydate: eDate.value,
+                    h_deliverydate: hDate ? hDate.value : eDate.value,
+                };
+
+                if ( timeSlot && timeSlot !== '' && timeSlot !== 'select' && timeSlot !== 'choose' && timeSlot !== 'NA' ) {
+                    deliveryData.orddd_lite_time_slot = timeSlot;
+                }
+
                 return Object.assign( {}, extensionData, {
-                    'order-delivery-date': {
-                        e_deliverydate:       eDate.value,
-                        h_deliverydate:       hDate ? hDate.value : eDate.value,
-                        orddd_lite_time_slot: timeSlot,
-                    }
+                    'order-delivery-date': deliveryData
                 } );
             }
         );
