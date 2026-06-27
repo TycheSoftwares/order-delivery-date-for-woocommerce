@@ -1545,7 +1545,10 @@ class Orddd_Lite_Common {
 			return false;
 		}
 		if ( self::is_hpos_enabled() ) {
-			$order       = wc_get_order( $order_id );
+			$order = wc_get_order( $order_id );
+			if ( ! $order || ! $order instanceof WC_Order ) {
+				return false;
+			}
 			$post_status = $order->get_status();
 			$post_type   = $order->get_type();
 		} else {
