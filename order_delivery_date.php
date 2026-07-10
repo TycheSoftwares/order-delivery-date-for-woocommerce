@@ -121,9 +121,11 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 				add_action( 'woocommerce_cart_collaterals', array( &$this, 'orddd_lite_front_scripts_js' ) );
 			}
 
-			add_action( 'woocommerce_checkout_update_order_meta', array( 'Orddd_Lite_Process', 'orddd_lite_my_custom_checkout_field_update_order_meta' ) );
+			add_action( 'woocommerce_checkout_update_order_meta', array( 'Orddd_Lite_Process', 'orddd_lite_my_custom_checkout_field_update_order_meta' ),9,2 );
+			add_action( 'wc_stripe_express_checkout_update_order_meta', array( 'Orddd_Lite_Process', 'orddd_lite_my_custom_checkout_field_update_order_meta' ), 9, 2 );
 
-			add_action( 'woocommerce_checkout_update_order_meta', array( 'Orddd_Lite_Process', 'orddd_update_order_meta_time_slot' ) );
+			add_action( 'woocommerce_checkout_update_order_meta', array( 'Orddd_Lite_Process', 'orddd_update_order_meta_time_slot' ),9,2 );
+			add_action( 'wc_stripe_express_checkout_update_order_meta', array( 'Orddd_Lite_Process', 'orddd_update_order_meta_time_slot' ), 9, 2 );
 
 			if ( version_compare( get_option( 'woocommerce_version' ), '2.3', '>=' ) > 0 ) {
 				add_filter( 'woocommerce_email_order_meta_fields', array( 'Orddd_Lite_Process', 'orddd_lite_add_delivery_date_to_order_woo_new' ), 11, 3 );
@@ -192,6 +194,9 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			add_filter( 'wp_plugin_check_checks', array( __CLASS__, 'orddd_lite_plugin_check_ignore_files' ), 10 );
 			add_action( 'wp_ajax_nopriv_orddd_order_calendar_content', array( 'orddd_lite_class_view_deliveries', 'orddd_order_calendar_content' ) );
 			add_action( 'wp_ajax_orddd_order_calendar_content', array( 'orddd_lite_class_view_deliveries', 'orddd_order_calendar_content' ) );
+			add_filter( 'wc_stripe_express_checkout_enable_classic_checkout_custom_fields', '__return_true' );
+			// Remove Delivery Date & Time fields if required on the checkout page.
+			add_filter( 'woocommerce_checkout_fields', array( &$this, 'orddd_lite_update_delivery_fields' ) );
 		}
 
 		/**
@@ -892,6 +897,36 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			unset( $checks['trademarks'] );
 			unset( $checks['plugin_readme'] );
 			return $checks;
+		}
+		/**
+		 * Remove Delivery Date & Time fields on the checkout page when delivery not enabled.
+		 *
+		 * @hook woocommerce_checkout_fields
+		 * @globals $current_user Current logged-in user
+		 *
+		 * @param array $fields Checkout page fields.
+		 * @return array Checkout page fields
+		 * @since 1.0
+		 */
+		public static function orddd_lite_update_delivery_fields( $fields ) {
+			if ( 'on' == get_option( 'orddd_lite_enable_delivery_date') ) {
+				$fields['billing'][ 'e_deliverydate_hidden'] = array(
+						'type' => 'hidden',
+				);
+
+				$fields['billing'][ 'orddd_lite_time_slot_hidden'] = array(
+						'type' => 'hidden',
+				);
+
+			}
+			// Checkout Block requests use the Store API. Issue #7707.
+			if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+				$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+				if ( false !== strpos( $request_uri, '/wp-json/wc/store/' ) ) {
+					unset( $fields['account'] );
+				}
+			}
+			return $fields;
 		}
 	}
 }

@@ -100,7 +100,8 @@ class Orddd_Lite_Process {
 	 * @param int $order_id Order ID.
 	 * @since 1.5
 	 */
-	public static function orddd_lite_my_custom_checkout_field_update_order_meta( $order_id ) {
+	public static function orddd_lite_my_custom_checkout_field_update_order_meta( $order_id, $data ) {
+		
 		$order = wc_get_order( $order_id );
 		if ( isset( $_POST['e_deliverydate'] ) && '' !== $_POST['e_deliverydate'] ) { //phpcs:ignore
 			$delivery_date = '';
@@ -139,7 +140,7 @@ class Orddd_Lite_Process {
 	 * @param int $order_id Order ID.
 	 * @since 3.11.0
 	 */
-	public static function orddd_update_order_meta_time_slot( $order_id ) {
+	public static function orddd_update_order_meta_time_slot( $order_id, $data ) {
 		$order = wc_get_order( $order_id );
 
 		if ( ! is_object( $order ) ) {

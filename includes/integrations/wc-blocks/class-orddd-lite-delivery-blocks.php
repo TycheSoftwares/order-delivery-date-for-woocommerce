@@ -35,14 +35,29 @@ class ORDDD_Lite_Delivery_Blocks {
 	 */
 	public static function orddd_lite_update_block_order_meta_delivery_date( $order, $request ) {
 		$order_id = $order->get_id();
+		$delivery_date = '';
+		$date_format   = 'dd-mm-y';
 		if ( isset( $request['extensions']['order-delivery-date'] ) && '' !== $request['extensions']['order-delivery-date'] ) { //phpcs:ignore
-			$delivery_date = '';
-			$date_format   = 'dd-mm-y';
-			$data          = isset( $request['extensions']['order-delivery-date'] ) ? $request['extensions']['order-delivery-date'] : array();
+			$data = isset( $request['extensions']['order-delivery-date'] ) ? $request['extensions']['order-delivery-date'] : array();
 
 			if ( isset( $data['h_deliverydate'] ) ) { //phpcs:ignore
 				$delivery_date = sanitize_text_field( wp_unslash( $data['h_deliverydate'] ) ); //phpcs:ignore
 			}
+			if ( '' === $delivery_date && isset( $data['e_deliverydate'] ) ) { //phpcs:ignore
+				$date = sanitize_text_field( wp_unslash( $data['e_deliverydate'] ) ); //phpcs:ignore
+				if ( '' !== $date ) {
+					$delivery_date = date( 'j-n-Y', strtotime( $date ) );
+				}
+			}
+		}
+		if ( '' === $delivery_date && isset( $request['extensions']['wc-stripe/express-checkout']['custom_checkout_data'] ) ) { //phpcs:ignore
+			$custom_data = json_decode( wp_unslash( $request['extensions']['wc-stripe/express-checkout']['custom_checkout_data'] ), true ); //phpcs:ignore
+
+			if ( is_array( $custom_data ) && ! empty( $custom_data['e_deliverydate_hidden'] ) ) {
+				$delivery_date = sanitize_text_field( $custom_data['e_deliverydate_hidden'] );
+			}
+		}
+		if ( '' !== $delivery_date ) {
 			self::orddd_lite_validate_date_wpefield_cart_block( $order, $request );
 
 			Orddd_Lite_Common::update_order_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), sanitize_text_field( wp_unslash( $data['e_deliverydate'] ) ), $order ); //phpcs:ignore
@@ -80,12 +95,16 @@ class ORDDD_Lite_Delivery_Blocks {
 		if ( ! is_object( $order ) ) {
 			return;
 		}
-		$data = isset( $request['extensions']['order-delivery-date'] ) ? $request['extensions']['order-delivery-date'] : array();
+		$data        = isset( $request['extensions']['order-delivery-date'] ) ? $request['extensions']['order-delivery-date'] : array();
+		$custom_data = isset( $request['extensions']['wc-stripe/express-checkout']['custom_checkout_data'] ) ? json_decode( wp_unslash( $request['extensions']['wc-stripe/express-checkout']['custom_checkout_data'] ), true ) : array();
 
 		$time_slot_label = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
 
-		if ( isset( $data['orddd_lite_time_slot'] ) && '' != $data['orddd_lite_time_slot'] ) { //phpcs:ignore
-			$time_slot = $data['orddd_lite_time_slot']; //phpcs:ignore
+		if ( ( isset( $data['orddd_lite_time_slot'] ) && '' != $data['orddd_lite_time_slot'] ) || ( isset( $custom_data['orddd_lite_time_slot_hidden'] ) && '' !== $custom_data['orddd_lite_time_slot_hidden'] ) ) { //phpcs:ignore
+			$time_slot = isset( $data['orddd_lite_time_slot'] ) ? $data['orddd_lite_time_slot'] : ''; //phpcs:ignore
+			if ( '' === $time_slot ) {
+				$time_slot = isset( $custom_data['orddd_lite_time_slot_hidden'] ) ? $custom_data['orddd_lite_time_slot_hidden'] : '';
+			}
 
 			if ( has_filter( 'orddd_before_timeslot_update' ) ) {
 				$time_slot = apply_filters( 'orddd_before_timeslot_update', $time_slot );
@@ -94,6 +113,9 @@ class ORDDD_Lite_Delivery_Blocks {
 			$h_deliverydate = '';
 			if ( isset( $data['h_deliverydate'] ) ) { //phpcs:ignore
 				$h_deliverydate = $data['h_deliverydate']; //phpcs:ignore
+			}
+			if ( '' === $h_deliverydate && isset( $custom_data['e_deliverydate_hidden'] ) ) { //phpcs:ignore
+				$h_deliverydate = $custom_data['e_deliverydate_hidden']; //phpcs:ignore
 			}
 			self::orddd_lite_validate_date_wpefield_cart_block( $order, $request );
 			if ( '' !== $time_slot && 'choose' !== $time_slot && 'NA' !== $time_slot && 'select' !== $time_slot ) {
@@ -164,10 +186,26 @@ class ORDDD_Lite_Delivery_Blocks {
 			$delivery_date = date( 'd-m-Y', strtotime( $delivery_date ) );// phpcs:ignore
 		}
 
+		if ( '' === $delivery_date && isset( $request['extensions']['wc-stripe/express-checkout']['custom_checkout_data'] ) ) { //phpcs:ignore
+			$custom_data = json_decode( wp_unslash( $request['extensions']['wc-stripe/express-checkout']['custom_checkout_data'] ), true ); //phpcs:ignore
+
+			if ( is_array( $custom_data ) && ! empty( $custom_data['e_deliverydate_hidden'] ) ) {
+				$delivery_date = sanitize_text_field( $custom_data['e_deliverydate_hidden'] );
+			}
+		}
+
 		if ( isset( $data['orddd_lite_time_slot'] ) ) { // phpcs:ignore
 			$ts = wc_clean( wp_unslash( $data['orddd_lite_time_slot'] ) ); // phpcs:ignore
 		} else {
 			$ts = '';
+		}
+
+		if ( '' === $ts && isset( $request['extensions']['wc-stripe/express-checkout']['custom_checkout_data'] ) ) { //phpcs:ignore
+			$custom_data = json_decode( wp_unslash( $request['extensions']['wc-stripe/express-checkout']['custom_checkout_data'] ), true ); //phpcs:ignore
+
+			if ( is_array( $custom_data ) && ! empty( $custom_data['orddd_lite_time_slot_hidden'] ) ) {
+				$ts = sanitize_text_field( $custom_data['orddd_lite_time_slot_hidden'] );
+			}
 		}
 
 		if ( 'yes' === $is_delivery_enabled ) {
