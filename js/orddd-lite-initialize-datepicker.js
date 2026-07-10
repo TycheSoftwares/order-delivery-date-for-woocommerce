@@ -1078,73 +1078,14 @@ if( orddd_lite_admin_params.orddd_lite_admin_url != '' && typeof( orddd_lite_adm
 
 jQuery.ajaxPrefilter( function(options, originalOptions, jqXHR) {
 
-	if ( ! options.url ) {
-		return;
-	}
+const query = options.url.substring(options.url.indexOf('?') + 1);	
+var urlParams = new URLSearchParams(query);
+const wcAjax = urlParams.get('wc-ajax');
 
-	const query = options.url.substring(options.url.indexOf('?') + 1);
-	var urlParams = new URLSearchParams(query);
-	const wcAjax = urlParams.get('wc-ajax');
-
-	// 'checkout' is the standard WooCommerce classic checkout endpoint, used
-	// by WooCommerce Payments' classic Payment Request button.
-	// 'wc_stripe_create_order' is the endpoint WooCommerce Stripe Gateway's
-	// classic Payment Request Button (Apple Pay / Google Pay) posts to
-	// instead of 'checkout' - see WC_Stripe_Payment_Request::ajax_create_order()
-	// in includes/payment-methods/class-wc-stripe-payment-request.php.
-	var checkoutLikeEndpoints = [ 'checkout', 'wc_stripe_create_order' ];
-	if ( -1 === checkoutLikeEndpoints.indexOf( wcAjax ) ) {
-		return;
+if ( 'checkout' == wcAjax && options.data.indexOf( 'h_deliverydate' ) == -1 ) {	
+	if( '' !== jQuery('#h_deliverydate').val() ){
+		options.data += '&h_deliverydate=' + jQuery('#h_deliverydate').val();
 	}
-
-	// Resolve current values, falling back to the session values used by
-	// express payment flows (Apple Pay / Google Pay) where the visible
-	// fields may never have been touched by the shopper.
-	var eDate = jQuery( '#e_deliverydate' ).val() || localStorage.getItem( 'orddd_deliverydate_lite_session' ) || '';
-	var hDate = jQuery( '#h_deliverydate' ).val() || localStorage.getItem( 'h_deliverydate_lite_session' ) || '';
-	var timeSlot = jQuery( '#orddd_lite_time_slot' ).val() || localStorage.getItem( 'orddd_lite_time_slot' ) || '';
-
-	var toInject = {};
-	if ( '' !== hDate ) {
-		toInject.h_deliverydate = hDate;
-	}
-	if ( '' !== eDate ) {
-		toInject.e_deliverydate = eDate;
-	}
-	if ( '' !== timeSlot ) {
-		toInject.orddd_lite_time_slot = timeSlot;
-	}
-
-	if ( 0 === Object.keys( toInject ).length ) {
-		return;
-	}
-
-	try {
-		if ( typeof options.data === 'string' || typeof options.data === 'undefined' ) {
-			var dataStr = options.data || '';
-			Object.keys( toInject ).forEach( function( key ) {
-				if ( -1 === dataStr.indexOf( key + '=' ) ) {
-					dataStr += '&' + key + '=' + encodeURIComponent( toInject[ key ] );
-				}
-			} );
-			options.data = dataStr;
-		} else if ( options.data instanceof FormData ) {
-			Object.keys( toInject ).forEach( function( key ) {
-				if ( ! options.data.has( key ) ) {
-					options.data.append( key, toInject[ key ] );
-				}
-			} );
-		} else if ( typeof options.data === 'object' && null !== options.data ) {
-			Object.keys( toInject ).forEach( function( key ) {
-				if ( ! ( key in options.data ) ) {
-					options.data[ key ] = toInject[ key ];
-				}
-			} );
-		}
-	} catch ( e ) {
-		if ( window.console && window.console.warn ) {
-			console.warn( 'ORDDD: could not inject delivery date into express checkout request', e );
-		}
-	}
+}
 
 })
