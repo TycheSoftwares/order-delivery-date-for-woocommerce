@@ -98,6 +98,7 @@
 		jQuery( document ).trigger( "orddd_on_clear_text" );
 		jQuery( "#e_deliverydate" ).val( "" );
 		jQuery( "#h_deliverydate" ).val( '' );
+		jQuery('#e_deliverydate_hidden').val('');
 	})
 
 	jQuery( document ).on( "change", "#orddd_lite_time_slot", function() {
@@ -106,6 +107,7 @@
 		localStorage.setItem( "orddd_deliverydate_lite_session", jQuery( "#e_deliverydate" ).val() );
 		localStorage.setItem( "h_deliverydate_lite_session", jQuery( "#h_deliverydate" ).val() );
 		localStorage.setItem( "orddd_lite_time_slot", selected_val );
+		jQuery('#orddd_lite_time_slot_hidden').val( selected_val );
 
 		var current_date = orddd_lite_params.orddd_lite_current_day
 		if ( typeof( current_date ) != 'undefined' && current_date != '' ) {
@@ -206,6 +208,7 @@ if( 'no' == orddd_lite_admin_params.orddd_lite_delivery_enabled ) {
 jQuery('.ui-datepicker-close').on( 'click', function(){
 	jQuery( '#e_deliverydate' ).val( "" );
 	jQuery( '#h_deliverydate' ).val( "" );
+	jQuery( '#e_deliverydate_hidden').val('');
 })
 
 }
@@ -228,6 +231,7 @@ var dayValue = inst.selectedDay;
 var yearValue = inst.selectedYear;
 var all = dayValue + "-" + monthValue + "-" + yearValue;
 jQuery( "#h_deliverydate" ).val( all );
+jQuery( '#e_deliverydate_hidden').val(all);
 // jQuery( "#e_deliverydate" ).val(  jQuery('#' + jQuery( "#orddd_field_name" ).val() ).val() );
 if( orddd_lite_params.orddd_lite_enable_time_slot == "on" ) {
 	if( typeof( inst.id ) !== "undefined" ) {
@@ -311,6 +315,7 @@ var dayValue = inst.selectedDay;
 var yearValue = inst.selectedYear;
 var all = dayValue + "-" + monthValue + "-" + yearValue;
 jQuery( "#h_deliverydate" ).val( all );
+jQuery( '#e_deliverydate_hidden').val(all);
 if( orddd_lite_params.orddd_lite_enable_time_slot == "on" ) {
 	if( typeof( inst.id ) !== "undefined" ) {
 		var data = {
@@ -369,9 +374,12 @@ if( orddd_lite_params.orddd_lite_enable_time_slot == "on" ) {
 localStorage.setItem( "orddd_deliverydate_lite_session", jQuery( "#e_deliverydate" ).val() );
 localStorage.setItem( "h_deliverydate_lite_session", all );
 
-if( localStorage.getItem( "orddd_lite_time_slot" ) == null ) {
+if ( localStorage.getItem( "orddd_lite_time_slot" ) == null ) {
 	localStorage.setItem( "orddd_lite_time_slot", jQuery( "#orddd_lite_time_slot" ).find( ":selected" ).val() );
-} 
+	jQuery('#orddd_lite_time_slot_hidden').val( jQuery( "#orddd_lite_time_slot" ).find( ":selected" ).val() );
+} else {
+	jQuery('#orddd_lite_time_slot_hidden').val( localStorage.getItem( "orddd_lite_time_slot" ) );
+}
 
 var current_date = orddd_lite_params.orddd_lite_current_day
 if ( typeof( current_date ) != 'undefined' && current_date != '' ) {
@@ -404,6 +412,7 @@ if ( typeof( e_deliverydate_session ) != 'undefined' && e_deliverydate_session !
 		var default_date     = new Date( default_date_arr[ 1 ] + '/' + default_date_arr[ 0 ] + '/' + default_date_arr[ 2 ] );
 		jQuery( '#e_deliverydate' ).datepicker( "setDate", default_date );
 		jQuery( "#h_deliverydate" ).val( h_deliverydate_session );
+		jQuery( '#e_deliverydate_hidden').val(h_deliverydate_session );
 	}
 }
 }
@@ -445,6 +454,7 @@ var date_to_set = delay_days;
 jQuery( '#e_deliverydate' ).datepicker( "setDate", date_to_set );
 jQuery( 'input[name="e_deliverydate"]' ).val(min_date_to_set);
 jQuery( "#h_deliverydate" ).val( min_date_to_set );
+jQuery( '#e_deliverydate_hidden').val(min_date_to_set);
 
 var inst = jQuery.datepicker._getInst( jQuery( "#e_deliverydate" )[0] );
 orddd_set_date_from_session();
@@ -500,6 +510,7 @@ if( typeof( e_deliverydate_session ) != 'undefined' && e_deliverydate_session !=
 
 		jQuery( '#e_deliverydate' ).datepicker( "setDate", date_to_set );
 		jQuery( "#h_deliverydate" ).val( h_deliverydate_session );
+		jQuery( '#e_deliverydate_hidden').val( h_deliverydate_session );
 
 		jQuery( "body" ).trigger( "update_checkout" );
 		if ( 'on' == orddd_lite_params.orddd_lite_delivery_date_on_cart_page && orddd_lite_params.orddd_is_cart == '1') {
