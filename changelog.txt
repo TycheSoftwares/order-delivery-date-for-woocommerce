@@ -1,4 +1,9 @@
 *** Order Delivery Date for WooCommerce ***
+2026-07-13 - version 4.6.0
+* Fix - Resolved an issue where delivery date validation failed for orders placed via WooCommerce Stripe Express Checkout (Google Pay), despite a delivery date being selected.
+* Fix - Resolved an error reported when retrieving a deleted order from the Trash.
+* Fix - Resolved an issue where the delivery date was not retained when using WooPayments Express Checkout in Order Delivery Date Lite.
+
 2026-05-15 - version 4.5.3
 * Fix - Addressed an issue where updating delivery details using “Update & Notify Customer” would not complete, resulting in no confirmation feedback or email being triggered.
 
