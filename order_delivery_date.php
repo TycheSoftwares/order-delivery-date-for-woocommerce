@@ -87,6 +87,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			add_action( 'init', array( &$this, 'orddd_lite_update_po_file' ) );
 			add_action( 'admin_init', array( &$this, 'orddd_lite_update_db_check' ) );
 			add_action( 'admin_init', array( &$this, 'orddd_lite_remove_legacy_manage_options_cap' ) );
+			add_action( 'admin_init', array( &$this, 'orddd_lite_map_settings_capability' ) );
 			add_action( 'admin_init', array( &$this, 'orddd_lite_check_if_woocommerce_active' ) );
 
 			// Settings.
@@ -389,6 +390,37 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			}
 
 			update_option( 'orddd_lite_shop_manager_cap_cleaned', 'yes' );
+		}
+
+		/**
+		 * Allow shop managers (manage_woocommerce) to save ODD settings without
+		 * holding the site-wide manage_options cap. Mirrors the manage_woocommerce
+		 * capability the ODD admin pages already register on.
+		 */
+		public function orddd_lite_map_settings_capability() {
+
+			$orddd_lite_option_groups = array(
+				'orddd_lite_date_settings',
+				'orddd_lite_holidays_settings',
+				'orddd_lite_time_slot_settings',
+				'orddd_lite_disable_time_slot_settings',
+				'orddd_lite_appearance_settings',
+				'orddd_lite_additional_settings',
+				'orddd_lite_calendar_sync_settings',
+				'orddd_lite_add_new_settings',
+				'orddd_lite_order_delivery_date_settings',
+			);
+
+			foreach ( $orddd_lite_option_groups as $orddd_lite_group ) {
+				// options.php checks option_page_capability_{$group}; default is manage_options.
+				// Remap to manage_woocommerce so the cap required to SAVE matches the cap
+				// required to VIEW the page (add_submenu_page uses manage_woocommerce).
+				add_filter( "option_page_capability_{$orddd_lite_group}", array( &$this, 'orddd_lite_settings_capability' ) );
+			}
+		}
+
+		public function orddd_lite_settings_capability() {
+			return 'manage_woocommerce';
 		}
 
 		/**
