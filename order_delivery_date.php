@@ -4,13 +4,13 @@
  * Plugin URI: https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/
  * Description: This plugin allows customers to choose their preferred Order Delivery Date during checkout.
  * Author: Tyche Softwares
- * Version: 4.6.0
+ * Version: 4.6.1
  * Author URI: https://www.tychesoftwares.com/
  * Contributor: Tyche Softwares, https://www.tychesoftwares.com/
  * Text Domain: order-delivery-date
  * Requires PHP: 7.3
  * WC requires at least: 3.0.0
- * WC tested up to: 10.9.3
+ * WC tested up to: 10.9.4
  * Requires Plugins: woocommerce
  *
  * @package  Order-Delivery-Date-Lite-for-WooCommerce
@@ -21,7 +21,7 @@
  *
  * @since 1.0
  */
-$wpefield_version = '4.6.0';
+$wpefield_version = '4.6.1';
 
 /**
  * Template path.
@@ -86,7 +86,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 			add_action( 'init', array( &$this, 'orddd_lite_update_po_file' ) );
 			add_action( 'admin_init', array( &$this, 'orddd_lite_update_db_check' ) );
-			add_action( 'admin_init', array( &$this, 'orddd_lite_capabilities' ) );
+			add_action( 'admin_init', array( &$this, 'orddd_lite_remove_legacy_manage_options_cap' ) );
 			add_action( 'admin_init', array( &$this, 'orddd_lite_check_if_woocommerce_active' ) );
 
 			// Settings.
@@ -341,7 +341,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 		 */
 		public function orddd_lite_update_db_check() {
 			global $wpefield_version;
-			if ( '4.6.0' === $wpefield_version ) {
+			if ( '4.6.1' === $wpefield_version ) {
 				self::orddd_lite_update_install();
 			}
 		}
@@ -373,16 +373,22 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 
 		/**
-		 * Capability to allow shop manager to edit settings
+		 * One-time security remediation: removes the unintended `manage_options` capability from the `shop_manager` role.
 		 *
 		 * @hook admin_init
-		 * @since 2.2
+		 * @since 4.6.0
 		 */
-		public function orddd_lite_capabilities() {
-			$role = get_role( 'shop_manager' );
-			if ( isset( $role ) && '' !== $role ) {
-				$role->add_cap( 'manage_options' );
+		public function orddd_lite_remove_legacy_manage_options_cap() {
+			if ( 'yes' === get_option( 'orddd_lite_shop_manager_cap_cleaned', 'no' ) ) {
+				return;
 			}
+
+			$role = get_role( 'shop_manager' );
+			if ( $role instanceof WP_Role && $role->has_cap( 'manage_options' ) ) {
+				$role->remove_cap( 'manage_options' );
+			}
+
+			update_option( 'orddd_lite_shop_manager_cap_cleaned', 'yes' );
 		}
 
 		/**

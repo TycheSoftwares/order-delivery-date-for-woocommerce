@@ -13,6 +13,14 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
+// Security cleanup: strip the legacy site-wide `manage_options` capability that
+// versions <= 4.5.3 added to the shop_manager role, and drop our tracking flag.
+$orddd_lite_shop_manager = get_role( 'shop_manager' );
+if ( $orddd_lite_shop_manager instanceof WP_Role && $orddd_lite_shop_manager->has_cap( 'manage_options' ) ) {
+	$orddd_lite_shop_manager->remove_cap( 'manage_options' );
+}
+delete_option( 'orddd_lite_shop_manager_cap_cleaned' );
+
 delete_option( 'orddd_lite_db_version' );
 delete_option( 'orddd_lite_enable_delivery_date' );
 
