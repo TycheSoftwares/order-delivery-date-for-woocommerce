@@ -1,4 +1,7 @@
 *** Order Delivery Date for WooCommerce ***
+2026-08-19 - version 4.6.2
+* Fix - Checkout failed with a fatal error on HPOS stores when placing an order via Apple Pay or Google Pay Express Checkout without a delivery date selected.
+
 2026-07-22 - version 4.6.1
 * Security - Fixed a privilege escalation issue where the shop_manager role could incorrectly receive the manage_options capability.
 
