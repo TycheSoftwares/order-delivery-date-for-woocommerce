@@ -73,7 +73,7 @@ class ORDDD_Lite_Delivery_Blocks {
 			}
 
 			if ( 'yes' === $is_delivery_enabled ) {
-				Orddd_Lite_Common::update_order_meta( $order_id, get_option( 'orddd_delivery_date_field_label' ), '', $order );
+				Orddd_Lite_Common::update_order_meta( $order_id, get_option( 'orddd_lite_delivery_date_field_label' ), '', $order );
 			}
 		}
 		$order->save();
