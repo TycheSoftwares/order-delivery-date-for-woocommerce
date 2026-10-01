@@ -36,6 +36,7 @@
 			localStorage.removeItem( "orddd_lite_storage_next_time" );
 			localStorage.removeItem( "orddd_deliverydate_lite_session" );
 			localStorage.removeItem( "h_deliverydate_lite_session" );
+			localStorage.removeItem( "orddd_lite_time_slot" );
 		}
 	}
 
@@ -47,6 +48,7 @@
 						localStorage.removeItem( "orddd_lite_storage_next_time" );
 						localStorage.removeItem( "orddd_deliverydate_lite_session" );
 						localStorage.removeItem( "h_deliverydate_lite_session" );
+						localStorage.removeItem('orddd_lite_time_slot');
 					}
 				}
 			}

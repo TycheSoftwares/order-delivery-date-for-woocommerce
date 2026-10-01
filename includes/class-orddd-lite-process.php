@@ -149,6 +149,11 @@ class Orddd_Lite_Process {
 
 		$time_slot_label = '' !== get_option( 'orddd_lite_delivery_timeslot_field_label' ) ? get_option( 'orddd_lite_delivery_timeslot_field_label' ) : 'Time Slot';
 
+		// Fix: never save a time slot when time slots are disabled.
+		if ( 'on' !== get_option( 'orddd_lite_enable_time_slot' ) ) {
+			return;
+		}
+
 		if ( isset( $_POST['orddd_lite_time_slot'] ) && '' != $_POST['orddd_lite_time_slot'] ) { //phpcs:ignore
 			$time_slot = $_POST['orddd_lite_time_slot']; //phpcs:ignore
 
