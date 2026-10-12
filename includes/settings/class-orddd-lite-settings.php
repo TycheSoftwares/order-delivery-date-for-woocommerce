@@ -1242,6 +1242,15 @@ class Orddd_Lite_Settings {
 					break;
 
 				case 'time_slot':
+					$existing_timeslots_str = get_option( 'orddd_lite_disable_time_slot_log' );
+					$existing_timeslots_arr = array();
+					if ( 'null' == $existing_timeslots_str || '' == $existing_timeslots_str || '{}' == $existing_timeslots_str || '[]' == $existing_timeslots_str ) { // phpcs:ignore
+						$existing_timeslots_arr = array();
+					} else {
+						$existing_timeslots_arr = json_decode( $existing_timeslots_str );
+					}
+					$blocked_timeslots_count = is_array( $existing_timeslots_arr ) ? count( $existing_timeslots_arr ) : 0;
+
 					print( '<div id="content">
 						<form method="post" action="options.php">' );
 							settings_fields( 'orddd_lite_time_slot_settings' );
@@ -1250,6 +1259,10 @@ class Orddd_Lite_Settings {
 							<section>
 								<button id="orddd_lite_individual" class="button button-secondary">Add Individual Time Slots</button>
 								<button id="orddd_lite_bulk" class="button button-secondary">Add Time slots in Bulk</button>
+								<a href="<?php echo esc_url( admin_url( 'admin.php?page=order_delivery_date_lite&action=general_settings&section=block_time_slot_settings' ) ); ?>" class="button button-secondary orddd_lite_individual">
+									<?php esc_html_e( 'Manage Blocked Time Slots', 'order-delivery-date' ); ?>
+									<span class="orddd_lite_blocked_time_slots_count">(<?php echo esc_html( $blocked_timeslots_count ); ?>)</span>
+								</a>
 							</section>
 
 							<section id="orddd_lite_individual_time_slot_page">
@@ -1265,21 +1278,7 @@ class Orddd_Lite_Settings {
 							print( '</form>
 					</div>' );
 
-					$existing_timeslots_str = get_option( 'orddd_lite_disable_time_slot_log' );
-					$existing_timeslots_arr = array();
-					if ( 'null' == $existing_timeslots_str || '' == $existing_timeslots_str || '{}' == $existing_timeslots_str || '[]' == $existing_timeslots_str ) { // phpcs:ignore
-						$existing_timeslots_arr = array();
-					} else {
-						$existing_timeslots_arr = json_decode( $existing_timeslots_str );
-					}
 					?>
-					<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=block_time_slot_settings" class="block_time_slot">
-					<?php
-					esc_attr_e( 'Block Time Slots', 'order-delivery-date' );
-						echo ' (' . count( $existing_timeslots_arr ) . ')';
-					?>
-
-					</a>
 					<h3 id='timeslots_table_head'>
 					<?php
 						echo esc_attr_e( 'Time Slots', 'order-delivery-date' );
@@ -1303,7 +1302,12 @@ class Orddd_Lite_Settings {
 					break;
 				case 'block_time_slot_settings':
 					?>
-						<a href="admin.php?page=order_delivery_date_lite&action=general_settings&section=time_slot" class="back_to_time_slot"><?php esc_attr_e( 'Back to Time Slots', 'order-delivery-date' ); ?> </a>
+						<p class="orddd-back-wrap">
+							<a href="<?php echo esc_url( admin_url( 'admin.php?page=order_delivery_date_lite&action=general_settings&section=time_slot' ) ); ?>" class="button button-secondary orddd_lite_individual">
+								<span class="dashicons dashicons-arrow-left-alt2" aria-hidden="true"></span>
+								<?php esc_html_e( 'Back to Time Slots', 'order-delivery-date' ); ?>
+							</a>
+						</p>
 						<?php
 						print( '<div id="content">
 							<form method="post" action="options.php">' );
