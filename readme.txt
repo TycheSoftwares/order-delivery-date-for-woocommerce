@@ -4,8 +4,8 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
-Tested up to: 7.0.4
-Stable tag: 4.6.2
+Tested up to: 7.1.3
+Stable tag: 4.6.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -218,6 +218,10 @@ Upgrade if your store requires advanced delivery scheduling, delivery schedules 
 This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-order-delivery-date-lite/order-delivery-lite-usage-tracking/).
 
 == Changelog ==
+
+= 4.6.3 (14.10.2026)
+* Fix - Timeslot information (e.g. "Timeslot: 00:00") was displayed in order details, emails and PDF documents even when time slot capture was disabled.
+* Tweak - Improved visibility of the "Block Time Slots" link.
 
 = 4.6.2 (19.08.2026)
 * Fix - Checkout failed with a fatal error on HPOS stores when placing an order via Apple Pay or Google Pay Express Checkout without a delivery date selected.
