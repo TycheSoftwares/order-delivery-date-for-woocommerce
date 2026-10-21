@@ -19,7 +19,7 @@
       "@woocommerce/dependency-extraction-webpack-plugin": "^2.2.0",
       "@woocommerce/eslint-plugin": "^2.2.0",
       "@wordpress/blocks": "^12.6.0",
-      "@wordpress/scripts": "^26.0.0",
+      "@wordpress/scripts": "^37.0.0",
       "@wordpress/components": "^23.8.0"
   }
 }
