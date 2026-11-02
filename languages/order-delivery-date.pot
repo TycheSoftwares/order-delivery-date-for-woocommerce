@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-02T13:43:53+00:00\n"
+"POT-Creation-Date: 2026-11-02T14:05:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: order-delivery-date\n"
@@ -104,16 +104,16 @@ msgstr ""
 msgid "Invalid or missing key. Accepted: \"field\", \"calendar\"."
 msgstr ""
 
-#: includes/api/class-orddd-lite-appearance-api.php:207
+#: includes/api/class-orddd-lite-appearance-api.php:209
 msgid "Field appearance settings saved successfully."
 msgstr ""
 
-#: includes/api/class-orddd-lite-appearance-api.php:249
+#: includes/api/class-orddd-lite-appearance-api.php:251
 msgid "Calendar appearance settings saved successfully."
 msgstr ""
 
-#: includes/api/class-orddd-lite-delivery-schedule-api.php:220
-#: includes/api/class-orddd-lite-delivery-schedule-api.php:233
+#: includes/api/class-orddd-lite-delivery-schedule-api.php:221
+#: includes/api/class-orddd-lite-delivery-schedule-api.php:234
 msgid "Schedule not found."
 msgstr ""
 
@@ -1533,14 +1533,6 @@ msgid "As Soon as possible option is shown in the time slots dropdown."
 msgstr ""
 
 #: build/admin/index.js:1
-msgid "Additional Charges for 'As Soon As Possible':"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Additional Charges for 'As Soon As Possible' Option."
-msgstr ""
-
-#: build/admin/index.js:1
 msgid "Time Slot Field Label:"
 msgstr ""
 
@@ -2324,7 +2316,7 @@ msgid "Preview Theme:"
 msgstr ""
 
 #: build/admin/index.js:1
-msgid "Enable Availability Display:"
+msgid "Display availability on date:"
 msgstr ""
 
 #: build/admin/index.js:1
@@ -2332,15 +2324,15 @@ msgid "Show the availability widget that displays delivery dates on the frontend
 msgstr ""
 
 #: build/admin/index.js:1
-msgid "Enable Calendar Icon:"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Show a calendar icon next to the delivery date input field on the checkout page. Available in Pro."
-msgstr ""
-
-#: build/admin/index.js:1
 msgid "Color Code Your Calendar"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Show partially booked dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Highlight dates that still have some delivery slots available on the calendar."
 msgstr ""
 
 #: build/admin/index.js:1
@@ -2368,35 +2360,11 @@ msgid "Colour used to mark holiday dates when delivery is unavailable."
 msgstr ""
 
 #: build/admin/index.js:1
-msgid "Show partially booked dates:"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Highlight dates that still have some delivery slots available on the calendar."
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Partially booked dates:"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Colour used to indicate dates that are partially booked. Available in Pro."
-msgstr ""
-
-#: build/admin/index.js:1
 msgid "Cut-off time dates:"
 msgstr ""
 
 #: build/admin/index.js:1
 msgid "Colour used to indicate dates that are past the cut-off time for ordering. Available in Pro."
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Calendar icon color:"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Colour of the calendar icon shown next to the delivery date input field. Available in Pro."
 msgstr ""
 
 #: build/admin/index.js:1
