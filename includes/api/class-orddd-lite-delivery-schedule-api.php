@@ -46,6 +46,7 @@ if ( ! class_exists( 'ORDDD_Lite_Delivery_Schedule_API' ) ) {
 			'orddd_lite_enable_time_slot',
 			'orddd_lite_time_slot_mandatory',
 			'orddd_lite_time_slot_asap',
+			'orddd_lite_auto_populate_first_available_time_slot',
 			'orddd_lite_delivery_timeslot_field_label',
 		);
 

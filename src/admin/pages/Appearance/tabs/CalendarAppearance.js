@@ -501,21 +501,32 @@ const CalendarAppearance = () => {
 					</SettingRow>
 
 					<SettingRow
-						label={ __( 'Enable Availability Display:', 'order-delivery-date' ) }
+						label={ __( 'Display availability on date:', 'order-delivery-date' ) }
 						tooltip={ __( 'Show the availability widget that displays delivery dates on the frontend. Available in Pro.', 'order-delivery-date' ) }
 					>
 						<LockedToggle />
 					</SettingRow>
 
-					<SettingRow
-						label={ __( 'Enable Calendar Icon:', 'order-delivery-date' ) }
-						tooltip={ __( 'Show a calendar icon next to the delivery date input field on the checkout page. Available in Pro.', 'order-delivery-date' ) }
-					>
-						<LockedToggle />
-					</SettingRow>
 				</AccordionCard>
 
 				<AccordionCard title={ __( 'Color Code Your Calendar', 'order-delivery-date' ) }>
+					<SettingRow
+						label={ __( 'Show partially booked dates:', 'order-delivery-date' ) }
+						tooltip={ __( 'Highlight dates that still have some delivery slots available on the calendar.', 'order-delivery-date' ) }
+					>
+						<Controller
+							name="orddd_lite_show_partially_booked_dates"
+							control={ control }
+							render={ ( { field } ) => (
+								<ToggleControl
+									checked={ field.value }
+									onChange={ field.onChange }
+									__nextHasNoMarginBottom
+								/>
+							) }
+						/>
+					</SettingRow>
+
 					<SettingRow
 						label={ __( 'Available dates:', 'order-delivery-date' ) }
 						tooltip={ __( 'Colour used to highlight dates that are open for delivery.', 'order-delivery-date' ) }
@@ -556,42 +567,12 @@ const CalendarAppearance = () => {
 					</SettingRow>
 
 					<SettingRow
-						label={ __( 'Show partially booked dates:', 'order-delivery-date' ) }
-						tooltip={ __( 'Highlight dates that still have some delivery slots available on the calendar.', 'order-delivery-date' ) }
-					>
-						<Controller
-							name="orddd_lite_show_partially_booked_dates"
-							control={ control }
-							render={ ( { field } ) => (
-								<ToggleControl
-									checked={ field.value }
-									onChange={ field.onChange }
-									__nextHasNoMarginBottom
-								/>
-							) }
-						/>
-					</SettingRow>
-
-					<SettingRow
-						label={ __( 'Partially booked dates:', 'order-delivery-date' ) }
-						tooltip={ __( 'Colour used to indicate dates that are partially booked. Available in Pro.', 'order-delivery-date' ) }
-					>
-						<LockedToggle />
-					</SettingRow>
-
-					<SettingRow
 						label={ __( 'Cut-off time dates:', 'order-delivery-date' ) }
 						tooltip={ __( 'Colour used to indicate dates that are past the cut-off time for ordering. Available in Pro.', 'order-delivery-date' ) }
 					>
 						<LockedToggle />
 					</SettingRow>
 
-					<SettingRow
-						label={ __( 'Calendar icon color:', 'order-delivery-date' ) }
-						tooltip={ __( 'Colour of the calendar icon shown next to the delivery date input field. Available in Pro.', 'order-delivery-date' ) }
-					>
-						<LockedToggle />
-					</SettingRow>
 				</AccordionCard>
 			</SettingsPanel>
 		</div>

@@ -145,11 +145,7 @@ const ExpandPanel = ( { schedule, isEstimated = false } ) => {
 	useEffect( () => {
 		apiFetch( { path: '/orddd/v1/holidays' } )
 			.then( ( data ) => {
-				if ( ! Array.isArray( data ) ) { setHolidays( [] ); return; }
-				const match = data.find(
-					( item ) => String( item.delivery_schedule_id ) === String( schedule.delivery_schedule_id )
-				);
-				setHolidays( match?.holidays || [] );
+				setHolidays( Array.isArray( data ) ? data : [] );
 			} )
 			.catch( () => {
 				setHolidayError( true );

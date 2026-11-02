@@ -474,34 +474,6 @@ const Panel2TimeSlot = ( { form, control, timeSlots, setTimeSlots, deliveryDays 
 				/>
 			</SettingRow>
 
-			{ form.orddd_lite_time_slot_asap === 'checked' && (
-				<>
-					<CardDivider />
-					<SettingRow label={ __( 'Additional Charges for \'As Soon As Possible\':', 'order-delivery-date' ) }
-						tooltip={ __( 'Additional Charges for \'As Soon As Possible\' Option.', 'order-delivery-date' )}>
-						<div style={ { display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' } }>
-							<Controller name="orddd_asap_charges" control={ control }
-								render={ ( { field } ) => (
-									<TextControl type="number" min={ 0 } placeholder="Charges"
-										value={ field.value } onChange={ field.onChange } __nextHasNoMarginBottom />
-								) }
-							/>
-							<Controller name="orddd_asap_charges_type" control={ control }
-								render={ ( { field } ) => (
-									<SelectControl value={ field.value } options={ CHARGES_TYPE_OPTIONS }
-										onChange={ field.onChange } __nextHasNoMarginBottom />
-								) }
-							/>
-							<Controller name="orddd_asap_charges_label" control={ control }
-								render={ ( { field } ) => (
-									<TextControl placeholder="Charges Label"
-										value={ field.value } onChange={ field.onChange } __nextHasNoMarginBottom />
-								) }
-							/>
-						</div>
-					</SettingRow>
-				</>
-			) }
 			<CardDivider />
 
 			<SettingRow label={ __( 'Time Slot Field Label:', 'order-delivery-date' ) }

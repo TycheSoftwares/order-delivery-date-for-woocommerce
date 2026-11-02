@@ -188,6 +188,8 @@ if ( ! class_exists( 'ORDDD_Appearance_API' ) ) {
 				'orddd_lite_delivery_date_field_label',
 				'orddd_lite_delivery_timeslot_field_label',
 				'orddd_lite_delivery_date_field_placeholder',
+				'orddd_lite_auto_populate_first_available_date',
+				'orddd_lite_auto_populate_first_available_time_slot',
 			);
 
 			foreach ( $plain_fields as $field ) {
@@ -263,12 +265,14 @@ if ( ! class_exists( 'ORDDD_Appearance_API' ) ) {
 		 */
 		private function get_field_appearance_data() {
 			return array(
-				'orddd_lite_delivery_date_fields_on_checkout_page' => get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ),
-				'orddd_lite_delivery_date_on_cart_page'            => get_option( 'orddd_lite_delivery_date_on_cart_page' ),
-				'orddd_lite_delivery_date_field_label'             => get_option( 'orddd_lite_delivery_date_field_label' ),
-				'orddd_lite_delivery_timeslot_field_label'         => get_option( 'orddd_lite_delivery_timeslot_field_label' ),
-				'orddd_lite_delivery_date_field_placeholder'       => get_option( 'orddd_lite_delivery_date_field_placeholder' ),
-				'orddd_lite_delivery_date_field_note'              => get_option( 'orddd_lite_delivery_date_field_note' ),
+				'orddd_lite_delivery_date_fields_on_checkout_page'  => get_option( 'orddd_lite_delivery_date_fields_on_checkout_page' ),
+				'orddd_lite_delivery_date_on_cart_page'             => get_option( 'orddd_lite_delivery_date_on_cart_page' ),
+				'orddd_lite_delivery_date_field_label'              => get_option( 'orddd_lite_delivery_date_field_label' ),
+				'orddd_lite_delivery_timeslot_field_label'          => get_option( 'orddd_lite_delivery_timeslot_field_label' ),
+				'orddd_lite_delivery_date_field_placeholder'        => get_option( 'orddd_lite_delivery_date_field_placeholder' ),
+				'orddd_lite_delivery_date_field_note'               => get_option( 'orddd_lite_delivery_date_field_note' ),
+				'orddd_lite_auto_populate_first_available_date'     => get_option( 'orddd_lite_auto_populate_first_available_date' ),
+				'orddd_lite_auto_populate_first_available_time_slot' => get_option( 'orddd_lite_auto_populate_first_available_time_slot' ),
 			);
 		}
 

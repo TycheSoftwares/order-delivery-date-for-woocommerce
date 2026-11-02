@@ -1,183 +1,185 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# Copyright (C) 2026 Tyche Softwares
+# This file is distributed under the same license as the Order Delivery Date for WooCommerce (Lite version) plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-28 14:19+0530\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Project-Id-Version: Order Delivery Date for WooCommerce (Lite version) 5.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-delivery-date-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-02T13:43:53+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: order-delivery-date\n"
 
-#: order_delivery_date.php:312
-msgid ""
-"Order Delivery Date for WooCommerce (Lite version) plugin requires "
-"WooCommerce installed and activate."
+#. Plugin Name of the plugin
+#: order_delivery_date.php
+msgid "Order Delivery Date for WooCommerce (Lite version)"
 msgstr ""
 
-#: order_delivery_date.php:428 order_delivery_date.php:516
-#: order_delivery_date.php:636
-msgid "Clear"
+#. Plugin URI of the plugin
+#: order_delivery_date.php
+msgid "https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/"
 msgstr ""
 
-#: order_delivery_date.php:429 order_delivery_date.php:517
-#: order_delivery_date.php:637
-msgid "Holiday"
+#. Description of the plugin
+#: order_delivery_date.php
+msgid "This plugin allows customers to choose their preferred Order Delivery Date during checkout."
 msgstr ""
 
-#: order_delivery_date.php:430 order_delivery_date.php:437
-#: order_delivery_date.php:518 order_delivery_date.php:525
-#: order_delivery_date.php:638 order_delivery_date.php:645
-msgid "Booked"
+#. Author of the plugin
+#: order_delivery_date.php
+msgid "Tyche Softwares"
 msgstr ""
 
-#: order_delivery_date.php:431 order_delivery_date.php:519
-#: order_delivery_date.php:639 includes/class-orddd-lite-process.php:69
-#: includes/integrations/wc-blocks/class-order-delivery-date-blocks-integration.php:69
-#: includes/integrations/wc-blocks/class-order-delivery-date-cart-block-integration.php:69
-#: templates/orddd-lite-admin-datepicker.php:22
-msgid "Select a time slot"
+#. Author URI of the plugin
+#: order_delivery_date.php
+msgid "https://www.tychesoftwares.com/"
 msgstr ""
 
-#: order_delivery_date.php:432 order_delivery_date.php:520
-#: order_delivery_date.php:640 includes/class-orddd-lite-common.php:788
-msgid "As Soon As Possible"
-msgstr ""
-
-#: order_delivery_date.php:433 order_delivery_date.php:521
-#: order_delivery_date.php:641 includes/class-orddd-lite-common.php:786
-msgid "No time slots are available"
-msgstr ""
-
-#: order_delivery_date.php:691
-msgid "Docs"
-msgstr ""
-
-#: order_delivery_date.php:692
-msgid "Go Pro"
-msgstr ""
-
-#: order_delivery_date.php:692
-msgid "Unlock All"
-msgstr ""
-
-#: order_delivery_date.php:710
-#, php-format
-msgid ""
-"Thank you for using <a href=\"%1$s\" target=\"_blank\">Order Delivery Date</"
-"a>! Please <a href=\"%2$s\" target=\"_blank\">rate us on WordPress.org</a>"
-msgstr ""
-
-#: uninstall.php:20 includes/orddd-lite-config.php:162
-msgid "Sunday"
-msgstr ""
-
-#: uninstall.php:21 includes/orddd-lite-config.php:163
-msgid "Monday"
-msgstr ""
-
-#: uninstall.php:22 includes/orddd-lite-config.php:164
-msgid "Tuesday"
-msgstr ""
-
-#: uninstall.php:23 includes/orddd-lite-config.php:165
-msgid "Wednesday"
-msgstr ""
-
-#: uninstall.php:24 includes/orddd-lite-config.php:166
-msgid "Thursday"
-msgstr ""
-
-#: uninstall.php:25 includes/orddd-lite-config.php:167
-msgid "Friday"
-msgstr ""
-
-#: uninstall.php:26 includes/orddd-lite-config.php:168
-msgid "Saturday"
-msgstr ""
-
-#: emails/class-orddd-lite-email-update-date.php:34
-#: emails/class-orddd-lite-email-update-date.php:151
+#: emails/class-orddd-lite-email-update-date.php:47
+#: emails/class-orddd-lite-email-update-date.php:164
 msgid "Delivery Date & Time Updated"
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:35
+#: emails/class-orddd-lite-email-update-date.php:48
 msgid "Delivery Date & Time is is being updated for the order."
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:141
-msgid ""
-"[{blogname}] Delivery Date & Time is Updated for (Order {order_number}) - "
-"{order_date}"
+#: emails/class-orddd-lite-email-update-date.php:154
+msgid "[{blogname}] Delivery Date & Time is Updated for (Order {order_number}) - {order_date}"
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:164
+#: emails/class-orddd-lite-email-update-date.php:177
 msgid "Enable/Disable"
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:166
+#: emails/class-orddd-lite-email-update-date.php:179
 msgid "Enable this email notification"
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:170
-msgid "Recipient(s)"
-msgstr ""
-
-#: emails/class-orddd-lite-email-update-date.php:173
-#, php-format
-msgid ""
-"Enter recipients (comma separated) for this email. Defaults to <code>%s</"
-"code>."
-msgstr ""
-
-#: emails/class-orddd-lite-email-update-date.php:178
+#: emails/class-orddd-lite-email-update-date.php:191
 msgid "Subject"
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:181
+#. translators: %s: subject
+#: emails/class-orddd-lite-email-update-date.php:194
 #, php-format
-msgid ""
-"This controls the email subject line. Leave blank to use the default "
-"subject: <code>%s</code>."
+msgid "This controls the email subject line. Leave blank to use the default subject: <code>%s</code>."
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:186
+#: emails/class-orddd-lite-email-update-date.php:199
 msgid "Email Heading"
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:189
+#. translators: %s: heading
+#: emails/class-orddd-lite-email-update-date.php:202
 #, php-format
-msgid ""
-"This controls the main heading contained within the email notification. "
-"Leave blank to use the default heading: <code>%s</code>."
+msgid "This controls the main heading contained within the email notification. Leave blank to use the default heading: <code>%s</code>."
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:194
+#: emails/class-orddd-lite-email-update-date.php:207
 msgid "Email type"
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:196
+#: emails/class-orddd-lite-email-update-date.php:209
 msgid "Choose which format of email to send."
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:200
+#: emails/class-orddd-lite-email-update-date.php:213
 msgid "Plain text"
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:201
+#: emails/class-orddd-lite-email-update-date.php:214
 msgid "HTML"
 msgstr ""
 
-#: emails/class-orddd-lite-email-update-date.php:202
+#: emails/class-orddd-lite-email-update-date.php:215
 msgid "Multipart"
+msgstr ""
+
+#: includes/api/class-orddd-lite-appearance-api.php:140
+msgid "Invalid or missing key. Accepted: \"field\", \"calendar\"."
+msgstr ""
+
+#: includes/api/class-orddd-lite-appearance-api.php:207
+msgid "Field appearance settings saved successfully."
+msgstr ""
+
+#: includes/api/class-orddd-lite-appearance-api.php:249
+msgid "Calendar appearance settings saved successfully."
+msgstr ""
+
+#: includes/api/class-orddd-lite-delivery-schedule-api.php:220
+#: includes/api/class-orddd-lite-delivery-schedule-api.php:233
+msgid "Schedule not found."
+msgstr ""
+
+#: includes/api/class-orddd-lite-holidays-api.php:116
+msgid "holiday_name is required."
+msgstr ""
+
+#: includes/api/class-orddd-lite-holidays-api.php:136
+msgid "Provide holiday_date or holiday_date_from + holiday_date_to."
+msgstr ""
+
+#: includes/api/class-orddd-lite-holidays-api.php:165
+msgid "Holiday added successfully."
+msgstr ""
+
+#: includes/api/class-orddd-lite-holidays-api.php:189
+msgid "holiday_date query param is required."
+msgstr ""
+
+#: includes/api/class-orddd-lite-holidays-api.php:210
+msgid "Holiday removed successfully."
+msgstr ""
+
+#: includes/api/class-orddd-lite-settings-api.php:178
+msgid "Invalid or missing key. Accepted: default_schedule, additional."
+msgstr ""
+
+#: includes/api/class-orddd-lite-settings-api.php:242
+msgid "Default schedule settings saved successfully."
+msgstr ""
+
+#: includes/api/class-orddd-lite-settings-api.php:272
+msgid "Additional settings saved successfully."
+msgstr ""
+
+#: includes/api/class-orddd-lite-settings-api.php:333
+msgid "block_time_slot_for must be \"weekdays\" or \"dates\"."
+msgstr ""
+
+#: includes/api/class-orddd-lite-settings-api.php:341
+msgid "delivery_days and timeslot are required."
+msgstr ""
+
+#: includes/api/class-orddd-lite-settings-api.php:381
+#: build/admin/index.js:3
+msgid "Time slot blocked successfully."
+msgstr ""
+
+#: includes/api/class-orddd-lite-settings-api.php:411
+msgid "For bulk deletion, timeslot must be JSON with a \"timeslots\" array."
+msgstr ""
+
+#: includes/api/class-orddd-lite-settings-api.php:426
+msgid "delivery_days is required."
+msgstr ""
+
+#: includes/api/class-orddd-lite-settings-api.php:441
+msgid "Time slot unblocked successfully."
+msgstr ""
+
+#: includes/api/class-orddd-lite-settings-api.php:486
+msgid "Onboarding complete."
+msgstr ""
+
+#: includes/api/class-orddd-lite-settings-api.php:503
+msgid "This feature is available in the Pro version. Upgrade at tychesoftwares.com."
 msgstr ""
 
 #: includes/class-orddd-lite-admin-delivery.php:46
@@ -185,27 +187,233 @@ msgid "Edit Order Delivery Date and/or Time"
 msgstr ""
 
 #: includes/class-orddd-lite-admin-delivery.php:110
-#: includes/class-orddd-lite-admin-delivery.php:377
+#: includes/class-orddd-lite-admin-delivery.php:387
 msgid "Delivery Charges:"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-delivery.php:214
-#: includes/class-orddd-lite-admin-delivery.php:272
+#. translators: %1s: date label, %2s old delivery date, %3s new delivery date
+#. translators: %1s: time slot label, %2s old delivery time slot, %3s delivery time slot
+#: includes/class-orddd-lite-admin-delivery.php:224
+#: includes/class-orddd-lite-admin-delivery.php:282
 #, php-format
 msgid "%1$s is updated from %2$s to %3$s"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-delivery.php:242
-#: includes/class-orddd-lite-admin-delivery.php:243
-#: includes/class-orddd-lite-admin-delivery.php:244
-#: includes/class-orddd-lite-common.php:677
-#: includes/class-orddd-lite-process.php:167
-#: includes/class-orddd-lite-process.php:168
-#: includes/class-orddd-lite-process.php:264
-#: includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php:101
-#: includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php:102
-#: includes/settings/class-orddd-lite-time-slot-settings.php:854
+#: includes/class-orddd-lite-admin-delivery.php:252
+#: includes/class-orddd-lite-admin-delivery.php:253
+#: includes/class-orddd-lite-admin-delivery.php:254
+#: includes/class-orddd-lite-common.php:696
+#: includes/class-orddd-lite-process.php:173
+#: includes/class-orddd-lite-process.php:174
+#: includes/class-orddd-lite-process.php:270
+#: includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php:128
+#: includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php:129
 msgid "As Soon As Possible."
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:176
+#: build/admin/index.js:1
+msgid "12 hour"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:177
+#: build/admin/index.js:1
+msgid "24 hour"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:202
+#: uninstall.php:29
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Monday"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:203
+#: uninstall.php:30
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Tuesday"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:204
+#: uninstall.php:31
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Wednesday"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:205
+#: uninstall.php:32
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Thursday"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:206
+#: uninstall.php:33
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Friday"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:207
+#: uninstall.php:34
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Saturday"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:208
+#: uninstall.php:28
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Sunday"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:251
+msgid "Base"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:252
+#: build/admin/index.js:1
+msgid "Black Tie"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:253
+#: build/admin/index.js:1
+msgid "Blitzer"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:254
+#: build/admin/index.js:1
+msgid "Cupertino"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:255
+#: build/admin/index.js:1
+msgid "Dark Hive"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:256
+#: build/admin/index.js:1
+msgid "Dot Luv"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:257
+#: build/admin/index.js:1
+msgid "Eggplant"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:258
+#: build/admin/index.js:1
+msgid "Excite Bike"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:259
+#: build/admin/index.js:1
+msgid "Flick"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:260
+#: build/admin/index.js:1
+msgid "Hot Sneaks"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:261
+#: build/admin/index.js:1
+msgid "Humanity"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:262
+#: build/admin/index.js:1
+msgid "Le Frog"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:263
+#: build/admin/index.js:1
+msgid "Mint Choc"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:264
+#: build/admin/index.js:1
+msgid "Overcast"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:265
+#: build/admin/index.js:1
+msgid "Pepper Grinder"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:266
+#: build/admin/index.js:1
+msgid "Redmond"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:267
+#: build/admin/index.js:1
+msgid "Smoothness"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:268
+#: build/admin/index.js:1
+msgid "South Street"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:269
+#: build/admin/index.js:1
+msgid "Start"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:270
+#: build/admin/index.js:1
+msgid "Sunny"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:271
+#: build/admin/index.js:1
+msgid "Swanky Purse"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:272
+#: build/admin/index.js:1
+msgid "Trontastic"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:273
+#: build/admin/index.js:1
+msgid "UI Darkness"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:274
+#: build/admin/index.js:1
+msgid "UI Lightness"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:275
+#: build/admin/index.js:1
+msgid "Vader"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:301
+msgid "After Billing Section"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:302
+msgid "After Shipping Section"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:303
+#: build/admin/index.js:1
+msgid "Before Order Notes"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:304
+#: build/admin/index.js:1
+msgid "After Order Notes"
+msgstr ""
+
+#: includes/class-orddd-lite-admin-scripts.php:305
+msgid "After Your Order Table"
 msgstr ""
 
 #: includes/class-orddd-lite-common.php:115
@@ -225,54 +433,72 @@ msgstr ""
 msgid "I have purchased the Pro version of the Plugin."
 msgstr ""
 
+#: includes/class-orddd-lite-common.php:805
+#: order_delivery_date.php:451
+#: order_delivery_date.php:557
+#: order_delivery_date.php:814
+msgid "No time slots are available"
+msgstr ""
+
+#: includes/class-orddd-lite-common.php:807
+#: order_delivery_date.php:450
+#: order_delivery_date.php:556
+#: order_delivery_date.php:813
+msgid "As Soon As Possible"
+msgstr ""
+
+#: includes/class-orddd-lite-common.php:2115
+msgid "Rest of the World"
+msgstr ""
+
 #: includes/class-orddd-lite-privacy.php:43
 #: includes/class-orddd-lite-process.php:60
-#: includes/class-orddd-lite-process.php:362
+#: includes/class-orddd-lite-process.php:368
 #: includes/integrations/wc-blocks/class-order-delivery-date-blocks-integration.php:60
 #: includes/integrations/wc-blocks/class-order-delivery-date-cart-block-integration.php:60
-#: includes/integrations/wc-blocks/order-delivery-date-block.php:80
-#: includes/settings/class-orddd-lite-filter.php:59
+#: includes/integrations/wc-blocks/order-delivery-date-block.php:110
+#: includes/settings/class-orddd-lite-delivery-calendar.php:274
+#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+#: includes/settings/class-orddd-lite-filter.php:63
+#: build/frontend/cart-block-frontend.js:1
+#: build/frontend/index.js:1
+#: build/frontend/orddd-block-frontend.js:1
 msgid "Delivery Date"
 msgstr ""
 
 #: includes/class-orddd-lite-process.php:61
 #: includes/integrations/wc-blocks/class-order-delivery-date-blocks-integration.php:61
 #: includes/integrations/wc-blocks/class-order-delivery-date-cart-block-integration.php:61
+#: includes/settings/class-orddd-lite-delivery-calendar.php:275
+#: includes/settings/class-orddd-lite-delivery-calendar.php:594
 msgid "Delivery Time"
 msgstr ""
 
-#: includes/class-orddd-lite-process.php:432
-#: includes/class-orddd-lite-process.php:438
-#: includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php:177
-#: includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php:183
+#: includes/class-orddd-lite-process.php:69
+#: includes/integrations/wc-blocks/class-order-delivery-date-blocks-integration.php:69
+#: includes/integrations/wc-blocks/class-order-delivery-date-cart-block-integration.php:69
+#: order_delivery_date.php:449
+#: order_delivery_date.php:555
+#: order_delivery_date.php:812
+#: templates/orddd-lite-admin-datepicker.php:22
+msgid "Select a time slot"
+msgstr ""
+
+#: includes/class-orddd-lite-process.php:439
+#: includes/class-orddd-lite-process.php:445
+#: includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php:220
+#: includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php:226
 msgid "is a required field."
 msgstr ""
 
-#: includes/class-orddd-lite-process.php:497
-#: includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php:235
-msgid ""
-"The cut-off time for the selected date has expired. Please select another "
-"delivery date."
+#: includes/class-orddd-lite-process.php:505
+#: includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php:278
+msgid "The cut-off time for the selected date has expired. Please select another delivery date."
 msgstr ""
 
-#: includes/class-orddd-lite-process.php:499
-#: includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php:237
-msgid ""
-"The selected time slot has expired. Please select another time slot for "
-"delivery."
-msgstr ""
-
-#: includes/component/faq-support/ts-faq-support.php:125
-#, php-format
-msgid "Frequently Asked Questions for %s"
-msgstr ""
-
-#: includes/component/faq-support/ts-faq-support.php:126
-msgid "Frequently Asked Questions for "
-msgstr ""
-
-#: includes/component/faq-support/ts-faq-support.php:175
-msgid "FAQ & Support"
+#: includes/class-orddd-lite-process.php:507
+#: includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php:280
+msgid "The selected time slot has expired. Please select another time slot for delivery."
 msgstr ""
 
 #: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:172
@@ -292,14 +518,11 @@ msgid "The plugin is not working."
 msgstr ""
 
 #: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:186
-msgid ""
-"Please share what was faulty with the plugin so that we may get the issue "
-"fixed."
+msgid "Please share what was faulty with the plugin so that we may get the issue fixed."
 msgstr ""
 
 #: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:192
-msgid ""
-"We’re sorry! Please tell us about the issues so that we can get them fixed."
+msgid "We’re sorry! Please tell us about the issues so that we can get them fixed."
 msgstr ""
 
 #: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:196
@@ -315,14 +538,11 @@ msgid "I have purchased the Pro version of the plugin"
 msgstr ""
 
 #: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:204
-msgid ""
-"We’re sorry! We would like you to tell us the plugin/theme so that we can "
-"work on the compatibility."
+msgid "We’re sorry! We would like you to tell us the plugin/theme so that we can work on the compatibility."
 msgstr ""
 
 #: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:208
-msgid ""
-"The plugin is great, but I need specific feature(s) that is not supported."
+msgid "The plugin is great, but I need specific feature(s) that is not supported."
 msgstr ""
 
 #: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:214
@@ -330,8 +550,7 @@ msgid "Minimum Delivery Time (in hours) is not working as expected"
 msgstr ""
 
 #: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:220
-msgid ""
-"We do not have a need for the plugin as we aren’t doing deliveries anymore"
+msgid "We do not have a need for the plugin as we aren’t doing deliveries anymore"
 msgstr ""
 
 #: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:226
@@ -355,6 +574,7 @@ msgid "Submit & Deactivate"
 msgstr ""
 
 #: includes/component/plugin-deactivation/class-tyche-plugin-deactivation.php:259
+#: build/admin/index.js:1
 msgid "Cancel"
 msgstr ""
 
@@ -362,1141 +582,225 @@ msgstr ""
 msgid "Please select a reason for deactivation!"
 msgstr ""
 
-#: includes/component/plugin-tracking/class-tyche-plugin-tracking.php:121
-msgid "Once in a Week"
-msgstr ""
-
-#: includes/component/plugin-tracking/class-tyche-plugin-tracking.php:261
-msgid "Want to help make "
-msgstr ""
-
-#: includes/component/plugin-tracking/class-tyche-plugin-tracking.php:264
-msgid "Allow"
-msgstr ""
-
-#: includes/component/plugin-tracking/class-tyche-plugin-tracking.php:265
-msgid "No thanks"
-msgstr ""
-
-#: includes/component/plugin-tracking/ts-tracking.php:200
+#: includes/component/plugin-tracking/ts-tracking.php:218
 msgid "Reset usage tracking"
 msgstr ""
 
-#: includes/component/upgrade-to-pro/ts-upgrade-to-pro.php:206
-#: includes/component/upgrade-to-pro/ts-upgrade-to-pro.php:207
-#: includes/component/upgrade-to-pro/ts-upgrade-to-pro.php:288
-msgid "Upgrade to Pro"
-msgstr ""
-
-#: includes/component/upgrade-to-pro/ts-upgrade-to-pro.php:252
-#, php-format
-msgid ""
-"Your Woo store is losing its WOW factor. Your Order Delivery Date Pro for "
-"WooCommerce license has expired. <a href=\"%s\" target=\"_blank\" class="
-"\"button\">Renew Now</a>"
-msgstr ""
-
-#: includes/component/upgrade-to-pro/ts-upgrade-to-pro.php:260
-#, php-format
-msgid ""
-"Upgrade to the PRO version of Order Delivery Date for WooCommerce plugin for "
-"$1! Enjoy all Pro features for 30 days at this insane price. Limited time "
-"offer <a href=\"%s\" class=\"button-primary button button-large\" target="
-"\"_blank\"><b>Act now!</b></a>"
-msgstr ""
-
-#: includes/component/upgrade-to-pro/templates/upgrade-to-pro-page/upgrade-to-pro-modal.php:4
+#: includes/component/upgrade-to-pro/templates/upgrade-to-pro-page/upgrade-to-pro-modal.php:5
+#: build/admin/index.js:4
 msgid "Order Delivery Date PRO for WooCommerce is CHEAPER than you think"
 msgstr ""
 
-#: includes/component/upgrade-to-pro/templates/upgrade-to-pro-page/upgrade-to-pro-modal.php:5
+#: includes/component/upgrade-to-pro/templates/upgrade-to-pro-page/upgrade-to-pro-modal.php:6
+#: build/admin/index.js:4
 msgid "Upgrade from Lite to PRO with our Super Saver PRO Access Deal!"
 msgstr ""
 
-#: includes/component/upgrade-to-pro/templates/upgrade-to-pro-page/upgrade-to-pro-modal.php:6
-msgid ""
-"Unlock all premium features of Order Delivery Date PRO for WooCommerce "
-"without restrictions — all while staying within budget. Your store's success "
-"is one click away, so don't miss the Super Saver PRO Access Deal that can "
-"skyrocket your sales today!"
-msgstr ""
-
 #: includes/component/upgrade-to-pro/templates/upgrade-to-pro-page/upgrade-to-pro-modal.php:7
-msgid ""
-"Upgrade from lite to PRO at special pricing. Click the button below to "
-"<i>access the latest deals.</i>"
+#: build/admin/index.js:4
+msgid "Unlock all premium features of Order Delivery Date PRO for WooCommerce without restrictions — all while staying within budget. Your store's success is one click away, so don't miss the Super Saver PRO Access Deal that can skyrocket your sales today!"
 msgstr ""
 
-#: includes/component/upgrade-to-pro/templates/upgrade-to-pro-page/upgrade-to-pro-modal.php:10
-msgid "Your store was thriving with PRO - Why stop now?"
+#: includes/component/upgrade-to-pro/templates/upgrade-to-pro-page/upgrade-to-pro-modal.php:8
+msgid "Upgrade from lite to PRO at special pricing. Click the button below to <i>access the latest deals.</i>"
 msgstr ""
 
 #: includes/component/upgrade-to-pro/templates/upgrade-to-pro-page/upgrade-to-pro-modal.php:11
-msgid "Upgrade to Order Delivery Date PRO for WooCommerce"
+#: build/admin/index.js:4
+msgid "Your store was thriving with PRO - Why stop now?"
 msgstr ""
 
 #: includes/component/upgrade-to-pro/templates/upgrade-to-pro-page/upgrade-to-pro-modal.php:12
-msgid ""
-"Reclaim the 20+ powerful features that were driving your growth. Upgrade to "
-"PRO again and continue unlocking your store's full potential. Without PRO "
-"you are missing out on -"
+#: build/admin/index.js:4
+msgid "Upgrade to Order Delivery Date PRO for WooCommerce"
 msgstr ""
 
 #: includes/component/upgrade-to-pro/templates/upgrade-to-pro-page/upgrade-to-pro-modal.php:13
-msgid ""
-"<b><i>Don't miss out on what you were achieving - take action today! Click "
-"the button below to Upgrade to PRO.</i></b>"
+#: build/admin/index.js:4
+msgid "Reclaim the 20+ powerful features that were driving your growth. Upgrade to PRO again and continue unlocking your store's full potential. Without PRO you are missing out on -"
 msgstr ""
 
-#: includes/component/woocommerce-check/ts-woo-active.php:79
-msgid " plugin requires WooCommerce installed and active."
+#: includes/component/upgrade-to-pro/templates/upgrade-to-pro-page/upgrade-to-pro-modal.php:14
+msgid "<b><i>Don't miss out on what you were achieving - take action today! Click the button below to Upgrade to PRO.</i></b>"
 msgstr ""
 
-#: includes/integrations/wc-blocks/order-delivery-date-block.php:85
+#: includes/component/upgrade-to-pro/ts-upgrade-to-pro.php:208
+#: includes/component/upgrade-to-pro/ts-upgrade-to-pro.php:209
+#: build/admin/index.js:1
+msgid "Upgrade to Pro"
+msgstr ""
+
+#. translators: %s: Renew Link
+#: includes/component/upgrade-to-pro/ts-upgrade-to-pro.php:254
+#, php-format
+msgid "Your Woo store is losing its WOW factor. Your Order Delivery Date Pro for WooCommerce license has expired. <a href=\"%s\" target=\"_blank\" class=\"button\">Renew Now</a>"
+msgstr ""
+
+#. translators: %s: Orddd Trial Version Download page Link
+#: includes/component/upgrade-to-pro/ts-upgrade-to-pro.php:262
+#, php-format
+msgid "Upgrade to the PRO version of Order Delivery Date for WooCommerce plugin for $1! Enjoy all Pro features for 30 days at this insane price. Limited time offer <a href=\"%s\" class=\"button-primary button button-large\" target=\"_blank\"><b>Act now!</b></a>"
+msgstr ""
+
+#: includes/integrations/wc-blocks/order-delivery-date-block.php:115
 msgid "Delivery Date (d-m-y format)"
 msgstr ""
 
-#: includes/integrations/wc-blocks/order-delivery-date-block.php:90
-#: includes/settings/class-orddd-lite-view-disable-time-slots.php:106
-#: includes/settings/class-orddd-lite-view-time-slots.php:111
+#: includes/integrations/wc-blocks/order-delivery-date-block.php:120
+#: build/admin/index.js:1
+#: build/frontend/cart-block-frontend.js:1
+#: build/frontend/index.js:1
+#: build/frontend/orddd-block-frontend.js:1
 msgid "Time Slot"
 msgstr ""
 
-#: includes/integrations/wc-blocks/order-delivery-date-block.php:95
+#: includes/integrations/wc-blocks/order-delivery-date-block.php:125
+#: build/admin/index.js:1
 msgid "Delivery Schedule"
 msgstr ""
 
-#: includes/integrations/wc-blocks/order-delivery-date-block.php:100
+#: includes/integrations/wc-blocks/order-delivery-date-block.php:130
 msgid "Time Slot Mandatory"
 msgstr ""
 
-#: includes/integrations/wc-blocks/order-delivery-date-block.php:105
+#: includes/integrations/wc-blocks/order-delivery-date-block.php:135
 msgid "Time Slot Label"
 msgstr ""
 
-#: includes/integrations/wc-blocks/order-delivery-date-block.php:142
-msgid "Order Delivery Date Blocks"
+#: includes/settings/class-delivery-calendar-event-json.php:46
+msgid "Unauthorized"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-additional-settings.php:47
-msgid ""
-"Enable default sorting of orders (in descending order) by Delivery Date on "
-"WooCommerce -> Orders page"
+#: includes/settings/class-delivery-calendar-event-json.php:50
+#: includes/settings/class-orddd-lite-delivery-calendar.php:41
+msgid "Authentication has failed."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-additional-settings.php:99
-msgid "Virtual Products"
+#: includes/settings/class-orddd-lite-delivery-calendar.php:269
+#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+msgid "Order ID"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-additional-settings.php:108
-msgid "Featured Products"
+#: includes/settings/class-orddd-lite-delivery-calendar.php:270
+#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+#: templates/orddd-lite-delivery-calendar-html.php:19
+#: build/admin/index.js:1
+msgid "Products"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-appearance-settings.php:268
-msgid "In Billing Section"
+#: includes/settings/class-orddd-lite-delivery-calendar.php:271
+#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+msgid "Billing Address"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-appearance-settings.php:269
-msgid "In Shipping Section"
+#: includes/settings/class-orddd-lite-delivery-calendar.php:272
+#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+msgid "Shipping Address"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-appearance-settings.php:270
-msgid "Before Order Notes"
+#: includes/settings/class-orddd-lite-delivery-calendar.php:273
+#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+#: build/admin/index.js:1
+msgid "Shipping Method"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-appearance-settings.php:271
-msgid "After Order Notes"
+#: includes/settings/class-orddd-lite-delivery-calendar.php:276
+#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+msgid "Order Date"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-appearance-settings.php:272
-msgid "Between Your Order & Payment Section"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-appearance-settings.php:359
-msgid "Preview theme:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-calendar-sync-settings.php:140
-msgid "Sync Automatically"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-calendar-sync-settings.php:141
-msgid "Sync Manually"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-calendar-sync-settings.php:142
-msgid "Disabled"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-calendar-sync-settings.php:153
-msgid ""
-"To set up Google Calendar API, please click on \"Show me how\" link and "
-"carefully follow these steps:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-calendar-sync-settings.php:154
-#: includes/settings/class-orddd-lite-calendar-sync-settings.php:239
-msgid "Click to toggle instructions"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-calendar-sync-settings.php:154
-#: includes/settings/class-orddd-lite-calendar-sync-settings.php:239
-msgid "Show me how"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-calendar-sync-settings.php:228
-msgid ""
-"Events will be imported using the ICS Feed url. Each event will create a new "
-"WooCommerce Order. The event's date & time will be set as that order's "
-"Delivery Date & Time. <br>Lockout will be updated for global settings for "
-"the set Delivery Date & Time."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-calendar-sync-settings.php:237
-msgid ""
-"To set up Import events using ics feed urls, please click on \"Show me how\" "
-"link and carefully follow these steps:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-filter.php:245
+#: includes/settings/class-orddd-lite-filter.php:251
 msgid "Today"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-filter.php:246
+#: includes/settings/class-orddd-lite-filter.php:252
 msgid "Tomorrow"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-filter.php:247
+#: includes/settings/class-orddd-lite-filter.php:253
+#: build/admin/index.js:1
 msgid "Custom"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-filter.php:276
+#: includes/settings/class-orddd-lite-filter.php:282
 msgid "Show all Delivery Dates"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-filter.php:290
-#, php-format
-msgctxt "order-delivery-date"
-msgid "%1$s %2$d"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-filter.php:305
+#: includes/settings/class-orddd-lite-filter.php:311
 msgid "Start Date"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-filter.php:306
+#: includes/settings/class-orddd-lite-filter.php:312
 msgid "End Date"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:66
-#: includes/settings/class-orddd-lite-settings.php:1111
-msgid "Order Delivery Date Settings"
+#: includes/settings/class-orddd-lite-settings.php:53
+msgid "<div class=\"notice notice-info my-dismiss-notice is-dismissible\"><p style=\"font-size:17px;\">Across the world, businesses are going through a tough time with COVID-19. In such times, we want to do our bit to support small businesses. Since shoppers are increasingly relying on delivery right now, we are giving <strong>50% off on the Order Delivery Date Pro plugin until April 14 2020</strong>. If you don't love it, get a full refund in 30 days, no questions asked!<br><br>Please use the coupon code STAYSAFE to avail the discount. <strong><a target=\"_blank\" href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=customerstore&utm_medium=link&utm_campaign=OrderDeliveryDateLiteCovidNotice\"><u>BUY NOW FOR $49.50 (<span style=\"text-decoration:line-through;\">$99.00</span>)</u></a><strong>.</p></div>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:73
-msgid "Enable Delivery Date:"
+#: order_delivery_date.php:320
+msgid "Order Delivery Date for WooCommerce (Lite version) plugin requires WooCommerce installed and activate."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:77
-msgid "Enable Delivery Date capture on the checkout page."
+#: order_delivery_date.php:446
+#: order_delivery_date.php:552
+#: order_delivery_date.php:809
+msgid "Clear"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:82
-msgid "Delivery Days:"
+#: order_delivery_date.php:447
+#: order_delivery_date.php:553
+#: order_delivery_date.php:810
+msgid "Holiday"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:86
-msgid "Select weekdays for delivery."
+#: order_delivery_date.php:448
+#: order_delivery_date.php:455
+#: order_delivery_date.php:554
+#: order_delivery_date.php:561
+#: order_delivery_date.php:811
+#: order_delivery_date.php:818
+msgid "Booked"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:91
-msgid "Minimum Delivery time (in hours):"
+#: order_delivery_date.php:872
+msgid "Docs"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:95
-msgid "Minimum number of hours required to prepare for delivery."
+#: order_delivery_date.php:873
+msgid "Go Pro"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:100
-msgid "Number of dates to choose:"
+#: order_delivery_date.php:873
+msgid "Unlock All"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-settings.php:104
-msgid "Number of dates available for delivery."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:109
-#: includes/settings/class-orddd-lite-settings.php:688
-msgid "Mandatory field?:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:113
-msgid "Selection of delivery date on the checkout page will become mandatory."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:118
-msgid "Maximum Order Deliveries per day (based on per order):"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:122
-msgid "Maximum deliveries/orders per day."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:127
-msgid "Apply Minimum Delivery Time for non working weekdays:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:131
-msgid ""
-"If selected, then the Minimum Delivery Time (in hours) will be applied on "
-"the non working weekdays which are unchecked in Delivery Weekdays. If "
-"unchecked, then it will not be applied. For example, if Minimum Delivery "
-"Time (in hours) is set to 48 hours and Saturday is disabled for delivery. "
-"Now if a customer visits the website on Friday, then the first available "
-"date will be Sunday and not Monday."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:184
-msgid "Calendar Appearance"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:191
-msgid "Calendar Language:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:195
-msgid "Choose a Language."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:200
-msgid "Date Format:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:204
-msgid ""
-"The format in which the Delivery Date appears to the customers on the "
-"checkout page once the date is selected."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:209
-msgid "Time Format:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:213
-msgid ""
-"The time range will come in the selected format. If 12 hour format is "
-"selected, then the time slider will appear in am/pm format."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:218
-msgid "First Day of Week:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:222
-msgid "Choose the first day of week displayed on the Delivery Date calendar."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:227
-msgid "Field Label:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:231
-msgid ""
-"Choose the label that is to be displayed for the field on checkout page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:236
-msgid "Time slot Field Label:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:240
-msgid ""
-"Choose a label that is to be displayed for the time slot field on the "
-"checkout page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:245
-msgid "Field Placeholder Text:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:249
-msgid ""
-"Choose the placeholder text that is to be displayed for the field on "
-"checkout page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:254
-msgid "Field Note Text:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:258
-msgid ""
-"Choose the note to be displayed below the delivery date field on checkout "
-"page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:263
-msgid "Number of Months:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:267
-msgid "The number of months to be shown on the calendar."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:272
-msgid "Field placement on the Checkout page:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:276
-msgid ""
-"</br>The Delivery Date field will be displayed in the selected section.</"
-"br><i>Note: WooCommerce automatically hides the Shipping section fields for "
-"Virtual products.</i>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:281
-msgid "Delivery Date field on Cart page:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:285
-msgid ""
-"Add the Delivery Date field on the cart page along with the Checkout page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:290
-msgid "Theme:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:294
-msgid ""
-"Select the theme for the calendar which blends with the design of your "
-"website."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:299
-msgid "Color Code Your Calendar"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:306
-msgid "Holidays:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:310
-msgid ""
-"Color in which holidays should be shown on the calendar on checkout page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:315
-msgid "Booked Dates:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:319
-msgid ""
-"Color in which booked dates should be shown on the calendar on checkout page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:324
-msgid "Available Dates:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:328
-msgid ""
-"Color in which available dates should be shown on the calendar on checkout "
-"page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:422
-msgid "Add Holiday"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:429
-msgid "Holiday Name:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:437
-msgid "From Date:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:445
-msgid "To Date:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:449
-msgid ""
-"<br>Leave the \"To Date:\" field unchanged for single day holidays.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:454
-msgid "Allow Recurring:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:458
-msgid "Enable to block the holidays for all future years."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:478
-msgid "Google Calendar Sync"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:485
-msgid "Event Location"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:489
-msgid ""
-"<br>Enter the text that will be used in the location field of the calendar "
-"event. If left empty, the website description will be used. <br><i>Note: You "
-"can use ADDRESS, FULL_ADDRESS and CITY placeholders which will be replaced "
-"by their real values.</i><br><b><i>Upgrade to <a href=\"https://www."
-"tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-"
-"pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:494
-msgid "Event summary (name)"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:502
-msgid "Event Description"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:506
-msgid ""
-"<br>For the above 2 fields, you can use the following placeholders which "
-"will be replaced by their real values:&nbsp;SITE_NAME, CLIENT, PRODUCTS, "
-"PRODUCT_WITH_QTY, ORDER_DATE_TIME, ORDER_DATE, ORDER_NUMBER, PRICE, PHONE, "
-"NOTE, ADDRESS, FULL_ADDRESS , EMAIL (Client's email).<br><b><i>Upgrade to <a "
-"href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-"
-"date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:511
-msgid "Customer Add to Calendar button Settings"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:518
-msgid "Show Add to Calendar button on Order received page"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:522
-msgid ""
-"Show Add to Calendar button on the Order Received page for the customers."
-"<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-"
-"plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:527
-msgid "Show Add to Calendar button in the Customer notification email"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:531
-msgid ""
-"Show Add to Calendar button in the Customer notification email."
-"<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-"
-"plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:536
-msgid "Show Add to Calendar button on My account"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:540
-msgid ""
-"Show Add to Calendar button on My account page for the customers."
-"<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-"
-"plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:545
-msgid "Open Calendar in Same Window"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:549
-msgid ""
-"As default, the Calendar is opened in a new tab or window. If you check this "
-"option, user will be redirected to the Calendar from the same page, without "
-"opening a new tab or window.<br><b><i>Upgrade to <a href=\"https://www."
-"tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-"
-"pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:554
-msgid "Admin Calendar Sync Settings"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:561
-msgid "Integration Mode"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:565
-msgid ""
-"<br>Select method of integration. \"Sync Automatically\" will add the "
-"delivery events to the Google calendar, which is set in the \"Calendar to be "
-"used\" field, automatically when a customer places an order. Also, an \"Add "
-"to Calendar\" button is added on the Delivery Calendar page in admin to Sync "
-"past orders. <br>\"Sync Manually\" will add an \"Add to Google Calendar\" "
-"button in emails received by admin and New customer order.<br>\"Disabled\" "
-"will disable the integration with Google Calendar.<br>Note: Import of the "
-"events will work manually using .ics link.<br><b><i>Upgrade to <a href="
-"\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-"
-"for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:570
-#: includes/settings/class-orddd-lite-settings.php:630
-msgid "Instructions"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:578
-msgid "Key file name"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:582
-msgid ""
-"<br>Enter key file name here without extention, e.g. ab12345678901234567890-"
-"privatekey.<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/"
-"store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:587
-msgid "Service account email address"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:591
-msgid ""
-"<br>Enter Service account email address here, e.g. 1234567890@developer."
-"gserviceaccount.com.<br><b><i>Upgrade to <a href=\"https://www."
-"tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-"
-"pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:596
-msgid "Calendar to be used"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:600
-msgid ""
-"<br>Enter the ID of the calendar in which your deliveries will be saved, e."
-"g. abcdefg1234567890@group.calendar.google.com.<br><b><i>Upgrade to <a href="
-"\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-"
-"for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:605
-msgid "Show \"Export to Google Calendar\" button on Delivery Calendar page"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:609
-msgid ""
-"Show \"Export to Google Calendar\" button on the Order Delivery Date -> "
-"Delivery Calendar page.<br><i>Note: This button can be used to export the "
-"already placed orders with future deliveries from the current date to the "
-"calendar used above.</i><br><b><i>Upgrade to <a href=\"https://www."
-"tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-"
-"pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:614
-msgid "Show Add to Calendar button in New Order email notification"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:618
-msgid ""
-"Show \"Add to Calendar\" button in the New Order email notification."
-"<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-"
-"plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:623
-msgid "Import Events"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:638
-msgid "iCalendar/.ics Feed URL"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:646
-msgid "Import frequency"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:650
-msgid ""
-"Import events from Google calendar based on the time set below. By default, "
-"all events from the Google calendar will be imported once every 24 hours."
-"<br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/premium-"
-"plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:655
-msgid "Enter Import frequency (in minutes)"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:659
-msgid ""
-"The duration in minutes at which events from the Google Calendar ICS feeds "
-"will be imported automatically in the store. <i>Note: Setting this to a "
-"lower value then 10 minutes may impact the performance of your store.</"
-"i><br><b><i>Upgrade to <a href=\"https://www.tychesoftwares.com/store/"
-"premium-plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=ordddupgradetopro&utm_medium=link&utm_campaign=OrderDeliveryDateLite"
-"\" target=\"_blank\">Order Delivery Date Pro for WooCommerce</a> to enable "
-"the setting.</i></b>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:672
-msgid "Delivery Time Settings"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:679
-msgid "Enable time slot capture:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:683
-msgid ""
-"Allows the customer to choose a time slot for delivery on the checkout page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:692
-msgid "Selection of Time slot on the checkout page will become mandatory."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:697
-msgid "Show 'As Soon As Possible' option:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:701
-msgid "A new option will be added in the Time slot dropdown on checkout page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:706
-msgid "Auto-populate first available delivery time slot:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:710
-msgid ""
-"Auto-populate first available Delivery time slot when the date is selected "
-"on the checkout page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:715
-msgid ""
-"Add Time Slot <a href=https://www.tychesoftwares.com/docs/docs/order-"
-"delivery-date-pro-for-woocommerce/setup-delivery-date-with-time/?"
-"utm_source=userwebsite&utm_medium=link&utm_campaign=OrderDeliveryDateProSetting"
-"\" target=\"_blank\" class=\"dashicons dashicons-external\" style=\"line-"
-"height:unset;\"></a>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:722
-#: includes/settings/class-orddd-lite-settings.php:775
-msgid "Time Slot for:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:726
-#: includes/settings/class-orddd-lite-settings.php:779
-msgid ""
-"Select Weekday option or Specific delivery dates option to create a time "
-"slot."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:731
-#: includes/settings/class-orddd-lite-settings.php:784
-msgid "Select Delivery Days/Dates:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:735
-#: includes/settings/class-orddd-lite-settings.php:788
-msgid ""
-"Select Delivery Days/Dates for which you want to create an exclusive Time "
-"Slot. To create a time slot for all the weekdays, select \"All\"."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:740
-msgid "Time From/To:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:744
-msgid "Start time for the time slot."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:749
-#: includes/settings/class-orddd-lite-settings.php:829
-msgid "Maximum Order Deliveries per time slot (based on per order):"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:753
-#: includes/settings/class-orddd-lite-settings.php:833
-msgid ""
-"A time slot will become unavailable for further deliveries once these many "
-"orders are placed for delivery for that time slot. <br> <em>Note: If Max "
-"order deliveries is set, then that will get priority over time slot lockout."
-"</em>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:758
-#: includes/settings/class-orddd-lite-settings.php:838
-msgid "Additional Charges for time slot and Checkout label:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:762
-#: includes/settings/class-orddd-lite-settings.php:842
-msgid ""
-"Add delivery charges (if applicable) for time slot and add the label to be "
-"displayed on Checkout page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:768
-msgid ""
-"Bulk Add Time Slots <a href=https://www.tychesoftwares.com/docs/docs/order-"
-"delivery-date-pro-for-woocommerce/setup-delivery-date-with-time/?"
-"utm_source=userwebsite&utm_medium=link&utm_campaign=OrderDeliveryDateProSetting"
-"\" target=\"_blank\" class=\"dashicons dashicons-external\" style=\"line-"
-"height:unset;\"></a>"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:793
-msgid "Time Slot Duration:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:797
-msgid "X minutes per time slot or Duration of each time slot in minutes"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:802
-msgid "Interval between time slots:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:806
-msgid "Minutes between each time slot if applicable."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:811
-msgid "Time Slot Starts From:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:815
-msgid "Start time for the time slots."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:820
-msgid "Time Slot Ends At:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:824
-msgid "End time for the time slots."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:888
-msgid "Block a Time Slot"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:895
-msgid "Block Time Slot for:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:899
-msgid ""
-"Select \"Dates\" option to block time slots for individual dates. Select "
-"\"Weekdays\" option to block the time slots for a weekday or multiple "
-"weekdays."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:904
-msgid "Select Weekdays:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:908
-msgid "Select Weekdays for which you want to block the time slots."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:913
-msgid "Select Time Slots to block:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:917
-msgid ""
-"This will list all the time slots which are created in General Settings or "
-"in Custom Delivery Settings."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:934
-#: includes/settings/class-orddd-lite-settings.php:1193
-msgid "Additional Settings"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:941
-msgid "Show on Orders Listing Page:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:945
-msgid "Displays the Delivery Date on the WooCommerce->Orders page."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:950
-msgid "Show Filter on Orders Listing Page:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:954
-msgid ""
-"Displays the Filter on the WooCommerce->Orders page that allows you to view "
-"orders to be delivered today, tomorrow or in any month."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:959
-msgid "Auto-populate first available Delivery date:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:963
-msgid ""
-"Auto-populate first available Delivery date when the checkout page loads."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:968
-msgid "Disable the Delivery Date and Time Slot Fields for:"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:972
-msgid ""
-"<br>Disable the Delivery Date and Time Slot on the Checkout page for Virtual "
-"products and Featured products."
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:977
-msgid "Show Partially Booked Dates on the Delivery Calendar"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:981
-msgid ""
-"When enabled, it will show the dates with diagonally separated colors of "
-"Booked dates and Available Dates if 1 or more orders are placed for that "
-"date. <div class=\"orddd-tooltip\">"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1117
-msgid "General Settings"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1119
-msgid "Delivery Schedules"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1120
-msgid "Integrations"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1181
-msgid "Customize Delivery Date"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1184
-msgid "Define Delivery Times"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1187
-msgid "Holiday Calendar"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1190
-msgid "Appearance"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1207
-#: includes/settings/class-orddd-lite-settings.php:1216
-#: includes/settings/class-orddd-lite-settings.php:1256
-#: includes/settings/class-orddd-lite-settings.php:1303
-#: includes/settings/class-orddd-lite-settings.php:1326
-#: includes/settings/class-orddd-lite-settings.php:1336
-#: includes/settings/class-orddd-lite-settings.php:1346
-msgid "Save Settings"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1220
-msgid "Holidays"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1270
-msgid "Block Time Slots"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1277
-msgid "Time Slots"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1297
-msgid "Back to Time Slots"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1306
-msgid "Blocked Time Slots"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-settings.php:1590
+#. translators: %!$s: Website link, %2$s: Review link
+#: order_delivery_date.php:891
 #, php-format
-msgid ""
-"<div class=\"notice notice-info my-dismiss-notice is-dismissible\"><p style="
-"\"font-size:17px;\">Across the world, businesses are going through a tough "
-"time with COVID-19. In such times, we want to do our bit to support small "
-"businesses. Since shoppers are increasingly relying on delivery right now, "
-"we are giving <strong>50% off on the Order Delivery Date Pro plugin until "
-"April 14 2020</strong>. If you don't love it, get a full refund in 30 days, "
-"no questions asked!<br><br>Please use the coupon code STAYSAFE to avail the "
-"discount. <strong><a target=\"_blank\" href=\"https://www.tychesoftwares.com/"
-"store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?"
-"utm_source=customerstore&utm_medium=link&utm_campaign=OrderDeliveryDateLiteCovidNotice"
-"\"><u>BUY NOW FOR $49.50 (<span style=\"text-decoration:line-through;\">"
-"$99.00</span>)</u></a><strong>.</p></div>"
+msgid "Thank you for using <a href=\"%1$s\" target=\"_blank\">Order Delivery Date</a>! Please <a href=\"%2$s\" target=\"_blank\">rate us on WordPress.org</a>"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-shipping-days-settings.php:24
-msgid ""
-"Please enable the business days of your store so all the calculations of cut-"
-"off time and minimum delivery time will be done based on these weekdays and "
-"not based on delivery weekdays. You can leave this unchanged if you handle "
-"delivery & shipping by yourself. Please refer <a href=\"https://www."
-"tychesoftwares.com/docs/docs/order-delivery-date-pro-for-woocommerce/setup-"
-"shipping-days/?utm_source=userwebsite&amp;utm_medium=link&amp;"
-"utm_campaign=OrderDeliveryDateLiteSetting\" target=\"_blank\"> this post </"
-"a> to know more."
+#: templates/emails/admin-update-date.php:20
+#: templates/emails/plain/admin-update-date.php:21
+msgid "The Delivery Date & Time has been updated by the Administrator. The details of the order and the updated delivery details are as follows:"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-time-slot-settings.php:108
-#: includes/settings/class-orddd-lite-time-slot-settings.php:535
-#: includes/settings/class-orddd-lite-time-slot-settings.php:716
-msgid "Weekdays"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-time-slot-settings.php:109
-#: includes/settings/class-orddd-lite-time-slot-settings.php:536
-msgid "Specific Dates"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-time-slot-settings.php:715
-msgid "Dates"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-disable-time-slots.php:43
-msgid "block_time_slot"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-disable-time-slots.php:44
-msgid "block_time_slots"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-disable-time-slots.php:59
-msgid "Unblock"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-disable-time-slots.php:105
-#: includes/settings/class-orddd-lite-view-time-slots.php:110
-msgid "Delivery Days/Dates"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-holidays-table.php:42
-msgid "holiday"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-holidays-table.php:43
-msgid "holidays"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-holidays-table.php:58
-#: includes/settings/class-orddd-lite-view-time-slots.php:62
-msgid "Delete"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-holidays-table.php:109
-msgid "Name"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-holidays-table.php:110
-msgid "Date"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-holidays-table.php:111
-msgid "Type"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-holidays-table.php:143
-msgid "Recurring"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-holidays-table.php:145
-msgid "Current Year"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-time-slots.php:45
-msgid "time_slot"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-time-slots.php:46
-msgid "time_slots"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-time-slots.php:112
-msgid "Maximum Order Deliveries per time slot"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-time-slots.php:113
-msgid "Additional Charges for time slot"
-msgstr ""
-
-#: includes/settings/class-orddd-lite-view-time-slots.php:114
-msgid "Checkout label"
+#: templates/emails/admin-update-date.php:22
+#: templates/emails/plain/admin-update-date.php:23
+msgid "The Delivery Date & Time has been updated by the customer. The details of the order and the updated delivery details are as follows:"
 msgstr ""
 
 #: templates/orddd-lite-admin-datepicker.php:37
-msgid ""
-"Any change in Delivery charges here will not change the order total. You "
-"will need to update the Item section above for delivery charges to reflect "
-"in order total."
+msgid "Any change in Delivery charges here will not change the order total. You will need to update the Item section above for delivery charges to reflect in order total."
 msgstr ""
 
 #: templates/orddd-lite-admin-datepicker.php:41
-msgid ""
-"Note: If you are creating the order manually, you can update the delivery "
-"date & time after creating the order."
+msgid "Note: If you are creating the order manually, you can update the delivery date & time after creating the order."
 msgstr ""
 
 #: templates/orddd-lite-admin-datepicker.php:47
+#: build/admin/index.js:1
 msgid "Update"
 msgstr ""
 
@@ -1504,16 +808,2704 @@ msgstr ""
 msgid "Update & Notify Customer"
 msgstr ""
 
-#: templates/emails/admin-update-date.php:20
-#: templates/emails/plain/admin-update-date.php:21
-msgid ""
-"The Delivery Date & Time has been updated by the Administrator. The details "
-"of the order and the updated delivery details are as follows:"
+#: templates/orddd-lite-delivery-calendar-html.php:15
+#: build/admin/index.js:1
+msgid "Select a view:"
 msgstr ""
 
-#: templates/emails/admin-update-date.php:22
-#: templates/emails/plain/admin-update-date.php:23
+#: templates/orddd-lite-delivery-calendar-html.php:18
+msgid "Filter Deliveries by"
+msgstr ""
+
+#: templates/orddd-lite-delivery-calendar-html.php:20
+msgid "Orders"
+msgstr ""
+
+#: templates/orddd-lite-delivery-calendar-html.php:29
+#: build/admin/index.js:1
+msgid "Select status:"
+msgstr ""
+
+#: templates/orddd-lite-delivery-calendar-html.php:51
+#: build/admin/index.js:1
+msgid "Select shipping method:"
+msgstr ""
+
+#: templates/orddd-lite-delivery-calendar-html.php:69
+msgid "Apply Filters"
+msgstr ""
+
+#: templates/orddd-lite-delivery-calendar-html.php:76
+#: build/admin/index.js:1
+msgid "CSV"
+msgstr ""
+
+#: templates/orddd-lite-delivery-calendar-html.php:83
+#: build/admin/index.js:1
+msgid "Print"
+msgstr ""
+
+#: templates/orddd-lite-delivery-calendar-html.php:84
+msgid "Export Deliveries in CSV format. You can use the Order status filter and Month, Week and Day option of the calendar to filter the export data."
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Order Calendar"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "View all orders placed on their delivery date using the filters below."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Apply filters"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "* Orders that are imported from the ICS feed URL will not be displayed on the calendar under \"Products\" view until the products are added for those orders. Such orders will however continue to show on the calendar in the \"Orders\" view."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "* To export all orders to your Google calendar, please click the \"Export to Google Calendar\" button."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "If you have already exported the orders once & wish to re-export all orders again, please click on the \"Re-export to Google Calendar\" button."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "All events are added to the Google calendar. You can re-export the events to your calendar if you wish to add the events again with new settings."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Export to Google Calendar"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Re-exporting Orders …"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "All events are re-exported to the Google calendar."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Re-export to Google Calendar"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Home"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Delivery Schedules"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Holidays"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Settings"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Appearance"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Integrations"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Reminders"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Order Delivery Date"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Toggle navigation"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "FAQ's"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Common questions about Order Delivery Date."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Save Settings"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Settings saved."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "← Back"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Delivery Charges"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Product Categories"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Product Tags"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:3
+msgid "Order Type"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "User Role"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pickup Locations"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Fixed"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Percentage"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Individual"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Date Range"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Weekdays"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Specific Dates"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Select Weekday"
+msgstr ""
+
+#: build/admin/index.js:1
+#, js-format
+msgid "TIME SLOTS (%d)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "TIME SLOTS"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Day"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Slot"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Max Orders"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Charges"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "No time slots configured."
+msgstr ""
+
+#: build/admin/index.js:1
+#, js-format
+msgid "DELIVERY DAYS (%d)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Day / Date"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "HOLIDAYS"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Could not load holidays."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Name"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Date"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Type"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "No holidays configured."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Estimated"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Calendar"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Toggle row details"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Default Schedule"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "DEFAULT"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Delivery Date:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enabled"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Disabled"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Estimated Delivery Date"
+msgstr ""
+
+#: build/admin/index.js:1
+#, js-format
+msgid "Range: %s - %s Days"
+msgstr ""
+
+#: build/admin/index.js:1
+#, js-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: build/admin/index.js:1
+#, js-format
+msgid "%d day ahead"
+msgid_plural "%d days ahead"
+msgstr[0] ""
+msgstr[1] ""
+
+#: build/admin/index.js:1
+msgid "Same day"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Next day"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Minimum Delivery Time"
+msgstr ""
+
+#: build/admin/index.js:1
+#, js-format
+msgid "%s hour"
+msgid_plural "%s hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: build/admin/index.js:1
+#, js-format
+msgid "%d slot"
+msgid_plural "%d slots"
+msgstr[0] ""
+msgstr[1] ""
+
+#: build/admin/index.js:1
+msgid "No slots"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "No holidays"
+msgstr ""
+
+#: build/admin/index.js:1
+#, js-format
+msgid "%d holiday"
+msgid_plural "%d holidays"
+msgstr[0] ""
+msgstr[1] ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Edit"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Could not load delivery schedules. Please refresh the page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Delivery & Pickup Schedules"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "+ Add Schedule"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Create custom schedules per shipping method, product, or location with "
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Order Delivery Date Pro"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Schedule"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Delivery Days"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Cutoffs"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Time Slots/Holidays"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Actions"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "No delivery schedules found."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Search…"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pro"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Upgrade"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pickup"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Delivery"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Schedule Type:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Choose whether this schedule applies to Delivery or Pickup orders."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Schedule Based On:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select the criterion that determines which orders this schedule applies to."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Shipping Methods:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select the shipping methods this schedule applies to."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Product Categories:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Search and select product categories for this schedule."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Optional: restrict to specific shipping methods within the selected categories."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Product Tags:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Search and select product tags for this schedule."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Optional: restrict to specific shipping methods within the selected tags."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Products:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Search and select individual products for this schedule."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Optional: restrict to specific shipping methods for the selected products."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pickup Locations:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select pickup locations this schedule applies to."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Note: Pickup Locations are managed separately."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Click here to configure Pickup Locations."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Optional: restrict to specific product categories for the selected locations."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Order Type:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select order types this schedule applies to."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "User Role:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select user roles this schedule applies to."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Upgrade to unlock"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pro Feature"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "This feature is available in the Pro version."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Upgrade to Order Delivery Date Pro →"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Add More"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "No records found."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select all rows"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select row"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "✕ Cancel"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Bulk Action"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Apply"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select date"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select dates"
+msgstr ""
+
+#: build/admin/index.js:1
+#, js-format
+msgid "%d date(s) selected"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Done"
+msgstr ""
+
+#: build/admin/index.js:1
+#, js-format
+msgid "Remove %s"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Additional Charges"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Charges Type"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Charges Label"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Maximum Orders"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable Delivery Date capture on the checkout page for this delivery schedule."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Choose the delivery date option to be displayed on the checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select delivery days & specific dates and add additional charges & lockout for the date (if any)."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Disable"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable this option to choose specific delivery dates on the checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Add the maximum number of deliveries you can manage:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "A date will become unavailable for further deliveries once these many orders are placed."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Maximum Order"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Mandatory field?:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Selection of delivery date on the checkout page will become mandatory."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Number of dates to choose:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Number of dates available for delivery."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Date Field Label:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Choose the label that is to be displayed for the field on checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Delivery/Pick Up Date"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Field Note Text:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Choose the note to be displayed below the delivery date field on checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Minimum number of hours required to prepare for delivery."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "e.g. 2"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Maximum Order Deliveries per time slot"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable Time Slot Capture:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Allows the customer to choose a time slot for delivery on the checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Selection of Time slot on the checkout page will become mandatory."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Show 'As Soon As Possible' Option:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "As Soon as possible option is shown in the time slots dropdown."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Additional Charges for 'As Soon As Possible':"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Additional Charges for 'As Soon As Possible' Option."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Time Slot Field Label:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Choose a label that is to be displayed for the time slot field on the checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+#: build/admin/index.js:4
+msgid "Delete"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Add Individual Time Slot"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Add Bulk Time Slots"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Priority:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Add priority for the delivery schedule between 1 to 10 with 1 being the highest."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Apply Minimum Delivery Time for non working weekdays:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "If selected, then the Minimum Delivery Time (in hours) will be applied on the non working weekdays which are unchecked in Delivery Weekdays."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Minimum Pickup Time (in hours):"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Minimum number of hours required to prepare for pickup."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Current day will be disabled if an order is placed after this time."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Next day will be disabled if an order is placed after this time."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Set same day, next day, and rush hour delivery charges."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Configure per-weekday same/next day cutoffs, charges, and minimum delivery times."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Set same day and next day cutoff times per individual time slot."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable Delivery Date:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Delivery Checkout options:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Minimum Delivery Time (hours):"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Delivery Range (days):"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Delivery Days:"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Delivery Days/Dates"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable Specific Delivery Dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Add Specific Delivery Dates"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select Delivery Dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Additional Charges for Specific Delivery Dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Cut-off time for Same Day Delivery Orders:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Cut-off time for Next Day Delivery Orders:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Additional Charges for Same Day Delivery:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Additional Charges for Next Day Delivery:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Minimum Order Amount for Waiving off Delivery Charges:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable Delivery Charges Based on Number of Days (Rush Delivery Charges):"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Enable Pickup Date:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pickup Checkout options:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Estimated Pickup Date"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Minimum Pickup Time (hours):"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pickup Range (days):"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pickup Days & Specific Dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pickup Days/Dates"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable Specific Pickup Dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Add Specific Pickup Dates"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select Pickup Dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Additional Charges for Specific Pickup Dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pickup Schedule"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Cut-off time for Same Day Pickup Orders:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Cut-off time for Next Day Pickup Orders:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Additional Charges for Same Day Pickup:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Additional Charges for Next Day Pickup:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Minimum Order Amount for Waiving off Pickup Charges:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable Pickup Charges Based on Number of Days (Rush Pickup Charges):"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Edit Default Schedule"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Edit Custom Schedule"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Could not load schedule data."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Add New Schedule"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Edit Schedule"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "← Back to Schedules"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Schedule created successfully."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Schedule saved successfully."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Failed to save schedule. Please try again."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Schedule Settings"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Date Settings"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Weekday / Specific Dates"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Time Slot Cutoffs"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Recurring"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Current Year"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Every Year"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Global Holidays"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "1 holiday"
+msgstr ""
+
+#: build/admin/index.js:1
+#, js-format
+msgid "%d holidays"
+msgstr ""
+
+#: build/admin/index.js:1
+#, js-format
+msgid "Schedule ID: %d"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Global"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Use Global Holidays"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Repeat Type"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Delete this holiday?"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "New holiday name..."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "From date"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "To"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "To date"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Save"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Could not load holidays. Please refresh and try again."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Dates added here will be blocked and unavailable for delivery selection on the checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "In Billing Section"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "In Shipping Section"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Between Your Order & Payment Section"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Custom Hook"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Note: In Checkout Block, please add the Order Delivery Date block manually from the Edit Checkout page in any preferred section."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Custom Theme 1"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Custom Theme 2"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Afrikaans"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Arabic"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Algerian Arabic"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Azerbaijani"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Indonesian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Malaysian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Dutch Belgian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Bosnian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Bulgarian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Catalan"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Czech"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Welsh"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Danish"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "German"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Estonian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Greek"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "English (Australia)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "English (New Zealand)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "English (UK)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Spanish"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Esperanto"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Basque"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Faroese"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "French"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "French Swiss"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Galician"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Albanian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Korean"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Hebrew"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Hindi (India)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Croatian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Armenian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Icelandic"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Italian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Georgian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Khmer"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Latvian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Lithuanian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Macedonian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Hungarian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Malayam"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Dutch"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Japanese"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Norwegian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Thai"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Polish"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Portuguese"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Portuguese (Brazil)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Romanian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Romansh"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Russian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Slovak"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Slovenian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Serbian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Finnish"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Swedish"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Tamil"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Vietnamese"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Turkish"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Ukrainian"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Chinese (Hong Kong)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Chinese (Simplified)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Chinese (Traditional)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Field Appearance"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Calendar Appearance"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Could not load settings. Please refresh and try again."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Field Appearance Settings"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Customise how the delivery date and time slot fields appear on your checkout."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Field appearance settings saved."
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:4
+msgid "Failed to save settings. Please try again."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Field Placeholder Text:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "The placeholder text shown inside the delivery date input before the customer selects a date."
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/frontend/cart-block-frontend.js:1
+#: build/frontend/index.js:1
+#: build/frontend/orddd-block-frontend.js:1
+msgid "Choose a Date"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "A note displayed below the delivery date field on the checkout page. HTML is allowed."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Estimated Date Text:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Text shown when displaying an estimated delivery date. HTML is allowed. Available in Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Fields placement on the Checkout page:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Choose where the delivery date and time fields appear on the checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Calendar Display Mode:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Choose how the delivery date calendar appears on the checkout page. Available in Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Date selection field on Cart page:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Show the delivery date selection field on the WooCommerce cart page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Show Dates in Dropdown:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Display available delivery dates in a dropdown list instead of a calendar picker. Available in Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Show Time Slots in List View:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Display time slots as a vertical list instead of a dropdown. Available in Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Preselect first available date:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Automatically pre-select the earliest available delivery date when the checkout page loads."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Preselect first available time slot:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Automatically pre-select the first available time slot when a delivery date is chosen."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Calendar Appearance Settings"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Fit your needs by tailoring the calendar appearance from top to bottom (or let's talk calendar - from Jan through Dec!)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Calendar Language:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "The language used for month names, day names, and other calendar labels."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Date Format:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "How the selected delivery date is formatted in the order field and confirmation."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Time Format:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Whether time slots are shown in 12-hour (AM/PM) or 24-hour format."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "First Day of Week:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Choose which day the calendar week starts on."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Number of Months:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "How many calendar months to show at once on the checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Theme:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "The visual theme applied to the jQuery UI datepicker calendar widget."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Preview Theme:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable Availability Display:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Show the availability widget that displays delivery dates on the frontend. Available in Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable Calendar Icon:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Show a calendar icon next to the delivery date input field on the checkout page. Available in Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Color Code Your Calendar"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Available dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Colour used to highlight dates that are open for delivery."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Booked dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Colour used to indicate fully booked dates."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Holidays:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Colour used to mark holiday dates when delivery is unavailable."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Show partially booked dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Highlight dates that still have some delivery slots available on the calendar."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Partially booked dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Colour used to indicate dates that are partially booked. Available in Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Cut-off time dates:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Colour used to indicate dates that are past the cut-off time for ordering. Available in Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Calendar icon color:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Colour of the calendar icon shown next to the delivery date input field. Available in Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:3
+msgid "Unblock"
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Dates"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Add Time Slots"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Block Time Slot For:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Choose whether to block by specific dates or recurring weekdays."
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Weekday:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pick the date you want to block."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enter weekday names, e.g. Sunday, Monday."
+msgstr ""
+
+#: build/admin/index.js:1
+#: build/admin/index.js:2
+msgid "Select Date"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select weekdays…"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select Time Slots to Block:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select the time slot you want to block."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select Time Slot to Block."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select time slots…"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Unlock Business Days configuration by upgrading to Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Business Days and Hours"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Business days a.k.a. working days and hours of your own company play a major role in correct delivery calculation. Eager for the deets?"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "this post"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "to find out more."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Calculate delivery by working days:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Calculate Minimum Delivery Time, Same Day cut-off and Next Day cut-off based on the business days selected."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Business Days:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Business days of your store."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select 'Weekdays' or 'Business Days'"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select Weekdays"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Opening Time:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "What time does your business start delivering orders?"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Closing Time:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "What time does your business stop delivering orders?"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Unlock Common Schedule Settings by upgrading to Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Common Schedule Settings"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "If you want to deliver only a certain number of orders per day, time slot or product quantity, configure the limits here."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Set the maximum number of deliveries per product:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "If enabled, date availability is reduced by product quantity ordered."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Use global maximum orders per day for custom settings:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Maximum Order Deliveries per day setting will be considered for custom settings."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Apply default delivery schedule when no priority is set:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "In case of conflicts between 2 or more delivery schedules when no priority is set, the default delivery schedule will be applied."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Global Maximum Order Deliveries for Time slots:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Maximum deliveries applied to all time slots if individual maximum is blank. Leave blank for unlimited."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Before Billing Section"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Before Delivery Fields"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Unlock Order Type settings by upgrading to Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Order Type Settings"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Let customers select between Pickup or Delivery before entering the address."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable option to choose from Delivery or Pickup:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "If enabled, customers can choose between Delivery & Pickup on the checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Field Label:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Choose a heading for the order type section on checkout."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "How do you want the order to be fulfilled?"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Label for 'Delivery' option:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Choose the label displayed for the Delivery option."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Deliver to My Address"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Label for 'Pickup' option:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Choose the label displayed for the Pickup option."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pickup from Store"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Field Position:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Where to display the order type selection field on the checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Add a custom hook"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Minimum Order Amount required for availing Delivery:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Set the minimum order amount required for customers to qualify for delivery."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Note: Free delivery can be offered by setting up \"Minimum Order Amount for Waiving off Delivery Charges:\" option under the delivery schedules."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Dynamically show or hide shipping methods based on selection:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "If enabled, shipping methods will be shown/hidden based on the order type selected."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Default (Order in which pickup locations are added)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Distance from customer"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Alphabetical by location name"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Active"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Inactive"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Address Line 1"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Address Line 2 (optional)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "City"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "State / Region"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Postcode / ZIP"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Country"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Notification Email(s)"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Active — visible to customers at checkout"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Could not load pickup locations."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Unlock Pickup Location settings by upgrading to Pro."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pickup Location Settings"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Configure general pickup location options for your checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pickup location settings saved successfully."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enable Pickup Locations:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Allow customers to choose a pickup location on the checkout page."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Customers must choose the pickup location:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Selection of pickup location on the checkout page will become mandatory."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Locations Label:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Label displayed for the delivery locations field on checkout. HTML allowed."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select a pickup location"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Pickup Location Sort Order:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Select how pickup locations should be sorted on checkout."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Google Maps Geocoding API:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Required for sorting locations by distance from customer."
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Enter your API key"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Get API Key"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "Automatically pre-select first pickup location:"
+msgstr ""
+
+#: build/admin/index.js:1
+msgid "The first pickup location will be auto-selected on the checkout page."
+msgstr ""
+
+#. translators: 1: number of active locations, 2: total number of locations, 3: singular/plural "location(s)"
+#: build/admin/index.js:2
+#, js-format
+msgid "%1$d of %2$d %3$s active"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "location"
+msgid_plural "locations"
+msgstr[0] ""
+msgstr[1] ""
+
+#: build/admin/index.js:2
+msgid "No locations added yet"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "+ Add Location"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "New Pickup Location"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Failed to add location."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "No pickup locations found. Click"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "to get started."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Edit Pickup Location"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Failed to save location."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Are you sure you want to delete this pickup location?"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Failed to delete location."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Shipping Methods"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Add Shipping Methods to Disable"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Disable Shipping Methods For:"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Choose whether to disable shipping on specific dates or recurring weekdays."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Pick the dates on which the shipping method should be disabled."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Select the weekdays on which the shipping method should be disabled."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Select Shipping Methods to Disable:"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Select the shipping methods you want to disable."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Select Shipping Methods"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Could not load disable-shipping rules. Please refresh."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Unlock Disable Shipping settings by upgrading to Pro."
+msgstr ""
+
+#: build/admin/index.js:2
+#: build/admin/index.js:3
+msgid "Disable Shipping"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Hide the shipping methods on checkout based on selected weekdays or specific dates."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Delete this shipping rule?"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Shipping rule deleted."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Failed to delete shipping rule."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Deleting…"
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Shipping rule added successfully."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Failed to add rule. Please try again."
+msgstr ""
+
+#: build/admin/index.js:2
+#: build/admin/index.js:3
+msgid "Please select at least one date."
+msgstr ""
+
+#: build/admin/index.js:2
+#: build/admin/index.js:3
+msgid "Please select at least one weekday."
+msgstr ""
+
+#: build/admin/index.js:2
+msgid "Please select at least one shipping method."
+msgstr ""
+
+#. translators: %d: number of shipping rules
+#: build/admin/index.js:3
+#, js-format
+msgid "Delete %d shipping rule?"
+msgid_plural "Delete %d shipping rules?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: build/admin/index.js:3
+msgid "No disabled shipping rules found."
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Business Days"
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Block Time Slot"
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Common Settings"
+msgstr ""
+
+#: build/admin/index.js:3
+#: build/admin/index.js:4
+msgid "Additional Settings"
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Pickup Location"
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Could not load blocked time slots. Please refresh."
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Block Time Slots"
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Configure time slots to be blocked across all delivery schedules within the store"
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Unblock this time slot?"
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Time slot unblocked."
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Failed to unblock time slot."
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Removing…"
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Failed to add blocked time slot."
+msgstr ""
+
+#: build/admin/index.js:3
+msgid "Please select at least one time slot."
+msgstr ""
+
+#. translators: %s: number of blocked time slots to delete
+#: build/admin/index.js:4
+#, js-format
+msgid "Delete %d blocked time slot?"
+msgid_plural "Delete %d blocked time slots?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: build/admin/index.js:4
+msgid "No blocked time slots found."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Enable or disable various display and behavior settings for your store."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Orders Listing Page Display:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Show delivery/pickup date column on the WooCommerce Orders page."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Displays the Delivery/Pickup Date on the WooCommerce → Orders page."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Enable Default Sorting on Orders Page:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Orders will be sorted by delivery/pickup date in descending order."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Enable default sorting of orders by Delivery/Pickup Date on WooCommerce → Orders page."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Show Filter on Orders Listing Page:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Show a date filter on the WooCommerce Orders page."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Displays a filter on the Orders page to view orders due today, tomorrow, or later."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Disable date & time for Virtual Products:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Hide delivery date/time fields when the cart contains only virtual products."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Virtual Products"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Disable date & time for Featured Products:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Hide delivery date/time fields when the cart contains only featured products."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Featured Products"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Enable Tax Calculation for Delivery/Pickup Charges:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Enable tax calculation for delivery/pickup charges — Pro feature."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Allow Customers to Reschedule Date & Time:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Allow customers to reschedule their delivery/pickup date and time — Pro feature."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Display Delivery Info in WooCommerce Mobile App:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Display delivery/pickup info in the Order Notes in the WooCommerce mobile app — Pro feature."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Enable AI Abilities:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Allow AI assistants to manage deliveries via MCP — Pro feature."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Reset Usage Tracking:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Removes the stored tracking consent so the plugin will ask again whether to send usage data."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Reset usage tracking? This will remove the tracking consent and schedule a fresh data send."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Usage tracking has been reset."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Failed to reset usage tracking. Please try again."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Reset"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Access all the premium features (Custom delivery schedules, Same Day & Next Day delivery, Delivery & Local Pickup options and much more)"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Early access to new features"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Dedicated Customer Support"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Priority access to our other offers/services"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Don't miss out on what you were achieving - take action today! Click the button below to Upgrade to PRO."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Upgrade from lite to PRO at special pricing. Click the button below to "
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "access the latest deals."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Google Sync"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Google Calendar Sync"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Stay on top of your delivery & pickup schedule by syncing it with Google Calendar. Your customers can also add delivery info to their own calendar."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "General Settings"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Integration Mode:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "OAuth Sync"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Service Account"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Event Location:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Event summary (name):"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Event Description:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Customer Add to Calendar Button Settings"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Show Add to Calendar button on Order received page:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Show Add to Calendar button in Customer Emails:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Show Add to Calendar button in My Account:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Admin Calendar Settings"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Auto-add new orders to Admin Delivery Calendar:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Send email notification on event creation:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Enable real-time import:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Integration Settings"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Enable compatibility with other WooCommerce plugins and addons."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Plugin Compatibility"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Show delivery fields in CSV Export:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Show delivery fields in PDF Invoices & Packing Slips:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Show delivery fields in Cloud Print for Orders:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Ship to Multiple Addresses compatibility:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Amazon Payments Advanced gateway compatibility:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Feature Settings"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Enable Post-Delivery Email:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Vendors"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Vendor Settings"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Control which delivery settings vendors can manage in multi-vendor marketplaces."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Vendor Permissions"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Enable vendor settings:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Allow vendors to manage Delivery Calendar:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Allow vendors to manage Pickup Locations:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Allow vendors to manage Delivery Schedules:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Allow vendors to send Reminders:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Allow vendors to block Time Slots:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Allow vendors to access Other Settings:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Order Status Automation"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Automatically change order statuses based on delivery date and time."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Status"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Rule Name"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Trigger"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Delay"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "And more!"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Upgrade and Unlock"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Send reminder before 24 Hour(s)"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "24 hours before delivery"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Send reminder after 24 Hour(s)"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "24 hours after delivery"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Customer Reminder Templates"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Create automated email reminders sent to customers before or after their delivery date."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "+ Add New Reminder"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Reminder Title"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Send Time"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Admin Reminder"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Automatically notify your admin about the next day's scheduled deliveries every evening at 7 PM."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Admin Reminder Settings"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Send reminder to admin for next day's deliveries:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "When enabled, an automatic reminder email is sent to the admin at 7 PM every day listing the next day's deliveries."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Include same day deliveries in admin reminder:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Include today's scheduled deliveries in the 7 PM admin reminder email."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Manual Reminder"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Send a one-time reminder email to selected customers immediately."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Compose Reminder"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Select Orders:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Choose the orders whose customers should receive this reminder. Only orders with future delivery dates are listed."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "— Select orders —"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Order #101 – John Doe – 2 Nov 2026"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Order #102 – Jane Smith – 3 Nov 2026"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Subject:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "The email subject line. Supports dynamic tags like {order_number}, {blogname}, {delivery_date}."
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Delivery Reminder"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Message:"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "The email body. Supports dynamic tags: {customer_name}, {delivery_date}, {delivery_time}, {order_details}, and more."
+msgstr ""
+
+#: build/admin/index.js:4
 msgid ""
-"The Delivery Date & Time has been updated by the customer. The details of "
-"the order and the updated delivery details are as follows:"
+"Dear {customer_name},\n"
+"\n"
+"This is a friendly reminder that your order from {blogname} is scheduled for delivery on {delivery_date} at {delivery_time}.\n"
+"\n"
+"{order_details}\n"
+"\n"
+"Thank you for choosing {blogname}!"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Save Draft"
+msgstr ""
+
+#: build/admin/index.js:4
+msgid "Send Reminder"
+msgstr ""
+
+#: build/frontend/cart-block-frontend.js:1
+#: build/frontend/index.js:1
+#: build/frontend/orddd-block-frontend.js:1
+msgid "Please select a delivery date"
+msgstr ""
+
+#: build/frontend/cart-block-frontend.js:1
+#: build/frontend/index.js:1
+#: build/frontend/orddd-block-frontend.js:1
+msgid "Please select a time slot"
+msgstr ""
+
+#: build/frontend/cart-block-frontend.js:1
+#: build/frontend/index.js:1
+#: build/frontend/orddd-block-frontend.js:1
+msgid "Loading delivery date�"
+msgstr ""
+
+#: block.json
+#: blocks/cart/block.json
+msgctxt "block title"
+msgid "Order Delivery Date"
 msgstr ""
