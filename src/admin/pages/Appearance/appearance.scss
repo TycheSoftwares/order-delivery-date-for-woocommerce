@@ -1,0 +1,261 @@
+// ── Appearance page tab panel ─────────────────────────────────────────────────
+
+.ordd-appearance-page {
+
+	.components-tab-panel__tabs {
+		display: flex;
+		flex-wrap: wrap;
+		border-bottom: 2px solid rgba( 167, 172, 177, 0.3 );
+		padding-top: 10px;
+		margin: 0;
+		background: #fff;
+
+		.components-tab-panel__tabs-item {
+			display: block;
+			border: none;
+			border-bottom: 2px solid transparent;
+			border-radius: 0;
+			background: none;
+			box-shadow: none;
+			font-size: 15px;
+			color: #1d2327;
+			line-height: 26px;
+			padding: 14px 10px;
+			margin: 0 20px -2px 0;
+			cursor: pointer;
+
+			&:hover,
+			&:focus {
+				border-bottom-color: #41278d;
+				background: none;
+				box-shadow: none;
+				color: #1d2327;
+			}
+
+			&.is-active {
+				border-bottom-color: #41278d;
+				background: none;
+				box-shadow: none;
+				font-weight: 600;
+			}
+		}
+	}
+}
+
+// ── Field Appearance page ─────────────────────────────────────────────────────
+
+.fa-page {
+
+	// ── Collapsible section card ──────────────────────────────────────────────
+
+	.fa-section {
+		margin-bottom: 24px;
+
+		// Reset PanelBody's own border — Card handles it.
+		.components-panel__body {
+			border: none;
+			margin: 0;
+
+			// Title / toggle button row
+			.components-panel__body-title {
+				margin: 0;
+				border-bottom: 1px solid #f0f0f0;
+
+				.components-button.components-panel__body-toggle {
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					padding: 20px 28px;
+					font-size: 18px;
+					font-weight: 700;
+					color: #1d2327;
+					background: none;
+					box-shadow: none;
+					border-radius: 0;
+
+					// Chevron SVG sits on the right via flex
+					svg {
+						flex-shrink: 0;
+						color: #757575;
+					}
+
+					&:hover,
+					&:focus {
+						background: none;
+						box-shadow: none;
+						color: #1d2327;
+					}
+				}
+			}
+
+			// When collapsed, remove the bottom border on the title
+			&:not( .is-opened ) .components-panel__body-title {
+				border-bottom: none;
+			}
+
+			// Body content — no extra padding; SettingRow handles spacing
+			.components-panel__body-content {
+				padding: 0;
+			}
+		}
+
+		// SettingRow (CardBody) inside PanelBody — keep osp-row layout
+		.osp-row {
+			padding: 20px 28px;
+			border-bottom: 1px solid #f0f0f0;
+
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+	}
+
+	// ── Override input widths for Field Appearance rows ──────────────────────
+	// The shared osp-row rule caps inputs at 220px; widen them here to match
+	// the textarea and the design shown in Field Appearance Settings.
+
+	.osp-row-field-content {
+		.components-text-control__input {
+			max-width: 560px;
+		}
+
+		.components-select-control__input {
+			max-width: 380px;
+		}
+	}
+
+	// ── TextareaControl ───────────────────────────────────────────────────────
+
+	.fa-textarea {
+		.components-textarea-control__input {
+			width: 100%;
+			max-width: 560px;
+			border: 1px solid #a7acb1;
+			border-radius: 5px;
+			font-size: 13px;
+			color: #424242;
+			padding: 10px 15px;
+			resize: vertical;
+
+			&:focus {
+				border-color: #41278d;
+				box-shadow: 0 0 20px rgba( 65, 39, 141, 0.1 );
+				outline: none;
+			}
+		}
+	}
+
+	// ── Field placement radio list ────────────────────────────────────────────
+
+	.fa-placement {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+
+		&__option {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			cursor: pointer;
+			font-size: 14px;
+			color: #1d2327;
+			line-height: 1.4;
+		}
+
+		&__radio {
+			width: 16px;
+			height: 16px;
+			accent-color: #41278d;
+			flex-shrink: 0;
+			cursor: pointer;
+		}
+
+		&__label {
+			flex-shrink: 0;
+		}
+
+		// Inline TextControl for the Custom option
+		&__custom-input {
+			flex: 1;
+
+			.components-text-control__input {
+				max-width: 280px;
+				height: 36px;
+				border: 1px solid #a7acb1;
+				border-radius: 4px;
+				font-size: 13px;
+				padding: 0 12px;
+
+				&:focus {
+					border-color: #41278d;
+					box-shadow: 0 0 0 2px rgba( 65, 39, 141, 0.12 );
+					outline: none;
+				}
+			}
+		}
+
+		&__note {
+			margin: 4px 0 0;
+			font-size: 12px;
+			color: #757575;
+			line-height: 1.5;
+		}
+	}
+}
+
+// ── Theme preview (used by CalendarAppearance) ────────────────────────────────
+
+.orddd-theme-preview {
+	margin-top: 14px;
+
+	&-label {
+		display: block;
+		font-size: 13px;
+		color: #757575;
+		margin-bottom: 8px;
+	}
+
+	&-calendar {
+		// Constrain to a reasonable width so it doesn't stretch full-column.
+		display: inline-block;
+
+		// The datepicker injects its own table; prevent it from inheriting
+		// WP admin table styles.
+		.ui-datepicker {
+			width: auto;
+			padding: 0;
+			font-size: 13px;
+		}
+	}
+}
+
+// ── ColorInput (used by CalendarAppearance) ───────────────────────────────────
+
+.ap-color-input {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.ap-color-swatch {
+	width: 40px;
+	height: 40px;
+	padding: 2px;
+	border: 1px solid #a7acb1;
+	border-radius: 4px;
+	background: none;
+	cursor: pointer;
+	flex-shrink: 0;
+
+	&::-webkit-color-swatch-wrapper { padding: 0; }
+	&::-webkit-color-swatch         { border: none; border-radius: 2px; }
+	&::-moz-color-swatch             { border: none; border-radius: 2px; }
+}
+
+.ap-color-text {
+	.components-text-control__input {
+		max-width: 110px !important;
+		font-family: monospace;
+	}
+}

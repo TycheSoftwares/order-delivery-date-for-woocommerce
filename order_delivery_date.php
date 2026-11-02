@@ -4,11 +4,12 @@
  * Plugin URI: https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/
  * Description: This plugin allows customers to choose their preferred Order Delivery Date during checkout.
  * Author: Tyche Softwares
- * Version: 4.6.3
+ * Version: 5.0.0
  * Author URI: https://www.tychesoftwares.com/
  * Contributor: Tyche Softwares, https://www.tychesoftwares.com/
  * Text Domain: order-delivery-date
- * Requires PHP: 7.3
+ * Domain Path: languages
+ * Requires PHP: 7.4
  * WC requires at least: 3.0.0
  * WC tested up to: 11.2.1
  * Requires Plugins: woocommerce
@@ -21,13 +22,15 @@
  *
  * @since 1.0
  */
-$wpefield_version = '4.6.3';
+define( 'ORDDD_LITE_VERSION', '5.0.0' );
+$wpefield_version = ORDDD_LITE_VERSION;
 
 /**
  * Template path.
  *
  * @since 3.16.0
  */
+define( 'ORDDD_LITE_PLUGIN_FILE', __FILE__ );
 define( 'ORDDD_LITE_TEMPLATE_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
 /**
  * Add HPOS compatability
@@ -62,6 +65,15 @@ if ( 'on' === get_option( 'orddd_lite_enable_delivery_date' ) ) {
 	require_once 'includes/integrations/wc-blocks/class-orddd-lite-delivery-blocks.php';
 }
 
+// REST API + React admin SPA.
+require_once 'includes/api/class-orddd-lite-admin-api.php';
+require_once 'includes/api/class-orddd-lite-settings-api.php';
+require_once 'includes/api/class-orddd-lite-appearance-api.php';
+require_once 'includes/api/class-orddd-lite-holidays-api.php';
+require_once 'includes/api/class-orddd-lite-delivery-schedule-api.php';
+require_once 'includes/class-orddd-lite-admin-scripts.php';
+new ORDDD_Lite_Admin_Scripts();
+
 /**
 * Defines the plugin version and url when on the admin page
 *
@@ -87,20 +99,10 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			add_action( 'init', array( &$this, 'orddd_lite_update_po_file' ) );
 			add_action( 'admin_init', array( &$this, 'orddd_lite_update_db_check' ) );
 			add_action( 'admin_init', array( &$this, 'orddd_lite_remove_legacy_manage_options_cap' ) );
-			add_action( 'admin_init', array( &$this, 'orddd_lite_map_settings_capability' ) );
 			add_action( 'admin_init', array( &$this, 'orddd_lite_check_if_woocommerce_active' ) );
 
 			// Settings.
 			add_action( 'admin_menu', array( 'Orddd_Lite_Settings', 'orddd_lite_order_delivery_date_menu' ) );
-			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'order_lite_delivery_date_admin_settings' ) );
-			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'order_lite_appearance_admin_settings' ) );
-			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'order_lite_holidays_admin_settings' ) );
-			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_lite_delete_settings' ) );
-			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_lite_calendar_sync_settings_callback' ) );
-
-			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_integration_of_plugins' ) );
-			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_lite_time_slot_settings' ) );
-			add_action( 'admin_init', array( 'Orddd_Lite_Settings', 'orddd_lite_disable_time_slot_settings' ) );
 
 			if ( isset( $_GET['page'] ) && 'order_delivery_date_lite' === $_GET['page'] ) { //phpcs:ignore
 				if ( strtotime( '15 April 2020' ) > current_time( 'timestamp' ) ) { //phpcs:ignore
@@ -342,7 +344,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 		 */
 		public function orddd_lite_update_db_check() {
 			global $wpefield_version;
-			if ( '4.6.3' === $wpefield_version ) {
+			if ( '5.0.0' === $wpefield_version ) {
 				self::orddd_lite_update_install();
 			}
 		}
@@ -390,33 +392,6 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 			}
 
 			update_option( 'orddd_lite_shop_manager_cap_cleaned', 'yes' );
-		}
-
-		/**
-		 * Allow shop managers (manage_woocommerce) to save ODD settings without
-		 * holding the site-wide manage_options cap. Mirrors the manage_woocommerce
-		 * capability the ODD admin pages already register on.
-		 */
-		public function orddd_lite_map_settings_capability() {
-
-			$orddd_lite_option_groups = array(
-				'orddd_lite_date_settings',
-				'orddd_lite_holidays_settings',
-				'orddd_lite_time_slot_settings',
-				'orddd_lite_disable_time_slot_settings',
-				'orddd_lite_appearance_settings',
-				'orddd_lite_additional_settings',
-				'orddd_lite_calendar_sync_settings',
-				'orddd_lite_add_new_settings',
-				'orddd_lite_order_delivery_date_settings',
-			);
-
-			foreach ( $orddd_lite_option_groups as $orddd_lite_group ) {
-				// options.php checks option_page_capability_{$group}; default is manage_options.
-				// Remap to manage_woocommerce so the cap required to SAVE matches the cap
-				// required to VIEW the page (add_submenu_page uses manage_woocommerce).
-				add_filter( "option_page_capability_{$orddd_lite_group}", array( &$this, 'orddd_lite_settings_capability' ) );
-			}
 		}
 
 		public function orddd_lite_settings_capability() {
@@ -699,6 +674,7 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 
 				$holidays_str = '';
 
+				$export_nonce = wp_create_nonce( 'orddd_export_nonce' );
 				$args = array(
 					'orddd_holiday_color' => get_option( 'orddd_lite_holiday_color' ),
 					'orddd_holidays'      => $holidays_str,
@@ -708,7 +684,21 @@ if ( ! class_exists( 'order_delivery_date_lite' ) ) {
 					'pluginurl'           => admin_url() . 'admin.php?action=orddd-delivery-calendar-event-json&vendor_id=0&security='.wp_create_nonce( 'orddd-delivery-calendar-event-json' ),
 					'security'            => wp_create_nonce( 'orddd-delivery-calendar-event-json' ),
 					'vendor_id'           => 0,
-					'orddd_export_nonce'  => wp_create_nonce( 'orddd_export_nonce' ),
+					'orddd_export_nonce'  => $export_nonce,
+					'print_url'           => add_query_arg(
+						array(
+							'download'           => 'orddd_data.print',
+							'orddd_export_nonce' => $export_nonce,
+						),
+						admin_url( 'admin.php' )
+					),
+					'csv_url'             => add_query_arg(
+						array(
+							'download'           => 'orddd_data.csv',
+							'orddd_export_nonce' => $export_nonce,
+						),
+						admin_url( 'admin.php' )
+					),
 				);
 
 				wp_localize_script(

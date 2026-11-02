@@ -1,0 +1,4718 @@
+// =============================================================================
+// Order Delivery Date — Admin Styles
+// All admin SCSS consolidated here; imported once from src/admin/index.js.
+// =============================================================================
+
+body {
+	background: #f6f5fb;
+	font-family: "SF Pro Text", sans-serif;
+	font-size: 13px;
+	color: #424242;
+	font-weight: 400;
+	line-height: 170%;
+	overflow-x: hidden;
+}
+
+#order-delivery-date-for-woocommerce  {
+
+	.components-tab-panel__tabs {
+		padding-left: 30px;
+		margin: 0 0 0 0.5rem;
+		border-bottom: 2px solid rgba(167, 172, 177, 0.3);
+		padding-top: 10px;
+	}
+
+	.components-tab-panel__tabs .components-tab-panel__tabs-item {
+		margin: 0 20px -2px 0;
+		font-size: 15px;
+		color: #1D2327;
+		padding: 14px 10px;
+	}
+
+	.components-tab-panel__tabs .components-tab-panel__tabs-item.orddd-tab--locked {
+		display: inline-flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 5px;
+		color: #a7acb1;
+
+		svg path {
+			fill: #a7acb1;
+		}
+	}
+
+	.orddd-faq-list {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.orddd-faq-item {
+		background: #fff;
+		border: 1px solid #e2e4e7;
+		border-radius: 6px;
+		padding: 16px 20px;
+		cursor: pointer;
+
+		&:hover {
+			border-color: #7f54b3;
+		}
+
+		&__question {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 14px;
+			font-weight: 600;
+			color: #1d2327;
+
+			svg {
+				flex-shrink: 0;
+				fill: #7f54b3;
+			}
+		}
+
+		&__answer {
+			margin: 12px 0 0;
+			font-size: 13px;
+			color: #3c434a;
+			line-height: 1.7;
+		}
+	}
+
+	.orddd-locked-panel {
+		pointer-events: none;
+		user-select: none;
+		opacity: 0.5;
+	}
+
+	.orddd-upgrade-prompt {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 12px;
+		background: #f5f3ff;
+		border: 1px solid #ddd6fe;
+		border-radius: 8px;
+		padding: 12px 20px;
+		margin-bottom: 20px;
+
+		&__badge {
+			background: #7f54b3;
+			color: #fff;
+			font-size: 11px;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			padding: 3px 10px;
+			border-radius: 100px;
+			white-space: nowrap;
+		}
+
+		&__icon {
+			flex-shrink: 0;
+
+			path {
+				fill: #7f54b3;
+			}
+		}
+
+		&__message {
+			margin: 0;
+			font-size: 13px;
+			color: #3c434a;
+			flex: 1;
+		}
+
+		&__btn {
+			display: inline-block;
+			background: #7f54b3;
+			color: #fff;
+			font-size: 13px;
+			font-weight: 600;
+			padding: 6px 16px;
+			border-radius: 5px;
+			text-decoration: none;
+			white-space: nowrap;
+
+			&:hover {
+				background: #6a3f9a;
+				color: #fff;
+			}
+		}
+	}
+
+	.orddd-locked-toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+
+		&__badge {
+			display: inline-block;
+			padding: 2px 8px;
+			border-radius: 3px;
+			background: #7f54b3;
+			color: #fff;
+			font-size: 11px;
+			font-weight: 600;
+			letter-spacing: 0.5px;
+			text-transform: uppercase;
+		}
+
+		&__link {
+			font-size: 13px;
+			color: #7f54b3;
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	.components-divider.components-card__divider.components-card-divider {
+		border-color: #e3e4e4;
+	}
+
+	.components-input-control__input,
+	.components-text-control__input,
+	.components-select-control__input,
+	.components-form-token-field__input-container>.components-flex {
+		min-height: 38px !important;
+		height: 100% !important;
+		border-radius: 4px !important;
+	}
+
+	.components-input-control__backdrop,
+	.components-form-token-field__input-container {
+		border-radius: 4px !important;
+	}
+
+	.orddd-secondary-btn {
+		border: none;
+		border-radius: 5px;
+		transition: all 0.2s ease-in-out;
+		outline: none;
+		font-family: "SF Pro Text", sans-serif;
+		font-size: 18px;
+		color: #fff;
+		font-weight: 600;
+		text-align: center;
+		line-height: 24px;
+		text-decoration: none;
+		letter-spacing: 0;
+		cursor: pointer;
+		padding: 13px 25px;
+		background: #F6F3FF;
+		border: 1px solid #41278D;
+		font-size: 15px;
+		color: #41278D;
+		padding: 7px 14px;
+
+		&:hover {
+			background: #41278D;
+			border-color: #41278D;
+			color: #fff !important;
+		}
+	}
+
+
+	.orddd-reverse {
+		background: #41278D;
+    	color: #FFFFFF;
+
+		&:hover {
+			background: #F6F3FF;
+			color: #41278D;
+		}
+	}
+
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+.ordd-header {
+	background: #58419c;
+	color: #fff;
+
+	.header-wrap {
+		display: flex;
+		align-items: center;
+		padding: 15px 15px 0;
+
+		.branding {
+			margin: 0 10px 10px 0;
+
+			a {
+				display: block;
+			}
+		}
+
+		.ordd-navigation {
+			flex-grow: 1;
+			padding: 0;
+
+			.ordd-nav-toggler {
+				display: none; // shown via media query below
+				border: none;
+				color: #fff;
+				padding: 0;
+				margin-left: 10px;
+				background: none;
+				box-shadow: none;
+
+				&:hover,
+				&:active,
+				&:focus {
+					background: none;
+					box-shadow: none;
+				}
+
+				.ordd-nav-toggler-icon {
+					display: block;
+					width: 24px;
+					height: 24px;
+				}
+			}
+
+			.ordd-nav-menu {
+				display: flex;
+				align-items: center;
+				list-style: none;
+				padding: 0;
+				margin: 0 0 0 0.5rem;
+				padding-left: 10px;
+
+				li {
+					padding: 0;
+					margin-bottom: 0;
+				}
+
+				li a.ordd-nav-link {
+					display: block;
+					font-size: 15px;
+					color: #fff;
+					font-weight: 600;
+					padding: 19px 13px 18px;
+					text-decoration: none;
+
+					&:hover,
+					&:active,
+					&:focus {
+						background: rgba( 255, 255, 255, 0.15 );
+						color: #fff;
+					}
+
+					&.active {
+						background: #fff;
+						color: #41278d;
+						font-weight: 600;
+					}
+				}
+			}
+		}
+
+		.ordd-version {
+			.ver-fig {
+				font-size: 15px;
+				margin-bottom: 0;
+				color: #fff;
+			}
+		}
+	}
+
+	// Mobile
+	@media ( max-width: 992px ) {
+		.ordd-nav-toggler {
+			display: block;
+		}
+
+		.ordd-nav-collapse {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background: #fbfcfa;
+			z-index: 100;
+
+			&--open {
+				display: block;
+			}
+		}
+
+		.ordd-nav-menu {
+			flex-direction: column;
+			align-items: flex-start !important;
+
+			li a.ordd-nav-link {
+				color: #58419c !important;
+			}
+		}
+	}
+}
+
+// ── Home page ─────────────────────────────────────────────────────────────────
+
+.ordd-home-page {
+
+	// .components-tab-panel__tabs {
+	// 	display: flex;
+	// 	flex-wrap: wrap;
+	// 	border-bottom: 2px solid rgba( 167, 172, 177, 0.3 );
+	// 	padding-top: 10px;
+	// 	margin: 0;
+	// 	background: #fff;
+
+	// 	.components-tab-panel__tabs-item {
+	// 		display: block;
+	// 		border: none;
+	// 		border-bottom: 2px solid transparent;
+	// 		border-radius: 0;
+	// 		background: none;
+	// 		box-shadow: none;
+	// 		font-size: 15px;
+	// 		color: #1d2327;
+	// 		line-height: 26px;
+	// 		padding: 14px 10px;
+	// 		margin: 0 20px -2px 0;
+	// 		cursor: pointer;
+
+	// 		&:hover,
+	// 		&:focus {
+	// 			border-bottom-color: #41278d;
+	// 			background: none;
+	// 			box-shadow: none;
+	// 			color: #1d2327;
+	// 		}
+
+	// 		&.is-active {
+	// 			border-bottom-color: #41278d;
+	// 			background: none;
+	// 			box-shadow: none;
+	// 			font-weight: 600;
+	// 		}
+	// 	}
+	// }
+	.ordd-welcome-page {
+		margin-top: 48px;
+	}
+	
+	.wbc-head {
+		justify-content: flex-start;
+		align-items: center;
+
+		h2 {
+			margin-bottom: 0;
+		}
+
+		p {
+			margin-top: 0;
+		}
+	}
+
+	// FAQ two-column grid (legacy)
+	.ordd-faq-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 24px;
+
+		@media ( max-width: 768px ) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	// Info/alert box
+	.ordd-info-box {
+		display: flex;
+		gap: 12px;
+		background: #f0f0f1;
+		border-left: 4px solid #72aee6;
+		border-radius: 4px;
+		padding: 12px 16px;
+		margin-top: 12px;
+		font-size: 13px;
+		color: #1d2327;
+
+		.left-col {
+			flex-shrink: 0;
+			padding-top: 2px;
+		}
+
+		.right-col {
+			flex: 1;
+
+			h5 {
+				margin: 0 0 6px;
+				font-size: 13px;
+				font-weight: 600;
+			}
+
+			p, ol {
+				margin: 0;
+			}
+
+			ol {
+				padding-left: 18px;
+			}
+		}
+	}
+
+	// WP PanelBody used as accordion
+	.ordd-accordian {
+		margin-bottom: 38px;
+
+		.components-panel__body {
+			border: none;
+			border-bottom: 1px solid rgba( 220, 220, 222, 0.7 );
+			margin-bottom: 15px;
+
+			.components-panel__body-title {
+				background: #f2f2f2;
+				padding: 15px;
+
+				.components-button.components-panel__body-toggle {
+					font-size: 15px;
+					font-weight: 600;
+					color: #1d2327;
+					padding: 0;
+					box-shadow: none;
+
+					&:hover,
+					&:focus {
+						color: #41278d;
+						box-shadow: none;
+					}
+				}
+			}
+
+			.components-panel__body-content {
+				padding: 0 0 16px;
+			}
+		}
+	}
+
+	.ordd-wc-related {
+		margin-bottom: 30px;
+
+		h1 {
+			font-size: 22px;
+			margin-bottom: 5px;
+		}
+
+		p {
+			margin-bottom: 10px !important;
+  			margin-top: 0;
+		}
+
+		ul {
+			display: flex;
+			flex-wrap: wrap;
+			list-style: disc;
+			padding-left: 10px;
+			margin: 0 0 0 0.5rem;
+		}
+
+		li {
+			flex: 0 0 100%;
+			max-width: 40%;
+			padding-right: 20px;
+			margin: 0 0 8px;
+		}
+	}
+
+	.wc3-mod-box {
+		display: flex;
+		margin-left: -7%;
+		flex-direction: row;
+
+		.wc3-col {
+			max-width: 33%;
+			margin: 0 0 3% 7%;
+		}
+	}
+
+	.ss-foot {
+		text-align: right;
+		padding-top: 52px;
+
+		.orddd-save.is-primary {
+			border: none;
+			border-radius: 5px;
+			transition: all 0.2s ease-in-out;
+			outline: none;
+			font-family: "SF Pro Text", sans-serif;
+			font-size: 18px;
+			font-weight: 600;
+			text-align: center;
+			color: #fff;
+			line-height: 24px;
+			text-decoration: none;
+			letter-spacing: 0;
+			cursor: pointer;
+			padding: 13px 25px;
+			background: #1A8D34;
+			height: auto;
+
+			&:hover {
+				background: #1A8D34;
+				box-shadow: none;
+			}
+		}
+	}
+
+	// ── FAQ page ─────────────────────────────────────────────
+
+	.faq-page {
+		padding: 16px 0 32px;
+		margin-top: 48px;
+
+		&__title {
+			font-size:   1.3rem;
+			font-weight: 600;
+			color:       #1d2327;
+			margin:      0 0 16px;
+			padding:     20px 30px;
+		}
+
+		&__divider {
+			border:     none;
+			border-top: 1px solid #e5e7eb;
+			margin:     0 0 20px;
+		}
+	}
+
+	.faq-list {
+		display:        flex;
+		flex-direction: column;
+		gap:            10px;
+	}
+
+	// FAQ item Cards
+	.faq-item.components-card {
+		background:    #fff;
+		border:        1px solid #e5e7eb;
+		border-radius: 8px;
+		box-shadow:    none;
+		cursor:        pointer;
+		transition:    border-color 0.12s, box-shadow 0.12s;
+		user-select:   none;
+
+		&:hover {
+			border-color: #c4b5fd;
+			box-shadow:   0 1px 4px rgba( 65, 39, 141, 0.08 );
+		}
+
+		.components-card__body {
+			padding: 16px 20px;
+		}
+
+		.faq-item__header {
+			display:         flex;
+			align-items:     center;
+			justify-content: space-between;
+			gap:             16px;
+		}
+
+		.faq-item__question {
+			font-size:   14px;
+			font-weight: 500;
+			color:       #1d2327;
+			line-height: 1.5;
+			flex:        1;
+		}
+
+		.faq-item__chevron.dashicons {
+			flex-shrink: 0;
+			font-size:   18px;
+			width:       18px;
+			height:      18px;
+			color:       #6b7280;
+			line-height: 1;
+		}
+
+		.components-card__divider {
+			margin: 0;
+		}
+
+		.faq-item__answer {
+			p {
+				margin:      0;
+				font-size:   13px;
+				color:       #50575e;
+				line-height: 1.7;
+			}
+		}
+	}
+}
+
+// ── SettingsPanel (shared component) ─────────────────────────────────────────
+
+.osp-wrap {
+	// ── Page header ──────────────────────────────────────────
+	.osp-page-header {
+		display: flex;
+		align-items: flex-start;
+		padding: 35px 0 30px;
+
+		.osp-page-header-text {
+			flex: 1;
+
+			.osp-title {
+				font-size: 22px;
+				font-weight: 600;
+				color: #1d2327;
+				margin: 0 0 8px;
+				line-height: 1.3;
+			}
+
+			.osp-subtitle {
+				font-size: 13px;
+				color: #424242;
+				margin: 0;
+				line-height: 1.6;
+				max-width: 700px;
+
+				a {
+					color: #41278d;
+					text-decoration: underline;
+
+					&:hover {
+						color: #136826;
+					}
+				}
+			}
+		}
+	}
+
+	// ── Save button (both top & bottom) ──────────────────────
+	.osp-save-btn.orddd-save {
+		display: inline-block;
+		border: none;
+		border-radius: 5px;
+		transition: all 0.2s ease-in-out;
+		outline: none;
+		font-family: "SF Pro Text", sans-serif;
+		font-size: 18px;
+		font-weight: 600;
+		text-align: center;
+		color: #fff;
+		line-height: 24px;
+		text-decoration: none;
+		letter-spacing: 0;
+		cursor: pointer;
+		padding: 13px 25px;
+		background: #1A8D34;
+		height: 52px;
+		min-width: 160px;
+		box-sizing: border-box;
+
+		&:disabled,
+		&[aria-disabled='true'] {
+			opacity: 0.6;
+			cursor: not-allowed;
+		}
+	}
+
+	// ── Card ─────────────────────────────────────────────────
+	.osp-card {
+		border: 1px solid #e0e0e0;
+		border-radius: 8px;
+		box-shadow: none;
+		margin-bottom: 30px;
+		background: #FBFCFA;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	// ── Card accordion header ────────────────────────────────
+	.osp-card-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 16px 50px 16px 15px;
+		background: #EEE9FE;
+		cursor: pointer;
+		user-select: none;
+		border-radius: 8px 8px 0 0;
+
+		.osp-card-header-title {
+			display:     flex;
+			align-items: center;
+			gap:         10px;
+			font-size:   15px;
+			font-weight: 600;
+			color:       #1d2327;
+		}
+
+		.osp-card-header-badge {
+			display:        inline-flex;
+			align-items:    center;
+			background:     #5b3ec8;
+			color:          #fff;
+			font-size:      10px;
+			font-weight:    700;
+			letter-spacing: 0.5px;
+			padding:        2px 8px;
+			border-radius:  100px;
+			text-transform: uppercase;
+			line-height:    1.4;
+		}
+
+		svg {
+			color: #1d2327;
+		}
+	}
+
+	// ── Setting row ──────────────────────────────────────────
+	.osp-row {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+		padding: 22px 28px;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		// Label column — fixed width to align all rows
+		.osp-row-label {
+			flex: 0 0 260px;
+
+			.osp-row-label-text {
+				font-size: 15px;
+				font-weight: 600;
+				color: #1d2327;
+				line-height: 1.4;
+			}
+		}
+
+		// Field column
+		.osp-row-field {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			flex: 1;
+
+			// ⓘ info icon
+			.osp-info-icon {
+				display: inline-flex;
+				align-items: center;
+				color: #41278d;
+				cursor: pointer;
+				flex-shrink: 0;
+				border-radius: 50%;
+				transition: color 0.2s;
+
+				&:hover {
+					color: #58419c;
+				}
+
+				svg {
+					display: block;
+				}
+			}
+
+			.osp-row-field-content {
+				flex: 1;
+
+				// Remove bottom margin WP components add
+				.components-base-control {
+					margin-bottom: 0;
+				}
+
+				// TextControl input sizing
+				.components-text-control__input {
+					max-width: 220px;
+					height: 40px;
+					border: 1px solid #a7acb1;
+					border-radius: 5px;
+					font-size: 13px;
+					color: #424242;
+					padding: 0 15px;
+					transition: border 0.2s, box-shadow 0.2s;
+
+					&:focus {
+						border-color: #41278d;
+						box-shadow: 0 0 20px rgba( 65, 39, 141, 0.1 );
+					}
+				}
+
+				// SelectControl — size the CONTAINER so the dropdown arrow (suffix)
+				// is preserved; never apply border/padding to the raw <select> element.
+				.components-select-control {
+					max-width: 220px;
+
+					.components-select-control__input {
+						height: 40px;
+						font-size: 13px;
+						color: #424242;
+					}
+				}
+			}
+		}
+	}
+
+	// ── Inline bottom footer ─────────────────────────────────
+	.osp-page-footer {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 24px;
+		padding-bottom: 32px;
+	}
+
+	// ── Sticky footer (shown when inline button scrolls out of view) ──
+	.osp-sticky-footer {
+		position: fixed;
+		bottom: 0;
+		left: 160px; // clear WP admin sidebar
+		right: 0;
+		z-index: 100;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 12px 28px;
+		background: #fff;
+		border-top: 1px solid #e0e0e0;
+		box-shadow: 0 -2px 8px rgba( 0, 0, 0, 0.08 );
+	}
+}
+
+// ── SearchMultiSelect (TokenField wrapper) ────────────────────────────────────
+
+.sms-wrap {
+	max-width: 420px;
+
+	// Style TokenField to match other inputs in the panel
+	.components-form-token-field__input-container {
+		border:        1px solid #a7acb1;
+		border-radius: 4px;
+		min-height:    40px;
+		padding:       4px 8px;
+		font-size:     13px;
+
+		&:focus-within {
+			border-color: #41278d;
+			box-shadow:   0 0 0 1px #41278d;
+		}
+	}
+
+	// Token chips — match brand purple
+	.components-form-token-field__token {
+		background:    #ede9fb;
+		border:        1px solid #c5b8f3;
+		border-radius: 4px;
+		color:         #41278d;
+		font-size:     12px;
+	}
+
+	.components-form-token-field__remove-token {
+		color: #41278d;
+		opacity: 0.7;
+		&:hover { opacity: 1; }
+	}
+
+	// Suggestions dropdown
+	.components-form-token-field__suggestions-list {
+		border:        1px solid #a7acb1;
+		border-radius: 0 0 4px 4px;
+		box-shadow:    0 4px 12px rgba( 0, 0, 0, 0.1 );
+		max-height:    200px;
+		overflow-y:    auto;
+	}
+
+	.components-form-token-field__suggestion {
+		font-size: 13px;
+		padding:   6px 10px;
+
+		&.is-selected,
+		&:hover {
+			background: #ede9fb;
+			color:      #41278d;
+		}
+	}
+}
+
+// ── SettingsForm component ────────────────────────────────────────────────────
+// Generic reusable Card-based form. Used by AddSpecificDatesForm (EditSchedule)
+// and AddTimeSlotForm (BlockTimeSlot), and any future form that needs the same
+// two-column label/field layout.
+
+.sf-card {
+	margin: 16px; // inset from DataTable odt-form-slot CardBody
+
+	&__title-row.components-card__body {
+		padding: 16px 20px !important;
+	}
+
+	&__title {
+		font-size: 18px;
+		font-weight: 600;
+		color: #1d2327;
+		margin: 0;
+	}
+}
+
+// Two-column row: 220px label | 1fr field
+.sf-row {
+	&.components-card__body {
+		display: grid;
+		grid-template-columns: 220px 1fr;
+		gap: 16px;
+		align-items: start;
+		padding: 16px 20px !important;
+	}
+
+	&__label {
+		font-size: 14px;
+		font-weight: 600;
+		color: #1d2327;
+		padding-top: 2px;
+	}
+
+	// Field wrapper
+	&__field {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		// Column variant — icon/hint stacks above control
+		&--col {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 6px;
+		}
+	}
+
+	// ⓘ icon inside a Tooltip
+	&__icon {
+		display: inline-flex;
+		align-items: center;
+		color: #41278d;
+		cursor: default;
+		flex-shrink: 0;
+
+		svg { display: block; }
+	}
+
+	// Hint bar (icon + optional text), col layout only
+	&__hint {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		color: #555;
+		font-size: 13px;
+	}
+
+	&__hint-text {
+		font-size: 13px;
+	}
+}
+
+// ── Shared input / select ─────────────────────────────────────────────────────
+
+.sf-input {
+	padding: 6px 10px;
+	border: 1px solid #a7acb1;
+	border-radius: 4px;
+	font-size: 14px;
+	width: 200px;
+	color: #1d2327;
+	background: #fff;
+
+	&:focus {
+		outline: none;
+		border-color: #41278d;
+		box-shadow: 0 0 0 2px rgba( 65, 39, 141, 0.12 );
+	}
+
+	&--wide { width: 220px; }
+}
+
+.sf-select {
+	.components-select-control__input {
+		width: 200px;
+	}
+}
+
+// ── Save button ───────────────────────────────────────────────────────────────
+
+.sf-save-btn.components-button {
+	border: 2px solid #41278d;
+	color: #41278d;
+	border-radius: 4px;
+	font-weight: 600;
+	margin-top: 4px;
+
+	&:hover:not( :disabled ) {
+		background: #41278d;
+		color: #fff;
+	}
+}
+
+// ── Inline fields group (sub-labeled inputs side by side, e.g. Charges row) ──
+
+.sf-inline-fields {
+	display: flex;
+	align-items: flex-end;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.sf-inline-field {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+
+	&__label {
+		font-size: 12px;
+		font-weight: 500;
+		color: #555;
+	}
+}
+
+// ── DatePickerField ───────────────────────────────────────────────────────────
+
+.sf-date-dropdown {
+	display: inline-block;
+}
+
+.sf-date-trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 10px;
+	border: 1px solid #a7acb1;
+	border-radius: 4px;
+	font-size: 14px;
+	color: #1d2327;
+	background: #fff;
+	cursor: pointer;
+	min-width: 120px;
+	line-height: 1.4;
+
+	&:hover {
+		border-color: #41278d;
+	}
+
+	&.is-open,
+	&:focus {
+		outline: none;
+		border-color: #41278d;
+		box-shadow: 0 0 0 2px rgba( 65, 39, 141, 0.12 );
+	}
+
+	&__text {
+		flex: 1;
+		text-align: left;
+	}
+}
+
+.sf-date-popover {
+	padding: 8px;
+	background: #fff;
+	border-radius: 4px;
+}
+
+// ── MultiDatePickerField ──────────────────────────────────────────────────────
+
+.sf-multi-date {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	position: relative;
+}
+
+.sf-multi-date-popover {
+	position: absolute;
+	top: calc( 100% + 4px );
+	left: 0;
+	z-index: 100;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	box-shadow: 0 4px 12px rgba( 0, 0, 0, 0.12 );
+	padding: 8px;
+
+	&__footer {
+		display: flex;
+		justify-content: flex-end;
+		padding: 8px 8px 4px;
+		border-top: 1px solid #f0f0f0;
+		margin-top: 4px;
+	}
+}
+
+.sf-multi-date-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.sf-multi-date-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	background: #f0ecfa;
+	color: #41278d;
+	border-radius: 3px;
+	padding: 2px 6px;
+	font-size: 12px;
+	font-weight: 500;
+
+	&__remove {
+		background: none;
+		border: none;
+		cursor: pointer;
+		color: #41278d;
+		padding: 0;
+		font-size: 14px;
+		line-height: 1;
+		opacity: 0.7;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+}
+
+// ── SelectControl wider variant ───────────────────────────────────────────────
+
+.sf-select--wide {
+	.components-select-control__input {
+		width: 300px;
+	}
+}
+
+// ── Time range row (from-time + To + to-time + optional delete) ───────────────
+
+.sf-time-range-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 8px;
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}
+
+.sf-time-range-sep {
+	font-size: 13px;
+	color: #1d2327;
+}
+
+// ── Delete link (red) ─────────────────────────────────────────────────────────
+
+.sf-delete-link {
+	background: none;
+	border: none;
+	padding: 0;
+	color: #d32f2f;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	text-decoration: underline;
+
+	&:hover { color: #b71c1c; }
+}
+
+// ── Add Another Slot link (purple) ────────────────────────────────────────────
+
+.sf-add-link {
+	background: none;
+	border: none;
+	padding: 0;
+	color: #41278d;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	margin-top: 4px;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+
+	&:hover { text-decoration: underline; }
+}
+
+// ── Two add-links row beneath the time slot DataTable ────────────────────────
+
+.sf-slot-add-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 0 4px;
+}
+
+.sf-slot-add-sep {
+	color: #ddd;
+	font-size: 14px;
+}
+
+// ── MultiSelectDropdown ───────────────────────────────────────────────────────
+
+.sf-msd {
+	display: inline-block;
+
+	&__trigger {
+		display:       inline-flex;
+		align-items:   center;
+		gap:           6px;
+		padding:       6px 10px;
+		border:        1px solid #a7acb1;
+		border-radius: 4px;
+		font-size:     14px;
+		color:         #1d2327;
+		background:    #fff;
+		cursor:        pointer;
+		min-width:     200px;
+		line-height:   1.4;
+
+		&:hover { border-color: #41278d; }
+
+		&.is-open,
+		&:focus {
+			outline:      none;
+			border-color: #41278d;
+			box-shadow:   0 0 0 2px rgba( 65, 39, 141, 0.12 );
+		}
+
+		&-text {
+			flex:          1;
+			text-align:    left;
+			overflow:      hidden;
+			text-overflow: ellipsis;
+			white-space:   nowrap;
+		}
+	}
+
+	&__chevron {
+		flex-shrink: 0;
+		font-size:   10px;
+		color:       #666;
+	}
+
+	&__menu {
+		min-width:     200px;
+		max-height:    220px;
+		overflow-y:    auto;
+		padding:       6px 0;
+		background:    #fff;
+		border-radius: 4px;
+	}
+
+	&__option {
+		display:     flex;
+		align-items: center;
+		gap:         8px;
+		padding:     6px 12px;
+		font-size:   14px;
+		color:       #1d2327;
+		cursor:      pointer;
+
+		&:hover { background: #f6f7f7; }
+
+		&.is-checked { color: #41278d; font-weight: 500; }
+	}
+
+	&__checkbox {
+		margin:       0;
+		cursor:       pointer;
+		accent-color: #41278d;
+		flex-shrink:  0;
+	}
+}
+
+// ── DataTable component ───────────────────────────────────────────────────────
+
+.odt-wrap {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.odt-header {
+	display: grid;
+	background: linear-gradient( 90deg, #EEE9FE 0%, #ddd9ef 100% );
+	padding: 0 8px;
+	align-items: center;
+}
+
+.odt-row {
+	display: grid;
+	padding: 0 8px;
+	align-items: center;
+	background: #fafafa;
+	transition: background 0.15s;
+
+	&:hover {
+		background: #f5f3fb;
+	}
+
+	&--selected {
+		background: #f0edf8;
+	}
+
+	&--blocked {
+		background: #f5f5f5;
+
+		.odt-cell:not(:last-child) {
+			opacity: 0.45;
+		}
+	}
+}
+
+.odt-cell {
+	padding: 14px 12px;
+	font-size: 13px;
+	color: #1d2327;
+
+	&--heading {
+		font-weight: 600;
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
+}
+
+.odt-col-tooltip-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 16px;
+	height: 16px;
+	font-size: 13px;
+	color: #6b7280;
+	cursor: default;
+	flex-shrink: 0;
+
+	&:hover {
+		color: #41278d;
+	}
+}
+
+.components-tooltip {
+	max-width: 260px;
+	white-space: normal;
+	word-wrap: break-word;
+	text-align: left;
+}
+
+.odt-checkbox {
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	accent-color: #41278d;
+}
+
+.odt-empty {
+	text-align: center;
+	color: #757575;
+	font-size: 14px;
+	padding: 24px 20px !important;
+}
+
+.odt-loading {
+	text-align: center;
+	padding: 24px 20px !important;
+}
+
+.odt-form-slot {
+	background: #fff;
+}
+
+.odt-add-more-row {
+	display: flex;
+	align-items: center;
+}
+
+.odt-add-more-link.components-button {
+	color: #2a9d3f;
+	text-decoration: none;
+	gap: 6px;
+	font-weight: 500;
+	font-size: 14px;
+
+	&:hover:not( :disabled ) {
+		color: #1e7a30;
+	}
+
+	.odt-add-more-label {
+		text-decoration: underline;
+	}
+}
+
+.odt-cancel-link.components-button {
+	color: #757575;
+	text-decoration: underline;
+	font-size: 14px;
+
+	&:hover:not( :disabled ) {
+		color: #1d2327;
+	}
+}
+
+.odt-add-more-plus {
+	font-size: 15px;
+	line-height: 1;
+	text-decoration: none;
+	display: inline-block;
+}
+
+.odt-footer {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 16px;
+
+	.odt-bulk-select {
+		.components-select-control__input {
+			min-width: 140px;
+			width: auto;
+		}
+	}
+
+	.odt-apply-btn.components-button {
+		border: 2px solid #41278d;
+		color: #41278d;
+		border-radius: 4px;
+		font-weight: 600;
+
+		&:hover:not( :disabled ) {
+			background: #41278d;
+			color: #fff;
+		}
+	}
+}
+
+// ── Business Days (Settings page) ─────────────────────────────────────────────
+
+.bd-loading {
+	display: flex;
+	justify-content: center;
+	padding: 60px 0;
+}
+
+.orddd-page-wrap {
+	max-width: 1022px;
+	margin: auto;
+	margin-top: 48px;
+
+	.components-notice {
+		margin: 0 20px;
+		margin-bottom: 16px;
+	}
+
+	.bd-days-field {
+
+		.bd-days-hint {
+			font-size: 13px;
+			color: #424242;
+			margin: 0 0 8px;
+		}
+
+		.components-form-token-field {
+			max-width: 100%;
+
+			.components-form-token-field__input-container {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 6px;
+				align-items: center;
+				border: 1px solid #a7acb1;
+				border-radius: 5px;
+				padding: 8px 10px;
+				background: #fff;
+				min-height: 44px;
+				cursor: text;
+
+				&:focus-within {
+					border-color: #41278d;
+					box-shadow: 0 0 20px rgba( 65, 39, 141, 0.1 );
+				}
+			}
+
+			.components-form-token-field__token {
+				display: inline-flex;
+				align-items: center;
+				gap: 4px;
+				background: #fff;
+				border: 1px solid #a7acb1;
+				border-radius: 4px;
+				padding: 2px 8px;
+				font-size: 13px;
+				color: #1d2327;
+				line-height: 1.6;
+			}
+
+			.components-form-token-field__remove-token {
+				display: inline-flex;
+				align-items: center;
+				padding: 0;
+				margin: 0;
+				background: none;
+				border: none;
+				cursor: pointer;
+				color: #787c82;
+
+				&:hover {
+					color: #d72c0d;
+				}
+			}
+
+			.components-form-token-field__input {
+				border: none;
+				outline: none;
+				box-shadow: none;
+				font-size: 13px;
+				color: #424242;
+				padding: 2px 4px;
+				height: auto;
+				min-width: 130px;
+				max-width: 100%;
+				background: transparent;
+
+				&::placeholder {
+					color: #787c82;
+				}
+			}
+
+			.components-form-token-field__suggestions-list {
+				border: 1px solid #a7acb1;
+				border-radius: 5px;
+				background: #fff;
+				margin-top: 4px;
+				padding: 4px 0;
+				list-style: none;
+				box-shadow: 0 4px 12px rgba( 0, 0, 0, 0.08 );
+				max-height: 200px;
+				overflow-y: auto;
+
+				.components-form-token-field__suggestion {
+					padding: 8px 14px;
+					font-size: 13px;
+					color: #1d2327;
+					cursor: pointer;
+
+					&:hover,
+					&.is-selected {
+						background: #f6f3ff;
+						color: #41278d;
+					}
+				}
+			}
+
+			.components-form-token-field__help {
+				display: none;
+			}
+		}
+	}
+
+	.osp-row-field-content {
+		.components-text-control__input {
+			max-width: 180px;
+		}
+	}
+}
+
+// ── Block Time Slot tab ───────────────────────────────────────────────────────
+
+.bts-wrap {
+	padding: 24px 20px;
+}
+
+.bts-unblock-link {
+	background: none;
+	border: none;
+	padding: 0;
+	color: #41278d;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
+
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+}
+
+.bts-form {
+	margin: 16px;
+
+	&__title-row {
+		padding: 16px 20px !important;
+	}
+
+	&__title {
+		font-size: 18px;
+		font-weight: 600;
+		color: #1d2327;
+		margin: 0;
+	}
+
+	&__row.components-card__body {
+		display: grid;
+		grid-template-columns: 220px 1fr;
+		gap: 16px;
+		align-items: start;
+		padding: 16px 20px !important;
+	}
+
+	&__label {
+		font-size: 14px;
+		font-weight: 600;
+		color: #1d2327;
+		padding-top: 2px;
+	}
+
+	&__field {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		&--col {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 6px;
+		}
+	}
+
+	&__info-icon {
+		display: inline-flex;
+		align-items: center;
+		color: #41278d;
+		cursor: default;
+		flex-shrink: 0;
+
+		svg { display: block; }
+	}
+
+	&__hint {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		color: #555;
+		font-size: 13px;
+	}
+
+	&__hint-text {
+		font-size: 13px;
+	}
+
+	&__input {
+		padding: 6px 10px;
+		border: 1px solid #a7acb1;
+		border-radius: 4px;
+		font-size: 14px;
+		width: 200px;
+		color: #1d2327;
+
+		&:focus {
+			outline: none;
+			border-color: #41278d;
+			box-shadow: 0 0 0 2px rgba( 65, 39, 141, 0.12 );
+		}
+	}
+
+	&__select {
+		.components-select-control__input {
+			width: 240px;
+		}
+	}
+
+	&__save-btn.components-button {
+		border: 2px solid #41278d;
+		color: #41278d;
+		border-radius: 4px;
+		font-weight: 600;
+		margin-top: 4px;
+
+		&:hover:not( :disabled ) {
+			background: #41278d;
+			color: #fff;
+		}
+	}
+}
+
+// ── Disable Shipping tab ──────────────────────────────────────────────────────
+
+.ds-wrap {
+	padding: 24px 20px;
+}
+
+.ds-enable-link {
+	background: none;
+	border: none;
+	padding: 0;
+	color: #41278d;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
+
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+}
+
+.ds-form {
+	margin: 16px;
+
+	&__title-row.components-card__body {
+		padding: 16px 20px !important;
+	}
+
+	&__title {
+		font-size: 18px;
+		font-weight: 600;
+		color: #1d2327;
+		margin: 0;
+	}
+
+	&__row.components-card__body {
+		display: grid;
+		grid-template-columns: 220px 1fr;
+		gap: 16px;
+		align-items: start;
+		padding: 16px 20px !important;
+	}
+
+	&__label {
+		font-size: 14px;
+		font-weight: 600;
+		color: #1d2327;
+		padding-top: 2px;
+	}
+
+	&__field {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		&--col {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 6px;
+		}
+	}
+
+	&__info-icon {
+		display: inline-flex;
+		align-items: center;
+		color: #41278d;
+		cursor: default;
+		flex-shrink: 0;
+
+		svg { display: block; }
+	}
+
+	&__hint {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		color: #555;
+		font-size: 13px;
+	}
+
+	&__hint-text {
+		font-size: 13px;
+	}
+
+	&__input {
+		padding: 6px 10px;
+		border: 1px solid #a7acb1;
+		border-radius: 4px;
+		font-size: 14px;
+		width: 200px;
+		color: #1d2327;
+
+		&:focus {
+			outline: none;
+			border-color: #41278d;
+			box-shadow: 0 0 0 2px rgba( 65, 39, 141, 0.12 );
+		}
+	}
+
+	&__select {
+		.components-select-control__input {
+			width: 240px;
+		}
+	}
+
+	&__save-btn.components-button {
+		border: 2px solid #41278d;
+		color: #41278d;
+		border-radius: 4px;
+		font-weight: 600;
+		margin-top: 4px;
+
+		&:hover:not( :disabled ) {
+			background: #41278d;
+			color: #fff;
+		}
+	}
+}
+
+// ── Integrations page tab panel ───────────────────────────────────────────────
+
+.orddd-integrations-page {
+
+	.gcal-redirect-uri {
+
+		.components-base-control {
+			width: 100%;
+		}
+	}
+
+	.gcal-calendar-id {
+		.components-base-control {
+			width: 100%;
+		}
+	}
+
+	// ── Upsell overlay (blurred preview + upgrade card) ───────────────────────
+
+	.orddd-integrations-upsell {
+		position: relative;
+
+		&__content {
+			filter:         blur( 1.5px );
+			pointer-events: none;
+			user-select:    none;
+		}
+
+		.ts-upsell-overlay {
+			position:         absolute;
+			top:              80px;
+			left:             50%;
+			transform:        translateX( -50% );
+			width:            750px;
+			max-width:        calc( 100% - 32px );
+			background-color: #fff;
+			border:           1px solid #d6e2ed;
+			border-radius:    4px;
+			box-shadow:       0 5px 25px rgba( 0, 0, 0, 0.15 );
+		}
+
+		.ts-upsell-top {
+			padding:       16px 40px;
+			border-bottom: 1px solid #e2e4e9;
+
+			h2 {
+				margin:      1em 0;
+				font-size:   20px;
+				font-weight: 700;
+				color:       #1d2327;
+			}
+		}
+
+		.ts-upsell-content {
+			padding: 24px 40px 40px;
+		}
+
+		.ts-upsell-content__features {
+
+			h3 {
+				font-size:     22px;
+				line-height:   1.2;
+				margin-bottom: 12px;
+			}
+
+			h4 {
+				font-size:   16px;
+				line-height: 1.4;
+				color:       #444;
+				font-weight: 400;
+				margin:      0;
+			}
+		}
+
+		.ts-columns-2 {
+			margin:  16px 0 24px;
+			display: grid;
+			gap:     10px;
+
+			li {
+				display:     flex;
+				align-items: flex-start;
+				gap:         8px;
+				font-size:   15px;
+				line-height: 1.4;
+
+				img {
+					width:      20px;
+					height:     20px;
+					flex-shrink: 0;
+					margin-top:  2px;
+				}
+			}
+		}
+
+		.ts-upsell-content__features-cliff p {
+			margin:    0 0 0;
+			font-size: 15px;
+			color:     #444;
+		}
+
+		p {
+			margin:      16px 0;
+			font-size:   15px;
+			line-height: 1.4;
+			color:       #444;
+		}
+
+		.ts-upgrade-button {
+			display:         inline-flex;
+			align-items:     center;
+			gap:             10px;
+			font-weight:     700;
+			font-size:       18px;
+			background:      #338eef;
+			border:          1px solid #1177e3;
+			border-radius:   4px;
+			padding:         12px 24px;
+			color:           #fff;
+			text-decoration: none;
+			margin-top:      8px;
+
+			img {
+				width:  24px;
+				height: 24px;
+			}
+
+			&:hover {
+				background: #1177e3;
+				color:      #fff;
+			}
+		}
+	}
+
+	// ── Automation table ──────────────────────────────────────────────────────
+
+	.orddd-automation-table {
+		margin-top: 16px;
+
+		th, td {
+			padding: 12px 16px;
+		}
+
+		td .components-toggle-control {
+			margin: 0;
+		}
+	}
+
+	// ── Delivery Schedules table ───────────────────────────────────────────────
+
+	.orddd-schedule-status {
+		display: inline-block;
+		padding: 2px 10px;
+		border-radius: 3px;
+		font-size: 12px;
+		font-weight: 600;
+
+		&--active {
+			background: #edfaef;
+			color: #1e8534;
+			border: 1px solid #b8e6bf;
+		}
+	}
+
+	.orddd-schedules-upsell-hint {
+		margin-top: 12px;
+		font-size: 13px;
+		color: #50575e;
+
+		a {
+			color: #7f54b3;
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+
+// ── Field / Calendar Appearance page ─────────────────────────────────────────
+
+.fa-page {
+
+	// ── Collapsible section card ──────────────────────────────────────────────
+
+	.fa-section {
+		margin-bottom: 24px;
+
+		.components-panel__body {
+			border: none;
+			margin: 0;
+
+			.components-panel__body-title {
+				margin: 0;
+				border-bottom: 1px solid #f0f0f0;
+
+				.components-button.components-panel__body-toggle {
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					padding: 20px 28px;
+					font-size: 18px;
+					font-weight: 600;
+					color: #1d2327;
+					background: none;
+					box-shadow: none;
+					border-radius: 0;
+
+					svg {
+						flex-shrink: 0;
+						color: #757575;
+					}
+
+					&:hover,
+					&:focus {
+						background: none;
+						box-shadow: none;
+						color: #1d2327;
+					}
+				}
+			}
+
+			&:not( .is-opened ) .components-panel__body-title {
+				border-bottom: none;
+			}
+
+			.components-panel__body-content {
+				padding: 0;
+			}
+		}
+
+		.osp-row {
+			padding: 20px 28px;
+			border-bottom: 1px solid #f0f0f0;
+
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+	}
+
+	// ── Override input widths for Field / Calendar Appearance rows ────────────
+	// The shared osp-row rule caps inputs at 220px; widen them here.
+
+	.osp-row-field-content {
+		.components-text-control__input {
+			max-width: 560px !important;
+		}
+
+		.components-select-control {
+			max-width: 380px !important;
+		}
+	}
+
+	// ── TextareaControl ───────────────────────────────────────────────────────
+
+	.fa-textarea {
+		.components-textarea-control__input {
+			width: 100%;
+			max-width: 560px;
+			border: 1px solid #a7acb1;
+			border-radius: 5px;
+			font-size: 13px;
+			color: #424242;
+			padding: 10px 15px;
+			resize: vertical;
+			background-color: #fff;
+			border: 1px solid #A7ACB1;
+			border-radius: 5px;
+			transition: all 0.2s ease-in-out;
+
+			&:focus {
+				border-color: #41278d;
+				box-shadow: 0 0 20px rgba( 65, 39, 141, 0.1 );
+				outline: none;
+			}
+		}
+	}
+
+	// ── Field placement radio list ────────────────────────────────────────────
+
+	.fa-placement {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+
+		&__option {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			cursor: pointer;
+			font-size: 14px;
+			color: #1d2327;
+			line-height: 1.4;
+		}
+
+		&__radio {
+			width: 16px;
+			height: 16px;
+			accent-color: #41278d;
+			flex-shrink: 0;
+			cursor: pointer;
+		}
+
+		&__label {
+			flex-shrink: 0;
+		}
+
+		&__custom-input {
+			flex: 1;
+
+			.components-text-control__input {
+				max-width: 280px;
+				height: 36px;
+				border: 1px solid #a7acb1;
+				border-radius: 4px;
+				font-size: 13px;
+				padding: 0 12px;
+
+				&:focus {
+					border-color: #41278d;
+					box-shadow: 0 0 0 2px rgba( 65, 39, 141, 0.12 );
+					outline: none;
+				}
+			}
+		}
+
+		&__note {
+			margin: 4px 0 0;
+			font-size: 12px;
+			color: #757575;
+			line-height: 1.5;
+		}
+	}
+}
+
+// ── InlineRadios (global component) ──────────────────────────────────────────
+
+.orddd-inline-radios {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+
+	&__option {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 13px;
+		color: #1d2327;
+		cursor: pointer;
+		line-height: 1.4;
+	}
+
+	&__input {
+		margin: 0;
+		accent-color: #41278d;
+		flex-shrink: 0;
+		cursor: pointer;
+	}
+}
+
+// ── Google Sync ───────────────────────────────────────────────────────────────
+
+.gcal-instructions {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.gcal-instructions-list {
+	margin: 0;
+	padding-left: 20px;
+	font-size: 13px;
+	color: #424242;
+	line-height: 1.7;
+
+	li { margin-bottom: 4px; }
+
+	a { color: #41278d; }
+}
+
+.gcal-redirect-uri {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	.components-text-control__input {
+		max-width: 420px;
+		background: #f6f7f7;
+		color: #50575e;
+	}
+}
+
+.gcal-connect-btn {
+	margin-top: 10px;
+}
+
+.gcal-calendar-select,
+.gcal-calendar-id {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
+}
+
+.gcal-file-input {
+	font-size: 13px;
+	color: #424242;
+}
+
+.gcal-key-file-status {
+	font-size: 13px;
+	color: #2a9d3f;
+	font-weight: 500;
+	margin-top: 6px;
+	display: block;
+}
+
+.gcal-msg--success {
+	font-size: 13px;
+	color: #2a9d3f;
+	font-weight: 500;
+}
+
+.gcal-msg--error {
+	font-size: 13px;
+	color: #d72c0d;
+	font-weight: 500;
+}
+
+.gcal-ics-feeds {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.gcal-ics-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+
+	.components-text-control__input {
+		max-width: 360px;
+	}
+}
+
+// ── ColorInput (Calendar Appearance) ─────────────────────────────────────────
+
+.ap-color-input {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.ap-color-swatch {
+	width: 40px;
+	height: 40px;
+	padding: 2px;
+	border: 1px solid #a7acb1;
+	border-radius: 4px;
+	background: none;
+	cursor: pointer;
+	flex-shrink: 0;
+
+	&::-webkit-color-swatch-wrapper { padding: 0; }
+	&::-webkit-color-swatch         { border: none; border-radius: 2px; }
+	&::-moz-color-swatch             { border: none; border-radius: 2px; }
+}
+
+.ap-color-text {
+	.components-text-control__input {
+		max-width: 110px !important;
+		font-family: monospace;
+	}
+}
+
+// ── Pickup Locations ──────────────────────────────────────────────────────────
+
+.pl-locations-wrap {
+	margin-top: 24px;
+
+	.osp-page-header {
+		display:         flex;
+		align-items:     center;
+		justify-content: space-between;
+		margin-bottom:   20px;
+
+		.osp-page-header-text {
+			.osp-title {
+				font-size:   1.2rem;
+				font-weight: 600;
+				color:       #1e1e1e;
+				margin:      0 0 4px;
+			}
+
+			.osp-subtitle {
+				font-size: 0.875rem;
+				color:     #757575;
+				margin:    0;
+			}
+		}
+	}
+}
+
+.pl-add-btn {
+	background:    #41278d !important;
+	color:         #fff    !important;
+	border:        none    !important;
+	border-radius: 6px     !important;
+	padding:       8px 16px !important;
+	font-weight:   600     !important;
+	cursor:        pointer;
+	box-shadow:    none    !important;
+
+	&:hover {
+		background: #331f70 !important;
+	}
+}
+
+.pl-list {
+	display:        flex;
+	flex-direction: column;
+	gap:            12px;
+}
+
+.pl-empty {
+	color:     #757575;
+	font-size: 0.9rem;
+	padding:   24px 0;
+}
+
+// ── Location card ─────────────────────────────────────────────────────────────
+
+.pl-location-card {
+	display:          flex;
+	align-items:      center;
+	gap:              16px;
+	background:       #fff;
+	border:           1px solid #e0e0e0;
+	border-radius:    8px;
+	padding:          16px 20px;
+	transition:       box-shadow 0.15s;
+
+	&:hover {
+		box-shadow: 0 2px 8px rgba( 0, 0, 0, 0.07 );
+	}
+}
+
+.pl-location-avatar {
+	flex-shrink:     0;
+	width:           44px;
+	height:          44px;
+	border-radius:   8px;
+	background:      #41278d;
+	color:           #fff;
+	font-size:       1.2rem;
+	font-weight:     600;
+	display:         flex;
+	align-items:     center;
+	justify-content: center;
+	text-transform:  uppercase;
+}
+
+.pl-location-body {
+	flex:       1;
+	min-width:  0;
+}
+
+.pl-location-name-row {
+	display:     flex;
+	align-items: center;
+	gap:         10px;
+	flex-wrap:   wrap;
+}
+
+.pl-location-name {
+	font-weight: 600;
+	font-size:   0.95rem;
+	color:       #1e1e1e;
+}
+
+.pl-badge {
+	display:       inline-block;
+	font-size:     0.72rem;
+	font-weight:   600;
+	border-radius: 20px;
+	padding:       2px 10px;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+
+	&--active {
+		background: #e8f5e9;
+		color:      #2e7d32;
+	}
+
+	&--inactive {
+		background: #fafafa;
+		color:      #9e9e9e;
+		border:     1px solid #e0e0e0;
+	}
+}
+
+.pl-location-address,
+.pl-location-email {
+	margin:    4px 0 0;
+	font-size: 0.85rem;
+	color:     #757575;
+	white-space: nowrap;
+	overflow:    hidden;
+	text-overflow: ellipsis;
+}
+
+.pl-location-actions {
+	display:    flex;
+	gap:        8px;
+	flex-shrink: 0;
+}
+
+// ── Location form panel ───────────────────────────────────────────────────────
+
+.pl-form-panel {
+	background:    #fff;
+	border:        1px solid #e0e0e0;
+	border-left:   4px solid #41278d;
+	border-radius: 8px;
+	padding:       24px 28px;
+	margin-bottom: 12px;
+}
+
+.pl-form-header {
+	display:     flex;
+	align-items: center;
+	gap:         10px;
+	margin-bottom: 20px;
+}
+
+.pl-form-dot {
+	display:          block;
+	width:            10px;
+	height:           10px;
+	border-radius:    50%;
+	background:       #41278d;
+	flex-shrink:      0;
+}
+
+.pl-form-title {
+	font-size:   1rem;
+	font-weight: 600;
+	color:       #1e1e1e;
+	margin:      0;
+}
+
+.pl-form-field {
+	display:        flex;
+	flex-direction: column;
+	gap:            4px;
+	margin-bottom:  14px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.pl-form-label {
+	font-size:   0.8rem;
+	font-weight: 500;
+	color:       #555;
+}
+
+.pl-form-grid {
+	display:               grid;
+	grid-template-columns: 1fr 1fr;
+	gap:                   14px 20px;
+	margin-bottom:         14px;
+}
+
+.pl-form-half {
+	max-width: 50%;
+
+	@media ( max-width: 600px ) {
+		max-width: 100%;
+	}
+}
+
+.pl-form-footer {
+	display:         flex;
+	align-items:     center;
+	justify-content: space-between;
+	flex-wrap:       wrap;
+	gap:             12px;
+	margin-top:      20px;
+	padding-top:     16px;
+	border-top:      1px solid #f0f0f0;
+}
+
+.pl-form-footer-actions {
+	display:     flex;
+	align-items: center;
+	gap:         8px;
+}
+
+// ── Holidays ──────────────────────────────────────────────────────────────────
+
+.hol-page-header {
+	display:         flex;
+	align-items:     flex-start;
+	justify-content: space-between;
+	margin-bottom:   24px;
+	gap:             16px;
+	margin-top:      30px;
+
+	.hol-title {
+		font-size:   1.3rem;
+		font-weight: 600;
+		color:       #1e1e1e;
+		margin:      0 0 6px;
+	}
+
+	.hol-subtitle {
+		font-size: 0.875rem;
+		color:     #555;
+		margin:    0;
+		max-width: 520px;
+	}
+}
+
+.hol-doc-link {
+	font-size:      0.875rem;
+	color:          #41278d;
+	text-decoration: none;
+	font-weight:    600;
+	white-space:    nowrap;
+	flex-shrink:    0;
+
+	&:hover { text-decoration: underline; }
+}
+
+.hol-cards {
+	display:        flex;
+	flex-direction: column;
+	gap:            16px;
+}
+
+// ── Card shell ────────────────────────────────────────────────────────────────
+
+.hol-card {
+	background:    #fff;
+	border:        1px solid #e0e0e0;
+	border-radius: 10px;
+	overflow:      hidden;
+}
+
+.hol-card-header {
+	display:         flex;
+	align-items:     center;
+	justify-content: space-between;
+	padding:         18px 24px;
+	background:      #eee9fe;
+	gap:             12px;
+
+	&:hover { background: #f5f5f5; }
+}
+
+.hol-card-header-left {
+	display:     flex;
+	align-items: center;
+	gap:         12px;
+	flex:        1;
+	min-width:   0;
+	flex-wrap:   wrap;
+}
+
+.hol-card-header-right {
+	display:     flex;
+	align-items: center;
+	gap:         16px;
+	flex-shrink: 0;
+}
+
+// Globe avatar (Global Holidays)
+.hol-globe-avatar {
+	width:           40px;
+	height:          40px;
+	border-radius:   8px;
+	background:      #41278d;
+	color:           #fff;
+	font-size:       1.1rem;
+	display:         flex;
+	align-items:     center;
+	justify-content: center;
+	flex-shrink:     0;
+}
+
+.hol-card-title {
+	font-size:   1rem;
+	font-weight: 600;
+	color:       #1e1e1e;
+}
+
+.hol-card-subtitle {
+	font-size:  0.78rem;
+	color:      #757575;
+	margin-top: 2px;
+}
+
+// ── Type badges (Delivery / Pickup) ───────────────────────────────────────────
+
+.hol-type-badge {
+	display:      inline-flex;
+	align-items:  center;
+	gap:          5px;
+	font-size:    0.72rem;
+	font-weight:  600;
+	border-radius: 20px;
+	padding:      3px 10px;
+	flex-shrink:  0;
+
+	&--delivery {
+		background: #e8f5e9;
+		color:      #2e7d32;
+
+		.hol-type-dot { background: #2e7d32; }
+	}
+
+	&--pickup {
+		background: #ede7f6;
+		color:      #41278d;
+
+		.hol-type-dot { background: #41278d; }
+	}
+}
+
+.hol-type-dot {
+	width:        7px;
+	height:       7px;
+	border-radius: 50%;
+	flex-shrink:  0;
+}
+
+.hol-shipping-label {
+	font-size: 0.8rem;
+	color:     #9e9e9e;
+}
+
+// Count badge — orange/amber
+.hol-count-badge {
+	display:       inline-block;
+	font-size:     0.72rem;
+	font-weight:   600;
+	border-radius: 20px;
+	padding:       2px 10px;
+	background:    #fff7ed;
+	color:         #ea580c;
+	border:        1px solid #fed7aa;
+	flex-shrink:   0;
+}
+
+// "Global" badge — blue
+.hol-global-badge {
+	display:       inline-block;
+	font-size:     0.72rem;
+	font-weight:   600;
+	border-radius: 20px;
+	padding:       2px 10px;
+	background:    #eff6ff;
+	color:         #2563eb;
+	flex-shrink:   0;
+}
+
+// "Use Global Holidays" toggle row in header
+.hol-global-toggle {
+	display:     flex;
+	align-items: center;
+	gap:         8px;
+
+	.hol-global-toggle-label {
+		font-size:   0.8rem;
+		color:       #555;
+		white-space: nowrap;
+	}
+
+	// Nudge WP ToggleControl to sit flush
+	.components-form-toggle {
+		margin: 0;
+	}
+}
+
+.hol-collapse-btn {
+	background:  none;
+	border:      none;
+	padding:     4px;
+	cursor:      pointer;
+	color:       #757575;
+	display:     flex;
+	align-items: center;
+
+	&:hover { color: #1e1e1e; }
+}
+
+// ── Card body / table ─────────────────────────────────────────────────────────
+
+.hol-card-body {
+	border-top: 1px solid #e0e0e0;
+}
+
+.hol-table {
+	width:           100%;
+	border-collapse: collapse;
+	table-layout:    fixed;
+
+	thead tr {
+		background: #f9f9f9;
+	}
+
+	th,
+	td {
+		padding:    12px 16px;
+		text-align: left;
+		font-size:  0.875rem;
+		color:      #1e1e1e;
+		border-bottom: 1px solid #f0f0f0;
+		vertical-align: middle;
+	}
+
+	th {
+		font-weight:     600;
+		color:           #555;
+		font-size:       0.78rem;
+		text-transform:  uppercase;
+		letter-spacing:  0.04em;
+	}
+
+	tbody tr:last-of-type td {
+		border-bottom: none;
+	}
+
+	tbody tr:not(.hol-add-row):hover {
+		background: #fafafa;
+	}
+}
+
+.hol-th-check,
+.hol-td-check {
+	width:      44px;
+	text-align: center;
+}
+
+.hol-th-date {
+	width: 300px;
+}
+
+.hol-th-actions {
+	width:      180px;
+	text-align: left;
+}
+
+.hol-td-actions {
+	display:     flex;
+	align-items: center;
+	gap:         2px;
+}
+
+// ── Repeat type badges ────────────────────────────────────────────────────────
+
+.hol-repeat-badge {
+	display:       inline-block;
+	font-size:     0.72rem;
+	font-weight:   600;
+	border-radius: 20px;
+	padding:       3px 12px;
+
+	&--recurring {
+		background: #ede7f6;
+		color:      #41278d;
+	}
+
+	&--current {
+		background: #f5f5f5;
+		color:      #757575;
+		border:     1px solid #e0e0e0;
+	}
+}
+
+// ── Inline add row ────────────────────────────────────────────────────────────
+
+.hol-add-row {
+	td {
+		border-top:    2px dashed #e8e8e8;
+		border-bottom: none !important;
+		padding:       10px 16px;
+		color:         #9e9e9e;
+	}
+
+	&:hover td {
+		background: #fafafa;
+	}
+}
+
+.hol-add-icon {
+	text-align: center;
+	font-size:  1.1rem;
+	color:      #bdbdbd;
+}
+
+// ── Inline inputs (shared between add row and edit row) ───────────────────────
+
+.hol-input {
+	width:         100%;
+	border:        1px solid #e0e0e0;
+	border-radius: 4px;
+	padding:       6px 10px;
+	font-size:     0.875rem;
+	color:         #1e1e1e;
+	background:    #fff;
+	box-sizing:    border-box;
+
+	&::placeholder { color: #bdbdbd; }
+
+	&:focus {
+		outline:    none;
+		border-color: #41278d;
+		box-shadow: 0 0 0 2px rgba( 65, 39, 141, 0.15 );
+	}
+}
+
+.hol-date-input {
+	min-width: 150px;
+}
+
+.hol-date-range {
+	display:     flex;
+	align-items: center;
+	gap:         6px;
+
+	.hol-date-range-sep {
+		color:       #757575;
+		font-size:   13px;
+		white-space: nowrap;
+	}
+}
+
+.hol-select {
+	border:        1px solid #e0e0e0;
+	border-radius: 4px;
+	padding:       6px 10px;
+	font-size:     0.875rem;
+	color:         #1e1e1e;
+	background:    #fff;
+	min-width:     140px;
+	cursor:        pointer;
+
+	&:focus {
+		outline:    none;
+		border-color: #41278d;
+	}
+}
+
+// ── Add more row ──────────────────────────────────────────────────────────────
+
+.hol-add-more-row {
+	padding: 8px 16px;
+	border-top: 1px solid #f0f0f0;
+}
+
+// ── Bulk action row ───────────────────────────────────────────────────────────
+
+.hol-bulk-row {
+	display:     flex;
+	align-items: center;
+	gap:         8px;
+	padding:     12px 16px;
+	border-top:  1px solid #f0f0f0;
+	background:  #fafafa;
+}
+
+// =============================================================================
+// Delivery & Pickup Schedules — list page
+// Namespace: .ds-  (delivery-schedules)
+// =============================================================================
+
+.ds-loading {
+	display:         flex;
+	justify-content: center;
+	padding:         48px;
+}
+
+.ds-page {
+	max-width: 1200px;
+}
+
+// ── Page header ───────────────────────────────────────────────────────────────
+
+.ds-page-header {
+	display:         flex;
+	align-items:     center;
+	justify-content: space-between;
+	padding:         45px 0 30px;
+}
+
+.ds-page-title {
+	font-size:   24px;
+	font-weight: 600;
+	color:       #1d2327;
+	margin:      0;
+}
+
+.ds-page-header-actions {
+	display:     flex;
+	align-items: center;
+	gap:         16px;
+}
+
+.ds-doc-link {
+	color:           #6b4fbb;
+	text-decoration: none;
+	font-size:       14px;
+
+	&:hover { text-decoration: underline; color: #6b4fbb; }
+}
+
+.ds-add-btn {
+	background:     #5b3ec8;
+	color:          #fff;
+	border:         none;
+	border-radius:  6px;
+	padding:        10px 20px;
+	font-size:      14px;
+	font-weight:    600;
+	cursor:         pointer;
+	line-height:    1;
+	text-decoration: none;
+	display:        inline-flex;
+	align-items:    center;
+	gap:            6px;
+
+	&:hover { background: #4a31ab; color: #fff; }
+
+	&--locked {
+		background:  #a78bdb;
+		cursor:      default;
+		pointer-events: auto;
+
+		&:hover { background: #9270cf; }
+	}
+}
+
+.ds-add-btn--locked svg path {
+	fill: #a7acb1;
+}
+
+// ── Info banner ───────────────────────────────────────────────────────────────
+
+.ds-info-banner {
+	display:       flex;
+	align-items:   center;
+	gap:           10px;
+	background:    #eeebfb;
+	border:        1px solid #d9d4f6;
+	border-radius: 8px;
+	padding:       12px 16px;
+	margin-bottom: 24px;
+	font-size:     14px;
+	color:         #3b2d7c;
+}
+
+.ds-info-icon {
+	flex-shrink: 0;
+
+	path {
+		fill: #FFD700;
+	}
+}
+
+.ds-info-banner--upsell {
+	background: #fefce8;
+	border:     1px solid #fde047;
+	color:      #854d0e;
+
+	a {
+		color:           #5b3ec8;
+		font-weight:     600;
+		text-decoration: none;
+		&:hover { text-decoration: underline; }
+	}
+}
+
+// ── Bulk action bar ───────────────────────────────────────────────────────────
+
+.ds-bulk-bar {
+	position:      fixed;
+	bottom:        24px;
+	left:          50%;
+	transform:     translateX( -50% );
+	z-index:       9999;
+	display:       flex;
+	align-items:   center;
+	gap:           12px;
+	background:    #1d2327;
+	color:         #fff;
+	border-radius: 10px;
+	padding:       12px 20px;
+	font-size:     14px;
+	box-shadow:    0 4px 24px rgba( 0, 0, 0, 0.25 );
+	white-space:   nowrap;
+}
+
+.ds-bulk-bar-count {
+	flex:       1;
+	font-weight: 600;
+}
+
+.ds-bulk-delete-btn {
+	display:       inline-flex;
+	align-items:   center;
+	gap:           6px;
+	background:    #b91c1c;
+	color:         #fff;
+	border:        none;
+	border-radius: 6px;
+	padding:       6px 14px;
+	font-size:     13px;
+	font-weight:   600;
+	cursor:        pointer;
+
+	&:hover { background: #991b1b; }
+	&:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+.ds-bulk-clear-btn {
+	background:  transparent;
+	border:      1px solid rgba(255,255,255,0.4);
+	color:       #fff;
+	border-radius: 6px;
+	padding:     5px 12px;
+	font-size:   13px;
+	cursor:      pointer;
+
+	&:hover { background: rgba(255,255,255,0.1); }
+}
+
+// ── Row checkbox ──────────────────────────────────────────────────────────────
+
+.ds-row-cell--checkbox,
+.ds-header-cell--checkbox {
+	display:     flex;
+	align-items: center;
+	justify-content: center;
+}
+
+// ── Table container ───────────────────────────────────────────────────────────
+
+.ds-table {
+	background:    #fff;
+	border:        1px solid #e5e7eb;
+	border-radius: 8px;
+	overflow:      hidden;
+}
+
+// Column grid: checkbox | expand-btn | status | schedule | days | cutoffs | slots | actions
+$ds-columns: 36px 36px 90px 220px 1fr 180px 120px 120px;
+
+.ds-table-header {
+	display:               grid;
+	grid-template-columns: $ds-columns;
+	background:            #f8f7fc;
+	border-bottom:         1px solid #e5e7eb;
+	padding:               0 8px;
+}
+
+.ds-header-cell {
+	padding:     12px 8px;
+	font-size:   13px;
+	font-weight: 600;
+	color:       #1d2327;
+
+	&--expand { padding: 0; }
+}
+
+// ── Rows ──────────────────────────────────────────────────────────────────────
+
+.ds-row {
+	border-bottom: 1px solid #f0eef8;
+
+	&:last-child { border-bottom: none; }
+
+	&--disabled .ds-row-main {
+		opacity: 0.55;
+	}
+}
+
+.ds-row-main {
+	display:               grid;
+	grid-template-columns: $ds-columns;
+	align-items:           center;
+	padding:               0 8px;
+	min-height:            80px;
+	transition:            background 0.12s;
+
+	&:hover { background: #faf8ff; }
+}
+
+.ds-row-cell {
+	padding: 12px 8px;
+
+	&--expand  { padding: 0; display: flex; align-items: center; }
+	&--status  { display: flex; align-items: center; }
+	&--actions { display: flex; align-items: center; gap: 4px; }
+}
+
+// ── Expand button ─────────────────────────────────────────────────────────────
+
+.ds-expand-btn {
+	width:         28px;
+	height:        28px;
+	display:       flex;
+	align-items:   center;
+	justify-content: center;
+	background:    none;
+	border:        none;
+	cursor:        pointer;
+	color:         #9ca3af;
+	border-radius: 4px;
+	flex-shrink:   0;
+
+	&:hover    { background: #f3f4f6; color: #6b7280; }
+	&--open    { color: #6b4fbb; }
+}
+
+// ── Toggle switch (iOS-style) ─────────────────────────────────────────────────
+
+.ds-toggle-switch {
+	position: relative;
+	display:  inline-block;
+	width:    42px;
+	height:   24px;
+	cursor:   pointer;
+
+	input {
+		opacity:  0;
+		width:    0;
+		height:   0;
+		position: absolute;
+
+		&:checked + .ds-toggle-track {
+			background: #22c55e;
+
+			&::after { transform: translateX( 18px ); }
+		}
+
+		&:disabled + .ds-toggle-track {
+			opacity: 0.5;
+			cursor:  not-allowed;
+		}
+	}
+
+	.ds-toggle-track {
+		position:      absolute;
+		inset:         0;
+		background:    #d1d5db;
+		border-radius: 24px;
+		transition:    background 0.2s;
+
+		&::after {
+			content:       '';
+			position:      absolute;
+			top:           3px;
+			left:          3px;
+			width:         18px;
+			height:        18px;
+			background:    #fff;
+			border-radius: 50%;
+			transition:    transform 0.2s;
+			box-shadow:    0 1px 3px rgba( 0, 0, 0, 0.2 );
+		}
+	}
+}
+
+// ── Schedule column ───────────────────────────────────────────────────────────
+
+.ds-schedule-default-title {
+	display:       flex;
+	align-items:   center;
+	gap:           8px;
+	margin-bottom: 6px;
+}
+
+.ds-schedule-default-name {
+	font-size:   14px;
+	font-weight: 600;
+	color:       #1d2327;
+}
+
+.ds-schedule-info {
+	display:        flex;
+	flex-direction: column;
+	gap:            15px;
+}
+
+.ds-schedule-info-item {
+	display:        flex;
+	flex-direction: column;
+	line-height:    1.4;
+}
+
+.ds-schedule-info-label {
+	font-size:   13px;
+	font-weight: 600;
+	color:       #1d2327;
+}
+
+.ds-schedule-info-value {
+	font-size: 13px;
+	color:     #3c434a;
+}
+
+.ds-schedule-info-status {
+	font-size:   13px;
+	font-weight: 600;
+
+	&--enabled { color: #1a7a3c; }
+	&--disabled { color: #6b7280; }
+}
+
+// ── Badges ────────────────────────────────────────────────────────────────────
+
+.ds-badge {
+	display:        inline-flex;
+	align-items:    center;
+	border-radius:  12px;
+	padding:        2px 8px;
+	font-size:      11px;
+	font-weight:    600;
+	letter-spacing: 0.02em;
+	white-space:    nowrap;
+
+	&--default {
+		background: #1d2327;
+		color:      #fff;
+		font-size:  10px;
+	}
+
+	&--type {
+		text-transform: none;
+		font-weight:    600;
+		font-size:      12px;
+	}
+
+	&--delivery {
+		background: #dcfce7;
+		color:      #16a34a;
+	}
+
+	&--pickup {
+		background: #ede9fe;
+		color:      #6b4fbb;
+	}
+}
+
+// ── Day pills ─────────────────────────────────────────────────────────────────
+
+.ds-day-pills {
+	display:       flex;
+	gap:           3px;
+	margin-bottom: 5px;
+}
+
+.ds-day-pill {
+	width:           26px;
+	height:          22px;
+	display:         flex;
+	align-items:     center;
+	justify-content: center;
+	border-radius:   4px;
+	font-size:       11px;
+	font-weight:     600;
+	background:      #e5e7eb;
+	color:           #9ca3af;
+
+	&--active {
+		background: #5b3ec8;
+		color:      #fff;
+	}
+}
+
+.ds-day-summary {
+	font-size: 12px;
+	color:     #6b7280;
+}
+
+
+// ── Cutoff column ─────────────────────────────────────────────────────────────
+
+.ds-cutoff-row {
+	display:     flex;
+	align-items: center;
+	gap:         8px;
+	margin-bottom: 4px;
+
+	&:last-child { margin-bottom: 0; }
+}
+
+.ds-cutoff-label {
+	font-size:  12px;
+	color:      #6b7280;
+	min-width:  56px;
+}
+
+.ds-cutoff-box {
+	border:        1px solid #d1d5db;
+	border-radius: 4px;
+	padding:       2px 8px;
+	font-size:     12px;
+	font-weight:   600;
+	color:         #1d2327;
+	background:    #fff;
+	white-space:   nowrap;
+}
+
+.ds-cutoff-separator {
+	border:     none;
+	border-top: 1px solid #e5e7eb;
+	margin:     4px 0;
+}
+
+.ds-cutoff-divider {
+	color:      #d1d5db;
+	font-size:  12px;
+}
+
+.ds-cutoff-charge {
+	font-size:  12px;
+	color:      #6b7280;
+	white-space: nowrap;
+}
+
+.ds-empty-dash {
+	color:     #9ca3af;
+	font-size: 14px;
+}
+
+// ── Slots / Holidays cell layout ──────────────────────────────────────────────
+
+.ds-slots-section,
+.ds-holidays-section {
+	display:        flex;
+	flex-direction: column;
+	gap:            4px;
+}
+
+.ds-slots-divider {
+	border:     none;
+	border-top: 1px solid #e5e7eb;
+	margin:     6px 0;
+}
+
+.ds-no-value {
+	color:     #9ca3af;
+	font-size: 13px;
+}
+
+.ds-holidays-custom-text {
+	color:       #5b21b6;
+	font-size:   13px;
+	cursor:      pointer;
+	font-weight: 600;
+
+	&:hover { text-decoration: underline; }
+}
+
+.ds-global-holidays-text {
+	color:     #1d2327;
+	font-size: 12px;
+}
+
+.ds-slots-text {
+	color:       #5b21b6;
+	font-size:   13px;
+	font-weight: 600;
+	cursor:      pointer;
+
+	&:hover { text-decoration: underline; }
+}
+
+
+.ds-inline-link {
+	color:       #6b4fbb;
+	background:  none;
+	border:      none;
+	cursor:      pointer;
+	font-size:   13px;
+	font-weight: 600;
+	padding:     0;
+
+	&:hover { text-decoration: underline; }
+}
+
+// ── Action buttons ────────────────────────────────────────────────────────────
+
+.ds-action-btn {
+	width:           32px;
+	height:          32px;
+	display:         flex;
+	align-items:     center;
+	justify-content: center;
+	background:      none;
+	border:          none;
+	border-radius:   6px;
+	cursor:          pointer;
+	color:           #9ca3af;
+	transition:      background 0.12s, color 0.12s;
+
+	&:hover        { background: #f3f4f6; color: #374151; }
+
+	&--edit:hover  { background: #ede9fe; color: #6b4fbb; }
+
+	&--delete:hover { background: #fef2f2; color: #dc2626; }
+}
+
+// ── Expand panel ─────────────────────────────────────────────────────────────
+
+.ds-expand-panel {
+	display:    grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap:        24px;
+	padding:    20px 24px;
+	background: #f9f8fe;
+	border-top: 1px solid #e5e7eb;
+}
+
+.ds-expand-section-header {
+	display:         flex;
+	align-items:     center;
+	justify-content: space-between;
+	margin-bottom:   12px;
+}
+
+.ds-expand-section-title {
+	font-size:      11px;
+	font-weight:    600;
+	color:          #9ca3af;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.ds-expand-link {
+	color:           #6b4fbb;
+	font-size:       13px;
+	text-decoration: none;
+
+	&:hover { text-decoration: underline; color: #6b4fbb; }
+}
+
+.ds-table-scroll {
+	max-height:  222px; // thead (~37px) + 5 data rows (~37px each)
+	overflow-y:  auto;
+	border:      1px solid #e5e7eb;
+	border-radius: 6px;
+	margin-bottom: 12px;
+}
+
+.ds-slots-table {
+	width:           100%;
+	border-collapse: collapse;
+	font-size:       13px;
+
+	th,
+	td {
+		text-align:    left;
+		padding:       8px 12px;
+		border-bottom: 1px solid #e5e7eb;
+	}
+
+	th {
+		font-weight: 600;
+		color:       #6b7280;
+		background:  #f3f4f6;
+		position:    sticky;
+		top:         0;
+		z-index:     1;
+	}
+
+	td { color: #1d2327; }
+
+	tr:last-child td { border-bottom: none; }
+}
+
+.ds-expand-cutoff-list {
+	margin-bottom: 12px;
+}
+
+.ds-expand-empty {
+	font-size: 13px;
+	color:     #9ca3af;
+	margin:    4px 0 12px;
+}
+
+// ── Empty state ───────────────────────────────────────────────────────────────
+
+.ds-empty {
+	padding:    48px;
+	text-align: center;
+	color:      #6b7280;
+	font-size:  14px;
+}
+
+// =============================================================================
+// Edit / Add Schedule — form page
+// Namespace: .es-  (edit-schedule)
+// =============================================================================
+
+.es-loading {
+	display:         flex;
+	justify-content: center;
+	padding:         48px;
+}
+
+.es-page {
+	max-width: 860px;
+}
+
+// ── Page header ───────────────────────────────────────────────────────────────
+
+.es-header {
+	display:     flex;
+	align-items: center;
+	gap:         16px;
+	margin-bottom: 24px;
+}
+
+.es-back-btn {
+	color:       #6b4fbb;
+	background:  none;
+	border:      none;
+	cursor:      pointer;
+	font-size:   14px;
+	padding:     0;
+	flex-shrink: 0;
+
+	&:hover { text-decoration: underline; }
+}
+
+.es-title {
+	font-size:   22px;
+	font-weight: 600;
+	color:       #1d2327;
+	margin:      0;
+}
+
+// ── Notice ────────────────────────────────────────────────────────────────────
+
+.es-notice {
+	padding:       12px 16px;
+	border-radius: 6px;
+	font-size:     14px;
+	margin-bottom: 16px;
+
+	&--success {
+		background: #dcfce7;
+		color:      #166534;
+		border:     1px solid #bbf7d0;
+	}
+
+	&--error {
+		background: #fef2f2;
+		color:      #991b1b;
+		border:     1px solid #fecaca;
+	}
+}
+
+// ── Section card ──────────────────────────────────────────────────────────────
+
+.es-card {
+	background:    #fff;
+	border:        1px solid #e5e7eb;
+	border-radius: 8px;
+	padding:       24px;
+	margin-bottom: 20px;
+}
+
+.es-card-title {
+	font-size:      15px;
+	font-weight:    600;
+	color:          #1d2327;
+	margin:         0 0 16px;
+	padding-bottom: 12px;
+	border-bottom:  1px solid #f0eef8;
+}
+
+// ── Form rows ─────────────────────────────────────────────────────────────────
+
+.es-field {
+	display:     flex;
+	align-items: flex-start;
+	gap:         16px;
+	margin-bottom: 16px;
+
+	&:last-child { margin-bottom: 0; }
+}
+
+.es-field-label {
+	font-size:   13px;
+	font-weight: 600;
+	color:       #374151;
+	min-width:   190px;
+	padding-top: 8px;
+	flex-shrink: 0;
+}
+
+.es-field-input {
+	flex: 1;
+}
+
+.es-field-hint {
+	display:    block;
+	font-size:  12px;
+	color:      #6b7280;
+	margin-top: 4px;
+}
+
+// ── Inputs ────────────────────────────────────────────────────────────────────
+
+.es-input,
+.es-select {
+	border:        1px solid #d1d5db;
+	border-radius: 6px;
+	padding:       8px 12px;
+	font-size:     14px;
+	color:         #1d2327;
+	background:    #fff;
+	width:         100%;
+
+	&:focus {
+		outline:    none;
+		border-color: #6b4fbb;
+		box-shadow: 0 0 0 2px rgba( 107, 79, 187, 0.15 );
+	}
+
+	&--short { max-width: 160px; }
+}
+
+// ── Radio / checkbox groups ───────────────────────────────────────────────────
+
+.es-radio-group {
+	display:   flex;
+	flex-wrap: wrap;
+	gap:       20px;
+}
+
+.es-radio-option {
+	display:     flex;
+	align-items: center;
+	gap:         8px;
+	font-size:   14px;
+	color:       #374151;
+	cursor:      pointer;
+
+	input { cursor: pointer; accent-color: #6b4fbb; }
+}
+
+// ── Weekdays grid ─────────────────────────────────────────────────────────────
+
+.es-weekdays-grid {
+	display:   flex;
+	gap:       10px;
+	flex-wrap: wrap;
+}
+
+.es-weekday-cell {
+	display:         flex;
+	flex-direction:  column;
+	align-items:     center;
+	gap:             6px;
+	padding:         10px 14px;
+	border:          1px solid #e5e7eb;
+	border-radius:   8px;
+	cursor:          pointer;
+	min-width:       72px;
+	background:      #fafafa;
+	transition:      border-color 0.12s, background 0.12s;
+	user-select:     none;
+
+	&:hover { border-color: #c4b5fd; background: #f5f3ff; }
+
+	&--active {
+		border-color: #6b4fbb;
+		background:   #ede9fe;
+
+		label { color: #5b3ec8; }
+	}
+
+	label {
+		font-size:   13px;
+		font-weight: 600;
+		color:       #374151;
+		cursor:      pointer;
+	}
+
+	input[ type='checkbox' ] {
+		accent-color: #6b4fbb;
+		cursor:       pointer;
+	}
+}
+
+// ── Footer ────────────────────────────────────────────────────────────────────
+
+.es-footer {
+	display:     flex;
+	align-items: center;
+	gap:         12px;
+	padding-top: 8px;
+}
+
+.es-save-btn {
+	background:    #5b3ec8;
+	color:         #fff;
+	border:        none;
+	border-radius: 6px;
+	padding:       10px 28px;
+	font-size:     14px;
+	font-weight:   600;
+	cursor:        pointer;
+
+	&:hover:not( :disabled ) { background: #4a31ab; }
+
+	&:disabled { opacity: 0.65; cursor: not-allowed; }
+}
+
+.es-cancel-btn {
+	background:    none;
+	color:         #6b7280;
+	border:        1px solid #d1d5db;
+	border-radius: 6px;
+	padding:       10px 20px;
+	font-size:     14px;
+	cursor:        pointer;
+
+	&:hover:not( :disabled ) { background: #f3f4f6; }
+	&:disabled { opacity: 0.65; cursor: not-allowed; }
+}
+
+// ── Accordion Panels ──────────────────────────────────────────────────────────
+
+.es-accordion-panel {
+	border:        1px solid #e5e7eb;
+	border-radius: 8px;
+	margin-bottom: 12px;
+	background:    #fff;
+	overflow:      hidden;
+}
+
+.es-accordion-header {
+	display:         flex;
+	align-items:     center;
+	justify-content: space-between;
+	padding:         14px 20px;
+	cursor:          pointer;
+	user-select:     none;
+	background:      #fafafa;
+	border-bottom:   1px solid transparent;
+	transition:      background 0.12s;
+
+	&:hover { background: #f3f0ff; }
+
+	h3 {
+		margin:      0;
+		font-size:   14px;
+		font-weight: 600;
+		color:       #1d2327;
+	}
+
+	.es-accordion-chevron {
+		font-size: 12px;
+		color:     #6b7280;
+		transition: transform 0.2s;
+	}
+
+	&--open {
+		background:    #f3f0ff;
+		border-bottom: 1px solid #e5e7eb;
+
+		.es-accordion-chevron { transform: rotate( 180deg ); }
+	}
+}
+
+.es-accordion-body {
+	padding: 20px 24px;
+}
+
+// ── Two-column form layout ─────────────────────────────────────────────────────
+
+.es-two-col-section {
+	display:               grid;
+	grid-template-columns: 30% 35% 35%;
+	gap:                   0 20px;
+	margin-bottom:         20px;
+	align-items:           start;
+}
+
+// ── Multi-select ──────────────────────────────────────────────────────────────
+
+.es-select--multi {
+	min-height: 100px;
+	resize:     vertical;
+}
+
+// ── Inline tables (weekdays, time slots, weekday-based schedule) ───────────────
+
+.es-table-wrap {
+	overflow-x: auto;
+	margin-top: 12px;
+}
+
+.es-table {
+	width:           100%;
+	border-collapse: collapse;
+	font-size:       13px;
+
+	th {
+		background:    #f9fafb;
+		border:        1px solid #e5e7eb;
+		padding:       8px 10px;
+		text-align:    left;
+		font-weight:   600;
+		color:         #374151;
+		white-space:   nowrap;
+	}
+
+	td {
+		border:          1px solid #e5e7eb;
+		padding:         7px 10px;
+		vertical-align:  middle;
+
+		input[ type='number' ],
+		input[ type='text' ],
+		input[ type='date' ],
+		input[ type='time' ],
+		select {
+			width:         100%;
+			min-width:     80px;
+			padding:       4px 6px;
+			border:        1px solid #d1d5db;
+			border-radius: 4px;
+			font-size:     12px;
+		}
+	}
+
+	tr.es-row--disabled td {
+		opacity: 0.45;
+	}
+}
+
+// ── Table action links ─────────────────────────────────────────────────────────
+
+.es-link-btn {
+	background:    none;
+	border:        none;
+	padding:       2px 6px;
+	cursor:        pointer;
+	font-size:     12px;
+	border-radius: 3px;
+	margin-right:  2px;
+
+	&--edit    { color: #2563eb; &:hover { background: #eff6ff; } }
+	&--update  { color: #16a34a; &:hover { background: #f0fdf4; } }
+	&--enable  { color: #16a34a; &:hover { background: #f0fdf4; } }
+	&--disable { color: #dc2626; &:hover { background: #fef2f2; } }
+	&--delete  { color: #dc2626; &:hover { background: #fef2f2; } }
+	&--block   { color: #d97706; &:hover { background: #fffbeb; } }
+}
+
+// ── Expandable sub-form sections ───────────────────────────────────────────────
+
+.es-expand-form {
+	border:        1px solid #e5e7eb;
+	border-radius: 6px;
+	padding:       16px 20px;
+	margin-top:    12px;
+	background:    #fafafa;
+
+	h3 {
+		margin:        0 0 14px;
+		font-size:     13px;
+		font-weight:   600;
+		color:         #374151;
+		border-bottom: 1px solid #e5e7eb;
+		padding-bottom: 8px;
+	}
+}
+
+.es-expand-toggle-row {
+	display:    flex;
+	gap:        16px;
+	flex-wrap:  wrap;
+	margin-top: 12px;
+}
+
+.es-expand-btn {
+	display:       inline-flex;
+	align-items:   center;
+	gap:           6px;
+	background:    none;
+	border:        1px dashed #6b4fbb;
+	border-radius: 6px;
+	padding:       6px 14px;
+	color:         #6b4fbb;
+	cursor:        pointer;
+	font-size:     13px;
+	font-weight:   500;
+	margin-top:    10px;
+	transition:    background 0.12s;
+
+	&:hover { background: #f3f0ff; }
+}
+
+// ── Time range inputs ──────────────────────────────────────────────────────────
+
+.es-time-range {
+	display:     flex;
+	align-items: center;
+	gap:         10px;
+
+	span { color: #6b7280; font-size: 12px; }
+}
+
+// ── Rush-hour charges rows ─────────────────────────────────────────────────────
+
+.es-charges-row {
+	display:     flex;
+	gap:         10px;
+	align-items: flex-end;
+	flex-wrap:   wrap;
+	margin-bottom: 10px;
+	padding:     10px;
+	background:  #f9fafb;
+	border:      1px solid #e5e7eb;
+	border-radius: 6px;
+
+	> div {
+		display:        flex;
+		flex-direction: column;
+		gap:            4px;
+		flex:           1;
+		min-width:      100px;
+
+		label {
+			font-size:   11px;
+			font-weight: 600;
+			color:       #6b7280;
+			text-transform: uppercase;
+		}
+	}
+}
+
+// ── Add More link ──────────────────────────────────────────────────────────────
+
+.es-add-more-btn {
+	background:    none;
+	border:        none;
+	color:         #5b3ec8;
+	cursor:        pointer;
+	font-size:     13px;
+	font-weight:   500;
+	padding:       4px 0;
+	display:       inline-flex;
+	align-items:   center;
+	gap:           4px;
+
+	&:hover { text-decoration: underline; }
+}
+
+// ── Bulk action bar ────────────────────────────────────────────────────────────
+
+.es-bulk-bar {
+	display:     flex;
+	align-items: center;
+	gap:         8px;
+	margin-top:  8px;
+}
+
+// ── Schedule top section ───────────────────────────────────────────────────────
+
+.es-top-section {
+	display:               grid;
+	grid-template-columns: repeat( 3, 1fr );
+	gap:                   24px;
+	background:            #fff;
+	border:                1px solid #e5e7eb;
+	border-radius:         8px;
+	padding:               20px 24px;
+	margin-bottom:         16px;
+
+	> div > strong {
+		display:       block;
+		font-size:     13px;
+		font-weight:   600;
+		color:         #374151;
+		margin-bottom: 8px;
+	}
+}
+
+// ── Field hint text ────────────────────────────────────────────────────────────
+
+.es-field-hint {
+	font-size:  11px;
+	color:      #9ca3af;
+	margin-top: 4px;
+	display:    block;
+}
+
+// ── Checkbox row for time slot selection ──────────────────────────────────────
+
+.es-checkbox-col {
+	display:         flex;
+	justify-content: center;
+	align-items:     center;
+}
+
+// ── Info note ─────────────────────────────────────────────────────────────────
+
+.es-note {
+	font-size:    12px;
+	color:        #6b7280;
+	margin-top:   6px;
+	padding:      8px 12px;
+	background:   #f9fafb;
+	border-left:  3px solid #c4b5fd;
+	border-radius: 0 4px 4px 0;
+
+	a { color: #5b3ec8; }
+}
+
+// ── Save row at top ────────────────────────────────────────────────────────────
+
+.es-top-save-row {
+	display:         flex;
+	justify-content: flex-end;
+	margin-bottom:   16px;
+}
+
+// ── Edit Schedule page overrides ───────────────────────────────────────────────
+//
+// Widens TextControl / SelectControl / TextareaControl inputs (the global
+// osp-row rule caps them at 220px, which is too narrow for schedule fields).
+// Scoped to .orddd-page-wrap so other pages are unaffected.
+
+.orddd-page-wrap {
+
+	// Widen inputs inside SettingRow
+	.osp-row-field-content {
+		.components-text-control__input,
+		.components-textarea-control__input {
+			max-width: 480px;
+		}
+
+		.components-select-control {
+			max-width: 320px;
+		}
+	}
+
+	// DataTable nested inside an AccordionCard — remove the redundant inner card
+	// border/shadow so it reads as part of the panel, not a box-within-a-box.
+	.es-table-cardBody {
+		padding: 0 20px 20px;
+
+		.odt-wrap {
+			margin-top: 20px;
+		}
+
+		.odt-card {
+			box-shadow: none;
+			border:     1px solid #e8e8e8;
+		}
+	}
+
+	// osp-card spacing between accordion panels
+	.osp-card {
+		margin-bottom: 16px;
+	}
+
+	.fa-textarea {
+		.components-textarea-control__input {
+			width: 100%;
+			max-width: 560px;
+			border: 1px solid #a7acb1;
+			border-radius: 5px;
+			font-size: 13px;
+			color: #424242;
+			padding: 10px 15px;
+			resize: vertical;
+			background-color: #fff;
+			border: 1px solid #A7ACB1;
+			border-radius: 5px;
+			transition: all 0.2s ease-in-out;
+
+			&:focus {
+				border-color: #41278d;
+				box-shadow: 0 0 20px rgba( 65, 39, 141, 0.1 );
+				outline: none;
+			}
+		}
+	}
+}
+
+// ── Shared: list-tab styles (Reminders + Order Status Automation) ─────────────
+
+.rem-tab-wrap {
+	padding:   24px 28px;
+	margin-top: 20px;
+	
+
+	// Header row: description left, Add button right
+	.rem-list-header {
+		display:         flex;
+		align-items:     flex-start;
+		justify-content: space-between;
+		gap:             16px;
+		margin-bottom:   20px;
+	}
+
+	.rem-description {
+		font-size:   13px;
+		color:       #6b7280;
+		margin:      0;
+		line-height: 1.6;
+		flex:        1;
+	}
+
+	.rem-add-btn.components-button {
+		flex-shrink:   0;
+		background:    #41278d;
+		color:         #fff;
+		border-radius: 6px;
+		padding:       8px 16px;
+		font-size:     13px;
+		font-weight:   600;
+		height:        auto;
+
+		&:hover:not( :disabled ) {
+			background: #331f70;
+			color:      #fff;
+		}
+	}
+
+	.rem-info-note {
+		margin-top:    16px;
+		padding:       10px 14px;
+		background:    #f0f0f1;
+		border-left:   4px solid #72aee6;
+		border-radius: 4px;
+		font-size:     13px;
+		color:         #1d2327;
+	}
+
+	// Status toggle in DataTable cell — keep it compact
+	.odt-cell .components-form-toggle {
+		margin: 0;
+	}
+}
+
+// ── Reminders page ────────────────────────────────────────────────────────────
+
+.ordd-reminders-page {}
+
+// ── Order Calendar — filter toolbar ──────────────────────────────────────────
+
+.orddd-cal-filters {
+	margin-bottom: 16px;
+}
+
+.orddd-cal-filters-row {
+	display:               grid;
+	grid-template-rows:    auto auto;
+	gap:                   12px;
+
+	&__filters {
+		display:     flex;
+		flex-wrap:   wrap;
+		align-items: flex-end;
+		gap:         12px;
+	}
+
+	&__actions {
+		display:     flex;
+		align-items: center;
+		gap:         8px;
+		justify-content: space-between;
+		margin-bottom: 10px;
+	}
+}
+
+.orddd-cal-filter-group {
+	display:        flex;
+	flex-direction: column;
+	gap:            4px;
+	width: 220px;
+  	max-width: 300px;
+}
+
+.orddd-cal-filter-label {
+	font-size:   12px;
+	font-weight: 600;
+	color:       #50575e;
+}
+
+// Apply filters button
+.orddd-cal-btn {
+	display:       inline-flex;
+	align-items:   center;
+	gap:           6px;
+	border-radius: 4px;
+	font-size:     13px;
+	font-weight:   600;
+	cursor:        pointer;
+	line-height:   1;
+	transition:    background 0.12s, color 0.12s;
+
+	&--apply {
+		background: #41278d;
+		color:      #fff;
+		border:     none;
+		padding:    8px 16px;
+		height:     36px;
+
+		&:hover { background: #331f70; }
+	}
+
+	&--export {
+		background: #fff;
+		color:      #1d2327;
+		border:     1px solid #a7acb1;
+		padding:    6px 12px;
+		height:     36px;
+
+		.dashicons {
+			font-size:   16px;
+			width:       16px;
+			height:      16px;
+			line-height: 1;
+		}
+
+		&:hover {
+			background:   #f6f3ff;
+			border-color: #41278d;
+			color:        #41278d;
+		}
+	}
+}
+
+.orddd-cal-export-btns {
+	display:     flex;
+	align-items: center;
+	gap:         6px;
+	align-self:  flex-end;
+	margin-left: auto;
+}
+
+// ── Tools page ────────────────────────────────────────────────────────────────
+
+.ordd-tools-page {
+	margin-top: 48px;
+
+	.components-notice {
+		margin-bottom: 16px;
+	}
+
+	.ordd-tools-card-title {
+		font-size:   16px;
+		font-weight: 600;
+		margin:      0;
+		color:       #1d2327;
+	}
+
+	.ordd-tools-row {
+		display:     flex;
+		align-items: flex-start;
+		gap:         24px;
+	}
+
+	.ordd-tools-content {
+		flex: 1;
+
+		.ordd-tools-section-title {
+			font-size:   15px;
+			font-weight: 600;
+			margin:      0 0 4px;
+			color:       #1d2327;
+		}
+
+		> p {
+			margin: 0 0 12px;
+			color:  #50575e;
+		}
+	}
+
+	.ordd-tools-action {
+		flex-shrink: 0;
+		padding-top: 2px;
+	}
+
+	.ordd-tools-btn {
+		font-weight: 600;
+		text-align: center;
+		line-height: 24px;
+		letter-spacing: 0px;
+		cursor: pointer;
+		color: rgb(65, 39, 141);
+		border-radius: 5px;
+		transition: 0.2s ease-in-out;
+		outline: none;
+		text-decoration: none;
+		background: rgb(246, 243, 255);
+		border-width: 1px;
+		border-style: solid;
+		border-color: rgb(65, 39, 141);
+		border-image: none;
+		padding: 7px 14px;
+
+		&:hover {
+			color: rgb(255, 255, 255) !important;
+			background: rgb(65, 39, 141) !important;
+			border-color: rgb(65, 39, 141);
+		}
+	}
+
+	// Upload zone
+	.ordd-upload-zone {
+		display:        flex;
+		flex-direction: column;
+		align-items:    center;
+		gap:            10px;
+		border:         2px dashed #c3c4c7;
+		border-radius:  8px;
+		padding:        28px 20px;
+		max-width:      580px;
+		cursor:         pointer;
+		transition:     border-color 0.15s, background 0.15s;
+
+		&:hover,
+		&.is-dragging {
+			border-color: #58419c;
+			background:   #f8f7fc;
+		}
+
+		.ordd-upload-icon {
+			width:  40px;
+			height: 40px;
+		}
+
+		.ordd-upload-label {
+			display:          inline-block;
+			padding:          6px 14px;
+			border:           1px solid #c3c4c7;
+			border-radius:    4px;
+			background:       #fff;
+			font-size:        13px;
+			font-weight:      600;
+			color:            #1d2327;
+			cursor:           pointer;
+		}
+
+		.ordd-upload-hint {
+			font-size: 13px;
+			color:     #757575;
+		}
+	}
+
+	// Info/alert box (override root .ordd-info-box for tools context)
+	.ordd-info-box {
+		border-left:   none;
+		border-radius: 8px;
+		background:    #f0f0f1;
+		margin-top:    0;
+
+		h5 {
+			font-size: 14px;
+		}
+	}
+}
+
+// ── License page ──────────────────────────────────────────────────────────────
+
+.orddd-license-page {
+	margin-top: 48px;
+
+	.components-notice {
+		margin-bottom: 16px;
+	}
+
+	.orddd-license-card {
+		margin-bottom: 24px;
+
+		.orddd-license-title {
+			font-size:   16px;
+			font-weight: 600;
+			margin:      0;
+			color:       #1d2327;
+		}
+
+		.orddd-license-header {
+			padding: 20px 30px;
+		}
+
+		.orddd-license-row {
+			display:     flex;
+			align-items: center;
+			padding: 20px 30px;
+		}
+
+		.orddd-license-label {
+			font-weight: 600;
+			min-width:   180px;
+			flex-shrink: 0;
+			color:       #1d2327;
+		}
+
+		.orddd-status-active {
+			color:       #008a20;
+			font-weight: 600;
+		}
+
+		.orddd-status-inactive {
+			color:       #cc1818;
+			font-weight: 600;
+		}
+
+		.orddd-license-key-wrap {
+			display:     flex;
+			align-items: center;
+			gap:         12px;
+			flex:        1;
+
+			.components-text-control__input {
+				min-width: 320px;
+			}
+		}
+
+		.orddd-btn-deactivate {
+			font-weight: 600;
+			flex-shrink: 0;
+			background: none;
+			border-color: #D72C0D;
+			color: #D72C0D;
+			box-shadow: none;
+			border-radius: 5px;
+			transition: all 0.2s ease-in-out;
+			border: 1px solid #D72C0D;
+
+			&:hover {
+				color:            #fff;
+				background-color: #cc1818;
+				border-color:     #cc1818;
+				box-shadow:       none;
+			}
+		}
+
+		.orddd-btn-activate {
+			flex-shrink: 0;
+			flex-shrink: 0;
+			background: #1A8D34;
+			color: #fff;
+			border: none;
+			box-shadow: none;
+			border-radius: 5px;
+			transition: all 0.2s ease-in-out;
+			font-weight: 600;
+			text-align: center;
+			line-height: 24px;
+		}
+	}
+}
+
+// Calendar wrapper + loading overlay
+.orddd-cal-calendar-wrap {
+	position: relative;
+}
+
+.orddd-cal-loader-overlay {
+	position:        absolute;
+	inset:           0;
+	z-index:         10;
+	display:         flex;
+	align-items:     center;
+	justify-content: center;
+	background:      rgba( 255, 255, 255, 0.6 );
+	border-radius:   4px;
+
+	.components-spinner {
+		width:  32px;
+		height: 32px;
+		margin: 0;
+	}
+}
+
+// ── Order Calendar footer ─────────────────────────────────────────────────────
+
+.orddd-cal-footer {
+	margin-top: 24px;
+
+	&__note {
+		font-size:   13px;
+		color:       #50575e;
+		line-height: 1.6;
+		margin:      0 0 8px;
+	}
+
+	&__divider {
+		border:        none;
+		border-top:    1px solid #dcdcde;
+		margin:        16px 0;
+	}
+
+	&__gcal-actions {
+		display:     flex;
+		gap:         10px;
+		margin-top:  16px;
+	}
+
+	&__gcal-message {
+		margin-top:  12px;
+		font-size:   13px;
+		color:       #50575e;
+	}
+}
+
+// ── Footer ────────────────────────────────────────────────────────────────────
+
+.orddd-footer {
+	text-align:  center;
+	padding:     32px 20px 24px;
+	color:       #50575e;
+	font-size:   13px;
+	line-height: 1.8;
+
+	p {
+		margin: 0 0 15px;
+	}
+
+	a {
+		color:           #41278d;
+		text-decoration: underline;
+
+		&:hover {
+			color: #58419c;
+		}
+	}
+
+	&__stars {
+		color:     #dba617;
+		font-size: 18px;
+	}
+
+	.components-notice.is-info {
+		background:      #F2F2F2;
+		max-width:       1022px;
+		align-content:   center;
+		justify-content: center;
+		margin:          20px auto;
+	}
+
+	&__notice-icon {
+		vertical-align: middle;
+		margin-right:   6px;
+		position:       relative;
+		top:            -1px;
+	}
+}
+
+.orddd-field-note {
+	margin:    6px 0 0;
+	font-size: 12px;
+	color:     #6b7280;
+
+	a {
+		color:           #2271b1;
+		text-decoration: none;
+
+		&:hover { text-decoration: underline; }
+	}
+}
+
+
+// ── Pro field notice (inline, replaces a single field control) ─────────────────
+
+.orddd-pro-field {
+	display:     inline-flex;
+	align-items: center;
+	gap:         8px;
+}
+
+.orddd-pro-field__badge {
+	display:        inline-flex;
+	align-items:    center;
+	background:     #5b3ec8;
+	color:          #fff;
+	font-size:      10px;
+	font-weight:    700;
+	letter-spacing: 0.5px;
+	padding:        2px 8px;
+	border-radius:  100px;
+	text-transform: uppercase;
+	line-height:    1.4;
+}
+
+.orddd-pro-field__link {
+	font-size:       13px;
+	font-weight:     500;
+	color:           #5b3ec8;
+	text-decoration: none;
+
+	&:hover { text-decoration: underline; }
+}
+
+// ── Pro section notice (replaces an entire section's content) ──────────────────
+
+.orddd-pro-section-notice {
+	display:     flex;
+	align-items: center;
+	gap:         16px;
+	background:  #f5f3ff;
+	border:      1px solid #ddd6fe;
+	border-radius: 8px;
+	padding:     20px 24px;
+}
+
+.orddd-pro-section-notice__icon {
+	font-size:   28px;
+	flex-shrink: 0;
+	line-height: 1;
+}
+
+.orddd-pro-section-notice__body {
+	display:        flex;
+	flex-direction: column;
+	gap:            6px;
+}
+
+.orddd-pro-section-notice__feature {
+	margin:      0;
+	font-size:   14px;
+	font-weight: 500;
+	color:       #3b2d7c;
+}
+
+.orddd-pro-section-notice__link {
+	font-size:       13px;
+	font-weight:     600;
+	color:           #5b3ec8;
+	text-decoration: none;
+
+	&:hover { text-decoration: underline; }
+}
