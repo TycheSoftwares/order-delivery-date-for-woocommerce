@@ -86,7 +86,7 @@ class ORDDD_Lite_Admin_Scripts {
 		if ( file_exists( plugin_dir_path( __DIR__ ) . 'build/admin/index.css' ) ) {
 			wp_enqueue_style(
 				'orddd-admin-app',
-				plugins_url( 'build/admin/index.css', dirname( __FILE__ ) . '/../order_delivery_date.php' ),
+				plugins_url( 'build/admin/index.css', ORDDD_LITE_PLUGIN_FILE ),
 				array( 'wp-components' ),
 				$asset['version']
 			);
@@ -112,6 +112,20 @@ class ORDDD_Lite_Admin_Scripts {
 		wp_enqueue_style(
 			'orddd-qtip-css',
 			plugins_url( 'css/jquery.qtip.min.css', ORDDD_LITE_PLUGIN_FILE ),
+			array(),
+			$asset['version']
+		);
+
+		wp_enqueue_style(
+			'orddd-lite-admin-css',
+			plugins_url( 'css/order-delivery-date.css', ORDDD_LITE_PLUGIN_FILE ),
+			array(),
+			$asset['version']
+		);
+
+		wp_enqueue_style(
+			'orddd-lite-datepicker-css',
+			plugins_url( 'css/datepicker.css', ORDDD_LITE_PLUGIN_FILE ),
 			array(),
 			$asset['version']
 		);
@@ -153,7 +167,7 @@ class ORDDD_Lite_Admin_Scripts {
 				'order_statuses'     => wc_get_order_statuses(),
 				'shipping_methods'   => Orddd_Lite_Common::get_all_wc_shipping_methods(),
 				'orddd_holiday_color' => get_option( 'orddd_lite_holiday_color' ),
-				'orddd_holidays'     => '',
+				'orddd_holidays'     => self::build_holidays_json(),
 				'calendar_language'  => get_option( 'orddd_lite_language_selected' ) ?: 'en-GB',
 			)
 		);
@@ -304,5 +318,37 @@ class ORDDD_Lite_Admin_Scripts {
 			'after_order_notes'      => __( 'After Order Notes', 'order-delivery-date' ),
 			'after_your_order_table' => __( 'After Your Order Table', 'order-delivery-date' ),
 		);
+	}
+
+	/**
+	 * Build a JSON array of holiday date strings for the Order Calendar.
+	 *
+	 * Recurring holidays are stored as "m-j" (month-day only) so they highlight
+	 * every year. Non-recurring holidays use the full "m-j-Y" string.
+	 *
+	 * @return string JSON-encoded array, e.g. ["12-25","1-1-2025"].
+	 */
+	private static function build_holidays_json() {
+		$raw = get_option( 'orddd_lite_holidays', '' );
+		if ( in_array( $raw, array( '', 'null', '[]', '{}', false ), true ) ) {
+			return '[]';
+		}
+		$items  = json_decode( $raw, true ) ?? array();
+		$dates  = array();
+		foreach ( $items as $h ) {
+			if ( empty( $h['d'] ) ) {
+				continue;
+			}
+			if ( isset( $h['r_type'] ) && 'on' === $h['r_type'] ) {
+				// Recurring: strip the year — store as "m-j".
+				$parts = explode( '-', $h['d'] );
+				if ( count( $parts ) >= 2 ) {
+					$dates[] = $parts[0] . '-' . $parts[1];
+				}
+			} else {
+				$dates[] = $h['d']; // Full "m-j-Y".
+			}
+		}
+		return wp_json_encode( $dates );
 	}
 }

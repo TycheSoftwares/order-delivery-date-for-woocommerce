@@ -1,10 +1,8 @@
 /**
  * WordPress dependencies
  */
-import { useState, useEffect } from '@wordpress/element';
-import { ToggleControl, FormTokenField, TextControl, Notice, Spinner } from '@wordpress/components';
+import { ToggleControl, FormTokenField, TextControl } from '@wordpress/components';
 import TimeInput from '../../../components/ui/TimeInput';
-import apiFetch from '@wordpress/api-fetch';
 import { __ } from '@wordpress/i18n';
 import { UpgradePrompt } from '../../../components/ProNotice';
 
@@ -20,36 +18,6 @@ import SettingsPanel, { SettingRow } from '../../../components/SettingsPanel';
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
-// ── Time helpers ──────────────────────────────────────────────────────────────
-
-/** "08:00 AM" / "07:15 PM"  →  "08:00" / "19:15" */
-function to24Hour( timeStr ) {
-	if ( ! timeStr ) return '';
-	const match = timeStr.match( /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i );
-	if ( ! match ) return timeStr;
-	let [ , h, m, meridiem ] = match;
-	h = parseInt( h, 10 );
-	if ( meridiem.toUpperCase() === 'AM' ) {
-		if ( h === 12 ) h = 0;
-	} else {
-		if ( h !== 12 ) h += 12;
-	}
-	return `${ String( h ).padStart( 2, '0' ) }:${ m }`;
-}
-
-/** "08:00" / "19:15"  →  "08:00 AM" / "07:15 PM" */
-function to12Hour( timeStr ) {
-	if ( ! timeStr ) return '';
-	const match = timeStr.match( /^(\d{1,2}):(\d{2})$/ );
-	if ( ! match ) return timeStr;
-	let [ , h, m ] = match;
-	h = parseInt( h, 10 );
-	const meridiem = h < 12 ? 'AM' : 'PM';
-	if ( h === 0 ) h = 12;
-	else if ( h > 12 ) h -= 12;
-	return `${ String( h ).padStart( 2, '0' ) }:${ m } ${ meridiem }`;
-}
-
 const DAY_OPTIONS = [
 	{ key: 'orddd_shipping_day_0', label: 'Sunday'    },
 	{ key: 'orddd_shipping_day_1', label: 'Monday'    },
@@ -61,7 +29,6 @@ const DAY_OPTIONS = [
 ];
 
 const DAY_LABELS = DAY_OPTIONS.map( ( d ) => d.label );
-const labelToKey = ( label ) => DAY_OPTIONS.find( ( d ) => d.label === label )?.key;
 
 const DEFAULT_VALUES = {
 	enableShippingDays: false,
@@ -73,84 +40,11 @@ const DEFAULT_VALUES = {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 const BusinessDays = ( { locked = false } ) => {
-	const [ loading, setLoading ] = useState( ! locked );
-	const [ saving,  setSaving  ] = useState( false );
-	const [ error,   setError   ] = useState( null );
-
-	const { control, handleSubmit, reset } = useForm( { defaultValues: DEFAULT_VALUES } );
-
-	// ── Fetch ──────────────────────────────────────────────────────────────────
-
-	useEffect( () => {
-		if ( locked ) return;
-
-		apiFetch( { path: '/orddd/v1/settings' } )
-			.then( ( data ) => {
-				const bd = data?.business_days ?? {};
-				reset( {
-					enableShippingDays: bd.orddd_enable_shipping_days === 'on',
-					selectedDays:       DAY_OPTIONS
-						.filter( ( d ) => bd.business_days?.[ d.key ]?.enabled === 'checked' )
-						.map( ( d ) => d.label ),
-					openingTime:        to24Hour( bd.orddd_business_opening_time ?? '' ),
-					closingTime:        to24Hour( bd.orddd_business_closing_time ?? '' ),
-				} );
-			} )
-			.catch( () => {
-				setError( __( 'Could not load settings. Please refresh and try again.', 'order-delivery-date' ) );
-			} )
-			.finally( () => setLoading( false ) );
-	}, [] );
-
-	// ── Save ───────────────────────────────────────────────────────────────────
-
-	const onSubmit = async ( values ) => {
-		setSaving( true );
-		setError( null );
-
-		try {
-			await apiFetch( {
-				path:   '/orddd/v1/settings',
-				method: 'POST',
-				data:   {
-					key:                         'business_days',
-					orddd_enable_shipping_days:  values.enableShippingDays ? 'on' : '',
-					shipping_days:               values.selectedDays.map( labelToKey ).filter( Boolean ).join( ',' ),
-					orddd_business_opening_time: to12Hour( values.openingTime ),
-					orddd_business_closing_time: to12Hour( values.closingTime ),
-				},
-			} );
-		} catch ( err ) {
-			setError( err?.message ?? __( 'Failed to save settings. Please try again.', 'order-delivery-date' ) );
-		} finally {
-			setSaving( false );
-		}
-	};
-
-	// ── Loading state ─────────────────────────────────────────────────────────
-
-	if ( loading ) {
-		return (
-			<div className="bd-loading">
-				<Spinner />
-			</div>
-		);
-	}
-
-	// ── Render ────────────────────────────────────────────────────────────────
+	const { control } = useForm( { defaultValues: DEFAULT_VALUES } );
 
 	return (
 		<div className="orddd-page-wrap">
 			{ locked && <UpgradePrompt message={ __( 'Unlock Business Days configuration by upgrading to Pro.', 'order-delivery-date' ) } /> }
-			{ error && ! locked && (
-				<Notice
-					status="error"
-					isDismissible
-					onRemove={ () => setError( null ) }
-				>
-					{ error }
-				</Notice>
-			) }
 
 			<div className={ locked ? 'orddd-locked-panel' : undefined }>
 			<SettingsPanel
@@ -168,10 +62,7 @@ const BusinessDays = ( { locked = false } ) => {
 						{ ' ' }{ __( 'to find out more.', 'order-delivery-date' ) }
 					</>
 				}
-				onSave={ locked ? undefined : handleSubmit( onSubmit ) }
-				isSaving={ saving }
 			>
-				{ /* ── Calculate by working days ──────────────────── */ }
 				<SettingRow
 					label={ __( 'Calculate delivery by working days:', 'order-delivery-date' ) }
 					tooltip={ __( 'Calculate Minimum Delivery Time, Same Day cut-off and Next Day cut-off based on the business days selected.', 'order-delivery-date' ) }
@@ -189,30 +80,28 @@ const BusinessDays = ( { locked = false } ) => {
 					/>
 				</SettingRow>
 
-				{ /* ── Business days multi-select ──────────────────── */ }
 				<SettingRow
 					label={ __( 'Business Days:', 'order-delivery-date' ) }
 					tooltip={ __( 'Business days of your store.', 'order-delivery-date' ) }
 				>
 					<Controller
-							name="selectedDays"
-							control={ control }
-							render={ ( { field } ) => (
-								<FormTokenField
-									label={ __( 'Select \'Weekdays\' or \'Business Days\'', 'order-delivery-date' ) }
-									value={ field.value }
-									suggestions={ DAY_LABELS }
-									onChange={ field.onChange }
-									placeholder={ __( 'Select Weekdays', 'order-delivery-date' ) }
-									__experimentalShowHowTo={ false }
-									__experimentalExpandOnFocus
-									__nextHasNoMarginBottom
-								/>
-							) }
-						/>
+						name="selectedDays"
+						control={ control }
+						render={ ( { field } ) => (
+							<FormTokenField
+								label={ __( 'Select \'Weekdays\' or \'Business Days\'', 'order-delivery-date' ) }
+								value={ field.value }
+								suggestions={ DAY_LABELS }
+								onChange={ field.onChange }
+								placeholder={ __( 'Select Weekdays', 'order-delivery-date' ) }
+								__experimentalShowHowTo={ false }
+								__experimentalExpandOnFocus
+								__nextHasNoMarginBottom
+							/>
+						) }
+					/>
 				</SettingRow>
 
-				{ /* ── Opening time ─────────────────────────────────── */ }
 				<SettingRow
 					label={ __( 'Opening Time:', 'order-delivery-date' ) }
 					tooltip={ __( 'What time does your business start delivering orders?', 'order-delivery-date' ) }
@@ -229,7 +118,6 @@ const BusinessDays = ( { locked = false } ) => {
 					/>
 				</SettingRow>
 
-				{ /* ── Closing time ─────────────────────────────────── */ }
 				<SettingRow
 					label={ __( 'Closing Time:', 'order-delivery-date' ) }
 					tooltip={ __( 'What time does your business stop delivering orders?', 'order-delivery-date' ) }

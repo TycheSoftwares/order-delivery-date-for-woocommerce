@@ -2,6 +2,9 @@
 .gitignore
 .distignore
 .DS_Store
+.github
+.vipgoci_options
+.vipgoci_phpcs_skip_folders
 
 node_modules
 vendor

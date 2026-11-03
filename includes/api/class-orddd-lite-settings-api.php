@@ -4,7 +4,6 @@
  *
  * GET  /orddd/v1/settings                  — all settings groups
  * POST /orddd/v1/settings                  — save by key (default_schedule | additional)
- * POST /orddd/v1/settings/onboarding/complete
  *
  * GET    /orddd/v1/settings/block-time-slot — list blocked time slots
  * POST   /orddd/v1/settings/block-time-slot — add blocked time slot
@@ -47,17 +46,6 @@ if ( ! class_exists( 'ORDDD_Settings_API' ) ) {
 		public function register_routes() {
 			$ns   = self::endpoint();
 			$base = $this->rest_base;
-
-			// POST /orddd/v1/settings/onboarding/complete
-			register_rest_route(
-				$ns,
-				'/' . $base . '/onboarding/complete',
-				array(
-					'methods'             => WP_REST_Server::CREATABLE,
-					'callback'            => array( $this, 'complete_onboarding' ),
-					'permission_callback' => array( $this, 'check_admin_permission' ),
-				)
-			);
 
 			// GET / POST /orddd/v1/settings
 			register_rest_route(
@@ -196,6 +184,8 @@ if ( ! class_exists( 'ORDDD_Settings_API' ) ) {
 		private function save_default_schedule( WP_REST_Request $request ) {
 			global $orddd_lite_weekdays;
 
+			$body = $request->get_json_params() ?: array();
+
 			// Scalar delivery-date options.
 			$scalar_fields = array(
 				'orddd_lite_enable_delivery_date',
@@ -211,29 +201,56 @@ if ( ! class_exists( 'ORDDD_Settings_API' ) ) {
 			);
 
 			foreach ( $scalar_fields as $field ) {
-				update_option( $field, sanitize_text_field( $request->get_param( $field ) ?? '' ) );
+				if ( array_key_exists( $field, $body ) ) {
+					update_option( $field, sanitize_text_field( $body[ $field ] ) );
+				}
 			}
 
 			// orddd_lockout_date_quantity_based has no _lite_ prefix.
-			update_option(
-				'orddd_lockout_date_quantity_based',
-				sanitize_text_field( $request->get_param( 'orddd_lockout_date_quantity_based' ) ?? '' )
-			);
+			if ( array_key_exists( 'orddd_lockout_date_quantity_based', $body ) ) {
+				update_option( 'orddd_lockout_date_quantity_based', sanitize_text_field( $body['orddd_lockout_date_quantity_based'] ) );
+			}
 
 			// Weekday checkboxes.
-			$weekdays_param = $request->get_param( 'weekdays' );
-			if ( is_array( $weekdays_param ) ) {
+			if ( array_key_exists( 'weekdays', $body ) && is_array( $body['weekdays'] ) ) {
 				for ( $i = 0; $i <= 6; $i++ ) {
-					$key   = 'orddd_lite_weekday_' . $i;
-					$value = isset( $weekdays_param[ $key ] ) ? sanitize_text_field( $weekdays_param[ $key ] ) : '';
-					update_option( $key, $value );
+					$key = 'orddd_lite_weekday_' . $i;
+					if ( array_key_exists( $key, $body['weekdays'] ) ) {
+						update_option( $key, sanitize_text_field( $body['weekdays'][ $key ] ) );
+					}
 				}
 			}
 
 			// Time slots JSON array.
-			$time_slots = $request->get_param( 'time_slots' );
-			if ( is_array( $time_slots ) ) {
-				update_option( 'orddd_lite_delivery_time_slot_log', wp_json_encode( $time_slots ) );
+			if ( array_key_exists( 'time_slots', $body ) && is_array( $body['time_slots'] ) ) {
+				$slot_log = array();
+				foreach ( $body['time_slots'] as $slot ) {
+					if ( ! is_array( $slot ) ) {
+						continue;
+					}
+					$fh     = (int) ( $slot['fh'] ?? 0 );
+					$fm     = (int) ( $slot['fm'] ?? 0 );
+					$th     = (int) ( $slot['th'] ?? 0 );
+					$tm     = (int) ( $slot['tm'] ?? 0 );
+					$dd_raw = isset( $slot['dd'] ) ? $slot['dd'] : '[""]';
+					$dd_arr = json_decode( $dd_raw, true );
+					$dd_arr = is_array( $dd_arr )
+						? array_map( 'sanitize_text_field', $dd_arr )
+						: array( sanitize_text_field( $dd_raw ) );
+					$slot_log[] = array(
+						'tv'                       => sanitize_text_field( $slot['tv']                       ?? 'weekdays' ),
+						'dd'                       => wp_json_encode( $dd_arr ),
+						'fh'                       => gmdate( 'G', gmmktime( $fh, $fm, 0, gmdate( 'm' ), gmdate( 'd' ), gmdate( 'Y' ) ) ),
+						'fm'                       => gmdate( 'i', gmmktime( $fh, $fm, 0, gmdate( 'm' ), gmdate( 'd' ), gmdate( 'Y' ) ) ),
+						'th'                       => gmdate( 'G', gmmktime( $th, $tm, 0, gmdate( 'm' ), gmdate( 'd' ), gmdate( 'Y' ) ) ),
+						'tm'                       => gmdate( 'i', gmmktime( $th, $tm, 0, gmdate( 'm' ), gmdate( 'd' ), gmdate( 'Y' ) ) ),
+						'lockout'                  => sanitize_text_field( $slot['lockout']                  ?? '' ),
+						'additional_charges'       => sanitize_text_field( $slot['additional_charges']       ?? '' ),
+						'charges_type'             => sanitize_text_field( $slot['charges_type']             ?? 'fixed' ),
+						'additional_charges_label' => sanitize_text_field( $slot['additional_charges_label'] ?? '' ),
+					);
+				}
+				update_option( 'orddd_lite_delivery_time_slot_log', wp_json_encode( $slot_log ) );
 			}
 
 			return self::return_response(
@@ -252,6 +269,7 @@ if ( ! class_exists( 'ORDDD_Settings_API' ) ) {
 		 * @return WP_REST_Response
 		 */
 		private function save_additional( WP_REST_Request $request ) {
+			$body   = $request->get_json_params() ?: array();
 			$fields = array(
 				'orddd_lite_show_column_on_orders_page_check',
 				'orddd_lite_enable_default_sorting_of_column',
@@ -263,7 +281,9 @@ if ( ! class_exists( 'ORDDD_Settings_API' ) ) {
 			);
 
 			foreach ( $fields as $field ) {
-				update_option( $field, sanitize_text_field( $request->get_param( $field ) ?? '' ) );
+				if ( array_key_exists( $field, $body ) ) {
+					update_option( $field, sanitize_text_field( $body[ $field ] ) );
+				}
 			}
 
 			return self::return_response(
@@ -352,13 +372,19 @@ if ( ! class_exists( 'ORDDD_Settings_API' ) ) {
 				: ( json_decode( $raw, true ) ?? array() );
 
 			foreach ( $days as $day ) {
-				$delivery_date = ( 'dates' === $block_for )
-					? gmdate( 'n-j-Y', strtotime( $day ) )
-					: $day;
+				if ( 'dates' === $block_for ) {
+					$ts = strtotime( $day );
+					if ( false === $ts ) {
+						continue;
+					}
+					$delivery_date = gmdate( 'n-j-Y', $ts );
+				} else {
+					$delivery_date = $day;
+				}
 
 				$found = false;
 				foreach ( $existing as $item ) {
-					if ( $item['dtv'] === $block_for && $item['dd'] === $delivery_date && $item['ts'] === $selected_ts ) {
+					if ( ( $item['dtv'] ?? '' ) === $block_for && ( $item['dd'] ?? '' ) === $delivery_date && ( $item['ts'] ?? '' ) === $selected_ts ) {
 						$found = true;
 						break;
 					}
@@ -413,10 +439,16 @@ if ( ! class_exists( 'ORDDD_Settings_API' ) ) {
 					);
 				}
 				foreach ( $bulk['timeslots'] as $entry ) {
-					$t_slot       = $entry[0];
-					$t_day        = strpos( $entry[1], '-' ) !== false
-						? gmdate( 'n-j-Y', strtotime( $entry[1] ) )
-						: $entry[1];
+					if ( ! isset( $entry[0], $entry[1] ) ) {
+						continue;
+					}
+					$t_slot = $entry[0];
+					if ( strpos( $entry[1], '-' ) !== false ) {
+						$ts    = strtotime( $entry[1] );
+						$t_day = ( false !== $ts ) ? gmdate( 'n-j-Y', $ts ) : $entry[1];
+					} else {
+						$t_day = $entry[1];
+					}
 					$timeslot_arr = $this->unblock_time_slot( $timeslot_arr, $t_slot, $t_day );
 				}
 			} else {
@@ -427,9 +459,12 @@ if ( ! class_exists( 'ORDDD_Settings_API' ) ) {
 						array( 'status' => 400 )
 					);
 				}
-				$day_to_check = strpos( $days_raw, '-' ) !== false
-					? gmdate( 'n-j-Y', strtotime( $days_raw ) )
-					: $days_raw;
+				if ( strpos( $days_raw, '-' ) !== false ) {
+					$ts           = strtotime( $days_raw );
+					$day_to_check = ( false !== $ts ) ? gmdate( 'n-j-Y', $ts ) : $days_raw;
+				} else {
+					$day_to_check = $days_raw;
+				}
 				$timeslot_arr = $this->unblock_time_slot( $timeslot_arr, sanitize_text_field( $slot_raw ), $day_to_check );
 			}
 
@@ -440,50 +475,6 @@ if ( ! class_exists( 'ORDDD_Settings_API' ) ) {
 					'status'  => 'success',
 					'message' => __( 'Time slot unblocked successfully.', 'order-delivery-date' ),
 					'data'    => $this->get_blocked_time_slots_data(),
-				)
-			);
-		}
-
-		// =========================================================================
-		// POST /orddd/v1/settings/onboarding/complete
-		// =========================================================================
-
-		/**
-		 * Complete the onboarding wizard and save initial settings.
-		 *
-		 * @param WP_REST_Request $request Request object.
-		 * @return WP_REST_Response
-		 */
-		public function complete_onboarding( WP_REST_Request $request ) {
-			// Enable delivery date.
-			update_option( 'orddd_lite_enable_delivery_date', 'on' );
-
-			// Weekdays.
-			$weekdays = $request->get_param( 'weekdays' );
-			if ( is_array( $weekdays ) ) {
-				for ( $i = 0; $i <= 6; $i++ ) {
-					$key   = 'orddd_lite_weekday_' . $i;
-					$value = isset( $weekdays[ $key ] ) ? sanitize_text_field( $weekdays[ $key ] ) : '';
-					update_option( $key, $value );
-				}
-			}
-
-			// Minimum delivery time.
-			$min_time = sanitize_text_field( $request->get_param( 'minimum_delivery_time' ) ?? '' );
-			update_option( 'orddd_lite_minimumOrderDays', $min_time );
-
-			// Time slots.
-			$time_slots = $request->get_param( 'time_slots' );
-			if ( is_array( $time_slots ) && count( $time_slots ) > 0 ) {
-				update_option( 'orddd_lite_delivery_time_slot_log', wp_json_encode( $time_slots ) );
-			}
-
-			update_option( 'orddd_lite_welcome_page_displayed', 'yes' );
-
-			return self::return_response(
-				array(
-					'status'  => 'success',
-					'message' => __( 'Onboarding complete.', 'order-delivery-date' ),
 				)
 			);
 		}

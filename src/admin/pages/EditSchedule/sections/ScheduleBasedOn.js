@@ -7,7 +7,7 @@ import TokenField    from '../../../components/TokenField';
 
 import { BASED_ON_OPTIONS } from '../constants';
 import { getAdminData }     from '../helpers';
-import InlineRadios         from '../ui/InlineRadios';
+import InlineRadios         from '../../../components/ui/InlineRadios';
 
 // ── ScheduleBasedOnSection ────────────────────────────────────────────────────
 

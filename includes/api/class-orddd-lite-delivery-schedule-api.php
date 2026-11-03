@@ -64,14 +64,22 @@ if ( ! class_exists( 'ORDDD_Lite_Delivery_Schedule_API' ) ) {
 			$ns   = self::endpoint();
 			$base = $this->rest_base;
 
-			// GET /orddd/v1/delivery_schedule
+			// GET  /orddd/v1/delivery_schedule
+			// POST /orddd/v1/delivery_schedule
 			register_rest_route(
 				$ns,
 				'/' . $base,
 				array(
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_schedules' ),
-					'permission_callback' => array( $this, 'check_admin_permission' ),
+					array(
+						'methods'             => WP_REST_Server::READABLE,
+						'callback'            => array( $this, 'get_schedules' ),
+						'permission_callback' => array( $this, 'check_admin_permission' ),
+					),
+					array(
+						'methods'             => WP_REST_Server::CREATABLE,
+						'callback'            => array( $this, 'create_schedule' ),
+						'permission_callback' => array( $this, 'check_admin_permission' ),
+					),
 				)
 			);
 
@@ -196,7 +204,7 @@ if ( ! class_exists( 'ORDDD_Lite_Delivery_Schedule_API' ) ) {
 				'title'                               => array(),
 				'schedule_type'                       => 'delivery',
 				'appearance'                          => array(
-					'time_format' => get_option( 'orddd_lite_time_format', '1' ),
+					'time_format' => get_option( 'orddd_lite_delivery_time_format', '1' ),
 				),
 			);
 		}
@@ -283,6 +291,19 @@ if ( ! class_exists( 'ORDDD_Lite_Delivery_Schedule_API' ) ) {
 			}
 
 			return self::return_response( array( 'success' => true ) );
+		}
+
+		/**
+		 * POST /orddd/v1/delivery_schedule — creating custom schedules requires Pro.
+		 *
+		 * @return WP_Error
+		 */
+		public function create_schedule() {
+			return new WP_Error(
+				'orddd_pro_required',
+				__( 'Creating custom delivery schedules requires Order Delivery Date Pro.', 'order-delivery-date' ),
+				array( 'status' => 403 )
+			);
 		}
 	}
 

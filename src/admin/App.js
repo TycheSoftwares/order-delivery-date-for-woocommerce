@@ -6,9 +6,8 @@
  *   admin.php?page=order_delivery_date_lite#/appearance/field-appearance
  */
 
-import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Component } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 
 class RouteErrorBoundary extends Component {
 	constructor( props ) {
@@ -34,8 +33,6 @@ class RouteErrorBoundary extends Component {
 }
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
-import DeliverySchedulesPage from './pages/DeliverySchedulesPage';
-import DefaultSchedulePage from './pages/DefaultSchedulePage';
 import DeliverySchedules from './pages/DeliverySchedules';
 import EditSchedule from './pages/EditSchedule';
 import Holidays from './pages/Holidays';
@@ -45,22 +42,8 @@ import OrderCalendar from './pages/OrderCalendar';
 import IntegrationsPage from './pages/IntegrationsPage';
 import RemindersPage from './pages/RemindersPage';
 
-export const NAV_ITEMS = [
-	{ key: 'home',             label: __( 'Home', 'order-delivery-date' ),             path: '/home' },
-	{ key: 'delivery-schedule', label: __( 'Delivery Schedules', 'order-delivery-date' ), path: '/delivery-schedule' },
-	{ key: 'holidays',         label: __( 'Holidays', 'order-delivery-date' ),         path: '/holidays' },
-	{ key: 'appearance',       label: __( 'Appearance', 'order-delivery-date' ),       path: '/appearance' },
-	{ key: 'settings',         label: __( 'Settings', 'order-delivery-date' ),         path: '/settings' },
-	{ key: 'order-calendar',   label: __( 'Order Calendar', 'order-delivery-date' ),   path: '/order-calendar' },
-	{ key: 'integrations',     label: __( 'Integrations', 'order-delivery-date' ),     path: '/integrations' },
-	{ key: 'reminders',        label: __( 'Reminders', 'order-delivery-date' ),        path: '/reminders' },
-];
-
 /** Inner layout — needs to be inside <HashRouter> to use useLocation */
 function AppContent() {
-	const location = useLocation();
-	const isAppearance = location.pathname.startsWith( '/appearance' );
-
 	return (
 		<div className="orddd-admin-app">
 			<Header />

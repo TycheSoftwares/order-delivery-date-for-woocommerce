@@ -53,17 +53,6 @@ const buildExportUrl = ( baseUrl, { view, statuses, shipping }, dateRange ) => {
 	return `${ baseUrl }&${ params.toString() }`;
 };
 
-const parseHolidays = () => {
-	const str = calData().orddd_holidays || '';
-	if ( ! str ) return [];
-	try {
-		// eslint-disable-next-line no-eval
-		const parsed = eval( '[' + str + ']' );
-		return Array.isArray( parsed ) ? parsed : [];
-	} catch {
-		return [];
-	}
-};
 
 /**
  * Returns a change handler that maps selected label strings back to
@@ -143,8 +132,15 @@ const OrderCalendar = () => {
 	}, [ appliedFilters.view ] );
 
 	const handleDayCellDidMount = useCallback( ( args ) => {
-		const holidays = parseHolidays();
-		const color    = calData().orddd_holiday_color;
+		const str  = calData().orddd_holidays || '[]';
+		let holidays = [];
+		try {
+			const parsed = JSON.parse( str );
+			holidays = Array.isArray( parsed ) ? parsed : [];
+		} catch {
+			holidays = [];
+		}
+		const color = calData().orddd_holiday_color;
 		if ( ! holidays.length || ! color ) return;
 		const d         = args.date;
 		const m         = d.getMonth() + 1;

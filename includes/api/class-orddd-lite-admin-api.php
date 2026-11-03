@@ -67,23 +67,6 @@ if ( ! class_exists( 'ORDDD_API' ) ) {
 		}
 
 		/**
-		 * Verifies the WP REST nonce from the X-WP-Nonce request header.
-		 *
-		 * @param WP_REST_Request $request        Incoming request.
-		 * @param bool            $stop_execution When true, halts execution on failure.
-		 * @return bool
-		 */
-		public static function verify_nonce( $request, $stop_execution = true ) {
-			if ( ! wp_verify_nonce( $request->get_header( 'X-WP-Nonce' ), 'wp_rest' ) ) {
-				if ( $stop_execution ) {
-					die( self::error() ); // phpcs:ignore WordPress.Security.EscapeOutput
-				}
-				return false;
-			}
-			return true;
-		}
-
-		/**
 		 * Returns $value, or $fallback when $value is an empty string.
 		 *
 		 * @param string $value   Target value.

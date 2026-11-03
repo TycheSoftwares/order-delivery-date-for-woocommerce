@@ -1,10 +1,8 @@
 /**
  * WordPress dependencies
  */
-import { useState, useEffect } from '@wordpress/element';
-import { ToggleControl, TextControl, Notice, Spinner } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import apiFetch from '@wordpress/api-fetch';
+import { ToggleControl, TextControl } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -29,94 +27,16 @@ const DEFAULT_VALUES = {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 const CommonSettings = ( { locked = false } ) => {
-	const [ loading, setLoading ] = useState( ! locked );
-	const [ saving,  setSaving  ] = useState( false );
-	const [ notice,  setNotice  ] = useState( null );
-
-	const { control, handleSubmit, reset } = useForm( { defaultValues: DEFAULT_VALUES } );
-
-	// ── Fetch ──────────────────────────────────────────────────────────────────
-
-	useEffect( () => {
-		if ( locked ) return;
-
-		apiFetch( { path: '/orddd/v1/settings' } )
-			.then( ( data ) => {
-				const cs = data?.common_schedule ?? {};
-				reset( {
-					orddd_lockout_date_quantity_based: cs.orddd_lockout_date_quantity_based === 'on',
-					orddd_global_lockout_custom:       cs.orddd_global_lockout_custom       === 'on',
-					orddd_global_lockout_time_slots:   cs.orddd_global_lockout_time_slots   ?? '',
-					orddd_default_schedule_priority:   cs.orddd_default_schedule_priority   === 'on',
-				} );
-			} )
-			.catch( () => {
-				setNotice( { type: 'error', message: __( 'Could not load settings. Please refresh and try again.', 'order-delivery-date' ) } );
-			} )
-			.finally( () => setLoading( false ) );
-	}, [] );
-
-	// ── Save ───────────────────────────────────────────────────────────────────
-
-	const onSubmit = async ( values ) => {
-		setSaving( true );
-		setNotice( null );
-
-		try {
-			await apiFetch( {
-				path:   '/orddd/v1/settings',
-				method: 'POST',
-				data:   {
-					key:                               'common_schedule',
-					orddd_lockout_date_quantity_based: values.orddd_lockout_date_quantity_based ? 'on' : '',
-					orddd_global_lockout_custom:       values.orddd_global_lockout_custom       ? 'on' : '',
-					orddd_global_lockout_time_slots:   values.orddd_global_lockout_time_slots,
-					orddd_default_schedule_priority:   values.orddd_default_schedule_priority   ? 'on' : '',
-				},
-			} );
-
-		} catch ( err ) {
-			setNotice( {
-				type:    'error',
-				message: err?.message ?? __( 'Failed to save settings. Please try again.', 'order-delivery-date' ),
-			} );
-			throw err;
-		} finally {
-			setSaving( false );
-		}
-	};
-
-	// ── Loading state ─────────────────────────────────────────────────────────
-
-	if ( loading ) {
-		return (
-			<div className="bd-loading">
-				<Spinner />
-			</div>
-		);
-	}
-
-	// ── Render ────────────────────────────────────────────────────────────────
+	const { control } = useForm( { defaultValues: DEFAULT_VALUES } );
 
 	return (
 		<div className="orddd-page-wrap">
 			{ locked && <UpgradePrompt message={ __( 'Unlock Common Schedule Settings by upgrading to Pro.', 'order-delivery-date' ) } /> }
-			{ notice && ! locked && (
-				<Notice
-					status={ notice.type }
-					isDismissible
-					onRemove={ () => setNotice( null ) }
-				>
-					{ notice.message }
-				</Notice>
-			) }
 
 			<div className={ locked ? 'orddd-locked-panel' : undefined }>
 			<SettingsPanel
 				title={ __( 'Common Schedule Settings', 'order-delivery-date' ) }
 				subtitle={ __( 'If you want to deliver only a certain number of orders per day, time slot or product quantity, configure the limits here.', 'order-delivery-date' ) }
-				onSave={ locked ? undefined : handleSubmit( onSubmit ) }
-				isSaving={ saving }
 			>
 				<SettingRow
 					label={ __( 'Set the maximum number of deliveries per product:', 'order-delivery-date' ) }

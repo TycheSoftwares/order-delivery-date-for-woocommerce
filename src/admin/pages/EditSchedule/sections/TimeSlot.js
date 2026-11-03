@@ -31,8 +31,8 @@ import {
 	BULK_SLOT_EMPTY,
 	WEEK_DAYS,
 }                           from '../constants';
-import TimeInput            from '../ui/TimeInput';
-import InlineRadios         from '../ui/InlineRadios';
+import TimeInput            from '../../../components/ui/TimeInput';
+import InlineRadios         from '../../../components/ui/InlineRadios';
 
 const upgradeUrl =
 	window.ordddAdminData?.upgradeUrl ??

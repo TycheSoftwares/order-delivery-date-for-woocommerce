@@ -182,6 +182,7 @@ if ( ! class_exists( 'ORDDD_Appearance_API' ) ) {
 		 * @return WP_REST_Response
 		 */
 		public function save_field_appearance( WP_REST_Request $request ) {
+			$body         = $request->get_json_params() ?: array();
 			$plain_fields = array(
 				'orddd_lite_delivery_date_fields_on_checkout_page',
 				'orddd_lite_delivery_date_on_cart_page',
@@ -193,15 +194,18 @@ if ( ! class_exists( 'ORDDD_Appearance_API' ) ) {
 			);
 
 			foreach ( $plain_fields as $field ) {
-				update_option( $field, sanitize_text_field( $request->get_param( $field ) ?? '' ) );
+				if ( array_key_exists( $field, $body ) ) {
+					update_option( $field, sanitize_text_field( $body[ $field ] ) );
+				}
 			}
 
 			// Allow limited HTML in the field note (mirrors Pro behaviour).
-			$note = $request->get_param( 'orddd_lite_delivery_date_field_note' );
-			update_option(
-				'orddd_lite_delivery_date_field_note',
-				null !== $note ? wp_filter_post_kses( wp_unslash( $note ) ) : ''
-			);
+			if ( array_key_exists( 'orddd_lite_delivery_date_field_note', $body ) ) {
+				update_option(
+					'orddd_lite_delivery_date_field_note',
+					wp_filter_post_kses( wp_unslash( $body['orddd_lite_delivery_date_field_note'] ) )
+				);
+			}
 
 			return self::return_response(
 				array(
@@ -223,6 +227,7 @@ if ( ! class_exists( 'ORDDD_Appearance_API' ) ) {
 		 * @return WP_REST_Response
 		 */
 		public function save_calendar_appearance( WP_REST_Request $request ) {
+			$body         = $request->get_json_params() ?: array();
 			$plain_fields = array(
 				'orddd_lite_language_selected',
 				'orddd_lite_delivery_date_format',
@@ -236,13 +241,14 @@ if ( ! class_exists( 'ORDDD_Appearance_API' ) ) {
 			);
 
 			foreach ( $plain_fields as $field ) {
-				update_option( $field, sanitize_text_field( $request->get_param( $field ) ?? '' ) );
+				if ( array_key_exists( $field, $body ) ) {
+					update_option( $field, sanitize_text_field( $body[ $field ] ) );
+				}
 			}
 
 			// orddd_booked_color in the request maps to orddd_lite_booked_dates_color in storage.
-			$booked_color = $request->get_param( 'orddd_booked_color' );
-			if ( null !== $booked_color ) {
-				update_option( 'orddd_lite_booked_dates_color', sanitize_text_field( $booked_color ) );
+			if ( array_key_exists( 'orddd_booked_color', $body ) ) {
+				update_option( 'orddd_lite_booked_dates_color', sanitize_text_field( $body['orddd_booked_color'] ) );
 			}
 
 			return self::return_response(
@@ -283,7 +289,7 @@ if ( ! class_exists( 'ORDDD_Appearance_API' ) ) {
 		 */
 		private function get_calendar_appearance_data() {
 			return array(
-				'orddd_lite_language_selected'   => get_option( 'orddd_lite_language_selected' ),
+				'orddd_lite_language_selected'    => get_option( 'orddd_lite_language_selected' ),
 				'orddd_lite_delivery_date_format' => get_option( 'orddd_lite_delivery_date_format' ),
 				'orddd_lite_delivery_time_format' => get_option( 'orddd_lite_delivery_time_format' ),
 				'orddd_lite_start_of_week'        => get_option( 'orddd_lite_start_of_week' ),

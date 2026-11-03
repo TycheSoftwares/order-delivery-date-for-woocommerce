@@ -4228,6 +4228,12 @@ $ds-columns: 36px 36px 90px 220px 1fr 180px 120px 120px;
 
 .ordd-reminders-page {}
 
+// ── Order Calendar — FullCalendar overrides ───────────────────────────────────
+
+.fc-event {
+	cursor: pointer;
+}
+
 // ── Order Calendar — filter toolbar ──────────────────────────────────────────
 
 .orddd-cal-filters {
