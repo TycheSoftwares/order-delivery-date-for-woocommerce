@@ -1,0 +1,136 @@
+// ── Block Time Slot tab ───────────────────────────────────────────────────────
+
+.bts-wrap {
+	padding: 24px 20px;
+}
+
+// ── Unblock action link ───────────────────────────────────────────────────────
+
+.bts-unblock-link {
+	background: none;
+	border: none;
+	padding: 0;
+	color: #41278d;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
+
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+}
+
+// ── Add Time Slots inline form ────────────────────────────────────────────────
+// WP Card handles the border, radius, shadow, and overflow.
+// We only need the internal grid layout and field styles.
+
+.bts-form {
+	margin: 16px; // inset from the DataTable odt-form-slot CardBody
+
+	&__title-row {
+		padding: 16px 20px !important;
+	}
+
+	&__title {
+		font-size: 18px;
+		font-weight: 700;
+		color: #1d2327;
+		margin: 0;
+	}
+
+	// CardBody for each row — grid: label | field
+	&__row.components-card__body {
+		display: grid;
+		grid-template-columns: 220px 1fr;
+		gap: 16px;
+		align-items: start;
+		padding: 16px 20px !important;
+	}
+
+	&__label {
+		font-size: 14px;
+		font-weight: 700;
+		color: #1d2327;
+		padding-top: 2px;
+	}
+
+	// Field wrapper — row (icon + control inline)
+	&__field {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		// Column variant (icon+hint stacked above control)
+		&--col {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 6px;
+		}
+	}
+
+	// ⓘ icon (WP Icon inside a Tooltip)
+	&__info-icon {
+		display: inline-flex;
+		align-items: center;
+		color: #41278d;
+		cursor: default;
+		flex-shrink: 0;
+
+		svg { display: block; }
+	}
+
+	// Small hint line (icon + text)
+	&__hint {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		color: #555;
+		font-size: 13px;
+	}
+
+	&__hint-text {
+		font-size: 13px;
+	}
+
+	// Date / text input (native, not a WP component)
+	&__input {
+		padding: 6px 10px;
+		border: 1px solid #a7acb1;
+		border-radius: 4px;
+		font-size: 14px;
+		width: 200px;
+		color: #1d2327;
+
+		&:focus {
+			outline: none;
+			border-color: #41278d;
+			box-shadow: 0 0 0 2px rgba( 65, 39, 141, 0.12 );
+		}
+	}
+
+	// WP SelectControl — constrain width
+	&__select {
+		.components-select-control__input {
+			width: 240px;
+		}
+	}
+
+	// WP Button (variant="secondary") — override to match design
+	&__save-btn.components-button {
+		border: 2px solid #41278d;
+		color: #41278d;
+		border-radius: 4px;
+		font-weight: 600;
+		margin-top: 4px;
+
+		&:hover:not( :disabled ) {
+			background: #41278d;
+			color: #fff;
+		}
+	}
+}
