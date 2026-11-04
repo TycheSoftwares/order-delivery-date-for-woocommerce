@@ -1,0 +1,280 @@
+.osp-wrap {
+	padding: 24px 20px;
+
+	// ── Page header ──────────────────────────────────────────
+	.osp-page-header {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 24px;
+		margin-bottom: 24px;
+
+		.osp-page-header-text {
+			flex: 1;
+
+			.osp-title {
+				font-size: 26px;
+				font-weight: 700;
+				color: #1d2327;
+				margin: 0 0 8px;
+				line-height: 1.3;
+			}
+
+			.osp-subtitle {
+				font-size: 14px;
+				color: #424242;
+				margin: 0;
+				line-height: 1.6;
+				max-width: 700px;
+
+				a {
+					color: #41278d;
+					text-decoration: underline;
+
+					&:hover {
+						color: #136826;
+					}
+				}
+			}
+		}
+	}
+
+	// ── Save button (both top & bottom) ──────────────────────
+	.osp-save-btn.orddd-save {
+		// Let the existing .orddd-save rule handle bg/color/size.
+		// Override WP Button resets that fight those rules:
+		height: auto;
+		border: none;
+		border-radius: 5px;
+		box-shadow: none;
+		white-space: nowrap;
+
+		&:hover,
+		&:focus,
+		&:active {
+			background: #136826 !important;
+			color: #fff !important;
+			box-shadow: none !important;
+		}
+
+		&:disabled,
+		&[aria-disabled='true'] {
+			opacity: 0.6;
+			cursor: not-allowed;
+		}
+	}
+
+	// ── Card ─────────────────────────────────────────────────
+	.osp-card {
+		border: 1px solid #e0e0e0;
+		border-radius: 8px;
+		box-shadow: none;
+		margin-bottom: 16px;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	// ── Card accordion header ────────────────────────────────
+	.osp-card-header {
+		// Reset WordPress CardHeader defaults
+		&.components-card__header {
+			padding: 0;
+			border-bottom: none;
+			min-height: unset;
+		}
+
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 20px 28px;
+		cursor: pointer;
+		user-select: none;
+		border-radius: 8px 8px 0 0;
+
+		&:hover {
+			background: #f9f9f9;
+		}
+
+		.osp-card-header-title {
+			font-size: 16px;
+			font-weight: 700;
+			color: #1d2327;
+		}
+
+		svg {
+			color: #1d2327;
+		}
+	}
+
+	// ── Setting row ──────────────────────────────────────────
+	.osp-row {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+		padding: 22px 28px;
+		border-bottom: 1px solid #f0f0f0;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		// Label column — fixed width to align all rows
+		.osp-row-label {
+			flex: 0 0 260px;
+
+			.osp-row-label-text {
+				font-size: 15px;
+				font-weight: 700;
+				color: #1d2327;
+				line-height: 1.4;
+			}
+		}
+
+		// Field column
+		.osp-row-field {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			flex: 1;
+
+			// ⓘ info icon
+			.osp-info-icon {
+				display: inline-flex;
+				align-items: center;
+				color: #41278d;
+				cursor: pointer;
+				flex-shrink: 0;
+				border-radius: 50%;
+				transition: color 0.2s;
+
+				&:hover {
+					color: #58419c;
+				}
+
+				// Align WP Icon svg correctly
+				svg {
+					display: block;
+				}
+			}
+
+			.osp-row-field-content {
+				flex: 1;
+
+				// Remove bottom margin WP components add
+				.components-base-control {
+					margin-bottom: 0;
+				}
+
+				// TextControl / SelectControl input sizing
+				.components-text-control__input,
+				.components-select-control__input {
+					max-width: 220px;
+					height: 40px;
+					border: 1px solid #a7acb1;
+					border-radius: 5px;
+					font-size: 13px;
+					color: #424242;
+					padding: 0 15px;
+					transition: border 0.2s, box-shadow 0.2s;
+
+					&:focus {
+						border-color: #41278d;
+						box-shadow: 0 0 20px rgba( 65, 39, 141, 0.1 );
+					}
+				}
+			}
+		}
+	}
+
+	// ── Page footer ──────────────────────────────────────────
+	.osp-page-footer {
+		display:     flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap:         12px;
+		margin-top:  24px;
+
+		.osp-inline-notice {
+			margin: 0;
+			flex:   1 1 auto;
+		}
+	}
+}
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+
+@media ( max-width: 768px ) {
+
+	.osp-row {
+		flex-direction: column;
+		align-items:    flex-start;
+		gap:            12px;
+		padding:        16px 20px;
+
+		.osp-row-label {
+			flex:  none;
+			width: 100%;
+		}
+
+		.osp-row-field {
+			width: 100%;
+		}
+
+		.osp-row-field-content {
+			width: 100%;
+
+			.components-text-control__input,
+			.components-select-control__input {
+				max-width: 100%;
+				width:     100%;
+			}
+		}
+	}
+
+	.osp-sticky-footer {
+		left:    0 !important;
+		padding: 10px 16px;
+	}
+}
+
+// ── Sticky save button (bottom-right, outside osp-wrap) ─────────────────────
+.osp-sticky-footer {
+	position: fixed;
+	bottom: 32px;
+	right: 32px;
+	z-index: 9999;
+
+	display: flex;
+	align-items: center;
+	gap: 12px;
+
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	box-shadow: 0 4px 16px rgba( 0, 0, 0, 0.12 );
+	padding: 12px 16px;
+
+	animation: osp-slide-in 0.2s ease-out;
+
+	// Notice rendered inline in the sticky bar
+	.osp-sticky-notice.components-notice {
+		margin: 0;
+		padding: 6px 12px;
+		border-radius: 4px;
+		font-size: 13px;
+		align-items: center;
+
+		.components-notice__content {
+			margin: 0;
+			padding: 0;
+			font-size: 13px;
+		}
+
+		.components-notice__dismiss {
+			margin: 0;
+		}
+	}
+}
+

@@ -125,6 +125,7 @@ class Orddd_Lite_TS_Tracking {
 		add_action( self::$plugin_prefix . '_add_new_settings', array( 'Orddd_Lite_TS_tracking', 'ts_add_reset_tracking_setting' ) );
 
 		add_action( 'admin_init', array( 'Orddd_Lite_TS_tracking', 'ts_reset_tracking_setting' ) );
+		add_action( 'wp_ajax_ts_reset_tracking_setting', array( 'Orddd_Lite_TS_tracking', 'ts_reset_tracking_setting_ajax' ) );
 		// Include JS script for the notice.
 		add_filter( 'orddd_lite_ts_tracker_data', array( __CLASS__, 'orddd_lite_ts_add_plugin_tracking_data' ), 10, 1 );
 		add_action( 'admin_footer', array( __CLASS__, 'ts_admin_notices_scripts' ) );
@@ -144,6 +145,23 @@ class Orddd_Lite_TS_Tracking {
 			wp_safe_redirect( $ts_url );
 		}
 	}
+		/**
+		 * Reset tracking setting via AJAX.
+		 */
+	public static function ts_reset_tracking_setting_ajax() {
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json( array( 'message' => 'error' ) );
+		}
+
+		$plugin_short_name = isset( $_POST['plugin_short_name'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin_short_name'] ) ) : ''; // phpcs:ignore
+		if ( '' === $plugin_short_name ) {
+			wp_send_json( array( 'message' => 'error' ) );
+		}
+
+		Tyche_Plugin_Tracking::reset_tracker_setting( $plugin_short_name );
+		wp_send_json( array( 'message' => 'success' ) );
+	}
+
 		/**
 		 * Add tracker completed.
 		 */

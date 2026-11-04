@@ -1,4 +1,8 @@
 *** Order Delivery Date for WooCommerce ***
+2026-10-14 - version 4.6.3
+* Fix - Timeslot information (e.g. "Timeslot: 00:00") was displayed in order details, emails and PDF documents even when time slot capture was disabled.
+* Tweak - Improved visibility of the "Block Time Slots" link.
+
 2026-08-19 - version 4.6.2
 * Fix - Checkout failed with a fatal error on HPOS stores when placing an order via Apple Pay or Google Pay Express Checkout without a delivery date selected.
 
