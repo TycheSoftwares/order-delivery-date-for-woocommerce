@@ -232,13 +232,18 @@ if ( ! class_exists( 'ORDDD_Settings_API' ) ) {
 					$fm     = (int) ( $slot['fm'] ?? 0 );
 					$th     = (int) ( $slot['th'] ?? 0 );
 					$tm     = (int) ( $slot['tm'] ?? 0 );
-					$dd_raw = isset( $slot['dd'] ) ? $slot['dd'] : '[""]';
-					$dd_arr = json_decode( $dd_raw, true );
-					$dd_arr = is_array( $dd_arr )
-						? array_map( 'sanitize_text_field', $dd_arr )
-						: array( sanitize_text_field( $dd_raw ) );
+					$dd_raw = $slot['dd'] ?? '[""]';
+					if ( is_array( $dd_raw ) ) {
+						$dd_arr = $dd_raw;
+					} else {
+						$dd_arr = json_decode( (string) $dd_raw, true );
+						if ( ! is_array( $dd_arr ) ) {
+							$dd_arr = array( (string) $dd_raw );
+						}
+					}
+					$dd_arr = array_map( 'sanitize_text_field', $dd_arr );
 					$slot_log[] = array(
-						'tv'                       => sanitize_text_field( $slot['tv']                       ?? 'weekdays' ),
+						'tv'                       => in_array( $slot['tv'] ?? '', array( 'weekdays', 'dates' ), true ) ? $slot['tv'] : 'weekdays',
 						'dd'                       => wp_json_encode( $dd_arr ),
 						'fh'                       => gmdate( 'G', gmmktime( $fh, $fm, 0, gmdate( 'm' ), gmdate( 'd' ), gmdate( 'Y' ) ) ),
 						'fm'                       => gmdate( 'i', gmmktime( $fh, $fm, 0, gmdate( 'm' ), gmdate( 'd' ), gmdate( 'Y' ) ) ),

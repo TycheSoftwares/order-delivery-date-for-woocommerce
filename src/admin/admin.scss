@@ -234,6 +234,7 @@ body {
 .ordd-header {
 	background: #58419c;
 	color: #fff;
+	position: relative;
 
 	.header-wrap {
 		display: flex;
@@ -323,7 +324,7 @@ body {
 
 	// Mobile
 	@media ( max-width: 992px ) {
-		.ordd-nav-toggler {
+		.header-wrap .ordd-navigation .ordd-nav-toggler {
 			display: block;
 		}
 
@@ -4721,4 +4722,69 @@ $ds-columns: 36px 36px 90px 220px 1fr 180px 120px 120px;
 	text-decoration: none;
 
 	&:hover { text-decoration: underline; }
+}
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+//
+// WP admin sidebar widths:
+//   expanded : 160px  (default)
+//   folded   : 36px   (body.folded)
+//   ≤782px   : 0      (WP hides sidebar into a slide-out overlay)
+
+body.folded .osp-sticky-footer {
+	left: 36px;
+}
+
+@media ( max-width: 782px ) {
+	.osp-sticky-footer {
+		left: 0 !important;
+	}
+}
+
+// Calendar filter groups — flex instead of fixed 220px so they wrap naturally
+@media ( max-width: 1024px ) {
+	.orddd-cal-filter-group {
+		flex:      1 1 180px;
+		width:     auto;
+		min-width: 160px;
+		max-width: 260px;
+	}
+}
+
+@media ( max-width: 600px ) {
+	.orddd-cal-filter-group {
+		flex:      1 1 100%;
+		max-width: 100%;
+	}
+
+	.orddd-cal-filters-row__actions {
+		flex-wrap: wrap;
+	}
+}
+
+// Holidays table — allow horizontal scroll on small screens
+@media ( max-width: 768px ) {
+	.orddd-page-wrap {
+		padding: 0 12px;
+	}
+
+	.hol-table {
+		table-layout: auto;
+		display:      block;
+		overflow-x:   auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.hol-th-date    { width: auto; min-width: 140px; }
+	.hol-th-actions { width: auto; min-width: 120px; }
+
+	// EditSchedule / Settings pages — full-width inputs
+	.orddd-page-wrap .osp-row-field-content {
+		.components-text-control__input,
+		.components-select-control__input,
+		.components-textarea-control__input {
+			max-width: 100%;
+			width:     100%;
+		}
+	}
 }

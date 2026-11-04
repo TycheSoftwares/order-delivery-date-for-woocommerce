@@ -259,3 +259,27 @@
 		font-family: monospace;
 	}
 }
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+
+@media ( max-width: 768px ) {
+
+	.fa-page {
+
+		.osp-row-field-content {
+			.components-text-control__input,
+			.components-select-control__input {
+				max-width: 100%;
+				width:     100%;
+			}
+		}
+
+		.fa-textarea .components-textarea-control__input {
+			max-width: 100%;
+		}
+
+		.fa-placement__custom-input .components-text-control__input {
+			max-width: 100%;
+		}
+	}
+}

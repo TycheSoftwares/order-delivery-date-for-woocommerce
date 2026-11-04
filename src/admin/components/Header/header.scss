@@ -1,6 +1,7 @@
 .ordd-header {
 	background: #58419c;
 	color: #fff;
+	position: relative;
 
 	.header-wrap {
 		display: flex;
@@ -89,7 +90,7 @@
 
 	// Mobile
 	@media ( max-width: 992px ) {
-		.ordd-nav-toggler {
+		.header-wrap .ordd-navigation .ordd-nav-toggler {
 			display: block;
 		}
 

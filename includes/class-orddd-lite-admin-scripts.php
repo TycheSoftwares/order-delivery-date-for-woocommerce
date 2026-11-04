@@ -30,9 +30,10 @@ class ORDDD_Lite_Admin_Scripts {
 	 * on any admin page and generate the correct script-translation JSON.
 	 */
 	public function register_script() {
-		$asset = array(
-			'dependencies' => array( 'wp-api-fetch', 'wp-i18n', 'wp-date', 'wp-element', 'wp-components' ),
-			'version'      => '2.0.0',
+		$asset_file = plugin_dir_path( ORDDD_LITE_PLUGIN_FILE ) . 'build/admin/index.asset.php';
+		$asset      = file_exists( $asset_file ) ? require $asset_file : array(
+			'dependencies' => array( 'wp-api-fetch', 'wp-i18n', 'wp-element', 'wp-components' ),
+			'version'      => ORDDD_LITE_VERSION,
 		);
 
 		wp_register_script(
@@ -62,8 +63,9 @@ class ORDDD_Lite_Admin_Scripts {
 			return;
 		}
 
-		$asset = array(
-			'dependencies' => array( 'wp-api-fetch', 'wp-i18n', 'wp-date', 'wp-element', 'wp-components' ),
+		$asset_file = plugin_dir_path( ORDDD_LITE_PLUGIN_FILE ) . 'build/admin/index.asset.php';
+		$asset      = file_exists( $asset_file ) ? require $asset_file : array(
+			'dependencies' => array( 'wp-api-fetch', 'wp-i18n', 'wp-element', 'wp-components' ),
 			'version'      => ORDDD_LITE_VERSION,
 		);
 
@@ -97,7 +99,7 @@ class ORDDD_Lite_Admin_Scripts {
 			'orddd-images-loaded',
 			plugins_url( 'js/imagesloaded.pkg.min.js', ORDDD_LITE_PLUGIN_FILE ),
 			array(),
-			$asset['version'],
+			ORDDD_LITE_VERSION,
 			true
 		);
 
@@ -105,7 +107,7 @@ class ORDDD_Lite_Admin_Scripts {
 			'orddd-qtip',
 			plugins_url( 'js/jquery.qtip.min.js', ORDDD_LITE_PLUGIN_FILE ),
 			array( 'jquery', 'orddd-images-loaded' ),
-			$asset['version'],
+			ORDDD_LITE_VERSION,
 			true
 		);
 
@@ -113,21 +115,21 @@ class ORDDD_Lite_Admin_Scripts {
 			'orddd-qtip-css',
 			plugins_url( 'css/jquery.qtip.min.css', ORDDD_LITE_PLUGIN_FILE ),
 			array(),
-			$asset['version']
+			ORDDD_LITE_VERSION
 		);
 
 		wp_enqueue_style(
 			'orddd-lite-admin-css',
 			plugins_url( 'css/order-delivery-date.css', ORDDD_LITE_PLUGIN_FILE ),
 			array(),
-			$asset['version']
+			ORDDD_LITE_VERSION
 		);
 
 		wp_enqueue_style(
 			'orddd-lite-datepicker-css',
 			plugins_url( 'css/datepicker.css', ORDDD_LITE_PLUGIN_FILE ),
 			array(),
-			$asset['version']
+			ORDDD_LITE_VERSION
 		);
 
 		// Calendar data for the React Order Calendar page (window.orddd_calendar_js).

@@ -3,7 +3,6 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import { Button } from '@wordpress/components';
 
 /**
  * External dependencies
@@ -46,11 +45,12 @@ const Header = () => {
 				</div>
 
 				<nav className="ordd-navigation">
-					<Button
+					<button
 						className="ordd-nav-toggler"
 						onClick={ () => setMenuOpen( ( open ) => ! open ) }
 						aria-expanded={ menuOpen }
 						aria-label={ __( 'Toggle navigation', 'order-delivery-date' ) }
+						type="button"
 					>
 						<span className="ordd-nav-toggler-icon">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -58,7 +58,7 @@ const Header = () => {
 								<path d="M3 4h18v2H3V4zm0 7h12v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(255,255,255,1)" />
 							</svg>
 						</span>
-					</Button>
+					</button>
 
 					<div className={ `ordd-nav-collapse${ menuOpen ? ' ordd-nav-collapse--open' : '' }` }>
 						<ul className="ordd-nav-menu">

@@ -203,6 +203,42 @@
 	}
 }
 
+// ── Responsive ────────────────────────────────────────────────────────────────
+
+@media ( max-width: 768px ) {
+
+	.osp-row {
+		flex-direction: column;
+		align-items:    flex-start;
+		gap:            12px;
+		padding:        16px 20px;
+
+		.osp-row-label {
+			flex:  none;
+			width: 100%;
+		}
+
+		.osp-row-field {
+			width: 100%;
+		}
+
+		.osp-row-field-content {
+			width: 100%;
+
+			.components-text-control__input,
+			.components-select-control__input {
+				max-width: 100%;
+				width:     100%;
+			}
+		}
+	}
+
+	.osp-sticky-footer {
+		left:    0 !important;
+		padding: 10px 16px;
+	}
+}
+
 // ── Sticky save button (bottom-right, outside osp-wrap) ─────────────────────
 .osp-sticky-footer {
 	position: fixed;
