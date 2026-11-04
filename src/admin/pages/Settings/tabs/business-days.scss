@@ -1,0 +1,136 @@
+.bd-loading {
+	display: flex;
+	justify-content: center;
+	padding: 60px 0;
+}
+
+.orddd-page-wrap {
+	max-width: 1022px;
+	margin: auto;
+
+	// Notice sits above the panel
+	.components-notice {
+		margin: 0 20px 16px;
+	}
+
+	// ── Business days chip field ──────────────────────────────
+	.bd-days-field {
+
+		.bd-days-hint {
+			font-size: 13px;
+			color: #424242;
+			margin: 0 0 8px;
+		}
+
+		// Style the WP FormTokenField to match the screenshot
+		.components-form-token-field {
+			max-width: 100%;
+
+			// Token list (chip area) + input row
+			.components-form-token-field__input-container {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 6px;
+				align-items: center;
+				border: 1px solid #a7acb1;
+				border-radius: 5px;
+				padding: 8px 10px;
+				background: #fff;
+				min-height: 44px;
+				cursor: text;
+
+				&:focus-within {
+					border-color: #41278d;
+					box-shadow: 0 0 20px rgba( 65, 39, 141, 0.1 );
+				}
+			}
+
+			// Individual chip
+			.components-form-token-field__token {
+				display: inline-flex;
+				align-items: center;
+				gap: 4px;
+				background: #fff;
+				border: 1px solid #a7acb1;
+				border-radius: 4px;
+				padding: 2px 8px;
+				font-size: 13px;
+				color: #1d2327;
+				line-height: 1.6;
+			}
+
+			// ⊗ remove button inside the chip
+			.components-form-token-field__remove-token {
+				display: inline-flex;
+				align-items: center;
+				padding: 0;
+				margin: 0;
+				background: none;
+				border: none;
+				cursor: pointer;
+				color: #787c82;
+
+				&:hover {
+					color: #d72c0d;
+				}
+			}
+
+			// Text input inside the token field
+			.components-form-token-field__input {
+				border: none;
+				outline: none;
+				box-shadow: none;
+				font-size: 13px;
+				color: #424242;
+				padding: 2px 4px;
+				height: auto;
+				min-width: 130px;
+				max-width: 100%;
+				background: transparent;
+
+				&::placeholder {
+					color: #787c82;
+				}
+			}
+
+			// Dropdown suggestions list
+			.components-form-token-field__suggestions-list {
+				border: 1px solid #a7acb1;
+				border-radius: 5px;
+				background: #fff;
+				margin-top: 4px;
+				padding: 4px 0;
+				list-style: none;
+				box-shadow: 0 4px 12px rgba( 0, 0, 0, 0.08 );
+				max-height: 200px;
+				overflow-y: auto;
+
+				.components-form-token-field__suggestion {
+					padding: 8px 14px;
+					font-size: 13px;
+					color: #1d2327;
+					cursor: pointer;
+
+					&:hover,
+					&.is-selected {
+						background: #f6f3ff;
+						color: #41278d;
+					}
+				}
+			}
+
+			// Hide the default "add" hint text
+			.components-form-token-field__help {
+				display: none;
+			}
+		}
+	}
+
+	// ── Time TextControl sizing ───────────────────────────────
+	.osp-row-field-content {
+
+		.components-text-control__input {
+			max-width: 180px;
+		}
+	}
+}

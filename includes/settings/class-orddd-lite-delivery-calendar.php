@@ -233,25 +233,24 @@ class orddd_lite_class_view_deliveries {
 		}
 
 		// Check required params.
-		if ( ! isset( $_GET['download'], $_GET['page'] ) ) {
+		if ( ! isset( $_GET['download'] ) ) {
 			return;
 		}
 
 		// Nonce verification.
-		if ( ! isset( $_GET['orddd_export_nonce'] ) || 
+		if ( ! isset( $_GET['orddd_export_nonce'] ) ||
 			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['orddd_export_nonce'] ) ), 'orddd_export_nonce' ) ) {
-			wp_die( esc_html__( 'Security check failed.', 'order-delivery-date' ) );
+			return;
 		}
 
 		$download = sanitize_text_field( wp_unslash( $_GET['download'] ) );
-		$page     = sanitize_text_field( wp_unslash( $_GET['page'] ) );
 
 		// Allowed downloads only.
 		$allowed_downloads = array( 'orddd_data.csv', 'orddd_data.print' );
 		if ( ! in_array( $download, $allowed_downloads, true ) ) {
 			return;
 		}
-		if ( isset( $_GET['download'] ) && ( $_GET['download'] == 'orddd_data.csv' ) && ( ( isset( $_GET['page'] ) && $_GET['page'] = 'orddd_view_orders' ) ) ) {
+		if ( 'orddd_data.csv' === $download ) {
 			$report = self::orddd_generate_data();
 			$csv    = self::orddd_generate_csv( $report );
 
@@ -262,7 +261,7 @@ class orddd_lite_class_view_deliveries {
 			echo "\xEF\xBB\xBF";
 			echo $csv;
 			exit;
-		} elseif ( isset( $_GET['download'] ) && ( $_GET['download'] == 'orddd_data.print' ) && ( ( isset( $_GET['page'] ) && $_GET['page'] = 'orddd_view_orders' ) ) ) {
+		} elseif ( 'orddd_data.print' === $download ) {
 			$report = self::orddd_generate_data();
 
 			$print_data_columns  = "

@@ -343,6 +343,7 @@ div.orddd-filter-field .select2-selection__choice__remove {
 .fc .fc-button-group>.fc-button.fc-button-active {
 	background: #3858e9 !important;
     border-color: #3858e9 !important;
+    color: white !important;
 }
 .fc .fc-button-group>.fc-prev-button,.fc .fc-button-group>.fc-next-button, .fc .fc-button-group>.fc-today-button {
 	background: #3858e9 !important;

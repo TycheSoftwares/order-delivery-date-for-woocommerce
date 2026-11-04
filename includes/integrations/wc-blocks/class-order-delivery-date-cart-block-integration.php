@@ -91,9 +91,9 @@ class Order_DeliveryDate_Lite_Cart_Block_Integration implements IntegrationInter
 		if ( $this->is_editing_checkout_page() ) {
 			return; // don't load cart block JS here
 		}
-		$script_path       = '/build/cart-block.js';
+		$script_path       = '/build/frontend/cart-block.js';
 		$script_url        = plugins_url( 'order-delivery-date-for-woocommerce' . $script_path );
-		$script_asset_path = plugins_url( 'order-delivery-date-for-woocommerce/build/cart-block.asset.php' );
+		$script_asset_path = plugins_url( 'order-delivery-date-for-woocommerce/build/frontend/cart-block.asset.php' );
 		$script_asset      = file_exists( $script_asset_path )
 			? require $script_asset_path
 			: array(
@@ -116,10 +116,10 @@ class Order_DeliveryDate_Lite_Cart_Block_Integration implements IntegrationInter
 	 * @return void
 	 */
 	public function register_block_frontend_scripts() {
-		$script_path       = '/build/cart-block-frontend.js';
+		$script_path       = '/build/frontend/cart-block-frontend.js';
 		$script_url        = plugins_url( '/order-delivery-date-for-woocommerce' . $script_path );
-		$style_url         = plugins_url( '/order-delivery-date-for-woocommerce/build/style-index.css' );
-		$script_asset_path = WP_PLUGIN_DIR . '/order-delivery-date-for-woocommerce/build/cart-block-frontend.asset.php';
+		$style_url         = plugins_url( '/order-delivery-date-for-woocommerce/build/frontend/style-index.css' );
+		$script_asset_path = WP_PLUGIN_DIR . '/order-delivery-date-for-woocommerce/build/frontend/cart-block-frontend.asset.php';
 
 		$script_asset = file_exists( $script_asset_path )
 			? require $script_asset_path
