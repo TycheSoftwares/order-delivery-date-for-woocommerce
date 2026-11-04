@@ -19,12 +19,12 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'ORDDD_Settings_API' ) ) {
+if ( ! class_exists( 'ORDDD_Lite_Settings_API' ) ) {
 
 	/**
-	 * Class ORDDD_Settings_API
+	 * Class ORDDD_Lite_Settings_API
 	 */
-	class ORDDD_Settings_API extends ORDDD_API {
+	class ORDDD_Lite_Settings_API extends ORDDD_Lite_API {
 
 		/**
 		 * REST base for this resource.
@@ -633,5 +633,5 @@ if ( ! class_exists( 'ORDDD_Settings_API' ) ) {
 		}
 	}
 
-	new ORDDD_Settings_API();
+	new ORDDD_Lite_Settings_API();
 }

@@ -15,12 +15,12 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'ORDDD_Holidays_API' ) ) {
+if ( ! class_exists( 'ORDDD_Lite_Holidays_API' ) ) {
 
 	/**
-	 * Class ORDDD_Holidays_API
+	 * Class ORDDD_Lite_Holidays_API
 	 */
-	class ORDDD_Holidays_API extends ORDDD_API {
+	class ORDDD_Lite_Holidays_API extends ORDDD_Lite_API {
 
 		/**
 		 * REST base for this resource.
@@ -260,5 +260,5 @@ if ( ! class_exists( 'ORDDD_Holidays_API' ) ) {
 		}
 	}
 
-	new ORDDD_Holidays_API();
+	new ORDDD_Lite_Holidays_API();
 }
