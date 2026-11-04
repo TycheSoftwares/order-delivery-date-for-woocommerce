@@ -1,0 +1,153 @@
+// ── DataTable component ───────────────────────────────────────────────────────
+//
+// BEM-like namespace: .odt-  (orddd data-table)
+// WP Card handles: border, border-radius, box-shadow, background, overflow.
+// We only need to style the grid layout, header colouring, and interactive elements.
+
+.odt-wrap {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+// ── Table header row ──────────────────────────────────────────────────────────
+
+.odt-header {
+	display: grid;
+	// gridTemplateColumns is set via inline style (dynamic column count)
+	background: linear-gradient( 90deg, #e8e5f3 0%, #ddd9ef 100% );
+	padding: 0 8px;
+	align-items: center;
+}
+
+// ── Data rows ─────────────────────────────────────────────────────────────────
+
+.odt-row {
+	display: grid;
+	// gridTemplateColumns is set via inline style (dynamic column count)
+	padding: 0 8px;
+	align-items: center;
+	background: #fafafa;
+	transition: background 0.15s;
+
+	&:hover {
+		background: #f5f3fb;
+	}
+
+	&--selected {
+		background: #f0edf8;
+	}
+}
+
+// ── Shared cell ───────────────────────────────────────────────────────────────
+
+.odt-cell {
+	padding: 14px 12px;
+	font-size: 14px;
+	color: #1d2327;
+	min-width: 0;
+	word-break: break-word;
+
+	&--heading {
+		font-weight: 700;
+	}
+}
+
+// ── Checkbox ──────────────────────────────────────────────────────────────────
+
+.odt-checkbox {
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	accent-color: #41278d;
+}
+
+// ── Empty / Loading states ────────────────────────────────────────────────────
+
+.odt-empty {
+	text-align: center;
+	color: #757575;
+	font-size: 14px;
+	padding: 24px 20px !important; // override CardBody default
+}
+
+.odt-loading {
+	text-align: center;
+	padding: 24px 20px !important;
+}
+
+// ── Inline form slot ──────────────────────────────────────────────────────────
+// CardBody with size="none" — no extra padding; the renderForm provides its own spacing.
+
+.odt-form-slot {
+	background: #fff;
+}
+
+// ── Add More row (inside CardBody size="small") ───────────────────────────────
+
+.odt-add-more-row {
+	// CardBody provides padding; we just align the link.
+	display: flex;
+	align-items: center;
+}
+
+.odt-add-more-link.components-button {
+	color: #2a9d3f;
+	text-decoration: none;
+	gap: 6px;
+	font-weight: 500;
+	font-size: 14px;
+
+	&:hover:not( :disabled ) {
+		color: #1e7a30;
+	}
+
+	.odt-add-more-label {
+		text-decoration: underline;
+	}
+}
+
+.odt-cancel-link.components-button {
+	color: #757575;
+	text-decoration: underline;
+	font-size: 14px;
+
+	&:hover:not( :disabled ) {
+		color: #1d2327;
+	}
+}
+
+.odt-add-more-plus {
+	font-size: 18px;
+	line-height: 1;
+	text-decoration: none;
+	display: inline-block;
+}
+
+// ── Footer ────────────────────────────────────────────────────────────────────
+
+.odt-footer {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 16px;
+
+	// Constrain the SelectControl width; WP sets it to 100% by default.
+	.odt-bulk-select {
+		.components-select-control__input {
+			min-width: 140px;
+			width: auto;
+		}
+	}
+
+	// Style the Apply button to match the design (outlined purple).
+	.odt-apply-btn.components-button {
+		border: 2px solid #41278d;
+		color: #41278d;
+		border-radius: 4px;
+		font-weight: 600;
+
+		&:hover:not( :disabled ) {
+			background: #41278d;
+			color: #fff;
+		}
+	}
+}

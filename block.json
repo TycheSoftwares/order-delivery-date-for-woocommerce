@@ -23,5 +23,5 @@
 		"inserter": true
 	},
 	"textdomain": "order-delivery-date",
-	"editorScript": "file:./build/index.js"
+	"editorScript": "file:./build/frontend/index.js"
 }

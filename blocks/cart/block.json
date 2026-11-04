@@ -16,5 +16,5 @@
 		}
 	},
 	"textdomain": "order-delivery-date",
-	"editorScript": "file:./build/cart-block.js"
+	"editorScript": "file:./build/frontend/cart-block.js"
 }

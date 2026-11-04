@@ -1,2 +1,2 @@
-import './js/index.js';
-import './js/frontend.js';
+import './frontend/index.js';
+import './frontend/frontend.js';

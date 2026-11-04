@@ -11,48 +11,12 @@ const defaultRules = defaultConfig.module.rules.filter((rule) => {
 module.exports = {
 	...defaultConfig,
 	entry: {
-		index: path.resolve(process.cwd(), 'src', 'index.js' ),
-		'orddd-block': path.resolve(
-			process.cwd(),
-			'src',
-			'js',
-			'index.js'
-		),
-		'orddd-block-frontend':
-			path.resolve(
-				process.cwd(),
-				'src',
-				'js',
-				'frontend.js'
-			),
-		'cart-block': path.resolve(
-			process.cwd(),
-			'src',
-			'js',
-			'cart-block',
-			'cart-index.js'
-		),
-		'cart-block-frontend': path.resolve(
-			process.cwd(),
-			'src',
-			'js',
-			'cart-block',
-			'frontend.js'
-		),
-		'cart-block': path.resolve(
-			process.cwd(),
-			'src',
-			'js',
-			'cart-block',
-			'cart-index.js'
-		),
-		'cart-block-frontend': path.resolve(
-			process.cwd(),
-			'src',
-			'js',
-			'cart-block',
-			'frontend.js'
-		),
+		'frontend/index': path.resolve(process.cwd(), 'src', 'index.js'),
+		'frontend/orddd-block': path.resolve(process.cwd(), 'src', 'frontend', 'index.js'),
+		'frontend/orddd-block-frontend': path.resolve(process.cwd(), 'src', 'frontend', 'frontend.js'),
+		'frontend/cart-block': path.resolve(process.cwd(), 'src', 'frontend', 'cart-block', 'cart-index.js'),
+		'frontend/cart-block-frontend': path.resolve(process.cwd(), 'src', 'frontend', 'cart-block', 'frontend.js'),
+		'admin/index': path.resolve(process.cwd(), 'src', 'admin', 'index.js'),
 	},
 	module: {
 		...defaultConfig.module,
@@ -68,22 +32,18 @@ module.exports = {
 						loader: 'sass-loader',
 						options: {
 							sassOptions: {
-								includePaths: ['src/css'],
+								includePaths: ['src/frontend/css'],
 							},
 							additionalData: (content, loaderContext) => {
-								const { resourcePath, rootContext } =
-									loaderContext;
-								const relativePath = path.relative(
-									rootContext,
-									resourcePath
-								);
+								const { resourcePath, rootContext } = loaderContext;
+								const relativePath = path.relative(rootContext, resourcePath);
 
-								if (relativePath.startsWith('src/css/')) {
+								if (relativePath.startsWith('src/frontend/css/')) {
 									return content;
 								}
 
 								// Add code here to prepend to all .scss/.sass files.
-								//return '@import "_colors"; ' + content;
+								// return '@import "_colors"; ' + content;
 							},
 						},
 					},
@@ -101,4 +61,9 @@ module.exports = {
 			filename: `[name].css`,
 		}),
 	],
+	externals: {
+		...defaultConfig.externals,
+		'@wordpress/api-fetch': 'wp.apiFetch',
+		'@wordpress/i18n': 'wp.i18n',
+	},
 };
