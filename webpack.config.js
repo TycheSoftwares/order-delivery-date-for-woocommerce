@@ -34,17 +34,7 @@ module.exports = {
 							sassOptions: {
 								includePaths: ['src/frontend/css'],
 							},
-							additionalData: (content, loaderContext) => {
-								const { resourcePath, rootContext } = loaderContext;
-								const relativePath = path.relative(rootContext, resourcePath);
-
-								if (relativePath.startsWith('src/frontend/css/')) {
-									return content;
-								}
-
-								// Add code here to prepend to all .scss/.sass files.
-								// return '@import "_colors"; ' + content;
-							},
+							additionalData: (content) => content,
 						},
 					},
 				],
