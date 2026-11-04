@@ -20,7 +20,7 @@ if ( ! class_exists( 'ORDDD_Lite_Delivery_Schedule_API' ) ) {
 	/**
 	 * Class ORDDD_Lite_Delivery_Schedule_API
 	 */
-	class ORDDD_Lite_Delivery_Schedule_API extends ORDDD_API {
+	class ORDDD_Lite_Delivery_Schedule_API extends ORDDD_Lite_API {
 
 		/**
 		 * REST base for this resource.
