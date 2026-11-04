@@ -100,9 +100,9 @@ class Order_DeliveryDate_Lite_Blocks_Integration implements IntegrationInterface
 	 * @return void
 	 */
 	public function register_block_editor_scripts() {
-		$script_path       = '/build/orddd-block.js';
+		$script_path       = '/build/frontend/orddd-block.js';
 		$script_url        = plugins_url( 'order-delivery-date-for-woocommerce' . $script_path );
-		$script_asset_path = plugins_url( 'order-delivery-date-for-woocommerce/build/orddd-block.asset.php' );
+		$script_asset_path = plugins_url( 'order-delivery-date-for-woocommerce/build/frontend/orddd-block.asset.php' );
 		$script_asset      = file_exists( $script_asset_path )
 			? require $script_asset_path
 			: array(
@@ -125,10 +125,10 @@ class Order_DeliveryDate_Lite_Blocks_Integration implements IntegrationInterface
 	 * @return void
 	 */
 	public function register_block_frontend_scripts() {
-		$script_path       = '/build/orddd-block-frontend.js';
+		$script_path       = '/build/frontend/orddd-block-frontend.js';
 		$script_url        = plugins_url( '/order-delivery-date-for-woocommerce' . $script_path );
-		$style_url         = plugins_url( '/order-delivery-date-for-woocommerce/build/style-index.css' );
-		$script_asset_path = WP_PLUGIN_DIR . '/order-delivery-date-for-woocommerce/build/orddd-block-frontend.asset.php';
+		$style_url         = plugins_url( '/order-delivery-date-for-woocommerce/build/frontend/style-index.css' );
+		$script_asset_path = WP_PLUGIN_DIR . '/order-delivery-date-for-woocommerce/build/frontend/orddd-block-frontend.asset.php';
 
 		$script_asset = file_exists( $script_asset_path )
 			? require $script_asset_path

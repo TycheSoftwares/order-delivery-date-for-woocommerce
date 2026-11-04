@@ -566,20 +566,54 @@ class Delivery_Calendar_lite_Event_JSON {
 				}
 			}
 
-			$orddd_query = 'SELECT ID FROM `' . $wpdb->prefix . "posts` WHERE post_type = 'shop_order' AND post_status NOT IN ('wc-cancelled', 'wc-refunded', 'trash', 'wc-failed') AND ID IN ( SELECT post_id FROM `" . $wpdb->prefix . "postmeta` WHERE meta_key LIKE '%_orddd_shipping_multiple_addresss_timestamp_%' AND meta_value >= '" . $event_start_timestamp . "' AND meta_value <= '" . $event_end_timestamp . "' ) ";
-			$orddd_query = $wpdb->prepare( $orddd_query );
-			$results     = $wpdb->get_results( $orddd_query );// nosemgrep:audit.php.wp.security.sqli.input-in-sinks
+			// Secondary query: orders with multiple shipping addresses.
+			// Supports both legacy posts table and HPOS (wc_orders).
+			if ( Orddd_Lite_Common::is_hpos_enabled() ) {
+				$multi_order_table = $wpdb->prefix . 'wc_orders';
+				$multi_meta_table  = $wpdb->prefix . 'wc_orders_meta';
+				$multi_id_col      = 'id';
+				$multi_pid_col     = 'order_id';
+				$multi_type_col    = 'type';
+				$multi_status_col  = 'status';
+			} else {
+				$multi_order_table = $wpdb->prefix . 'posts';
+				$multi_meta_table  = $wpdb->prefix . 'postmeta';
+				$multi_id_col      = 'ID';
+				$multi_pid_col     = 'post_id';
+				$multi_type_col    = 'post_type';
+				$multi_status_col  = 'post_status';
+			}
+
+			$orddd_query = $wpdb->prepare(
+				"SELECT {$multi_id_col} FROM `{$multi_order_table}`
+				WHERE {$multi_type_col} = 'shop_order'
+				AND {$multi_status_col} NOT IN ('wc-cancelled', 'wc-refunded', 'trash', 'wc-failed')
+				AND {$multi_id_col} IN (
+					SELECT {$multi_pid_col} FROM `{$multi_meta_table}`
+					WHERE meta_key LIKE %s
+					AND meta_value >= %d
+					AND meta_value <= %d
+				)",
+				'%_orddd_shipping_multiple_addresss_timestamp_%',
+				(int) $event_start_timestamp,
+				(int) $event_end_timestamp
+			);
+			$results     = $wpdb->get_results( $orddd_query );
 			if ( is_array( $results ) && count( $results ) > 0 ) {
 				foreach ( $results as $key => $value ) {
-					$order       = wc_get_order( $value->ID );
+					$row_id      = isset( $value->ID ) ? $value->ID : ( isset( $value->id ) ? $value->id : 0 );
+					$order       = wc_get_order( $row_id );
 					$order_items = $order->get_items();
 					$post_status = $version_greater_than_three ? ( isset( $value->post_status ) ? $value->post_status : ( isset( $value->status ) ? $value->status : '' ) ) : $order->post_status;
 
 					if ( in_array( $post_status, $order_status ) ) {
 						$shipping_packages = $order->get_meta( '_shipping_packages', true );
-						$query             = 'SELECT meta_key, meta_value FROM `' . $wpdb->prefix . "postmeta` WHERE post_id='" . $value->ID . "' AND meta_key LIKE '%_orddd_shipping_multiple_addresss_%'";
-						$query             = $wpdb->prepare( $query );
-						$results_array     = $wpdb->get_results( $query );// nosemgrep:audit.php.wp.security.sqli.input-in-sinks
+						$query             = $wpdb->prepare(
+							"SELECT meta_key, meta_value FROM `{$multi_meta_table}` WHERE {$multi_pid_col} = %d AND meta_key LIKE %s",
+							$row_id,
+							'%_orddd_shipping_multiple_addresss_%'
+						);
+						$results_array     = $wpdb->get_results( $query );
 						$delivery_dates    = array();
 						foreach ( $results_array as $r_key => $r_value ) {
 							$delivery_dates[ $r_value->meta_key ] = $r_value->meta_value;
@@ -638,7 +672,7 @@ class Delivery_Calendar_lite_Event_JSON {
 															apply_filters(
 																'orddd_lite_delivery_modify_calendar_data',
 																array(
-																	'id'       => $value->ID,
+																	'id'       => $row_id,
 																	'title'    => $product_name . ' x' . $item['quantity'],
 																	'product_name' => $product_name,
 																	'start'    => $from_date,
@@ -671,7 +705,7 @@ class Delivery_Calendar_lite_Event_JSON {
 															apply_filters(
 																'orddd_lite_delivery_modify_calendar_data',
 																array(
-																	'id'       => $value->ID,
+																	'id'       => $row_id,
 																	'title'    => $product_name . ' x' . $item['quantity'],
 																	'product_name' => $product_name,
 																	'start'    => $from_date,
@@ -703,7 +737,7 @@ class Delivery_Calendar_lite_Event_JSON {
 													apply_filters(
 														'orddd_lite_delivery_modify_calendar_data',
 														array(
-															'id'    => $value->ID,
+															'id'    => $row_id,
 															'title' => $product_name . ' x' . $item['quantity'],
 															'product_name' => $product_name,
 															'start' => $from_date,
@@ -730,7 +764,7 @@ class Delivery_Calendar_lite_Event_JSON {
 													apply_filters(
 														'orddd_lite_delivery_modify_calendar_data',
 														array(
-															'id'    => $value->ID,
+															'id'    => $row_id,
 															'title' => $product_name . ' x' . $item['quantity'],
 															'product_name' => $product_name,
 															'start' => $delivery_date_formatted,
@@ -771,7 +805,7 @@ class Delivery_Calendar_lite_Event_JSON {
 														apply_filters(
 															'orddd_lite_delivery_modify_calendar_data',
 															array(
-																'id'       => $value->ID,
+																'id'       => $row_id,
 																'title'    => 'Order Number: ' . $order_number,
 																'start'    => $from_date,
 																'end'      => $to_date,
@@ -798,7 +832,7 @@ class Delivery_Calendar_lite_Event_JSON {
 														apply_filters(
 															'orddd_lite_delivery_modify_calendar_data',
 															array(
-																'id'       => $value->ID,
+																'id'       => $row_id,
 																'title'    => 'Order Number: ' . $order_number,
 																'start'    => $from_date,
 																'end'      => $to_date,
@@ -825,7 +859,7 @@ class Delivery_Calendar_lite_Event_JSON {
 												apply_filters(
 													'orddd_lite_delivery_modify_calendar_data',
 													array(
-														'id'    => $value->ID,
+														'id'    => $row_id,
 														'title' => 'Order Number: ' . $order_number,
 														'start' => $from_date,
 														'end'   => $to_date,
@@ -847,7 +881,7 @@ class Delivery_Calendar_lite_Event_JSON {
 												apply_filters(
 													'orddd_lite_delivery_modify_calendar_data',
 													array(
-														'id'    => $value->ID,
+														'id'    => $row_id,
 														'title' => 'Order Number: ' . $order_number,
 														'start' => $delivery_date_formatted,
 														'end'   => $delivery_date_formatted,
