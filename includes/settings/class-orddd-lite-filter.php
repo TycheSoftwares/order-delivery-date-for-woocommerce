@@ -409,10 +409,38 @@ class Orddd_Lite_Filter {
 	 * @return array
 	 */
 	public static function orddd_lite_add_search_fields( $search_fields ) {
-		array_push( $search_fields, get_option( 'orddd_lite_delivery_date_field_label' ) );
+		foreach ( self::orddd_lite_get_date_label_variants() as $label ) {
+			if ( ! in_array( $label, $search_fields, true ) ) {
+				$search_fields[] = $label;
+			}
+		}
 		return $search_fields;
+	}
+
+	/**
+	 * Get every label the delivery date may have been saved under.
+	 *
+	 * @return array Unique, non-empty labels.
+	 * @since 4.6.4
+	 */
+	public static function orddd_lite_get_date_label_variants() {
+		$option = 'orddd_lite_delivery_date_field_label';
+		$labels = array( get_option( $option ) );
+
+		if ( has_filter( 'wpml_active_languages' ) ) {
+			$original  = apply_filters( 'wpml_unfiltered_admin_string', get_option( $option ), $option );
+			$labels[]  = $original;
+			$languages = apply_filters( 'wpml_active_languages', null, array( 'skip_missing' => 0 ) );
+
+			if ( is_array( $languages ) ) {
+				foreach ( array_keys( $languages ) as $language_code ) {
+					$labels[] = apply_filters( 'wpml_translate_single_string', $original, 'admin_texts_' . $option, $option, $language_code );
+				}
+			}
+		}
+
+		return array_values( array_unique( array_filter( array_map( 'strval', $labels ) ) ) );
 	}
 
 }
 $orddd_lite_filter = new Orddd_Lite_Filter();
-
