@@ -4,6 +4,7 @@
 	<key name="orddd_lite_delivery_date_field_label"/>
 	<key name="orddd_lite_delivery_date_field_placeholder"/>
 	<key name="orddd_lite_delivery_date_field_note"/>
+	<key name="orddd_lite_delivery_timeslot_field_label"/>
 </admin-texts>
 
 </wpml-config>
