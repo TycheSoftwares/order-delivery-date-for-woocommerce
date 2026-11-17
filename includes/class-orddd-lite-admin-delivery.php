@@ -449,6 +449,7 @@ class Orddd_Lite_Admin_Delivery {
 			$admin_lite_params['orddd_lite_field_label']          = esc_attr( $date_field_label );
 			$admin_lite_params['orddd_lite_timeslot_field_label'] = esc_attr( $time_field_label );
 			$admin_lite_params['security']                        = wp_create_nonce( 'orddd_save_delivery_dates' );
+			$admin_lite_params['timeslot_nonce']                  = wp_create_nonce( 'orddd_lite_timeslot_order' );
 			return $admin_lite_params;
 		}
 	}
