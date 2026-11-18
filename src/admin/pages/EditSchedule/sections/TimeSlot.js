@@ -134,11 +134,6 @@ export const AddIndividualTimeSlotsForm = ( { form, setForm, onSave, weekdayOpti
 						/>
 					</div>
 					<div className="sf-inline-field">
-						<span className="sf-inline-field__label">Charges Type</span>
-						<SelectControl className="sf-select" value={ form.charges_type }
-							options={ [ { value: 'fixed', label: 'Fixed' } ] } onChange={ set( 'charges_type' ) } __nextHasNoMarginBottom />
-					</div>
-					<div className="sf-inline-field">
 						<InputControl
 							label="Time Slot Charges Label"
 							placeholder='Time slot Charges'
@@ -243,15 +238,6 @@ export const AddBulkTimeSlotsForm = ( { form, setForm, onSave, weekdayOptions, s
 							value={ form.charges }
 							onChange={ ( v ) => set( 'charges' )( v ) }
 						/>
-					</div>
-					<div className="sf-inline-field">
-						<SelectControl 
-							className="sf-select" 
-							label="Charges Type"
-							value={ form.charges_type }
-							options={ [ { value: 'fixed', label: 'Fixed' } ] } 
-							onChange={ set( 'charges_type' ) } 
-							__nextHasNoMarginBottom />
 					</div>
 					<div className="sf-inline-field">
 						<InputControl
@@ -364,7 +350,6 @@ const Panel2TimeSlot = ( { form, control, timeSlots, setTimeSlots, deliveryDays 
 		{ key: 'time',          label: __( 'Time Slot', 'order-delivery-date' ) },
 		{ key: 'max_orders',    label: __( 'Maximum Order Deliveries per time slot','order-delivery-date' ) },
 		{ key: 'charges',       label: __( 'Additional Charges', 'order-delivery-date' ) },
-		{ key: 'charges_type',  label: __( 'Charges Type', 'order-delivery-date' ) },
 		{ key: 'charges_label', label: __( 'Charges Label', 'order-delivery-date' ) },
 	];
 
@@ -399,12 +384,6 @@ const Panel2TimeSlot = ( { form, control, timeSlots, setTimeSlots, deliveryDays 
 					</span>
 				);
 			}
-			if ( colKey === 'charges_type' ) {
-				return (
-					<SelectControl value={ row.charges_type } options={ [ { value: 'fixed', label: __( 'Fixed', 'order-delivery-date' ) } ] }
-						onChange={ ( v ) => updateSlot( timeSlots.indexOf( row ), 'charges_type', v ) } __nextHasNoMarginBottom />
-				);
-			}
 			return (
 				<TextControl value={ row[ colKey ] }
 					onChange={ ( v ) => updateSlot( timeSlots.indexOf( row ), colKey, v ) }
@@ -418,8 +397,7 @@ const Panel2TimeSlot = ( { form, control, timeSlots, setTimeSlots, deliveryDays 
 			if ( t && typeof t === 'object' ) return `${ t.from_time || '' } - ${ t.to_time || '' }`;
 			return t || '';
 		}
-		if ( colKey === 'charges' && row.charges ) return row.charges_type === 'percentage' ? `${ row.charges }%` : row.charges;
-		if ( colKey === 'charges_type' && ! row.charges ) return '';
+		if ( colKey === 'charges' && row.charges ) return row.charges;
 		return row[ colKey ] || '';
 	};
 

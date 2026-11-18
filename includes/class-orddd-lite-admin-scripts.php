@@ -132,8 +132,15 @@ class ORDDD_Lite_Admin_Scripts {
 			ORDDD_LITE_VERSION
 		);
 
+		wp_enqueue_style(
+			'orddd-lite-font-awesome',
+			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+			array(),
+			'6.4.0'
+		);
+
 		// Calendar data for the React Order Calendar page (window.orddd_calendar_js).
-		$calendar_nonce  = wp_create_nonce( 'orddd-delivery-calendar-event-json' );
+		$calendar_nonce   = wp_create_nonce( 'orddd-delivery-calendar-event-json' );
 		$cal_export_nonce = wp_create_nonce( 'orddd_export_nonce' );
 
 		wp_localize_script(
@@ -142,15 +149,12 @@ class ORDDD_Lite_Admin_Scripts {
 			array(
 				'pluginurl'          => add_query_arg(
 					array(
-						'action'    => 'orddd-delivery-calendar-event-json',
-						'vendor_id' => 0,
-						'security'  => $calendar_nonce,
+						'action' => 'orddd-delivery-calendar-event-json',
 					),
 					admin_url( 'admin.php' )
 				),
 				'ajax_url'           => admin_url( 'admin-ajax.php' ),
 				'security'           => $calendar_nonce,
-				'vendor_id'          => 0,
 				'orddd_export_nonce' => $cal_export_nonce,
 				'print_url'          => add_query_arg(
 					array(
@@ -194,6 +198,8 @@ class ORDDD_Lite_Admin_Scripts {
 				),
 				'calendar_themes'        => $this->get_calendar_themes(),
 				'languages'              => $this->get_languages(),
+				'days'                   => $this->get_days(),
+				'number_of_months'       => $this->get_number_of_months(),
 				'checkout_positions'     => $this->get_checkout_positions(),
 				'upgradeUrl'             => 'https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/',
 				'faqs'                   => Orddd_Lite_All_Component::orddd_lite_get_faq(),
@@ -305,6 +311,44 @@ class ORDDD_Lite_Admin_Scripts {
 		}
 
 		return array( 'en-GB' => 'English' );
+	}
+
+	/**
+	 * Returns weekday options keyed by day index (0 = Sunday).
+	 *
+	 * @return array
+	 */
+	private function get_days() {
+		global $orddd_lite_days;
+
+		if ( ! empty( $orddd_lite_days ) && is_array( $orddd_lite_days ) ) {
+			return $orddd_lite_days;
+		}
+
+		return array(
+			'0' => __( 'Sunday', 'order-delivery-date' ),
+			'1' => __( 'Monday', 'order-delivery-date' ),
+			'2' => __( 'Tuesday', 'order-delivery-date' ),
+			'3' => __( 'Wednesday', 'order-delivery-date' ),
+			'4' => __( 'Thursday', 'order-delivery-date' ),
+			'5' => __( 'Friday', 'order-delivery-date' ),
+			'6' => __( 'Saturday', 'order-delivery-date' ),
+		);
+	}
+
+	/**
+	 * Returns available number-of-months options.
+	 *
+	 * @return array
+	 */
+	private function get_number_of_months() {
+		global $orddd_lite_number_of_months;
+
+		if ( ! empty( $orddd_lite_number_of_months ) && is_array( $orddd_lite_number_of_months ) ) {
+			return $orddd_lite_number_of_months;
+		}
+
+		return array( 1 => 1, 2 => 2 );
 	}
 
 	/**

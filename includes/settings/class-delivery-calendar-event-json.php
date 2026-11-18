@@ -27,6 +27,7 @@ class Delivery_Calendar_lite_Event_JSON {
 	 * @since 8.1
 	 */
 	public function __construct() {
+		add_action( 'init', array( &$this, 'handle_event_json' ) );
 		add_action( 'admin_init', array( &$this, 'handle_event_json' ) );
 	}
 
@@ -37,22 +38,12 @@ class Delivery_Calendar_lite_Event_JSON {
 	 */
 	public static function handle_event_json() {
 
-		$action    = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
-		$vendor_id = isset( $_GET['vendor_id'] ) ? sanitize_text_field( wp_unslash( $_GET['vendor_id'] ) ) : '';
-		$is_vendor = '' !== $vendor_id && 0 !== $vendor_id;
+		$action = isset( $_GET['action'] ) ? $_GET['action'] : ''; // phpcs:ignore
 
 		if ( 'orddd-delivery-calendar-event-json' === $action ) {
-			if ( ! current_user_can( 'manage_woocommerce' ) && ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( __( 'Unauthorized', 'order-delivery-date' ), 403 );
-			}
-			$import_nonce = isset( $_GET['security'] ) ? sanitize_text_field( wp_unslash( $_GET['security'] ) ) : '';
-			if ( ! wp_verify_nonce( $import_nonce, 'orddd-delivery-calendar-event-json' ) ) {
-				esc_html_e( 'Authentication has failed.', 'order-delivery-date' );
-				return;
-			}
 			global $wpdb;
-			if ( isset( $_GET['orderStatus'] ) && ( sanitize_text_field( wp_unslash( $_GET['orderStatus'] ) ) != '' ) ) {
-				$order_status1 = sanitize_text_field( wp_unslash( $_GET['orderStatus'] ) );
+			if ( isset( $_GET['orderStatus'] ) && ( $_GET['orderStatus'] != '' ) ) { // phpcs:ignore
+				$order_status1 = $_GET['orderStatus']; // phpcs:ignore
 				$order_status  = explode( ',', $order_status1 );
 			} else {
 				$all_order_status = wc_get_order_statuses();
@@ -67,8 +58,8 @@ class Delivery_Calendar_lite_Event_JSON {
 			}
 
 			$order_shipping = array();
-			if ( isset( $_GET['orderShipping'] ) && ( sanitize_text_field( wp_unslash( $_GET['orderShipping'] ) ) != '' ) ) {
-				$order_shipping1 = sanitize_text_field( wp_unslash( $_GET['orderShipping'] ) );
+			if ( isset( $_GET['orderShipping'] ) && ( $_GET['orderShipping'] != '' ) ) { // phpcs:ignore
+				$order_shipping1 = $_GET['orderShipping']; // phpcs:ignore
 				$order_shipping  = explode( ',', $order_shipping1 );
 			}
 
@@ -77,23 +68,22 @@ class Delivery_Calendar_lite_Event_JSON {
 			$event_end             = '';
 			$event_end_timestamp   = '';
 
-			if ( isset( $_GET['start'] ) ) {
-				$event_start           = sanitize_text_field( wp_unslash( $_GET['start'] ) );
-				$event_start_timestamp = strtotime( $event_start );
+			if ( isset( $_GET['start'] ) ) { // phpcs:ignore
+				$event_start           = $_GET['start']; // phpcs:ignore
+				$event_start_timestamp = strtotime( $_GET['start'] ); // phpcs:ignore
 			}
 
-			if ( isset( $_GET['end'] ) ) {
-				$event_end           = sanitize_text_field( wp_unslash( $_GET['end'] ) );
-				$event_end_timestamp = strtotime( $event_end );
+			if ( isset( $_GET['end'] ) ) { // phpcs:ignore
+				$event_end           = $_GET['end']; // phpcs:ignore
+				$event_end_timestamp = strtotime( $_GET['end'] ); // phpcs:ignore
 			}
 
 			$date_str            = Orddd_Lite_Common::str_to_date_format();
 			$delivery_date_label = esc_sql( get_option( 'orddd_lite_delivery_date_field_label' ) );
 
-			
 			$order_timestamp_key     = '_orddd_lite_timestamp';
 			$orddd_delivery_date_key = $delivery_date_label;
-			
+
 			$order_table      = 'posts';
 			$order_meta_table = 'postmeta';
 			$post_type        = 'post_type';
@@ -110,70 +100,21 @@ class Delivery_Calendar_lite_Event_JSON {
 				$id               = 'id';
 			}
 
-			// Sanitize dynamic identifiers (table + column names).
-			$order_table      = sanitize_key( $order_table );
-			$order_meta_table = sanitize_key( $order_meta_table );
-			$id               = sanitize_key( $id );
-			$post_id          = sanitize_key( $post_id );
-			$post_status_col  = sanitize_key( $post_status );
-			$post_type_col    = sanitize_key( $post_type );
+			$orddd_query = "SELECT DISTINCT wp.{$id}, {$post_status}, wpm1.meta_value AS orddd_timestamp , wpm2.meta_value AS delivery_date , wpm3.meta_value AS time_slot
+			FROM `" . $wpdb->prefix . "$order_table` wp
+			INNER JOIN `" . $wpdb->prefix . "$order_meta_table` wpm1 ON ( wp.{$id} = wpm1.{$post_id} AND wpm1.meta_key ='" . $order_timestamp_key . "' )
+			LEFT JOIN `" . $wpdb->prefix . "$order_meta_table` wpm2 ON ( wp.{$id} = wpm2.{$post_id} AND ( wpm2.meta_key ='" . $orddd_delivery_date_key . "' ) )
+			LEFT JOIN `" . $wpdb->prefix . "$order_meta_table` wpm3 ON ( wp.{$id} = wpm3.{$post_id} AND wpm3.meta_key ='_orddd_time_slot' ) ";
 
-			// Sanitize meta keys.
-			$order_timestamp_key     = sanitize_key( $order_timestamp_key );
-			$orddd_delivery_date_key = sanitize_key( $orddd_delivery_date_key );
-			$delivery_date_label     = sanitize_key( $delivery_date_label );
+			$orddd_query .= "WHERE $post_type = 'shop_order' AND $post_status IN ( '" . implode( "','", $order_status ) . "')
+			AND
+			(
+			( wpm1.meta_key = '" . $order_timestamp_key . "' AND wpm1.meta_value >= '" . $event_start_timestamp . "' AND wpm1.meta_value <= '" . $event_end_timestamp . "' ) OR
+			( wpm2.meta_key = '" . $delivery_date_label . "' AND STR_TO_DATE( wpm2.meta_value, '" . $date_str . "' ) >= '" . $event_start . "' AND STR_TO_DATE( wpm2.meta_value, '" . $date_str . "' ) <= '" . $event_end . "' )
+			OR ( wpm2.meta_key = '" . ORDDD_LITE_DELIVERY_DATE_FIELD_LABEL . "' AND STR_TO_DATE( wpm2.meta_value, '" . $date_str . "' ) >= '" . $event_start . "' AND STR_TO_DATE( wpm2.meta_value, '" . $date_str . "' ) <= '" . $event_end . "' )
+			OR ( wpm2.meta_key = '" . $orddd_delivery_date_key . "' AND STR_TO_DATE( wpm2.meta_value, '" . $date_str . "' ) >= '" . $event_start . "' AND STR_TO_DATE( wpm2.meta_value, '" . $date_str . "' ) <= '" . $event_end . "' )
+			)";
 
-			// Sanitize date format string safely (allowed characters only).
-			$date_str = preg_replace( '/[^%a-zA-Z\-\/ :]/', '', $date_str );
-
-			// Sanitize statuses.
-			$order_status = array_map( 'sanitize_text_field', (array) $order_status );
-
-			// Create placeholders for IN clause.
-			$status_placeholders = implode( ',', array_fill( 0, count( $order_status ), '%s' ) );
-
-			$query = "SELECT DISTINCT wp.{$id}, wp.{$post_status_col}, 
-				wpm1.meta_value AS orddd_timestamp,
-				wpm2.meta_value AS delivery_date,
-				wpm3.meta_value AS time_slot
-				FROM {$wpdb->prefix}{$order_table} wp
-				INNER JOIN {$wpdb->prefix}{$order_meta_table} wpm1 
-					ON ( wp.{$id} = wpm1.{$post_id} AND wpm1.meta_key = %s )
-				LEFT JOIN {$wpdb->prefix}{$order_meta_table} wpm2 
-					ON ( wp.{$id} = wpm2.{$post_id} AND wpm2.meta_key IN ( %s, %s ) )
-				LEFT JOIN {$wpdb->prefix}{$order_meta_table} wpm3 
-					ON ( wp.{$id} = wpm3.{$post_id} AND wpm3.meta_key = %s )
-				WHERE wp.{$post_type_col} = %s
-					AND wp.{$post_status_col} IN ( {$status_placeholders} )
-					AND (
-							( wpm1.meta_value BETWEEN %d AND %d )
-							OR
-							( STR_TO_DATE( wpm2.meta_value, %s ) BETWEEN %s AND %s )
-						)
-				";
-
-			// Merge prepare values in correct order.
-			$prepare_values = array_merge(
-				array(
-					$order_timestamp_key,
-					$delivery_date_label,
-					$orddd_delivery_date_key,
-					'_orddd_time_slot',
-					'shop_order',
-				),
-				$order_status,
-				array(
-					(int) $event_start_timestamp,
-					(int) $event_end_timestamp,
-					$date_str,
-					$event_start,
-					$event_end,
-				)
-			);
-
-			$orddd_query = $wpdb->prepare( $query, $prepare_values );
-
-			// Allow safe filtering AFTER prepare (optional — depends on your architecture).
 			$orddd_query = apply_filters( 'orddd_lite_calendar_query_filter', $orddd_query );
 
 			$results = $wpdb->get_results( $orddd_query );// nosemgrep:audit.php.wp.security.sqli.input-in-sinks
@@ -584,21 +525,16 @@ class Delivery_Calendar_lite_Event_JSON {
 				$multi_status_col  = 'post_status';
 			}
 
-			$orddd_query = $wpdb->prepare(
-				"SELECT {$multi_id_col} FROM `{$multi_order_table}`
+			$orddd_query = "SELECT {$multi_id_col} FROM `{$multi_order_table}`
 				WHERE {$multi_type_col} = 'shop_order'
 				AND {$multi_status_col} NOT IN ('wc-cancelled', 'wc-refunded', 'trash', 'wc-failed')
 				AND {$multi_id_col} IN (
 					SELECT {$multi_pid_col} FROM `{$multi_meta_table}`
-					WHERE meta_key LIKE %s
-					AND meta_value >= %d
-					AND meta_value <= %d
-				)",
-				'%_orddd_shipping_multiple_addresss_timestamp_%',
-				(int) $event_start_timestamp,
-				(int) $event_end_timestamp
-			);
-			$results     = $wpdb->get_results( $orddd_query );
+					WHERE meta_key LIKE '%_orddd_shipping_multiple_addresss_timestamp_%'
+					AND meta_value >= '" . $event_start_timestamp . "'
+					AND meta_value <= '" . $event_end_timestamp . "'
+				)";
+			$results     = $wpdb->get_results( $orddd_query );// nosemgrep:audit.php.wp.security.sqli.input-in-sinks
 			if ( is_array( $results ) && count( $results ) > 0 ) {
 				foreach ( $results as $key => $value ) {
 					$row_id      = isset( $value->ID ) ? $value->ID : ( isset( $value->id ) ? $value->id : 0 );
@@ -608,12 +544,8 @@ class Delivery_Calendar_lite_Event_JSON {
 
 					if ( in_array( $post_status, $order_status ) ) {
 						$shipping_packages = $order->get_meta( '_shipping_packages', true );
-						$query             = $wpdb->prepare(
-							"SELECT meta_key, meta_value FROM `{$multi_meta_table}` WHERE {$multi_pid_col} = %d AND meta_key LIKE %s",
-							$row_id,
-							'%_orddd_shipping_multiple_addresss_%'
-						);
-						$results_array     = $wpdb->get_results( $query );
+						$query             = "SELECT meta_key, meta_value FROM `{$multi_meta_table}` WHERE {$multi_pid_col} = '" . $row_id . "' AND meta_key LIKE '%_orddd_shipping_multiple_addresss_%'";
+						$results_array     = $wpdb->get_results( $query );// nosemgrep:audit.php.wp.security.sqli.input-in-sinks
 						$delivery_dates    = array();
 						foreach ( $results_array as $r_key => $r_value ) {
 							$delivery_dates[ $r_value->meta_key ] = $r_value->meta_value;

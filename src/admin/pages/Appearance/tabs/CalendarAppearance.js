@@ -22,7 +22,7 @@ import { useForm, Controller, useWatch } from 'react-hook-form';
  */
 import SettingsPanel, { AccordionCard, SettingRow } from '../../../components/SettingsPanel';
 
-// ── Option lists ──────────────────────────────────────────────────────────────
+// ── Option lists (sourced from orddd-lite-config.php via ordddAdminData) ──────
 
 // Formats a Date using jQuery UI datepicker format tokens.
 const DAY_NAMES_SHORT   = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
@@ -46,146 +46,26 @@ const formatJQueryUIDate = ( date, format ) => {
 	return format.replace( /DD|D|MM|M|dd|d|mm|m|yy|y/g, ( token ) => map[ token ] );
 };
 
-const TODAY = new Date();
+const TODAY     = new Date();
+const adminData = window.ordddAdminData ?? {};
 
-const DATE_FORMAT_OPTIONS = [
-	'mm/dd/y',
-	'dd/mm/y',
-	'dd/mm/yy',
-	'y/mm/dd',
-	'mm/dd/y, D',
-	'dd.mm.y',
-	'y.mm.dd',
-	'yy-mm-dd',
-	'dd-mm-y',
-	'd M, y',
-	'd M, yy',
-	'd MM, y',
-	'd MM, yy',
-	'DD, d MM, yy',
-	'D, M d, yy',
-	'DD, M d, yy',
-	'DD, MM d, yy',
-	'D, MM d, yy',
-	'DD d MM yy',
-	'DD d MM',
-].map( ( fmt ) => ( { value: fmt, label: `${ formatJQueryUIDate( TODAY, fmt ) }` } ) );
+const DATE_FORMAT_OPTIONS = Object.keys( adminData.date_formats ?? {} )
+	.map( ( fmt ) => ( { value: fmt, label: formatJQueryUIDate( TODAY, fmt ) } ) );
 
-const TIME_FORMAT_OPTIONS = [
-	{ value: '1', label: __( '12 hour', 'order-delivery-date' ) },
-	{ value: '2', label: __( '24 hour', 'order-delivery-date' ) },
-];
+const TIME_FORMAT_OPTIONS = Object.entries( adminData.time_formats ?? {} )
+	.map( ( [ value, label ] ) => ( { value, label } ) );
 
-const START_OF_WEEK_OPTIONS = [
-	{ value: '0', label: __( 'Sunday', 'order-delivery-date' )    },
-	{ value: '1', label: __( 'Monday', 'order-delivery-date' )    },
-	{ value: '2', label: __( 'Tuesday', 'order-delivery-date' )   },
-	{ value: '3', label: __( 'Wednesday', 'order-delivery-date' ) },
-	{ value: '4', label: __( 'Thursday', 'order-delivery-date' )  },
-	{ value: '5', label: __( 'Friday', 'order-delivery-date' )    },
-	{ value: '6', label: __( 'Saturday', 'order-delivery-date' )  },
-];
+const START_OF_WEEK_OPTIONS = Object.entries( adminData.days ?? {} )
+	.map( ( [ value, label ] ) => ( { value, label } ) );
 
-const NUMBER_OF_MONTHS_OPTIONS = [
-	{ value: '1', label: '1' },
-	{ value: '2', label: '2' },
-];
+const NUMBER_OF_MONTHS_OPTIONS = Object.entries( adminData.number_of_months ?? {} )
+	.map( ( [ value ] ) => ( { value: String( value ), label: String( value ) } ) );
 
-const CALENDAR_THEME_OPTIONS = [
-	{ value: 'smoothness',     label: __( 'Smoothness', 'order-delivery-date' )     },
-	{ value: 'ui-lightness',   label: __( 'UI Lightness', 'order-delivery-date' )   },
-	{ value: 'ui-darkness',    label: __( 'UI Darkness', 'order-delivery-date' )    },
-	{ value: 'start',          label: __( 'Start', 'order-delivery-date' )          },
-	{ value: 'redmond',        label: __( 'Redmond', 'order-delivery-date' )        },
-	{ value: 'sunny',          label: __( 'Sunny', 'order-delivery-date' )          },
-	{ value: 'overcast',       label: __( 'Overcast', 'order-delivery-date' )       },
-	{ value: 'le-frog',        label: __( 'Le Frog', 'order-delivery-date' )        },
-	{ value: 'flick',          label: __( 'Flick', 'order-delivery-date' )          },
-	{ value: 'pepper-grinder', label: __( 'Pepper Grinder', 'order-delivery-date' ) },
-	{ value: 'eggplant',       label: __( 'Eggplant', 'order-delivery-date' )       },
-	{ value: 'dark-hive',      label: __( 'Dark Hive', 'order-delivery-date' )      },
-	{ value: 'cupertino',      label: __( 'Cupertino', 'order-delivery-date' )      },
-	{ value: 'south-street',   label: __( 'South Street', 'order-delivery-date' )   },
-	{ value: 'blitzer',        label: __( 'Blitzer', 'order-delivery-date' )        },
-	{ value: 'humanity',       label: __( 'Humanity', 'order-delivery-date' )       },
-	{ value: 'hot-sneaks',     label: __( 'Hot Sneaks', 'order-delivery-date' )     },
-	{ value: 'excite-bike',    label: __( 'Excite Bike', 'order-delivery-date' )    },
-	{ value: 'vader',          label: __( 'Vader', 'order-delivery-date' )          },
-	{ value: 'dot-luv',        label: __( 'Dot Luv', 'order-delivery-date' )        },
-	{ value: 'mint-choc',      label: __( 'Mint Choc', 'order-delivery-date' )      },
-	{ value: 'black-tie',      label: __( 'Black Tie', 'order-delivery-date' )      },
-	{ value: 'trontastic',     label: __( 'Trontastic', 'order-delivery-date' )     },
-	{ value: 'swanky-purse',   label: __( 'Swanky Purse', 'order-delivery-date' )   },
-	{ value: 'new-theme-1',    label: __( 'Custom Theme 1', 'order-delivery-date' ) },
-	{ value: 'new-theme-2',    label: __( 'Custom Theme 2', 'order-delivery-date' ) },
-];
+const CALENDAR_THEME_OPTIONS = Object.entries( adminData.calendar_themes ?? {} )
+	.map( ( [ value, label ] ) => ( { value, label } ) );
 
-const LANGUAGE_OPTIONS = [
-	{ value: 'af',    label: __( 'Afrikaans', 'order-delivery-date' )            },
-	{ value: 'ar',    label: __( 'Arabic', 'order-delivery-date' )               },
-	{ value: 'ar-DZ', label: __( 'Algerian Arabic', 'order-delivery-date' )      },
-	{ value: 'az',    label: __( 'Azerbaijani', 'order-delivery-date' )          },
-	{ value: 'id',    label: __( 'Indonesian', 'order-delivery-date' )           },
-	{ value: 'ms',    label: __( 'Malaysian', 'order-delivery-date' )            },
-	{ value: 'nl-BE', label: __( 'Dutch Belgian', 'order-delivery-date' )        },
-	{ value: 'bs',    label: __( 'Bosnian', 'order-delivery-date' )              },
-	{ value: 'bg',    label: __( 'Bulgarian', 'order-delivery-date' )            },
-	{ value: 'ca',    label: __( 'Catalan', 'order-delivery-date' )              },
-	{ value: 'cs',    label: __( 'Czech', 'order-delivery-date' )                },
-	{ value: 'cy-GB', label: __( 'Welsh', 'order-delivery-date' )                },
-	{ value: 'da',    label: __( 'Danish', 'order-delivery-date' )               },
-	{ value: 'de',    label: __( 'German', 'order-delivery-date' )               },
-	{ value: 'et',    label: __( 'Estonian', 'order-delivery-date' )             },
-	{ value: 'el',    label: __( 'Greek', 'order-delivery-date' )                },
-	{ value: 'en-AU', label: __( 'English (Australia)', 'order-delivery-date' )  },
-	{ value: 'en-NZ', label: __( 'English (New Zealand)', 'order-delivery-date' )},
-	{ value: 'en-GB', label: __( 'English (UK)', 'order-delivery-date' )         },
-	{ value: 'es',    label: __( 'Spanish', 'order-delivery-date' )              },
-	{ value: 'eo',    label: __( 'Esperanto', 'order-delivery-date' )            },
-	{ value: 'eu',    label: __( 'Basque', 'order-delivery-date' )               },
-	{ value: 'fo',    label: __( 'Faroese', 'order-delivery-date' )              },
-	{ value: 'fr',    label: __( 'French', 'order-delivery-date' )               },
-	{ value: 'fr-CH', label: __( 'French Swiss', 'order-delivery-date' )         },
-	{ value: 'gl',    label: __( 'Galician', 'order-delivery-date' )             },
-	{ value: 'sq',    label: __( 'Albanian', 'order-delivery-date' )             },
-	{ value: 'ko',    label: __( 'Korean', 'order-delivery-date' )               },
-	{ value: 'he',    label: __( 'Hebrew', 'order-delivery-date' )               },
-	{ value: 'hi',    label: __( 'Hindi (India)', 'order-delivery-date' )        },
-	{ value: 'hr',    label: __( 'Croatian', 'order-delivery-date' )             },
-	{ value: 'hy',    label: __( 'Armenian', 'order-delivery-date' )             },
-	{ value: 'is',    label: __( 'Icelandic', 'order-delivery-date' )            },
-	{ value: 'it',    label: __( 'Italian', 'order-delivery-date' )              },
-	{ value: 'ka',    label: __( 'Georgian', 'order-delivery-date' )             },
-	{ value: 'km',    label: __( 'Khmer', 'order-delivery-date' )                },
-	{ value: 'lv',    label: __( 'Latvian', 'order-delivery-date' )              },
-	{ value: 'lt',    label: __( 'Lithuanian', 'order-delivery-date' )           },
-	{ value: 'mk',    label: __( 'Macedonian', 'order-delivery-date' )           },
-	{ value: 'hu',    label: __( 'Hungarian', 'order-delivery-date' )            },
-	{ value: 'ml',    label: __( 'Malayam', 'order-delivery-date' )              },
-	{ value: 'nl',    label: __( 'Dutch', 'order-delivery-date' )                },
-	{ value: 'ja',    label: __( 'Japanese', 'order-delivery-date' )             },
-	{ value: 'no',    label: __( 'Norwegian', 'order-delivery-date' )            },
-	{ value: 'th',    label: __( 'Thai', 'order-delivery-date' )                 },
-	{ value: 'pl',    label: __( 'Polish', 'order-delivery-date' )               },
-	{ value: 'pt-pt', label: __( 'Portuguese', 'order-delivery-date' )           },
-	{ value: 'pt',    label: __( 'Portuguese', 'order-delivery-date' )           },
-	{ value: 'pt-BR', label: __( 'Portuguese (Brazil)', 'order-delivery-date' )  },
-	{ value: 'ro',    label: __( 'Romanian', 'order-delivery-date' )             },
-	{ value: 'rm',    label: __( 'Romansh', 'order-delivery-date' )              },
-	{ value: 'ru',    label: __( 'Russian', 'order-delivery-date' )              },
-	{ value: 'sk',    label: __( 'Slovak', 'order-delivery-date' )               },
-	{ value: 'sl',    label: __( 'Slovenian', 'order-delivery-date' )            },
-	{ value: 'sr',    label: __( 'Serbian', 'order-delivery-date' )              },
-	{ value: 'fi',    label: __( 'Finnish', 'order-delivery-date' )              },
-	{ value: 'sv',    label: __( 'Swedish', 'order-delivery-date' )              },
-	{ value: 'ta',    label: __( 'Tamil', 'order-delivery-date' )                },
-	{ value: 'vi',    label: __( 'Vietnamese', 'order-delivery-date' )           },
-	{ value: 'tr',    label: __( 'Turkish', 'order-delivery-date' )              },
-	{ value: 'uk',    label: __( 'Ukrainian', 'order-delivery-date' )            },
-	{ value: 'zh-HK', label: __( 'Chinese (Hong Kong)', 'order-delivery-date' )  },
-	{ value: 'zh-CN', label: __( 'Chinese (Simplified)', 'order-delivery-date' ) },
-	{ value: 'zh-TW', label: __( 'Chinese (Traditional)', 'order-delivery-date' )},
-];
+const LANGUAGE_OPTIONS = Object.entries( adminData.languages ?? {} )
+	.map( ( [ value, label ] ) => ( { value, label } ) );
 
 // ── Default values ─────────────────────────────────────────────────────────────
 

@@ -88,6 +88,19 @@ if ( ! class_exists( 'ORDDD_Lite_Settings_API' ) ) {
 				)
 			);
 
+			// POST /orddd/v1/settings/reset-tracking
+			register_rest_route(
+				$ns,
+				'/' . $base . '/reset-tracking',
+				array(
+					array(
+						'methods'             => WP_REST_Server::CREATABLE,
+						'callback'            => array( $this, 'reset_tracking' ),
+						'permission_callback' => array( $this, 'check_admin_permission' ),
+					),
+				)
+			);
+
 			// GET / POST / DELETE /orddd/v1/settings/disable-shipping — Pro only
 			register_rest_route(
 				$ns,
@@ -608,6 +621,18 @@ if ( ! class_exists( 'ORDDD_Lite_Settings_API' ) ) {
 		 * @param string $day      Day key or date string.
 		 * @return array
 		 */
+		/**
+		 * POST /orddd/v1/settings/reset-tracking
+		 * Clears the stored tracking consent so the plugin will prompt again.
+		 *
+		 * @return WP_REST_Response
+		 */
+		public function reset_tracking() {
+			delete_option( 'orddd_lite_allow_tracking' );
+			delete_option( 'ts_tracker_last_send' );
+			return self::success();
+		}
+
 		private function unblock_time_slot( array $arr, $slot, $day ) {
 			$updated = array();
 

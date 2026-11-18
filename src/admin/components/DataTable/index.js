@@ -115,7 +115,7 @@ const DataTable = ( {
 						</div>
 					) }
 					{ columns.map( ( col ) => (
-						<div key={ col.key } className="odt-cell odt-cell--heading">
+						<div key={ col.key } className={ `odt-cell odt-cell--heading${ col.pro ? ' odt-cell--heading-pro' : '' }` }>
 							{ col.label }
 							{ col.tooltip && (
 								<Tooltip text={ col.tooltip }>

@@ -171,8 +171,8 @@ class Ts_Upgrade_To_Pro {
 	public function ts_add_submenu_class() {
 		global $submenu;
 
-		if ( isset( $submenu[ self::$plugin_slug ] ) ) {
-			$submenu[ self::$plugin_slug ][1][] = 'orddd-upgrade-to-pro-additional-class'; // phpcs:ignore.
+		if ( isset( $submenu[ self::$plugin_slug ][0] ) ) {
+			$submenu[ self::$plugin_slug ][0][] = 'orddd-upgrade-to-pro-additional-class'; // phpcs:ignore.
 		}
 	}
 

@@ -31,7 +31,7 @@ jQuery(document).ready( function() {
 						upgrade_to_pro_type: 'expired',
 						security: orddd_ts_dismiss_notice.tracking_notice
 					};
-				} else if ( $this.hasClass( 'ordd_lite-tracker' ) ) {
+				} else if ( $this.hasClass( 'orddd_lite-tracker' ) ) {
 					data = {
 						action: orddd_ts_dismiss_notice.ts_prefix_of_plugin + "_tracker_dismiss_notice",
 						tracking_notice : orddd_ts_dismiss_notice.tracking_notice,

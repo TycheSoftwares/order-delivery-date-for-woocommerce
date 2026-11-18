@@ -137,21 +137,8 @@ const CutoffRow = ( { label, value, charge, chargeType } ) => {
 
 // ── ExpandPanel ───────────────────────────────────────────────────────────────
 
-const ExpandPanel = ( { schedule, isEstimated = false } ) => {
+const ExpandPanel = ( { schedule, isEstimated = false, holidays = null, holidayError = false } ) => {
 	const slots = getAllSlots( schedule.time_slots );
-
-	const [ holidays,     setHolidays     ] = useState( null ); // null = loading
-	const [ holidayError, setHolidayError ] = useState( false );
-	useEffect( () => {
-		apiFetch( { path: '/orddd/v1/holidays' } )
-			.then( ( data ) => {
-				setHolidays( Array.isArray( data ) ? data : [] );
-			} )
-			.catch( () => {
-				setHolidayError( true );
-				setHolidays( [] );
-			} );
-	}, [] ); // eslint-disable-line react-hooks/exhaustive-deps
 
 	if ( isEstimated ) {
 		return null;
@@ -285,11 +272,22 @@ const ExpandPanel = ( { schedule, isEstimated = false } ) => {
 // ── ScheduleRow ───────────────────────────────────────────────────────────────
 
 const ScheduleRow = ( { schedule, timeFormat, onEdit, defaultExpanded = false } ) => {
-	const [ expanded, setExpanded ] = useState( defaultExpanded );
+	const [ expanded,     setExpanded     ] = useState( defaultExpanded );
+	const [ holidays,     setHolidays     ] = useState( null ); // null = loading
+	const [ holidayError, setHolidayError ] = useState( false );
+
+	useEffect( () => {
+		apiFetch( { path: '/orddd/v1/holidays' } )
+			.then( ( data ) => setHolidays( Array.isArray( data ) ? data : [] ) )
+			.catch( () => {
+				setHolidayError( true );
+				setHolidays( [] );
+			} );
+	}, [] ); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const isEnabled  = schedule.status !== 'off' && schedule.status !== 'inactive';
 	const dayCount   = countEnabledDays( schedule.weekdays );
-	const numDates   = schedule.number_of_dates || '30';
+	const numDates   = schedule.orddd_lite_number_of_dates || '30';
 	const checkout   = getCheckoutLabel( schedule );
 	const minTime    = schedule.minimum_delivery_time;
 	const sameDay    = fmtTime( schedule.same_day?.after_hours, schedule.same_day?.after_minutes, timeFormat );
@@ -300,7 +298,7 @@ const ScheduleRow = ( { schedule, timeFormat, onEdit, defaultExpanded = false } 
 	const nextDayChargeType = schedule.next_day?.charges_type;
 	const slots      = getUniqueSlots( schedule.time_slots );
 	const hasSlots          = schedule.orddd_lite_enable_time_slot === 'on' && slots.length > 0;
-	const holidayCount      = Array.isArray( schedule.holidays ) ? schedule.holidays.filter( ( h ) => h.holiday_date ).length : 0;
+	const holidayCount      = Array.isArray( holidays ) ? holidays.length : 0;
 	const hasCutoffs  = minTime || sameDay || nextDay;
 	const isEstimated = ( schedule.orddd_delivery_checkout_options || schedule.orddd_pickup_checkout_options ) === 'text_block';
 	return (
@@ -458,7 +456,7 @@ const ScheduleRow = ( { schedule, timeFormat, onEdit, defaultExpanded = false } 
 			</div>
 
 			{ /* ── Expand panel ── */ }
-			{ expanded && <ExpandPanel schedule={ schedule } isEstimated={ isEstimated } /> }
+			{ expanded && <ExpandPanel schedule={ schedule } isEstimated={ isEstimated } holidays={ holidays } holidayError={ holidayError } /> }
 
 		</div>
 	);

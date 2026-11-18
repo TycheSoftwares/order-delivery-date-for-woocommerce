@@ -76,13 +76,14 @@ class orddd_lite_class_view_deliveries {
 	                }
 	            }
 
-	            $product_link = '<a href="' . esc_url( get_edit_post_link( $product_id ) ) . '" target="_blank">' . esc_html( $product_name ) . ' x' . esc_html( $product_quantity ) . '</a>';
+	            $product_link = '<a href="' . esc_url( get_edit_post_link( $product_id ) ) . '" target="_blank">' . esc_html( $product_name ) . '</a>';
 
 	            $content .= '
 					<div class="orddd-popup-details">
 						<div class="orddd-product-name">
-							<i class="dashicons dashicons-archive"></i>
+							<i class="fa-solid fa-cube"></i>
 							' . $product_link . '
+							<span class="qty">x' . esc_html( $product_quantity ) . '</span>
 						</div>
 
 						<div class="orddd-row">
@@ -195,7 +196,7 @@ class orddd_lite_class_view_deliveries {
 	            }
 	            $content .= '
 						<div class="orddd-row">
-							<i class="dashicons dashicons-archive"></i>
+							<i class="fas fa-cube"></i>
 							<div class="orddd-product-list">
 							' . wp_kses_post( $product_name ) . '
 							</div>

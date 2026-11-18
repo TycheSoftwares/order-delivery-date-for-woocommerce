@@ -1985,7 +1985,7 @@ class Orddd_Lite_Common {
 	 */
 
 	public static function str_to_date_format() {
-		$date_format = get_option( 'orddd_lite_delivery_date_format' );
+		$date_format = get_option( 'orddd_lite_delivery_date_format' ) ?: ORDDD_LITE_DELIVERY_DATE_FORMAT;
 		switch ( $date_format ) {
 			case 'mm/dd/y':
 				$date_str  = str_replace( 'dd', '%d', $date_format );
@@ -2032,6 +2032,11 @@ class Orddd_Lite_Common {
 				$date_str  = str_replace( 'dd', '%d', $date_format );
 				$month_str = str_replace( 'mm', '%m', $date_str );
 				$year_str  = str_replace( 'y', '%y', $month_str );
+				break;
+			case 'dd-mm-yy':
+				$date_str  = str_replace( 'dd', '%d', $date_format );
+				$month_str = str_replace( 'mm', '%m', $date_str );
+				$year_str  = str_replace( 'yy', '%Y', $month_str );
 				break;
 			case 'd M, y':
 				$date_str  = str_replace( 'd', '%e', $date_format );
@@ -2094,6 +2099,9 @@ class Orddd_Lite_Common {
 				$date_str  = str_replace( 'd', '%e', $day_str );
 				$month_str = str_replace( 'MM', '%M', $date_str );
 				$year_str  = str_replace( 'yy', '%Y', $month_str );
+				break;
+			default:
+				$year_str = $date_format;
 				break;
 		}
 		return $year_str;

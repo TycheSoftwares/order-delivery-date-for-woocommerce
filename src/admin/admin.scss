@@ -1373,6 +1373,10 @@ body {
 		display: flex;
 		align-items: center;
 		gap: 4px;
+
+		&-pro {
+			opacity: 0.5;
+		}
 	}
 }
 
@@ -2953,7 +2957,9 @@ body {
 }
 
 .ds-page {
-	max-width: 1200px;
+	max-width:                  1200px;
+	overflow-x:                 auto;
+	-webkit-overflow-scrolling: touch;
 }
 
 // ── Page header ───────────────────────────────────────────────────────────────
@@ -3121,6 +3127,9 @@ body {
 	background:    #fff;
 	border:        1px solid #e5e7eb;
 	border-radius: 8px;
+	// Fixed columns sum to 802px; keep a floor so rows and header always
+	// share the same width and scroll together inside .ds-page.
+	min-width:     900px;
 	overflow:      hidden;
 }
 
@@ -4786,5 +4795,151 @@ body.folded .osp-sticky-footer {
 			max-width: 100%;
 			width:     100%;
 		}
+	}
+
+	// SettingsPanel row — stack label above field
+	.osp-wrap .osp-row {
+		flex-direction: column;
+		align-items:    flex-start;
+		gap:            12px;
+		padding:        16px 20px;
+
+		.osp-row-label {
+			flex:  unset;
+			width: 100%;
+		}
+
+		.osp-row-field {
+			width: 100%;
+		}
+
+		.osp-row-field-content {
+			width: 100%;
+
+			.components-text-control__input,
+			.components-select-control__input {
+				max-width: 100%;
+				width:     100%;
+			}
+
+			.components-select-control {
+				max-width: 100%;
+			}
+		}
+	}
+
+	// Page header — allow save button to wrap below title
+	.osp-wrap .osp-page-header {
+		flex-wrap: wrap;
+	}
+
+	// SettingsForm two-column rows — stack to single column
+	.sf-row.components-card__body {
+		grid-template-columns: 1fr;
+	}
+
+	.sf-input,
+	.sf-input--wide {
+		width: 100%;
+	}
+
+	.sf-select .components-select-control__input,
+	.sf-select--wide .components-select-control__input {
+		width: 100%;
+	}
+
+	.sf-msd__trigger {
+		min-width: 0;
+		width:     100%;
+	}
+
+	.sf-time-range-row {
+		flex-wrap: wrap;
+	}
+
+	.sms-wrap {
+		max-width: 100%;
+	}
+
+	// Block Time Slot inline form
+	.bts-form__row.components-card__body {
+		grid-template-columns: 1fr;
+	}
+
+	.bts-form__input {
+		width: 100%;
+	}
+
+	.bts-form__select .components-select-control__input {
+		width: 100%;
+	}
+
+	// Disable Shipping inline form
+	.ds-form__row.components-card__body {
+		grid-template-columns: 1fr;
+	}
+
+	.ds-form__input {
+		width: 100%;
+	}
+
+	.ds-form__select .components-select-control__input {
+		width: 100%;
+	}
+
+	// DataTable — horizontal scroll on small screens.
+	// The Card is a block element that defaults to viewport width; its row-wrapper
+	// divs fill that same width, so 1fr columns compress instead of overflowing.
+	// Setting width: max-content (clamped to at least 100%) makes the card expand
+	// to fit the widest content (the header), forcing all rows to inherit that
+	// width and scroll together with the header.
+	.odt-wrap {
+		overflow-x:                 auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.odt-wrap .components-card {
+		width:     -webkit-max-content;
+		width:     max-content;
+		min-width: 100%;
+	}
+
+	// Tab bar — allow tabs to wrap rather than overflow
+	#order-delivery-date-for-woocommerce .components-tab-panel__tabs {
+		flex-wrap:    wrap;
+		padding-left: 10px;
+	}
+
+	// Home page — stack the 3-column box
+	.wc3-mod-box {
+		flex-direction: column;
+		margin-left:    0;
+
+		.wc3-col {
+			max-width: 100%;
+			margin:    0 0 20px;
+		}
+	}
+
+	.ordd-wc-related li {
+		max-width: 100%;
+	}
+}
+
+@media ( max-width: 600px ) {
+
+	// Tighten panel padding on very small screens
+	.osp-wrap {
+		padding: 12px;
+	}
+
+	.bts-wrap,
+	.ds-wrap {
+		padding: 12px;
+	}
+
+	// Reduce card header padding
+	.osp-wrap .osp-card-header {
+		padding: 14px 16px;
 	}
 }
