@@ -19,6 +19,10 @@ import { __ } from '@wordpress/i18n';
 
 const EXCLUDED_STATUSES = [ 'wc-cancelled', 'wc-refunded', 'wc-failed' ];
 
+const STORAGE_VIEW     = 'delivery_calendar_last_view_0';
+const STORAGE_STATUSES = 'delivery_calendar_last_order_statuses_0';
+const STORAGE_SHIPPING = 'delivery_calendar_last_order_shipping_0';
+
 const VIEW_OPTIONS = [
 	{ value: 'order',   label: 'Orders'   },
 	{ value: 'product', label: 'Products' },
@@ -54,6 +58,36 @@ const buildExportUrl = ( baseUrl, { view, statuses, shipping }, dateRange ) => {
 };
 
 
+const loadStoredFilters = ( statusOptions, shippingOptions ) => {
+	try {
+		const storedView     = localStorage.getItem( STORAGE_VIEW );
+		const storedStatuses = localStorage.getItem( STORAGE_STATUSES );
+		const storedShipping = localStorage.getItem( STORAGE_SHIPPING );
+		if ( ! storedView && ! storedStatuses && ! storedShipping ) return null;
+		return {
+			view:     storedView || 'order',
+			statuses: storedStatuses
+				? storedStatuses.split( ',' ).map( ( v ) => statusOptions.find( ( o ) => o.value === v.trim() ) ).filter( Boolean )
+				: [],
+			shipping: storedShipping
+				? storedShipping.split( ',' ).map( ( v ) => shippingOptions.find( ( o ) => o.value === v.trim() ) ).filter( Boolean )
+				: [],
+		};
+	} catch {
+		return null;
+	}
+};
+
+const saveFilters = ( { view, statuses, shipping } ) => {
+	try {
+		localStorage.setItem( STORAGE_VIEW,     view );
+		localStorage.setItem( STORAGE_STATUSES, statuses.map( ( s ) => s.value ).join( ',' ) );
+		localStorage.setItem( STORAGE_SHIPPING, shipping.map( ( s ) => s.value ).join( ',' ) );
+	} catch {
+		// localStorage unavailable — ignore
+	}
+};
+
 /**
  * Returns a change handler that maps selected label strings back to
  * { value, label } objects using the provided options array.
@@ -73,18 +107,23 @@ const OrderCalendar = () => {
 
 	const defaultStatuses = statusOptions.filter( ( o ) => ! EXCLUDED_STATUSES.includes( o.value ) );
 
+	const stored = loadStoredFilters( statusOptions, shippingOptions );
+	const initialView     = stored?.view                              ?? 'order';
+	const initialStatuses = stored?.statuses?.length ? stored.statuses : defaultStatuses;
+	const initialShipping = stored?.shipping                          ?? [];
+
 	// Filter state
-	const [ view,     setView     ] = useState( 'order' );
-	const [ statuses, setStatuses ] = useState( defaultStatuses );
-	const [ shipping, setShipping ] = useState( [] );
+	const [ view,     setView     ] = useState( initialView );
+	const [ statuses, setStatuses ] = useState( initialStatuses );
+	const [ shipping, setShipping ] = useState( initialShipping );
 
 	// Applied filters (what the calendar actually uses)
 	const [ appliedFilters, setAppliedFilters ] = useState( {
-		view: 'order', statuses: defaultStatuses, shipping: [],
+		view: initialView, statuses: initialStatuses, shipping: initialShipping,
 	} );
 
 	const [ eventUrl,  setEventUrl  ] = useState( () => buildEventUrl( {
-		view: 'order', statuses: defaultStatuses, shipping: [],
+		view: initialView, statuses: initialStatuses, shipping: initialShipping,
 	} ) );
 	const [ isLoading, setIsLoading ] = useState( false );
 	const [ dateRange, setDateRange ] = useState( { start: '', end: '' } );
@@ -97,7 +136,14 @@ const OrderCalendar = () => {
 	const handleLoading = useCallback( ( bool ) => setIsLoading( bool ), [] );
 
 	const handleDatesSet = useCallback( ( { startStr, endStr } ) => {
-		setDateRange( { start: startStr.slice( 0, 10 ), end: endStr.slice( 0, 10 ) } );
+		// FullCalendar end is exclusive — subtract 1 day to get the last visible date.
+		// Use local date arithmetic (avoid toISOString which shifts to UTC).
+		const d = new Date( endStr.slice( 0, 10 ) + 'T00:00:00' );
+		d.setDate( d.getDate() - 1 );
+		const end = d.getFullYear() + '-' +
+			String( d.getMonth() + 1 ).padStart( 2, '0' ) + '-' +
+			String( d.getDate() ).padStart( 2, '0' );
+		setDateRange( { start: startStr.slice( 0, 10 ), end } );
 	}, [] );
 
 	const handleEventDidMount = useCallback( ( info ) => {
@@ -157,6 +203,7 @@ const OrderCalendar = () => {
 		const filters = { view, statuses, shipping };
 		setAppliedFilters( filters );
 		setEventUrl( buildEventUrl( filters ) );
+		saveFilters( filters );
 	};
 
 	const handlePrint = () => {

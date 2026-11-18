@@ -167,10 +167,10 @@ const Panel1DateSettings = ( { form, control, deliveryDays, setDeliveryDays, sch
 
 	const DAY_COLS = [
 		{ key: 'name',               label: labels.delivery_days_table() },
-		{ key: 'additional_charges', label: <ProColLabel label={ __( 'Additional Charges', 'order-delivery-date' ) } /> },
-		{ key: 'charges_type',       label: <ProColLabel label={ __( 'Charges Type',       'order-delivery-date' ) } /> },
-		{ key: 'charges_label',      label: <ProColLabel label={ __( 'Charges Label',      'order-delivery-date' ) } /> },
-		{ key: 'max_orders',         label: <ProColLabel label={ __( 'Maximum Orders',     'order-delivery-date' ) } /> },
+		{ key: 'additional_charges', label: <ProColLabel label={ __( 'Additional Charges', 'order-delivery-date' ) } />, pro: true },
+		{ key: 'charges_type',       label: <ProColLabel label={ __( 'Charges Type',       'order-delivery-date' ) } />, pro: true },
+		{ key: 'charges_label',      label: <ProColLabel label={ __( 'Charges Label',      'order-delivery-date' ) } />, pro: true },
+		{ key: 'max_orders',         label: <ProColLabel label={ __( 'Maximum Orders',     'order-delivery-date' ) } />, pro: true },
 	];
 
 	const PRO_COLS = new Set( [ 'additional_charges', 'charges_type', 'charges_label', 'max_orders' ] );

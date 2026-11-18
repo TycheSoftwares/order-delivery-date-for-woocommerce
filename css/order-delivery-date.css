@@ -220,12 +220,8 @@ a.qtip-close.qtip-icon span.ui-icon.ui-icon-close {
 .orddd-view-order:hover {
   background: #dbe9ff;
 }
-i.dashicons-archive {
-    margin-left: -3px;
-    font-size: 14px;
-}
 .orddd-product-list{
-  display: inline-block;
+  display: inline-flex;
 }
 .orddd-product-list a {
     display: block;

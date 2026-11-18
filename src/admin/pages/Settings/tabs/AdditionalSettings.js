@@ -273,14 +273,10 @@ const AdditionalSettings = () => {
 							setResetBusy( true );
 							setResetNotice( null );
 							try {
-								const body = new FormData();
-								body.append( 'action', 'ts_reset_tracking_setting' );
-								body.append( 'plugin_short_name', 'orddd_lite' );
-								const response = await fetch( window.ajaxurl, { method: 'POST', body } );
-								const data = await response.json();
-								if ( 'success' !== data?.message ) {
-									throw new Error();
-								}
+								await apiFetch( {
+									path:   '/orddd/v1/settings/reset-tracking',
+									method: 'POST',
+								} );
 								setResetNotice( { type: 'success', message: __( 'Usage tracking has been reset.', 'order-delivery-date' ) } );
 							} catch {
 								setResetNotice( { type: 'error', message: __( 'Failed to reset usage tracking. Please try again.', 'order-delivery-date' ) } );
