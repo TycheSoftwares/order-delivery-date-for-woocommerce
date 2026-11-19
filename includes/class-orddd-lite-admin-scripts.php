@@ -69,10 +69,12 @@ class ORDDD_Lite_Admin_Scripts {
 			'version'      => ORDDD_LITE_VERSION,
 		);
 
+		$dependencies = array_unique( array_merge( $asset['dependencies'], array( 'jquery-ui-datepicker' ) ) );
+
 		wp_register_script(
 			'orddd-admin-app',
 			plugins_url( 'build/admin/index.js', ORDDD_LITE_PLUGIN_FILE ),
-			$asset['dependencies'],
+			$dependencies,
 			$asset['version'],
 			true
 		);
@@ -172,7 +174,7 @@ class ORDDD_Lite_Admin_Scripts {
 				),
 				'order_statuses'     => wc_get_order_statuses(),
 				'shipping_methods'   => Orddd_Lite_Common::get_all_wc_shipping_methods(),
-				'orddd_holiday_color' => get_option( 'orddd_lite_holiday_color' ),
+				'orddd_holiday_color' => get_option( 'orddd_lite_holiday_color', '#ff0000' ),
 				'orddd_holidays'     => self::build_holidays_json(),
 				'calendar_language'  => get_option( 'orddd_lite_language_selected' ) ?: 'en-GB',
 			)

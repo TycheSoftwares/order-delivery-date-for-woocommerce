@@ -76,8 +76,8 @@ const DEFAULT_VALUES = {
 	orddd_lite_start_of_week:              '0',
 	orddd_lite_number_of_months:           '1',
 	orddd_lite_calendar_theme:             'smoothness',
-	orddd_lite_available_dates_color:      '#77c04b',
-	orddd_lite_booked_dates_color:         '#f85959',
+	orddd_lite_available_dates_color:      '#90EE90',
+	orddd_lite_booked_dates_color:         '#ff0000',
 	orddd_lite_holiday_color:              '#ff0000',
 	orddd_lite_show_partially_booked_dates: false,
 };
@@ -197,8 +197,8 @@ const CalendarAppearance = () => {
 					orddd_lite_start_of_week:               String( ca.orddd_lite_start_of_week               ?? '0' ),
 					orddd_lite_number_of_months:            String( ca.orddd_lite_number_of_months            ?? '1' ),
 					orddd_lite_calendar_theme:              ca.orddd_lite_calendar_theme                       ?? 'smoothness',
-					orddd_lite_available_dates_color:       ca.orddd_lite_available_dates_color                ?? '#77c04b',
-					orddd_lite_booked_dates_color:          ca.orddd_booked_color                              ?? '#f85959',
+					orddd_lite_available_dates_color:       ca.orddd_lite_available_dates_color                ?? '#90EE90',
+					orddd_lite_booked_dates_color:          ca.orddd_booked_color                              ?? '#ff0000',
 					orddd_lite_holiday_color:               ca.orddd_lite_holiday_color                        ?? '#ff0000',
 					orddd_lite_show_partially_booked_dates: ca.orddd_lite_show_partially_booked_dates          === 'on',
 				} );
