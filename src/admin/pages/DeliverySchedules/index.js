@@ -285,7 +285,7 @@ const ScheduleRow = ( { schedule, timeFormat, onEdit, defaultExpanded = false } 
 			} );
 	}, [] ); // eslint-disable-line react-hooks/exhaustive-deps
 
-	const isEnabled  = schedule.status !== 'off' && schedule.status !== 'inactive';
+	const isEnabled  = schedule.orddd_lite_enable_delivery_date === 'on';
 	const dayCount   = countEnabledDays( schedule.weekdays );
 	const numDates   = schedule.orddd_lite_number_of_dates || '30';
 	const checkout   = getCheckoutLabel( schedule );
