@@ -289,17 +289,17 @@ if ( ! class_exists( 'ORDDD_Lite_Appearance_API' ) ) {
 		 */
 		private function get_calendar_appearance_data() {
 			return array(
-				'orddd_lite_language_selected'    => get_option( 'orddd_lite_language_selected' ),
-				'orddd_lite_delivery_date_format' => get_option( 'orddd_lite_delivery_date_format' ),
-				'orddd_lite_delivery_time_format' => get_option( 'orddd_lite_delivery_time_format' ),
-				'orddd_lite_start_of_week'        => get_option( 'orddd_lite_start_of_week' ),
-				'orddd_lite_number_of_months'     => get_option( 'orddd_lite_number_of_months' ),
-				'orddd_lite_calendar_theme'       => get_option( 'orddd_lite_calendar_theme' ),
-				'orddd_lite_holiday_color'        => get_option( 'orddd_lite_holiday_color' ),
+				'orddd_lite_language_selected'    => get_option( 'orddd_lite_language_selected', 'en-GB' ),
+				'orddd_lite_delivery_date_format' => get_option( 'orddd_lite_delivery_date_format', 'd MM, yy' ),
+				'orddd_lite_delivery_time_format' => get_option( 'orddd_lite_delivery_time_format', '1' ),
+				'orddd_lite_start_of_week'        => get_option( 'orddd_lite_start_of_week', '0' ),
+				'orddd_lite_number_of_months'     => get_option( 'orddd_lite_number_of_months', '1' ),
+				'orddd_lite_calendar_theme'       => get_option( 'orddd_lite_calendar_theme', 'smoothness' ),
+				'orddd_lite_holiday_color'        => get_option( 'orddd_lite_holiday_color', '#ff0000' ),
 				// Returned as orddd_booked_color to match Pro response shape.
-				'orddd_booked_color'                      => get_option( 'orddd_lite_booked_dates_color' ),
-				'orddd_lite_available_dates_color'        => get_option( 'orddd_lite_available_dates_color' ),
-				'orddd_lite_show_partially_booked_dates'  => get_option( 'orddd_lite_show_partially_booked_dates' ),
+				'orddd_booked_color'                      => get_option( 'orddd_lite_booked_dates_color', '#ff0000' ),
+				'orddd_lite_available_dates_color'        => get_option( 'orddd_lite_available_dates_color', '#90EE90' ),
+				'orddd_lite_show_partially_booked_dates'  => get_option( 'orddd_lite_show_partially_booked_dates', '' ),
 			);
 		}
 	}
