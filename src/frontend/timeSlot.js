@@ -17,31 +17,30 @@ const TimeSlot = ({ checkoutData, updateSession, setLoading }) => {
 	const [ timeLabel, setTimeLabel ] = useState( __( 'Time Slot', 'order-delivery-date' ) );
     const { setExtensionData } = checkoutData;
     const [ isEnabled, setIsEnabled ] = useState( false );
-	const [ isDeliveryEnabled, setIsDeliveryEnabled ] = useState( true ) ;
+	// Read straight from the settings: state would be stale on the first effect run.
+	const isDeliveryEnabled = 'on' === orddd_lite_params.orddd_lite_enable_time_slot;
 	const { setValidationErrors, clearValidationError } = useDispatch( VALIDATION_STORE_KEY );
     const errorId = 'orddd_lite_time_slot';
 	const errorMessage = __( 'Please select a time slot', 'order-delivery-date' );
 
     useEffect(() => {
-    	if( orddd_lite_params.orddd_lite_enable_time_slot !== "on" ) {
-    		setIsDeliveryEnabled( false );
-    	}
-
-		if ( !isDeliveryEnabled ) {
+		if ( ! isDeliveryEnabled ) {
 			return;
 		}
 
-		let timeValue = 'undefined' !== localStorage.getItem( 'orddd_lite_time_slot' ) ? localStorage.getItem( 'orddd_lite_time_slot' ) : '';
+		let timeValue = localStorage.getItem( 'orddd_lite_time_slot' ) || '';
 		setTimeSlot( timeValue );
 		setIsRequired( 'checked' === orddd_lite_params.orddd_lite_time_slot_mandatory ? true : false );
 		setTimeLabel(orddd_lite_params.orddd_lite_delivery_timeslot_field_label);
-		onChangeTimeSlot( timeValue );
+		// Do not call extensionCartUpdate() on mount. Switching between the Ship and Collection
+		// tabs remounts this block, and a cart update here races with WooCommerce's own
+		// shipping rate / pickup selection and reverts the tab.
 
 		setExtensionData( 'order-delivery-date', 'orddd_lite_time_slot', timeValue );
         setExtensionData( 'order-delivery-date', 'time_slot_mandatory', isRequired );
         setExtensionData( 'order-delivery-date', 'time_field_label', timeLabel );
 
-		jQuery( document ).on( 'orddd_lite_on_load_time_slots', function( data, values ) {
+		const onLoadTimeSlots = function( data, values ) {
 			let arr = [];
 			let time_slot_session = localStorage.getItem( 'orddd_lite_time_slot' );
 			let option_selected = orddd_lite_params.orddd_lite_auto_populate_first_available_time_slot;
@@ -73,7 +72,8 @@ const TimeSlot = ({ checkoutData, updateSession, setLoading }) => {
 				}
 			};
 			setTimeOptions( arr );
-		});
+		};
+		jQuery( document ).on( 'orddd_lite_on_load_time_slots', onLoadTimeSlots );
 
 		if ( ! isRequired || timeSlot ) {
 			clearValidationError( errorId );
@@ -86,6 +86,11 @@ const TimeSlot = ({ checkoutData, updateSession, setLoading }) => {
 			} );
 		}
 		clearValidationError( errorId );
+
+		// Remove the listener on unmount so remounts do not stack handlers.
+		return () => {
+			jQuery( document ).off( 'orddd_lite_on_load_time_slots', onLoadTimeSlots );
+		};
         
     },[ setExtensionData, isDeliveryEnabled, setTimeOptions, setTimeSlot, updateSession, setIsEnabled, setValidationErrors, clearValidationError ] );
 
@@ -102,9 +107,9 @@ const TimeSlot = ({ checkoutData, updateSession, setLoading }) => {
 					h_deliverydate: localStorage.getItem( 'h_deliverydate_lite_session' ),
                 },
             });
-			update_cart.then( () => { setLoading( false ) } )
+			update_cart.catch( () => {} ).finally( () => { setLoading( false ) } );
 		},
-		[ setTimeSlot, setExtensionData ]
+		[ setTimeSlot, setExtensionData, setLoading ]
 	);
 
 	const error = useSelect( ( select ) => {
