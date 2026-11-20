@@ -240,6 +240,7 @@ if( orddd_lite_params.orddd_lite_enable_time_slot == "on" ) {
 		var data = {
 			current_date: all,
 			order_id: orddd_lite_admin_params.orddd_lite_order_id,
+			timeslot_nonce: orddd_lite_admin_params.timeslot_nonce,
 			min_date: orddd_lite_admin_params.orddd_lite_min_date_set,
 			current_date_to_check: orddd_lite_admin_params.orddd_lite_current_date_set,
 			holidays_str: orddd_lite_params.orddd_lite_holidays,
