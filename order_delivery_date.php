@@ -11,7 +11,7 @@
  * Domain Path: languages
  * Requires PHP: 7.4
  * WC requires at least: 3.0.0
- * WC tested up to: 11.2.1
+ * WC tested up to: 11.3.0
  * Requires Plugins: woocommerce
  *
  * @package  Order-Delivery-Date-Lite-for-WooCommerce

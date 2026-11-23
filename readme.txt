@@ -4,8 +4,8 @@ Donate link: https://www.paypal.me/TycheSoftwares
 Author URI: https://www.tychesoftwares.com/
 Tags: delivery date, delivery time, preparation time, woocommerce, pickup date
 Requires at least: 1.3
-Tested up to: 7.1.3
-Stable tag: 4.6.3
+Tested up to: 7.1.5
+Stable tag: 5.0.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -218,6 +218,11 @@ Upgrade if your store requires advanced delivery scheduling, delivery schedules 
 This plugin communicates with our tracking server to send usage data **only** if the user has explicitly opted in to usage tracking. For detailed information about what is tracked, please refer to our [usage tracking documentation](https://www.tychesoftwares.com/docs/woocommerce-order-delivery-date-lite/order-delivery-lite-usage-tracking/).
 
 == Changelog ==
+
+= 5.0.0 (23.11.2026)
+* Enhancement - Rebuilt the plugin's admin interface in React. The settings page now loads faster and saves without a full page reload.
+* Dev - Added REST endpoints (orddd/v1) for reading and updating settings, protected by capability checks and nonce verification.
+* Dev - Removed the legacy Settings API registration and the PHP-rendered settings templates.
 
 = 4.6.3 (14.10.2026)
 * Fix - Timeslot information (e.g. "Timeslot: 00:00") was displayed in order details, emails and PDF documents even when time slot capture was disabled.
