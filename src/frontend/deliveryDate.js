@@ -14,21 +14,21 @@ const DeliveryDate = ({ checkoutData, shippingMethod, updateSession, setLoading 
     const [ isRequired, setIsRequired ] = useState( true );
     const [ dateLabel, setDateLabel ] = useState( __( 'Delivery Date', 'order-delivery-date' ) );
     const { setExtensionData } = checkoutData;
-	const { setValidationErrors, clearValidationError } = useDispatch( VALIDATION_STORE_KEY );
+    const { setValidationErrors, clearValidationError } = useDispatch( VALIDATION_STORE_KEY );
     const [ isEnabled, setIsEnabled ] = useState( true ) ;
     const [ datePlaceholder, setdatePlaceholder ] = useState( __( 'Choose a Date', 'order-delivery-date' ) );
 
     useEffect(() => {
         setIsEnabled( orddd_lite_params.is_enable_delivery_date );
         setDateLabel(orddd_lite_params.orddd_lite_delivery_date_field_label);
-		setDeliveryDate( localStorage.getItem( 'orddd_deliverydate_lite_session' ) );
+        setDeliveryDate( localStorage.getItem( 'orddd_deliverydate_lite_session' ) );
         setExtensionData( 'order-delivery-date', 'e_deliverydate', deliveryDate );
-		setExtensionData( 'order-delivery-date', 'h_deliverydate', localStorage.getItem( 'h_deliverydate_lite_session' ) );
+        setExtensionData( 'order-delivery-date', 'h_deliverydate', localStorage.getItem( 'h_deliverydate_lite_session' ) );
         setIsRequired( 'checked' === orddd_lite_params.orddd_lite_date_field_mandatory ? true : false );
         setdatePlaceholder( orddd_lite_params.orddd_lite_delivery_date_field_placeholder );
         if ( ! isEnabled ) {
-			return;
-		}
+            return;
+        }
 
         setTimeout(() => {
             setDeliveryDate( localStorage.getItem('orddd_deliverydate_lite_session' ) );
@@ -36,72 +36,90 @@ const DeliveryDate = ({ checkoutData, shippingMethod, updateSession, setLoading 
             setExtensionData( 'order-delivery-date', 'h_deliverydate', localStorage.getItem( 'h_deliverydate_lite_session' ) );
         }, 3000 );
 
-        jQuery( document ).on( 'orddd_lite_on_select_date', function( data, values ) {
+        if ( isRequired && '' === deliveryDate ) {
+            setValidationErrors({
+                ['e_deliverydate']: {
+                    message: __( 'Please select a delivery date', 'order-delivery-date' ),
+                    hidden: false,
+                },
+            });
+            return;
+        }
+        clearValidationError('e_deliverydate');
+        
+    },[setExtensionData, deliveryDate, isRequired, isEnabled, setDeliveryDate, shippingMethod, updateSession, setValidationErrors, clearValidationError ]);
+
+    /**
+     * Register the jQuery listeners once per mount and remove them on unmount.
+     * Without the cleanup every Ship/Collection tab switch stacked another set of
+     * handlers, each firing its own extensionCartUpdate().
+     */
+    useEffect(() => {
+        if ( ! orddd_lite_params.is_enable_delivery_date ) {
+            return;
+        }
+
+        const onSelectDate = function( data, values ) {
             setDeliveryDate( values );
-        });
+        };
 
         /** For inline datepicker */
-        jQuery( document ).on( 'change', '#orddd_lite_datepicker', function( e ) {
-			setDeliveryDate( e.target.value );
+        const onInlineChange = function( e ) {
+            setDeliveryDate( e.target.value );
             setExtensionData( 'order-delivery-date', 'e_deliverydate', e.target.value );
             setExtensionData( 'order-delivery-date', 'h_deliverydate', localStorage.getItem( 'h_deliverydate_lite_session' ) );
             setLoading( true );
-            var update_cart = extensionCartUpdate( {
+            extensionCartUpdate( {
                 namespace: 'order-delivery-date',
                 data: {
                     e_deliverydate: e.target.value,
                     h_deliverydate: localStorage.getItem( 'h_deliverydate_lite_session' )
                 },
-            });
-            update_cart.then( () => { setLoading( false ) } )
-		});
+            }).catch( () => {} ).finally( () => { setLoading( false ) } );
+        };
 
-        jQuery( document ).on( 'orddd_on_clear_text', function() {
+        const onClearText = function() {
             setLoading( true );
-            var update_cart = extensionCartUpdate( {
+            extensionCartUpdate( {
                 namespace: 'order-delivery-date',
                 data: {
                     e_deliverydate: '',
                     h_deliverydate: '',
                 },
-            });
-            update_cart.then( () => { 
+            }).then( () => {
                 localStorage.setItem( 'h_deliverydate_lite_session', '' );
                 localStorage.setItem( 'orddd_deliverydate_lite_session', '' );
                 setDeliveryDate('');
-                setLoading( false );
-            } )
-        });
+            } ).catch( () => {} ).finally( () => { setLoading( false ) } );
+        };
 
-        if ( isRequired && '' === deliveryDate ) {
-			setValidationErrors({
-				['e_deliverydate']: {
-					message: __( 'Please select a delivery date', 'order-delivery-date' ),
-					hidden: false,
-				},
-			});
-			return;
-		}
-		clearValidationError('e_deliverydate');
-        
-    },[setExtensionData, deliveryDate, isRequired, isEnabled, setDeliveryDate, shippingMethod, updateSession, setValidationErrors, clearValidationError ]);
+        jQuery( document ).on( 'orddd_lite_on_select_date', onSelectDate );
+        jQuery( document ).on( 'change', '#orddd_lite_datepicker', onInlineChange );
+        jQuery( document ).on( 'orddd_on_clear_text', onClearText );
+
+        return () => {
+            jQuery( document ).off( 'orddd_lite_on_select_date', onSelectDate );
+            jQuery( document ).off( 'change', '#orddd_lite_datepicker', onInlineChange );
+            jQuery( document ).off( 'orddd_on_clear_text', onClearText );
+        };
+    }, [ setExtensionData, setLoading ]);
 
     const { validationError } = useSelect((select) => {
-		const store = select('wc/store/validation');
-		return {
-			validationError: store.getValidationError('e_deliverydate'),
-		};
-	});
+        const store = select('wc/store/validation');
+        return {
+            validationError: store.getValidationError('e_deliverydate'),
+        };
+    });
 
     const onDateChange = useCallback(
-		( value ) => {
-			setDeliveryDate( value );
-			setExtensionData( 'order-delivery-date', 'e_deliverydate', value );
-			setExtensionData( 'order-delivery-date', 'h_deliverydate', localStorage.getItem( 'h_deliverydate_lite_session' ) );
+        ( value ) => {
+            setDeliveryDate( value );
+            setExtensionData( 'order-delivery-date', 'e_deliverydate', value );
+            setExtensionData( 'order-delivery-date', 'h_deliverydate', localStorage.getItem( 'h_deliverydate_lite_session' ) );
             
-		},
-		[ setDeliveryDate. setExtensionData ]
-	)
+        },
+        [ setDeliveryDate. setExtensionData ]
+    )
 
     return (
         <div
