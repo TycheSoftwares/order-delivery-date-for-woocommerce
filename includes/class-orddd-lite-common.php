@@ -582,6 +582,9 @@ class Orddd_Lite_Common {
 	    if ( get_option( 'orddd_lite_enable_delivery_date' ) !== 'on' ) {
 	    	return $has_virtual;
 	    }
+		if ( ! function_exists( 'WC' ) || ! WC()->cart ) {
+			return $has_virtual;
+    	}
 
 	    foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
 	        $_product = $values['data'];
