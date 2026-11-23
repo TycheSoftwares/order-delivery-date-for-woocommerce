@@ -580,10 +580,29 @@ class Orddd_Lite_Process {
 		}
 
 		// Time slot selected for the order. This is for the edit order page in admin.
+		// The order's saved slot is only revealed to the shop staff editing that order, or to the
+		// logged-in customer who owns it. Anyone else gets the plain slot list with nothing pre-selected.
 		$time_slot_for_order = '';
 		if ( isset( $_POST['order_id'] ) ) { // phpcs:ignore
-			$order_id            = $_POST['order_id']; // phpcs:ignore
-			$time_slot_for_order = Orddd_Lite_Common::orddd_get_order_timeslot( $order_id );
+			$order_id = absint( wp_unslash( $_POST['order_id'] ) ); // phpcs:ignore
+			$order    = $order_id ? wc_get_order( $order_id ) : false;
+
+			if ( $order ) {
+				$can_view = false;
+
+				if ( current_user_can( 'edit_shop_order', $order_id ) ) {
+					// Admin edit-order screen: require the nonce issued for that screen.
+					$can_view = isset( $_POST['timeslot_nonce'] ) // phpcs:ignore
+						&& wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['timeslot_nonce'] ) ), 'orddd_lite_timeslot_order' ); // phpcs:ignore
+				} elseif ( is_user_logged_in() && (int) $order->get_customer_id() === get_current_user_id() ) {
+					// Customer looking at their own order.
+					$can_view = true;
+				}
+
+				if ( $can_view ) {
+					$time_slot_for_order = Orddd_Lite_Common::orddd_get_order_timeslot( $order_id );
+				}
+			}
 		}
 
 		$time_slots_to_show_timestamp = Orddd_Lite_Common::orddd_lite_get_timeslot_display( $time_slot_for_order );
