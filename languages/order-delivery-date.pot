@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-04T13:06:13+00:00\n"
+"POT-Creation-Date: 2026-11-23T04:56:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: order-delivery-date\n"
@@ -141,44 +141,44 @@ msgstr ""
 msgid "Holiday removed successfully."
 msgstr ""
 
-#: includes/api/class-orddd-lite-settings-api.php:166
+#: includes/api/class-orddd-lite-settings-api.php:179
 msgid "Invalid or missing key. Accepted: default_schedule, additional."
 msgstr ""
 
-#: includes/api/class-orddd-lite-settings-api.php:264
+#: includes/api/class-orddd-lite-settings-api.php:277
 msgid "Default schedule settings saved successfully."
 msgstr ""
 
-#: includes/api/class-orddd-lite-settings-api.php:297
+#: includes/api/class-orddd-lite-settings-api.php:310
 msgid "Additional settings saved successfully."
 msgstr ""
 
-#: includes/api/class-orddd-lite-settings-api.php:358
+#: includes/api/class-orddd-lite-settings-api.php:371
 msgid "block_time_slot_for must be \"weekdays\" or \"dates\"."
 msgstr ""
 
-#: includes/api/class-orddd-lite-settings-api.php:366
+#: includes/api/class-orddd-lite-settings-api.php:379
 msgid "delivery_days and timeslot are required."
 msgstr ""
 
-#: includes/api/class-orddd-lite-settings-api.php:412
+#: includes/api/class-orddd-lite-settings-api.php:425
 #: build/admin/index.js:1
 msgid "Time slot blocked successfully."
 msgstr ""
 
-#: includes/api/class-orddd-lite-settings-api.php:442
+#: includes/api/class-orddd-lite-settings-api.php:455
 msgid "For bulk deletion, timeslot must be JSON with a \"timeslots\" array."
 msgstr ""
 
-#: includes/api/class-orddd-lite-settings-api.php:463
+#: includes/api/class-orddd-lite-settings-api.php:476
 msgid "delivery_days is required."
 msgstr ""
 
-#: includes/api/class-orddd-lite-settings-api.php:481
+#: includes/api/class-orddd-lite-settings-api.php:494
 msgid "Time slot unblocked successfully."
 msgstr ""
 
-#: includes/api/class-orddd-lite-settings-api.php:499
+#: includes/api/class-orddd-lite-settings-api.php:512
 msgid "This feature is available in the Pro version. Upgrade at tychesoftwares.com."
 msgstr ""
 
@@ -211,201 +211,182 @@ msgstr ""
 msgid "As Soon As Possible."
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:192
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:198
 msgid "12 hour"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:193
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:199
 msgid "24 hour"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:218
+#: includes/class-orddd-lite-admin-scripts.php:226
+#: includes/class-orddd-lite-admin-scripts.php:332
 #: uninstall.php:29
 #: build/admin/index.js:1
 msgid "Monday"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:219
+#: includes/class-orddd-lite-admin-scripts.php:227
+#: includes/class-orddd-lite-admin-scripts.php:333
 #: uninstall.php:30
 #: build/admin/index.js:1
 msgid "Tuesday"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:220
+#: includes/class-orddd-lite-admin-scripts.php:228
+#: includes/class-orddd-lite-admin-scripts.php:334
 #: uninstall.php:31
 #: build/admin/index.js:1
 msgid "Wednesday"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:221
+#: includes/class-orddd-lite-admin-scripts.php:229
+#: includes/class-orddd-lite-admin-scripts.php:335
 #: uninstall.php:32
 #: build/admin/index.js:1
 msgid "Thursday"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:222
+#: includes/class-orddd-lite-admin-scripts.php:230
+#: includes/class-orddd-lite-admin-scripts.php:336
 #: uninstall.php:33
 #: build/admin/index.js:1
 msgid "Friday"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:223
+#: includes/class-orddd-lite-admin-scripts.php:231
+#: includes/class-orddd-lite-admin-scripts.php:337
 #: uninstall.php:34
 #: build/admin/index.js:1
 msgid "Saturday"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:224
+#: includes/class-orddd-lite-admin-scripts.php:232
+#: includes/class-orddd-lite-admin-scripts.php:331
 #: uninstall.php:28
 #: build/admin/index.js:1
 msgid "Sunday"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:267
+#: includes/class-orddd-lite-admin-scripts.php:275
 msgid "Base"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:268
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:276
 msgid "Black Tie"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:269
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:277
 msgid "Blitzer"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:270
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:278
 msgid "Cupertino"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:271
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:279
 msgid "Dark Hive"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:272
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:280
 msgid "Dot Luv"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:273
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:281
 msgid "Eggplant"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:274
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:282
 msgid "Excite Bike"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:275
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:283
 msgid "Flick"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:276
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:284
 msgid "Hot Sneaks"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:277
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:285
 msgid "Humanity"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:278
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:286
 msgid "Le Frog"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:279
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:287
 msgid "Mint Choc"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:280
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:288
 msgid "Overcast"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:281
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:289
 msgid "Pepper Grinder"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:282
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:290
 msgid "Redmond"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:283
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:291
 msgid "Smoothness"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:284
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:292
 msgid "South Street"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:285
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:293
 msgid "Start"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:286
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:294
 msgid "Sunny"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:287
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:295
 msgid "Swanky Purse"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:288
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:296
 msgid "Trontastic"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:289
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:297
 msgid "UI Darkness"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:290
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:298
 msgid "UI Lightness"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:291
-#: build/admin/index.js:1
+#: includes/class-orddd-lite-admin-scripts.php:299
 msgid "Vader"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:317
+#: includes/class-orddd-lite-admin-scripts.php:363
 msgid "After Billing Section"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:318
+#: includes/class-orddd-lite-admin-scripts.php:364
 msgid "After Shipping Section"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:319
+#: includes/class-orddd-lite-admin-scripts.php:365
 #: build/admin/index.js:1
 msgid "Before Order Notes"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:320
+#: includes/class-orddd-lite-admin-scripts.php:366
 #: build/admin/index.js:1
 msgid "After Order Notes"
 msgstr ""
 
-#: includes/class-orddd-lite-admin-scripts.php:321
+#: includes/class-orddd-lite-admin-scripts.php:367
 msgid "After Your Order Table"
 msgstr ""
 
@@ -427,18 +408,18 @@ msgid "I have purchased the Pro version of the Plugin."
 msgstr ""
 
 #: includes/class-orddd-lite-common.php:805
-#: order_delivery_date.php:466
-#: order_delivery_date.php:586
+#: order_delivery_date.php:460
+#: order_delivery_date.php:580
 msgid "No time slots are available"
 msgstr ""
 
 #: includes/class-orddd-lite-common.php:807
-#: order_delivery_date.php:465
-#: order_delivery_date.php:585
+#: order_delivery_date.php:459
+#: order_delivery_date.php:579
 msgid "As Soon As Possible"
 msgstr ""
 
-#: includes/class-orddd-lite-common.php:2115
+#: includes/class-orddd-lite-common.php:2123
 msgid "Rest of the World"
 msgstr ""
 
@@ -448,8 +429,8 @@ msgstr ""
 #: includes/integrations/wc-blocks/class-order-delivery-date-blocks-integration.php:60
 #: includes/integrations/wc-blocks/class-order-delivery-date-cart-block-integration.php:60
 #: includes/integrations/wc-blocks/order-delivery-date-block.php:110
-#: includes/settings/class-orddd-lite-delivery-calendar.php:274
-#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+#: includes/settings/class-orddd-lite-delivery-calendar.php:275
+#: includes/settings/class-orddd-lite-delivery-calendar.php:595
 #: includes/settings/class-orddd-lite-filter.php:63
 #: build/frontend/cart-block-frontend.js:1
 #: build/frontend/index.js:1
@@ -460,16 +441,16 @@ msgstr ""
 #: includes/class-orddd-lite-process.php:61
 #: includes/integrations/wc-blocks/class-order-delivery-date-blocks-integration.php:61
 #: includes/integrations/wc-blocks/class-order-delivery-date-cart-block-integration.php:61
-#: includes/settings/class-orddd-lite-delivery-calendar.php:275
-#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+#: includes/settings/class-orddd-lite-delivery-calendar.php:276
+#: includes/settings/class-orddd-lite-delivery-calendar.php:595
 msgid "Delivery Time"
 msgstr ""
 
 #: includes/class-orddd-lite-process.php:69
 #: includes/integrations/wc-blocks/class-order-delivery-date-blocks-integration.php:69
 #: includes/integrations/wc-blocks/class-order-delivery-date-cart-block-integration.php:69
-#: order_delivery_date.php:464
-#: order_delivery_date.php:584
+#: order_delivery_date.php:458
+#: order_delivery_date.php:578
 #: templates/orddd-lite-admin-datepicker.php:22
 msgid "Select a time slot"
 msgstr ""
@@ -657,44 +638,39 @@ msgstr ""
 msgid "Time Slot Label"
 msgstr ""
 
-#: includes/settings/class-delivery-calendar-event-json.php:46
-msgid "Unauthorized"
-msgstr ""
-
-#: includes/settings/class-delivery-calendar-event-json.php:50
 #: includes/settings/class-orddd-lite-delivery-calendar.php:41
 msgid "Authentication has failed."
 msgstr ""
 
-#: includes/settings/class-orddd-lite-delivery-calendar.php:269
-#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+#: includes/settings/class-orddd-lite-delivery-calendar.php:270
+#: includes/settings/class-orddd-lite-delivery-calendar.php:595
 msgid "Order ID"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-delivery-calendar.php:270
-#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+#: includes/settings/class-orddd-lite-delivery-calendar.php:271
+#: includes/settings/class-orddd-lite-delivery-calendar.php:595
 #: build/admin/index.js:1
 msgid "Products"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-delivery-calendar.php:271
-#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+#: includes/settings/class-orddd-lite-delivery-calendar.php:272
+#: includes/settings/class-orddd-lite-delivery-calendar.php:595
 msgid "Billing Address"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-delivery-calendar.php:272
-#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+#: includes/settings/class-orddd-lite-delivery-calendar.php:273
+#: includes/settings/class-orddd-lite-delivery-calendar.php:595
 msgid "Shipping Address"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-delivery-calendar.php:273
-#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+#: includes/settings/class-orddd-lite-delivery-calendar.php:274
+#: includes/settings/class-orddd-lite-delivery-calendar.php:595
 #: build/admin/index.js:1
 msgid "Shipping Method"
 msgstr ""
 
-#: includes/settings/class-orddd-lite-delivery-calendar.php:276
-#: includes/settings/class-orddd-lite-delivery-calendar.php:594
+#: includes/settings/class-orddd-lite-delivery-calendar.php:277
+#: includes/settings/class-orddd-lite-delivery-calendar.php:595
 msgid "Order Date"
 msgstr ""
 
@@ -727,41 +703,41 @@ msgstr ""
 msgid "<div class=\"notice notice-info my-dismiss-notice is-dismissible\"><p style=\"font-size:17px;\">Across the world, businesses are going through a tough time with COVID-19. In such times, we want to do our bit to support small businesses. Since shoppers are increasingly relying on delivery right now, we are giving <strong>50% off on the Order Delivery Date Pro plugin until April 14 2020</strong>. If you don't love it, get a full refund in 30 days, no questions asked!<br><br>Please use the coupon code STAYSAFE to avail the discount. <strong><a target=\"_blank\" href=\"https://www.tychesoftwares.com/store/premium-plugins/order-delivery-date-for-woocommerce-pro-21/?utm_source=customerstore&utm_medium=link&utm_campaign=OrderDeliveryDateLiteCovidNotice\"><u>BUY NOW FOR $49.50 (<span style=\"text-decoration:line-through;\">$99.00</span>)</u></a><strong>.</p></div>"
 msgstr ""
 
-#: order_delivery_date.php:318
+#: order_delivery_date.php:312
 msgid "Order Delivery Date for WooCommerce (Lite version) plugin requires WooCommerce installed and activate."
 msgstr ""
 
-#: order_delivery_date.php:461
-#: order_delivery_date.php:581
+#: order_delivery_date.php:455
+#: order_delivery_date.php:575
 msgid "Clear"
 msgstr ""
 
-#: order_delivery_date.php:462
-#: order_delivery_date.php:582
+#: order_delivery_date.php:456
+#: order_delivery_date.php:576
 msgid "Holiday"
 msgstr ""
 
-#: order_delivery_date.php:463
-#: order_delivery_date.php:470
-#: order_delivery_date.php:583
-#: order_delivery_date.php:590
+#: order_delivery_date.php:457
+#: order_delivery_date.php:464
+#: order_delivery_date.php:577
+#: order_delivery_date.php:584
 msgid "Booked"
 msgstr ""
 
-#: order_delivery_date.php:644
+#: order_delivery_date.php:638
 msgid "Docs"
 msgstr ""
 
-#: order_delivery_date.php:645
+#: order_delivery_date.php:639
 msgid "Go Pro"
 msgstr ""
 
-#: order_delivery_date.php:645
+#: order_delivery_date.php:639
 msgid "Unlock All"
 msgstr ""
 
 #. translators: %!$s: Website link, %2$s: Review link
-#: order_delivery_date.php:663
+#: order_delivery_date.php:657
 #, php-format
 msgid "Thank you for using <a href=\"%1$s\" target=\"_blank\">Order Delivery Date</a>! Please <a href=\"%2$s\" target=\"_blank\">rate us on WordPress.org</a>"
 msgstr ""
@@ -1772,266 +1748,6 @@ msgstr ""
 
 #: build/admin/index.js:1
 msgid "Note: In Checkout Block, please add the Order Delivery Date block manually from the Edit Checkout page in any preferred section."
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Custom Theme 1"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Custom Theme 2"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Afrikaans"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Arabic"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Algerian Arabic"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Azerbaijani"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Indonesian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Malaysian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Dutch Belgian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Bosnian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Bulgarian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Catalan"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Czech"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Welsh"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Danish"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "German"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Estonian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Greek"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "English (Australia)"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "English (New Zealand)"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "English (UK)"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Spanish"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Esperanto"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Basque"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Faroese"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "French"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "French Swiss"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Galician"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Albanian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Korean"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Hebrew"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Hindi (India)"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Croatian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Armenian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Icelandic"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Italian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Georgian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Khmer"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Latvian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Lithuanian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Macedonian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Hungarian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Malayam"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Dutch"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Japanese"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Norwegian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Thai"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Polish"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Portuguese"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Portuguese (Brazil)"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Romanian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Romansh"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Russian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Slovak"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Slovenian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Serbian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Finnish"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Swedish"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Tamil"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Vietnamese"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Turkish"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Ukrainian"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Chinese (Hong Kong)"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Chinese (Simplified)"
-msgstr ""
-
-#: build/admin/index.js:1
-msgid "Chinese (Traditional)"
 msgstr ""
 
 #: build/admin/index.js:1
