@@ -1,4 +1,9 @@
 *** Order Delivery Date for WooCommerce ***
+2026-11-23 - version 5.0.0
+* Enhancement - Rebuilt the plugin's admin interface in React. The settings page now loads faster and saves without a full page reload.
+* Dev - Added REST endpoints (orddd/v1) for reading and updating settings, protected by capability checks and nonce verification.
+* Dev - Removed the legacy Settings API registration and the PHP-rendered settings templates.
+
 2026-10-14 - version 4.6.3
 * Fix - Timeslot information (e.g. "Timeslot: 00:00") was displayed in order details, emails and PDF documents even when time slot capture was disabled.
 * Tweak - Improved visibility of the "Block Time Slots" link.
